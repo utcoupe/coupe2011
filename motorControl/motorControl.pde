@@ -72,8 +72,23 @@ void loop(){
 	checkCurrentGoal();
 
 	/*envoyer un caractere sur le port serie pour test*/
-	Serial.println(value_left_enc);
-	//index++;
+	if(index == 0){
+          Serial.println("_________________");
+          Serial.println(robot_state.angle);
+          Serial.println(robot_state.speed_left);
+          Serial.println(robot_state.x);
+          Serial.println(robot_state.y);
+          Serial.println(value_pwm_left);
+	  Serial.println(value_pwm_right);
+          Serial.println(value_left_enc);
+	  Serial.println(value_right_enc);
+        }
+        
+        if(index == 500){
+	  index = 0;
+        }else{
+          index ++;
+        }
 }
 
 
