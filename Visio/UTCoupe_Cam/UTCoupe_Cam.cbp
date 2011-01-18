@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="opencv2" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin\Debug\opencv2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Debug\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+					<Add directory="D:\Programmes\OpenCV2.0\include\opencv" />
+				</Compiler>
+				<Linker>
+					<Add library="D:\Programmes\OpenCV2.0\lib\libcv200.dll.a" />
+					<Add library="D:\Programmes\OpenCV2.0\lib\libcxcore200.dll.a" />
+					<Add library="D:\Programmes\OpenCV2.0\lib\libhighgui200.dll.a" />
+					<Add library="D:\Programmes\OpenCV2.0\lib\libcvaux200.dll.a" />
+					<Add library="D:\Programmes\OpenCV2.0\lib\libcxts200.dll.a" />
+					<Add library="D:\Programmes\OpenCV2.0\lib\libml200.dll.a" />
+					<Add directory="D:\Programmes\OpenCV2.0\lib" />
+				</Linker>
+			</Target>
+			<Target title="Release">
+				<Option output="bin\Release\opencv2" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj\Release\" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-march=core2" />
+					<Add option="-O3" />
+					<Add option="-O2" />
+					<Add option="-O1" />
+					<Add option="-O" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+			<Add option="-fexceptions" />
+			<Add directory="D:\Programmes\OpenCV2.0\include\opencv" />
+		</Compiler>
+		<Linker>
+			<Add library="D:\Programmes\OpenCV2.0\lib\libcv200.dll.a" />
+			<Add library="D:\Programmes\OpenCV2.0\lib\libcxcore200.dll.a" />
+			<Add library="D:\Programmes\OpenCV2.0\lib\libhighgui200.dll.a" />
+			<Add library="D:\Programmes\OpenCV2.0\lib\libcvaux200.dll.a" />
+			<Add library="D:\Programmes\OpenCV2.0\lib\libcxts200.dll.a" />
+			<Add library="D:\Programmes\OpenCV2.0\lib\libml200.dll.a" />
+			<Add directory="D:\Programmes\OpenCV2.0\lib" />
+		</Linker>
+		<Unit filename="UTCamera.cpp" />
+		<Unit filename="UTCamera.hpp" />
+		<Unit filename="main.cpp" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
