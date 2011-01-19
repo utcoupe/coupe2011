@@ -8,13 +8,13 @@
 #ifndef PARAMETERS_H_
 #define PARAMETERS_H_
 
-/* Paramètres mécanique du robot en mm,rad*/
+/* ParamÔøΩtres mÔøΩcanique du robot en mm,rad*/
 #define ENC_CENTER_DIST 200
 #define ENC_RESOLUTION 1000
 #define ENC_RADIUS 40
 #define ENC_DELTA (2*M_PI*ENC_RADIUS)/ENC_RESOLUTION
 
-/* Paramètres de la carte asservissement
+/* ParamÔøΩtres de la carte asservissement
  * pin 0 -> USB 2 TTL
  * pin 1 -> USB 2 TTL
  * pin 2 -> interrupt 0
@@ -26,25 +26,25 @@
  * pin 6 -> pwm
  * pin 7 -> pwm
  * */
-#define PIN_PWM_LEFT_1 4
-#define PIN_PWM_LEFT_2 5
-#define PIN_PWM_RIGHT_1 6
-#define PIN_PWM_RIGHT_2 7
-#define PIN_LEFT_A 2
-#define PIN_LEFT_B 3
+#define PIN_EN_LEFT 3
+#define PIN_DIR_LEFT 12
+#define PIN_EN_RIGHT 11
+#define PIN_DIR_RIGHT 13
+#define PIN_LEFT_A 18
+#define PIN_LEFT_B 19
 #define PIN_RIGHT_A 21
 #define PIN_RIGHT_B 20
-#define INTERRUPT_LEFT_A 0
-#define INTERRUPT_LEFT_B 1
+#define INTERRUPT_LEFT_A 5
+#define INTERRUPT_LEFT_B 4
 #define INTERRUPT_RIGHT_A 2
 #define INTERRUPT_RIGHT_B 3
 
-/* Paramètre de la table en mm*/
+/* ParamÔøΩtre de la table en mm*/
 #define TABLE_WIDTH_MM 2100
 #define TABLE_HEIGHT_MM 3000
 #define TABLE_DISTANCE_MAX_MM 3662
 
-/*Paramètre de l'asservissement*/
+/*ParamÔøΩtre de l'asservissement*/
 #define K_DIST 0.5
 #define K_ANGLE 700
 
@@ -58,11 +58,11 @@
 #define KI_POSITION 5
 #define KD_POSITION 20
 
-/*Paramètre de liaison série*/
+/*ParamÔøΩtre de liaison sÔøΩrie*/
 #define SOF '<'
 #define EOF '>'
 
-/*Paramètre de la file des buts a atteindre*/
+/*ParamÔøΩtre de la file des buts a atteindre*/
 #define SIZE 10
 
 /*Constantes*/

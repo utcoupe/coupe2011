@@ -6,32 +6,33 @@
  */
 #include "wiring.h"
 #include "pwm.h"
+#include "AFMotor.h"
 
+AF_DCMotor MoteurG(1, MOTOR12_64KHZ);
+AF_DCMotor MoteurD(2, MOTOR12_64KHZ);
 void initPWM(){
-	pinMode(PIN_PWM_LEFT_1,OUTPUT);
-	pinMode(PIN_PWM_LEFT_2,OUTPUT);
-	pinMode(PIN_PWM_RIGHT_1,OUTPUT);
-	pinMode(PIN_PWM_RIGHT_2,OUTPUT);
+	AF_DCMotor MoteurG(1, MOTOR12_64KHZ);
+	AF_DCMotor MoteurD(2, MOTOR12_64KHZ);
+
+	MoteurG.setSpeed(0);
+	MoteurG.run(FORWARD);
+	
+	MoteurD.setSpeed(0);
+	MoteurD.run(FORWARD);
 }
 
 void setLeftPWM(int value){
+	MoteurG.setSpeed(abs(value));
 	if(value>0)
-		analogWrite(PIN_PWM_LEFT_1,value);
-	else if(value<0)
-		analogWrite(PIN_PWM_LEFT_2,value);
-	else{
-		analogWrite(PIN_PWM_LEFT_1,value);
-		analogWrite(PIN_PWM_LEFT_2,value);
-	}
+		MoteurG.run(FORWARD);
+	else
+		MoteurG.run(BACKWARD);
 }
 
 void setRightPWM(int value){
+	MoteurD.setSpeed(abs(value));
 	if(value>0)
-		analogWrite(PIN_PWM_RIGHT_1,value);
-	else if(value<0)
-		analogWrite(PIN_PWM_RIGHT_2,value);
-	else{
-		analogWrite(PIN_PWM_RIGHT_1,value);
-		analogWrite(PIN_PWM_RIGHT_2,value);
-	}
+		MoteurD.run(FORWARD);
+	else
+		MoteurD.run(BACKWARD);
 }
