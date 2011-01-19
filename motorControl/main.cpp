@@ -5,6 +5,7 @@
  *      Author: HoHen
  */
 
+#include <math.h>
 #include <stdint.h>
 #include "wiring.h"
 #include "WProgram.h"
@@ -24,13 +25,13 @@ void setup(){
 	initGoals();
 	/*Active les pwm*/
 	initPWM();
-	/*Initialise le rŽgulateur*/
+	/*Initialise le rï¿½gulateur*/
 	initController();
 	/*Active les interruptions sur les encodeurs*/
 	initEncoders();
 	/*Definit la position initiale du robot*/
 	initRobotState();
-	/*Active la liaison sŽrie*/
+	/*Active la liaison sï¿½rie*/
 	initSerialLink();
 }
 
@@ -51,7 +52,7 @@ void loop(){
 	/*recuperation du but suivant (vitesse, angle ou position) */
 	if(current_goal.isReached){
 		popGoal(); /* va changer la valeur de current_goal */
-		reinitPID = true; /*reinitialise les valeurs d'integration et de dŽrivŽe au prochain appel de computePID */
+		reinitPID = true; /*reinitialise les valeurs d'integration et de dï¿½rivï¿½e au prochain appel de computePID */
 	}
 
 	/*calcul des sorties*/
@@ -74,7 +75,7 @@ void loop(){
 	/*modele d'evolution*/
 	computeRobotState();
 
-	/*verification de l'Žtat des consignes, si elles sont atteintes ou non*/
+	/*verification de l'ï¿½tat des consignes, si elles sont atteintes ou non*/
 	checkCurrentGoal();
 
 	/*envoyer un caractere sur le port serie pour test*/
