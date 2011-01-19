@@ -15,8 +15,8 @@ void initGoals(){
 	goals.out = 0;
 
 	/*pour tester le robot*/
-	pushGoal(TYPE_SPEED,50,0);
-	pushGoal(TYPE_ANGLE,3.14,0);
+	//pushGoal(TYPE_SPEED,50,0);
+	//pushGoal(TYPE_ANGLE,3.14,0);
 	pushGoal(TYPE_POSITION,1000,1000);
 }
 
