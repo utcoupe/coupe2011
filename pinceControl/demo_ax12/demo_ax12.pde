@@ -1,5 +1,3 @@
-#include "ax12.h"
-
 /*
  * 
  * Sketch by Pablo Gindel : http://www.pablogindel.com/2010/01/biblioteca-de-arduino-para-ax-12/
@@ -7,40 +5,47 @@
  * Donc, on branche les servos sur RX+TX de Serial1, et on peut continuer à utiliser l'USB normalement.
  *
  */
+ 
+#include "ax12.h"
+/* Si on utilise le Serial fourni par Arduino, le fichier HardwareSerialBis.h va être inclus,
+   ce qui provoque un conflit avec la librairie AX-12, qui utilise son propre ISR sur UART1.
+   SerialBis.cpp est donc identique au HardwareSerialBis.cpp d'Arduino, sauf qu'il n'y a pas de
+   SerialBis1. Tout doit être renommé, pour que le fichier d'origine ne soit pas inclus. */
+#include "SerialBis.h"
 
 void setup(){
 	ax12Init(1000000);
-//	Serial.begin(9600);  
+	SerialBis.begin(115200);  
 
 	writeData(14, AX_TORQUE_ENABLE, 1, 1); // 14 is the motor ID
 }
 
 void loop() {
 
-//	int error = ping(14);
-//	Serial.print("ping ID: "); Serial.print(status_id, DEC);
-//	Serial.print(" int.error: "); Serial.print(error, DEC);
-//	Serial.print(" status.error: "); Serial.println(status_error, DEC);
-//	Serial.println(" ");
-//
-//	error = readData(14, AX_PRESENT_TEMPERATURE, 1);
-//	Serial.print("temperatura: "); Serial.print(status_data, DEC);
-//	Serial.print(" int.error: "); Serial.print(error, DEC);
-//	Serial.print(" status.error: "); Serial.println(status_error, DEC);
-//	Serial.println(" ");
-//
-//	error = writeData(14, AX_GOAL_POSITION_L, 2, int(random(1024)));
-//	Serial.print("goal position ID: "); Serial.print(status_id, DEC);
-//	Serial.print(" int.error: "); Serial.print(error, DEC);
-//	Serial.print(" status.error: "); Serial.println(status_error, DEC);
-//	Serial.println(" ");
-//
-//	delay(200);
-//
-//	error = readData(14, AX_PRESENT_POSITION_L, 2);
-//	Serial.print("posicion: "); Serial.print(status_data, DEC);
-//	Serial.print(" int.error: "); Serial.print(error, DEC);
-//	Serial.print(" status.error: "); Serial.println(status_error, DEC);
-//	Serial.println(" ");
+	int error = ping(14);
+	SerialBis.print("ping ID: "); SerialBis.print(status_id, DEC);
+	SerialBis.print(" int.error: "); SerialBis.print(error, DEC);
+	SerialBis.print(" status.error: "); SerialBis.println(status_error, DEC);
+	SerialBis.println(" ");
+
+	error = readData(14, AX_PRESENT_TEMPERATURE, 1);
+	SerialBis.print("temperatura: "); SerialBis.print(status_data, DEC);
+	SerialBis.print(" int.error: "); SerialBis.print(error, DEC);
+	SerialBis.print(" status.error: "); SerialBis.println(status_error, DEC);
+	SerialBis.println(" ");
+
+	error = writeData(14, AX_GOAL_POSITION_L, 2, int(random(1024)));
+	SerialBis.print("goal position ID: "); SerialBis.print(status_id, DEC);
+	SerialBis.print(" int.error: "); SerialBis.print(error, DEC);
+	SerialBis.print(" status.error: "); SerialBis.println(status_error, DEC);
+	SerialBis.println(" ");
+
+	delay(200);
+
+	error = readData(14, AX_PRESENT_POSITION_L, 2);
+	SerialBis.print("posicion: "); SerialBis.print(status_data, DEC);
+	SerialBis.print(" int.error: "); SerialBis.print(error, DEC);
+	SerialBis.print(" status.error: "); SerialBis.println(status_error, DEC);
+	SerialBis.println(" ");
 }
 
