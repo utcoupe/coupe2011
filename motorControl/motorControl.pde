@@ -1,5 +1,6 @@
 #include "WProgram.h"
 #include "parameters.h"
+#include <math.h>
 
 #include "encoder.h"
 #include "robotstate.h"
@@ -30,11 +31,11 @@ void setup(){
 
 void loop(){
 	/* zone libre */
-	pinMode(13,OUTPUT);
+	/*pinMode(13,OUTPUT);
 	if(index%200>100)
 		 digitalWrite(13, HIGH);
 	else
-		 digitalWrite(13, LOW);
+		 digitalWrite(13, LOW);*/
 	/* fin zone de programmation libre */
 
 	/*lecture des ordres*/
@@ -72,20 +73,18 @@ void loop(){
 	checkCurrentGoal();
 
 	/*envoyer un caractere sur le port serie pour test*/
-	if(index == 0){
+	if(index == 500){
           Serial.println("_________________");
-          Serial.println(robot_state.angle);
-          Serial.println(robot_state.speed_left);
-          Serial.println(robot_state.x);
-          Serial.println(robot_state.y);
-          Serial.println(value_pwm_left);
-	  Serial.println(value_pwm_right);
-          Serial.println(value_left_enc);
-	  Serial.println(value_right_enc);
-        }
-        
-        if(index == 500){
-	  index = 0;
+          Serial.print("time: ");Serial.println(millis());
+          Serial.print("angle: ");Serial.println(robot_state.angle);
+          Serial.print("speed: ");Serial.println(robot_state.speed_left);
+          Serial.print("x: ");Serial.println(robot_state.x);
+          Serial.print("y: ");Serial.println(robot_state.y);
+          Serial.print("pwmL: ");Serial.println(value_pwm_left);
+	  Serial.print("pwmR: ");Serial.println(value_pwm_right);
+          Serial.print("encL: ");Serial.println(value_left_enc);
+	  Serial.print("encR: ");Serial.println(value_right_enc);
+          index=0;
         }else{
           index ++;
         }
