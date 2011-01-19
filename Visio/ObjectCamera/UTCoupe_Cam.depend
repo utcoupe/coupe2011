@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1295277278 source:/home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/main.cpp
+1295432187 source:/home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/main.cpp
 	<iostream>
 	"cv.h"
 	"highgui.h"
@@ -273,110 +273,21 @@
 	"opencv2/core/core.hpp"
 	"opencv2/highgui/highgui_c.h"
 
-1295282194 /home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/UTCamera.hpp
-	<iostream>
-	<stdio.h>
-	"cv.h"
-	"highgui.h"
-
-1295283711 source:/home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/UTCamera.cpp
-	"UTCamera.hpp"
-
-1295290147 source:c:\users\pierre\desktop\nouveau dossier\utcoupe_cam\main.cpp
-	<iostream>
-	<cv.h>
-	<highgui.h>
-	"UTCamera.hpp"
-
-1295290747 c:\users\pierre\desktop\nouveau dossier\utcoupe_cam\utcamera.hpp
+1295377179 /home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/UTCamera.hpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
 	<cv.h>
 	<highgui.h>
+	"ListeRegion.hpp"
 
-1295290879 source:c:\users\pierre\desktop\nouveau dossier\utcoupe_cam\utcamera.cpp
+1295432174 source:/home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/UTCamera.cpp
 	"UTCamera.hpp"
 
-1253998110 d:\programmes\opencv2.0\include\opencv\cv.h
-	<chdl.h>
-	"cxcore.h"
-	"cvtypes.h"
-	"cv.hpp"
-	"cvcompat.h"
+1295389305 source:/home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/ListeRegion.cpp
+	"ListeRegion.hpp"
 
-1253998110 d:\programmes\opencv2.0\include\opencv\cxcore.h
-	"ipl.h"
-	"ipl/ipl.h"
-	"cxtypes.h"
-	"cxerror.h"
-	"cvver.h"
-	"cxcore.hpp"
-
-1254328356 d:\programmes\opencv2.0\include\opencv\cxtypes.h
-	<assert.h>
-	<stdlib.h>
-	<string.h>
-	<float.h>
-	<stdint.h>
-	<emmintrin.h>
-	<mmintrin.h>
-	<fastmath.h>
-	<math.h>
-	<ipl.h>
-	<ipl/ipl.h>
-
-1253998110 d:\programmes\opencv2.0\include\opencv\cxerror.h
-
-1254323310 d:\programmes\opencv2.0\include\opencv\cvver.h
-
-1254323310 d:\programmes\opencv2.0\include\opencv\cxcore.hpp
-	"cxmisc.h"
-	<algorithm>
-	<cmath>
-	<complex>
-	<map>
-	<new>
-	<string>
-	<vector>
-	"cxoperations.hpp"
-	"cxmat.hpp"
-	"cxflann.h"
-
-1253998110 d:\programmes\opencv2.0\include\opencv\cxmisc.h
-	"cvconfig.h"
-	<limits.h>
-	"omp.h"
-	<malloc.h>
-	<alloca.h>
-	<stdlib.h>
-
-1254323310 d:\programmes\opencv2.0\include\opencv\cxoperations.hpp
-	<string.h>
-	<limits.h>
-	<ext/atomicity.h>
-	<bits/atomicity.h>
-	"windows.h"
-
-1254326198 d:\programmes\opencv2.0\include\opencv\cxmat.hpp
-	<limits.h>
-
-1253998110 d:\programmes\opencv2.0\include\opencv\cxflann.h
-
-1253998110 d:\programmes\opencv2.0\include\opencv\cvtypes.h
-	<assert.h>
-	<stdlib.h>
-
-1254090844 d:\programmes\opencv2.0\include\opencv\cv.hpp
-
-1253998110 d:\programmes\opencv2.0\include\opencv\cvcompat.h
-	<string.h>
-
-1253998110 d:\programmes\opencv2.0\include\opencv\highgui.h
-	"cxcore.h"
-	<windows.h>
-	<chdl.h>
-	"highgui.hpp"
-
-1253998112 d:\programmes\opencv2.0\include\opencv\highgui.hpp
+1295388897 /home/xavier/WorkSpace/UTCoupe/UTCoupe_Cam/ListeRegion.hpp
+	<iostream>
+	<cv.h>
 
