@@ -51,7 +51,7 @@ void loop(){
 
 	/*calcul des sorties*/
 	int value_pwm_left = 0;
-	int value_pwm_right = 0;
+        int value_pwm_right = 0;
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
@@ -73,7 +73,7 @@ void loop(){
 	checkCurrentGoal();
 
 	/*envoyer un caractere sur le port serie pour test*/
-	if(index == 500){
+	/*if(index == 500){
           Serial.println("_________________");
           Serial.print("time: ");Serial.println(millis());
           Serial.print("angle: ");Serial.println(robot_state.angle);
@@ -87,7 +87,7 @@ void loop(){
           index=0;
         }else{
           index ++;
-        }
+        }*/
 }
 
 

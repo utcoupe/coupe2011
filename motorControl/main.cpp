@@ -56,8 +56,8 @@ void loop(){
 	}
 
 	/*calcul des sorties*/
-	int value_pwm_left = 0;
-	int value_pwm_right = 0;
+	value_pwm_left = 0;
+	value_pwm_right = 0;
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
