@@ -8,23 +8,24 @@
 #ifndef PARAMETERS_H_
 #define PARAMETERS_H_
 
-/* Param�tres m�canique du robot en mm,rad*/
+/* Paramètres mécanique du robot en mm,rad*/
 #define ENC_CENTER_DIST 200
-#define ENC_RESOLUTION 1000
+//#define ENC_RESOLUTION 1000
 #define ENC_RADIUS 40
-#define ENC_DELTA (2*M_PI*ENC_RADIUS)/ENC_RESOLUTION
+//#define ENC_DELTA (2*M_PI*ENC_RADIUS)/ENC_RESOLUTION
+#define ENC_DELTA 0.2
 
-/* Param�tres de la carte asservissement
+/* Paramètres de la carte asservissement
  * pin 0 -> USB 2 TTL
  * pin 1 -> USB 2 TTL
- * pin 2 -> interrupt 0
- * pin 3 -> interrupt 1
- * pin 21 -> interrupt 2
- * pin 20 -> interrupt 3
- * pin 4 -> pwm
- * pin 5 -> pwm
- * pin 6 -> pwm
- * pin 7 -> pwm
+ * pin 3 -> enable moteur 1 (pwm)
+ * pin 12 -> direction moteur 1
+ * pin 11 -> enable moteur 2 (pwm)
+ * pin 13 -> direction moteur 2
+ * pin 18 -> A encodeur 1
+ * pin 19 -> B encodeur 1
+ * pin 21 -> A encodeur 2
+ * pin 20 -> B encodeur 2
  * */
 #define PIN_EN_LEFT 3
 #define PIN_DIR_LEFT 12
@@ -39,12 +40,12 @@
 #define INTERRUPT_RIGHT_A 2
 #define INTERRUPT_RIGHT_B 3
 
-/* Param�tre de la table en mm*/
+/* Paramètre de la table en mm*/
 #define TABLE_WIDTH_MM 2100
 #define TABLE_HEIGHT_MM 3000
 #define TABLE_DISTANCE_MAX_MM 3662
 
-/*Param�tre de l'asservissement*/
+/*Paramètre de l'asservissement*/
 #define K_DIST 0.5
 #define K_ANGLE 700
 
@@ -58,11 +59,22 @@
 #define KI_POSITION 5
 #define KD_POSITION 20
 
-/*Param�tre de liaison s�rie*/
+/*Paramètre de liaison série*/
 #define SOF '<'
 #define EOF '>'
+#define T_QUERY 0
+#define T_POSITION 1
+#define T_SPEED 2
+#define T_ANGLE 3
+#define T_PAUSE 4
+#define T_RESET 6
+#define T_ALIGN 7
+#define T_SETX 9
+#define T_SETY 10
 
-/*Param�tre de la file des buts a atteindre*/
+
+
+/*Paramètre de la file des buts a atteindre*/
 #define SIZE 10
 
 /*Constantes*/
