@@ -13,6 +13,7 @@
 
 void readIncomingData();
 void initSerialLink();
+void analyzeMessage();
 
 
 #endif /* MESSAGE_H_ */
