@@ -1,9 +1,28 @@
+/**
+*****************************************************
+    Copyright (c)
+    RODRIGUEZ   Xavier          xavier.rodriguez@hds.utc.fr
+    FRICOT      Pierre-Henri
+
+    UTCoupe 2010-2011
+    All rights reserved.
+
+*   Objet qui permet de gérer les listes chainées de
+*   régions
+*****************************************************
+ **/
 #ifndef Liste_Region
 #define Liste_Region
 
+/****************************************************
+*****           INCLUDES                        *****
+****************************************************/
 #include <iostream>
 #include <cv.h>
 
+/****************************************************
+*****           STRUCTURE                       *****
+****************************************************/
 typedef struct Region{
 	CvPoint		 	max[4];		// Coins de la zone
 								// | 0 | 1 |
@@ -19,6 +38,9 @@ typedef struct Region{
 }region;
 
 
+/****************************************************
+*****           ListeRegion                     *****
+****************************************************/
 
 class ListeRegion
 {

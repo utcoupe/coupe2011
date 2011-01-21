@@ -40,6 +40,10 @@ using namespace cv;
 #define CAMERA_AVA 0
 #define CAMERA_ARR 1
 
+//
+#define PIONT
+#define FIGUR
+
 // Valeurs identifiants les couleurs
 #define NB_COLOR            7
 
@@ -51,39 +55,62 @@ using namespace cv;
 #define	JAUNE				5
 #define	BLANC				6
 
+#define TEXTE               "num : HSV\n1) NOIR\n2) ROUGE\n3) VERT\n4) BLEU\n5) JAUNE\n6) BLANC"
+
 // Valeurs identifiants les positions des maximum des regions
 #define HAUT 	            0
 #define BAS 	            1
 #define DROITE 	            2
 #define GAUCHE 	            3
 
+// Mode d'enregistrement
+#define VISION_NORMAL       0
+#define VISION_MASK         1
+#define VISION_ZONE         2
+
+// Limte de recursivité
+#define STOP_REC            100000
+
 // Calcul des seuils avec la tolerance
-#define seuil(nb, cherche, tol) (nb > (cherche-tol) && nb < (cherche+tol))
+#define SEUIL(nb, cherche, tol) (nb > (cherche-tol) && nb < (cherche+tol))
+// Renvoie true si la couleur en hsv est dans les seuils de tolerance de color.
+#define IS_COLOR(h,s,v,color)   (SEUIL( h, Htab[color], Htol[color]) && SEUIL( s, Stab[color], Stol[color])   && SEUIL( v, Vtab[color], Vtol[color]))
+// Division par 2 avec prise en compte du reste
+#define DIV2SUP(x) 		( (x%2)==0 ?   ((x)/2) : (((x)+1)/2) )
+#define DIV2INF(x) 		( (x%2)==0 ?   ((x)/2) : (((x)-1)/2) )
 
 /****************************************************
 *****           PROTOTYPES                      *****
 ****************************************************/
-void checkCouleur(int);
 
 
+/****************************************************
+*****           UTCamera                        *****
+****************************************************/
 
 class UTCamera
 {
 
     public:
 
-        UTCamera(int camera);          // Utiliser les macros pour choisir la caméra
+        UTCamera(int camera, int wScreen, int hScreen);          // Utiliser les macros pour choisir la caméra
 
         //--- Methodes pour l'utilisateur ---
         void calibrage();
 
+        int* analyseZoneVerte();                    // Retourne un tableau de 5 entiers indiquant l'ordre des pionts
+                                                    // et des figures sur la zone verte.
+                                                    // 0 -> plus proche  4 -> plus loin
 
+
+        void record(int mode);                      // Pour enregistrer la vidéo produite
 
         //--- Methodes Avancées ---
         void maskApplication();
         void RegGApplication();
 
         void afficherMask();
+        void afficherMask(char* WindowMaskName);
         void afficherRegi();
 
         void saveConfig();
@@ -116,6 +143,9 @@ class UTCamera
         string          nameCam;
         int             width;
         int             height;
+
+        int             wScreen;
+        int             hScreen;
 
         CvCapture*      ptrCamera;
         IplImage*       frame;

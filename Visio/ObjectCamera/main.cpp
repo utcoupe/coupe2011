@@ -13,12 +13,10 @@ using namespace std;
 int main()
 {
 
-    //UTCamera *camAv = new UTCamera(CAMERA_AVA);
-    UTCamera *camAv = new UTCamera(CAMERA_ARR);
+    //UTCamera *camAv = new UTCamera(CAMERA_AVA, 1280, 800);
+    UTCamera *camAv = new UTCamera(CAMERA_ARR, 1280, 800);
 
     camAv->calibrage();
-
-
 
 
     return 0;

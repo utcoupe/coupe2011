@@ -1,3 +1,16 @@
+/**
+*****************************************************
+    Copyright (c)
+    RODRIGUEZ   Xavier          xavier.rodriguez@hds.utc.fr
+    FRICOT      Pierre-Henri
+
+    UTCoupe 2010-2011
+    All rights reserved.
+
+*   Objet qui permet de gérer les listes chainées de
+*   régions
+*****************************************************
+ **/
 #include "ListeRegion.hpp"
 
 ListeRegion::ListeRegion()
