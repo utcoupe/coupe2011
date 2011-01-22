@@ -241,7 +241,7 @@ void computeRobotState(){
 	double speed_left = dl/DUREE_CYCLE;
 	double speed_right = dr/DUREE_CYCLE;
 	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
-	if(speed != 42){Serial.print("speed: ");Serial.println(speed_left, DEC);}
+	if(speed != 0){Serial.print("speed: ");Serial.println(speed_left, DEC);}
 	
 	/* mise a jour de l'orientation en rad */
 	double delta_angle = (double)(dr-dl)*(double)ENC_TICKS_TO_MM/(double)ENC_CENTER_DIST;
@@ -257,8 +257,8 @@ void computeRobotState(){
 	double dx = speed*DUREE_CYCLE*cos(angle);
 	double dy = speed*DUREE_CYCLE*sin(angle);
 	
-	if(dx != 0){Serial.print("dx: ");Serial.println(dx, DEC);}
-	if(dy != 0){Serial.print("dy: ");Serial.println(dy, DEC);}
+//	if(dx != 0){Serial.print("dx: ");Serial.println(dx, DEC);}
+//	if(dy != 0){Serial.print("dy: ");Serial.println(dy, DEC);}
 	
 	/*mise a jour de l'Žtat du robot  */
 	robot_state.speed = speed;
