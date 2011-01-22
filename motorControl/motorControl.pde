@@ -9,7 +9,6 @@
 #include "message.h"
 #include "control.h"
 
-
 unsigned long index = 0;
 unsigned long timeStart = 0;
 
@@ -68,9 +67,6 @@ void loop(){
 
 	/*modele d'evolution*/
 	computeRobotState();
-
-	/*verification de l'état des consignes, si elles sont atteintes ou non*/
-	checkCurrentGoal();
 	
 	// On éteint la del
 	digitalWrite(16, LOW);
