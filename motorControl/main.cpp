@@ -19,6 +19,8 @@
 #include "control.h"
 
 unsigned long index = 0;
+int value_pwm_right = 0;
+int value_pwm_left = 0;
 
 void setup(){
 	/*Initialise la file des buts a atteindre*/
@@ -50,20 +52,17 @@ void loop(){
 
 
 	/*recuperation du but suivant (vitesse, angle ou position) */
-	if(current_goal.isReached){
+	if(current_goal.isReached)
 		popGoal(); /* va changer la valeur de current_goal */
-		reinitPID = true; /*reinitialise les valeurs d'integration et de d�riv�e au prochain appel de computePID */
-	}
+
 
 	/*calcul des sorties*/
-	value_pwm_left = 0;
-	value_pwm_right = 0;
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
-			speedControl(current_goal.speed,&value_pwm_left,&value_pwm_right,5000);
+			speedControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_ANGLE)
-			angleControl(current_goal.angle,&value_pwm_left,&value_pwm_right);
+			angleControl(&value_pwm_left,&value_pwm_right);
 		else
 			positionControl(current_goal.x,current_goal.y,&value_pwm_left,&value_pwm_right);
 	}

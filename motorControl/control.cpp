@@ -8,6 +8,7 @@
 #include "control.h"
 #include "encoder.h"
 #include "robotstate.h"
+#include "PID_Beta6.h"
 
 bool reinitPID;
 CurrentGoal current_goal;
@@ -17,54 +18,123 @@ void initController(){
 	reinitPID = true;
 }
 
-/* Calcule les pwm ˆ appliquer pour un asservissement en vitesse
- * <> speed : la consigne de vitesse en mm/s
+/* Calcule les pwm ˆ appliquer pour un asservissement en vitesse en trapeze
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
  * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
- * <> nb_period : le nombre d'iteration avant la phase de decceleration
  * */
-void speedControl(int speed,int* value_pwm_left, int* value_pwm_right, int nb_period){
+void speedControl(int* value_pwm_left, int* value_pwm_right){
 	/* si le robot est en train de tourner, et qu'on lui donne une consigne de vitesse, il ne va pas partir droit
 	 * solution = dŽcomposer l'asservissement en vitesse en 2 :
 	 * -> stopper le robot (les 2 vitesses = 0)
 	 * -> lancer l'asservissement en vitesse
 	 */
 
-	static int period_left = 0;
+	static int start_time;
+	static int pwm;
+	static int consigne;
+	static int currentSpeed;
+	static PID pid4SpeedControl(&pwm,&currentSpeed,&consigne,KP_SPEED,KI_SPEED,KD_SPEED);
 
-	if(period_left == 0) period_left = nb_period;
-	else period_left--;
+	static bool initDone = false;
 
-	if(period_left > 0){
-		//phase acceleration + regime permanent
-		(*value_pwm_left) = computePID(robot_state.speed_left-speed,KP_SPEED,KI_SPEED,KD_SPEED);
-		(*value_pwm_right) = computePID(robot_state.speed_right-speed,KP_SPEED,KI_SPEED,KD_SPEED);
+	if(!initDone){
+		start_time = 0;
+		pwm = 0;
+		currentSpeed = 0;
+		consigne = 0;
+		pid4SpeedControl.Reset();
+		pid4SpeedControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		initDone = true;
 	}
-	else{
-		//phase de decceleration
-		(*value_pwm_left) = computePID(robot_state.speed_left,KP_SPEED,KI_SPEED,KD_SPEED);
-		(*value_pwm_right) = computePID(robot_state.speed_right,KP_SPEED,KI_SPEED,KD_SPEED);
-		period_left = 0;
+
+	if(current_goal.phase == PHASE_1){ //phase d'acceleration
+
+		consigne = current_goal.speed;
+		currentSpeed = robot_state.speed;
+		if(abs(consigne-currentSpeed) < 1){ /*si l'erreur est infŽrieur a 1, on concidere la consigne atteinte*/
+			current_goal.phase = PHASE_2;
+			start_time = millis();
+		}
 	}
+	else if(current_goal.phase == PHASE_2){ //phase de regime permanent
+		consigne = current_goal.speed;
+		currentSpeed = robot_state.speed;
+		if(millis()-start_time > current_goal.periode){ /* fin de regime permanent */
+			current_goal.phase = PHASE_3;
+		}
+	}
+	else if(current_goal.phase == PHASE_3){ //phase de decceleration
+		consigne = 0;
+		currentSpeed = robot_state.speed;
+		if(abs(robot_state.speed)<1){
+			current_goal.phase = PHASE_4;
+
+		}
+	}
+
+	pid4SpeedControl.Compute();
+
+	if(current_goal.phase == PHASE_4){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		current_goal.isReached = true;
+		initDone = false;
+	}else{
+		(*value_pwm_right) = pwm;
+		(*value_pwm_left) = pwm;
+	}
+
 }
 
 
 /* Calcule les pwm ˆ appliquer pour un asservissement en angle
- * <> angle : la consigne d'orientation en rad
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
  * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
  * */
-void angleControl(int angle,int* value_pwm_left, int* value_pwm_right){
+void angleControl(int* value_pwm_left, int* value_pwm_right){
 
-	int pwm = computePID(robot_state.angle-angle,KP_ANGLE,KI_ANGLE,KD_ANGLE);
 
-	if(angle>PI){
-		(*value_pwm_left) = pwm;
-		(*value_pwm_right) = -pwm;
-	}else{
-		(*value_pwm_left) = -pwm;
-		(*value_pwm_right) = pwm;
+	/* A FINIR  !!!!!*/
+	static int pwm;
+	static double consigne;
+	static double currentAngle;
+	static PID pid4AngleControl(&pwm,&currentAngle,&consigne,KP_ANGLE,KI_ANGLE,KD_ANGLE);
+
+	static bool initDone = false;
+
+	if(!initDone){
+		start_time = 0;
+		pwm = 0;
+		currentAngle = .0;
+		consigne = .0;
+		pid4AngleControl.Reset();
+		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		initDone = true;
 	}
+
+	if(current_goal.phase == PHASE_1){
+		consigne = current_goal.angle;
+		currentAngle = robot_state.angle;
+		if(abs(consigne-currentAngle) < M_PI/180){ /*si l'erreur est infŽrieur a 1deg, on concidere la consigne atteinte*/
+			current_goal.phase = PHASE_2;
+		}
+	}
+
+
+	pid4AngleControl.Compute();
+
+
+	if(current_goal.phase == PHASE_2){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		current_goal.isReached = true;
+		initDone = false;
+	}
+	else{
+		(*value_pwm_right) = pwm;
+		(*value_pwm_left) = -pwm;
+	}
+
 }
 
 /* Calcule les pwm ˆ appliquer pour un asservissement en position
@@ -73,7 +143,55 @@ void angleControl(int angle,int* value_pwm_left, int* value_pwm_right){
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
  * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
  * */
-void positionControl(int x,int y,int* value_pwm_left, int* value_pwm_right){
+void positionControl(int* value_pwm_left, int* value_pwm_right){
+
+	/* A FINIR  !!!!!*/
+
+	static int pwm4angle;
+	static int pwm4dist;
+	static double consigneAngle;
+	static double currentAngle;
+	static int consigneDist;
+	static int currentDist;
+	static PID pid4AngleControl(&pwm4angle,&currentAngle,&consigneAngle,KP_ANGLE,KI_ANGLE,KD_ANGLE);
+	static PID pid4DistanceControl(&pwm4dist,&currentDist,&consigneDist,KP_DIST,KI_DIST,KD_DIST);
+
+	static bool initDone = false;
+
+	if(!initDone){
+		start_time = 0;
+		pwm = 0;
+		currentAngle = .0;
+		consigne = .0;
+		pid4AngleControl.Reset();
+		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		initDone = true;
+	}
+
+	if(current_goal.phase == PHASE_1){
+		consigne = current_goal.angle;
+		currentAngle = robot_state.angle;
+		if(abs(consigne-currentAngle) < M_PI/180){ /*si l'erreur est infŽrieur a 1deg, on concidere la consigne atteinte*/
+			current_goal.phase = PHASE_2;
+		}
+	}
+
+
+	pid4AngleControl.Compute();
+
+
+	if(current_goal.phase == PHASE_2){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		current_goal.isReached = true;
+		initDone = false;
+	}
+	else{
+		(*value_pwm_right) = pwm;
+		(*value_pwm_left) = -pwm;
+	}
+
+
 
 	/*calcul de l'angle ˆ combler avant d'tre alignŽ avec le point cible
 	 * borne = [0,2*PI[ */
@@ -119,15 +237,16 @@ void computeRobotState(){
 	double dr = (value_right_enc - prev_value_right_enc)*ENC_DELTA;
 
 	/*ce dŽplacement a ŽtŽ rŽalisŽ en un temps donne -> calcul de la vitesse en mm/s*/
-	double speed_left = dl/((millis()-prev_time)/1000);
-	double speed_right = dr/((millis()-prev_time)/1000);
+	double speed_left = dl/(millis()-prev_time);
+	double speed_right = dr/(millis()-prev_time);
+	prev_time = millis();
 	double speed = (speed_left+speed_right)/2; /*estimation : simple moyenne*/
 
 	/*mise a jour de l'orientation en rad*/
 	double delta_angle = (dr-dl)/ENC_CENTER_DIST;
 
-	double angle = fmod(robot_state.angle + delta_angle,PI); /*Attention au modulo PI*/
-
+	double angle = fmod(robot_state.angle + delta_angle/2,2*M_PI); /*Attention au modulo PI*/
+	if (angle < 0) angle += 2*M_PI; /* l'angle est maintenant entre 0 et 2*PI
 	/*mise a jour de la position en mm
 	 * on utilise des cos et des sin et c'est pas trs opti.
 	 * A voir si l'approximation par un dev limitŽ d'ordre 2 est plus efficace
@@ -147,7 +266,6 @@ void computeRobotState(){
 	/*prŽparation de la prochaine itŽration*/
 	prev_value_left_enc = value_left_enc;
 	prev_value_right_enc = value_right_enc;
-	prev_time = millis();
 }
 
 /* Calcul la consigne ˆ appliquer en fonction de l'erreur ˆ combler
@@ -188,30 +306,4 @@ int computePID(double error,int kp,int ki,int kd){
 }
 
 
-
-/* VŽrifie si le but a ŽtŽ atteint.
- * Inutile de continuer ˆ calculer les pwm aux prochaines itŽrations si c'est le cas
- */
-void checkCurrentGoal(){
-	switch (current_goal.type) {
-		case TYPE_SPEED:
-			/* A plus ou moins 10 mm/s, on concidere que le but est atteint*/
-			if(abs(current_goal.speed-robot_state.speed) < 10)
-				current_goal.isReached = true;
-			break;
-		case TYPE_ANGLE:
-			/* A plus ou moins 1 deg, on concidere que le but est atteint*/
-			if(abs(current_goal.angle-robot_state.angle) < 0.0017)
-				current_goal.isReached = true;
-			break;
-		case TYPE_POSITION:
-			/* A plus ou moins 2 mm, on concidere que le but est atteint*/
-			if(abs(current_goal.x-robot_state.x) < 2 && abs(current_goal.y-robot_state.y) < 2)
-				current_goal.isReached = true;
-			break;
-		default:
-			break;
-	}
-
-}
 

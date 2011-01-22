@@ -31,11 +31,11 @@ void setup(){
 
 void loop(){
 	/* zone libre */
-	/*pinMode(13,OUTPUT);
+	pinMode(13,OUTPUT);
 	if(index%200>100)
 		 digitalWrite(13, HIGH);
 	else
-		 digitalWrite(13, LOW);*/
+		 digitalWrite(13, LOW);
 	/* fin zone de programmation libre */
 
 	/*lecture des ordres*/
@@ -44,20 +44,17 @@ void loop(){
 
 
 	/*recuperation du but suivant (vitesse, angle ou position) */
-	if(current_goal.isReached){
+	if(current_goal.isReached)
 		popGoal(); /* va changer la valeur de current_goal */
-		reinitPID = true; /*reinitialise les valeurs d'integration et de dérivée au prochain appel de computePID */
-	}
+
 
 	/*calcul des sorties*/
-	int value_pwm_left = 0;
-        int value_pwm_right = 0;
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
-			speedControl(current_goal.speed,&value_pwm_left,&value_pwm_right,5000);
+			speedControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_ANGLE)
-			angleControl(current_goal.angle,&value_pwm_left,&value_pwm_right);
+			angleControl(&value_pwm_left,&value_pwm_right);
 		else
 			positionControl(current_goal.x,current_goal.y,&value_pwm_left,&value_pwm_right);
 	}
@@ -69,9 +66,9 @@ void loop(){
 	/*modele d'evolution*/
 	computeRobotState();
 
-	/*verification de l'état des consignes, si elles sont atteintes ou non*/
+	/*verification de l'ÔøΩtat des consignes, si elles sont atteintes ou non*/
 	checkCurrentGoal();
-
+	
 	/*envoyer un caractere sur le port serie pour test*/
 	/*if(index == 500){
           Serial.println("_________________");
