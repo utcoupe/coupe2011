@@ -5,6 +5,7 @@
  *      Author: HoHen
  */
 
+#include "WProgram.h"
 #include "control.h"
 #include "encoder.h"
 #include "robotstate.h"
@@ -109,45 +110,47 @@ void positionControl(int x,int y,int* value_pwm_left, int* value_pwm_right){
  * A appeler à intervalle régulier (à voir pour la mettre sur une interruption timer)
  * */
 void computeRobotState(){
-
 	static unsigned long prev_value_left_enc = 0;
 	static unsigned long prev_value_right_enc = 0;
-	static unsigned long prev_time = 0;
 
-	/*calcul du deplacement depuis la dernière fois en mm*/
-	double dl = (value_left_enc - prev_value_left_enc)*ENC_DELTA;
-	double dr = (value_right_enc - prev_value_right_enc)*ENC_DELTA;
+	/*calcul du deplacement depuis la dernière fois en ticks */
+	long dl = value_left_enc - prev_value_left_enc;
+	long dr = value_right_enc - prev_value_right_enc;
+	
+	/*préparation de la prochaine itération*/
+	prev_value_left_enc = value_left_enc;
+	prev_value_right_enc = value_right_enc;
 
-	/*ce déplacement a été réalisé en un temps donne -> calcul de la vitesse en mm/s*/
-	double speed_left = dl/((millis()-prev_time)/1000);
-	double speed_right = dr/((millis()-prev_time)/1000);
-	double speed = (speed_left+speed_right)/2; /*estimation : simple moyenne*/
+	/*ce déplacement a été réalisé en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
+	double speed_left = dl/DUREE_CYCLE;
+	double speed_right = dr/DUREE_CYCLE;
+	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
+	if(speed != 42){Serial.print("speed: ");Serial.println(speed_left, DEC);}
+	
+	/* mise a jour de l'orientation en rad */
+	double delta_angle = (double)(dr-dl)*(double)ENC_TICKS_TO_MM/(double)ENC_CENTER_DIST;
 
-	/*mise a jour de l'orientation en rad*/
-	double delta_angle = (dr-dl)/ENC_CENTER_DIST;
-
-	double angle = fmod(robot_state.angle + delta_angle,PI); /*Attention au modulo PI*/
-
-	/*mise a jour de la position en mm
+	// Angle du robot par rapport à l'axe X
+	double angle = fmod(robot_state.angle + delta_angle,M_PI); /*Attention au modulo PI*/
+	if(delta_angle != 0){Serial.print("angle: ");Serial.println(DUREE_CYCLE*cos(angle), DEC);}
+	
+	/* mise a jour de la position en ticks
 	 * on utilise des cos et des sin et c'est pas très opti.
 	 * A voir si l'approximation par un dev limité d'ordre 2 est plus efficace
-	 * */
-	double delta_move = (dr+dl)/ENC_CENTER_DIST;
-	double x = robot_state.x + speed*cos(robot_state.angle + delta_angle);
-	double y = robot_state.y + speed*sin(robot_state.angle + delta_angle);
-
+	 */
+	double dx = speed*DUREE_CYCLE*cos(angle);
+	double dy = speed*DUREE_CYCLE*sin(angle);
+	
+	if(dx != 0){Serial.print("dx: ");Serial.println(dx, DEC);}
+	if(dy != 0){Serial.print("dy: ");Serial.println(dy, DEC);}
+	
 	/*mise a jour de l'état du robot  */
 	robot_state.speed = speed;
 	robot_state.speed_left = speed_left;
 	robot_state.speed_right = speed_right;
 	robot_state.angle = angle;
-	robot_state.x = x;
-	robot_state.y = y;
-
-	/*préparation de la prochaine itération*/
-	prev_value_left_enc = value_left_enc;
-	prev_value_right_enc = value_right_enc;
-	prev_time = millis();
+	robot_state.x += dx;
+	robot_state.y += dy;
 }
 
 /* Calcul la consigne à appliquer en fonction de l'erreur à combler
