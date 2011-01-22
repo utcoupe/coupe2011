@@ -80,13 +80,13 @@ void analyzeMessage(){
                         Serial.print(EOF);
 		break;
 		case T_POSITION:
-			pushGoal(TYPE_POSITION, buffer[2] << 8 + buffer[3], buffer[3] << 8 + buffer[4]);
+			//pushGoal(TYPE_POSITION, buffer[2] << 8 + buffer[3], buffer[3] << 8 + buffer[4]);
 		break;
 		case T_SPEED:
-			pushGoal(TYPE_SPEED, buffer[2], 0);
+			//pushGoal(TYPE_SPEED, buffer[2], 0);
 		break;
 		case T_ANGLE:
-			pushGoal(TYPE_ANGLE, buffer[2] << 8 + buffer[3], 0);
+			//pushGoal(TYPE_ANGLE, buffer[2] << 8 + buffer[3], 0);
 		break;
                 case '?':
                         Serial.println("_________________");

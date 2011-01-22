@@ -64,7 +64,7 @@ void loop(){
 		else if(current_goal.type == TYPE_ANGLE)
 			angleControl(&value_pwm_left,&value_pwm_right);
 		else
-			positionControl(current_goal.x,current_goal.y,&value_pwm_left,&value_pwm_right);
+			positionControl(&value_pwm_left,&value_pwm_right);
 	}
 
 	/*ecriture de la sortie*/
@@ -75,7 +75,7 @@ void loop(){
 	computeRobotState();
 
 	/*verification de l'�tat des consignes, si elles sont atteintes ou non*/
-	checkCurrentGoal();
+
 
 	/*envoyer un caractere sur le port serie pour test*/
 	Serial.println(value_left_enc);

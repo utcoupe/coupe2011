@@ -13,6 +13,8 @@
 
 
 unsigned long index = 0;
+int value_pwm_left = 0;
+int value_pwm_right = 0;
 
 void setup(){
 	/*Initialise la file des buts a atteindre*/
@@ -56,7 +58,7 @@ void loop(){
 		else if(current_goal.type == TYPE_ANGLE)
 			angleControl(&value_pwm_left,&value_pwm_right);
 		else
-			positionControl(current_goal.x,current_goal.y,&value_pwm_left,&value_pwm_right);
+			positionControl(&value_pwm_left,&value_pwm_right);
 	}
 
 	/*ecriture de la sortie*/
@@ -67,7 +69,7 @@ void loop(){
 	computeRobotState();
 
 	/*verification de l'ÔøΩtat des consignes, si elles sont atteintes ou non*/
-	checkCurrentGoal();
+	//checkCurrentGoal();
 	
 	/*envoyer un caractere sur le port serie pour test*/
 	/*if(index == 500){

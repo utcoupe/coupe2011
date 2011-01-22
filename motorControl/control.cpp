@@ -5,6 +5,7 @@
  *      Author: HoHen
  */
 
+
 #include "control.h"
 #include "encoder.h"
 #include "robotstate.h"
@@ -18,22 +19,21 @@ void initController(){
 	reinitPID = true;
 }
 
-/* Calcule les pwm ˆ appliquer pour un asservissement en vitesse en trapeze
+double pwm,consigne,currentSpeed;
+PID pid4SpeedControl(&pwm,&currentSpeed,&consigne,KP_SPEED,KI_SPEED,KD_SPEED);
+
+/* Calcule les pwm ï¿½ appliquer pour un asservissement en vitesse en trapeze
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
  * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
  * */
 void speedControl(int* value_pwm_left, int* value_pwm_right){
 	/* si le robot est en train de tourner, et qu'on lui donne une consigne de vitesse, il ne va pas partir droit
-	 * solution = dŽcomposer l'asservissement en vitesse en 2 :
+	 * solution = dï¿½composer l'asservissement en vitesse en 2 :
 	 * -> stopper le robot (les 2 vitesses = 0)
 	 * -> lancer l'asservissement en vitesse
 	 */
 
 	static int start_time;
-	static int pwm;
-	static int consigne;
-	static int currentSpeed;
-	static PID pid4SpeedControl(&pwm,&currentSpeed,&consigne,KP_SPEED,KI_SPEED,KD_SPEED);
 
 	static bool initDone = false;
 
@@ -51,7 +51,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 
 		consigne = current_goal.speed;
 		currentSpeed = robot_state.speed;
-		if(abs(consigne-currentSpeed) < 1){ /*si l'erreur est infŽrieur a 1, on concidere la consigne atteinte*/
+		if(abs(consigne-currentSpeed) < 1){ /*si l'erreur est infï¿½rieur a 1, on concidere la consigne atteinte*/
 			current_goal.phase = PHASE_2;
 			start_time = millis();
 		}
@@ -87,7 +87,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 }
 
 
-/* Calcule les pwm ˆ appliquer pour un asservissement en angle
+/* Calcule les pwm ï¿½ appliquer pour un asservissement en angle
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
  * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
  * */
@@ -95,49 +95,48 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 
 
 	/* A FINIR  !!!!!*/
-	static int pwm;
-	static double consigne;
-	static double currentAngle;
-	static PID pid4AngleControl(&pwm,&currentAngle,&consigne,KP_ANGLE,KI_ANGLE,KD_ANGLE);
-
-	static bool initDone = false;
-
-	if(!initDone){
-		start_time = 0;
-		pwm = 0;
-		currentAngle = .0;
-		consigne = .0;
-		pid4AngleControl.Reset();
-		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
-		initDone = true;
-	}
-
-	if(current_goal.phase == PHASE_1){
-		consigne = current_goal.angle;
-		currentAngle = robot_state.angle;
-		if(abs(consigne-currentAngle) < M_PI/180){ /*si l'erreur est infŽrieur a 1deg, on concidere la consigne atteinte*/
-			current_goal.phase = PHASE_2;
-		}
-	}
-
-
-	pid4AngleControl.Compute();
-
-
-	if(current_goal.phase == PHASE_2){
-		(*value_pwm_right) = 0;
-		(*value_pwm_left) = 0;
-		current_goal.isReached = true;
-		initDone = false;
-	}
-	else{
-		(*value_pwm_right) = pwm;
-		(*value_pwm_left) = -pwm;
-	}
+//	static double pwm;
+//	static double consigne;
+//	static double currentAngle;
+//	static PID pid4AngleControl(&pwm,&currentAngle,&consigne,KP_ANGLE,KI_ANGLE,KD_ANGLE);
+//
+//	static bool initDone = false;
+//
+//	if(!initDone){
+//		pwm = 0;
+//		currentAngle = .0;
+//		consigne = .0;
+//		pid4AngleControl.Reset();
+//		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+//		initDone = true;
+//	}
+//
+//	if(current_goal.phase == PHASE_1){
+//		consigne = current_goal.angle;
+//		currentAngle = robot_state.angle;
+//		if(abs(consigne-currentAngle) < M_PI/180){ /*si l'erreur est infï¿½rieur a 1deg, on concidere la consigne atteinte*/
+//			current_goal.phase = PHASE_2;
+//		}
+//	}
+//
+//
+//	pid4AngleControl.Compute();
+//
+//
+//	if(current_goal.phase == PHASE_2){
+//		(*value_pwm_right) = 0;
+//		(*value_pwm_left) = 0;
+//		current_goal.isReached = true;
+//		initDone = false;
+//	}
+//	else{
+//		(*value_pwm_right) = pwm;
+//		(*value_pwm_left) = -pwm;
+//	}
 
 }
 
-/* Calcule les pwm ˆ appliquer pour un asservissement en position
+/* Calcule les pwm ï¿½ appliquer pour un asservissement en position
  * <> x : la consigne de position en x
  * <> y : la consigne de position en y
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
@@ -145,86 +144,86 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
  * */
 void positionControl(int* value_pwm_left, int* value_pwm_right){
 
-	/* A FINIR  !!!!!*/
-
-	static int pwm4angle;
-	static int pwm4dist;
-	static double consigneAngle;
-	static double currentAngle;
-	static int consigneDist;
-	static int currentDist;
-	static PID pid4AngleControl(&pwm4angle,&currentAngle,&consigneAngle,KP_ANGLE,KI_ANGLE,KD_ANGLE);
-	static PID pid4DistanceControl(&pwm4dist,&currentDist,&consigneDist,KP_DIST,KI_DIST,KD_DIST);
-
-	static bool initDone = false;
-
-	if(!initDone){
-		start_time = 0;
-		pwm = 0;
-		currentAngle = .0;
-		consigne = .0;
-		pid4AngleControl.Reset();
-		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
-		initDone = true;
-	}
-
-	if(current_goal.phase == PHASE_1){
-		consigne = current_goal.angle;
-		currentAngle = robot_state.angle;
-		if(abs(consigne-currentAngle) < M_PI/180){ /*si l'erreur est infŽrieur a 1deg, on concidere la consigne atteinte*/
-			current_goal.phase = PHASE_2;
-		}
-	}
-
-
-	pid4AngleControl.Compute();
-
-
-	if(current_goal.phase == PHASE_2){
-		(*value_pwm_right) = 0;
-		(*value_pwm_left) = 0;
-		current_goal.isReached = true;
-		initDone = false;
-	}
-	else{
-		(*value_pwm_right) = pwm;
-		(*value_pwm_left) = -pwm;
-	}
-
-
-
-	/*calcul de l'angle ˆ combler avant d'tre alignŽ avec le point cible
-	 * borne = [0,2*PI[ */
-	double gamma = 0; /*coeff angulaire de la droite passant par le robot et le point cible*/
-	if(robot_state.x-x == 0)
-		gamma = M_PI/2;
-	else if(robot_state.y-y == 0)
-		gamma = 0;
-	else
-		gamma = atan2(robot_state.y-y,robot_state.x-x); /*arctan(y/x) -> [-PI,PI]*/
-	double delta_angle = M_PI - robot_state.angle - gamma;
-
-	/* calcul de la distance a parcourir jusqu'au point
-	 * borne [0,TABLE_DIST_MAX_MM] soit [0,3662] */
-	double delta_move = sqrt(pow(robot_state.x-x,2)+pow(robot_state.y-y,2)); /*norme simple*/
-
-	/* L'idŽe est d'affecter un poids au 2 delta pour eviter que l'angle soit sous reprŽsentŽ
-	 * par rapport a la distance ˆ parcourir (il suffit de regarder les bornes pour s'en rendre compte)
-	 * -> les 2 poids sont K_DIST et K_ANGLE
-	 */
-	if(delta_angle>PI){
-		(*value_pwm_left) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_POSITION,KI_POSITION,KD_POSITION);
-		(*value_pwm_right) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_POSITION,KI_POSITION,KD_POSITION);
-	}
-	else{
-		(*value_pwm_left) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_POSITION,KP_POSITION,KP_POSITION);
-		(*value_pwm_right) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_POSITION,KP_POSITION,KP_POSITION);
-	}
+//	/* A FINIR  !!!!!
+//
+//	static int pwm4angle;
+//	static int pwm4dist;
+//	static double consigneAngle;
+//	static double currentAngle;
+//	static int consigneDist;
+//	static int currentDist;
+//	static PID pid4AngleControl(&pwm4angle,&currentAngle,&consigneAngle,KP_ANGLE,KI_ANGLE,KD_ANGLE);
+//	static PID pid4DistanceControl(&pwm4dist,&currentDist,&consigneDist,KP_DIST,KI_DIST,KD_DIST);
+//
+//	static bool initDone = false;
+//
+//	if(!initDone){
+//		start_time = 0;
+//		pwm = 0;
+//		currentAngle = .0;
+//		consigne = .0;
+//		pid4AngleControl.Reset();
+//		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+//		initDone = true;
+//	}
+//
+//	if(current_goal.phase == PHASE_1){
+//		consigne = current_goal.angle;
+//		currentAngle = robot_state.angle;
+//		if(abs(consigne-currentAngle) < M_PI/180){ /*si l'erreur est infï¿½rieur a 1deg, on concidere la consigne atteinte*/
+//			current_goal.phase = PHASE_2;
+//		}
+//	}
+//
+//
+//	pid4AngleControl.Compute();
+//
+//
+//	if(current_goal.phase == PHASE_2){
+//		(*value_pwm_right) = 0;
+//		(*value_pwm_left) = 0;
+//		current_goal.isReached = true;
+//		initDone = false;
+//	}
+//	else{
+//		(*value_pwm_right) = pwm;
+//		(*value_pwm_left) = -pwm;
+//	}
+//
+//
+//
+//	/*calcul de l'angle ï¿½ combler avant d'ï¿½tre alignï¿½ avec le point cible
+//	 * borne = [0,2*PI[ */
+//	double gamma = 0; /*coeff angulaire de la droite passant par le robot et le point cible*/
+//	if(robot_state.x-x == 0)
+//		gamma = M_PI/2;
+//	else if(robot_state.y-y == 0)
+//		gamma = 0;
+//	else
+//		gamma = atan2(robot_state.y-y,robot_state.x-x); /*arctan(y/x) -> [-PI,PI]*/
+//	double delta_angle = M_PI - robot_state.angle - gamma;
+//
+//	/* calcul de la distance a parcourir jusqu'au point
+//	 * borne [0,TABLE_DIST_MAX_MM] soit [0,3662] */
+//	double delta_move = sqrt(pow(robot_state.x-x,2)+pow(robot_state.y-y,2)); /*norme simple*/
+//
+//	/* L'idï¿½e est d'affecter un poids au 2 delta pour eviter que l'angle soit sous reprï¿½sentï¿½
+//	 * par rapport a la distance ï¿½ parcourir (il suffit de regarder les bornes pour s'en rendre compte)
+//	 * -> les 2 poids sont K_DIST et K_ANGLE
+//	 */
+//	if(delta_angle>PI){
+//		(*value_pwm_left) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_POSITION,KI_POSITION,KD_POSITION);
+//		(*value_pwm_right) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_POSITION,KI_POSITION,KD_POSITION);
+//	}
+//	else{
+//		(*value_pwm_left) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_POSITION,KP_POSITION,KP_POSITION);
+//		(*value_pwm_right) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_POSITION,KP_POSITION,KP_POSITION);
+//	}
 
 }
 
-/* ImplŽmentation du modle d'Žvolution du robot ˆ partir de l'odometrie
- * A appeler ˆ intervalle rŽgulier (ˆ voir pour la mettre sur une interruption timer)
+/* Implï¿½mentation du modï¿½le d'ï¿½volution du robot ï¿½ partir de l'odometrie
+ * A appeler ï¿½ intervalle rï¿½gulier (ï¿½ voir pour la mettre sur une interruption timer)
  * */
 void computeRobotState(){
 
@@ -232,11 +231,11 @@ void computeRobotState(){
 	static unsigned long prev_value_right_enc = 0;
 	static unsigned long prev_time = 0;
 
-	/*calcul du deplacement depuis la dernire fois en mm*/
+	/*calcul du deplacement depuis la derniï¿½re fois en mm*/
 	double dl = (value_left_enc - prev_value_left_enc)*ENC_DELTA;
 	double dr = (value_right_enc - prev_value_right_enc)*ENC_DELTA;
 
-	/*ce dŽplacement a ŽtŽ rŽalisŽ en un temps donne -> calcul de la vitesse en mm/s*/
+	/*ce dï¿½placement a ï¿½tï¿½ rï¿½alisï¿½ en un temps donne -> calcul de la vitesse en mm/s*/
 	double speed_left = dl/(millis()-prev_time);
 	double speed_right = dr/(millis()-prev_time);
 	prev_time = millis();
@@ -248,14 +247,14 @@ void computeRobotState(){
 	double angle = fmod(robot_state.angle + delta_angle/2,2*M_PI); /*Attention au modulo PI*/
 	if (angle < 0) angle += 2*M_PI; /* l'angle est maintenant entre 0 et 2*PI
 	/*mise a jour de la position en mm
-	 * on utilise des cos et des sin et c'est pas trs opti.
-	 * A voir si l'approximation par un dev limitŽ d'ordre 2 est plus efficace
+	 * on utilise des cos et des sin et c'est pas trï¿½s opti.
+	 * A voir si l'approximation par un dev limitï¿½ d'ordre 2 est plus efficace
 	 * */
 	double delta_move = (dr+dl)/ENC_CENTER_DIST;
 	double x = robot_state.x + speed*cos(robot_state.angle + delta_angle);
 	double y = robot_state.y + speed*sin(robot_state.angle + delta_angle);
 
-	/*mise a jour de l'Žtat du robot  */
+	/*mise a jour de l'ï¿½tat du robot  */
 	robot_state.speed = speed;
 	robot_state.speed_left = speed_left;
 	robot_state.speed_right = speed_right;
@@ -263,18 +262,18 @@ void computeRobotState(){
 	robot_state.x = x;
 	robot_state.y = y;
 
-	/*prŽparation de la prochaine itŽration*/
+	/*prï¿½paration de la prochaine itï¿½ration*/
 	prev_value_left_enc = value_left_enc;
 	prev_value_right_enc = value_right_enc;
 }
 
-/* Calcul la consigne ˆ appliquer en fonction de l'erreur ˆ combler
- * error : l'erreur ˆ combler
- * kp : le terme proportionnel qui permet d'augmenter la vitesse de montŽe (atteint la consigne le plus rapidement possible).
- * ki : le terme intŽgral qui rŽduit l'erreur statique.
- * kd : le terme dŽrivŽ qui rŽduit le dŽpassement (l'overshoot).
+/* Calcul la consigne ï¿½ appliquer en fonction de l'erreur ï¿½ combler
+ * error : l'erreur ï¿½ combler
+ * kp : le terme proportionnel qui permet d'augmenter la vitesse de montï¿½e (atteint la consigne le plus rapidement possible).
+ * ki : le terme intï¿½gral qui rï¿½duit l'erreur statique.
+ * kd : le terme dï¿½rivï¿½ qui rï¿½duit le dï¿½passement (l'overshoot).
  * __________________________________________________________________________________________________
- * Coefficient		|Temps de montŽe	|Temps de stabilisation	|DŽpassement	|Erreur statique	|
+ * Coefficient		|Temps de montï¿½e	|Temps de stabilisation	|Dï¿½passement	|Erreur statique	|
  *	kp				|Diminue			|Augmente				|Augmente		|Diminue			|
  *	ki				|Diminue			|Augmente				|Augmente		|Annule				|
  *	kd				|-					|Diminue				|Diminue		|-					|
