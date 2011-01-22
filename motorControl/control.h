@@ -12,28 +12,32 @@
 #include "parameters.h"
 #include "wiring.h"
 
+#define PHASE_1 1
+#define PHASE_2 2
+#define PHASE_3 3
+#define PHASE_4 4
+
 typedef struct CurrentGoal {
 	int type;
-	double speed;
-	double x;
-	double y;
+	int speed;
+	int periode;
+	int x;
+	int y;
 	double angle;
 	bool isReached;
+	int phase;
 } CurrentGoal;
 
 extern CurrentGoal current_goal;
-extern bool reinitPID;
 
 void initController();
 
-void speedControl(int,int*,int*,int);
-void angleControl(int,int*,int*);
-void positionControl(int,int,int*,int*);
+void speedControl(int*,int*);
+void angleControl(int*,int*);
+void positionControl(int*,int*);
 
 void computeRobotState();
 
 int computePID(double,int,int,int);
-
-void checkCurrentGoal();
 
 #endif /* CONTROL_H_ */

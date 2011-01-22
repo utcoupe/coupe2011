@@ -14,8 +14,9 @@
 
 typedef struct {
 	int type;
-	double data_1; /*speed, angle ou x*/
-	double data_2; /* y */
+	int data_1; /*speed ou x*/
+	int data_2; /* y */
+	double data_3; /* angle */
 } Goal;
 
 typedef struct {
@@ -26,7 +27,7 @@ typedef struct {
 
 
 void initGoals();
-void pushGoal(int,double,double);
+void pushGoal(int,int,int,double);
 void popGoal();
 void clearGoals();
 

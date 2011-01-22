@@ -51,15 +51,15 @@
 #define K_DIST 0.5
 #define K_ANGLE 700
 
-#define KP_SPEED 100
-#define KI_SPEED 5
-#define KD_SPEED 20
-#define KP_ANGLE 100
-#define KI_ANGLE 5
-#define KD_ANGLE 20
-#define KP_POSITION 100
-#define KI_POSITION 5
-#define KD_POSITION 20
+#define KP_SPEED 2.0
+#define KI_SPEED 5.0
+#define KD_SPEED 1.0
+#define KP_ANGLE 2.0
+#define KI_ANGLE 5.0
+#define KD_ANGLE 1.0
+#define KP_POSITION 100.0
+#define KI_POSITION 5.0
+#define KD_POSITION 20.0
 
 /*Paramètre de liaison série*/
 #define SOF '<'

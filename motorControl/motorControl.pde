@@ -45,10 +45,9 @@ void loop(){
 
 	/*recuperation du but suivant (vitesse, angle ou position) */
 	// Arthur: Ne pas le faire s'il n'y a pas de nouveau point, mais maintenir la position
-	if(current_goal.isReached){
+	if(current_goal.isReached)
 		popGoal(); /* va changer la valeur de current_goal */
-		reinitPID = true; /*reinitialise les valeurs d'integration et de dérivée au prochain appel de computePID */
-	}
+
 
 	/*calcul des sorties*/
 	int value_pwm_left = 0;
@@ -56,11 +55,11 @@ void loop(){
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
-			speedControl(current_goal.speed,&value_pwm_left,&value_pwm_right,5000);
+			speedControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_ANGLE)
-			angleControl(current_goal.angle,&value_pwm_left,&value_pwm_right);
+			angleControl(&value_pwm_left,&value_pwm_right);
 		else
-			positionControl(current_goal.x,current_goal.y,&value_pwm_left,&value_pwm_right);
+			positionControl(&value_pwm_left,&value_pwm_right);
 	}
 
 	/*ecriture de la sortie*/
