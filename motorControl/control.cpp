@@ -12,7 +12,6 @@
 bool reinitPID;
 CurrentGoal current_goal;
 
-
 void initController(){
 	current_goal.isReached = true;
 	reinitPID = true;
@@ -96,12 +95,12 @@ void positionControl(int x,int y,int* value_pwm_left, int* value_pwm_right){
 	 * -> les 2 poids sont K_DIST et K_ANGLE
 	 */
 	if(delta_angle>PI){
-		(*value_pwm_left) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_SPEED,KI_SPEED,KD_SPEED);
-		(*value_pwm_right) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_SPEED,KI_SPEED,KD_SPEED);
+		(*value_pwm_left) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_POSITION,KI_POSITION,KD_POSITION);
+		(*value_pwm_right) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_POSITION,KI_POSITION,KD_POSITION);
 	}
 	else{
-		(*value_pwm_left) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_SPEED,KI_SPEED,KD_SPEED);
-		(*value_pwm_right) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_SPEED,KI_SPEED,KD_SPEED);
+		(*value_pwm_left) = computePID(K_DIST*delta_move-K_ANGLE*delta_angle,KP_POSITION,KP_POSITION,KP_POSITION);
+		(*value_pwm_right) = computePID(K_DIST*delta_move+K_ANGLE*delta_angle,KP_POSITION,KP_POSITION,KP_POSITION);
 	}
 
 }
@@ -120,12 +119,13 @@ void computeRobotState(){
 	double dr = (value_right_enc - prev_value_right_enc)*ENC_DELTA;
 
 	/*ce déplacement a été réalisé en un temps donne -> calcul de la vitesse en mm/s*/
-	double speed_left = dl/(millis()-prev_time);
-	double speed_right = dr/(millis()-prev_time);
+	double speed_left = dl/((millis()-prev_time)/1000);
+	double speed_right = dr/((millis()-prev_time)/1000);
 	double speed = (speed_left+speed_right)/2; /*estimation : simple moyenne*/
 
 	/*mise a jour de l'orientation en rad*/
 	double delta_angle = (dr-dl)/ENC_CENTER_DIST;
+
 	double angle = fmod(robot_state.angle + delta_angle,PI); /*Attention au modulo PI*/
 
 	/*mise a jour de la position en mm
@@ -133,8 +133,8 @@ void computeRobotState(){
 	 * A voir si l'approximation par un dev limité d'ordre 2 est plus efficace
 	 * */
 	double delta_move = (dr+dl)/ENC_CENTER_DIST;
-	double x = robot_state.x + delta_move*cos(robot_state.angle + delta_angle/2);
-	double y = robot_state.y + delta_move*sin(robot_state.angle + delta_angle/2);
+	double x = robot_state.x + speed*cos(robot_state.angle + delta_angle);
+	double y = robot_state.y + speed*sin(robot_state.angle + delta_angle);
 
 	/*mise a jour de l'état du robot  */
 	robot_state.speed = speed;
