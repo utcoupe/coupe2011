@@ -7,7 +7,6 @@
 #include "encoder.h"
 #include "wiring.h"
 
-
 int state_left_pinA;
 int state_left_pinB;
 int state_right_pinA;
@@ -22,10 +21,10 @@ void initEncoders(){
 	pinMode(PIN_RIGHT_A,INPUT);
 	pinMode(PIN_RIGHT_B,INPUT);
 
-        digitalWrite(PIN_LEFT_A, HIGH);
-        digitalWrite(PIN_LEFT_B, HIGH);
-        digitalWrite(PIN_RIGHT_A, HIGH);
-        digitalWrite(PIN_RIGHT_B, HIGH);
+	digitalWrite(PIN_LEFT_A, HIGH);
+	digitalWrite(PIN_LEFT_B, HIGH);
+	digitalWrite(PIN_RIGHT_A, HIGH);
+	digitalWrite(PIN_RIGHT_B, HIGH);
 
 	state_left_pinA = digitalRead(PIN_LEFT_A);
 	state_left_pinB = digitalRead(PIN_LEFT_B);
