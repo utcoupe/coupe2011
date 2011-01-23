@@ -35,7 +35,7 @@ void initController(){
 
 
 double pwm,consigne,currentSpeed;
-PID pid4SpeedControl(&pwm,&currentSpeed,&consigne,KP_SPEED,KI_SPEED,KD_SPEED);
+PID pid4SpeedControl(&currentSpeed,&pwm,&consigne,KP_SPEED,KI_SPEED,KD_SPEED);
 
 /* Calcule les pwm a appliquer pour un asservissement en vitesse en trapeze
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
@@ -58,13 +58,14 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		currentSpeed = 0;
 		consigne = 0;
 		pid4SpeedControl.Reset();
-		pid4SpeedControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		pid4SpeedControl.SetInputLimits(-10,10);
+		pid4SpeedControl.SetOutputLimits(-255,255);
+		pid4SpeedControl.SetSampleTime(2); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
 		pid4SpeedControl.SetMode(AUTO);
 		initDone = true;
 	}
 
 	if(current_goal.phase == PHASE_1){ //phase d'acceleration
-
 		consigne = current_goal.speed;
 		currentSpeed = robot_state.speed;
 		if(abs(consigne-currentSpeed) < 1){ /*si l'erreur est inf�rieur a 1, on concidere la consigne atteinte*/
@@ -84,7 +85,6 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		currentSpeed = robot_state.speed;
 		if(abs(robot_state.speed)<1){
 			current_goal.phase = PHASE_4;
-
 		}
 	}
 
@@ -103,7 +103,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 }
 
 double currentAngle;
-PID pid4AngleControl(&pwm,&currentAngle,&consigne,KP_ANGLE,KI_ANGLE,KD_ANGLE);
+PID pid4AngleControl(&currentAngle,&pwm,&consigne,KP_ANGLE,KI_ANGLE,KD_ANGLE);
 /* Calcule les pwm a appliquer pour un asservissement en angle
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
  * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
@@ -118,7 +118,9 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		currentAngle = .0;
 		consigne = .0;
 		pid4AngleControl.Reset();
-		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		pid4AngleControl.SetInputLimits(-M_PI,M_PI);
+		pid4AngleControl.SetOutputLimits(-255,255);
+		pid4AngleControl.SetSampleTime(2); //2ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
 		pid4AngleControl.SetMode(AUTO);
 		initDone = true;
 	}
@@ -182,8 +184,8 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 double output4Delta, output4Alpha;
 double currentDelta, currentAlpha;
 double consigneDelta, consigneAlpha;
-PID pid4DeltaControl(&output4Delta,&currentDelta,&consigneDelta,KP_DELTA,KI_DELTA,KD_DELTA);
-PID pid4AlphaControl(&output4Alpha,&currentAlpha,&consigneAlpha,KP_ALPHA,KI_ALPHA,KD_ALPHA);
+PID pid4DeltaControl(&currentDelta,&output4Delta,&consigneDelta,KP_DELTA,KI_DELTA,KD_DELTA);
+PID pid4AlphaControl(&currentAlpha,&output4Alpha,&consigneAlpha,KP_ALPHA,KI_ALPHA,KD_ALPHA);
 
 /* Calcule les pwm a appliquer pour un asservissement en position
  * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
@@ -201,11 +203,13 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		consigneDelta = .0;
 		consigneAlpha = .0;
 		pid4DeltaControl.Reset();
-		pid4DeltaControl.SetSampleTime(10);
+		pid4DeltaControl.SetInputLimits(0,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
+		pid4DeltaControl.SetSampleTime(2);
 		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed);
 		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
-		pid4AlphaControl.SetSampleTime(10);
+		pid4AlphaControl.SetSampleTime(2);
+		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
 		pid4AlphaControl.SetOutputLimits(-55,55);
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
@@ -246,8 +250,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		initDone = false;
 	}
 	else{
-		(*value_pwm_right) = output4Delta+output4Alpha;
-		(*value_pwm_left) = output4Delta-output4Alpha;
+		(*value_pwm_right) = -(output4Delta+output4Alpha);
+		(*value_pwm_left) = -(output4Delta-output4Alpha);
 	}
 
 
