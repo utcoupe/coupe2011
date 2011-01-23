@@ -59,6 +59,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		consigne = 0;
 		pid4SpeedControl.Reset();
 		pid4SpeedControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		pid4SpeedControl.SetMode(AUTO);
 		initDone = true;
 	}
 
@@ -118,6 +119,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		consigne = .0;
 		pid4AngleControl.Reset();
 		pid4AngleControl.SetSampleTime(10); //10ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
+		pid4AngleControl.SetMode(AUTO);
 		initDone = true;
 	}
 
@@ -201,9 +203,11 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4DeltaControl.Reset();
 		pid4DeltaControl.SetSampleTime(10);
 		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed);
+		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(10);
-		pid4DeltaControl.SetOutputLimits(-55,55);
+		pid4AlphaControl.SetOutputLimits(-55,55);
+		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
 
