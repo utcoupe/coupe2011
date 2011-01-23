@@ -203,7 +203,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		consigneDelta = .0;
 		consigneAlpha = .0;
 		pid4DeltaControl.Reset();
-		pid4DeltaControl.SetInputLimits(0,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
+		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
 		pid4DeltaControl.SetSampleTime(2);
 		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed);
 		pid4DeltaControl.SetMode(AUTO);
@@ -220,21 +220,22 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
 		/*calcul de l'angle alpha combler avant d'etre aligne avec le point cible
 		 * borne = [-PI/2 PI/2] */
-		double alpha = 0; /*coeff angulaire de la droite passant par le robot et le point cible*/
-		if(robot_state.x-current_goal.x == 0)
-			alpha = M_PI/2;
-		else if(robot_state.y-current_goal.y == 0)
-			alpha = 0;
-		else
-			alpha = atan2(robot_state.y-current_goal.y,robot_state.x-current_goal.x); /*arctan(y/x) -> [-PI/2,PI/2]*/
-
+		double alpha = atan2(abs(robot_state.y-current_goal.y),abs(robot_state.x-current_goal.x)); /*arctan(y/x) -> [-PI/2,PI/2]*/
 		currentAlpha = M_PI - robot_state.angle - alpha;
 
-		currentDelta = sqrt(pow(robot_state.x-current_goal.x,2)+pow(robot_state.y-current_goal.y,2)); /*norme simple*/
+	 	double dx = robot_state.x-current_goal.x;
+		double dy = robot_state.y-current_goal.y;
+		int sens = dx/abs(dx);
+		currentDelta = sens*sqrt(dx*dx+dy*dy);
 
+		Serial.print("a:");
+		Serial.println(currentAlpha);
 
+		Serial.print("d:");
+		Serial.println(currentDelta);
+		
 		/* condition d'arret */
-		if(currentDelta < 1){ /*si l'ecart n'est plus que de un mm, on concidere la consigne comme atteinte*/
+		if(abs(currentDelta) < 42){ /*si l'ecart n'est plus que de 42 ticks, on considere la consigne comme atteinte*/
 			current_goal.phase = PHASE_2;
 		}
 	}
@@ -250,8 +251,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		initDone = false;
 	}
 	else{
-		(*value_pwm_right) = -(output4Delta+output4Alpha);
-		(*value_pwm_left) = -(output4Delta-output4Alpha);
+		(*value_pwm_right) = output4Delta+output4Alpha;
+		(*value_pwm_left) = output4Delta-output4Alpha;
 	}
 
 
