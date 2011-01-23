@@ -200,7 +200,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		consigneAlpha = .0;
 		pid4DeltaControl.Reset();
 		pid4DeltaControl.SetSampleTime(10);
-		pid4DeltaControl.SetOutputLimits(-200,200);
+		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(10);
 		pid4DeltaControl.SetOutputLimits(-55,55);
