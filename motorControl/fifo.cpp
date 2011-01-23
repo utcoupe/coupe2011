@@ -17,7 +17,7 @@ void initGoals(){
 	/*pour tester le robot*/
 	//pushGoal(TYPE_SPEED,50,10000,.0);
 	pushGoal(TYPE_ANGLE,0,0,M_PI/2);
-	//pushGoal(TYPE_POSITION,1000,1000);
+	pushGoal(TYPE_POSITION,200,200,100); //x , y , ratio vitesse max [0-200]
 }
 
 void pushGoal(int type,int data_1,int data_2,double data_3){
@@ -48,6 +48,7 @@ void popGoal(){
 		case TYPE_POSITION:
 			current_goal.x = outGoal->data_1;
 			current_goal.y = outGoal->data_2;
+			current_goal.speed = outGoal->data_3;
 			break;
 		default:
 			break;
