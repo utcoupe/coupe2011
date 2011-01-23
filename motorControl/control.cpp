@@ -213,20 +213,20 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		/*calcul de l'angle alpha combler avant d'etre aligne avec le point cible
 		 * borne = [-PI/2 PI/2] */
 		double alpha = 0; /*coeff angulaire de la droite passant par le robot et le point cible*/
-		if(robot_state.x-x == 0)
+		if(robot_state.x-current_goal.x == 0)
 			alpha = M_PI/2;
-		else if(robot_state.y-y == 0)
+		else if(robot_state.y-current_goal.y == 0)
 			alpha = 0;
 		else
-			alpha = atan2(robot_state.y-y,robot_state.x-x); /*arctan(y/x) -> [-PI/2,PI/2]*/
+			alpha = atan2(robot_state.y-current_goal.y,robot_state.x-current_goal.x); /*arctan(y/x) -> [-PI/2,PI/2]*/
 
 		currentAlpha = M_PI - robot_state.angle - alpha;
 
-		currentDelta = sqrt(pow(robot_state.x-x,2)+pow(robot_state.y-y,2)); /*norme simple*/
+		currentDelta = sqrt(pow(robot_state.x-current_goal.x,2)+pow(robot_state.y-current_goal.y,2)); /*norme simple*/
 
 
 		/* condition d'arret */
-		if(delta < 1){ /*si l'ecart n'est plus que de un mm, on concidere la consigne comme atteinte*/
+		if(currentDelta < 1){ /*si l'ecart n'est plus que de un mm, on concidere la consigne comme atteinte*/
 			current_goal.phase = PHASE_2;
 		}
 	}
@@ -261,8 +261,8 @@ void computeRobotState(){
 	static unsigned long prev_time = 0;
 
 	/*calcul du deplacement depuis la derniere fois en mm*/
-	double dl = (value_left_enc - prev_value_left_enc)*ENC_DELTA;
-	double dr = (value_right_enc - prev_value_right_enc)*ENC_DELTA;
+	double dl = (value_left_enc - prev_value_left_enc)*ENC_TICKS_TO_MM;
+	double dr = (value_right_enc - prev_value_right_enc)*ENC_TICKS_TO_MM;
 
 	/*ce deplacement a ete realise en un temps donne -> calcul de la vitesse en mm/s*/
 	double speed_left = dl/(millis()-prev_time);

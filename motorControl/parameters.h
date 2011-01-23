@@ -10,10 +10,10 @@
 
 /* Paramètres mécanique du robot en mm,rad*/
 #define ENC_CENTER_DIST 200
-//#define ENC_RESOLUTION 1000
+#define ENC_RESOLUTION 2000 //quadrature de phase 500*2*2
 #define ENC_RADIUS 40
 //#define ENC_DELTA (2*M_PI*ENC_RADIUS)/ENC_RESOLUTION
-#define ENC_DELTA 0.2
+#define ENC_TICKS_TO_MM 0.2
 
 /* Paramètres de la carte asservissement
  * pin 0 -> USB 2 TTL
