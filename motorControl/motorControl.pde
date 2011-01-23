@@ -11,6 +11,8 @@
 
 unsigned long index = 0;
 unsigned long timeStart = 0;
+int value_pwm_left = 0;
+int value_pwm_right = 0;
 
 void setup(){
 	/*Initialise la file des buts a atteindre*/
@@ -44,13 +46,12 @@ void loop(){
 
 	/*recuperation du but suivant (vitesse, angle ou position) */
 	// Arthur: Ne pas le faire s'il n'y a pas de nouveau point, mais maintenir la position
+	// Cedric: c'est ce qui se passe actuellement, les pwm sont nulles lorsque le but est atteint, et ne change pas tant qu'il n'y a pas de nouveau but
 	if(current_goal.isReached)
 		popGoal(); /* va changer la valeur de current_goal */
 
 
 	/*calcul des sorties*/
-	int value_pwm_left = 0;
-	int value_pwm_right = 0;
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
