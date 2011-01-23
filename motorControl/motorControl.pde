@@ -72,8 +72,8 @@ void loop(){
 	// On éteint la del
 	digitalWrite(16, LOW);
 	
-	// On attend le temps qu'il faut pour boucler (10ms)
-	delayMicroseconds(2000-(micros()-timeStart));
+	// On attend le temps qu'il faut pour boucler
+	delayMicroseconds(DUREE_CYCLE*1000-(micros()-timeStart));
 }
 
 
