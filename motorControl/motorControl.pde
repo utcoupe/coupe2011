@@ -27,7 +27,7 @@ void setup(){
 	initEncoders();
 	/*Definit la position initiale du robot*/
 	initRobotState();
-	/*Active la liaison série*/
+	/*Active la liaison serie*/
 	initSerialLink();
 }
 
@@ -68,8 +68,6 @@ void loop(){
 	/*modele d'evolution*/
 	computeRobotState();
 
-	/*verification de l'ÔøΩtat des consignes, si elles sont atteintes ou non*/
-	//checkCurrentGoal();
 	
 	/*envoyer un caractere sur le port serie pour test*/
 	/*if(index == 500){
