@@ -9,12 +9,8 @@
 #include "message.h"
 #include "control.h"
 
-
-
-
 unsigned long index = 0;
-int value_pwm_left = 0;
-int value_pwm_right = 0;
+unsigned long timeStart = 0;
 
 void setup(){
 	/*Initialise la file des buts a atteindre*/
@@ -27,30 +23,34 @@ void setup(){
 	initEncoders();
 	/*Definit la position initiale du robot*/
 	initRobotState();
-	/*Active la liaison serie*/
+	/*Active la liaison série*/
 	initSerialLink();
+
+	// LED qui n'en est pas une
+	pinMode(16,OUTPUT);
 }
 
 void loop(){
+	// On note le temps de début
+	timeStart = micros();
+
 	/* zone libre */
-	pinMode(13,OUTPUT);
-	if(index%200>100)
-		 digitalWrite(13, HIGH);
-	else
-		 digitalWrite(13, LOW);
+	// La del est allumée pendant le traitement
+	digitalWrite(16, HIGH);
 	/* fin zone de programmation libre */
 
 	/*lecture des ordres*/
-	/*syntaxe d'un message : <data> */
 	readIncomingData();
 
-
 	/*recuperation du but suivant (vitesse, angle ou position) */
+	// Arthur: Ne pas le faire s'il n'y a pas de nouveau point, mais maintenir la position
 	if(current_goal.isReached)
 		popGoal(); /* va changer la valeur de current_goal */
 
 
 	/*calcul des sorties*/
+	int value_pwm_left = 0;
+	int value_pwm_right = 0;
 
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
@@ -67,27 +67,12 @@ void loop(){
 
 	/*modele d'evolution*/
 	computeRobotState();
-
 	
-	/*envoyer un caractere sur le port serie pour test*/
-	/*if(index == 500){
-          Serial.println("_________________");
-          Serial.print("time: ");Serial.println(millis());
-          Serial.print("angle: ");Serial.println(robot_state.angle);
-          Serial.print("speed: ");Serial.println(robot_state.speed_left);
-          Serial.print("x: ");Serial.println(robot_state.x);
-          Serial.print("y: ");Serial.println(robot_state.y);
-          Serial.print("pwmL: ");Serial.println(value_pwm_left);
-	  Serial.print("pwmR: ");Serial.println(value_pwm_right);
-          Serial.print("encL: ");Serial.println(value_left_enc);
-	  Serial.print("encR: ");Serial.println(value_right_enc);
-          index=0;
-        }else{
-          index ++;
-        }*/
+	// On éteint la del
+	digitalWrite(16, LOW);
+	
+	// On attend le temps qu'il faut pour boucler (10ms)
+	delayMicroseconds(2000-(micros()-timeStart));
 }
-
-
-
 
 

@@ -51,7 +51,6 @@ void readIncomingData(){
 }
 
 void analyzeMessage(){
-  Serial.println(buffer[0]);
 	/*
 	Contenu du buffer par index
 		1			type
@@ -88,19 +87,19 @@ void analyzeMessage(){
 		case T_ANGLE:
 			//pushGoal(TYPE_ANGLE, buffer[2] << 8 + buffer[3], 0);
 		break;
-                case '?':
-                        Serial.println("_________________");
-                        Serial.print("time: ");Serial.println(millis());
-                        Serial.print("angle: ");Serial.println(robot_state.angle);
-                        Serial.print("speed: ");Serial.println(robot_state.speed_left);
-                        Serial.print("x: ");Serial.println(robot_state.x);
-                        Serial.print("y: ");Serial.println(robot_state.y);
-/*                        Serial.print("pwmL: ");Serial.println(value_pwm_left);
-               	        Serial.print("pwmR: ");Serial.println(value_pwm_right);*/
-                        Serial.print("encL: ");Serial.println(value_left_enc);
-                	Serial.print("encR: ");Serial.println(value_right_enc);
-                break;
-                default: break;
+		case '?':
+			Serial.println("_________________");
+			Serial.print("time: ");Serial.println(millis());
+			Serial.print("angle: ");Serial.println(robot_state.angle, DEC);
+			Serial.print("speed: ");Serial.println(robot_state.speed*ENC_TICKS_TO_MM, DEC);
+			Serial.print("x: ");Serial.println(robot_state.x*ENC_TICKS_TO_MM, DEC);
+			Serial.print("y: ");Serial.println(robot_state.y*ENC_TICKS_TO_MM, DEC);
+			/* Serial.print("pwmL: ");Serial.println(value_pwm_left);
+			Serial.print("pwmR: ");Serial.println(value_pwm_right);*/
+			Serial.print("encL: ");Serial.println(value_left_enc);
+			Serial.print("encR: ");Serial.println(value_right_enc);
+		break;
+		default: break;
 	}
 }
 
