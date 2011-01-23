@@ -8,12 +8,14 @@
 #ifndef PARAMETERS_H_
 #define PARAMETERS_H_
 
-/* Paramètres mécanique du robot en mm,rad*/
-#define ENC_CENTER_DIST 200
-#define ENC_RESOLUTION 2000 //quadrature de phase 500*2*2
-#define ENC_RADIUS 40
-//#define ENC_DELTA (2*M_PI*ENC_RADIUS)/ENC_RESOLUTION
-#define ENC_TICKS_TO_MM 0.2
+/* Parametres mecanique du robot */
+#define ENC_CENTER_DIST (2*160) // Distance entre chaque roue codeuse et le centre du robot en mm
+#define ENC_RESOLUTION 500 // Nombre de points par tour d'encodeur
+#define ENC_RADIUS 18 // Rayon de la roue codeuse
+#define ENC_TICKS_TO_MM (2*M_PI*ENC_RADIUS)/(ENC_RESOLUTION*4) // en mm.tick^-1 (opti: a calculer apres)
+
+// Durée d'un cycle (en millisecondes)
+#define DUREE_CYCLE 2
 
 /* Paramètres de la carte asservissement
  * pin 0 -> USB 2 TTL
