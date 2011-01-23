@@ -6,11 +6,11 @@
  */
 
 typedef struct RobotState {
-  long x;
-  long y;
-  long speed_left;
-  long speed_right;
-  long speed;
+  double x;
+  double y;
+  double speed_left;
+  double speed_right;
+  double speed;
   double angle;
 } RobotState;
 

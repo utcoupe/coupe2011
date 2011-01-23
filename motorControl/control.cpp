@@ -271,19 +271,16 @@ void computeRobotState(){
 	prev_value_right_enc = value_right_enc;
 
 	/*ce dŽplacement a ŽtŽ rŽalisŽ en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
-	double speed_left = dl/DUREE_CYCLE;
-	double speed_right = dr/DUREE_CYCLE;
+	double speed_left = (double)dl/(double)DUREE_CYCLE;
+	double speed_right = (double)dr/(double)DUREE_CYCLE;
 	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
-	if(speed != 42){Serial.print("speed: ");Serial.println(speed_left, DEC);}
 
 	/* mise a jour de l'orientation en rad */
 	double delta_angle = (double)(dr-dl)*(double)ENC_TICKS_TO_MM/(double)ENC_CENTER_DIST;
-
+	
 	// Angle du robot par rapport ˆ l'axe X
 	double angle = fmod(robot_state.angle + delta_angle,2*M_PI); /*Attention au modulo PI*/
 	if (angle < 0) angle += 2*M_PI;
-
-	if(delta_angle != 0){Serial.print("angle: ");Serial.println(DUREE_CYCLE*cos(angle), DEC);}
 
 	/* mise a jour de la position en ticks
 	 * on utilise des cos et des sin et c'est pas trs opti.
@@ -291,9 +288,6 @@ void computeRobotState(){
 	 */
 	double dx = speed*DUREE_CYCLE*cos(angle);
 	double dy = speed*DUREE_CYCLE*sin(angle);
-
-	if(dx != 0){Serial.print("dx: ");Serial.println(dx, DEC);}
-	if(dy != 0){Serial.print("dy: ");Serial.println(dy, DEC);}
 
 	/*mise a jour de l'Žtat du robot  */
 	robot_state.speed = speed;
@@ -303,8 +297,6 @@ void computeRobotState(){
 	robot_state.x += dx;
 	robot_state.y += dy;
 }
-
-
 
 
 
