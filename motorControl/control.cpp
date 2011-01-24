@@ -214,16 +214,15 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		sens = -1;
 		currentAlpha = M_PI - angularCoeff - robot_state.angle;
 	}
+	
+	currentAlpha = -currentAlpha;
+	
+ 	double dx = current_goal.x-robot_state.x;
+	double dy = current_goal.y-robot_state.y;
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part à l'envers
 
- 	double dx = robot_state.x-current_goal.x;
-	double dy = robot_state.y-current_goal.y;
-	currentDelta = sens * sqrt(dx*dx+dy*dy);
-
-
-	Serial.print("a:");
-	Serial.println(currentAlpha);
-
-	Serial.print("d:");
+	Serial.print("ad");
+	Serial.print(currentAlpha);
 	Serial.println(currentDelta);
 
 	if(abs(currentDelta) < 36) /*si l'ecart n'est plus que de 36 ticks (environ 1mm), on considere la consigne comme atteinte*/
