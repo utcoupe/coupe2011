@@ -61,3 +61,7 @@ void clearGoals(){
 	goals.in = 0;
 	goals.out = 0;
 }
+
+bool fifoIsEmpty(){
+	return goals.in==goals.out;
+}
