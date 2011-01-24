@@ -57,9 +57,9 @@
 #define KP_ANGLE 2.0
 #define KI_ANGLE 5.0
 #define KD_ANGLE 1.0
-#define KP_DELTA 2.0
+#define KP_DELTA .05
 #define KI_DELTA 0.0
-#define KD_DELTA 1.0
+#define KD_DELTA 55.0
 #define KP_ALPHA .05
 #define KI_ALPHA 0.0
 #define KD_ALPHA 55.0
