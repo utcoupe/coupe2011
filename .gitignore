@@ -1,4 +1,6 @@
 *.elf
 *.hex
-build/*
+*.o
 *.dblite
+*build/*
+*build/
