@@ -64,7 +64,7 @@ elif platform == 'winnt':
     ARDUINO_PORT_DEFAULT = None
 else:
     # For Ubuntu Linux (9.10 or higher)
-    ARDUINO_HOME_DEFAULT = '../../../arduino-0022/' #'/home/YOU/apps/arduino-0018/'
+    ARDUINO_HOME_DEFAULT = '../../arduino-0022/' #'/home/YOU/apps/arduino-0018/'
     ARDUINO_PORT_DEFAULT = getUsbTty('/dev/ttyACM0')
     AVR_BIN_PREFIX = 'avr-'
 
