@@ -31,15 +31,26 @@ void readIncomingData(){
 
 }
 
+int checksum(int size, int* buffer) {
+	int i, check=0;
+	for(i=0; i<size-1; i++) {
+		check+=buffer[i];	
+	}
+	return check % 128;
+}
+
 void analyzeMessage(int bufferIndex, int* buffer){
-	/*
-	Contenu du buffer par index
-		1			type
-		2:index-2	données
-		index-1		checksum
-	*/
+	Serial.println("_______DEBUG__________");
+			Serial.print("time: ");Serial.println(millis());
+			Serial.println();
+			Serial.print("1. Checksum : ");Serial.println();
+			Serial.print("calculate : ");Serial.println(checksum(bufferIndex, buffer));
+			Serial.print("get : ");Serial.println(buffer[bufferIndex]);
+			Serial.println();
 	// Si le checksum est pas bon, on stop net
-	// TODO
+	if(checksum(bufferIndex, buffer) != buffer[bufferIndex]) {
+		return;
+	}
 	
 	
 	// On analyse le message en fonction de son type

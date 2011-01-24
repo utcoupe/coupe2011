@@ -5,7 +5,8 @@
 
 void initSerialLink();
 void readIncomingData();
-void analyzeMessage();
+int checksum(int size, int* buffer);
+void analyzeMessage(int bufferIndex, int* buffer);
 
 
 #endif /* MESSAGE_H_ */
