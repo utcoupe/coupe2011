@@ -1,4 +1,4 @@
-#include "blink.h"
+
 /*
   Petit test !
  */
@@ -13,6 +13,10 @@ void setup() {
 
 void loop() {
   	int sensorValue = analogRead(A0);
-  	Serial.println(sensorValue, DEC);
-	blinkgreen();
+  	if (Serial.available() > 0)
+  	{
+  		int inByte = Serial.read();
+  		Serial.println(inByte);
+  		//Serial.println(sensorValue, DEC);
+  	}
 }
