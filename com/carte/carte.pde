@@ -11,19 +11,14 @@ inline void indexError();		// -1
 
 void setup()
 {
- 	Serial.begin(9600);
+ 	initSerialLink(); // Initialisation de la lisaison serie (voir message.cpp)
 	pinMode(12, OUTPUT); // Rouge   
 	pinMode(13, OUTPUT); // Vert
 }
 
 void loop()
 {
-  	if (Serial.available() > 0)
-  	{
-  		int inByte = Serial.read();
-		//Serial.println(inByte);
-  		cmd(inByte);
-  	}
+	readIncomingData();
 }
 
 void cmd(int name)
