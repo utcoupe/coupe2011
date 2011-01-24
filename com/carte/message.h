@@ -1,18 +1,10 @@
-/*
- * message.h
- *
- *  Created on: 13 janv. 2011
- *      Author: HoHen
- */
-
 #ifndef MESSAGE_H_
 #define MESSAGE_H_
 
-#include "parameters.h"
+#define SERIAL_BAUD 9600
 
-
-void readIncomingData();
 void initSerialLink();
+void readIncomingData();
 void analyzeMessage();
 
 

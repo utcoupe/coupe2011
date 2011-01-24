@@ -1,33 +1,14 @@
-/*
- * message.cpp
- *
- *  Created on: 13 janv. 2011
- *      Author: HoHen
- */
-
 #include "WProgram.h"
 #include "message.h"
-#include "robotstate.h"
-#include "fifo.h"
-#include "encoder.h"
-
-int* buffer;
-int bufferIndex = 0;
 
 void initSerialLink(){
-	Serial.begin(9600);
-	buffer = (int*)malloc(16*sizeof(int));
+	Serial.begin(SERIAL_BAUD);
 }
 
-void readIncomingData(){
-/*	// Cédric, faut que tu m'expliques lui, pourquoi tu fais un 
-	// += Serial.read() toujours dans la même case du tableau ?
-	// Je pense que j'ai loupé un truc ^^
-	int available = Serial.available();
-	for(int i = 0; i < available; i ++)
-		buffer[0] += Serial.read();
-		
-		
+void readIncomingData(){	
+	static int* buffer = (int*)malloc(16*sizeof(int));
+	static int bufferIndex = 0;
+/*
 	A propos du protcole :
 	- un message commence par < et se termine par >
 	- le format des trames est dans Spec_protocole.pdf
@@ -39,7 +20,7 @@ void readIncomingData(){
 		
 		switch(data){
 			case SOF: bufferIndex = 0; break;
-			case EOF: analyzeMessage(); break;
+			case EOF: analyzeMessage(bufferIndex, buffer); break;
 			default:
 				buffer[bufferIndex] = data;
 			        bufferIndex++;
@@ -50,7 +31,7 @@ void readIncomingData(){
 
 }
 
-void analyzeMessage(){
+void analyzeMessage(int bufferIndex, int* buffer){
 	/*
 	Contenu du buffer par index
 		1			type
@@ -88,16 +69,9 @@ void analyzeMessage(){
 			//pushGoal(TYPE_ANGLE, buffer[2] << 8 + buffer[3], 0);
 		break;
 		case '?':
-			Serial.println("_________________");
+			Serial.println("_______HELP__________");
 			Serial.print("time: ");Serial.println(millis());
-			Serial.print("angle: ");Serial.println(robot_state.angle, DEC);
-			Serial.print("speed: ");Serial.println(robot_state.speed*ENC_TICKS_TO_MM, DEC);
-			Serial.print("x: ");Serial.println(robot_state.x*ENC_TICKS_TO_MM, DEC);
-			Serial.print("y: ");Serial.println(robot_state.y*ENC_TICKS_TO_MM, DEC);
-			/* Serial.print("pwmL: ");Serial.println(value_pwm_left);
-			Serial.print("pwmR: ");Serial.println(value_pwm_right);*/
-			Serial.print("encL: ");Serial.println(value_left_enc);
-			Serial.print("encR: ");Serial.println(value_right_enc);
+			Serial.print("Hey !! ");Serial.println();
 		break;
 		default: break;
 	}
