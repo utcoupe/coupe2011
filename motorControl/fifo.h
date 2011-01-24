@@ -30,5 +30,6 @@ void initGoals();
 void pushGoal(int,int,int,double);
 void popGoal();
 void clearGoals();
+bool fifoIsEmpty();
 
 #endif /* FIFO_H_ */
