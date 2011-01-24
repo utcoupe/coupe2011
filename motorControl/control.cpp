@@ -194,7 +194,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
 		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetOutputLimits(-225,225); /*composante liée à la vitesse de rotation*/
+		pid4AlphaControl.SetOutputLimits(-200,200); /*composante liée à la vitesse de rotation*/
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
@@ -219,7 +219,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	
  	double dx = current_goal.x-robot_state.x;
 	double dy = current_goal.y-robot_state.y;
-	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part √† l'envers
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part à l'envers
 
 	Serial.print("ad");
 	Serial.print(currentAlpha);
@@ -244,7 +244,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	}
 
 	/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
-	if(current_goal.phase == PHASE_2 && fifoIsEmpty()){
+	if(current_goal.phase == PHASE_2){// && fifoIsEmpty()){
 		current_goal.isReached = true;
 		initDone = false;
 	}
