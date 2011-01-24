@@ -1,5 +1,8 @@
 #include "WProgram.h"
 #include "message.h"
+#include "getters.h"
+
+
 
 void initSerialLink(){
 	Serial.begin(SERIAL_BAUD);
@@ -56,6 +59,10 @@ void analyzeMessage(int bufferIndex, int* buffer){
 	
 	// On analyse le message en fonction de son type
 	switch(buffer[0]){
+		case 'S':
+			Serial.println("_______SHARP__________");
+			getSharp();
+		break;
 		case '?':
 			Serial.println("_______HELP__________");
 			Serial.print("time: ");Serial.println(millis());

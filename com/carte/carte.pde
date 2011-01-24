@@ -5,38 +5,7 @@
 #include "message.h"
 
 
-void cmd(int name);
-inline void identification();	// 0
-inline void getSharp();			// 1
-inline void ledOn();			// 2
-inline void ledOff();			// 3
-inline void indexError();		// -1
 
-/*
-typedef int (*aa)();
-
-void cmd(int name);
-int identification()
-{
-	Serial.println(3);
-}
-
-int getSharp()
-{
-  	int sensorValue = analogRead(A0);
-	Serial.println(sensorValue);
-}
-//int identification();	// 0
-//int getSharp();			// 1
-inline int ledOn();			// 2
-inline int ledOff();			// 3
-inline int indexError();		// -1
-
-aa tab [] = { //Etrange hein?
-    identification,
-    getSharp
-};
-*/
 
 void setup()
 {
@@ -48,54 +17,6 @@ void setup()
 void loop()
 {
 	readIncomingData();
-}
-
-void cmd(int name)
-{
-	switch (name)
-	{
-		case 0: // identification
-			identification();
-			break;
-		case 1: // sharp
-			getSharp();
-			break;
-		case 2: //ledOn
-			ledOn();
-			break;
-		case 3:
-			ledOff();
-			break;
-		default:
-			indexError();
-			break;
-	}
-}
-
-void identification()
-{
-	Serial.println(3);
-}
-
-void getSharp()
-{
-  	int sensorValue = analogRead(A0);
-	Serial.println(sensorValue);
-}
-
-void indexError()
-{
-	Serial.println(-1);
-}
-
-void ledOn()
-{
-	digitalWrite(12, HIGH);
-}
-
-void ledOff()
-{
-	digitalWrite(12, LOW);
 }
 
 
