@@ -189,7 +189,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4DeltaControl.Reset();
 		pid4DeltaControl.SetInputLimits(0,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
 		pid4DeltaControl.SetSampleTime(2);
-		pid4DeltaControl.SetOutputLimits(-30,30); /*composante liée à la vitesse lineaire*/
+		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante liée à la vitesse lineaire*/
 		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
