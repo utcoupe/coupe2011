@@ -44,15 +44,16 @@ int checksum(int size, int* buffer) {
 
 void analyzeMessage(int bufferIndex, int* buffer){
 	int check = checksum(bufferIndex, buffer);
-	Serial.println("_______DEBUG__________");
+	/*Serial.println("_______DEBUG__________");
 			Serial.print("time: ");Serial.println(millis());
 			Serial.println();
 			Serial.println("1. Checksum : ");
 			Serial.print("calculate : ");Serial.println(check);
 			Serial.print("get : ");Serial.println(buffer[bufferIndex-1]);
-			Serial.println();
+			Serial.println();*/
 	// Si le checksum est pas bon, on stop net
-	if(check != buffer[bufferIndex-1]) {
+	if(check != (int) buffer[bufferIndex-1]) {
+		Serial.println(-1);
 		return;
 	}
 	
@@ -60,15 +61,15 @@ void analyzeMessage(int bufferIndex, int* buffer){
 	// On analyse le message en fonction de son type
 	switch(buffer[0]){
 		case 'S':
-			Serial.println("_______SHARP__________");
 			getSharp();
 		break;
 		case '?':
-			Serial.println("_______HELP__________");
 			Serial.print("time: ");Serial.println(millis());
 			Serial.print("Hey !! ");Serial.println();
 		break;
-		default: break;
+		default:
+			Serial.println(-1);
+		break;
 	}
 }
 
