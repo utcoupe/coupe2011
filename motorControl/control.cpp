@@ -132,7 +132,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	la consigne (SetPoint) du PID sera 0
 	la sortie du PID sera le double pwm
 	*/
-	currentEcart = current_goal.angle - robot_state.angle;
+	currentEcart = -current_goal.angle + robot_state.angle;
 
 	if(abs(currentEcart) < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;
@@ -194,7 +194,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
 		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetOutputLimits(-225,225); /*composante liŽe ˆ la vitesse de rotation*/
+		pid4AlphaControl.SetOutputLimits(-200,200); /*composante liŽe ˆ la vitesse de rotation*/
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
@@ -214,16 +214,15 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		sens = -1;
 		currentAlpha = M_PI - angularCoeff - robot_state.angle;
 	}
+	
+	currentAlpha = -currentAlpha;
+	
+ 	double dx = current_goal.x-robot_state.x;
+	double dy = current_goal.y-robot_state.y;
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part ˆ l'envers
 
- 	double dx = robot_state.x-current_goal.x;
-	double dy = robot_state.y-current_goal.y;
-	currentDelta = sens * sqrt(dx*dx+dy*dy);
-
-
-	Serial.print("a:");
-	Serial.println(currentAlpha);
-
-	Serial.print("d:");
+	Serial.print("ad");
+	Serial.print(currentAlpha);
 	Serial.println(currentDelta);
 
 	if(abs(currentDelta) < 36) /*si l'ecart n'est plus que de 36 ticks (environ 1mm), on considere la consigne comme atteinte*/
@@ -245,7 +244,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	}
 
 	/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
-	if(current_goal.phase == PHASE_2 && fifoIsEmpty()){
+	if(current_goal.phase == PHASE_2){// && fifoIsEmpty()){
 		current_goal.isReached = true;
 		initDone = false;
 	}
