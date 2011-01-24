@@ -201,7 +201,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
 	/*calcul de l'angle alpha a combler avant d'etre aligne avec le point cible
 	 * borne = [-PI PI] */
-	double angularCoeff = atan2(robot_state.y-current_goal.y,robot_state.x-current_goal.x); /*arctan(y/x) -> [-PI,PI]*/
+	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
 	currentAlpha = angularCoeff - robot_state.angle;
 
 
