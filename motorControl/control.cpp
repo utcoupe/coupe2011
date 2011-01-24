@@ -134,7 +134,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	*/
 	currentEcart = current_goal.angle - robot_state.angle;
 
-	if(currentEcart < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
+	if(abs(currentEcart) < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
