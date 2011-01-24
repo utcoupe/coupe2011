@@ -291,3 +291,27 @@
 	"highgui.h"
 	"UTCamera.hpp"
 
+1295794888 source:/home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp
+	"ListeRegion.hpp"
+
+1295794888 /home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp
+	<iostream>
+	<cv.h>
+
+1295794888 source:/home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp
+	"UTCamera.hpp"
+
+1295794888 /home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<cv.h>
+	<highgui.h>
+	"ListeRegion.hpp"
+
+1295794888 source:/home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/main.cpp
+	<iostream>
+	"cv.h"
+	"highgui.h"
+	"UTCamera.hpp"
+

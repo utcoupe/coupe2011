@@ -228,11 +228,11 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		int sens = dx/abs(dx);
 		currentDelta = sens*sqrt(dx*dx+dy*dy);
 
-		Serial.print("a:");
+		/*Serial.print("a:");
 		Serial.println(currentAlpha);
 
 		Serial.print("d:");
-		Serial.println(currentDelta);
+		Serial.println(currentDelta);*/
 		
 		/* condition d'arret */
 		if(abs(currentDelta) < 42){ /*si l'ecart n'est plus que de 42 ticks, on considere la consigne comme atteinte*/
