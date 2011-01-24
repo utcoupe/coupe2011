@@ -57,12 +57,12 @@
 #define KP_ANGLE 2.0
 #define KI_ANGLE 5.0
 #define KD_ANGLE 1.0
-#define KP_DELTA 2.0
+#define KP_DELTA .5
 #define KI_DELTA 0.0
-#define KD_DELTA 1.0
-#define KP_ALPHA .05
+#define KD_DELTA 5.0
+#define KP_ALPHA .5
 #define KI_ALPHA 0.0
-#define KD_ALPHA 55.0
+#define KD_ALPHA 5.0
 
 /*Paramètre de liaison série*/
 #define SOF '<'

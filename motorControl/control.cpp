@@ -134,7 +134,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	*/
 	currentEcart = current_goal.angle - robot_state.angle;
 
-	if(currentEcart < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
+	if(abs(currentEcart) < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
@@ -187,9 +187,9 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		consigneDelta = .0;
 		consigneAlpha = .0;
 		pid4DeltaControl.Reset();
-		pid4DeltaControl.SetInputLimits(0,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
+		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
 		pid4DeltaControl.SetSampleTime(2);
-		pid4DeltaControl.SetOutputLimits(-30,30); /*composante liŽe ˆ la vitesse lineaire*/
+		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante liŽe ˆ la vitesse lineaire*/
 		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
