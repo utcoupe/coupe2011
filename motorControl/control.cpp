@@ -26,12 +26,13 @@
 #include "PID_Beta6.h"
 #include "fifo.h"
 
-bool reinitPID;
+
+double moduloPI(double);
+
 CurrentGoal current_goal;
 
 void initController(){
 	current_goal.isReached = true;
-	reinitPID = true;
 }
 
 
@@ -219,6 +220,12 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	currentDelta = sens * sqrt(dx*dx+dy*dy);
 
 
+	Serial.print("a:");
+	Serial.println(currentAlpha);
+
+	Serial.print("d:");
+	Serial.println(currentDelta);
+
 	if(abs(currentDelta) < 36) /*si l'ecart n'est plus que de 36 ticks (environ 1mm), on considere la consigne comme atteinte*/
 		current_goal.phase = PHASE_2;
 	else
@@ -267,7 +274,7 @@ void computeRobotState(){
 
 	/* mise a jour de l'orientation en rad */
 	double delta_angle = (double)(dr-dl)*(double)ENC_TICKS_TO_MM/(double)ENC_CENTER_DIST;
-	
+
 	// Angle du robot par rapport ˆ l'axe X
 	double angle = moduloPI(robot_state.angle + delta_angle); /*Attention au modulo PI (oui ca change tous les jours)*/
 
