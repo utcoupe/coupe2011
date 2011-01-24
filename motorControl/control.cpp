@@ -132,7 +132,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	la consigne (SetPoint) du PID sera 0
 	la sortie du PID sera le double pwm
 	*/
-	currentEcart = current_goal.angle - robot_state.angle;
+	currentEcart = -current_goal.angle + robot_state.angle;
 
 	if(abs(currentEcart) < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;
