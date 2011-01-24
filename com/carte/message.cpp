@@ -6,21 +6,21 @@ void initSerialLink(){
 }
 
 void readIncomingData(){	
-	static int* buffer = (int*)malloc(16*sizeof(int));
+	static int buffer[16];
 	static int bufferIndex = 0;
-/*
+	/*
 	A propos du protcole :
 	- un message commence par < et se termine par >
 	- le format des trames est dans Spec_protocole.pdf
-*/
+	*/
 	// S'il y a des données à lire
 	int available = Serial.available();
 	for(int i = 0; i < available; i ++){
 		int data = Serial.read();
 		
 		switch(data){
-			case SOF: bufferIndex = 0; break;
-			case EOF: analyzeMessage(bufferIndex, buffer); break;
+			case '<': bufferIndex = 0; break;
+			case '>': analyzeMessage(bufferIndex, buffer); break;
 			default:
 				buffer[bufferIndex] = data;
 			        bufferIndex++;
@@ -40,15 +40,16 @@ int checksum(int size, int* buffer) {
 }
 
 void analyzeMessage(int bufferIndex, int* buffer){
+	int check = checksum(bufferIndex, buffer);
 	Serial.println("_______DEBUG__________");
 			Serial.print("time: ");Serial.println(millis());
 			Serial.println();
-			Serial.print("1. Checksum : ");Serial.println();
-			Serial.print("calculate : ");Serial.println(checksum(bufferIndex, buffer));
-			Serial.print("get : ");Serial.println(buffer[bufferIndex]);
+			Serial.println("1. Checksum : ");
+			Serial.print("calculate : ");Serial.println(check);
+			Serial.print("get : ");Serial.println(buffer[bufferIndex-1]);
 			Serial.println();
 	// Si le checksum est pas bon, on stop net
-	if(checksum(bufferIndex, buffer) != buffer[bufferIndex]) {
+	if(check != buffer[bufferIndex-1]) {
 		return;
 	}
 	
