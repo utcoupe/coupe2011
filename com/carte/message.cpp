@@ -39,8 +39,8 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	message[1] = 0;
 	m=1;
 	lasti=2;
-	for (i=2; i<bufferIndex; i++) {
-		if(buffer[i]==' ' or i==(bufferIndex-1)) {
+	for (i=2; i<=bufferIndex; i++) {
+		if(buffer[i]==' ' or i==(bufferIndex)) {
 			for(j=lasti; j<i; j++) {
 				message[m] = (buffer[j]-48)+(message[m]*10);
 			}
