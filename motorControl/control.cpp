@@ -221,9 +221,9 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	double dy = current_goal.y-robot_state.y;
 	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part ˆ l'envers
 
-	Serial.print("ad");
+	/*Serial.print("ad");
 	Serial.print(currentAlpha);
-	Serial.println(currentDelta);
+	Serial.println(currentDelta);*/
 
 	if(abs(currentDelta) < 36) /*si l'ecart n'est plus que de 36 ticks (environ 1mm), on considere la consigne comme atteinte*/
 		current_goal.phase = PHASE_2;
