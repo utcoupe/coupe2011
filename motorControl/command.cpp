@@ -64,6 +64,11 @@ void cmd(int c, float* message, int m)
 			pushGoal(TYPE_ANGLE, message[1], message[2], message[3]/360 * 2*M_PI); // x,y,angle
 			Serial.print(message[3]);Serial.print(" -> ");Serial.print(message[3]/360.0 * 2*M_PI);Serial.println("Tourne cocotte!!");
 		break;
+		//case T_RESET:
+		case 'r':
+			clearGoals();
+			Serial.println("J'ai plus de but dans la vie..");
+		break;
 		case '?':
 			Serial.print("_________________§");
 			Serial.print("time: ");Serial.print(millis());
