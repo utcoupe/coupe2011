@@ -103,6 +103,7 @@ class Server():
 	""" renvoie la réponse à la commande, None si elle n'est pas encore arrivée, 
 		si on met en bloquant la fonction attend d'avoir la réponse """
 	def getRcv(self, cmd, port, bloquant=False):
+		cmd = cmd[0]
 		rcv = self.waitRcv[port][cmd]
 		if bloquant:
 			while not rcv:
