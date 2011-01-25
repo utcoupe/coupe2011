@@ -29,7 +29,7 @@ void cmd(int c, float* message, int m)
 			sendMessage(c, "Test Card");
 		break;
 		case 'S':
-			//sendMessage(c, ""+getSharp());
+			sendMessage(c, getSharp());
 		break;
 		case 'L':
 			ledOn();
@@ -39,8 +39,8 @@ void cmd(int c, float* message, int m)
 			ledOff();
 			sendMessage(c, "Led OFF");
 		break;
-		case '?':
-			//sendMessage(c, ""+millis());
+		case 't':
+			sendMessage(c, millis());
 		break;
 		default:
 			sendMessage('E', "-1");
