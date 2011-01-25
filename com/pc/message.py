@@ -39,7 +39,7 @@ class Server():
 
 		# petite pause avant de pouvoir envoyer et recevoir des données
 		time.sleep(2)
-		
+	
 	
 	def connect(self, port, refresh):
 		for i in range(10):
@@ -55,20 +55,20 @@ class Server():
 		print 'echec de la connection %s après 10 tentatives, relancer le programme'%port
 		self.ser[port] = None
 		return self.ser[port]
-
+	
 	"""
 		commande brute (sans check sum ni caractere debut/fin
 	"""
 	def sendCmd(self, cmd):
 		self.ser['ACM0'].write('<'+cmd+'>')
-
-
-
+	
+	
+	
 	def readInput(self, port):
 		val = self.ser[port].readline()
 		val = val.replace("§","\n")
 		if val:
-			return port,':', val # int(binascii.hexlify(val),16)  #unpack('c', val)
+			return port + ':' + val # int(binascii.hexlify(val),16)  #unpack('c', val)
 		else:
 			return 'timeout on :',port
 			
