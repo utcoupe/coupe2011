@@ -1,13 +1,14 @@
 #include "WProgram.h"
 #include "command.h"
+#include "message.h"
 
 // Message est le tableau de message
 // m est le message
-void cmd(int* message, int m)
+void cmd(int c, float* message, int m)
 {
 	int i;
 	// On analyse le message en fonction de son type
-	switch(message[0]){
+	switch(c){
 		/*
 			DEBUG ZONE
 
@@ -20,7 +21,7 @@ void cmd(int* message, int m)
 				Serial.print("\n");
 		break;
 		case 'P': // Ping (renvoit time : pong)
-			Serial.print(millis());Serial.println(" : Pong");
+			sendMessage(c, "Pong");
 		break;
 
 		case 'I': // Identification

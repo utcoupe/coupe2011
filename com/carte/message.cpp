@@ -31,10 +31,19 @@ void readIncomingData(){
 	}
 }
 
+// c : Command qui était appelé (et qui donc fait la reponse)
+// message : string
+
+void sendMessage(unsigned char c, char* str)
+{
+	Serial.print(c);Serial.print(" ");Serial.println(str);
+}
+
+
 void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	int i, j, lasti=0;
-	int message[50];
-	int m = 0;
+	float message[50];
+	int m = 0, neg = 1;
 	message[0] = buffer[0];
 	message[1] = 0;
 	m=1;
@@ -42,15 +51,21 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	for (i=2; i<=bufferIndex; i++) {
 		if(buffer[i]==' ' or i==(bufferIndex)) {
 			for(j=lasti; j<i; j++) {
-				message[m] = (buffer[j]-48)+(message[m]*10);
+				if(buffer[j]=='-') { 
+					neg = -1; 
+				} else {
+					message[m] = ((float) buffer[j]-'0')+(message[m]*10);
+				}
 			}
+			if (neg<0) { message[m] *= -1; }
 			m++;
 			message[m] = 0;
+			neg = 1;
 			lasti = i + 1;
 		}
 	}
 	// CALL command.cpp (Don't forget this file is generic for all our arduino board)
-	cmd(message, m);
+	cmd(buffer[0], message, m);
 
 }
 
