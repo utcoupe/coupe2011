@@ -34,29 +34,7 @@ void readIncomingData(){
 
 }
 
-unsigned char checksum(int size, int* buffer) {
-	int i, check=0;
-	for(i=0; i<size-1; i++) {
-		check+=buffer[i];	
-	}
-	return check % 128;
-}
-
 void analyzeMessage(int bufferIndex, int* buffer){
-	int check = checksum(bufferIndex, buffer);
-	/*Serial.println("_______DEBUG__________");
-			Serial.print("time: ");Serial.println(millis());
-			Serial.println();
-			Serial.println("1. Checksum : ");
-			Serial.print("calculate : ");Serial.println(check);
-			Serial.print("get : ");Serial.println(buffer[bufferIndex-1]);
-			Serial.println();*/
-	// Si le checksum est pas bon, on stop net
-	if(check != (int) buffer[bufferIndex-1]) {
-		Serial.println(-1);
-		return;
-	}
-	
 	
 	// On analyse le message en fonction de son type
 	switch(buffer[0]){
