@@ -23,6 +23,8 @@ server = Server(ports)
 def loopCmd():
 	cmd = raw_input()
 	cperso = cmd.split()
+	if not cmd:
+		cmd = 'p'
 	if cperso[0] == 'test':
 		server.testPing('ACM0', cperso[1])
 	elif cperso[0] == 'live':
@@ -30,8 +32,8 @@ def loopCmd():
 	elif cperso[0] == 'stop':
 		server.stopScreen(int(cperso[1]))
 	else:
-		server.sendCmd(cmd, 'ACM0')
-		print server.readInput('ACM0')
+		server.addCmd(cmd, 'ACM0')
+		print 'vjuv',server.getRcv(cmd, 'ACM0', True)
 	
 
 def makeLoop(target, args= [], kwargs={}):

@@ -8,12 +8,17 @@ import serial
 import threading
 import time
 import subprocess
+from Queue import *
+
 from timer import *
+
 
 class Server():
 	def __init__(self, ports):
-		self.ser = dict()
-		self.screens = []
+		self.ser		= 	dict()
+		self.screens	= 	[]
+		self.queuedCmd 	= 	dict() 	# liste des commandes à envoyer par port
+		self.waitRcv 	=	dict() 	# liste des réponses attendues par port
 		
 		# lancement des tentatives de connection
 		threads = []
@@ -35,9 +40,17 @@ class Server():
 		for s in self.ser.values():
 			if not s: 
 				exit()
-
+		
+		# créarion des queues
+		for s in self.ser:
+			self.queuedCmd[s] = Queue() # on envoi les commandes les unes après les autres
+			self.waitRcv[s] = dict() # on reçoit dans n'importe quel ordre
+		
+		print self.queuedCmd
+		print self.waitRcv
+		
 		# petite pause avant de pouvoir envoyer et recevoir des données
-		time.sleep(2)
+		time.sleep(1)
 		
 		print 'fin init'
 	
@@ -56,19 +69,43 @@ class Server():
 		self.ser[port] = None
 		return self.ser[port]
 	
-	"""
-		cmd: commande brute (sans caractere debut/fin)
-	"""
-	def sendCmd(self, cmd, port):
-		if not cmd:
-			cmd = 'p'
+	def loopCmd(self, port):
+		queue = self.queuedCmd[port]
+		while True:
+			cmd = queue.get()
+			r = sendCmd(cmd)
+			if r < 0:
+				self.waitRcv[port] = 'timeout'
+			queue.task_done()
+	
+	def loopRcv(self, port):
+		di = self.waitRcv[port]
+		while True:
+			cmd,recv = readInput(port).split()
+			di[cmd] = recv
+	
+	def addCmd(self, cmd, port):
+		self.queuedCmd[port].put(cmd)
+		self.waitRcv[port][cmd] = None
+	
+	def getRcv(self, cmd, port, bloquant=False):
+		rcv = self.waitRcv[port]
+		if bloquant:
+			while not rcv:
+				rcv = rcv[cmd]
+		return rcv
+		
+	""" cmd: commande brute (sans caractere debut/fin) """
+	def _sendCmd(self, cmd, port):
 		try:
 			self.ser[port].write('<'+cmd+'>')
+			return 1
 		except serial.SerialException as ex:
 			print 'timeout writing on', port, ex
+			return -1
 	
 	
-	def readInput(self, port):
+	def _readInput(self, port):
 		val = self.ser[port].readline()
 		val = val.replace("§","\n")
 		if val:
@@ -76,6 +113,7 @@ class Server():
 		else:
 			return 'timeout on :',port
 	
+	""" test la reactivitée de la cmd en envoyant et recevant """
 	def testPing(self, port, cmd):
 		n = self.addScreen()
 		def loop():
@@ -84,8 +122,8 @@ class Server():
 			print 'test du port', port, 'avec la commande :', cmd
 			for i in xrange(nb_iter):
 				t = time.time()
-				self.sendCmd(cmd, port)
-				self.write(self.readInput(port), n)
+				self.addCmd(cmd, port)
+				self.write(self.getRcv(cmd, port,True), n)
 				tEllapsed = time.time() - t
 				tot += tEllapsed
 				self.write(""+str(i)+" "+str(tEllapsed), n)
@@ -96,23 +134,22 @@ class Server():
 		t.start()
 	
 	def addScreen(self, live=None):
-		"""
-			live: timer du live
-		"""
+		""" live: timer du live """
 		screens = [ s for s in self.screens if s[0] ]
 		self.screens = screens
 		screen = subprocess.Popen(["python","screen.py"], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 		self.screens.append([screen, live])
 		return len(self.screens)-1 # return l'index du screen créé
 	
+	""" écrit sur un écran """
 	def write(self, msg, n=0):
 		self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
 		self.screens[n][0].stdin.flush()
 	
 	def getLive(self, port, cmd):
 		def loop():
-			self.sendCmd(cmd, 'ACM0')
-			self.write(self.readInput('ACM0'),n)
+			self.addCmd(cmd, 'ACM0')
+			self.write(self.getRcv(cmd, 'ACM0', True),n)
 		timer = MyTimer(0.3,loop)
 		n = self.addScreen(timer)
 		timer.start()
