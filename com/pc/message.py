@@ -97,17 +97,18 @@ class Server():
 	
 	""" ajoute une commande dans la queue des commandes """
 	def addCmd(self, cmd, port):
+		cmdid = cmd[0]
 		self.queuedCmd[port].put(cmd)
-		self.waitRcv[port][cmd] = None
+		self.waitRcv[port][cmdid] = None
 	
 	""" renvoie la réponse à la commande, None si elle n'est pas encore arrivée, 
 		si on met en bloquant la fonction attend d'avoir la réponse """
 	def getRcv(self, cmd, port, bloquant=False):
-		cmd = cmd[0]
-		rcv = self.waitRcv[port][cmd]
+		cmdid = cmd[0]
+		rcv = self.waitRcv[port][cmdid]
 		if bloquant:
 			while not rcv:
-				rcv = self.waitRcv[port][cmd]
+				rcv = self.waitRcv[port][cmdid]
 		return rcv
 		
 	""" cmd: commande brute (sans caractere debut/fin) """
