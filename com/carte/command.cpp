@@ -14,8 +14,8 @@ void cmd(int c, float* message, int m)
 
 			Ces fonctions permettent entre autre le debug...
 		*/
-		case 'E': // Echo (renvoit le message qu'elle a reçu)
-			Serial.print("E,");
+		case 'W': // Echo (renvoit le message qu'elle a reçu)
+			Serial.print("W,");
 			for (i=1;i<m;i++) {
 				Serial.print("§message ");Serial.print(i);Serial.print(" ");Serial.print(message[i]); 
 			}
@@ -29,20 +29,21 @@ void cmd(int c, float* message, int m)
 			sendMessage(c, "Test Card");
 		break;
 		case 'S':
-			//sendMessage(c, getSharp());
+			//sendMessage(c, ""+getSharp());
 		break;
 		case 'L':
 			ledOn();
+			sendMessage(c, "Led ON");
 		break;
 		case 'l':
 			ledOff();
+			sendMessage(c, "Led OFF");
 		break;
 		case '?':
-			Serial.print("time: ");Serial.print(millis());
-			Serial.print("Hey !! ");Serial.print("\n");
+			//sendMessage(c, ""+millis());
 		break;
 		default:
-			Serial.print(-1);Serial.print("\n");
+			sendMessage('E', "-1");
 		break;
 	}
 }
