@@ -1,7 +1,6 @@
 #include "WProgram.h"
 #include "message.h"
 #include "getters.h"
-#include <string>
 
 
 void initSerialLink(){
@@ -30,13 +29,11 @@ void readIncomingData(){
 			break;
 		}
 	}
-		
-
 }
 
 void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	int i, j, lasti=0;
-	int* message[50];
+	int message[50];
 	int m = 0;
 	message[0] = buffer[0];
 	m=1;
@@ -53,7 +50,9 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 
 
 	// On analyse le message en fonction de son type
-	switch(buffer[0]){
+	switch(message[0]){
+		case 'E':
+			Serial.print(message[1]);Serial.print("\n");
 		case 'S':
 			getSharp();
 		break;
