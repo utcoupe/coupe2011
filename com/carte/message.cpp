@@ -63,6 +63,12 @@ void analyzeMessage(int bufferIndex, int* buffer){
 		case 'S':
 			getSharp();
 		break;
+		case 'L':
+			ledOn();
+		break;
+		case 'l':
+			ledOff();
+		break;
 		case '?':
 			Serial.print("time: ");Serial.println(millis());
 			Serial.print("Hey !! ");Serial.println();
