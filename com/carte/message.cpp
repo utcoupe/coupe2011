@@ -36,14 +36,16 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	int message[50];
 	int m = 0;
 	message[0] = buffer[0];
+	message[1] = 0;
 	m=1;
 	lasti=2;
 	for (i=2; i<bufferIndex; i++) {
-		if(buffer[i]==' ') {
+		if(buffer[i]==' ' or i==(bufferIndex-1)) {
 			for(j=lasti; j<i; j++) {
 				message[m] = (buffer[j]-48)+(message[m]*10);
 			}
 			m++;
+			message[m] = 0;
 			lasti = i + 1;
 		}
 	}
@@ -52,7 +54,17 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	// On analyse le message en fonction de son type
 	switch(message[0]){
 		case 'E':
-			Serial.print(message[1]);Serial.print("\n");
+			for(i=0;i<bufferIndex; i++) {
+				Serial.print(i);
+				Serial.print(" : ");
+				Serial.print(buffer[i]);
+				Serial.print("§");
+			}
+			for (i=1;i<m;i++) {
+				Serial.print("§message ");Serial.print(i);Serial.print(" ");Serial.print(message[i]); 
+			}
+				Serial.print("\n");
+		break;
 		case 'S':
 			getSharp();
 		break;
@@ -63,11 +75,11 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 			ledOff();
 		break;
 		case '?':
-			Serial.print("time: ");Serial.println(millis());
-			Serial.print("Hey !! ");Serial.println();
+			Serial.print("time: ");Serial.print(millis());
+			Serial.print("Hey !! ");Serial.print("\n");
 		break;
 		default:
-			Serial.println(-1);
+			Serial.print(-1);Serial.print("\n");
 		break;
 	}
 }
