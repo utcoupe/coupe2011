@@ -6,6 +6,6 @@
 void initSerialLink();
 void readIncomingData();
 void analyzeMessage(int bufferIndex, unsigned char* buffer);
-
+void sendMessage(unsigned char c, char* str);
 
 #endif /* MESSAGE_H_ */

@@ -31,6 +31,15 @@ void readIncomingData(){
 	}
 }
 
+// c : Command qui était appelé (et qui donc fait la reponse)
+// message : string
+
+void sendMessage(unsigned char c, char* str)
+{
+	Serial.print(c);Serial.print(" ");Serial.println(str);
+}
+
+
 void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	int i, j, lasti=0;
 	float message[50];

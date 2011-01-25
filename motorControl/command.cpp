@@ -7,6 +7,7 @@
 #include "pwm.h"
 #include "control.h"
 #include "encoder.h"
+#include "message.h"
 
 // Message est le tableau de message
 // m est le message
@@ -24,7 +25,7 @@ void cmd(int c, float* message, int m)
 			for (i=1;i<m;i++) {
 				Serial.print("§message ");Serial.print(i);Serial.print(" ");Serial.print(message[i]); 
 			}
-				Serial.print("\n");
+			sendMessage('E',"Test");
 		break;
 		case 'P': // Ping (renvoit time : pong)
 			Serial.print(millis());Serial.println(" : Pong");
