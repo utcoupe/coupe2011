@@ -8,7 +8,10 @@ import serial
 import threading
 import time
 
-
+from screen import *
+"""
+screen = Screen(None)
+screen.mainloop()"""
 
 class Server():
 	def __init__(self, ports):
@@ -57,13 +60,12 @@ class Server():
 		return self.ser[port]
 	
 	"""
-		commande brute (sans check sum ni caractere debut/fin
+		cmd: commande brute (sans caractere debut/fin)
 	"""
 	def sendCmd(self, cmd):
 		if not cmd:
 			cmd = 'p'
 		self.ser['ACM0'].write('<'+cmd+'>')
-	
 	
 	
 	def readInput(self, port):
@@ -73,4 +75,17 @@ class Server():
 			return port + ':' + val # int(binascii.hexlify(val),16)  #unpack('c', val)
 		else:
 			return 'timeout on :',port
+	
+	def testPing(self, port, cmd):
+		tot = 0
+		print 'test du port', port, 'avec la commande :', cmd
+		for i in xrange(300):
+			t = time.time()
+			self.sendCmd(cmd)
+			print self.readInput(port)
+			tEllapsed = time.time() - t
+			tot += tEllapsed
+			print tEllapsed
+		print "temps total", tot
+		print "moy", tot/300.0
 			
