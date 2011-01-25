@@ -3,13 +3,12 @@
 #include "getters.h"
 
 
-
 void initSerialLink(){
 	Serial.begin(SERIAL_BAUD);
 }
 
 void readIncomingData(){	
-	static int buffer[16];
+	static unsigned char buffer[100];
 	static int bufferIndex = 0;
 	/*
 	A propos du protcole :
@@ -30,36 +29,30 @@ void readIncomingData(){
 			break;
 		}
 	}
-		
-
 }
 
-unsigned char checksum(int size, int* buffer) {
-	int i, check=0;
-	for(i=0; i<size-1; i++) {
-		check+=buffer[i];	
+void analyzeMessage(int bufferIndex, unsigned char* buffer){
+	int i, j, lasti=0;
+	int message[50];
+	int m = 0;
+	message[0] = buffer[0];
+	m=1;
+	lasti=2;
+	for (i=2; i<bufferIndex; i++) {
+		if(buffer[i]==' ') {
+			for(j=lasti; j<i; j++) {
+				message[m] = (buffer[j]-48)+(message[m]*10);
+			}
+			m++;
+			lasti = i + 1;
+		}
 	}
-	return check % 128;
-}
 
-void analyzeMessage(int bufferIndex, int* buffer){
-	int check = checksum(bufferIndex, buffer);
-	/*Serial.println("_______DEBUG__________");
-			Serial.print("time: ");Serial.println(millis());
-			Serial.println();
-			Serial.println("1. Checksum : ");
-			Serial.print("calculate : ");Serial.println(check);
-			Serial.print("get : ");Serial.println(buffer[bufferIndex-1]);
-			Serial.println();*/
-	// Si le checksum est pas bon, on stop net
-	if(check != (int) buffer[bufferIndex-1]) {
-		Serial.println(-1);
-		return;
-	}
-	
-	
+
 	// On analyse le message en fonction de son type
-	switch(buffer[0]){
+	switch(message[0]){
+		case 'E':
+			Serial.print(message[1]);Serial.print("\n");
 		case 'S':
 			getSharp();
 		break;
