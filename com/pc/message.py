@@ -31,7 +31,6 @@ class Server():
 					time.sleep(2)
 					break # break que le for
 			break
-		print 'salut'
 		
 		# Verification que les connections ont reussi
 		for s in self.ser.values():
@@ -54,18 +53,14 @@ class Server():
 				self.ser[port] = s
 				return s
 		print 'echec de la connection %s après 10 tentatives, relancer le programme'%port
-		ser[port] = None
+		self.ser[port] = None
 		return self.ser[port]
 
 	"""
 		commande brute (sans check sum ni caractere debut/fin
 	"""
 	def sendCmd(self, cmd):
-		check_sum = 0
-		for c in cmd:
-			check_sum += ord(c)
-		check_sum %= 128
-		self.ser['ACM0'].write('<{0}{1}>'.format(cmd,chr(check_sum)))
+		self.ser['ACM0'].write('<'+cmd+'>')
 
 
 
