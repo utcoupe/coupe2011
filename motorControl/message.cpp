@@ -39,6 +39,10 @@ void sendMessage(unsigned char c, char* str)
 	Serial.print(c);Serial.print(",");Serial.println(str);
 }
 
+void sendMessage(unsigned char c, int str)
+{
+	Serial.print(c);Serial.print(",");Serial.println(str);
+}
 
 void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	int i, j, lasti=0;
