@@ -87,7 +87,7 @@ class Server():
 	def loopRcv(self, port):
 		di = self.waitRcv[port]
 		while True:
-			r = self._readInput(port).split()
+			r = self._readInput(port).split(',')
 			if r[0] != 'timeout':
 				cmd,recv = r
 				di[cmd] = recv
@@ -109,7 +109,7 @@ class Server():
 			self.ser[port].write('<'+cmd+'>')
 			return 1
 		except serial.SerialException as ex:
-			print 'timeout writing on', port, ex
+			print 'timeout, writing on', port, ex
 			return -1
 	
 	
