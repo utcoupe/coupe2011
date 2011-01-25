@@ -61,6 +61,7 @@ class Server():
 		
 		print 'fin init'
 	
+	""" se connecter à un port """
 	def connect(self, port, refresh):
 		for i in range(10):
 			try:
@@ -77,6 +78,7 @@ class Server():
 		self.ser[port] = None
 		return self.ser[port]
 	
+	""" la loop envoyant à la suite les commandes dans la queue """
 	def loopCmd(self, port):
 		queue = self.queuedCmd[port]
 		while True:
@@ -86,12 +88,13 @@ class Server():
 				self.waitRcv[port] = 'timeout'
 			queue.task_done()
 	
+	""" la loop récupérant les réponses au différentes commandes """
 	def loopRcv(self, port):
 		di = self.waitRcv[port]
 		while True:
 			r = self._readInput(port).split(',')
 			#print r
-			if r[0] != 'timeout':
+			if len(r) == 2 and r[0] != 'timeout':
 				cmd,recv = r
 				di[cmd] = recv
 	
