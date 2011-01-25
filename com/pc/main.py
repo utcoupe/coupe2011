@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 import threading
+import sys
+
 from message import *
 from timer import *
 
@@ -24,18 +26,21 @@ server = Server(ports)
 def loopCmd():
 	cmd = raw_input()
 	cperso = cmd.split()
-	if not cmd:
-		cmd = 'p'
-	if cperso[0] == 'test':
-		server.testPing('ACM0', cperso[1])
-	elif cperso[0] == 'live':
-		server.getLive('ACM0', cperso[1], cperso[2])
-	elif cperso[0] == 'stop':
-		server.stopScreen(int(cperso[1]))
-	else:
-		server.addCmd(cmd, 'ACM0')
-		r = timeout(1.0, server.getRcv, (cmd, 'ACM0', True,))
-		print r
+	try:
+		if not cmd:
+			cmd = 'p'
+		if cperso[0] == 'test':
+			server.testPing('ACM0', cperso[1])
+		elif cperso[0] == 'live':
+			server.getLive('ACM0', cperso[1], cperso[2])
+		elif cperso[0] == 'stop':
+			server.stopScreen(int(cperso[1]))
+		else:
+			server.addCmd(cmd, 'ACM0')
+			r = timeout(1.0, server.getRcv, (cmd, 'ACM0', True,))
+			print r
+	except Exception as ex:
+		print sys.exc_info()
 	
 
 def makeLoop(target, args= [], kwargs={}):
