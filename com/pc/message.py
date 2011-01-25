@@ -60,6 +60,8 @@ class Server():
 		commande brute (sans check sum ni caractere debut/fin
 	"""
 	def sendCmd(self, cmd):
+		if not cmd:
+			cmd = 'p'
 		self.ser['ACM0'].write('<'+cmd+'>')
 	
 	
