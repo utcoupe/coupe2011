@@ -9,6 +9,9 @@ import time
 
 ser = dict()
 
+ACM0 = True
+ACM1 = False
+
 def connect(port, refresh):
 	global ser
 	for i in range(10):
@@ -27,11 +30,11 @@ def connect(port, refresh):
 
 a = threading.Thread(None, connect, None, ('ACM0',9600,))
 b = threading.Thread(None, connect, None, ('ACM1',115200))
-a.start()
-b.start()
+if ACM0 : a.start()
+if ACM1 : b.start()
 
 # Attendre que les thread de connection soit terminés...
-while a.isAlive() or b.isAlive():
+while (a.isAlive() and ACM0) or (b.isAlive() and ACM1):
 	time.sleep(1)
 
 # Attendre que les connections soit bien la
@@ -94,7 +97,8 @@ class MyTimer:
         self._timer.cancel()
 	
 
-"""
+'''
+
 on = True
 def blink():
 	global on
@@ -111,8 +115,9 @@ timer = MyTimer(1, blink)
 timer.start()
 time.sleep(10)
 timer.stop()
+'''
 
-
+"""
 while True:
 	ser['ACM0'].write('<Sd>')
 	val = ser['ACM0'].readline()
@@ -121,8 +126,8 @@ while True:
 	else:
 		print 'timeout'
 """
-"""
-tot = 0
+
+'''tot = 0
 for i in xrange(300):
 	t = time.time()
 	ser['ACM0'].write(chr(1))
@@ -136,17 +141,17 @@ for i in xrange(300):
 		print 'timeout'
 print tot
 print tot/300.0
-
+'''
 tot = 0
 for i in xrange(300):
 	t = time.time()
-	ser['ACM1'].write('<?>')
+	ser['ACM0'].write('<LL>')
 	for i in range(8):
-		print 'ACM1 : '+ser['ACM1'].readline()
+		print 'ACM0 : '+ser['ACM0'].readline()
 	t = time.time()-t
 	print t
 	tot += t
 print tot
 print tot/300.0
-"""
+
 
