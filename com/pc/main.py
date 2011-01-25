@@ -1,70 +1,23 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import serial
 import threading
-import time
-#from struct import *
-#import binascii
+from message import *
+from timer import *
 
-ser = dict()
+		
 
-ACM0 = True
-ACM1 = False
+ports = []
+ports.append(('ACM0',9600))
+#ports.append(('ACM1',115200))
 
-def connect(port, refresh):
-	global ser
-	for i in range(10):
-		try:
-			#print 'tentative de connection sur %s'%port
-			s = serial.Serial('/dev/tty'+port, refresh, timeout=1, writeTimeout=1)
-		except serial.SerialException:
-			print 'connection echouée sur %s, nouvelle tentative'%port
-		else:
-			print 'connection %s établie'%port
-			ser[port] = s
-			return s
-	print 'echec de la connection %s après 10 tentatives, relancer le programme'%port
-	ser[port] = None
-	return ser[port]
-
-a = threading.Thread(None, connect, None, ('ACM0',9600,))
-b = threading.Thread(None, connect, None, ('ACM1',115200))
-if ACM0 : a.start()
-if ACM1 : b.start()
-
-# Attendre que les thread de connection soit terminés...
-while (a.isAlive() and ACM0) or (b.isAlive() and ACM1):
-	time.sleep(1)
-
-# Attendre que les connections soit bien la
-time.sleep(2)
-
-# Verification que les connections ont reussi...
-for s in ser.values():
-	if not s: 
-		exit()
-
-def sendCmd(cmd):
-	check_sum = 0
-	for c in cmd:
-		check_sum += c
-	check_sum %= 128
-	ser['ACM0'].write('<{0}{1}>'.format(cmd,char(check_sum)))
-
-def readInput(port):
-	val = ser[port].readline()
-	if val:
-		return port,':', val # int(binascii.hexlify(val),16)  #unpack('c', val)
-	else:
-		return 'timeout on :',port
-	
+server = Server(ports)
 
 # read, send and get output of a command
 def loopCmd():
 	cmd = raw_input()
-	sendCmd(cmd)
-	print readInput()
+	server.sendCmd(cmd)
+	print server.readInput('ACM0')
 	
 
 def makeLoop(target, args= [], kwargs={}):
@@ -75,27 +28,9 @@ def makeLoop(target, args= [], kwargs={}):
 loopCmd = threading.Thread(None, makeLoop, None, (loopCmd,))
 loopCmd.start()
 
+time.sleep(60)
 
 
-class MyTimer:
-    def __init__(self, tempo, target, args= [], kwargs={}):
-        self._target = target
-        self._args = args
-        self._kwargs = kwargs
-        self._tempo = tempo
-
-    def _run(self):
-        self._timer = threading.Timer(self._tempo, self._run)
-        self._timer.start()
-        self._target(*self._args, **self._kwargs)
-        
-    def start(self):
-        self._timer = threading.Timer(self._tempo, self._run)
-        self._timer.start()
-
-    def stop(self):
-        self._timer.cancel()
-	
 
 '''
 
@@ -141,7 +76,7 @@ for i in xrange(300):
 		print 'timeout'
 print tot
 print tot/300.0
-'''
+
 tot = 0
 for i in xrange(300):
 	t = time.time()
@@ -154,4 +89,4 @@ for i in xrange(300):
 print tot
 print tot/300.0
 
-
+'''
