@@ -4,6 +4,8 @@
 import serial
 import threading
 import time
+#from struct import *
+#import binascii
 
 ser = dict()
 
@@ -40,6 +42,37 @@ for s in ser.values():
 	if not s: 
 		exit()
 
+def sendCmd(cmd):
+	check_sum = 0
+	for c in cmd:
+		check_sum += c
+	check_sum %= 128
+	ser['ACM0'].write('<{0}{1}>'.format(cmd,char(check_sum)))
+
+def readInput(port):
+	val = ser[port].readline()
+	if val:
+		return port,':', val # int(binascii.hexlify(val),16)  #unpack('c', val)
+	else:
+		return 'timeout on :',port
+	
+
+# read, send and get output of a command
+def loopCmd():
+	cmd = raw_input()
+	sendCmd(cmd)
+	print readInput()
+	
+
+def makeLoop(target, args= [], kwargs={}):
+	while True:
+		target(*args, **kwargs)
+	
+
+loopCmd = threading.Thread(None, makeLoop, None, (loopCmd,))
+loopCmd.start()
+
+
 
 class MyTimer:
     def __init__(self, tempo, target, args= [], kwargs={}):
@@ -59,9 +92,9 @@ class MyTimer:
 
     def stop(self):
         self._timer.cancel()
+	
 
-
-
+"""
 on = True
 def blink():
 	global on
@@ -80,14 +113,14 @@ time.sleep(10)
 timer.stop()
 
 
-"""while True:
-	ser['ACM0'].write(chr(1))
+while True:
+	ser['ACM0'].write('<Sd>')
 	val = ser['ACM0'].readline()
 	if val:
-		print 'ACM0 : '+val
+		print 'ACM0 : ', val # int(binascii.hexlify(val),16)  #unpack('c', val)
 	else:
 		print 'timeout'
-	"""
+"""
 """
 tot = 0
 for i in xrange(300):
