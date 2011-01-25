@@ -65,6 +65,7 @@ class Server():
 			try:
 				#print 'tentative de connection sur %s'%port
 				s = serial.Serial('/dev/tty'+port, refresh, timeout=1, writeTimeout=1)
+				#s = serial.Serial('/dev/tty'+port, refresh, writeTimeout=1)
 			except serial.SerialException as ex:
 				print 'connection echouée sur %s, nouvelle tentative'%port, ex
 			else:
@@ -88,14 +89,18 @@ class Server():
 		di = self.waitRcv[port]
 		while True:
 			r = self._readInput(port).split(',')
+			#print r
 			if r[0] != 'timeout':
 				cmd,recv = r
 				di[cmd] = recv
 	
+	""" ajoute une commande dans la queue des commandes """
 	def addCmd(self, cmd, port):
 		self.queuedCmd[port].put(cmd)
 		self.waitRcv[port][cmd] = None
 	
+	""" renvoie la réponse à la commande, None si elle n'est pas encore arrivée, 
+		si on met en bloquant la fonction attend d'avoir la réponse """
 	def getRcv(self, cmd, port, bloquant=False):
 		rcv = self.waitRcv[port][cmd]
 		if bloquant:
@@ -119,14 +124,14 @@ class Server():
 		if val:
 			return val # int(binascii.hexlify(val),16)  #unpack('c', val)
 		else:
-			return 'timeout on : '+port
+			return 'timeout, on : '+port
 	
 	""" test la reactivitée de la cmd en envoyant et recevant """
 	def testPing(self, port, cmd):
 		n = self.addScreen()
 		def loop():
 			tot = 0
-			nb_iter = 100
+			nb_iter = 300
 			print 'test du port', port, 'avec la commande :', cmd
 			for i in xrange(nb_iter):
 				t = time.time()
@@ -158,7 +163,7 @@ class Server():
 		def loop():
 			self.addCmd(cmd, 'ACM0')
 			self.write(self.getRcv(cmd, 'ACM0', True),n)
-		timer = MyTimer(int(speed),loop)
+		timer = MyTimer(float(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()
 	
