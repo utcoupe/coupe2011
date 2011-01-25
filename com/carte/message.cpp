@@ -1,7 +1,7 @@
 #include "WProgram.h"
 #include "message.h"
 #include "getters.h"
-
+#include <string>
 
 
 void initSerialLink(){
@@ -9,7 +9,7 @@ void initSerialLink(){
 }
 
 void readIncomingData(){	
-	static int buffer[16];
+	static unsigned char buffer[100];
 	static int bufferIndex = 0;
 	/*
 	A propos du protcole :
@@ -34,8 +34,24 @@ void readIncomingData(){
 
 }
 
-void analyzeMessage(int bufferIndex, int* buffer){
-	
+void analyzeMessage(int bufferIndex, unsigned char* buffer){
+	int i, j, lasti=0;
+	int* message[50];
+	int m = 0;
+	message[0] = buffer[0];
+	m=1;
+	lasti=2;
+	for (i=2; i<bufferIndex; i++) {
+		if(buffer[i]==' ') {
+			for(j=lasti; j<i; j++) {
+				message[m] = (buffer[j]-48)+(message[m]*10);
+			}
+			m++;
+			lasti = i + 1;
+		}
+	}
+
+
 	// On analyse le message en fonction de son type
 	switch(buffer[0]){
 		case 'S':
