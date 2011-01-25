@@ -39,7 +39,7 @@ void cmd(int c, float* message, int m)
 		#define T_ALIGN 7
 		#define T_SETX 9
 		#define T_SETY 10
-		*/
+		*/ 
 		case T_QUERY:
 	        Serial.print(SOF);
 			Serial.print(robot_state.x, DEC);
@@ -57,14 +57,13 @@ void cmd(int c, float* message, int m)
 		//case T_SPEED:
 		case 's':
 			pushGoal(TYPE_SPEED, message[1], message[2], 0);
-			Serial.println("Tout droit !!!");
+			Serial.println("Tout droit...");
 		break;
 		//case T_ANGLE:
 		case 'a':
 			pushGoal(TYPE_ANGLE, message[1], message[2], message[3]/360 * 2*M_PI); // x,y,angle
 			Serial.print(message[3]);Serial.print(" -> ");Serial.print(message[3]/360.0 * 2*M_PI);Serial.println("Tourne cocotte!!");
 		break;
-
 		case '?':
 			Serial.print("_________________§");
 			Serial.print("time: ");Serial.print(millis());
