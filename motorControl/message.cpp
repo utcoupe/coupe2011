@@ -45,7 +45,7 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 				if(buffer[j]=='-') { 
 					neg = -1; 
 				} else {
-					message[m] = ((float) buffer[j]-48)+(message[m]*10);
+					message[m] = ((float) buffer[j]-'0')+(message[m]*10);
 				}
 			}
 			if (neg<0) { message[m] *= -1; }
