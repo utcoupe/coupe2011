@@ -36,7 +36,7 @@ void readIncomingData(){
 
 void sendMessage(unsigned char c, char* str)
 {
-	Serial.print(c);Serial.print(" ");Serial.println(str);
+	Serial.print(c);Serial.print(",");Serial.println(str);
 }
 
 
