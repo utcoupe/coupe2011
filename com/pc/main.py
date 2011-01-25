@@ -20,18 +20,26 @@ def connect(port, refresh):
 			ser[port] = s
 			return s
 	print 'echec de la connection %s après 10 tentatives, relancer le programme'%port
-	exit()
-
+	ser[port] = None
+	return ser[port]
 
 a = threading.Thread(None, connect, None, ('ACM0',9600,))
-#b = threading.Thread(None, connect, None, ('ACM1',115200))
+b = threading.Thread(None, connect, None, ('ACM1',115200))
 a.start()
-#b.start()
+b.start()
 
-while a.isAlive():# or b.isAlive():
+# Attendre que les thread de connection soit terminés...
+while a.isAlive() or b.isAlive():
 	time.sleep(1)
 
+# Attendre que les connections soit bien la
 time.sleep(2)
+
+# Verification que les connections ont reussi...
+for s in ser.values():
+	if not s: 
+		exit()
+
 
 class MyTimer:
     def __init__(self, tempo, target, args= [], kwargs={}):
