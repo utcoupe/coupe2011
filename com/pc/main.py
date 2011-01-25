@@ -28,12 +28,12 @@ def loopCmd():
 	if cperso[0] == 'test':
 		server.testPing('ACM0', cperso[1])
 	elif cperso[0] == 'live':
-		server.getLive('ACM0', cperso[1])
+		server.getLive('ACM0', cperso[1], cperso[2])
 	elif cperso[0] == 'stop':
 		server.stopScreen(int(cperso[1]))
 	else:
 		server.addCmd(cmd, 'ACM0')
-		print 'vjuv',server.getRcv(cmd, 'ACM0', True)
+		print server.getRcv(cmd, 'ACM0', True)
 	
 
 def makeLoop(target, args= [], kwargs={}):

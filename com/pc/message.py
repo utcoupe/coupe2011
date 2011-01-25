@@ -19,6 +19,8 @@ class Server():
 		self.screens	= 	[]
 		self.queuedCmd 	= 	dict() 	# liste des commandes à envoyer par port
 		self.waitRcv 	=	dict() 	# liste des réponses attendues par port
+		self.cmdLoops	=	dict() # threads
+		self.rcvLoops	=	dict() # threads
 		
 		# lancement des tentatives de connection
 		threads = []
@@ -41,16 +43,20 @@ class Server():
 			if not s: 
 				exit()
 		
-		# créarion des queues
+		# créarion de la queue pour l'envoie de commande
+		# et du dict pour récupérer les réponses
 		for s in self.ser:
 			self.queuedCmd[s] = Queue() # on envoi les commandes les unes après les autres
 			self.waitRcv[s] = dict() # on reçoit dans n'importe quel ordre
-		
-		print self.queuedCmd
-		print self.waitRcv
+			self.cmdLoops[s] = threading.Thread(None, self.loopCmd, None, (s,))
+			self.cmdLoops[s].start()
+			self.rcvLoops[s] = threading.Thread(None, self.loopRcv, None, (s,))
+			self.rcvLoops[s].start()
 		
 		# petite pause avant de pouvoir envoyer et recevoir des données
 		time.sleep(1)
+		
+		# lancement des loups
 		
 		print 'fin init'
 	
@@ -73,7 +79,7 @@ class Server():
 		queue = self.queuedCmd[port]
 		while True:
 			cmd = queue.get()
-			r = sendCmd(cmd)
+			r = self._sendCmd(cmd, port)
 			if r < 0:
 				self.waitRcv[port] = 'timeout'
 			queue.task_done()
@@ -81,8 +87,10 @@ class Server():
 	def loopRcv(self, port):
 		di = self.waitRcv[port]
 		while True:
-			cmd,recv = readInput(port).split()
-			di[cmd] = recv
+			r = self._readInput(port).split()
+			if r[0] != 'timeout':
+				cmd,recv = r
+				di[cmd] = recv
 	
 	def addCmd(self, cmd, port):
 		self.queuedCmd[port].put(cmd)
@@ -109,9 +117,9 @@ class Server():
 		val = self.ser[port].readline()
 		val = val.replace("§","\n")
 		if val:
-			return port + ':' + val # int(binascii.hexlify(val),16)  #unpack('c', val)
+			return val # int(binascii.hexlify(val),16)  #unpack('c', val)
 		else:
-			return 'timeout on :',port
+			return 'timeout on : '+port
 	
 	""" test la reactivitée de la cmd en envoyant et recevant """
 	def testPing(self, port, cmd):
@@ -146,11 +154,11 @@ class Server():
 		self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
 		self.screens[n][0].stdin.flush()
 	
-	def getLive(self, port, cmd):
+	def getLive(self, port, cmd, speed=0.3):
 		def loop():
 			self.addCmd(cmd, 'ACM0')
 			self.write(self.getRcv(cmd, 'ACM0', True),n)
-		timer = MyTimer(0.3,loop)
+		timer = MyTimer(int(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()
 	
