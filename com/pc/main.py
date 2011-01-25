@@ -8,7 +8,7 @@ from timer import *
 		
 
 ports = []
-ports.append(('ACM0',9600))
+ports.append(('ACM0',115200))
 #ports.append(('ACM1',115200))
 
 server = Server(ports)
@@ -16,8 +16,17 @@ server = Server(ports)
 # read, send and get output of a command
 def loopCmd():
 	cmd = raw_input()
-	server.sendCmd(cmd)
-	print server.readInput('ACM0')
+	cperso = cmd.split()
+	if cperso[0] == 'test':
+		cmd = raw_input()
+		server.testPing('ACM0',cmd)
+	elif cperso[0] == 'live':
+		server.getLive('ACM0', cperso[1])
+	elif cperso[0] == 'stop':
+		server.stopScreen(int(cperso[1]))
+	else:
+		server.sendCmd(cmd, 'ACM0')
+		print server.readInput('ACM0')
 	
 
 def makeLoop(target, args= [], kwargs={}):
