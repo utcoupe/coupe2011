@@ -5,6 +5,7 @@ import threading
 from message import *
 from timer import *
 
+
 """
 	commandes funky:
 		live <cmd>: aficher une nouvelle fenetre avec en boucle un envoi/reception de la commande spécifiée
@@ -33,7 +34,8 @@ def loopCmd():
 		server.stopScreen(int(cperso[1]))
 	else:
 		server.addCmd(cmd, 'ACM0')
-		print server.getRcv(cmd, 'ACM0', True)
+		r = timeout(1.0, server.getRcv, (cmd, 'ACM0', True,))
+		print r
 	
 
 def makeLoop(target, args= [], kwargs={}):
