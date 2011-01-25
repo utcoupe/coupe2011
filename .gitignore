@@ -2,5 +2,6 @@
 *.hex
 *.o
 *.dblite
+*.pyc
 *build/*
 *build/
