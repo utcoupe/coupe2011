@@ -1,7 +1,7 @@
 #ifndef MESSAGE_H_
 #define MESSAGE_H_
 
-#define SERIAL_BAUD 9600
+#define SERIAL_BAUD 115200
 
 void initSerialLink();
 void readIncomingData();

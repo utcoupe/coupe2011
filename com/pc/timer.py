@@ -1,6 +1,9 @@
 # -*- coding: utf-8 -*-
 
 
+import threading
+
+
 class MyTimer:
     def __init__(self, tempo, target, args= [], kwargs={}):
         self._target = target
