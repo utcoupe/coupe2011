@@ -14,7 +14,6 @@ class Server():
 	def __init__(self, ports):
 		self.ser = dict()
 		self.screens = []
-		self.addScreen()
 		
 		# lancement des tentatives de connection
 		threads = []
@@ -78,18 +77,23 @@ class Server():
 			return 'timeout on :',port
 	
 	def testPing(self, port, cmd):
-		tot = 0
-		nb_iter = 100
-		print 'test du port', port, 'avec la commande :', cmd
-		for i in xrange(nb_iter):
-			t = time.time()
-			self.sendCmd(cmd, port)
-			self.write(self.readInput(port))
-			tEllapsed = time.time() - t
-			tot += tEllapsed
-			self.writeOn(""+str(i)+" "+str(tEllapsed))
-		self.write("temps total"+str(tot))
-		self.write("moy"+str(tot/nb_iter))
+		n = self.addScreen()
+		def loop():
+			tot = 0
+			nb_iter = 100
+			print 'test du port', port, 'avec la commande :', cmd
+			for i in xrange(nb_iter):
+				t = time.time()
+				self.sendCmd(cmd, port)
+				self.write(self.readInput(port), n)
+				tEllapsed = time.time() - t
+				tot += tEllapsed
+				self.write(""+str(i)+" "+str(tEllapsed), n)
+			self.write("temps total"+str(tot), n)
+			self.write("moy"+str(tot/nb_iter), n)
+		
+		t = threading.Thread(None, loop, None)
+		t.start()
 	
 	def addScreen(self, live=None):
 		"""

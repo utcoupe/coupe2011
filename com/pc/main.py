@@ -5,7 +5,13 @@ import threading
 from message import *
 from timer import *
 
-		
+"""
+	commandes funky:
+		live <cmd>: aficher une nouvelle fenetre avec en boucle un envoi/reception de la commande spécifiée
+		stop <n>: killer le nième écran
+		test <cmd>: lance 300 fois la commande et affiche le temps d'execution
+"""
+
 
 ports = []
 ports.append(('ACM0',115200))
@@ -18,8 +24,7 @@ def loopCmd():
 	cmd = raw_input()
 	cperso = cmd.split()
 	if cperso[0] == 'test':
-		cmd = raw_input()
-		server.testPing('ACM0',cmd)
+		server.testPing('ACM0', cperso[1])
 	elif cperso[0] == 'live':
 		server.getLive('ACM0', cperso[1])
 	elif cperso[0] == 'stop':
