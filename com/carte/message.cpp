@@ -1,6 +1,6 @@
 #include "WProgram.h"
 #include "message.h"
-#include "getters.h"
+#include "command.h"
 
 
 void initSerialLink(){
@@ -49,39 +49,9 @@ void analyzeMessage(int bufferIndex, unsigned char* buffer){
 			lasti = i + 1;
 		}
 	}
+	// CALL command.cpp (Don't forget this file is generic for all our arduino board)
+	cmd(message, m);
 
-
-	// On analyse le message en fonction de son type
-	switch(message[0]){
-		case 'E':
-			for(i=0;i<bufferIndex; i++) {
-				Serial.print(i);
-				Serial.print(" : ");
-				Serial.print(buffer[i]);
-				Serial.print("§");
-			}
-			for (i=1;i<m;i++) {
-				Serial.print("§message ");Serial.print(i);Serial.print(" ");Serial.print(message[i]); 
-			}
-				Serial.print("\n");
-		break;
-		case 'S':
-			getSharp();
-		break;
-		case 'L':
-			ledOn();
-		break;
-		case 'l':
-			ledOff();
-		break;
-		case '?':
-			Serial.print("time: ");Serial.print(millis());
-			Serial.print("Hey !! ");Serial.print("\n");
-		break;
-		default:
-			Serial.print(-1);Serial.print("\n");
-		break;
-	}
 }
 
 
