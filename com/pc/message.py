@@ -89,10 +89,10 @@ class Server():
 		self.waitRcv[port][cmd] = None
 	
 	def getRcv(self, cmd, port, bloquant=False):
-		rcv = self.waitRcv[port]
+		rcv = self.waitRcv[port][cmd]
 		if bloquant:
 			while not rcv:
-				rcv = rcv[cmd]
+				rcv = self.waitRcv[port][cmd]
 		return rcv
 		
 	""" cmd: commande brute (sans caractere debut/fin) """
