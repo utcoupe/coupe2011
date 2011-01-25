@@ -32,7 +32,8 @@ void identification()
 void getSharp()
 {
   	int sensorValue = analogRead(A0);
-	Serial.println(sensorValue);
+	Serial.print(sensorValue);
+	Serial.print('\n');
 }
 
 void indexError()

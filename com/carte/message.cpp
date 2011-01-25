@@ -34,7 +34,7 @@ void readIncomingData(){
 
 }
 
-int checksum(int size, int* buffer) {
+unsigned char checksum(int size, int* buffer) {
 	int i, check=0;
 	for(i=0; i<size-1; i++) {
 		check+=buffer[i];	
