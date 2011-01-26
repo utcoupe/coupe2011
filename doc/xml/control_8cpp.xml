@@ -1,0 +1,685 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="control_8cpp" kind="file">
+    <compoundname>control.cpp</compoundname>
+    <includes refid="motor_control_2build_2core_2_w_program_8h" local="yes">WProgram.h</includes>
+    <includes refid="control_8h" local="yes">control.h</includes>
+    <includes refid="encoder_8h" local="yes">encoder.h</includes>
+    <includes refid="robotstate_8h" local="yes">robotstate.h</includes>
+    <includes refid="control_8cpp" local="yes">PID_Beta6.h</includes>
+    <includes refid="fifo_8h" local="yes">fifo.h</includes>
+    <includedby refid="control_8cpp" local="yes">motorControl/control.cpp</includedby>
+    <incdepgraph>
+      <node id="2062">
+        <label>encoder.h</label>
+        <link refid="encoder_8h"/>
+        <childnode refid="2061" relation="include">
+        </childnode>
+      </node>
+      <node id="2056">
+        <label>avr/interrupt.h</label>
+      </node>
+      <node id="2053">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2061">
+        <label>parameters.h</label>
+        <link refid="parameters_8h"/>
+      </node>
+      <node id="2057">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="2058" relation="include">
+        </childnode>
+        <childnode refid="2053" relation="include">
+        </childnode>
+        <childnode refid="2059" relation="include">
+        </childnode>
+      </node>
+      <node id="2058">
+        <label>avr/io.h</label>
+      </node>
+      <node id="2060">
+        <label>control.h</label>
+        <link refid="control_8h"/>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2061" relation="include">
+        </childnode>
+        <childnode refid="2057" relation="include">
+        </childnode>
+      </node>
+      <node id="2054">
+        <label>string.h</label>
+      </node>
+      <node id="2052">
+        <label>WProgram.h</label>
+        <link refid="motor_control_2build_2core_2_w_program_8h"/>
+        <childnode refid="2053" relation="include">
+        </childnode>
+        <childnode refid="2054" relation="include">
+        </childnode>
+        <childnode refid="2055" relation="include">
+        </childnode>
+        <childnode refid="2056" relation="include">
+        </childnode>
+        <childnode refid="2057" relation="include">
+        </childnode>
+      </node>
+      <node id="2055">
+        <label>math.h</label>
+      </node>
+      <node id="2059">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+      <node id="2063">
+        <label>robotstate.h</label>
+        <link refid="robotstate_8h"/>
+      </node>
+      <node id="2064">
+        <label>fifo.h</label>
+        <link refid="fifo_8h"/>
+        <childnode refid="2061" relation="include">
+        </childnode>
+        <childnode refid="2060" relation="include">
+        </childnode>
+      </node>
+      <node id="2051">
+        <label>motorControl/control.cpp</label>
+        <link refid="control.cpp"/>
+        <childnode refid="2052" relation="include">
+        </childnode>
+        <childnode refid="2060" relation="include">
+        </childnode>
+        <childnode refid="2062" relation="include">
+        </childnode>
+        <childnode refid="2063" relation="include">
+        </childnode>
+        <childnode refid="2051" relation="include">
+        </childnode>
+        <childnode refid="2064" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="2065">
+        <label>motorControl/control.cpp</label>
+        <link refid="control.cpp"/>
+        <childnode refid="2065" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="control_8cpp_1a0e510825641ecd3f7861a66a12f4a952" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref></type>
+        <definition>CurrentGoal current_goal</definition>
+        <argsstring></argsstring>
+        <name>current_goal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1aac43907b5e3333321612b5a041246c93" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double pwm</definition>
+        <argsstring></argsstring>
+        <name>pwm</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1ae71c194c42d358697d188b0113a7a549" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double consigne</definition>
+        <argsstring></argsstring>
+        <name>consigne</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>PID pid4SpeedControl &amp; currentSpeed</definition>
+        <argsstring></argsstring>
+        <name>currentSpeed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>PID pid4AngleControl &amp; currentEcart</definition>
+        <argsstring></argsstring>
+        <name>currentEcart</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="107" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="107" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double output4Delta</definition>
+        <argsstring></argsstring>
+        <name>output4Delta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="168" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1a831311fb4dc9f6428391f313ba15636b" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double output4Alpha</definition>
+        <argsstring></argsstring>
+        <name>output4Alpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="168" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="168" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>PID pid4DeltaControl &amp; currentDelta</definition>
+        <argsstring></argsstring>
+        <name>currentDelta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="169" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>PID pid4AlphaControl &amp; currentAlpha</definition>
+        <argsstring></argsstring>
+        <name>currentAlpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="169" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="169" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1a5a88d0dbd5f5eee3ac2e5c83fc298b4b" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double consigneDelta</definition>
+        <argsstring></argsstring>
+        <name>consigneDelta</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="170" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="control_8cpp_1a045e0294ed6109839f6e23d61acd0c62" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double consigneAlpha</definition>
+        <argsstring></argsstring>
+        <name>consigneAlpha</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="170" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="170" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="control_8cpp_1a617d3541eee6a91418272048740f582e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>double</type>
+        <definition>double moduloPI</definition>
+        <argsstring>(double)</argsstring>
+        <name>moduloPI</name>
+        <param>
+          <type>double</type>
+          <defname>Nb</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="30" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="303" bodyend="311"/>
+      </memberdef>
+      <memberdef kind="function" id="control_8cpp_1a126d81d79aac606e100d7bf6974d60f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initController</definition>
+        <argsstring>()</argsstring>
+        <name>initController</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="34" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="control_8cpp_1ab0b7c454bab847a8986b7b9f8567b86e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void speedControl</definition>
+        <argsstring>(int *value_pwm_left, int *value_pwm_right)</argsstring>
+        <name>speedControl</name>
+        <param>
+          <type>int *</type>
+          <declname>value_pwm_left</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>value_pwm_right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="46" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="control_8cpp_1a383f948a9568fc350b3a5e591af4e98e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void angleControl</definition>
+        <argsstring>(int *value_pwm_left, int *value_pwm_right)</argsstring>
+        <name>angleControl</name>
+        <param>
+          <type>int *</type>
+          <declname>value_pwm_left</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>value_pwm_right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="113" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="113" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="control_8cpp_1a22cdc5457b15801b2a283a4501638729" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void positionControl</definition>
+        <argsstring>(int *value_pwm_left, int *value_pwm_right)</argsstring>
+        <name>positionControl</name>
+        <param>
+          <type>int *</type>
+          <declname>value_pwm_left</declname>
+        </param>
+        <param>
+          <type>int *</type>
+          <declname>value_pwm_right</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="178" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="178" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="control_8cpp_1a14205b503643eae869c101e5f77b42fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeRobotState</definition>
+        <argsstring>()</argsstring>
+        <name>computeRobotState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" line="257" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="257" bodyend="294"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>control.cpp</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>Created<sp/>on:<sp/>13<sp/>janv.<sp/>2011</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Author:<sp/>HoHen</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Quelques<sp/>trucs<sp/>sur<sp/>le<sp/>PID</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>*<sp/>kp<sp/>:<sp/>le<sp/>terme<sp/>proportionnel<sp/>qui<sp/>permet<sp/>d&apos;augmenter<sp/>la<sp/>vitesse<sp/>de<sp/>montee<sp/>(atteint<sp/>la<sp/>consigne<sp/>le<sp/>plus<sp/>rapidement<sp/>possible).</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>*<sp/>ki<sp/>:<sp/>le<sp/>terme<sp/>integral<sp/>qui<sp/>reduit<sp/>l&apos;erreur<sp/>statique.</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>*<sp/>kd<sp/>:<sp/>le<sp/>terme<sp/>derive<sp/>qui<sp/>reduit<sp/>le<sp/>depassement<sp/>(l&apos;overshoot).</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/>*<sp/>__________________________________________________________________________________________________</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>*<sp/>Coefficient<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Temps<sp/>de<sp/>montee<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Temps<sp/>de<sp/>stabilisation<sp/>|Depassement<sp/><sp/><sp/><sp/>|Erreur<sp/>statique<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>kp<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Diminue<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Augmente<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Augmente<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Diminue<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>ki<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Diminue<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Augmente<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Augmente<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Annule<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>kd<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|-<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Diminue<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|Diminue<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|-<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>|</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/>*<sp/>_________________|___________________|_______________________|_______________|___________________|</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2_w_program_8h" kindref="compound">WProgram.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="control_8h" kindref="compound">control.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="encoder_8h" kindref="compound">encoder.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="robotstate_8h" kindref="compound">robotstate.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_p_i_d___beta6_8h" kindref="compound">PID_Beta6.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="fifo_8h" kindref="compound">fifo.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1a617d3541eee6a91418272048740f582e" kindref="member">moduloPI</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="control_8h_1a0e510825641ecd3f7861a66a12f4a952" refkind="member"><highlight class="normal"><ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref><sp/><ref refid="build_2control_8h_1a0e510825641ecd3f7861a66a12f4a952" kindref="member">current_goal</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="control_8h_1a126d81d79aac606e100d7bf6974d60f4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a126d81d79aac606e100d7bf6974d60f4" kindref="member">initController</ref>(){</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" kindref="member">isReached</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>,<ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref>,<ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><ref refid="class_p_i_d" kindref="compound">PID</ref><sp/>pid4SpeedControl(&amp;<ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref>,&amp;<ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>,&amp;<ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref>,<ref refid="build_2parameters_8h_1a14de3e9ccc4fd63825b30f39558d1868" kindref="member">KP_SPEED</ref>,<ref refid="build_2parameters_8h_1a94a50f5b31f44a7e16265302efaa218c" kindref="member">KI_SPEED</ref>,<ref refid="build_2parameters_8h_1af46789f95cc3b76b2aa0df1b69644751" kindref="member">KD_SPEED</ref>);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Calcule<sp/>les<sp/>pwm<sp/>a<sp/>appliquer<sp/>pour<sp/>un<sp/>asservissement<sp/>en<sp/>vitesse<sp/>en<sp/>trapeze</highlight></codeline>
+<codeline lineno="43"><highlight class="comment"><sp/>*<sp/>&lt;&gt;<sp/>value_pwm_left<sp/>:<sp/>la<sp/>pwm<sp/>a<sp/>appliquer<sp/>sur<sp/>la<sp/>roue<sp/>gauche<sp/>[-255,255]</highlight></codeline>
+<codeline lineno="44"><highlight class="comment"><sp/>*<sp/>&lt;&gt;<sp/>value_pwm_right<sp/>:<sp/>la<sp/>pwm<sp/>a<sp/>appliquer<sp/>sur<sp/>la<sp/>roue<sp/>droite<sp/>[-255,255]</highlight></codeline>
+<codeline lineno="45"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="control_8h_1a8febe790f4954110a1e26aa6865d121e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a8febe790f4954110a1e26aa6865d121e" kindref="member">speedControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="motor_control_8cpp_1a203ce29386c4f7c3325d3ff50e480bd1" kindref="member">value_pwm_left</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="motor_control_8cpp_1a1a69d9c8c21a8a9e4f0ceafedf281523" kindref="member">value_pwm_right</ref>){</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>si<sp/>le<sp/>robot<sp/>est<sp/>en<sp/>train<sp/>de<sp/>tourner,<sp/>et<sp/>qu&apos;on<sp/>lui<sp/>donne<sp/>une<sp/>consigne<sp/>de<sp/>vitesse,<sp/>il<sp/>ne<sp/>va<sp/>pas<sp/>partir<sp/>droit</highlight></codeline>
+<codeline lineno="48"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>solution<sp/>=<sp/>decomposer<sp/>l&apos;asservissement<sp/>en<sp/>vitesse<sp/>en<sp/>2<sp/>:</highlight></codeline>
+<codeline lineno="49"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>-&gt;<sp/>stopper<sp/>le<sp/>robot<sp/>(les<sp/>2<sp/>vitesses<sp/>=<sp/>0)</highlight></codeline>
+<codeline lineno="50"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>-&gt;<sp/>lancer<sp/>l&apos;asservissement<sp/>en<sp/>vitesse</highlight></codeline>
+<codeline lineno="51"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>start_time;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(!initDone){</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start_time<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4SpeedControl.Reset();</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4SpeedControl.SetInputLimits(-10,10);</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4SpeedControl.SetOutputLimits(-255,255);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4SpeedControl.SetSampleTime(2);<sp/></highlight><highlight class="comment">//10ms,<sp/>tout<sp/>ce<sp/>qu&apos;il<sp/>faut<sp/>c&apos;est<sp/>que<sp/>l&apos;observateur<sp/>soit<sp/>plus<sp/>rapide<sp/>que<sp/>le<sp/>PID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4SpeedControl.SetMode(<ref refid="_p_i_d___beta6_8h_1a0cc6f7717df9fbdc0f33efb88720a639" kindref="member">AUTO</ref>);</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1a3bc60c00ac0493cc2a60b3aeadfe3c2d" kindref="member">PHASE_1</ref>){<sp/></highlight><highlight class="comment">//phase<sp/>d&apos;acceleration</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref><sp/>=<sp/>current_goal.<ref refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" kindref="member">speed</ref>;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref><sp/>=<sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" kindref="member">speed</ref>;</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(<ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref>-<ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref>)<sp/>&lt;<sp/>1){<sp/></highlight><highlight class="comment">/*si<sp/>l&apos;erreur<sp/>est<sp/>infÔøΩrieur<sp/>a<sp/>1,<sp/>on<sp/>concidere<sp/>la<sp/>consigne<sp/>atteinte*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>start_time<sp/>=<sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a6ff7f2532a22366f0013bc41397129fd" kindref="member">millis</ref>();</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>){<sp/></highlight><highlight class="comment">//phase<sp/>de<sp/>regime<sp/>permanent</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref><sp/>=<sp/>current_goal.<ref refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" kindref="member">speed</ref>;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref><sp/>=<sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" kindref="member">speed</ref>;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="com_2carte_2build_2core_2wiring_8c_1a6ff7f2532a22366f0013bc41397129fd" kindref="member">millis</ref>()-start_time<sp/>&gt;<sp/>current_goal.<ref refid="struct_current_goal_1a6e92007beaa37c762cfd35d884b1a6bc" kindref="member">periode</ref>){<sp/></highlight><highlight class="comment">/*<sp/>fin<sp/>de<sp/>regime<sp/>permanent<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1adbc28675de3a486a093bb7896f70c817" kindref="member">PHASE_3</ref>;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1adbc28675de3a486a093bb7896f70c817" kindref="member">PHASE_3</ref>){<sp/></highlight><highlight class="comment">//phase<sp/>de<sp/>decceleration</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae281c4c04ab7aa6f343a77cd2824c9d4" kindref="member">currentSpeed</ref><sp/>=<sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" kindref="member">speed</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(<ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" kindref="member">speed</ref>)&lt;1){</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1a1ce1b1d3b01797b8faeeedfc85d60ade" kindref="member">PHASE_4</ref>;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4SpeedControl.Compute();</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1a1ce1b1d3b01797b8faeeedfc85d60ade" kindref="member">PHASE_4</ref>){</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_right)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_left)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" kindref="member">isReached</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_right)<sp/>=<sp/><ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_left)<sp/>=<sp/><ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107" refid="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" kindref="member">currentEcart</ref>;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><ref refid="class_p_i_d" kindref="compound">PID</ref><sp/>pid4AngleControl(&amp;<ref refid="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" kindref="member">currentEcart</ref>,&amp;<ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>,&amp;<ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref>,<ref refid="build_2parameters_8h_1aeb4da878c9d6049f24d57623053afa3f" kindref="member">KP_ANGLE</ref>,<ref refid="build_2parameters_8h_1a402dcb1af90d89d87ecab105e1be8c33" kindref="member">KI_ANGLE</ref>,<ref refid="build_2parameters_8h_1a7a34b8bd0de098b37a0e918f9bbac6f6" kindref="member">KD_ANGLE</ref>);</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Calcule<sp/>les<sp/>pwm<sp/>a<sp/>appliquer<sp/>pour<sp/>un<sp/>asservissement<sp/>en<sp/>angle</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/>&lt;&gt;<sp/>value_pwm_left<sp/>:<sp/>la<sp/>pwm<sp/>a<sp/>appliquer<sp/>sur<sp/>la<sp/>roue<sp/>gauche<sp/>[-255,255]</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>*<sp/>&lt;&gt;<sp/>value_pwm_right<sp/>:<sp/>la<sp/>pwm<sp/>a<sp/>appliquer<sp/>sur<sp/>la<sp/>roue<sp/>droite<sp/>[-255,255]</highlight></codeline>
+<codeline lineno="112"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="113" refid="control_8h_1af42eb2c4f9bb043f1a737c7febf61a79" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1af42eb2c4f9bb043f1a737c7febf61a79" kindref="member">angleControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="motor_control_8cpp_1a203ce29386c4f7c3325d3ff50e480bd1" kindref="member">value_pwm_left</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="motor_control_8cpp_1a1a69d9c8c21a8a9e4f0ceafedf281523" kindref="member">value_pwm_right</ref>){</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(!initDone){</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" kindref="member">currentEcart</ref><sp/>=<sp/>.0;</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1ae71c194c42d358697d188b0113a7a549" kindref="member">consigne</ref><sp/>=<sp/>.0;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AngleControl.Reset();</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AngleControl.SetInputLimits(-M_PI,M_PI);<sp/></highlight><highlight class="comment">//<sp/>&lt;-<sp/>le<sp/>problème<sp/>venait<sp/>de<sp/>là</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AngleControl.SetOutputLimits(-255,255);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AngleControl.SetSampleTime(2);<sp/></highlight><highlight class="comment">//2ms,<sp/>tout<sp/>ce<sp/>qu&apos;il<sp/>faut<sp/>c&apos;est<sp/>que<sp/>l&apos;observateur<sp/>soit<sp/>plus<sp/>rapide<sp/>que<sp/>le<sp/>PID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AngleControl.SetMode(<ref refid="_p_i_d___beta6_8h_1a0cc6f7717df9fbdc0f33efb88720a639" kindref="member">AUTO</ref>);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*l&apos;angle<sp/>consigne<sp/>doit<sp/>etre<sp/>comprise<sp/>entre<sp/>]-PI,<sp/>PI]</highlight></codeline>
+<codeline lineno="130"><highlight class="comment"></highlight></codeline>
+<codeline lineno="131"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>En<sp/>fait<sp/>pour<sp/>simplifier,<sp/>l&apos;entree<sp/>du<sp/>PID<sp/>sera<sp/>l&apos;ecart<sp/>entre<sp/>le<sp/>l&apos;angle<sp/>courant<sp/>et<sp/>l&apos;angle<sp/>cible<sp/>(consigne<sp/>-<sp/>angle<sp/>courant)</highlight></codeline>
+<codeline lineno="132"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>la<sp/>consigne<sp/>(SetPoint)<sp/>du<sp/>PID<sp/>sera<sp/>0</highlight></codeline>
+<codeline lineno="133"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>la<sp/>sortie<sp/>du<sp/>PID<sp/>sera<sp/>le<sp/>double<sp/>pwm</highlight></codeline>
+<codeline lineno="134"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" kindref="member">currentEcart</ref><sp/>=<sp/>-current_goal.<ref refid="struct_current_goal_1aa3f39d39acbff67e93d36d1a96ca7ee4" kindref="member">angle</ref><sp/>+<sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" kindref="member">angle</ref>;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(<ref refid="control_8cpp_1a26660c5918ab6004c26c398f4bf2cb5c" kindref="member">currentEcart</ref>)<sp/>&lt;<sp/>M_PI/180)<sp/></highlight><highlight class="comment">/*si<sp/>l&apos;erreur<sp/>est<sp/>inferieur<sp/>a<sp/>1deg,<sp/>on<sp/>concidere<sp/>la<sp/>consigne<sp/>atteinte*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1a3bc60c00ac0493cc2a60b3aeadfe3c2d" kindref="member">PHASE_1</ref>;</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AngleControl.Compute();</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>){</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_right)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_left)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_right)<sp/>=<sp/><ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>;</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_left)<sp/>=<sp/>-<ref refid="control_8cpp_1aac43907b5e3333321612b5a041246c93" kindref="member">pwm</ref>;</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref><sp/>&amp;&amp;<sp/><ref refid="fifo_8cpp_1a062277d8a4aeff8460a9e7af760f79a3" kindref="member">fifoIsEmpty</ref>()){</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" kindref="member">isReached</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Asservissement<sp/>en<sp/>position</highlight></codeline>
+<codeline lineno="161"><highlight class="comment"><sp/>*<sp/>Se<sp/>base<sp/>sur<sp/>un<sp/>representation<sp/>alpha-delta<sp/>(polaire<sp/>en<sp/>quelquesorte)<sp/>de<sp/>l&apos;ecart<sp/>avec<sp/>la<sp/>position<sp/>desiree</highlight></codeline>
+<codeline lineno="162"><highlight class="comment"><sp/>*<sp/>Alpha<sp/>represente<sp/>l&apos;ecart<sp/>de<sp/>l&apos;angle<sp/>(rho<sp/>en<sp/>polaire)</highlight></codeline>
+<codeline lineno="163"><highlight class="comment"><sp/>*<sp/>Delta<sp/>represente<sp/>l&apos;ecart<sp/>de<sp/>distance<sp/>(r<sp/>en<sp/>polaire)</highlight></codeline>
+<codeline lineno="164"><highlight class="comment"><sp/>*<sp/>L&apos;idee<sp/>est<sp/>donc<sp/>de<sp/>separer<sp/>la<sp/>pwm<sp/>resultante<sp/>en<sp/>2<sp/>composantes<sp/>:</highlight></codeline>
+<codeline lineno="165"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-la<sp/>vitesse<sp/>de<sp/>rotation<sp/>pour<sp/>reduire<sp/>l&apos;ecart<sp/>alpha</highlight></codeline>
+<codeline lineno="166"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>-la<sp/>vitesse<sp/>lineaire<sp/>pour<sp/>reduire<sp/>l&apos;ecart<sp/>delta</highlight></codeline>
+<codeline lineno="167"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168" refid="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" kindref="member">output4Delta</ref>,<sp/><ref refid="control_8cpp_1a831311fb4dc9f6428391f313ba15636b" kindref="member">output4Alpha</ref>;</highlight></codeline>
+<codeline lineno="169" refid="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" kindref="member">currentDelta</ref>,<sp/><ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref>;</highlight></codeline>
+<codeline lineno="170" refid="control_8cpp_1a5a88d0dbd5f5eee3ac2e5c83fc298b4b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1a5a88d0dbd5f5eee3ac2e5c83fc298b4b" kindref="member">consigneDelta</ref>,<sp/><ref refid="control_8cpp_1a045e0294ed6109839f6e23d61acd0c62" kindref="member">consigneAlpha</ref>;</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><ref refid="class_p_i_d" kindref="compound">PID</ref><sp/>pid4DeltaControl(&amp;<ref refid="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" kindref="member">currentDelta</ref>,&amp;<ref refid="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" kindref="member">output4Delta</ref>,&amp;<ref refid="control_8cpp_1a5a88d0dbd5f5eee3ac2e5c83fc298b4b" kindref="member">consigneDelta</ref>,<ref refid="build_2parameters_8h_1a8789471b40aa84a835db77899b0055f1" kindref="member">KP_DELTA</ref>,<ref refid="build_2parameters_8h_1a1606960197cabafe82092bb427d87fb6" kindref="member">KI_DELTA</ref>,<ref refid="build_2parameters_8h_1a11d4da6d334e5ee973452d9c78e82b8c" kindref="member">KD_DELTA</ref>);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><ref refid="class_p_i_d" kindref="compound">PID</ref><sp/>pid4AlphaControl(&amp;<ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref>,&amp;<ref refid="control_8cpp_1a831311fb4dc9f6428391f313ba15636b" kindref="member">output4Alpha</ref>,&amp;<ref refid="control_8cpp_1a045e0294ed6109839f6e23d61acd0c62" kindref="member">consigneAlpha</ref>,<ref refid="build_2parameters_8h_1afee02e6132492609bc0c823668330600" kindref="member">KP_ALPHA</ref>,<ref refid="build_2parameters_8h_1a3ef8b43aedffdbabf04ad9aaca642fa8" kindref="member">KI_ALPHA</ref>,<ref refid="build_2parameters_8h_1a0472dd147f50d9b9810a602b90c7dea6" kindref="member">KD_ALPHA</ref>);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Calcule<sp/>les<sp/>pwm<sp/>a<sp/>appliquer<sp/>pour<sp/>un<sp/>asservissement<sp/>en<sp/>position</highlight></codeline>
+<codeline lineno="175"><highlight class="comment"><sp/>*<sp/>&lt;&gt;<sp/>value_pwm_left<sp/>:<sp/>la<sp/>pwm<sp/>a<sp/>appliquer<sp/>sur<sp/>la<sp/>roue<sp/>gauche<sp/>[-255,255]</highlight></codeline>
+<codeline lineno="176"><highlight class="comment"><sp/>*<sp/>&lt;&gt;<sp/>value_pwm_right<sp/>:<sp/>la<sp/>pwm<sp/>a<sp/>appliquer<sp/>sur<sp/>la<sp/>roue<sp/>droite<sp/>[-255,255]</highlight></codeline>
+<codeline lineno="177"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178" refid="control_8h_1afa3541cbb488d296f15002a42a3200d7" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1afa3541cbb488d296f15002a42a3200d7" kindref="member">positionControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="motor_control_8cpp_1a203ce29386c4f7c3325d3ff50e480bd1" kindref="member">value_pwm_left</ref>,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*<sp/><ref refid="motor_control_8cpp_1a1a69d9c8c21a8a9e4f0ceafedf281523" kindref="member">value_pwm_right</ref>){</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(!initDone){</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" kindref="member">output4Delta</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a831311fb4dc9f6428391f313ba15636b" kindref="member">output4Alpha</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" kindref="member">currentDelta</ref><sp/>=<sp/>.0;</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref><sp/>=<sp/>.0;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a5a88d0dbd5f5eee3ac2e5c83fc298b4b" kindref="member">consigneDelta</ref><sp/>=<sp/>.0;</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a045e0294ed6109839f6e23d61acd0c62" kindref="member">consigneAlpha</ref><sp/>=<sp/>.0;</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4DeltaControl.Reset();</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4DeltaControl.SetInputLimits(-<ref refid="build_2parameters_8h_1aba440c3d164a691aa67bf8f7222b5a9c" kindref="member">TABLE_DISTANCE_MAX_MM</ref>/<ref refid="build_2parameters_8h_1ae2138972a8d0eacd1e3e5eaafa75e997" kindref="member">ENC_TICKS_TO_MM</ref>,<ref refid="build_2parameters_8h_1aba440c3d164a691aa67bf8f7222b5a9c" kindref="member">TABLE_DISTANCE_MAX_MM</ref>/<ref refid="build_2parameters_8h_1ae2138972a8d0eacd1e3e5eaafa75e997" kindref="member">ENC_TICKS_TO_MM</ref>);</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4DeltaControl.SetSampleTime(2);</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4DeltaControl.SetOutputLimits(-current_goal.<ref refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" kindref="member">speed</ref>,current_goal.<ref refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" kindref="member">speed</ref>);<sp/></highlight><highlight class="comment">/*composante<sp/>liée<sp/>à<sp/>la<sp/>vitesse<sp/>lineaire*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4DeltaControl.SetMode(<ref refid="_p_i_d___beta6_8h_1a0cc6f7717df9fbdc0f33efb88720a639" kindref="member">AUTO</ref>);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AlphaControl.Reset();</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AlphaControl.SetSampleTime(2);</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AlphaControl.SetInputLimits(-M_PI,M_PI);</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AlphaControl.SetOutputLimits(-200,200);<sp/></highlight><highlight class="comment">/*composante<sp/>liée<sp/>à<sp/>la<sp/>vitesse<sp/>de<sp/>rotation*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AlphaControl.SetMode(<ref refid="_p_i_d___beta6_8h_1a0cc6f7717df9fbdc0f33efb88720a639" kindref="member">AUTO</ref>);</highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*calcul<sp/>de<sp/>l&apos;angle<sp/>alpha<sp/>a<sp/>combler<sp/>avant<sp/>d&apos;etre<sp/>aligne<sp/>avec<sp/>le<sp/>point<sp/>cible</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>borne<sp/>=<sp/>[-PI<sp/>PI]<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>angularCoeff<sp/>=<sp/>atan2(current_goal.<ref refid="struct_current_goal_1a286f9ecda5511dca05030186fa0c3c7c" kindref="member">y</ref>-<ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ac96a8e033454034c95745aee1811ffc2" kindref="member">y</ref>,current_goal.<ref refid="struct_current_goal_1a3c29420a39256dd332de3ccda9947d25" kindref="member">x</ref>-<ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a7ca6f4e88ac7982242ab32cf5fba15e6" kindref="member">x</ref>);<sp/></highlight><highlight class="comment">/*arctan(y/x)<sp/>-&gt;<sp/>[-PI,PI]*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref><sp/>=<sp/>angularCoeff<sp/>-<sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" kindref="member">angle</ref>;</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>En<sp/>fait,<sp/>le<sp/>sens<sp/>est<sp/>donne<sp/>par<sp/>l&apos;ecart<sp/>entre<sp/>le<sp/>coeff<sp/>angulaire<sp/>et<sp/>l&apos;angle<sp/>courant<sp/>du<sp/>robot.</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Si<sp/>cet<sp/>angle<sp/>est<sp/>inferieur<sp/>a<sp/>PI/2<sp/>en<sp/>valeur<sp/>absolue,<sp/>le<sp/>robot<sp/>avance<sp/>en<sp/>marche<sp/>avant<sp/>(il<sp/>avance<sp/>quoi)</highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>Si<sp/>cet<sp/>angle<sp/>est<sp/>superieur<sp/>a<sp/>PI/2<sp/>en<sp/>valeur<sp/>absolue,<sp/>le<sp/>robot<sp/>recule<sp/>en<sp/>marche<sp/>arriere<sp/>(=<sp/>il<sp/>recule)</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>sens<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(<ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref>)<sp/>&gt;<sp/>M_PI/2){</highlight><highlight class="comment">/*<sp/>c&apos;est<sp/>à<sp/>dire<sp/>qu&apos;on<sp/>a<sp/>meilleur<sp/>temps<sp/>de<sp/>partir<sp/>en<sp/>marche<sp/>arriere<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>sens<sp/>=<sp/>-1;</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref><sp/>=<sp/>M_PI<sp/>-<sp/>angularCoeff<sp/>-<sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" kindref="member">angle</ref>;</highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref><sp/>=<sp/>-<ref refid="control_8cpp_1adc80a7620de231808dfc22d4f72428bc" kindref="member">currentAlpha</ref>;</highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/>current_goal.<ref refid="struct_current_goal_1a3c29420a39256dd332de3ccda9947d25" kindref="member">x</ref>-<ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a7ca6f4e88ac7982242ab32cf5fba15e6" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/>current_goal.<ref refid="struct_current_goal_1a286f9ecda5511dca05030186fa0c3c7c" kindref="member">y</ref>-<ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ac96a8e033454034c95745aee1811ffc2" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" kindref="member">currentDelta</ref><sp/>=<sp/>-sens<sp/>*<sp/>sqrt(dx*dx+dy*dy);<sp/></highlight><highlight class="comment">//<sp/>-<sp/>parce<sp/>que<sp/>le<sp/>robot<sp/>part<sp/>à<sp/>l&apos;envers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*Serial.print(&quot;ad&quot;);</highlight></codeline>
+<codeline lineno="225"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serial.print(currentAlpha);</highlight></codeline>
+<codeline lineno="226"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serial.println(currentDelta);*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(<ref refid="control_8cpp_1a37ff0058b42146b37230fcb24a983eb9" kindref="member">currentDelta</ref>)<sp/>&lt;<sp/>36)<sp/></highlight><highlight class="comment">/*si<sp/>l&apos;ecart<sp/>n&apos;est<sp/>plus<sp/>que<sp/>de<sp/>36<sp/>ticks<sp/>(environ<sp/>1mm),<sp/>on<sp/>considere<sp/>la<sp/>consigne<sp/>comme<sp/>atteinte*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>=<sp/><ref refid="build_2control_8h_1a3bc60c00ac0493cc2a60b3aeadfe3c2d" kindref="member">PHASE_1</ref>;</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4AlphaControl.Compute();</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pid4DeltaControl.Compute();</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>){</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_right)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_left)<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_right)<sp/>=<sp/><ref refid="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" kindref="member">output4Delta</ref>+<ref refid="control_8cpp_1a831311fb4dc9f6428391f313ba15636b" kindref="member">output4Alpha</ref>;</highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(*value_pwm_left)<sp/>=<sp/><ref refid="control_8cpp_1af9082541f89a515fe72991d6e0440ac8" kindref="member">output4Delta</ref>-output4Alpha;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*condition<sp/>d&apos;arret<sp/>=<sp/>si<sp/>on<sp/>a<sp/>atteint<sp/>le<sp/>but<sp/>et<sp/>qu&apos;un<sp/>nouveau<sp/>but<sp/>attends<sp/>dans<sp/>la<sp/>fifo*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(current_goal.<ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref><sp/>==<sp/><ref refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" kindref="member">PHASE_2</ref>){</highlight><highlight class="comment">//<sp/>&amp;&amp;<sp/>fifoIsEmpty()){</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>current_goal.<ref refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" kindref="member">isReached</ref><sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>initDone<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Implementation<sp/>du<sp/>modele<sp/>d&apos;evolution<sp/>du<sp/>robot<sp/>a<sp/>partir<sp/>de<sp/>l&apos;odometrie</highlight></codeline>
+<codeline lineno="255"><highlight class="comment"><sp/>*<sp/>A<sp/>appeler<sp/>a<sp/>intervalle<sp/>regulier<sp/>(a<sp/>voir<sp/>pour<sp/>la<sp/>mettre<sp/>sur<sp/>une<sp/>interruption<sp/>timer)</highlight></codeline>
+<codeline lineno="256"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257" refid="control_8h_1a14205b503643eae869c101e5f77b42fa" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a14205b503643eae869c101e5f77b42fa" kindref="member">computeRobotState</ref>(){</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>prev_value_left_enc<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>prev_value_right_enc<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*calcul<sp/>du<sp/>deplacement<sp/>depuis<sp/>la<sp/>dernière<sp/>fois<sp/>en<sp/>ticks<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>dl<sp/>=<sp/><ref refid="build_2encoder_8h_1a87d24e1c1ff1ab86858db9924dec06b0" kindref="member">value_left_enc</ref><sp/>-<sp/>prev_value_left_enc;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>dr<sp/>=<sp/><ref refid="build_2encoder_8h_1aa158bba4e00b1e650622b9098f86262c" kindref="member">value_right_enc</ref><sp/>-<sp/>prev_value_right_enc;</highlight></codeline>
+<codeline lineno="264"><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*préparation<sp/>de<sp/>la<sp/>prochaine<sp/>itération*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>prev_value_left_enc<sp/>=<sp/><ref refid="build_2encoder_8h_1a87d24e1c1ff1ab86858db9924dec06b0" kindref="member">value_left_enc</ref>;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>prev_value_right_enc<sp/>=<sp/><ref refid="build_2encoder_8h_1aa158bba4e00b1e650622b9098f86262c" kindref="member">value_right_enc</ref>;</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*ce<sp/>déplacement<sp/>a<sp/>été<sp/>réalisé<sp/>en<sp/>un<sp/>temps<sp/>DUREE_CYCLE<sp/>-&gt;<sp/>calcul<sp/>de<sp/>la<sp/>vitesse<sp/>en<sp/>ticks/ms<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>speed_left<sp/>=<sp/>(double)dl/(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)<ref refid="build_2parameters_8h_1ae70dc04027632d2fbb40c96d3a92147a" kindref="member">DUREE_CYCLE</ref>;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>speed_right<sp/>=<sp/>(double)dr/(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)<ref refid="build_2parameters_8h_1ae70dc04027632d2fbb40c96d3a92147a" kindref="member">DUREE_CYCLE</ref>;</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>speed<sp/>=<sp/>(speed_left+speed_right)/2.0;<sp/></highlight><highlight class="comment">/*estimation<sp/>:<sp/>simple<sp/>moyenne*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>mise<sp/>a<sp/>jour<sp/>de<sp/>l&apos;orientation<sp/>en<sp/>rad<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>delta_angle<sp/>=<sp/>(double)(dr-dl)*(double)<ref refid="build_2parameters_8h_1ae2138972a8d0eacd1e3e5eaafa75e997" kindref="member">ENC_TICKS_TO_MM</ref>/(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">)<ref refid="build_2parameters_8h_1a2727f915a2e82b5f6a72dc2ac349b93c" kindref="member">ENC_CENTER_DIST</ref>;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Angle<sp/>du<sp/>robot<sp/>par<sp/>rapport<sp/>à<sp/>l&apos;axe<sp/>X</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>angle<sp/>=<sp/><ref refid="control_8cpp_1a617d3541eee6a91418272048740f582e" kindref="member">moduloPI</ref>(<ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" kindref="member">angle</ref><sp/>+<sp/>delta_angle);<sp/></highlight><highlight class="comment">/*Attention<sp/>au<sp/>modulo<sp/>PI<sp/>(oui<sp/>ca<sp/>change<sp/>tous<sp/>les<sp/>jours)*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*<sp/>mise<sp/>a<sp/>jour<sp/>de<sp/>la<sp/>position<sp/>en<sp/>ticks</highlight></codeline>
+<codeline lineno="281"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>on<sp/>utilise<sp/>des<sp/>cos<sp/>et<sp/>des<sp/>sin<sp/>et<sp/>c&apos;est<sp/>pas<sp/>très<sp/>opti.</highlight></codeline>
+<codeline lineno="282"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*<sp/>A<sp/>voir<sp/>si<sp/>l&apos;approximation<sp/>par<sp/>un<sp/>dev<sp/>limité<sp/>d&apos;ordre<sp/>2<sp/>est<sp/>plus<sp/>efficace</highlight></codeline>
+<codeline lineno="283"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dx<sp/>=<sp/>speed*<ref refid="build_2parameters_8h_1ae70dc04027632d2fbb40c96d3a92147a" kindref="member">DUREE_CYCLE</ref>*cos(angle);</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dy<sp/>=<sp/>speed*<ref refid="build_2parameters_8h_1ae70dc04027632d2fbb40c96d3a92147a" kindref="member">DUREE_CYCLE</ref>*sin(angle);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">/*mise<sp/>a<sp/>jour<sp/>de<sp/>l&apos;état<sp/>du<sp/>robot<sp/><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" kindref="member">speed</ref><sp/>=<sp/>speed;</highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a2a1c1785dcde22c18396aaad1ab6e608" kindref="member">speed_left</ref><sp/>=<sp/>speed_left;</highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a28932ded61842c77697853499bc2d046" kindref="member">speed_right</ref><sp/>=<sp/>speed_right;</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" kindref="member">angle</ref><sp/>=<sp/>angle;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1a7ca6f4e88ac7982242ab32cf5fba15e6" kindref="member">x</ref><sp/>+=<sp/>dx;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="build_2robotstate_8h_1a4066fe2253fb9e9d6b4b5d6b3b5acea6" kindref="member">robot_state</ref>.<ref refid="struct_robot_state_1ac96a8e033454034c95745aee1811ffc2" kindref="member">y</ref><sp/>+=<sp/>dy;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Fonction<sp/>de<sp/>calcul<sp/>du<sp/>modulo<sp/>PI</highlight></codeline>
+<codeline lineno="299"><highlight class="comment"><sp/>*<sp/>moduloPi(<sp/>3*PI/2<sp/>)=<sp/>-<sp/>PI/2</highlight></codeline>
+<codeline lineno="300"><highlight class="comment"><sp/>*<sp/>moduloPi(<sp/>PI<sp/>)<sp/>=<sp/>PI</highlight></codeline>
+<codeline lineno="301"><highlight class="comment"><sp/>*<sp/>moduloPi(<sp/>0<sp/>)<sp/>=<sp/>0</highlight></codeline>
+<codeline lineno="302"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303" refid="control_8cpp_1a617d3541eee6a91418272048740f582e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="control_8cpp_1a617d3541eee6a91418272048740f582e" kindref="member">moduloPI</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>Nb){</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="namespacetimer_1a9b3240e5583e9ce751f9187b250cd5a9" kindref="member">result</ref>;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Nb<sp/>&gt;<sp/>M_PI)</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/>Nb<sp/>-<sp/>(2*M_PI)*trunc((Nb<sp/>+<sp/>M_PI)<sp/>/<sp/>(2*M_PI));</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Nb<sp/>&lt;=<sp/>-M_PI)</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>result<sp/>=<sp/>Nb<sp/>-<sp/>(2*M_PI)*trunc((Nb<sp/>-<sp/>M_PI)<sp/>/<sp/>(2*M_PI));</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/>result<sp/>=<sp/>Nb;</highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">(result);</highlight></codeline>
+<codeline lineno="311"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp"/>
+  </compounddef>
+</doxygen>

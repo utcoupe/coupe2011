@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_joint_config" kind="struct" prot="public">
+    <compoundname>JointConfig</compoundname>
+    <includes refid="config_8h" local="no">config.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1a6c122052434f8d43d1478998d8aa07ff" kindref="member">sInt8</ref></type>
+        <definition>sInt8 JointConfig::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="41" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1a23d1828957ef9a6b862510999275687a" prot="public" static="no" mutable="no">
+        <type>struct JointConfig::@0</type>
+        <definition>struct JointConfig::@0  JointConfig::sensors</definition>
+        <argsstring></argsstring>
+        <name>sensors</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="42"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1af6d824d71a1cf988650d0277f3039e9c" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 JointConfig::motorPosition</definition>
+        <argsstring></argsstring>
+        <name>motorPosition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="45" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1a6884aa6bfe2b9d21f058817463dd7096" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 JointConfig::InvertControlDirection</definition>
+        <argsstring></argsstring>
+        <name>InvertControlDirection</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1aa555101ee7f4380f480db7ae71b818bd" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float JointConfig::reductionRateMotor</definition>
+        <argsstring></argsstring>
+        <name>reductionRateMotor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="47" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1a19be44a8da122af386c71da9a7c1747d" prot="public" static="no" mutable="no">
+        <type>struct JointConfig::@1</type>
+        <definition>struct JointConfig::@1  JointConfig::motor</definition>
+        <argsstring></argsstring>
+        <name>motor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="48"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1a4d7415b22cceeee30abb3c6023b58f11" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 JointConfig::position</definition>
+        <argsstring></argsstring>
+        <name>position</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="50" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1a11ed95f40a458dd539ddfebc75959b24" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 JointConfig::lastPosition</definition>
+        <argsstring></argsstring>
+        <name>lastPosition</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="51" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_joint_config_1a1a76e093b95a477700e2fd7a0721ae9f" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 JointConfig::speed</definition>
+        <argsstring></argsstring>
+        <name>speed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="52" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Joint configuration Sensor anc actuator Separate struct because there is 2 of them ... </para>    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="37" bodyend="54"/>
+    <listofallmembers>
+      <member refid="struct_joint_config_1a6884aa6bfe2b9d21f058817463dd7096" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>InvertControlDirection</name></member>
+      <member refid="struct_joint_config_1a11ed95f40a458dd539ddfebc75959b24" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>lastPosition</name></member>
+      <member refid="struct_joint_config_1a19be44a8da122af386c71da9a7c1747d" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>motor</name></member>
+      <member refid="struct_joint_config_1af6d824d71a1cf988650d0277f3039e9c" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>motorPosition</name></member>
+      <member refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>position</name></member>
+      <member refid="struct_joint_config_1a4d7415b22cceeee30abb3c6023b58f11" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>position</name></member>
+      <member refid="struct_joint_config_1aa555101ee7f4380f480db7ae71b818bd" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>reductionRateMotor</name></member>
+      <member refid="struct_joint_config_1a23d1828957ef9a6b862510999275687a" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>sensors</name></member>
+      <member refid="struct_joint_config_1a1a76e093b95a477700e2fd7a0721ae9f" prot="public" virt="non-virtual"><scope>JointConfig</scope><name>speed</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

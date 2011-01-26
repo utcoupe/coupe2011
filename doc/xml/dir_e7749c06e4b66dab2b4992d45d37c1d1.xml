@@ -1,0 +1,13 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_e7749c06e4b66dab2b4992d45d37c1d1" kind="dir">
+    <compoundname>pinceControl/adafruit/</compoundname>
+    <innerfile refid="pince_control_2adafruit_2_a_f_motor_8cpp">AFMotor.cpp</innerfile>
+    <innerfile refid="pince_control_2adafruit_2_a_f_motor_8h">AFMotor.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/"/>
+  </compounddef>
+</doxygen>

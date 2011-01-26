@@ -1,0 +1,14 @@
+<map id="G" name="G">
+<area shape="rect" href="$d9/dc5/asserv_8c.html" title="asserv2010/asserv.c" alt="" coords="532,83,673,112"/>
+<area shape="rect" href="$d0/dcf/asserv_distance_8c.html" title="asserv2010/asservDistance.c" alt="" coords="5,160,197,189"/>
+<area shape="rect" href="$d9/d7d/asserv_orientation_8c.html" title="asserv2010/asservOrientation.c" alt="" coords="221,160,427,189"/>
+<area shape="rect" href="$dd/d9c/asserv_orientation_8h.html" title="asserv2010/asservOrientation.h" alt="" coords="1025,83,1231,112"/>
+<area shape="rect" href="$dc/d03/speed_asserv_8c.html" title="asserv2010/speedAsserv.c" alt="" coords="1493,160,1672,189"/>
+<area shape="rect" href="$d2/d94/trajectory_8c.html" title="asserv2010/trajectory.c" alt="" coords="1312,160,1469,189"/>
+<area shape="rect" href="$db/d16/config_8h.html" title="asserv2010/config.h" alt="" coords="823,83,961,112"/>
+<area shape="rect" href="$d3/d95/config_8c.html" title="asserv2010/config.c" alt="" coords="803,160,941,189"/>
+<area shape="rect" href="$d9/dcb/i2c_8c.html" title="asserv2010/i2c.c" alt="" coords="965,160,1085,189"/>
+<area shape="rect" href="$d1/d1f/_main_8c.html" title="asserv2010/Main.c" alt="" coords="1133,160,1264,189"/>
+<area shape="rect" href="$db/db1/position_8c.html" title="asserv2010/position.c" alt="" coords="632,160,779,189"/>
+<area shape="rect" href="$d7/d0d/_p_w_m_8c.html" title="asserv2010/PWM.c" alt="" coords="451,160,584,189"/>
+</map>

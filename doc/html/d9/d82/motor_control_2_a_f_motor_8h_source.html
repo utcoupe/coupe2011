@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de motorControl/AFMotor.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>motorControl/AFMotor.h</h1><a href="../../d9/d82/motor_control_2_a_f_motor_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Adafruit Motor shield library</span>
+<a name="l00002"></a>00002 <span class="comment">// copyright Adafruit Industries LLC, 2009</span>
+<a name="l00003"></a>00003 <span class="comment">// this code is public domain, enjoy!</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#ifndef _AFMotor_h_</span>
+<a name="l00006"></a>00006 <span class="preprocessor"></span><span class="preprocessor">#define _AFMotor_h_</span>
+<a name="l00007"></a>00007 <span class="preprocessor"></span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &lt;inttypes.h&gt;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;avr/io.h&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 
+<a name="l00012"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#abd639f43f6c3b97a35e93aa2839877b0">00012</a> <span class="preprocessor">#define MOTOR12_64KHZ _BV(CS20)  // no prescale</span>
+<a name="l00013"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a25da17ead327d0d7506d08141aa4bd23">00013</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR12_8KHZ _BV(CS21)   // divide by 8</span>
+<a name="l00014"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#adc02102ff568a44bf2dfdd680157f25a">00014</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR12_2KHZ _BV(CS21) | _BV(CS20) // divide by 32</span>
+<a name="l00015"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a4790d8e2237e091c734111ec06e9ba8b">00015</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR12_1KHZ _BV(CS22)  // divide by 64</span>
+<a name="l00016"></a>00016 <span class="preprocessor"></span>
+<a name="l00017"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a81e59bddb13c0a7898a9eb4cdd811bc7">00017</a> <span class="preprocessor">#define MOTOR1_DIR 12</span>
+<a name="l00018"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a2967bf5c2085f6433131c100608edd61">00018</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR2_DIR 13</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00020"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#acf59cc2c2015737f006876736aa67a52">00020</a> <span class="preprocessor">#define MOTOR1_A 2</span>
+<a name="l00021"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a910ad8b79b5f2ccd1024d8d46d18db59">00021</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR1_B 3</span>
+<a name="l00022"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a10d9dc2baccb61a1ff9ec726e6d8925f">00022</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR2_A 1</span>
+<a name="l00023"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a96c25b04428137f29a841f7109a924df">00023</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR2_B 4</span>
+<a name="l00024"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a06e738bd22322fd754315610e45de0b9">00024</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR4_A 0</span>
+<a name="l00025"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a433140d781f341e8d4042c2a9dffeaf1">00025</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR4_B 6</span>
+<a name="l00026"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a52212efbb8d325595f04d94f79f86017">00026</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR3_A 5</span>
+<a name="l00027"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a13043ae90f94a51906e6d8b50f870ed1">00027</a> <span class="preprocessor"></span><span class="preprocessor">#define MOTOR3_B 7</span>
+<a name="l00028"></a>00028 <span class="preprocessor"></span>
+<a name="l00029"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a6ddfdda7a062d10cff4a72b76b44aeb8">00029</a> <span class="preprocessor">#define FORWARD 1</span>
+<a name="l00030"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#adf445abfe1b77fa63f89e315ccc2f7f2">00030</a> <span class="preprocessor"></span><span class="preprocessor">#define BACKWARD 2</span>
+<a name="l00031"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#af78f6af13b9c032bf9d48ef40aa7e683">00031</a> <span class="preprocessor"></span><span class="preprocessor">#define BRAKE 3</span>
+<a name="l00032"></a><a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a5bd9a30fc22d9a737ee060d41a4ec479">00032</a> <span class="preprocessor"></span><span class="preprocessor">#define RELEASE 4</span>
+<a name="l00033"></a>00033 <span class="preprocessor"></span>
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="../../d2/d78/class_a_f___d_c_motor.html">00035</a> <span class="keyword">class </span><a class="code" href="../../d2/d78/class_a_f___d_c_motor.html">AF_DCMotor</a>
+<a name="l00036"></a>00036 {
+<a name="l00037"></a>00037  <span class="keyword">public</span>:
+<a name="l00038"></a>00038   <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#a66c3fff3c1a530bac1ec1f545e016857">AF_DCMotor</a>(uint8_t motornum, uint8_t freq =  <a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a25da17ead327d0d7506d08141aa4bd23">MOTOR12_8KHZ</a>);
+<a name="l00039"></a>00039   <span class="keywordtype">void</span> <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#aadb632824a197a86a8264b337c3c3110">run</a>(uint8_t);
+<a name="l00040"></a>00040   <span class="keywordtype">void</span> <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#a655aa89c20d3391809d3616914ce6532">setSpeed</a>(uint8_t);
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042  <span class="keyword">private</span>:
+<a name="l00043"></a>00043   uint8_t motornum, pwmfreq;
+<a name="l00044"></a>00044 };
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046 <span class="preprocessor">#endif</span>
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

@@ -1,0 +1,303 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_display_routines_8c" kind="file">
+    <compoundname>DisplayRoutines.c</compoundname>
+    <includes local="no">p30fxxxx.h</includes>
+    <includes local="yes">system.h</includes>
+    <includes refid="_display_routines_8c" local="yes">display_routines.h</includes>
+    <includedby refid="_display_routines_8c" local="yes">asserv2010/DisplayRoutines.c</includedby>
+    <incdepgraph>
+      <node id="1173">
+        <label>asserv2010/DisplayRoutines.c</label>
+        <link refid="DisplayRoutines.c"/>
+        <childnode refid="1174" relation="include">
+        </childnode>
+        <childnode refid="1175" relation="include">
+        </childnode>
+        <childnode refid="1173" relation="include">
+        </childnode>
+      </node>
+      <node id="1174">
+        <label>p30fxxxx.h</label>
+      </node>
+      <node id="1175">
+        <label>system.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1176">
+        <label>asserv2010/DisplayRoutines.c</label>
+        <link refid="DisplayRoutines.c"/>
+        <childnode refid="1176" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_display_routines_8c_1a887a496a7bba012e985b0d9ce1fc3fa1" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int TempSensor</definition>
+        <argsstring></argsstring>
+        <name>TempSensor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/A_to_D_Converter.c" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_display_routines_8c_1a55a1549e0efaab525b3500dc1c5b5e57" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Potentiometer</definition>
+        <argsstring></argsstring>
+        <name>Potentiometer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="40" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/A_to_D_Converter.c" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char DisplayData[]</definition>
+        <argsstring>[]</argsstring>
+        <name>DisplayData</name>
+        <initializer> &quot;dsPICDEM2  Board\r\nT=+00C Pot=0.00v\r\n\r\n\0&quot;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="44" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char adones</definition>
+        <argsstring></argsstring>
+        <name>adones</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="45" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char adtenths</definition>
+        <argsstring></argsstring>
+        <name>adtenths</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char adhundredths</definition>
+        <argsstring></argsstring>
+        <name>adhundredths</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="47" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_display_routines_8c_1a60a9582b6acb2f5a37011c9bd54fafdd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UpdateDisplayBuffer</definition>
+        <argsstring>(void)</argsstring>
+        <name>UpdateDisplayBuffer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" bodystart="53" bodyend="77"/>
+      </memberdef>
+      <memberdef kind="function" id="_display_routines_8c_1a237d3abfee1f13f142659c3367f6e472" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ADCResult2Decimal</definition>
+        <argsstring>(unsigned int ADRES)</argsstring>
+        <name>ADCResult2Decimal</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>ADRES</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" line="83" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c" bodystart="82" bodyend="137"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment">;<sp/>©<sp/>2005<sp/><sp/>Microchip<sp/>Technology<sp/>Inc.</highlight></codeline>
+<codeline lineno="3"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="4"><highlight class="comment">;<sp/>Microchip<sp/>Technology<sp/>Inc.<sp/>(“Microchip”)<sp/>licenses<sp/>this<sp/>software<sp/>to<sp/>you</highlight></codeline>
+<codeline lineno="5"><highlight class="comment">;<sp/>solely<sp/>for<sp/>use<sp/>with<sp/>Microchip<sp/>dsPIC®<sp/>digital<sp/>signal<sp/>controller</highlight></codeline>
+<codeline lineno="6"><highlight class="comment">;<sp/>products.<sp/><sp/>The<sp/>software<sp/>is<sp/>owned<sp/>by<sp/>Microchip<sp/>and<sp/>is<sp/>protected<sp/>under</highlight></codeline>
+<codeline lineno="7"><highlight class="comment">;<sp/>applicable<sp/>copyright<sp/>laws.<sp/><sp/>All<sp/>rights<sp/>reserved.</highlight></codeline>
+<codeline lineno="8"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="9"><highlight class="comment">;<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>“AS<sp/>IS.”<sp/><sp/>MICROCHIP<sp/>EXPRESSLY<sp/>DISCLAIMS<sp/>ANY</highlight></codeline>
+<codeline lineno="10"><highlight class="comment">;<sp/>WARRANTY<sp/>OF<sp/>ANY<sp/>KIND,<sp/>WHETHER<sp/>EXPRESS<sp/>OR<sp/>IMPLIED,<sp/>INCLUDING<sp/>BUT<sp/>NOT</highlight></codeline>
+<codeline lineno="11"><highlight class="comment">;<sp/>LIMITED<sp/>TO,<sp/>THE<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY,<sp/>FITNESS<sp/>FOR<sp/>A</highlight></codeline>
+<codeline lineno="12"><highlight class="comment">;<sp/>PARTICULAR<sp/>PURPOSE,<sp/>OR<sp/>NON-INFRINGEMENT.<sp/>IN<sp/>NO<sp/>EVENT<sp/>SHALL<sp/>MICROCHIP</highlight></codeline>
+<codeline lineno="13"><highlight class="comment">;<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>ANY<sp/>INCIDENTAL,<sp/>SPECIAL,<sp/>INDIRECT<sp/>OR<sp/>CONSEQUENTIAL</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">;<sp/>DAMAGES,<sp/>LOST<sp/>PROFITS<sp/>OR<sp/>LOST<sp/>DATA,<sp/>HARM<sp/>TO<sp/>YOUR<sp/>EQUIPMENT,<sp/>COST<sp/>OF</highlight></codeline>
+<codeline lineno="15"><highlight class="comment">;<sp/>PROCUREMENT<sp/>OF<sp/>SUBSTITUTE<sp/>GOODS,<sp/>TECHNOLOGY<sp/>OR<sp/>SERVICES,<sp/>ANY<sp/>CLAIMS</highlight></codeline>
+<codeline lineno="16"><highlight class="comment">;<sp/>BY<sp/>THIRD<sp/>PARTIES<sp/>(INCLUDING<sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO<sp/>ANY<sp/>DEFENSE<sp/>THEREOF),</highlight></codeline>
+<codeline lineno="17"><highlight class="comment">;<sp/>ANY<sp/>CLAIMS<sp/>FOR<sp/>INDEMNITY<sp/>OR<sp/>CONTRIBUTION,<sp/>OR<sp/>OTHER<sp/>SIMILAR<sp/>COSTS.</highlight></codeline>
+<codeline lineno="18"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="19"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="20"><highlight class="comment">;FILE<sp/>DESCRIPTION:</highlight></codeline>
+<codeline lineno="21"><highlight class="comment">;<sp/>This<sp/>file<sp/>contains<sp/>a<sp/>routine<sp/>to<sp/>convert<sp/>hexadecimal<sp/>A/D<sp/>conversion</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">;<sp/>results<sp/>into<sp/>decimal.<sp/>This<sp/>file<sp/>also<sp/>contains<sp/>a<sp/>routine<sp/>to<sp/>update</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">;<sp/>the<sp/>image<sp/>of<sp/>the<sp/>LCD<sp/>display<sp/>buffer<sp/>stored<sp/>in<sp/>the<sp/>dsPIC30F<sp/>device</highlight></codeline>
+<codeline lineno="24"><highlight class="comment">;<sp/>RAM.</highlight></codeline>
+<codeline lineno="25"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="26"><highlight class="comment">;REVISION<sp/>HISTORY:</highlight></codeline>
+<codeline lineno="27"><highlight class="comment">;<sp/><sp/>$Log:<sp/>DisplayRoutines.c,v<sp/>$</highlight></codeline>
+<codeline lineno="28"><highlight class="comment">;<sp/><sp/>Revision<sp/>1.1.1.1<sp/><sp/>2005/06/06<sp/>09:16:45<sp/><sp/>VasukiH</highlight></codeline>
+<codeline lineno="29"><highlight class="comment">;<sp/><sp/>First<sp/>release<sp/>of<sp/>software</highlight></codeline>
+<codeline lineno="30"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="31"><highlight class="comment">;</highlight></codeline>
+<codeline lineno="32"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//Pre-Processor<sp/>Directives:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;p30fxxxx.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;system.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="display__routines_8h" kindref="compound">display_routines.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//Declaration<sp/>to<sp/>Link<sp/>External<sp/>Functions<sp/>&amp;<sp/>Variables:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><ref refid="_a__to___d___converter_8c_1a887a496a7bba012e985b0d9ce1fc3fa1" kindref="member">TempSensor</ref>;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><ref refid="_a__to___d___converter_8c_1a55a1549e0efaab525b3500dc1c5b5e57" kindref="member">Potentiometer</ref>;</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//Functions<sp/>and<sp/>Variables<sp/>with<sp/>Global<sp/>Scope:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44" refid="_u_a_r_t_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[]<sp/>=<sp/></highlight><highlight class="stringliteral">&quot;dsPICDEM2<sp/><sp/>Board\r\nT=+00C<sp/>Pot=0.00v\r\n\r\n\0&quot;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="45" refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref>=0;</highlight></codeline>
+<codeline lineno="46" refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref>=0;</highlight></codeline>
+<codeline lineno="47" refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">char</highlight><highlight class="normal"><sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref>=0;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment">//UpdateDisplayBuffer()<sp/>Function:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">//This<sp/>function<sp/>writes<sp/>new<sp/>A/D<sp/>readings<sp/>to<sp/>the<sp/>Display<sp/>Buffer.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment">//The<sp/>display<sp/>buffer<sp/>stores<sp/>a<sp/>string<sp/>to<sp/>be<sp/>displayed<sp/>on<sp/>both<sp/>the<sp/>RS232<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//the<sp/>LCD.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="_display_routines_8c_1a60a9582b6acb2f5a37011c9bd54fafdd" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="display__routines_8h_1a60a9582b6acb2f5a37011c9bd54fafdd" kindref="member">UpdateDisplayBuffer</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>temp<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Convert<sp/>TC1047A<sp/>reading<sp/>to<sp/>Deg</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Celsius</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp<sp/>=<sp/><ref refid="_a__to___d___converter_8c_1a887a496a7bba012e985b0d9ce1fc3fa1" kindref="member">TempSensor</ref><sp/>-<sp/>0x66;<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Determine<sp/>if<sp/>the<sp/>temperature<sp/>is</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(temp<sp/>&gt;<sp/>0)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//negative,<sp/>in<sp/>order<sp/>to<sp/>write</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//either<sp/>a<sp/>+<sp/>or<sp/>-<sp/>sign<sp/>to<sp/>display<sp/>areas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[20]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;+&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp<sp/>=<sp/>0x66<sp/>-<sp/><ref refid="_a__to___d___converter_8c_1a887a496a7bba012e985b0d9ce1fc3fa1" kindref="member">TempSensor</ref>;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[20]<sp/>=<sp/></highlight><highlight class="charliteral">&apos;-&apos;</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="display__routines_8h_1a237d3abfee1f13f142659c3367f6e472" kindref="member">ADCResult2Decimal</ref>(temp);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Convert<sp/>the<sp/>hex<sp/>value<sp/>to<sp/>decimal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[21]<sp/>=<sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref>;<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Update<sp/>the<sp/>display<sp/>buffer<sp/>characters</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[22]<sp/>=<sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref>;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="display__routines_8h_1a237d3abfee1f13f142659c3367f6e472" kindref="member">ADCResult2Decimal</ref>(<ref refid="_a__to___d___converter_8c_1a55a1549e0efaab525b3500dc1c5b5e57" kindref="member">Potentiometer</ref>);<sp/></highlight><highlight class="comment">//Convert<sp/>the<sp/>A/D<sp/>hex<sp/>value<sp/>to</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[29]<sp/>=<sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//decimal<sp/>and<sp/>update<sp/>the<sp/>display<sp/>buffer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[31]<sp/>=<sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref>;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a3b2bfbc8c088c4c4b06cedb3570d48eb" kindref="member">DisplayData</ref>[32]<sp/>=<sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref>;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">//ADCResult2Decimal()<sp/>Function:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment">//This<sp/>function<sp/>converts<sp/>a<sp/>10-bit<sp/>A/D<sp/>result<sp/>in<sp/>hexadecimal<sp/>to<sp/>decimal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="comment">//assuming<sp/>a<sp/>5<sp/>volt<sp/>reference<sp/>voltage.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="82" refid="_display_routines_8c_1a237d3abfee1f13f142659c3367f6e472" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="display__routines_8h_1a237d3abfee1f13f142659c3367f6e472" kindref="member">ADCResult2Decimal</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>ADRES)</highlight></codeline>
+<codeline lineno="83"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//reset<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(ADRES<sp/>&gt;<sp/>0x8)</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(ADRES<sp/>&gt;<sp/>0xCC)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//test<sp/>for<sp/>1<sp/>volt<sp/>or<sp/>greater</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref>++;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//increment<sp/>1<sp/>volt<sp/>counter</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ADRES<sp/>-=<sp/>0xCD;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//subtract<sp/>1<sp/>volt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(ADRES<sp/>&gt;<sp/>0x14<sp/>&amp;&amp;<sp/>ADRES<sp/>&lt;=<sp/>0xCC)<sp/><sp/><sp/></highlight><highlight class="comment">//test<sp/>for<sp/>0.1<sp/>volt<sp/>or<sp/>greater</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref><sp/>&lt;<sp/>9)</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref>++;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//increment<sp/>tenths</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref>++;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//tenths<sp/>has<sp/>rolled<sp/>over</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//so<sp/>increment<sp/>ones<sp/>and<sp/>reset<sp/>tenths</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ADRES<sp/>-=0x15;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(ADRES<sp/>&gt;<sp/>0x2<sp/>&amp;&amp;<sp/>ADRES<sp/>&lt;=<sp/>0x14)<sp/><sp/><sp/></highlight><highlight class="comment">//test<sp/>for<sp/>0.01<sp/>volt<sp/>or<sp/>greater</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref><sp/>&lt;<sp/>9)</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref>++;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//increment<sp/>hundreths</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//reset<sp/>hundredths</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref><sp/>&lt;<sp/>9)</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref>++;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//and<sp/>increment<sp/>tenths</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref>++;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//unless<sp/>tenths<sp/>has<sp/>rolled<sp/>over</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref><sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//so<sp/>increment<sp/>ones<sp/>and<sp/>reset<sp/>tenths</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ADRES<sp/>-=<sp/>0x3;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a589a8c2ab021144f3ef4cad3c02fdba4" kindref="member">adones</ref><sp/>+=<sp/>0x30;</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a6611b5628f36ac6fe1c4a994b4e0ef95" kindref="member">adtenths</ref><sp/>+=<sp/>0x30;</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_display_routines_8c_1a21d923f04e30f1f069f4c9f207942d43" kindref="member">adhundredths</ref><sp/>+=<sp/>0x30;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/DisplayRoutines.c"/>
+  </compounddef>
+</doxygen>

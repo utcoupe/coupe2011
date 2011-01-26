@@ -1,0 +1,15 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_d3c8bf4cfed352ddd49bfccff8e08350" kind="dir">
+    <compoundname>pinceControl/demo_ax12/</compoundname>
+    <innerfile refid="ax12_8cpp">ax12.cpp</innerfile>
+    <innerfile refid="ax12_8h">ax12.h</innerfile>
+    <innerfile refid="_serial_bis_8cpp">SerialBis.cpp</innerfile>
+    <innerfile refid="_serial_bis_8h">SerialBis.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/demo_ax12/"/>
+  </compounddef>
+</doxygen>

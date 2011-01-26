@@ -1,0 +1,766 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="parameters_8h" kind="file">
+    <compoundname>parameters.h</compoundname>
+    <includedby refid="build_2encoder_8h" local="yes">motorControl/build/encoder.h</includedby>
+    <includedby refid="build_2fifo_8h" local="yes">motorControl/build/fifo.h</includedby>
+    <includedby refid="motor_control_2build_2message_8h" local="yes">motorControl/build/message.h</includedby>
+    <includedby refid="motor_control_8cpp" local="yes">motorControl/build/motorControl.cpp</includedby>
+    <includedby refid="build_2pwm_8h" local="yes">motorControl/build/pwm.h</includedby>
+    <includedby refid="motor_control_2command_8cpp" local="yes">motorControl/command.cpp</includedby>
+    <includedby refid="control_8h" local="yes">motorControl/control.h</includedby>
+    <includedby refid="encoder_8h" local="yes">motorControl/encoder.h</includedby>
+    <includedby refid="fifo_8h" local="yes">motorControl/fifo.h</includedby>
+    <includedby refid="pwm_8h" local="yes">motorControl/pwm.h</includedby>
+    <invincdepgraph>
+      <node id="2025">
+        <label>motorControl/build/fifo.h</label>
+        <link refid="build_2fifo_8h"/>
+        <childnode refid="2025" relation="include">
+        </childnode>
+      </node>
+      <node id="2026">
+        <label>motorControl/build/message.h</label>
+        <link refid="motor_control_2build_2message_8h"/>
+      </node>
+      <node id="2034">
+        <label>motorControl/encoder.h</label>
+        <link refid="encoder_8h"/>
+        <childnode refid="2031" relation="include">
+        </childnode>
+        <childnode refid="2035" relation="include">
+        </childnode>
+      </node>
+      <node id="2036">
+        <label>motorControl/pwm.h</label>
+        <link refid="pwm_8h"/>
+        <childnode refid="2037" relation="include">
+        </childnode>
+      </node>
+      <node id="2024">
+        <label>motorControl/build/encoder.h</label>
+        <link refid="build_2encoder_8h"/>
+      </node>
+      <node id="2027">
+        <label>motorControl/build/motorControl.cpp</label>
+        <link refid="motor_control_8cpp"/>
+        <childnode refid="2027" relation="include">
+        </childnode>
+      </node>
+      <node id="2035">
+        <label>motorControl/encoder.cpp</label>
+        <link refid="encoder_8cpp"/>
+      </node>
+      <node id="2029">
+        <label>motorControl/command.cpp</label>
+        <link refid="motor_control_2command_8cpp"/>
+        <childnode refid="2029" relation="include">
+        </childnode>
+      </node>
+      <node id="2023">
+        <label>motorControl/parameters.h</label>
+        <link refid="parameters.h"/>
+        <childnode refid="2024" relation="include">
+        </childnode>
+        <childnode refid="2025" relation="include">
+        </childnode>
+        <childnode refid="2026" relation="include">
+        </childnode>
+        <childnode refid="2027" relation="include">
+        </childnode>
+        <childnode refid="2028" relation="include">
+        </childnode>
+        <childnode refid="2029" relation="include">
+        </childnode>
+        <childnode refid="2030" relation="include">
+        </childnode>
+        <childnode refid="2034" relation="include">
+        </childnode>
+        <childnode refid="2032" relation="include">
+        </childnode>
+        <childnode refid="2036" relation="include">
+        </childnode>
+      </node>
+      <node id="2033">
+        <label>motorControl/fifo.cpp</label>
+        <link refid="fifo_8cpp"/>
+      </node>
+      <node id="2028">
+        <label>motorControl/build/pwm.h</label>
+        <link refid="build_2pwm_8h"/>
+      </node>
+      <node id="2030">
+        <label>motorControl/control.h</label>
+        <link refid="control_8h"/>
+        <childnode refid="2027" relation="include">
+        </childnode>
+        <childnode refid="2029" relation="include">
+        </childnode>
+        <childnode refid="2031" relation="include">
+        </childnode>
+        <childnode refid="2032" relation="include">
+        </childnode>
+      </node>
+      <node id="2037">
+        <label>motorControl/pwm.cpp</label>
+        <link refid="pwm_8cpp"/>
+      </node>
+      <node id="2032">
+        <label>motorControl/fifo.h</label>
+        <link refid="fifo_8h"/>
+        <childnode refid="2031" relation="include">
+        </childnode>
+        <childnode refid="2033" relation="include">
+        </childnode>
+      </node>
+      <node id="2031">
+        <label>motorControl/control.cpp</label>
+        <link refid="control_8cpp"/>
+        <childnode refid="2031" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="parameters_8h_1a2727f915a2e82b5f6a72dc2ac349b93c" prot="public" static="no">
+        <name>ENC_CENTER_DIST</name>
+        <initializer>(2*160)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="12" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1ad10b55d42b59180cf70f73a54b26445e" prot="public" static="no">
+        <name>ENC_RESOLUTION</name>
+        <initializer>500</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="13" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a9666ff1335bf114e169fc561c2de73f2" prot="public" static="no">
+        <name>ENC_RADIUS</name>
+        <initializer>18</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1ae2138972a8d0eacd1e3e5eaafa75e997" prot="public" static="no">
+        <name>ENC_TICKS_TO_MM</name>
+        <initializer>(2*M_PI*ENC_RADIUS)/(ENC_RESOLUTION*4)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="15" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1ae70dc04027632d2fbb40c96d3a92147a" prot="public" static="no">
+        <name>DUREE_CYCLE</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="18" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1adc03e6fe2319b9b7f61d3764efc3717e" prot="public" static="no">
+        <name>PIN_EN_LEFT</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a0537a9b854e97f89977e2f663d8dbaea" prot="public" static="no">
+        <name>PIN_DIR_LEFT</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="33" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a3729f35fefeb2a4426a71e23f844a06d" prot="public" static="no">
+        <name>PIN_EN_RIGHT</name>
+        <initializer>11</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="34" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a780c2868b797a25361340a153acbf67c" prot="public" static="no">
+        <name>PIN_DIR_RIGHT</name>
+        <initializer>13</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a3cbbda0baab250bd7538bf20337ab79b" prot="public" static="no">
+        <name>PIN_LEFT_A</name>
+        <initializer>18</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a2d09dfaba6d6a09e63f6dec7c54e1090" prot="public" static="no">
+        <name>PIN_LEFT_B</name>
+        <initializer>19</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1aee95bdc1b8f69b35c1419282dcf3739f" prot="public" static="no">
+        <name>PIN_RIGHT_A</name>
+        <initializer>21</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="38" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1af00c06d73d04d89f6063349803d75134" prot="public" static="no">
+        <name>PIN_RIGHT_B</name>
+        <initializer>20</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a18a46695d00fa7c262f65413efad8a2b" prot="public" static="no">
+        <name>INTERRUPT_LEFT_A</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="40" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a866dd0f428a9cb3785160eb30a618515" prot="public" static="no">
+        <name>INTERRUPT_LEFT_B</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="41" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a97bb13e1dc85db3b2d6f0691418841bb" prot="public" static="no">
+        <name>INTERRUPT_RIGHT_A</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="42" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a55f1f5942972a4517d3efa76d91149cc" prot="public" static="no">
+        <name>INTERRUPT_RIGHT_B</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="43" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1ae878d843d94135f37c6dc4dfa9620179" prot="public" static="no">
+        <name>TABLE_WIDTH_MM</name>
+        <initializer>2100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a1603e6f84f4dc2e9ae4e3394fbec98aa" prot="public" static="no">
+        <name>TABLE_HEIGHT_MM</name>
+        <initializer>3000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="47" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1aba440c3d164a691aa67bf8f7222b5a9c" prot="public" static="no">
+        <name>TABLE_DISTANCE_MAX_MM</name>
+        <initializer>3662</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="48" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a7838f645a6f635a919f84ca1b8d5c7a2" prot="public" static="no">
+        <name>K_DIST</name>
+        <initializer>0.5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="51" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1aaeb0d289a6c0bcd92cf00d9ba462d816" prot="public" static="no">
+        <name>K_ANGLE</name>
+        <initializer>700</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="52" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a14de3e9ccc4fd63825b30f39558d1868" prot="public" static="no">
+        <name>KP_SPEED</name>
+        <initializer>2.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a94a50f5b31f44a7e16265302efaa218c" prot="public" static="no">
+        <name>KI_SPEED</name>
+        <initializer>5.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="55" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1af46789f95cc3b76b2aa0df1b69644751" prot="public" static="no">
+        <name>KD_SPEED</name>
+        <initializer>1.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="56" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="56" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1aeb4da878c9d6049f24d57623053afa3f" prot="public" static="no">
+        <name>KP_ANGLE</name>
+        <initializer>2.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="57" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a402dcb1af90d89d87ecab105e1be8c33" prot="public" static="no">
+        <name>KI_ANGLE</name>
+        <initializer>5.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="58" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a7a34b8bd0de098b37a0e918f9bbac6f6" prot="public" static="no">
+        <name>KD_ANGLE</name>
+        <initializer>1.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="59" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a8789471b40aa84a835db77899b0055f1" prot="public" static="no">
+        <name>KP_DELTA</name>
+        <initializer>.65</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="60" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a1606960197cabafe82092bb427d87fb6" prot="public" static="no">
+        <name>KI_DELTA</name>
+        <initializer>0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="61" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a11d4da6d334e5ee973452d9c78e82b8c" prot="public" static="no">
+        <name>KD_DELTA</name>
+        <initializer>1800</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="62" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1afee02e6132492609bc0c823668330600" prot="public" static="no">
+        <name>KP_ALPHA</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="63" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a3ef8b43aedffdbabf04ad9aaca642fa8" prot="public" static="no">
+        <name>KI_ALPHA</name>
+        <initializer>0.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="64" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="64" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a0472dd147f50d9b9810a602b90c7dea6" prot="public" static="no">
+        <name>KD_ALPHA</name>
+        <initializer>550.0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="65" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a1a8a99dbd3696baa83bd6635d37b129a" prot="public" static="no">
+        <name>SOF</name>
+        <initializer>&apos;&lt;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="68" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a59adc4c82490d23754cd39c2fb99b0da" prot="public" static="no">
+        <name>EOF</name>
+        <initializer>&apos;&gt;&apos;</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="69" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a1f61e405ce114d01ad92a29e1b67b32a" prot="public" static="no">
+        <name>T_QUERY</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="70" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a575e6b96f15df34143bd406a4c875108" prot="public" static="no">
+        <name>T_POSITION</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="71" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a7a7a7dcb55998b42a9ebfbcf57f9b387" prot="public" static="no">
+        <name>T_SPEED</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="72" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a5fe6c9342ede9d17981dc5eb9b2ae837" prot="public" static="no">
+        <name>T_ANGLE</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="73" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a23c23b1fe436da9928d27bc73a9e1619" prot="public" static="no">
+        <name>T_PAUSE</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="74" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a2200db6bd258037917b0a5a4bbbedcce" prot="public" static="no">
+        <name>T_RESET</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="75" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a04b077da4e7bcdaa52e9900e3ac2ad46" prot="public" static="no">
+        <name>T_ALIGN</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="76" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a28d5209f4db1babc0610f42d892fbf29" prot="public" static="no">
+        <name>T_SETX</name>
+        <initializer>9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="77" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a0a0a9f8f80a35b934f9e11586ff38b71" prot="public" static="no">
+        <name>T_SETY</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="78" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a70ed59adcb4159ac551058053e649640" prot="public" static="no">
+        <name>SIZE</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="83" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1ab6f16e195dc63073e6cf911a2dcfabfc" prot="public" static="no">
+        <name>TYPE_SPEED</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="86" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1aa3e67045e60eb48875e9d3fc4bcbb72c" prot="public" static="no">
+        <name>TYPE_ANGLE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="87" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="parameters_8h_1a79c0cc4f9062ed4b0f708a21d532f0e0" prot="public" static="no">
+        <name>TYPE_POSITION</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" line="88" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>parameters.h</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>Created<sp/>on:<sp/>16<sp/>janv.<sp/>2011</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Author:<sp/>HoHen</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>PARAMETERS_H_</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PARAMETERS_H_</highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Parametres<sp/>mecanique<sp/>du<sp/>robot<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="parameters_8h_1a2727f915a2e82b5f6a72dc2ac349b93c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>ENC_CENTER_DIST<sp/>(2*160)<sp/>//<sp/>Distance<sp/>entre<sp/>chaque<sp/>roue<sp/>codeuse<sp/>et<sp/>le<sp/>centre<sp/>du<sp/>robot<sp/>en<sp/>mm</highlight></codeline>
+<codeline lineno="13" refid="parameters_8h_1ad10b55d42b59180cf70f73a54b26445e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ENC_RESOLUTION<sp/>500<sp/>//<sp/>Nombre<sp/>de<sp/>points<sp/>par<sp/>tour<sp/>d&apos;encodeur</highlight></codeline>
+<codeline lineno="14" refid="parameters_8h_1a9666ff1335bf114e169fc561c2de73f2" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ENC_RADIUS<sp/>18<sp/>//<sp/>Rayon<sp/>de<sp/>la<sp/>roue<sp/>codeuse</highlight></codeline>
+<codeline lineno="15" refid="parameters_8h_1ae2138972a8d0eacd1e3e5eaafa75e997" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ENC_TICKS_TO_MM<sp/>(2*M_PI*ENC_RADIUS)/(ENC_RESOLUTION*4)<sp/>//<sp/>en<sp/>mm.tick^-1<sp/>(opti:<sp/>a<sp/>calculer<sp/>apres)<sp/>environ<sp/>:<sp/>0.02826</highlight></codeline>
+<codeline lineno="16"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Durée<sp/>d&apos;un<sp/>cycle<sp/>(en<sp/>millisecondes)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18" refid="parameters_8h_1ae70dc04027632d2fbb40c96d3a92147a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DUREE_CYCLE<sp/>2</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Paramètres<sp/>de<sp/>la<sp/>carte<sp/>asservissement</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/>pin<sp/>0<sp/>-&gt;<sp/>USB<sp/>2<sp/>TTL</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>pin<sp/>1<sp/>-&gt;<sp/>USB<sp/>2<sp/>TTL</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>pin<sp/>3<sp/>-&gt;<sp/>enable<sp/>moteur<sp/>1<sp/>(pwm)</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>*<sp/>pin<sp/>12<sp/>-&gt;<sp/>direction<sp/>moteur<sp/>1</highlight></codeline>
+<codeline lineno="25"><highlight class="comment"><sp/>*<sp/>pin<sp/>11<sp/>-&gt;<sp/>enable<sp/>moteur<sp/>2<sp/>(pwm)</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/>*<sp/>pin<sp/>13<sp/>-&gt;<sp/>direction<sp/>moteur<sp/>2</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/>*<sp/>pin<sp/>18<sp/>-&gt;<sp/>A<sp/>encodeur<sp/>1</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/>*<sp/>pin<sp/>19<sp/>-&gt;<sp/>B<sp/>encodeur<sp/>1</highlight></codeline>
+<codeline lineno="29"><highlight class="comment"><sp/>*<sp/>pin<sp/>21<sp/>-&gt;<sp/>A<sp/>encodeur<sp/>2</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/>*<sp/>pin<sp/>20<sp/>-&gt;<sp/>B<sp/>encodeur<sp/>2</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/>*<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="parameters_8h_1adc03e6fe2319b9b7f61d3764efc3717e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PIN_EN_LEFT<sp/>3</highlight></codeline>
+<codeline lineno="33" refid="parameters_8h_1a0537a9b854e97f89977e2f663d8dbaea" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_DIR_LEFT<sp/>12</highlight></codeline>
+<codeline lineno="34" refid="parameters_8h_1a3729f35fefeb2a4426a71e23f844a06d" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_EN_RIGHT<sp/>11</highlight></codeline>
+<codeline lineno="35" refid="parameters_8h_1a780c2868b797a25361340a153acbf67c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_DIR_RIGHT<sp/>13</highlight></codeline>
+<codeline lineno="36" refid="parameters_8h_1a3cbbda0baab250bd7538bf20337ab79b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_LEFT_A<sp/>18</highlight></codeline>
+<codeline lineno="37" refid="parameters_8h_1a2d09dfaba6d6a09e63f6dec7c54e1090" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_LEFT_B<sp/>19</highlight></codeline>
+<codeline lineno="38" refid="parameters_8h_1aee95bdc1b8f69b35c1419282dcf3739f" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_RIGHT_A<sp/>21</highlight></codeline>
+<codeline lineno="39" refid="parameters_8h_1af00c06d73d04d89f6063349803d75134" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PIN_RIGHT_B<sp/>20</highlight></codeline>
+<codeline lineno="40" refid="parameters_8h_1a18a46695d00fa7c262f65413efad8a2b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERRUPT_LEFT_A<sp/>5</highlight></codeline>
+<codeline lineno="41" refid="parameters_8h_1a866dd0f428a9cb3785160eb30a618515" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERRUPT_LEFT_B<sp/>4</highlight></codeline>
+<codeline lineno="42" refid="parameters_8h_1a97bb13e1dc85db3b2d6f0691418841bb" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERRUPT_RIGHT_A<sp/>2</highlight></codeline>
+<codeline lineno="43" refid="parameters_8h_1a55f1f5942972a4517d3efa76d91149cc" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERRUPT_RIGHT_B<sp/>3</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Paramètre<sp/>de<sp/>la<sp/>table<sp/>en<sp/>mm*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="parameters_8h_1ae878d843d94135f37c6dc4dfa9620179" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TABLE_WIDTH_MM<sp/>2100</highlight></codeline>
+<codeline lineno="47" refid="parameters_8h_1a1603e6f84f4dc2e9ae4e3394fbec98aa" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TABLE_HEIGHT_MM<sp/>3000</highlight></codeline>
+<codeline lineno="48" refid="parameters_8h_1aba440c3d164a691aa67bf8f7222b5a9c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TABLE_DISTANCE_MAX_MM<sp/>3662</highlight></codeline>
+<codeline lineno="49"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">/*Paramètre<sp/>de<sp/>l&apos;asservissement*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="parameters_8h_1a7838f645a6f635a919f84ca1b8d5c7a2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>K_DIST<sp/>0.5</highlight></codeline>
+<codeline lineno="52" refid="parameters_8h_1aaeb0d289a6c0bcd92cf00d9ba462d816" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>K_ANGLE<sp/>700</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="parameters_8h_1a14de3e9ccc4fd63825b30f39558d1868" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>KP_SPEED<sp/>2.0</highlight></codeline>
+<codeline lineno="55" refid="parameters_8h_1a94a50f5b31f44a7e16265302efaa218c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KI_SPEED<sp/>5.0</highlight></codeline>
+<codeline lineno="56" refid="parameters_8h_1af46789f95cc3b76b2aa0df1b69644751" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KD_SPEED<sp/>1.0</highlight></codeline>
+<codeline lineno="57" refid="parameters_8h_1aeb4da878c9d6049f24d57623053afa3f" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KP_ANGLE<sp/>2.0</highlight></codeline>
+<codeline lineno="58" refid="parameters_8h_1a402dcb1af90d89d87ecab105e1be8c33" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KI_ANGLE<sp/>5.0</highlight></codeline>
+<codeline lineno="59" refid="parameters_8h_1a7a34b8bd0de098b37a0e918f9bbac6f6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KD_ANGLE<sp/>1.0</highlight></codeline>
+<codeline lineno="60" refid="parameters_8h_1a8789471b40aa84a835db77899b0055f1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KP_DELTA<sp/>.65</highlight></codeline>
+<codeline lineno="61" refid="parameters_8h_1a1606960197cabafe82092bb427d87fb6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KI_DELTA<sp/>0.0</highlight></codeline>
+<codeline lineno="62" refid="parameters_8h_1a11d4da6d334e5ee973452d9c78e82b8c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KD_DELTA<sp/>1800</highlight></codeline>
+<codeline lineno="63" refid="parameters_8h_1afee02e6132492609bc0c823668330600" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KP_ALPHA<sp/>3</highlight></codeline>
+<codeline lineno="64" refid="parameters_8h_1a3ef8b43aedffdbabf04ad9aaca642fa8" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KI_ALPHA<sp/>0.0</highlight></codeline>
+<codeline lineno="65" refid="parameters_8h_1a0472dd147f50d9b9810a602b90c7dea6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>KD_ALPHA<sp/>550.0</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="comment">/*Paramètre<sp/>de<sp/>liaison<sp/>série*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="parameters_8h_1a1a8a99dbd3696baa83bd6635d37b129a" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SOF<sp/>&apos;&lt;&apos;</highlight></codeline>
+<codeline lineno="69" refid="parameters_8h_1a59adc4c82490d23754cd39c2fb99b0da" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>EOF<sp/>&apos;&gt;&apos;</highlight></codeline>
+<codeline lineno="70" refid="parameters_8h_1a1f61e405ce114d01ad92a29e1b67b32a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_QUERY<sp/>0</highlight></codeline>
+<codeline lineno="71" refid="parameters_8h_1a575e6b96f15df34143bd406a4c875108" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_POSITION<sp/>1</highlight></codeline>
+<codeline lineno="72" refid="parameters_8h_1a7a7a7dcb55998b42a9ebfbcf57f9b387" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_SPEED<sp/>2</highlight></codeline>
+<codeline lineno="73" refid="parameters_8h_1a5fe6c9342ede9d17981dc5eb9b2ae837" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_ANGLE<sp/>3</highlight></codeline>
+<codeline lineno="74" refid="parameters_8h_1a23c23b1fe436da9928d27bc73a9e1619" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_PAUSE<sp/>4</highlight></codeline>
+<codeline lineno="75" refid="parameters_8h_1a2200db6bd258037917b0a5a4bbbedcce" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_RESET<sp/>6</highlight></codeline>
+<codeline lineno="76" refid="parameters_8h_1a04b077da4e7bcdaa52e9900e3ac2ad46" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_ALIGN<sp/>7</highlight></codeline>
+<codeline lineno="77" refid="parameters_8h_1a28d5209f4db1babc0610f42d892fbf29" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_SETX<sp/>9</highlight></codeline>
+<codeline lineno="78" refid="parameters_8h_1a0a0a9f8f80a35b934f9e11586ff38b71" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>T_SETY<sp/>10</highlight></codeline>
+<codeline lineno="79"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">/*Paramètre<sp/>de<sp/>la<sp/>file<sp/>des<sp/>buts<sp/>a<sp/>atteindre*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="parameters_8h_1a70ed59adcb4159ac551058053e649640" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SIZE<sp/>10</highlight></codeline>
+<codeline lineno="84"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"></highlight><highlight class="comment">/*Constantes*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86" refid="parameters_8h_1ab6f16e195dc63073e6cf911a2dcfabfc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TYPE_SPEED<sp/>0</highlight></codeline>
+<codeline lineno="87" refid="parameters_8h_1aa3e67045e60eb48875e9d3fc4bcbb72c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TYPE_ANGLE<sp/>1</highlight></codeline>
+<codeline lineno="88" refid="parameters_8h_1a79c0cc4f9062ed4b0f708a21d532f0e0" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TYPE_POSITION<sp/>2</highlight></codeline>
+<codeline lineno="89"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"></highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>PARAMETERS_H_<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/parameters.h"/>
+  </compounddef>
+</doxygen>

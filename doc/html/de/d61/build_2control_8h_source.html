@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de motorControl/build/control.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>motorControl/build/control.h</h1><a href="../../de/d61/build_2control_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment"> * control.h</span>
+<a name="l00003"></a>00003 <span class="comment"> *</span>
+<a name="l00004"></a>00004 <span class="comment"> *  Created on: 13 janv. 2011</span>
+<a name="l00005"></a>00005 <span class="comment"> *      Author: HoHen</span>
+<a name="l00006"></a>00006 <span class="comment"> */</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 <span class="preprocessor">#ifndef CONTROL_H_</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span><span class="preprocessor">#define CONTROL_H_</span>
+<a name="l00010"></a>00010 <span class="preprocessor"></span>
+<a name="l00011"></a>00011 <span class="preprocessor">#include &lt;math.h&gt;</span>
+<a name="l00012"></a>00012 <span class="preprocessor">#include &quot;parameters.h&quot;</span>
+<a name="l00013"></a>00013 <span class="preprocessor">#include &quot;<a class="code" href="../../d4/d80/motor_control_2build_2core_2wiring_8h.html">wiring.h</a>&quot;</span>
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="../../de/d61/build_2control_8h.html#a3bc60c00ac0493cc2a60b3aeadfe3c2d">00015</a> <span class="preprocessor">#define PHASE_1 1</span>
+<a name="l00016"></a><a class="code" href="../../de/d61/build_2control_8h.html#ae2778b96e6089232402c381f8ad19ca9">00016</a> <span class="preprocessor"></span><span class="preprocessor">#define PHASE_2 2</span>
+<a name="l00017"></a><a class="code" href="../../de/d61/build_2control_8h.html#adbc28675de3a486a093bb7896f70c817">00017</a> <span class="preprocessor"></span><span class="preprocessor">#define PHASE_3 3</span>
+<a name="l00018"></a><a class="code" href="../../de/d61/build_2control_8h.html#a1ce1b1d3b01797b8faeeedfc85d60ade">00018</a> <span class="preprocessor"></span><span class="preprocessor">#define PHASE_4 4</span>
+<a name="l00019"></a>00019 <span class="preprocessor"></span>
+<a name="l00020"></a><a class="code" href="../../d0/d8b/struct_current_goal.html">00020</a> <span class="keyword">typedef</span> <span class="keyword">struct </span><a class="code" href="../../d0/d8b/struct_current_goal.html">CurrentGoal</a> {
+<a name="l00021"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#add21cf5b478e9ed6b3cb8d3890a327f1">00021</a>         <span class="keywordtype">int</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#add21cf5b478e9ed6b3cb8d3890a327f1">type</a>;
+<a name="l00022"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#a87cfb79b5af0a4299154b7c69a42a6a4">00022</a>         <span class="keywordtype">int</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#a87cfb79b5af0a4299154b7c69a42a6a4">speed</a>;
+<a name="l00023"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#a6e92007beaa37c762cfd35d884b1a6bc">00023</a>         <span class="keywordtype">int</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#a6e92007beaa37c762cfd35d884b1a6bc">periode</a>;
+<a name="l00024"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#a3c29420a39256dd332de3ccda9947d25">00024</a>         <span class="keywordtype">int</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#a3c29420a39256dd332de3ccda9947d25">x</a>;
+<a name="l00025"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#a286f9ecda5511dca05030186fa0c3c7c">00025</a>         <span class="keywordtype">int</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#a286f9ecda5511dca05030186fa0c3c7c">y</a>;
+<a name="l00026"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#aa3f39d39acbff67e93d36d1a96ca7ee4">00026</a>         <span class="keywordtype">double</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#aa3f39d39acbff67e93d36d1a96ca7ee4">angle</a>;
+<a name="l00027"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#a8d39d8d2fa7fef466b0feef1eea1ea22">00027</a>         <span class="keywordtype">bool</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#a8d39d8d2fa7fef466b0feef1eea1ea22">isReached</a>;
+<a name="l00028"></a><a class="code" href="../../d0/d8b/struct_current_goal.html#a6bc07b5ef7b50ab35dc9c0b5b435bd48">00028</a>         <span class="keywordtype">int</span> <a class="code" href="../../d0/d8b/struct_current_goal.html#a6bc07b5ef7b50ab35dc9c0b5b435bd48">phase</a>;
+<a name="l00029"></a>00029 } <a class="code" href="../../d0/d8b/struct_current_goal.html">CurrentGoal</a>;
+<a name="l00030"></a>00030 
+<a name="l00031"></a>00031 <span class="keyword">extern</span> <a class="code" href="../../d0/d8b/struct_current_goal.html">CurrentGoal</a> <a class="code" href="../../de/d61/build_2control_8h.html#a0e510825641ecd3f7861a66a12f4a952">current_goal</a>;
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033 <span class="keywordtype">void</span> <a class="code" href="../../de/d61/build_2control_8h.html#a126d81d79aac606e100d7bf6974d60f4">initController</a>();
+<a name="l00034"></a>00034 
+<a name="l00035"></a>00035 <span class="keywordtype">void</span> <a class="code" href="../../de/d61/build_2control_8h.html#a8febe790f4954110a1e26aa6865d121e">speedControl</a>(<span class="keywordtype">int</span>*,<span class="keywordtype">int</span>*);
+<a name="l00036"></a>00036 <span class="keywordtype">void</span> <a class="code" href="../../de/d61/build_2control_8h.html#af42eb2c4f9bb043f1a737c7febf61a79">angleControl</a>(<span class="keywordtype">int</span>*,<span class="keywordtype">int</span>*);
+<a name="l00037"></a>00037 <span class="keywordtype">void</span> <a class="code" href="../../de/d61/build_2control_8h.html#afa3541cbb488d296f15002a42a3200d7">positionControl</a>(<span class="keywordtype">int</span>*,<span class="keywordtype">int</span>*);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039 <span class="keywordtype">void</span> <a class="code" href="../../de/d61/build_2control_8h.html#a14205b503643eae869c101e5f77b42fa">computeRobotState</a>();
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041 <span class="keywordtype">int</span> <a class="code" href="../../de/d61/build_2control_8h.html#a5ef071b26cbeaf4744db31b647c639ba">computePID</a>(<span class="keywordtype">double</span>,<span class="keywordtype">int</span>,<span class="keywordtype">int</span>,<span class="keywordtype">int</span>);
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043 <span class="preprocessor">#endif </span><span class="comment">/* CONTROL_H_ */</span>
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_region" kind="struct" prot="public">
+    <compoundname>Region</compoundname>
+    <includes refid="_liste_region_8hpp" local="no">ListeRegion.hpp</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_region_1a00416b88a721d21fcd920ac9d08c6918" prot="public" static="no" mutable="no">
+        <type>CvPoint</type>
+        <definition>CvPoint Region::max[4]</definition>
+        <argsstring>[4]</argsstring>
+        <name>max</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_region_1a976c15c73357d4309bf1a48f2eb120e1" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int Region::nbPixel</definition>
+        <argsstring></argsstring>
+        <name>nbPixel</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="30" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_region_1a0affdd2e9197f5a1be71212e5551082c" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char Region::color</definition>
+        <argsstring></argsstring>
+        <name>color</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="31" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_region_1af93ee487b947611c65ea7559c11343c6" prot="public" static="no" mutable="no">
+        <type>unsigned char</type>
+        <definition>unsigned char Region::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="33" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_region_1aaf30b4135ca98a21ef7416aeb0a33dab" prot="public" static="no" mutable="no">
+        <type>struct <ref refid="struct_region" kindref="compound">Region</ref> *</type>
+        <definition>struct Region* Region::suiv</definition>
+        <argsstring></argsstring>
+        <name>suiv</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para>Copyright (c) RODRIGUEZ Xavier <ulink url="mailto:xavier.rodriguez@hds.utc.fr">xavier.rodriguez@hds.utc.fr</ulink> FRICOT Pierre-Henri</para><para>UTCoupe 2010-2011 All rights reserved.</para><para>Objet qui permet de gérer les listes chainées de régions </para>    </detaileddescription>
+    <collaborationgraph>
+      <node id="86">
+        <label>Region</label>
+        <link refid="struct_region"/>
+        <childnode refid="86" relation="usage">
+          <edgelabel>suiv</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="26" bodyend="38"/>
+    <listofallmembers>
+      <member refid="struct_region_1a0affdd2e9197f5a1be71212e5551082c" prot="public" virt="non-virtual"><scope>Region</scope><name>color</name></member>
+      <member refid="struct_region_1a00416b88a721d21fcd920ac9d08c6918" prot="public" virt="non-virtual"><scope>Region</scope><name>max</name></member>
+      <member refid="struct_region_1a976c15c73357d4309bf1a48f2eb120e1" prot="public" virt="non-virtual"><scope>Region</scope><name>nbPixel</name></member>
+      <member refid="struct_region_1aaf30b4135ca98a21ef7416aeb0a33dab" prot="public" virt="non-virtual"><scope>Region</scope><name>suiv</name></member>
+      <member refid="struct_region_1af93ee487b947611c65ea7559c11343c6" prot="public" virt="non-virtual"><scope>Region</scope><name>type</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

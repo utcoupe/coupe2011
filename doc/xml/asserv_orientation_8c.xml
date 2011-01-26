@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="asserv_orientation_8c" kind="file">
+    <compoundname>asservOrientation.c</compoundname>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includes local="yes">math.h</includes>
+    <includes refid="trajectory_8h" local="yes">trajectory.h</includes>
+    <includes refid="config_8h" local="yes">config.h</includes>
+    <incdepgraph>
+      <node id="1133">
+        <label>trajectory.h</label>
+        <link refid="trajectory_8h"/>
+        <childnode refid="1131" relation="include">
+        </childnode>
+      </node>
+      <node id="1132">
+        <label>math.h</label>
+      </node>
+      <node id="1131">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+      <node id="1134">
+        <label>config.h</label>
+        <link refid="config_8h"/>
+        <childnode refid="1131" relation="include">
+        </childnode>
+        <childnode refid="1133" relation="include">
+        </childnode>
+      </node>
+      <node id="1130">
+        <label>asserv2010/asservOrientation.c</label>
+        <link refid="asservOrientation.c"/>
+        <childnode refid="1131" relation="include">
+        </childnode>
+        <childnode refid="1132" relation="include">
+        </childnode>
+        <childnode refid="1133" relation="include">
+        </childnode>
+        <childnode refid="1134" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="asserv_orientation_8c_1a196d72a8a149bb9ff3d8fbc8acf7789e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float calculEcart_rot</definition>
+        <argsstring>(point pA)</argsstring>
+        <name>calculEcart_rot</name>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref></type>
+          <declname>pA</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservOrientation.c" line="9" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservOrientation.c" bodystart="8" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trajectory_8h" kindref="compound">trajectory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8" refid="asserv_orientation_8h_1a4c75e8067c9aeb517497818ecbe84475" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_orientation_8c_1a196d72a8a149bb9ff3d8fbc8acf7789e" kindref="member">calculEcart_rot</ref>(<ref refid="structpoint" kindref="compound">point</ref><sp/>pA)</highlight></codeline>
+<codeline lineno="9"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>deltaX,deltaY,ecart_rot,consigne_rot;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deltaX<sp/>=<sp/>(pA.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>-Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>deltaY<sp/>=<sp/>(pA.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>-Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">((deltaX==0)&amp;&amp;(deltaY==0))<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>consigne_rot=<sp/>-<sp/>atan2f(deltaY<sp/>,deltaX);<sp/></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref><sp/>&lt;<sp/>0<sp/>)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecart_rot=consigne_rot<sp/>-<sp/>(Robot-&gt;<ref refid="structrobot_1abc0768ef4ba84a1e5701fd071ffa9d6f" kindref="member">orientation</ref><sp/>+<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>);</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecart_rot=consigne_rot<sp/>-<sp/>Robot-&gt;<ref refid="structrobot_1abc0768ef4ba84a1e5701fd071ffa9d6f" kindref="member">orientation</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//modulo<sp/>de<sp/>l&apos;orientation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(ecart_rot<sp/>&gt;<sp/><sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)<sp/>ecart_rot-=<ref refid="_a_l_types_8h_1a2a95859d7c6924f59afef24c2f3c20c9" kindref="member">PIx2</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(ecart_rot<sp/>&lt;<sp/>-<ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)<sp/>ecart_rot+=<ref refid="_a_l_types_8h_1a2a95859d7c6924f59afef24c2f3c20c9" kindref="member">PIx2</ref>;</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecart_rot;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservOrientation.c"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,513 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_main_8c" kind="file">
+    <compoundname>Main.c</compoundname>
+    <includes local="no">p30fxxxx.h</includes>
+    <includes local="yes">system.h</includes>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includes refid="_main_8c" local="yes">spi_for_lcd.h</includes>
+    <includes refid="display__routines_8h" local="yes">display_routines.h</includes>
+    <includes local="yes">intx_io_pins.h</includes>
+    <includes refid="_conversion_a_n_8h" local="yes">ConversionAN.h</includes>
+    <includes refid="_p_w_m_8h" local="yes">PWM.h</includes>
+    <includes refid="config_8h" local="yes">config.h</includes>
+    <includes refid="asserv_distance_8h" local="yes">asservDistance.h</includes>
+    <includes refid="asserv_orientation_8h" local="yes">asservOrientation.h</includes>
+    <includes refid="speed_asserv_8h" local="yes">speedAsserv.h</includes>
+    <includes refid="i2c_8h" local="yes">i2c.h</includes>
+    <includedby refid="_main_8c" local="yes">asserv2010/Main.c</includedby>
+    <incdepgraph>
+      <node id="1210">
+        <label>speedAsserv.h</label>
+        <link refid="speed_asserv_8h"/>
+      </node>
+      <node id="1205">
+        <label>PWM.h</label>
+        <link refid="_p_w_m_8h"/>
+      </node>
+      <node id="1208">
+        <label>asservDistance.h</label>
+        <link refid="asserv_distance_8h"/>
+      </node>
+      <node id="1199">
+        <label>p30fxxxx.h</label>
+      </node>
+      <node id="1202">
+        <label>display_routines.h</label>
+        <link refid="display__routines_8h"/>
+      </node>
+      <node id="1211">
+        <label>i2c.h</label>
+        <link refid="i2c_8h"/>
+      </node>
+      <node id="1204">
+        <label>ConversionAN.h</label>
+        <link refid="_conversion_a_n_8h"/>
+      </node>
+      <node id="1198">
+        <label>asserv2010/Main.c</label>
+        <link refid="Main.c"/>
+        <childnode refid="1199" relation="include">
+        </childnode>
+        <childnode refid="1200" relation="include">
+        </childnode>
+        <childnode refid="1201" relation="include">
+        </childnode>
+        <childnode refid="1198" relation="include">
+        </childnode>
+        <childnode refid="1202" relation="include">
+        </childnode>
+        <childnode refid="1203" relation="include">
+        </childnode>
+        <childnode refid="1204" relation="include">
+        </childnode>
+        <childnode refid="1205" relation="include">
+        </childnode>
+        <childnode refid="1206" relation="include">
+        </childnode>
+        <childnode refid="1208" relation="include">
+        </childnode>
+        <childnode refid="1209" relation="include">
+        </childnode>
+        <childnode refid="1210" relation="include">
+        </childnode>
+        <childnode refid="1211" relation="include">
+        </childnode>
+      </node>
+      <node id="1207">
+        <label>trajectory.h</label>
+        <link refid="trajectory_8h"/>
+        <childnode refid="1201" relation="include">
+        </childnode>
+      </node>
+      <node id="1201">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+      <node id="1206">
+        <label>config.h</label>
+        <link refid="config_8h"/>
+        <childnode refid="1201" relation="include">
+        </childnode>
+        <childnode refid="1207" relation="include">
+        </childnode>
+      </node>
+      <node id="1203">
+        <label>intx_io_pins.h</label>
+      </node>
+      <node id="1209">
+        <label>asservOrientation.h</label>
+        <link refid="asserv_orientation_8h"/>
+        <childnode refid="1207" relation="include">
+        </childnode>
+      </node>
+      <node id="1200">
+        <label>system.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1212">
+        <label>asserv2010/Main.c</label>
+        <link refid="Main.c"/>
+        <childnode refid="1212" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="_main_8c_1a80c3019b7eb3da73b390528ea55076be" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 gOneMsTemp</definition>
+        <argsstring></argsstring>
+        <name>gOneMsTemp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Timers.c" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_main_8c_1a9cbc04df9cd1654912f3f5e4d647e980" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+        <definition>uInt16 TruePositionReceived</definition>
+        <argsstring></argsstring>
+        <name>TruePositionReceived</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="55" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_main_8c_1a63963570a86d969aa0df3e32151792ed" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float distanceTheorique</definition>
+        <argsstring></argsstring>
+        <name>distanceTheorique</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="56" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.c" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_main_8c_1a6541de02098c9c007d512a9d8931e18f" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 noCommandTimeOutFlag</definition>
+        <argsstring></argsstring>
+        <name>noCommandTimeOutFlag</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="57" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa3392512803ceb5e86b0514396504d98" kindref="member">uInt32</ref></type>
+        <definition>uInt32 timeSpentWithoutCommand</definition>
+        <argsstring></argsstring>
+        <name>timeSpentWithoutCommand</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="58" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_main_8c_1afaeba89599991ec5e19a0352bc65a0f7" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa3392512803ceb5e86b0514396504d98" kindref="member">uInt32</ref></type>
+        <definition>uInt32 timeSpentSinceLastNewCommand</definition>
+        <argsstring></argsstring>
+        <name>timeSpentSinceLastNewCommand</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="59" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="_main_8c_1ab4d3fed8a67bee07252b6efc6ecb78b6" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa3392512803ceb5e86b0514396504d98" kindref="member">uInt32</ref></type>
+        <definition>uInt32 wrongCommand</definition>
+        <argsstring></argsstring>
+        <name>wrongCommand</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="60" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_main_8c_1ab66b11c16fbca37684b75e1af6c9a52a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_FOSC</definition>
+        <argsstring>(CSW_FSCM_OFF &amp;FRC_PLL16)</argsstring>
+        <name>_FOSC</name>
+        <param>
+          <type>CSW_FSCM_OFF &amp;</type>
+          <declname>FRC_PLL16</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="22"/>
+      </memberdef>
+      <memberdef kind="function" id="_main_8c_1ad515c06f1e515ece323faa50221347f2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_FWDT</definition>
+        <argsstring>(WDT_OFF)</argsstring>
+        <name>_FWDT</name>
+        <param>
+          <type>WDT_OFF</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="27"/>
+      </memberdef>
+      <memberdef kind="function" id="_main_8c_1a105c944acc906ca2543730ff55e95dad" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_FBORPOR</definition>
+        <argsstring>(MCLR_EN &amp;PWRT_64 &amp;PWMxL_ACT_LO &amp;PWMxH_ACT_LO)</argsstring>
+        <name>_FBORPOR</name>
+        <param>
+          <type>MCLR_EN &amp;PWRT_64 &amp;PWMxL_ACT_LO &amp;</type>
+          <declname>PWMxH_ACT_LO</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="28"/>
+      </memberdef>
+      <memberdef kind="function" id="_main_8c_1a8e73fa3deb6bd0b11f17abb8508f7622" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>_FGS</definition>
+        <argsstring>(CODE_PROT_OFF)</argsstring>
+        <name>_FGS</name>
+        <param>
+          <type>CODE_PROT_OFF</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="30"/>
+      </memberdef>
+      <memberdef kind="function" id="_main_8c_1a840291bc02cba5474a4cb46a9b9566fe" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int main</definition>
+        <argsstring>(void)</argsstring>
+        <name>main</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" line="68" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" bodystart="67" bodyend="180"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//Pre-Processor<sp/>Directives:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//Provide<sp/>pre-processor<sp/>directives<sp/>to<sp/>include<sp/>Device<sp/>header<sp/>files<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//any<sp/>application<sp/>specific<sp/>header<sp/>files.<sp/>Path<sp/>locations<sp/>to<sp/>the<sp/>Device</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="comment">//header<sp/>files<sp/>are<sp/>set<sp/>up<sp/>within<sp/>the<sp/>MPLAB<sp/>Project&gt;&gt;BuildOptions&gt;&gt;Project</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="comment">//dialog<sp/>box.<sp/>The<sp/>path<sp/>should<sp/>point<sp/>to<sp/>X:\\MPLAB<sp/>C30\support\h\,<sp/>where</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="comment">//&quot;X:&quot;<sp/>is<sp/>the<sp/>folder<sp/>where<sp/>the<sp/>MPLAB<sp/>C30<sp/>tools<sp/>are<sp/>installed.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;p30fxxxx.h&gt;</highlight><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="comment">//&quot;p30fxxxx.h&quot;<sp/>is<sp/>a<sp/>generic<sp/>header<sp/>file<sp/>for<sp/>dsPIC30F</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//devices.<sp/>This<sp/>file<sp/>will<sp/>in<sp/>turn<sp/>select<sp/>the<sp/>actual</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//device<sp/>header<sp/>file,<sp/>based<sp/>on<sp/>the<sp/>device<sp/>selected</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//by<sp/>the<sp/>MPLAB<sp/>workspace/project.<sp/>Using<sp/>the<sp/>p30fxxxx.h</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//file<sp/>makes<sp/>it<sp/>easy<sp/>to<sp/>migrate<sp/>a<sp/>project<sp/>from<sp/>one</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//dsPIC<sp/>device<sp/>to<sp/>another.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;system.h&quot;</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//&quot;system.h&quot;<sp/>is<sp/>a<sp/>header<sp/>file<sp/>defined<sp/>for<sp/>this<sp/>demo</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//application.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="comment">//Macros<sp/>for<sp/>Configuration<sp/>Fuse<sp/>Registers:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight><highlight class="comment">//Invoke<sp/>macros<sp/>to<sp/>set<sp/>up<sp/><sp/>device<sp/>configuration<sp/>fuse<sp/>registers.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="comment">//The<sp/>fuses<sp/>will<sp/>select<sp/>the<sp/>oscillator<sp/>source,<sp/>power-up<sp/>timers,<sp/>watch-dog</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">//timers,<sp/>BOR<sp/>characteristics<sp/>etc.<sp/>The<sp/>macros<sp/>are<sp/>defined<sp/>within<sp/>the<sp/>device</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">//header<sp/>files.<sp/>The<sp/>configuration<sp/>fuse<sp/>registers<sp/>reside<sp/>in<sp/>Flash<sp/>memory.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><ref refid="_main_8c_1ab66b11c16fbca37684b75e1af6c9a52a" kindref="member">_FOSC</ref>(CSW_FSCM_OFF<sp/>&amp;<sp/>FRC_PLL16);<sp/><sp/></highlight><highlight class="comment">//Run<sp/>this<sp/>project<sp/>using<sp/>an<sp/>external<sp/>crystal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//routed<sp/>via<sp/>the<sp/>PLL<sp/>in<sp/>8x<sp/>multiplier<sp/>mode</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//For<sp/>the<sp/>7.3728<sp/>MHz<sp/>crystal<sp/>we<sp/>will<sp/>derive<sp/>a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//throughput<sp/>of<sp/>7.3728e+6*8/4<sp/>=<sp/>14.74<sp/>MIPS(Fcy)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//,~67nanoseconds<sp/>instruction<sp/>cycle<sp/>time(Tcy).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><ref refid="_main_8c_1ad515c06f1e515ece323faa50221347f2" kindref="member">_FWDT</ref>(WDT_OFF);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Turn<sp/>off<sp/>the<sp/>Watch-Dog<sp/>Timer.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><ref refid="_main_8c_1a105c944acc906ca2543730ff55e95dad" kindref="member">_FBORPOR</ref>(MCLR_EN<sp/>&amp;<sp/>PWRT_64<sp/>&amp;<sp/>PWMxL_ACT_LO<sp/>&amp;<sp/>PWMxH_ACT_LO);<sp/><sp/><sp/></highlight><highlight class="comment">//Enable<sp/>MCLR<sp/>reset<sp/>pin<sp/>and<sp/>turn<sp/>off<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//power-up<sp/>timers.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><ref refid="_main_8c_1a8e73fa3deb6bd0b11f17abb8508f7622" kindref="member">_FGS</ref>(CODE_PROT_OFF);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Disable<sp/>Code<sp/>Protection</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="comment">//Declaration<sp/>to<sp/>Link<sp/>External<sp/>Functions<sp/>&amp;<sp/>Variables:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//Declare<sp/>functions<sp/>being<sp/>used<sp/>that<sp/>are<sp/>defined<sp/>outside<sp/>this<sp/>file,<sp/>or</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//elsewhere<sp/>in<sp/>this<sp/>MPLAB<sp/>project.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="spi__for__lcd_8h" kindref="compound">spi_for_lcd.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="uart_8h" kindref="compound">uart.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="quadrature_encoder_8h" kindref="compound">quadratureEncoder.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="display__routines_8h" kindref="compound">display_routines.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;intx_io_pins.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="delay_8h" kindref="compound">delay.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="timers_8h" kindref="compound">timers.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_conversion_a_n_8h" kindref="compound">ConversionAN.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_p_w_m_8h" kindref="compound">PWM.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="position_8h" kindref="compound">position.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_8h" kindref="compound">asserv.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_distance_8h" kindref="compound">asservDistance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_orientation_8h" kindref="compound">asservOrientation.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="speed_asserv_8h" kindref="compound">speedAsserv.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="i2c_8h" kindref="compound">i2c.h</ref>&quot;</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//Functions<sp/>and<sp/>Variables<sp/>with<sp/>Global<sp/>Scope:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">//Declare<sp/>functions<sp/>in<sp/>this<sp/>file<sp/>that<sp/>have<sp/>global<sp/>scope.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="_main_8c_1a80c3019b7eb3da73b390528ea55076be" kindref="member">gOneMsTemp</ref>;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/><ref refid="i2c_8c_1a9cbc04df9cd1654912f3f5e4d647e980" kindref="member">TruePositionReceived</ref>;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a63963570a86d969aa0df3e32151792ed" kindref="member">distanceTheorique</ref>;</highlight></codeline>
+<codeline lineno="57" refid="_main_8c_1a6541de02098c9c007d512a9d8931e18f" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="58" refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa3392512803ceb5e86b0514396504d98" kindref="member">uInt32</ref><sp/><ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="59" refid="_main_8c_1afaeba89599991ec5e19a0352bc65a0f7" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa3392512803ceb5e86b0514396504d98" kindref="member">uInt32</ref><sp/><ref refid="_main_8c_1afaeba89599991ec5e19a0352bc65a0f7" kindref="member">timeSpentSinceLastNewCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="60" refid="_main_8c_1ab4d3fed8a67bee07252b6efc6ecb78b6" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa3392512803ceb5e86b0514396504d98" kindref="member">uInt32</ref><sp/><ref refid="_main_8c_1ab4d3fed8a67bee07252b6efc6ecb78b6" kindref="member">wrongCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment">//Code<sp/>execution<sp/>automatically<sp/>reaches<sp/>the<sp/>main()<sp/>function<sp/>after</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment">//two<sp/>events<sp/>have<sp/>occurred;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">//1.<sp/>A<sp/>Reset<sp/>event<sp/>triggered<sp/>by<sp/>hardware<sp/>or<sp/>software</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">//2.<sp/>The<sp/>execution<sp/>of<sp/>the<sp/>C<sp/>Start<sp/>up<sp/>library<sp/>functions,<sp/>present</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/>in<sp/>the<sp/>crt0.o<sp/>file<sp/>in<sp/>the<sp/>libpic30-coff.a<sp/>library<sp/>file</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67" refid="_main_8c_1a840291bc02cba5474a4cb46a9b9566fe" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="_main_8c_1a840291bc02cba5474a4cb46a9b9566fe" kindref="member">main</ref><sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="68"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ecart_d,ecart_rot;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>planificationAsked=0;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(OSCCONbits.LOCK<sp/>!=<sp/>1)<sp/>{};<sp/></highlight><highlight class="comment">//<sp/>Issue<sp/>:<sp/>block<sp/>the<sp/>debug<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/>ADPCFG<sp/>=<sp/>0xFFFF;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//After<sp/>reset<sp/>all<sp/>port<sp/>pins<sp/>multiplexed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//with<sp/>the<sp/>A/D<sp/>converter<sp/>are<sp/>configred<sp/>analog.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//We<sp/>will<sp/>reconfigure<sp/>them<sp/>to<sp/>be<sp/>digital</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//by<sp/>writing<sp/>all<sp/>1&apos;s<sp/>to<sp/>the<sp/>ADPCFG<sp/>register.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Note:<sp/>All<sp/>dsPIC<sp/>registers<sp/>are<sp/>memory<sp/>mapped.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//The<sp/>address<sp/>of<sp/>ADPCFG<sp/>and<sp/>other<sp/>registers</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//are<sp/>defined<sp/>in<sp/>the<sp/>device<sp/>linker<sp/>script</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//in<sp/>your<sp/>project.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//Function<sp/>UART_Init()<sp/>available<sp/>in<sp/>file,<sp/>UART.c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//UART_Init();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//Initialize<sp/>the<sp/>UART<sp/>module<sp/>to<sp/>communicate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//with<sp/>the<sp/>COM<sp/>port<sp/>on<sp/>the<sp/>Host<sp/>PC<sp/>via<sp/>an</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//RS232<sp/>cable<sp/>and<sp/>the<sp/>DB9<sp/>connector.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><ref refid="config_8c_1a8374cc689fdf02e60f74e948bb968363" kindref="member">oInitConfig</ref>();</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><ref refid="config_8c_1ae896e514fc90ada138adb9662bc40077" kindref="member">initRobot</ref>();</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><ref refid="config_8c_1a5e71b7f680e74ecb24a5d99be79af082" kindref="member">initPid</ref>();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><ref refid="quadrature_encoder_8c_1a2a4156cfb6e75c7630f84202cdfd26e6" kindref="member">InitQEI</ref>();</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><ref refid="_p_w_m_8c_1a4d6c1c7b4f91f5fe15bce98142012aff" kindref="member">oInitPWM</ref>();</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><ref refid="i2c_8c_1a7072845a54cdfad3cac5829d2f66b616" kindref="member">oInitI2C</ref>();</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>Function<sp/>INTx_IO_Init()<sp/>available<sp/>in<sp/>file,<sp/>INTx_IO_pins.c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><ref refid="_i_n_tx___i_o__pins_8c_1a08c8986a914404a098cc9fce4734af8a" kindref="member">INTx_IO_Init</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Initialize<sp/>the<sp/>External<sp/>interrupt<sp/>pins<sp/>and</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//some<sp/>I/O<sp/>pins<sp/>to<sp/>accept<sp/>input<sp/>from<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//switches,<sp/>S5<sp/>and<sp/>S6<sp/>and<sp/>drive<sp/>the<sp/>LEDs,<sp/>D3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//and<sp/>D4.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Function<sp/>Timer1_Init()<sp/>&amp;<sp/>Timer2_Init()<sp/>available<sp/>in<sp/>file,<sp/>Timers.c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><ref refid="_timers_8c_1a8df1ec489d8960f0cd45f6dc49ae2d36" kindref="member">Timer1_Init</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Initialize<sp/>Timer1<sp/>to<sp/>provide<sp/>&quot;blinking&quot;<sp/>time</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//for<sp/>the<sp/>LEDs.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>TRISEbits.TRISE5<sp/>=<sp/>0;<sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>to<sp/>measure<sp/>time<sp/>spent<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>RECUPERATION<sp/>DES<sp/>PARAMETRE<sp/>DU<sp/>ROBOT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(1)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Main<sp/>Loop<sp/>of<sp/>Code<sp/>Executes<sp/>forever</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(!<ref refid="_main_8c_1a80c3019b7eb3da73b390528ea55076be" kindref="member">gOneMsTemp</ref>)</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>LATEbits.LATE5<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="_main_8c_1a80c3019b7eb3da73b390528ea55076be" kindref="member">gOneMsTemp</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>RECUPERATION<sp/>DES<sp/>ECARTS</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1a9cbc04df9cd1654912f3f5e4d647e980" kindref="member">TruePositionReceived</ref>)</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="position_8c_1af26a3b28c044ab6a3bbfbcdff1bc2518" kindref="member">calcul_position</ref>();</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecart_d<sp/>=<sp/><ref refid="asserv_distance_8c_1a6f8121ce0d03ce3742599f5afef5f925" kindref="member">calculConsigne_d</ref>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ecart_rot<sp/>=<sp/><ref refid="asserv_orientation_8c_1a196d72a8a149bb9ff3d8fbc8acf7789e" kindref="member">calculEcart_rot</ref>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="speed_asserv_8c_1ac9ede30e16e5e9c15755344affd44445" kindref="member">asservissementVitesse</ref>(&amp;ecart_d,<sp/>&amp;ecart_rot);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a0a056c0ffd9e312447308f33f65f95ca" kindref="member">asservissementPosition</ref>(ecart_d,<sp/>ecart_rot);</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1ac96c1155b2173512a07f1831d0f2cf91" kindref="member">detectionCalageBordure</ref>();</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1a091acab55a056b7f764185d309b67e11" kindref="member">checkNewCommandI2C</ref>())</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a79530048e9f4dff619ca3c10fa9babd6" kindref="member">NEW_COMMAND_CONTINOUS</ref><sp/>:</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1afaeba89599991ec5e19a0352bc65a0f7" kindref="member">timeSpentSinceLastNewCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1ada185962d822ceab4476f61a02d446ed" kindref="member">NEW_COMMAND_DIFFERENT</ref><sp/>:</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1afaeba89599991ec5e19a0352bc65a0f7" kindref="member">timeSpentSinceLastNewCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>planificationAsked<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a63963570a86d969aa0df3e32151792ed" kindref="member">distanceTheorique</ref><sp/>=<sp/><ref refid="asserv_distance_8c_1a6f8121ce0d03ce3742599f5afef5f925" kindref="member">calculConsigne_d</ref>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>);</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1ae027de2b9d8c454e3f73eeaa8dfe0d8e" kindref="member">OLD_COMMAND</ref><sp/>:<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1afaeba89599991ec5e19a0352bc65a0f7" kindref="member">timeSpentSinceLastNewCommand</ref><sp/>++;</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a1fccca1b6dc1167906cdc3a948bbc6de" kindref="member">NO_COMMAND</ref><sp/>:</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>++;</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>&gt;=<sp/><ref refid="i2c_8h_1a66d0e9454a301ab9be73799262cb617b" kindref="member">NO_COMMAND_TIMEOUT</ref>)</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1a371ea0d846f8dcbef3a7ba04d68b1e5c" kindref="member">timeSpentWithoutCommand</ref><sp/>=<sp/><ref refid="i2c_8h_1a66d0e9454a301ab9be73799262cb617b" kindref="member">NO_COMMAND_TIMEOUT</ref>;</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a924846e4eecc5f7de834b151b8a156a6" kindref="member">WRONG_COMMAND</ref><sp/>:</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_main_8c_1ab4d3fed8a67bee07252b6efc6ecb78b6" kindref="member">wrongCommand</ref>++;</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1a9cbc04df9cd1654912f3f5e4d647e980" kindref="member">TruePositionReceived</ref>)</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="trajectory_8c_1ac845a572b6a2f20dba1053ee6366e1a6" kindref="member">nextTargetPointManagement</ref>(ecart_d,planificationAsked);</highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/>planificationAsked<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a5b5b757da1baef7d5c0501d0d3f2c500" kindref="member">fillSendBuffer</ref>();</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>LATEbits.LATE5<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Code<sp/>never<sp/>reaches<sp/>here!</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="183"><highlight class="comment">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</highlight></codeline>
+<codeline lineno="184"><highlight class="comment">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="185"><highlight class="comment">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Software<sp/>License<sp/>Agreement<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="186"><highlight class="comment">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="187"><highlight class="comment">;<sp/><sp/><sp/>The<sp/>software<sp/>supplied<sp/>herewith<sp/>by<sp/>Microchip<sp/>Technology<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="188"><highlight class="comment">;<sp/><sp/><sp/>Incorporated<sp/>(the<sp/>&quot;Company&quot;)<sp/>for<sp/>its<sp/>dsPIC<sp/>controller<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="189"><highlight class="comment">;<sp/><sp/><sp/>is<sp/>intended<sp/>and<sp/>supplied<sp/>to<sp/>you,<sp/>the<sp/>Company&apos;s<sp/>customer,<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="190"><highlight class="comment">;<sp/><sp/><sp/>for<sp/>use<sp/>solely<sp/>and<sp/>exclusively<sp/>on<sp/>Microchip<sp/>dsPIC<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="191"><highlight class="comment">;<sp/><sp/><sp/>products.<sp/>The<sp/>software<sp/>is<sp/>owned<sp/>by<sp/>the<sp/>Company<sp/>and/or<sp/>its<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="192"><highlight class="comment">;<sp/><sp/><sp/>supplier,<sp/>and<sp/>is<sp/>protected<sp/>under<sp/>applicable<sp/>copyright<sp/>laws.<sp/>All<sp/><sp/>;</highlight></codeline>
+<codeline lineno="193"><highlight class="comment">;<sp/><sp/><sp/>rights<sp/>are<sp/>reserved.<sp/>Any<sp/>use<sp/>in<sp/>violation<sp/>of<sp/>the<sp/>foregoing<sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="194"><highlight class="comment">;<sp/><sp/><sp/>restrictions<sp/>may<sp/>subject<sp/>the<sp/>user<sp/>to<sp/>criminal<sp/>sanctions<sp/>under<sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="195"><highlight class="comment">;<sp/><sp/><sp/>applicable<sp/>laws,<sp/>as<sp/>well<sp/>as<sp/>to<sp/>civil<sp/>liability<sp/>for<sp/>the<sp/>breach<sp/>of<sp/>;</highlight></codeline>
+<codeline lineno="196"><highlight class="comment">;<sp/><sp/><sp/>the<sp/>terms<sp/>and<sp/>conditions<sp/>of<sp/>this<sp/>license.<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="197"><highlight class="comment">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="198"><highlight class="comment">;<sp/><sp/><sp/>THIS<sp/>SOFTWARE<sp/>IS<sp/>PROVIDED<sp/>IN<sp/>AN<sp/>&quot;AS<sp/>IS&quot;<sp/>CONDITION.<sp/><sp/>NO<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="199"><highlight class="comment">;<sp/><sp/><sp/>WARRANTIES,<sp/>WHETHER<sp/>EXPRESS,<sp/>IMPLIED<sp/>OR<sp/>STATUTORY,<sp/>INCLUDING,<sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="200"><highlight class="comment">;<sp/><sp/><sp/>BUT<sp/>NOT<sp/>LIMITED<sp/>TO,<sp/>IMPLIED<sp/>WARRANTIES<sp/>OF<sp/>MERCHANTABILITY<sp/>AND<sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="201"><highlight class="comment">;<sp/><sp/><sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE<sp/>APPLY<sp/>TO<sp/>THIS<sp/>SOFTWARE.<sp/>THE<sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="202"><highlight class="comment">;<sp/><sp/><sp/>COMPANY<sp/>SHALL<sp/>NOT,<sp/>IN<sp/>ANY<sp/>CIRCUMSTANCES,<sp/>BE<sp/>LIABLE<sp/>FOR<sp/>SPECIAL,<sp/><sp/>;</highlight></codeline>
+<codeline lineno="203"><highlight class="comment">;<sp/><sp/><sp/>INCIDENTAL<sp/>OR<sp/>CONSEQUENTIAL<sp/>DAMAGES,<sp/>FOR<sp/>ANY<sp/>REASON<sp/>WHATSOEVER.<sp/><sp/>;</highlight></codeline>
+<codeline lineno="204"><highlight class="comment">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>;</highlight></codeline>
+<codeline lineno="205"><highlight class="comment">;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;</highlight></codeline>
+<codeline lineno="206"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c"/>
+  </compounddef>
+</doxygen>

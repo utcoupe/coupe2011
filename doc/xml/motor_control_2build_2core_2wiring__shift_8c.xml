@@ -1,0 +1,181 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="motor_control_2build_2core_2wiring__shift_8c" kind="file">
+    <compoundname>wiring_shift.c</compoundname>
+    <includes refid="motor_control_2build_2core_2wiring__private_8h" local="yes">wiring_private.h</includes>
+    <incdepgraph>
+      <node id="1780">
+        <label>stdarg.h</label>
+      </node>
+      <node id="1777">
+        <label>avr/interrupt.h</label>
+      </node>
+      <node id="1782">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1781">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="1776" relation="include">
+        </childnode>
+        <childnode refid="1782" relation="include">
+        </childnode>
+        <childnode refid="1783" relation="include">
+        </childnode>
+      </node>
+      <node id="1774">
+        <label>motorControl/build/core/wiring_shift.c</label>
+        <link refid="motorControl/build/core/wiring_shift.c"/>
+        <childnode refid="1775" relation="include">
+        </childnode>
+      </node>
+      <node id="1776">
+        <label>avr/io.h</label>
+      </node>
+      <node id="1778">
+        <label>avr/delay.h</label>
+      </node>
+      <node id="1783">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+      <node id="1779">
+        <label>stdio.h</label>
+      </node>
+      <node id="1775">
+        <label>wiring_private.h</label>
+        <link refid="motor_control_2build_2core_2wiring__private_8h"/>
+        <childnode refid="1776" relation="include">
+        </childnode>
+        <childnode refid="1777" relation="include">
+        </childnode>
+        <childnode refid="1778" relation="include">
+        </childnode>
+        <childnode refid="1779" relation="include">
+        </childnode>
+        <childnode refid="1780" relation="include">
+        </childnode>
+        <childnode refid="1781" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="motor_control_2build_2core_2wiring__shift_8c_1a1efecc975119046403adc60af645015d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t shiftIn</definition>
+        <argsstring>(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder)</argsstring>
+        <name>shiftIn</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>dataPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>clockPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitOrder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/wiring_shift.c" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/wiring_shift.c" bodystart="27" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2wiring__shift_8c_1ac44afc7b9d1ec5feb1179b2e3454690a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void shiftOut</definition>
+        <argsstring>(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val)</argsstring>
+        <name>shiftOut</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>dataPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>clockPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitOrder</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/wiring_shift.c" line="43" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/wiring_shift.c" bodystart="42" bodyend="55"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/>wiring_shift.c<sp/>-<sp/>shiftOut()<sp/>function</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/>Part<sp/>of<sp/>Arduino<sp/>-<sp/>http://www.arduino.cc/</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/>Copyright<sp/>(c)<sp/>2005-2006<sp/>David<sp/>A.<sp/>Mellis</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/>License<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/>version<sp/>2.1<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the<sp/>GNU</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"></highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/>Public<sp/>License<sp/>along<sp/>with<sp/>this<sp/>library;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>59<sp/>Temple<sp/>Place,<sp/>Suite<sp/>330,</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/>Boston,<sp/>MA<sp/><sp/>02111-1307<sp/><sp/>USA</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"></highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/>$Id:<sp/>wiring.c<sp/>248<sp/>2007-02-03<sp/>15:36:30Z<sp/>mellis<sp/>$</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2wiring__private_8h" kindref="compound">wiring_private.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight></codeline>
+<codeline lineno="27" refid="motor_control_2build_2core_2wiring__shift_8c_1a1efecc975119046403adc60af645015d" refkind="member"><highlight class="normal">uint8_t<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a1efecc975119046403adc60af645015d" kindref="member">shiftIn</ref>(uint8_t<sp/>dataPin,<sp/>uint8_t<sp/>clockPin,<sp/>uint8_t<sp/>bitOrder)<sp/>{</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>value<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>i;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>8;<sp/>++i)<sp/>{</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(clockPin,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a5bb885982ff66a2e0a0a45a8ee9c35e2" kindref="member">HIGH</ref>);</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(bitOrder<sp/>==<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a5811613d98580676f67f0dde8125433e" kindref="member">LSBFIRST</ref>)</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>|=<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a47ebd125381c211f80468fb47f717a35" kindref="member">digitalRead</ref>(dataPin)<sp/>&lt;&lt;<sp/>i;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>value<sp/>|=<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a47ebd125381c211f80468fb47f717a35" kindref="member">digitalRead</ref>(dataPin)<sp/>&lt;&lt;<sp/>(7<sp/>-<sp/>i);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(clockPin,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" kindref="member">LOW</ref>);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>value;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="motor_control_2build_2core_2wiring__shift_8c_1ac44afc7b9d1ec5feb1179b2e3454690a" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ac44afc7b9d1ec5feb1179b2e3454690a" kindref="member">shiftOut</ref>(uint8_t<sp/>dataPin,<sp/>uint8_t<sp/>clockPin,<sp/>uint8_t<sp/>bitOrder,<sp/>uint8_t<sp/>val)</highlight></codeline>
+<codeline lineno="43"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>uint8_t<sp/>i;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">for</highlight><highlight class="normal"><sp/>(i<sp/>=<sp/>0;<sp/>i<sp/>&lt;<sp/>8;<sp/>i++)<sp/><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(bitOrder<sp/>==<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a5811613d98580676f67f0dde8125433e" kindref="member">LSBFIRST</ref>)</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(dataPin,<sp/>!!(val<sp/>&amp;<sp/>(1<sp/>&lt;&lt;<sp/>i)));</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(dataPin,<sp/>!!(val<sp/>&amp;<sp/>(1<sp/>&lt;&lt;<sp/>(7<sp/>-<sp/>i))));</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(clockPin,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a5bb885982ff66a2e0a0a45a8ee9c35e2" kindref="member">HIGH</ref>);</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(clockPin,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" kindref="member">LOW</ref>);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/wiring_shift.c"/>
+  </compounddef>
+</doxygen>

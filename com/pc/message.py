@@ -1,21 +1,29 @@
 # -*- coding: utf-8 -*-
 
 
-
-#from struct import *
-#import binascii
 import serial
 import threading
 import time
 import subprocess
 from Queue import *
+#from struct import *
+#import binascii
 
 from timer import *
 
 
-
 class Server():
+	"""
+	Cette classe permet la communication avec les différents ports série
+	
+	@author Thomas
+	"""
 	def __init__(self, ports):
+		""" Constructeur
+		
+		@param
+			ports: tableau de paire (nom du port, vitesse de rafraichissement)
+		"""
 		self.ser		= 	dict()
 		self.screens	= 	[]
 		self.queuedCmd 	= 	dict() 	# liste des commandes à envoyer par port
@@ -61,8 +69,13 @@ class Server():
 		
 		print 'fin init'
 	
-	""" se connecter à un port """
 	def connect(self, port, refresh):
+		""" Connection à un port
+		
+		@param
+			port: numéro du port
+			refresh: vitesse de rafraichissement
+		"""
 		for i in range(10):
 			try:
 				#print 'tentative de connection sur %s'%port
@@ -78,8 +91,8 @@ class Server():
 		self.ser[port] = None
 		return self.ser[port]
 	
-	""" la loop envoyant à la suite les commandes dans la queue """
 	def loopCmd(self, port):
+		""" la loop envoyant à la suite les commandes de la queue """
 		queue = self.queuedCmd[port]
 		while True:
 			cmd = queue.get()
@@ -88,8 +101,8 @@ class Server():
 				self.waitRcv[port] = 'timeout'
 			queue.task_done()
 	
-	""" la loop récupérant les réponses au différentes commandes """
 	def loopRcv(self, port):
+		""" la loop récupérant les réponses au différentes commandes """
 		di = self.waitRcv[port]
 		while True:
 			r = self._readInput(port).split(',')
@@ -98,15 +111,25 @@ class Server():
 				cmd,recv = r
 				di[cmd] = recv
 	
-	""" ajoute une commande dans la queue des commandes """
 	def addCmd(self, cmd, port):
+		""" ajoute une commande à envoyer dans la queue des commandes
+		
+		@param
+			cmd: commande à envoyer
+			port: port sur lequel envoyer
+		"""
 		cmdid = cmd[0]
 		self.queuedCmd[port].put(cmd)
 		self.waitRcv[port][cmdid] = None
 	
-	""" renvoie la réponse à la commande, None si elle n'est pas encore arrivée, 
-		si on met en bloquant la fonction attend d'avoir la réponse """
 	def getRcv(self, cmd, port, bloquant=False):
+		""" renvoie la réponse à la commande
+		
+		@param
+			cmd: la commande dont on veut la réponse
+			port: port sur lequel on veut écouter la réponse
+			bloquant: True <=> boucle en attendant la réponse
+		"""
 		cmdid = cmd[0]
 		rcv = self.waitRcv[port][cmdid]
 		if bloquant:
@@ -114,7 +137,6 @@ class Server():
 				rcv = self.waitRcv[port][cmdid]
 		return rcv
 		
-	""" cmd: commande brute (sans caractere debut/fin) """
 	def _sendCmd(self, cmd, port):
 		try:
 			self.ser[port].write('<'+cmd+'>')
@@ -132,8 +154,14 @@ class Server():
 		else:
 			return 'timeout, on : '+port
 	
-	""" test la reactivitée de la cmd en envoyant et recevant """
 	def testPing(self, port, cmd):
+		""" test la reactivitée de la cmd en envoyant et recevant 
+		la sortie est écrite sur un autre écran
+		
+		@param
+			port: sur quel port balancer la commande
+			cmd: commande
+		"""
 		n = self.addScreen()
 		def loop():
 			tot = 0
@@ -146,6 +174,7 @@ class Server():
 				tEllapsed = time.time() - t
 				tot += tEllapsed
 				self.write(""+str(i)+" "+str(tEllapsed), n)
+			self.write("nb d'iters : " + nb_iter)
 			self.write("temps total"+str(tot), n)
 			self.write("moy"+str(tot/nb_iter), n)
 		
@@ -153,19 +182,36 @@ class Server():
 		t.start()
 	
 	def addScreen(self, live=None):
-		""" live: timer du live """
+		""" 
+		@param
+			live: timer du live
+		
+		@return numero de l'écran créé
+		"""
 		screens = [ s for s in self.screens if s[0] ]
 		self.screens = screens
 		screen = subprocess.Popen(["python","screen.py"], shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 		self.screens.append([screen, live])
 		return len(self.screens)-1 # return l'index du screen créé
 	
-	""" écrit sur un écran """
 	def write(self, msg, n=0):
+		""" écrit sur un écran 
+		
+		@param
+			msg: le message
+			n: l'écran sur lequel écrire
+		"""
 		self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
 		self.screens[n][0].stdin.flush()
 	
 	def getLive(self, port, cmd, speed=0.3):
+		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
+		
+		@param
+			port: le port sur lequel envoyer la commande
+			cmd: la commande
+			speed: l'interval entre chaque envoi
+		"""
 		def loop():
 			self.addCmd(cmd, 'ACM0')
 			self.write(self.getRcv(cmd, 'ACM0', True),n)
@@ -173,20 +219,33 @@ class Server():
 		n = self.addScreen(timer)
 		timer.start()
 	
-	def stopLive(self, n):
+	def _stopLive(self, n):
+		""" arreter un "live"
+		
+		@param
+			n: numéro du live à stopper
+		"""
 		self.screens[n][1].stop()
 		self.screens[n][1] = None
-		self.stopProcess(n)
 	
-	def stopProcess(self, n):
+	def _stopProcess(self, n):
+		""" arrete le process faisant tourner un écran
+		
+		@param
+			n: numéro de l'écran
+		"""
 		self.screens[n][0].terminate()
 		self.screens[n][0] = None
 	
 	def stopScreen(self, n):
+		""" arreter un écran (et la boucle derrière)
+		
+		@param
+			n: numéro de l'écran
+		"""
 		if self.screens[n][1]:
 			self.stopLive(n)
-		else:
-			self.stopProcess(n)
+		self.stopProcess(n)
 			
 			
 				

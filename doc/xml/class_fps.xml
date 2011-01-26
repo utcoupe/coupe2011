@@ -1,0 +1,144 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="class_fps" kind="class" prot="public">
+    <compoundname>Fps</compoundname>
+    <includes refid="_fps_8hpp" local="no">Fps.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_fps_1a3d312d7ebd526e33cd02d20b84db915a" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Fps::debutMesure</definition>
+        <argsstring></argsstring>
+        <name>debutMesure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_fps_1a338a4847abff7490cb33e95ec0b02adb" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Fps::finMesure</definition>
+        <argsstring></argsstring>
+        <name>finMesure</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_fps_1afaec02c0ab7c81a604edbfc30d7e1723" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Fps::fps</definition>
+        <argsstring></argsstring>
+        <name>fps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_fps_1ab3cf6f60f0ebc8cdc60a0e8079360338" prot="private" static="no" mutable="no">
+        <type>double</type>
+        <definition>double Fps::milli</definition>
+        <argsstring></argsstring>
+        <name>milli</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_fps_1a5a3a5276c19fc9eb3597e41900f4672c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>long long</type>
+        <definition>long long Fps::getTimeMillis</definition>
+        <argsstring>()</argsstring>
+        <name>getTimeMillis</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="25" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="25" bodyend="47"/>
+      </memberdef>
+      <memberdef kind="function" id="class_fps_1ae18f17b719ac2aa42cfe232f5c96b751" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Fps::debutMesureTime</definition>
+        <argsstring>()</argsstring>
+        <name>debutMesureTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="50" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="50" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_fps_1a273fce45bacd6e9dd51caaed49fa2875" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void Fps::finMesureTime</definition>
+        <argsstring>()</argsstring>
+        <name>finMesureTime</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="54" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_fps_1a6196578cfcca5ee1b7aa736437894875" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Fps::getfps</definition>
+        <argsstring>()</argsstring>
+        <name>getfps</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="58" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="58" bodyend="64"/>
+      </memberdef>
+      <memberdef kind="function" id="class_fps_1a97b1e9e618352e2c2957d85944f706a6" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>double</type>
+        <definition>double Fps::getMilli</definition>
+        <argsstring>()</argsstring>
+        <name>getMilli</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="66" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="66" bodyend="72"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" line="11" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/Fps.hpp" bodystart="11" bodyend="74"/>
+    <listofallmembers>
+      <member refid="class_fps_1a3d312d7ebd526e33cd02d20b84db915a" prot="private" virt="non-virtual"><scope>Fps</scope><name>debutMesure</name></member>
+      <member refid="class_fps_1ae18f17b719ac2aa42cfe232f5c96b751" prot="public" virt="non-virtual"><scope>Fps</scope><name>debutMesureTime</name></member>
+      <member refid="class_fps_1a338a4847abff7490cb33e95ec0b02adb" prot="private" virt="non-virtual"><scope>Fps</scope><name>finMesure</name></member>
+      <member refid="class_fps_1a273fce45bacd6e9dd51caaed49fa2875" prot="public" virt="non-virtual"><scope>Fps</scope><name>finMesureTime</name></member>
+      <member refid="class_fps_1afaec02c0ab7c81a604edbfc30d7e1723" prot="private" virt="non-virtual"><scope>Fps</scope><name>fps</name></member>
+      <member refid="class_fps_1a6196578cfcca5ee1b7aa736437894875" prot="public" virt="non-virtual"><scope>Fps</scope><name>getfps</name></member>
+      <member refid="class_fps_1a97b1e9e618352e2c2957d85944f706a6" prot="public" virt="non-virtual"><scope>Fps</scope><name>getMilli</name></member>
+      <member refid="class_fps_1a5a3a5276c19fc9eb3597e41900f4672c" prot="public" virt="non-virtual"><scope>Fps</scope><name>getTimeMillis</name></member>
+      <member refid="class_fps_1ab3cf6f60f0ebc8cdc60a0e8079360338" prot="private" virt="non-virtual"><scope>Fps</scope><name>milli</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

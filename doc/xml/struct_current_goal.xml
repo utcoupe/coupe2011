@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_current_goal" kind="struct" prot="public">
+    <compoundname>CurrentGoal</compoundname>
+    <includes refid="build_2control_8h" local="no">control.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_current_goal_1add21cf5b478e9ed6b3cb8d3890a327f1" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int CurrentGoal::type</definition>
+        <argsstring></argsstring>
+        <name>type</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="21" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int CurrentGoal::speed</definition>
+        <argsstring></argsstring>
+        <name>speed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="22" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1a6e92007beaa37c762cfd35d884b1a6bc" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int CurrentGoal::periode</definition>
+        <argsstring></argsstring>
+        <name>periode</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="23" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1a3c29420a39256dd332de3ccda9947d25" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int CurrentGoal::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="24" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1a286f9ecda5511dca05030186fa0c3c7c" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int CurrentGoal::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="25" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1aa3f39d39acbff67e93d36d1a96ca7ee4" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double CurrentGoal::angle</definition>
+        <argsstring></argsstring>
+        <name>angle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" prot="public" static="no" mutable="no">
+        <type>bool</type>
+        <definition>bool CurrentGoal::isReached</definition>
+        <argsstring></argsstring>
+        <name>isReached</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int CurrentGoal::phase</definition>
+        <argsstring></argsstring>
+        <name>phase</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="28" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="20" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="20" bodyend="29"/>
+    <listofallmembers>
+      <member refid="struct_current_goal_1aa3f39d39acbff67e93d36d1a96ca7ee4" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>angle</name></member>
+      <member refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>isReached</name></member>
+      <member refid="struct_current_goal_1a6e92007beaa37c762cfd35d884b1a6bc" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>periode</name></member>
+      <member refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>phase</name></member>
+      <member refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>speed</name></member>
+      <member refid="struct_current_goal_1add21cf5b478e9ed6b3cb8d3890a327f1" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>type</name></member>
+      <member refid="struct_current_goal_1a3c29420a39256dd332de3ccda9947d25" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>x</name></member>
+      <member refid="struct_current_goal_1a286f9ecda5511dca05030186fa0c3c7c" prot="public" virt="non-virtual"><scope>CurrentGoal</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

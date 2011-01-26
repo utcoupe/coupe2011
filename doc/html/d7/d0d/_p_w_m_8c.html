@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011: Référence du fichier asserv2010/PWM.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>Référence du fichier asserv2010/PWM.c</h1><code>#include &lt;p30fxxxx.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="../../dd/df6/_a_l_types_8h_source.html">ALTypes.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">System.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../da/d9f/_p_w_m_8h_source.html">PWM.h</a>&quot;</code><br/>
+<code>#include &quot;<a class="el" href="../../db/d16/config_8h_source.html">config.h</a>&quot;</code><br/>
+<div class="dynheader">
+Graphe des dépendances par inclusion de PWM.c:</div>
+<div class="dynsection">
+<div class="center"><img src="../../df/dd8/_p_w_m_8c__incl.png" border="0" usemap="#asserv2010_2_p_w_m_8c_map" alt=""/></div>
+<map name="asserv2010_2_p_w_m_8c_map" id="asserv2010_2_p_w_m_8c">
+<area shape="rect" href="../../dd/df6/_a_l_types_8h.html" title="ALTypes.h" alt="" coords="165,237,248,267"/><area shape="rect" href="../../da/d9f/_p_w_m_8h.html" title="PWM.h" alt="" coords="165,83,229,112"/><area shape="rect" href="../../db/d16/config_8h.html" title="config.h" alt="" coords="253,83,320,112"/><area shape="rect" href="../../de/d67/trajectory_8h.html" title="trajectory.h" alt="" coords="244,160,329,189"/></map>
+</div>
+<div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dynsection">
+<div class="center"><img src="../../d9/df6/_p_w_m_8c__dep__incl.png" border="0" usemap="#asserv2010_2_p_w_m_8cdep_map" alt=""/></div>
+</div>
+
+<p><a href="../../d7/d0d/_p_w_m_8c_source.html">Aller au code source de ce fichier.</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Macros</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#a71c98c784a3ace8054b362de26c94149">FPWM</a>&nbsp;&nbsp;&nbsp;60000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#a871f48bc0ea63bcc8b17936855abfa96">USE_A3995</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#af073033e2afb60ed5dbb59ad2bc07104">BREAK_UP_A3995</a>&nbsp;&nbsp;&nbsp;0x0105</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#ae646cba2f932488a927e507e4af2ad64">BREAK_DOWN_A3995</a>&nbsp;&nbsp;&nbsp;0x0105</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#a1abf959c67a8e14352764bc7f2c66051">PWM_DEAD_ZONE</a>&nbsp;&nbsp;&nbsp;1000</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#a90e30f68f70242da970206bf0ed618ce">PWM_PHASE_1</a>&nbsp;&nbsp;&nbsp;LATEbits.LATE1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#a807dca90dbab14b65d24a93f66c4abe2">PWM_PHASE_2</a>&nbsp;&nbsp;&nbsp;LATEbits.LATE3</td></tr>
+<tr><td colspan="2"><h2>Fonctions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#a4d6c1c7b4f91f5fe15bce98142012aff">oInitPWM</a> (void)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">void&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d7/d0d/_p_w_m_8c.html#abc914689ec2b324a10eba7605e63576f">oApplyPWM</a> (<a class="el" href="../../dd/df6/_a_l_types_8h.html#ae9014d6aa3241454fd2548b913ce3f5f">sInt16</a> value, <a class="el" href="../../dd/df6/_a_l_types_8h.html#aa4e0f27a9aca905e340c06d2dcae843c">uInt8</a> pJoint)</td></tr>
+</table>
+<hr/><h2>Documentation des macros</h2>
+<a class="anchor" id="ae646cba2f932488a927e507e4af2ad64"></a><!-- doxytag: member="PWM.c::BREAK_DOWN_A3995" ref="ae646cba2f932488a927e507e4af2ad64" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BREAK_DOWN_A3995&nbsp;&nbsp;&nbsp;0x0105</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00030">30</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af073033e2afb60ed5dbb59ad2bc07104"></a><!-- doxytag: member="PWM.c::BREAK_UP_A3995" ref="af073033e2afb60ed5dbb59ad2bc07104" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BREAK_UP_A3995&nbsp;&nbsp;&nbsp;0x0105</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00027">27</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a71c98c784a3ace8054b362de26c94149"></a><!-- doxytag: member="PWM.c::FPWM" ref="a71c98c784a3ace8054b362de26c94149" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FPWM&nbsp;&nbsp;&nbsp;60000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<dl class="author"><dt><b>Auteur:</b></dt><dd>(c) 2007 All Rights Reserved - This file is confidential.</dd></dl>
+<p>Version : $Id$ All ADC needs : Potentiometters, Current value, voltage check. PWM frequency, 60 kHz, so that no audible noise is present. </p>
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00021">21</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1abf959c67a8e14352764bc7f2c66051"></a><!-- doxytag: member="PWM.c::PWM_DEAD_ZONE" ref="a1abf959c67a8e14352764bc7f2c66051" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PWM_DEAD_ZONE&nbsp;&nbsp;&nbsp;1000</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00047">47</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a90e30f68f70242da970206bf0ed618ce"></a><!-- doxytag: member="PWM.c::PWM_PHASE_1" ref="a90e30f68f70242da970206bf0ed618ce" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PWM_PHASE_1&nbsp;&nbsp;&nbsp;LATEbits.LATE1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Change the PWM command</p>
+<dl><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>value</em>&nbsp;</td><td>from -32768 to + 32767 0 means no PWM (full break) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pJoint</em>&nbsp;</td><td>is the motor number, 0 or 1 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00082">82</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a807dca90dbab14b65d24a93f66c4abe2"></a><!-- doxytag: member="PWM.c::PWM_PHASE_2" ref="a807dca90dbab14b65d24a93f66c4abe2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define PWM_PHASE_2&nbsp;&nbsp;&nbsp;LATEbits.LATE3</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00083">83</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a871f48bc0ea63bcc8b17936855abfa96"></a><!-- doxytag: member="PWM.c::USE_A3995" ref="a871f48bc0ea63bcc8b17936855abfa96" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define USE_A3995</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00023">23</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Documentation des fonctions</h2>
+<a class="anchor" id="abc914689ec2b324a10eba7605e63576f"></a><!-- doxytag: member="PWM.c::oApplyPWM" ref="abc914689ec2b324a10eba7605e63576f" args="(sInt16 value, uInt8 pJoint)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oApplyPWM </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="../../dd/df6/_a_l_types_8h.html#ae9014d6aa3241454fd2548b913ce3f5f">sInt16</a>&nbsp;</td>
+          <td class="paramname"> <em>value</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="../../dd/df6/_a_l_types_8h.html#aa4e0f27a9aca905e340c06d2dcae843c">uInt8</a>&nbsp;</td>
+          <td class="paramname"> <em>pJoint</em></td><td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td><td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Change the PWM command</p>
+<dl><dt><b>Paramètres:</b></dt><dd>
+  <table border="0" cellspacing="2" cellpadding="0">
+    <tr><td valign="top"></td><td valign="top"><em>value</em>&nbsp;</td><td>from -32768 to + 32768. 0 means no PWM (full break) </td></tr>
+    <tr><td valign="top"></td><td valign="top"><em>pJoint</em>&nbsp;</td><td>is the motor number, 0 or 1 </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00085">85</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4d6c1c7b4f91f5fe15bce98142012aff"></a><!-- doxytag: member="PWM.c::oInitPWM" ref="a4d6c1c7b4f91f5fe15bce98142012aff" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void oInitPWM </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+<p>Init all PWM, using external one-chip double H bridge </p>
+
+<p>Définition à la ligne <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html#l00052">52</a> du fichier <a class="el" href="../../d7/d0d/_p_w_m_8c_source.html">PWM.c</a>.</p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 14:42:56 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

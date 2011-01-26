@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="classmain_1_1_ordre" kind="class" prot="public">
+    <compoundname>main::Ordre</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classmain_1_1_ordre_1a2f30adeba483d24b3465efe690d1d587" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>main::Ordre::cmd</definition>
+        <argsstring></argsstring>
+        <name>cmd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmain_1_1_ordre_1a7767123df13c7ab35a6132c771959216" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>main::Ordre::fonction</definition>
+        <argsstring></argsstring>
+        <name>fonction</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" line="28" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classmain_1_1_ordre_1a29573d75467832a74e8055667c596bb0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>main::Ordre::timeSinceLastReponse</definition>
+        <argsstring></argsstring>
+        <name>timeSinceLastReponse</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" line="29" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classmain_1_1_ordre_1a5566e4f9e1c60af4b7d71b6903ad0304" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def main::Ordre::__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" bodystart="26" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="classmain_1_1_ordre_1a299311dab96ceaab53669a0b6e314d89" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def main::Ordre::check</definition>
+        <argsstring></argsstring>
+        <name>check</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" bodystart="32" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/main.py" bodystart="25" bodyend="36"/>
+    <listofallmembers>
+      <member refid="classmain_1_1_ordre_1a5566e4f9e1c60af4b7d71b6903ad0304" prot="public" virt="non-virtual"><scope>main::Ordre</scope><name>__init__</name></member>
+      <member refid="classmain_1_1_ordre_1a299311dab96ceaab53669a0b6e314d89" prot="public" virt="non-virtual"><scope>main::Ordre</scope><name>check</name></member>
+      <member refid="classmain_1_1_ordre_1a2f30adeba483d24b3465efe690d1d587" prot="public" virt="non-virtual"><scope>main::Ordre</scope><name>cmd</name></member>
+      <member refid="classmain_1_1_ordre_1a7767123df13c7ab35a6132c771959216" prot="public" virt="non-virtual"><scope>main::Ordre</scope><name>fonction</name></member>
+      <member refid="classmain_1_1_ordre_1a29573d75467832a74e8055667c596bb0" prot="public" virt="non-virtual"><scope>main::Ordre</scope><name>timeSinceLastReponse</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

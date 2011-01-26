@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="class_a_f_motor_controller" kind="class" prot="public">
+    <compoundname>AFMotorController</compoundname>
+    <includes refid="pince_control_2adafruit_2_a_f_motor_8h" local="no">AFMotor.h</includes>
+      <sectiondef kind="friend">
+      <memberdef kind="friend" id="class_a_f_motor_controller_1a6a48e8c9a424ccdaea47858f7d043819" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>friend class</type>
+        <definition>friend class AF_DCMotor</definition>
+        <argsstring></argsstring>
+        <name>AF_DCMotor</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" line="72" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_a_f_motor_controller_1ae0009d2a489ec5848aaa5b8dcce34284" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>AFMotorController::AFMotorController</definition>
+        <argsstring>(void)</argsstring>
+        <name>AFMotorController</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" line="70" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.cpp" bodystart="18" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="class_a_f_motor_controller_1af4241ea7f3957d9f252dddb1d891e69f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AFMotorController::enable</definition>
+        <argsstring>(void)</argsstring>
+        <name>enable</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" line="71" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.cpp" bodystart="21" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_a_f_motor_controller_1a74b92162f025c066f51994651f232bea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void AFMotorController::latch_tx</definition>
+        <argsstring>(void)</argsstring>
+        <name>latch_tx</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" line="73" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.cpp" bodystart="43" bodyend="68"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" line="68" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/pinceControl/adafruit/AFMotor.h" bodystart="67" bodyend="74"/>
+    <listofallmembers>
+      <member refid="class_a_f_motor_controller_1a6a48e8c9a424ccdaea47858f7d043819" prot="public" virt="non-virtual"><scope>AFMotorController</scope><name>AF_DCMotor</name></member>
+      <member refid="class_a_f_motor_controller_1ae0009d2a489ec5848aaa5b8dcce34284" prot="public" virt="non-virtual"><scope>AFMotorController</scope><name>AFMotorController</name></member>
+      <member refid="class_a_f_motor_controller_1af4241ea7f3957d9f252dddb1d891e69f" prot="public" virt="non-virtual"><scope>AFMotorController</scope><name>enable</name></member>
+      <member refid="class_a_f_motor_controller_1a74b92162f025c066f51994651f232bea" prot="public" virt="non-virtual"><scope>AFMotorController</scope><name>latch_tx</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

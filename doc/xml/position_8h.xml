@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="position_8h" kind="file">
+    <compoundname>position.h</compoundname>
+    <includedby refid="position_8c" local="yes">asserv2010/position.c</includedby>
+    <invincdepgraph>
+      <node id="1223">
+        <label>asserv2010/position.c</label>
+        <link refid="position_8c"/>
+      </node>
+      <node id="1222">
+        <label>asserv2010/position.h</label>
+        <link refid="position.h"/>
+        <childnode refid="1223" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="position_8h_1af671c4a8d5f275858e38f97241719e3a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void calcul_position</definition>
+        <argsstring>()</argsstring>
+        <name>calcul_position</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/position.h" line="3" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/position.c" bodystart="7" bodyend="44"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>POSITION_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>POSITION_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="position_8c_1af26a3b28c044ab6a3bbfbcdff1bc2518" kindref="member">calcul_position</ref>();</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/position.h"/>
+  </compounddef>
+</doxygen>

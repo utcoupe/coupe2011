@@ -1,0 +1,145 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="classtimer_1_1_my_timer" kind="class" prot="public">
+    <compoundname>timer::MyTimer</compoundname>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classtimer_1_1_my_timer_1ad7bf951a8114f64283ea5e71f348a307" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>timer::MyTimer::_target</definition>
+        <argsstring></argsstring>
+        <name>_target</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="9" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer_1_1_my_timer_1aa52c34ae5ad106a088525da394583929" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>timer::MyTimer::_args</definition>
+        <argsstring></argsstring>
+        <name>_args</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="10" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer_1_1_my_timer_1a7a00cae68b04c42d0d65f0b211fa255c" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>timer::MyTimer::_kwargs</definition>
+        <argsstring></argsstring>
+        <name>_kwargs</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="11" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer_1_1_my_timer_1aae2a7f9d76ddc20c20c2260b88ef0270" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>timer::MyTimer::_tempo</definition>
+        <argsstring></argsstring>
+        <name>_tempo</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="12" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classtimer_1_1_my_timer_1a936cdbffc967700ebd74e5bfca02afd4" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>timer::MyTimer::_timer</definition>
+        <argsstring></argsstring>
+        <name>_timer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="15" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classtimer_1_1_my_timer_1a9b9c68c2c606a18c0cb175ba0a7f904d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def timer::MyTimer::__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="8" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="8" bodyend="13"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer_1_1_my_timer_1a574061c189db3245ad982ac60a0194cd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def timer::MyTimer::start</definition>
+        <argsstring></argsstring>
+        <name>start</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="19" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="19" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="classtimer_1_1_my_timer_1ab53d51ab9e889089112aa0a1d133b84e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def timer::MyTimer::stop</definition>
+        <argsstring></argsstring>
+        <name>stop</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="23" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="23" bodyend="28"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="classtimer_1_1_my_timer_1a400c50fc1bb3f94fe37d12cf9b1f9e19" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def timer::MyTimer::_run</definition>
+        <argsstring></argsstring>
+        <name>_run</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="14" bodyend="18"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" line="8" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/timer.py" bodystart="7" bodyend="29"/>
+    <listofallmembers>
+      <member refid="classtimer_1_1_my_timer_1a9b9c68c2c606a18c0cb175ba0a7f904d" prot="public" virt="non-virtual"><scope>timer::MyTimer</scope><name>__init__</name></member>
+      <member refid="classtimer_1_1_my_timer_1aa52c34ae5ad106a088525da394583929" prot="private" virt="non-virtual"><scope>timer::MyTimer</scope><name>_args</name></member>
+      <member refid="classtimer_1_1_my_timer_1a7a00cae68b04c42d0d65f0b211fa255c" prot="private" virt="non-virtual"><scope>timer::MyTimer</scope><name>_kwargs</name></member>
+      <member refid="classtimer_1_1_my_timer_1a400c50fc1bb3f94fe37d12cf9b1f9e19" prot="private" virt="non-virtual"><scope>timer::MyTimer</scope><name>_run</name></member>
+      <member refid="classtimer_1_1_my_timer_1ad7bf951a8114f64283ea5e71f348a307" prot="private" virt="non-virtual"><scope>timer::MyTimer</scope><name>_target</name></member>
+      <member refid="classtimer_1_1_my_timer_1aae2a7f9d76ddc20c20c2260b88ef0270" prot="private" virt="non-virtual"><scope>timer::MyTimer</scope><name>_tempo</name></member>
+      <member refid="classtimer_1_1_my_timer_1a936cdbffc967700ebd74e5bfca02afd4" prot="private" virt="non-virtual"><scope>timer::MyTimer</scope><name>_timer</name></member>
+      <member refid="classtimer_1_1_my_timer_1a574061c189db3245ad982ac60a0194cd" prot="public" virt="non-virtual"><scope>timer::MyTimer</scope><name>start</name></member>
+      <member refid="classtimer_1_1_my_timer_1ab53d51ab9e889089112aa0a1d133b84e" prot="public" virt="non-virtual"><scope>timer::MyTimer</scope><name>stop</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

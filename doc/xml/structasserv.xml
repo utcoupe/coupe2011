@@ -1,0 +1,128 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="structasserv" kind="struct" prot="public">
+    <compoundname>asserv</compoundname>
+    <includes refid="config_8h" local="no">config.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="structasserv_1aa6c642febf7ae10bfe380ba63453f963" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::Kp_d</definition>
+        <argsstring></argsstring>
+        <name>Kp_d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="81" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1a93e5b5fc771c7a0877f0971a567c6f72" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::Ki_d</definition>
+        <argsstring></argsstring>
+        <name>Ki_d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="82" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1afeb218cf07c1d67ddfb902d127c2633a" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::Kd_d</definition>
+        <argsstring></argsstring>
+        <name>Kd_d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="83" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1ad10dfa74793122617e924f549a767c74" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::iMax_d</definition>
+        <argsstring></argsstring>
+        <name>iMax_d</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="84" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1a4d1fc0910cb249ae5af8e4007ce71d76" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::Kp_o</definition>
+        <argsstring></argsstring>
+        <name>Kp_o</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="85" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1a4206b0bbf2c1b60c44df113e37016c47" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::Ki_o</definition>
+        <argsstring></argsstring>
+        <name>Ki_o</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="86" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1a0caee5d8e4b8082118617858791b2e1a" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::Kd_o</definition>
+        <argsstring></argsstring>
+        <name>Kd_o</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="87" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="structasserv_1a9d87c90865ac93f41a1c685e45f2a1cb" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa7fe72e471faf6010b63245239c2a26e" kindref="member">sInt32</ref></type>
+        <definition>sInt32 asserv::iMax_o</definition>
+        <argsstring></argsstring>
+        <name>iMax_o</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="88" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" line="80" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.h" bodystart="80" bodyend="89"/>
+    <listofallmembers>
+      <member refid="structasserv_1ad10dfa74793122617e924f549a767c74" prot="public" virt="non-virtual"><scope>asserv</scope><name>iMax_d</name></member>
+      <member refid="structasserv_1a9d87c90865ac93f41a1c685e45f2a1cb" prot="public" virt="non-virtual"><scope>asserv</scope><name>iMax_o</name></member>
+      <member refid="structasserv_1afeb218cf07c1d67ddfb902d127c2633a" prot="public" virt="non-virtual"><scope>asserv</scope><name>Kd_d</name></member>
+      <member refid="structasserv_1a0caee5d8e4b8082118617858791b2e1a" prot="public" virt="non-virtual"><scope>asserv</scope><name>Kd_o</name></member>
+      <member refid="structasserv_1a93e5b5fc771c7a0877f0971a567c6f72" prot="public" virt="non-virtual"><scope>asserv</scope><name>Ki_d</name></member>
+      <member refid="structasserv_1a4206b0bbf2c1b60c44df113e37016c47" prot="public" virt="non-virtual"><scope>asserv</scope><name>Ki_o</name></member>
+      <member refid="structasserv_1aa6c642febf7ae10bfe380ba63453f963" prot="public" virt="non-virtual"><scope>asserv</scope><name>Kp_d</name></member>
+      <member refid="structasserv_1a4d1fc0910cb249ae5af8e4007ce71d76" prot="public" virt="non-virtual"><scope>asserv</scope><name>Kp_o</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

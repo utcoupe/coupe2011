@@ -1,0 +1,606 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="motor_control_2build_2core_2pins__arduino_8h" kind="file">
+    <compoundname>pins_arduino.h</compoundname>
+    <includes local="no">avr/pgmspace.h</includes>
+    <includedby refid="com_2carte_2build_2core_2_tone_8cpp" local="yes">com/carte/build/core/Tone.cpp</includedby>
+    <includedby refid="com_2carte_2build_2core_2wiring__analog_8c" local="yes">com/carte/build/core/wiring_analog.c</includedby>
+    <includedby refid="com_2carte_2build_2core_2wiring__digital_8c" local="yes">com/carte/build/core/wiring_digital.c</includedby>
+    <includedby refid="com_2carte_2build_2core_2wiring__pulse_8c" local="yes">com/carte/build/core/wiring_pulse.c</includedby>
+    <includedby refid="motor_control_2build_2core_2_tone_8cpp" local="yes">motorControl/build/core/Tone.cpp</includedby>
+    <includedby refid="motor_control_2build_2core_2wiring__analog_8c" local="yes">motorControl/build/core/wiring_analog.c</includedby>
+    <includedby refid="motor_control_2build_2core_2wiring__digital_8c" local="yes">motorControl/build/core/wiring_digital.c</includedby>
+    <includedby refid="motor_control_2build_2core_2wiring__pulse_8c" local="yes">motorControl/build/core/wiring_pulse.c</includedby>
+    <incdepgraph>
+      <node id="1432">
+        <label>motorControl/build/core/pins_arduino.h</label>
+        <link refid="motorControl/build/core/pins_arduino.h"/>
+        <childnode refid="1433" relation="include">
+        </childnode>
+      </node>
+      <node id="1433">
+        <label>avr/pgmspace.h</label>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1434">
+        <label>motorControl/build/core/pins_arduino.h</label>
+        <link refid="motorControl/build/core/pins_arduino.h"/>
+        <childnode refid="1435" relation="include">
+        </childnode>
+        <childnode refid="1436" relation="include">
+        </childnode>
+        <childnode refid="1437" relation="include">
+        </childnode>
+        <childnode refid="1438" relation="include">
+        </childnode>
+        <childnode refid="1439" relation="include">
+        </childnode>
+        <childnode refid="1440" relation="include">
+        </childnode>
+        <childnode refid="1441" relation="include">
+        </childnode>
+        <childnode refid="1442" relation="include">
+        </childnode>
+      </node>
+      <node id="1442">
+        <label>motorControl/build/core/wiring_pulse.c</label>
+        <link refid="motor_control_2build_2core_2wiring__pulse_8c"/>
+      </node>
+      <node id="1440">
+        <label>motorControl/build/core/wiring_analog.c</label>
+        <link refid="motor_control_2build_2core_2wiring__analog_8c"/>
+      </node>
+      <node id="1437">
+        <label>com/carte/build/core/wiring_digital.c</label>
+        <link refid="com_2carte_2build_2core_2wiring__digital_8c"/>
+      </node>
+      <node id="1436">
+        <label>com/carte/build/core/wiring_analog.c</label>
+        <link refid="com_2carte_2build_2core_2wiring__analog_8c"/>
+      </node>
+      <node id="1435">
+        <label>com/carte/build/core/Tone.cpp</label>
+        <link refid="com_2carte_2build_2core_2_tone_8cpp"/>
+      </node>
+      <node id="1439">
+        <label>motorControl/build/core/Tone.cpp</label>
+        <link refid="motor_control_2build_2core_2_tone_8cpp"/>
+      </node>
+      <node id="1438">
+        <label>com/carte/build/core/wiring_pulse.c</label>
+        <link refid="com_2carte_2build_2core_2wiring__pulse_8c"/>
+      </node>
+      <node id="1441">
+        <label>motorControl/build/core/wiring_digital.c</label>
+        <link refid="motor_control_2build_2core_2wiring__digital_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a62486102324ad2f7185279ce943e3152" prot="public" static="no">
+        <name>NOT_A_PIN</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="30" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" prot="public" static="no">
+        <name>NOT_A_PORT</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="31" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a77d75bdd0dd8486dc8a52e742f1dc8a0" prot="public" static="no">
+        <name>NOT_ON_TIMER</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="33" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a9a45c92fe306d61cc67ee815449cc754" prot="public" static="no">
+        <name>TIMER0A</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="34" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1ae27874b42e0356990a774d9da7161e22" prot="public" static="no">
+        <name>TIMER0B</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a90512316aeb46f7d54fb6a53ad7b9d80" prot="public" static="no">
+        <name>TIMER1A</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1aaeaaaf8bf5b4cdfd864164a6e93d1fa3" prot="public" static="no">
+        <name>TIMER1B</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1aca904d0e4ebb6d643c349f7f05613995" prot="public" static="no">
+        <name>TIMER2</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="38" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a029a1db02fe68e1ffed9a7e7b3910568" prot="public" static="no">
+        <name>TIMER2A</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a3c6f8d27eb3e22e69a9894cf22066152" prot="public" static="no">
+        <name>TIMER2B</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="40" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1afd0691fc61db026855e82a4bf09a619f" prot="public" static="no">
+        <name>TIMER3A</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="42" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a9f36722b6c1a7e1256c239111a8d7d70" prot="public" static="no">
+        <name>TIMER3B</name>
+        <initializer>9</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="43" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a051b5537c0f69ff7c0e565defeefe2dc" prot="public" static="no">
+        <name>TIMER3C</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="44" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1ac6088ef18958d9c48f1453c1f14c3555" prot="public" static="no">
+        <name>TIMER4A</name>
+        <initializer>11</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="45" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a0ef626a33b68c22b07ba09a4cdf84947" prot="public" static="no">
+        <name>TIMER4B</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a2509222007b170d0ffbaa25bced99a78" prot="public" static="no">
+        <name>TIMER4C</name>
+        <initializer>13</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="47" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a0bfbbf8c1f077f871e65628564a91b84" prot="public" static="no">
+        <name>TIMER5A</name>
+        <initializer>14</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="48" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a726d99899d8ec9eef95dad18ca7a2275" prot="public" static="no">
+        <name>TIMER5B</name>
+        <initializer>15</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="49" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1abd862e734e9180a5a624e312549af9a3" prot="public" static="no">
+        <name>TIMER5C</name>
+        <initializer>16</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="50" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a695126157083b643a98b9b800e28ac6f" prot="public" static="no">
+        <name>digitalPinToPort</name>
+        <param><defname>P</defname></param>
+        <initializer>( pgm_read_byte( <ref refid="motor_control_2build_2core_2pins__arduino_8h_1a760bd344a6a02658408a872150b8b885" kindref="member">digital_pin_to_port_PGM</ref> + (P) ) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="80" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a97d049a432ec5a04c40510df440c786a" prot="public" static="no">
+        <name>digitalPinToBitMask</name>
+        <param><defname>P</defname></param>
+        <initializer>( pgm_read_byte( <ref refid="motor_control_2build_2core_2pins__arduino_8h_1ac161b9268b58f75c06875fd9fd432ff7" kindref="member">digital_pin_to_bit_mask_PGM</ref> + (P) ) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="81" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a64a2691203f7d4e1d680b7cd6b7395b1" prot="public" static="no">
+        <name>digitalPinToTimer</name>
+        <param><defname>P</defname></param>
+        <initializer>( pgm_read_byte( <ref refid="motor_control_2build_2core_2pins__arduino_8h_1ae253f497127926f0ee4ca1d5568ad6a8" kindref="member">digital_pin_to_timer_PGM</ref> + (P) ) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="82" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a220e52e727b3b726b3d5a2295d98ca9d" prot="public" static="no">
+        <name>analogInPinToBit</name>
+        <param><defname>P</defname></param>
+        <initializer>(P)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="83" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="83" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a50e1d61573f6ba2a1748a58a1abf25ac" prot="public" static="no">
+        <name>portOutputRegister</name>
+        <param><defname>P</defname></param>
+        <initializer>( (volatile uint8_t *)( pgm_read_word( <ref refid="motor_control_2build_2core_2pins__arduino_8h_1a3c27bdee78e6cb316807107ee37c1d74" kindref="member">port_to_output_PGM</ref> + (P))) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="84" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a94b549025bf6bf8a93d752fef7b6780c" prot="public" static="no">
+        <name>portInputRegister</name>
+        <param><defname>P</defname></param>
+        <initializer>( (volatile uint8_t *)( pgm_read_word( <ref refid="motor_control_2build_2core_2pins__arduino_8h_1a1d2bcc0662263488ace7c68bc2073cb7" kindref="member">port_to_input_PGM</ref> + (P))) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="85" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2build_2core_2pins__arduino_8h_1a1b512232c48ace5432e307fe6dcac29c" prot="public" static="no">
+        <name>portModeRegister</name>
+        <param><defname>P</defname></param>
+        <initializer>( (volatile uint8_t *)( pgm_read_word( <ref refid="motor_control_2build_2core_2pins__arduino_8h_1aa89b79b8454402ab79188f967c301015" kindref="member">port_to_mode_PGM</ref> + (P))) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="86" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="86" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1acbe8412158c492ec8a596b58ad73b5d7" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t SS</definition>
+        <argsstring></argsstring>
+        <name>SS</name>
+        <initializer> 10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="58" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1a2559b2e00179d34c57de6aa25c4b4dd5" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t MOSI</definition>
+        <argsstring></argsstring>
+        <name>MOSI</name>
+        <initializer> 11</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="59" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1a1fcd80d042bfc259b798abf2882c7f96" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t MISO</definition>
+        <argsstring></argsstring>
+        <name>MISO</name>
+        <initializer> 12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="60" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="60" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1a4a97a1e1f893cc16d0c9ef17c7a9a8ac" prot="public" static="yes" mutable="no">
+        <type>const uint8_t</type>
+        <definition>const uint8_t SCK</definition>
+        <argsstring></argsstring>
+        <name>SCK</name>
+        <initializer> 13</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="61" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1aa89b79b8454402ab79188f967c301015" prot="public" static="no" mutable="no">
+        <type>const uint16_t PROGMEM</type>
+        <definition>const uint16_t PROGMEM port_to_mode_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>port_to_mode_PGM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="66" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="358" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1a1d2bcc0662263488ace7c68bc2073cb7" prot="public" static="no" mutable="no">
+        <type>const uint16_t PROGMEM</type>
+        <definition>const uint16_t PROGMEM port_to_input_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>port_to_input_PGM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="67" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1a3c27bdee78e6cb316807107ee37c1d74" prot="public" static="no" mutable="no">
+        <type>const uint16_t PROGMEM</type>
+        <definition>const uint16_t PROGMEM port_to_output_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>port_to_output_PGM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="68" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1a760bd344a6a02658408a872150b8b885" prot="public" static="no" mutable="no">
+        <type>const uint8_t PROGMEM</type>
+        <definition>const uint8_t PROGMEM digital_pin_to_port_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>digital_pin_to_port_PGM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="70" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1ac161b9268b58f75c06875fd9fd432ff7" prot="public" static="no" mutable="no">
+        <type>const uint8_t PROGMEM</type>
+        <definition>const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>digital_pin_to_bit_mask_PGM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="72" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="405" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="motor_control_2build_2core_2pins__arduino_8h_1ae253f497127926f0ee4ca1d5568ad6a8" prot="public" static="no" mutable="no">
+        <type>const uint8_t PROGMEM</type>
+        <definition>const uint8_t PROGMEM digital_pin_to_timer_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>digital_pin_to_timer_PGM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h" line="73" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="428" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/>pins_arduino.h<sp/>-<sp/>Pin<sp/>definition<sp/>functions<sp/>for<sp/>Arduino</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/>Part<sp/>of<sp/>Arduino<sp/>-<sp/>http://www.arduino.cc/</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/>Copyright<sp/>(c)<sp/>2007<sp/>David<sp/>A.<sp/>Mellis</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/>License<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/>version<sp/>2.1<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the<sp/>GNU</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"></highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/>Public<sp/>License<sp/>along<sp/>with<sp/>this<sp/>library;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>59<sp/>Temple<sp/>Place,<sp/>Suite<sp/>330,</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/>Boston,<sp/>MA<sp/><sp/>02111-1307<sp/><sp/>USA</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"></highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/>$Id:<sp/>wiring.h<sp/>249<sp/>2007-02-03<sp/>16:52:51Z<sp/>mellis<sp/>$</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>Pins_Arduino_h</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>Pins_Arduino_h</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;avr/pgmspace.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight></codeline>
+<codeline lineno="30" refid="motor_control_2build_2core_2pins__arduino_8h_1a62486102324ad2f7185279ce943e3152" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NOT_A_PIN<sp/>0</highlight></codeline>
+<codeline lineno="31" refid="motor_control_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>NOT_A_PORT<sp/>0</highlight></codeline>
+<codeline lineno="32"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="motor_control_2build_2core_2pins__arduino_8h_1a77d75bdd0dd8486dc8a52e742f1dc8a0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>NOT_ON_TIMER<sp/>0</highlight></codeline>
+<codeline lineno="34" refid="motor_control_2build_2core_2pins__arduino_8h_1a9a45c92fe306d61cc67ee815449cc754" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER0A<sp/>1</highlight></codeline>
+<codeline lineno="35" refid="motor_control_2build_2core_2pins__arduino_8h_1ae27874b42e0356990a774d9da7161e22" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER0B<sp/>2</highlight></codeline>
+<codeline lineno="36" refid="motor_control_2build_2core_2pins__arduino_8h_1a90512316aeb46f7d54fb6a53ad7b9d80" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER1A<sp/>3</highlight></codeline>
+<codeline lineno="37" refid="motor_control_2build_2core_2pins__arduino_8h_1aaeaaaf8bf5b4cdfd864164a6e93d1fa3" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER1B<sp/>4</highlight></codeline>
+<codeline lineno="38" refid="motor_control_2build_2core_2pins__arduino_8h_1aca904d0e4ebb6d643c349f7f05613995" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER2<sp/><sp/>5</highlight></codeline>
+<codeline lineno="39" refid="motor_control_2build_2core_2pins__arduino_8h_1a029a1db02fe68e1ffed9a7e7b3910568" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER2A<sp/>6</highlight></codeline>
+<codeline lineno="40" refid="motor_control_2build_2core_2pins__arduino_8h_1a3c6f8d27eb3e22e69a9894cf22066152" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER2B<sp/>7</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="motor_control_2build_2core_2pins__arduino_8h_1afd0691fc61db026855e82a4bf09a619f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TIMER3A<sp/>8</highlight></codeline>
+<codeline lineno="43" refid="motor_control_2build_2core_2pins__arduino_8h_1a9f36722b6c1a7e1256c239111a8d7d70" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER3B<sp/>9</highlight></codeline>
+<codeline lineno="44" refid="motor_control_2build_2core_2pins__arduino_8h_1a051b5537c0f69ff7c0e565defeefe2dc" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER3C<sp/>10</highlight></codeline>
+<codeline lineno="45" refid="motor_control_2build_2core_2pins__arduino_8h_1ac6088ef18958d9c48f1453c1f14c3555" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER4A<sp/>11</highlight></codeline>
+<codeline lineno="46" refid="motor_control_2build_2core_2pins__arduino_8h_1a0ef626a33b68c22b07ba09a4cdf84947" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER4B<sp/>12</highlight></codeline>
+<codeline lineno="47" refid="motor_control_2build_2core_2pins__arduino_8h_1a2509222007b170d0ffbaa25bced99a78" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER4C<sp/>13</highlight></codeline>
+<codeline lineno="48" refid="motor_control_2build_2core_2pins__arduino_8h_1a0bfbbf8c1f077f871e65628564a91b84" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER5A<sp/>14</highlight></codeline>
+<codeline lineno="49" refid="motor_control_2build_2core_2pins__arduino_8h_1a726d99899d8ec9eef95dad18ca7a2275" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER5B<sp/>15</highlight></codeline>
+<codeline lineno="50" refid="motor_control_2build_2core_2pins__arduino_8h_1abd862e734e9180a5a624e312549af9a3" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMER5C<sp/>16</highlight></codeline>
+<codeline lineno="51"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>SS<sp/><sp/><sp/>=<sp/>53;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>MOSI<sp/>=<sp/>51;</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>MISO<sp/>=<sp/>50;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>SCK<sp/><sp/>=<sp/>52;</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>SS<sp/><sp/><sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>MOSI<sp/>=<sp/>11;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>MISO<sp/>=<sp/>12;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/>uint8_t<sp/>SCK<sp/><sp/>=<sp/>13;</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="63"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">//<sp/>On<sp/>the<sp/>ATmega1280,<sp/>the<sp/>addresses<sp/>of<sp/>some<sp/>of<sp/>the<sp/>port<sp/>registers<sp/>are</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">//<sp/>greater<sp/>than<sp/>255,<sp/>so<sp/>we<sp/>can&apos;t<sp/>store<sp/>them<sp/>in<sp/>uint8_t&apos;s.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1aa89b79b8454402ab79188f967c301015" kindref="member">port_to_mode_PGM</ref>[];</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a1d2bcc0662263488ace7c68bc2073cb7" kindref="member">port_to_input_PGM</ref>[];</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a3c27bdee78e6cb316807107ee37c1d74" kindref="member">port_to_output_PGM</ref>[];</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a760bd344a6a02658408a872150b8b885" kindref="member">digital_pin_to_port_PGM</ref>[];</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="comment">//<sp/>extern<sp/>const<sp/>uint8_t<sp/>PROGMEM<sp/>digital_pin_to_bit_PGM[];</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ac161b9268b58f75c06875fd9fd432ff7" kindref="member">digital_pin_to_bit_mask_PGM</ref>[];</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ae253f497127926f0ee4ca1d5568ad6a8" kindref="member">digital_pin_to_timer_PGM</ref>[];</highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Get<sp/>the<sp/>bit<sp/>location<sp/>within<sp/>the<sp/>hardware<sp/>port<sp/>of<sp/>the<sp/>given<sp/>virtual<sp/>pin.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>comes<sp/>from<sp/>the<sp/>pins_*.c<sp/>file<sp/>for<sp/>the<sp/>active<sp/>board<sp/>configuration.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="comment">//<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"></highlight><highlight class="comment">//<sp/>These<sp/>perform<sp/>slightly<sp/>better<sp/>as<sp/>macros<sp/>compared<sp/>to<sp/>inline<sp/>functions</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="79"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80" refid="motor_control_2build_2core_2pins__arduino_8h_1a695126157083b643a98b9b800e28ac6f" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>digitalPinToPort(P)<sp/>(<sp/>pgm_read_byte(<sp/>digital_pin_to_port_PGM<sp/>+<sp/>(P)<sp/>)<sp/>)</highlight></codeline>
+<codeline lineno="81" refid="motor_control_2build_2core_2pins__arduino_8h_1a97d049a432ec5a04c40510df440c786a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>digitalPinToBitMask(P)<sp/>(<sp/>pgm_read_byte(<sp/>digital_pin_to_bit_mask_PGM<sp/>+<sp/>(P)<sp/>)<sp/>)</highlight></codeline>
+<codeline lineno="82" refid="motor_control_2build_2core_2pins__arduino_8h_1a64a2691203f7d4e1d680b7cd6b7395b1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>digitalPinToTimer(P)<sp/>(<sp/>pgm_read_byte(<sp/>digital_pin_to_timer_PGM<sp/>+<sp/>(P)<sp/>)<sp/>)</highlight></codeline>
+<codeline lineno="83" refid="motor_control_2build_2core_2pins__arduino_8h_1a220e52e727b3b726b3d5a2295d98ca9d" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>analogInPinToBit(P)<sp/>(P)</highlight></codeline>
+<codeline lineno="84" refid="motor_control_2build_2core_2pins__arduino_8h_1a50e1d61573f6ba2a1748a58a1abf25ac" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>portOutputRegister(P)<sp/>(<sp/>(volatile<sp/>uint8_t<sp/>*)(<sp/>pgm_read_word(<sp/>port_to_output_PGM<sp/>+<sp/>(P)))<sp/>)</highlight></codeline>
+<codeline lineno="85" refid="motor_control_2build_2core_2pins__arduino_8h_1a94b549025bf6bf8a93d752fef7b6780c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>portInputRegister(P)<sp/>(<sp/>(volatile<sp/>uint8_t<sp/>*)(<sp/>pgm_read_word(<sp/>port_to_input_PGM<sp/>+<sp/>(P)))<sp/>)</highlight></codeline>
+<codeline lineno="86" refid="motor_control_2build_2core_2pins__arduino_8h_1a1b512232c48ace5432e307fe6dcac29c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>portModeRegister(P)<sp/>(<sp/>(volatile<sp/>uint8_t<sp/>*)(<sp/>pgm_read_word(<sp/>port_to_mode_PGM<sp/>+<sp/>(P)))<sp/>)</highlight></codeline>
+<codeline lineno="87"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/pins_arduino.h"/>
+  </compounddef>
+</doxygen>

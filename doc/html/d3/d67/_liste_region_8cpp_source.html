@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de Visio/ObjectCamera/ListeRegion.cpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>Visio/ObjectCamera/ListeRegion.cpp</h1><a href="../../d3/d67/_liste_region_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00014"></a>00014 <span class="preprocessor">#include &quot;<a class="code" href="../../d7/d21/_liste_region_8hpp.html">ListeRegion.hpp</a>&quot;</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="../../d4/d4b/class_liste_region.html#a9e60498b643751377c93c8eb857300ed">00016</a> <a class="code" href="../../d4/d4b/class_liste_region.html#a9e60498b643751377c93c8eb857300ed">ListeRegion::ListeRegion</a>()
+<a name="l00017"></a>00017 {
+<a name="l00018"></a>00018     deb = NULL;
+<a name="l00019"></a>00019     fin = NULL;
+<a name="l00020"></a>00020 }
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="../../d4/d4b/class_liste_region.html#a1c0b81162a1f30378180a3b27d13b00a">00022</a> <span class="keywordtype">void</span> <a class="code" href="../../d4/d4b/class_liste_region.html#a1c0b81162a1f30378180a3b27d13b00a">ListeRegion::add</a>(<a class="code" href="../../d4/d29/struct_region.html">region</a>* r)
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024     r-&gt;<a class="code" href="../../d4/d29/struct_region.html#aaf30b4135ca98a21ef7416aeb0a33dab">suiv</a> = NULL;
+<a name="l00025"></a>00025     <span class="keywordflow">if</span>(deb==NULL)
+<a name="l00026"></a>00026         {
+<a name="l00027"></a>00027                 deb       = r  ;
+<a name="l00028"></a>00028                 fin       = deb;
+<a name="l00029"></a>00029         }<span class="keywordflow">else</span>{
+<a name="l00030"></a>00030                 fin-&gt;<a class="code" href="../../d4/d29/struct_region.html#aaf30b4135ca98a21ef7416aeb0a33dab">suiv</a> = r;
+<a name="l00031"></a>00031                 fin       = fin-&gt;<a class="code" href="../../d4/d29/struct_region.html#aaf30b4135ca98a21ef7416aeb0a33dab">suiv</a>;
+<a name="l00032"></a>00032         }
+<a name="l00033"></a>00033 }
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="../../d4/d4b/class_liste_region.html#ab162dcd73dfe53c120591c758162c9ef">00035</a> <span class="keywordtype">void</span> <a class="code" href="../../d4/d4b/class_liste_region.html#ab162dcd73dfe53c120591c758162c9ef">ListeRegion::destroy</a>()
+<a name="l00036"></a>00036 {
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     <a class="code" href="../../d4/d29/struct_region.html">region</a> *tmp,*<a class="code" href="../../d3/dd0/namespacescreen.html#a391180925962f2d8178b40fbbb862d17">t</a>;
+<a name="l00039"></a>00039     tmp = deb;
+<a name="l00040"></a>00040     <span class="keywordflow">while</span>(tmp!=NULL){
+<a name="l00041"></a>00041         t=tmp-&gt;<a class="code" href="../../d4/d29/struct_region.html#aaf30b4135ca98a21ef7416aeb0a33dab">suiv</a>;
+<a name="l00042"></a>00042         free(tmp);
+<a name="l00043"></a>00043         tmp=t;
+<a name="l00044"></a>00044     }
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046     deb = NULL;
+<a name="l00047"></a>00047     fin = NULL;
+<a name="l00048"></a>00048 }
+<a name="l00049"></a>00049 
+<a name="l00050"></a><a class="code" href="../../d4/d4b/class_liste_region.html#a4224b2c76a6fc6dba1ea7f0a3d51aa3b">00050</a> <span class="keywordtype">void</span> <a class="code" href="../../d4/d4b/class_liste_region.html#a4224b2c76a6fc6dba1ea7f0a3d51aa3b">ListeRegion::ptrSuiv</a>()
+<a name="l00051"></a>00051 {
+<a name="l00052"></a>00052     ptr = ptr-&gt;<a class="code" href="../../d4/d29/struct_region.html#aaf30b4135ca98a21ef7416aeb0a33dab">suiv</a>;
+<a name="l00053"></a>00053 }
+<a name="l00054"></a>00054 
+<a name="l00055"></a><a class="code" href="../../d4/d4b/class_liste_region.html#a93ce98f95b1034efd330a4a5d9b06bd2">00055</a> <a class="code" href="../../d4/d4b/class_liste_region.html#a93ce98f95b1034efd330a4a5d9b06bd2">ListeRegion::~ListeRegion</a>()
+<a name="l00056"></a>00056 {
+<a name="l00057"></a>00057     <a class="code" href="../../d4/d4b/class_liste_region.html#ab162dcd73dfe53c120591c758162c9ef">destroy</a>();
+<a name="l00058"></a>00058 }
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

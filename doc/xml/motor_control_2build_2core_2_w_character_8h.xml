@@ -1,0 +1,467 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="motor_control_2build_2core_2_w_character_8h" kind="file">
+    <compoundname>WCharacter.h</compoundname>
+    <includes local="no">ctype.h</includes>
+    <incdepgraph>
+      <node id="1530">
+        <label>motorControl/build/core/WCharacter.h</label>
+        <link refid="motorControl/build/core/WCharacter.h"/>
+        <childnode refid="1531" relation="include">
+        </childnode>
+      </node>
+      <node id="1531">
+        <label>ctype.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a40ecbd7e679ea4d50f81ef3010c63ccb" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isAlphaNumeric</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isAlphaNumeric</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="46" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1ae38e5f3bf4215196b1b2f01feb67dc97" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isAlpha</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isAlpha</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="54" bodyend="57"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a9bef669e9a914a002f3adbf7588c5b7f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isAscii</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isAscii</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="28" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1aa1e8b6ff7994c16c727de92fe82a6c5e" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isWhitespace</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isWhitespace</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="29" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="69" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1aaa11939aa26de553018e71ede803547b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isControl</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isControl</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="30" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="76" bodyend="79"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a00fc18068e98a00ced2de3c0cfc2793a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isDigit</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isDigit</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="31" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="83" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a6b2ac2190fa1945f099ef272ddc12eba" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isGraph</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isGraph</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="90" bodyend="93"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a9b873f379081256784af35de409f27d7" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isLowerCase</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isLowerCase</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="33" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="97" bodyend="100"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1ae2d120664cad11b1a7819a382621c835" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isPrintable</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isPrintable</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="34" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="104" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1ad81f2ed3aa87fe37ab781fe38e4df84b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isPunct</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isPunct</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="112" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1ab0f581e7fce5dc4722b8a824561b2c29" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isSpace</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isSpace</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="121" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a939653d2e98c6dcfa8646aea936d2b25" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isUpperCase</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isUpperCase</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="128" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a04fd71c44954d2bf1e47df8bd7857678" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="motor_control_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref></type>
+        <definition>boolean isHexadecimalDigit</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>isHexadecimalDigit</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="38" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="136" bodyend="139"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a97b92bef1d6fd64a291d66d3671c4ac0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int toAscii</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>toAscii</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="144" bodyend="147"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1a84077490f4d133962928ab4897781a65" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int toLowerCase</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>toLowerCase</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="40" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="156" bodyend="159"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2build_2core_2_w_character_8h_1ae7943209e31b947b2c8b7d426b80f9b3" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int toUpperCase</definition>
+        <argsstring>(int c) __attribute__((always_inline))</argsstring>
+        <name>toUpperCase</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" line="41" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h" bodystart="163" bodyend="166"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>WCharacter.h<sp/>-<sp/>Character<sp/>utility<sp/>functions<sp/>for<sp/>Wiring<sp/>&amp;<sp/>Arduino</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>Copyright<sp/>(c)<sp/>2010<sp/>Hernando<sp/>Barragan.<sp/><sp/>All<sp/>right<sp/>reserved.</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>This<sp/>library<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>License<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>version<sp/>2.1<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/>This<sp/>library<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the<sp/>GNU</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"><sp/>License<sp/>along<sp/>with<sp/>this<sp/>library;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the<sp/>Free<sp/>Software</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/>Foundation,<sp/>Inc.,<sp/>51<sp/>Franklin<sp/>St,<sp/>Fifth<sp/>Floor,<sp/>Boston,<sp/>MA<sp/><sp/>02110-1301<sp/><sp/>USA</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>Character_h</highlight></codeline>
+<codeline lineno="21"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>Character_h</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;ctype.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="comment">//<sp/>WCharacter.h<sp/>prototypes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a40ecbd7e679ea4d50f81ef3010c63ccb" kindref="member">isAlphaNumeric</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ae38e5f3bf4215196b1b2f01feb67dc97" kindref="member">isAlpha</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a9bef669e9a914a002f3adbf7588c5b7f" kindref="member">isAscii</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1aa1e8b6ff7994c16c727de92fe82a6c5e" kindref="member">isWhitespace</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1aaa11939aa26de553018e71ede803547b" kindref="member">isControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a00fc18068e98a00ced2de3c0cfc2793a" kindref="member">isDigit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a6b2ac2190fa1945f099ef272ddc12eba" kindref="member">isGraph</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a9b873f379081256784af35de409f27d7" kindref="member">isLowerCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ae2d120664cad11b1a7819a382621c835" kindref="member">isPrintable</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ad81f2ed3aa87fe37ab781fe38e4df84b" kindref="member">isPunct</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ab0f581e7fce5dc4722b8a824561b2c29" kindref="member">isSpace</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a939653d2e98c6dcfa8646aea936d2b25" kindref="member">isUpperCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a04fd71c44954d2bf1e47df8bd7857678" kindref="member">isHexadecimalDigit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a97b92bef1d6fd64a291d66d3671c4ac0" kindref="member">toAscii</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a84077490f4d133962928ab4897781a65" kindref="member">toLowerCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ae7943209e31b947b2c8b7d426b80f9b3" kindref="member">toUpperCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((always_inline));</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>an<sp/>alphanumeric<sp/>character.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/>It<sp/>is<sp/>equivalent<sp/>to<sp/>(isalpha(c)<sp/>||<sp/>isdigit(c)).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46" refid="motor_control_2build_2core_2_w_character_8h_1a40ecbd7e679ea4d50f81ef3010c63ccb" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a40ecbd7e679ea4d50f81ef3010c63ccb" kindref="member">isAlphaNumeric</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)<sp/></highlight></codeline>
+<codeline lineno="47"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isalnum(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="49"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>an<sp/>alphabetic<sp/>character.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight><highlight class="comment">//<sp/>It<sp/>is<sp/>equivalent<sp/>to<sp/>(isupper(c)<sp/>||<sp/>islower(c)).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="motor_control_2build_2core_2_w_character_8h_1ae38e5f3bf4215196b1b2f01feb67dc97" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ae38e5f3bf4215196b1b2f01feb67dc97" kindref="member">isAlpha</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="55"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isalpha(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>whether<sp/>c<sp/>is<sp/>a<sp/>7-bit<sp/>unsigned<sp/>char<sp/>value<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">//<sp/>that<sp/>fits<sp/>into<sp/>the<sp/>ASCII<sp/>character<sp/>set.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62" refid="motor_control_2build_2core_2_w_character_8h_1a9bef669e9a914a002f3adbf7588c5b7f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a9bef669e9a914a002f3adbf7588c5b7f" kindref="member">isAscii</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="63"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isascii<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="65"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>a<sp/>blank<sp/>character,<sp/>that<sp/>is,<sp/>a<sp/>space<sp/>or<sp/>a<sp/>tab.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69" refid="motor_control_2build_2core_2_w_character_8h_1aa1e8b6ff7994c16c727de92fe82a6c5e" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1aa1e8b6ff7994c16c727de92fe82a6c5e" kindref="member">isWhitespace</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="70"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isblank<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>a<sp/>control<sp/>character.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="motor_control_2build_2core_2_w_character_8h_1aaa11939aa26de553018e71ede803547b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1aaa11939aa26de553018e71ede803547b" kindref="member">isControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>iscntrl<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="79"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>a<sp/>digit<sp/>(0<sp/>through<sp/>9).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83" refid="motor_control_2build_2core_2_w_character_8h_1a00fc18068e98a00ced2de3c0cfc2793a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a00fc18068e98a00ced2de3c0cfc2793a" kindref="member">isDigit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="84"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isdigit<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="86"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"></highlight></codeline>
+<codeline lineno="89"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>any<sp/>printable<sp/>character<sp/>except<sp/>space.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="motor_control_2build_2core_2_w_character_8h_1a6b2ac2190fa1945f099ef272ddc12eba" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a6b2ac2190fa1945f099ef272ddc12eba" kindref="member">isGraph</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isgraph<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>a<sp/>lower-case<sp/>character.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="97" refid="motor_control_2build_2core_2_w_character_8h_1a9b873f379081256784af35de409f27d7" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a9b873f379081256784af35de409f27d7" kindref="member">isLowerCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="98"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(islower<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>any<sp/>printable<sp/>character<sp/>including<sp/>space.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="motor_control_2build_2core_2_w_character_8h_1ae2d120664cad11b1a7819a382621c835" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ae2d120664cad11b1a7819a382621c835" kindref="member">isPrintable</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isprint<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="107"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>any<sp/>printable<sp/>character<sp/>which<sp/>is<sp/>not<sp/>a<sp/>space<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="comment">//<sp/>or<sp/>an<sp/>alphanumeric<sp/>character.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="motor_control_2build_2core_2_w_character_8h_1ad81f2ed3aa87fe37ab781fe38e4df84b" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ad81f2ed3aa87fe37ab781fe38e4df84b" kindref="member">isPunct</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>ispunct<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>white-space<sp/>characters.<sp/>For<sp/>the<sp/>avr-libc<sp/>library,<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="comment">//<sp/>these<sp/>are:<sp/>space,<sp/>formfeed<sp/>(&apos;\f&apos;),<sp/>newline<sp/>(&apos;\n&apos;),<sp/>carriage<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="comment">//<sp/>return<sp/>(&apos;\r&apos;),<sp/>horizontal<sp/>tab<sp/>(&apos;\t&apos;),<sp/>and<sp/>vertical<sp/>tab<sp/>(&apos;\v&apos;).</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="motor_control_2build_2core_2_w_character_8h_1ab0f581e7fce5dc4722b8a824561b2c29" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ab0f581e7fce5dc4722b8a824561b2c29" kindref="member">isSpace</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="122"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isspace<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>an<sp/>uppercase<sp/>letter.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="128" refid="motor_control_2build_2core_2_w_character_8h_1a939653d2e98c6dcfa8646aea936d2b25" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a939653d2e98c6dcfa8646aea936d2b25" kindref="member">isUpperCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="129"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isupper<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="131"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Checks<sp/>for<sp/>a<sp/>hexadecimal<sp/>digits,<sp/>i.e.<sp/>one<sp/>of<sp/>0<sp/>1<sp/>2<sp/>3<sp/>4<sp/>5<sp/>6<sp/>7<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="comment">//<sp/>8<sp/>9<sp/>a<sp/>b<sp/>c<sp/>d<sp/>e<sp/>f<sp/>A<sp/>B<sp/>C<sp/>D<sp/>E<sp/>F.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136" refid="motor_control_2build_2core_2_w_character_8h_1a04fd71c44954d2bf1e47df8bd7857678" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">boolean</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a04fd71c44954d2bf1e47df8bd7857678" kindref="member">isHexadecimalDigit</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="137"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>(<sp/>isxdigit<sp/>(c)<sp/>==<sp/>0<sp/>?<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal"><sp/>:<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="139"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Converts<sp/>c<sp/>to<sp/>a<sp/>7-bit<sp/>unsigned<sp/>char<sp/>value<sp/>that<sp/>fits<sp/>into<sp/>the<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ASCII<sp/>character<sp/>set,<sp/>by<sp/>clearing<sp/>the<sp/>high-order<sp/>bits.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144" refid="motor_control_2build_2core_2_w_character_8h_1a97b92bef1d6fd64a291d66d3671c4ac0" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a97b92bef1d6fd64a291d66d3671c4ac0" kindref="member">toAscii</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>toascii<sp/>(c);</highlight></codeline>
+<codeline lineno="147"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Warning:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Many<sp/>people<sp/>will<sp/>be<sp/>unhappy<sp/>if<sp/>you<sp/>use<sp/>this<sp/>function.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"></highlight><highlight class="comment">//<sp/>This<sp/>function<sp/>will<sp/>convert<sp/>accented<sp/>letters<sp/>into<sp/>random<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight><highlight class="comment">//<sp/>characters.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Converts<sp/>the<sp/>letter<sp/>c<sp/>to<sp/>lower<sp/>case,<sp/>if<sp/>possible.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156" refid="motor_control_2build_2core_2_w_character_8h_1a84077490f4d133962928ab4897781a65" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1a84077490f4d133962928ab4897781a65" kindref="member">toLowerCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="157"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tolower<sp/>(c);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Converts<sp/>the<sp/>letter<sp/>c<sp/>to<sp/>upper<sp/>case,<sp/>if<sp/>possible.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163" refid="motor_control_2build_2core_2_w_character_8h_1ae7943209e31b947b2c8b7d426b80f9b3" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_character_8h_1ae7943209e31b947b2c8b7d426b80f9b3" kindref="member">toUpperCase</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c)</highlight></codeline>
+<codeline lineno="164"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>toupper<sp/>(c);</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/WCharacter.h"/>
+  </compounddef>
+</doxygen>

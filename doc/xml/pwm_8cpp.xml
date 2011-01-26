@@ -1,0 +1,184 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="pwm_8cpp" kind="file">
+    <compoundname>pwm.cpp</compoundname>
+    <includes refid="motor_control_2build_2core_2wiring_8h" local="yes">wiring.h</includes>
+    <includes refid="pwm_8h" local="yes">pwm.h</includes>
+    <includes refid="pince_control_2adafruit_2_a_f_motor_8h" local="yes">AFMotor.h</includes>
+    <incdepgraph>
+      <node id="2099">
+        <label>pwm.h</label>
+        <link refid="pwm_8h"/>
+        <childnode refid="2100" relation="include">
+        </childnode>
+      </node>
+      <node id="2097">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2101">
+        <label>AFMotor.h</label>
+        <link refid="pince_control_2adafruit_2_a_f_motor_8h"/>
+        <childnode refid="2102" relation="include">
+        </childnode>
+        <childnode refid="2096" relation="include">
+        </childnode>
+      </node>
+      <node id="2100">
+        <label>parameters.h</label>
+        <link refid="parameters_8h"/>
+      </node>
+      <node id="2095">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="2096" relation="include">
+        </childnode>
+        <childnode refid="2097" relation="include">
+        </childnode>
+        <childnode refid="2098" relation="include">
+        </childnode>
+      </node>
+      <node id="2096">
+        <label>avr/io.h</label>
+      </node>
+      <node id="2094">
+        <label>motorControl/pwm.cpp</label>
+        <link refid="pwm.cpp"/>
+        <childnode refid="2095" relation="include">
+        </childnode>
+        <childnode refid="2099" relation="include">
+        </childnode>
+        <childnode refid="2101" relation="include">
+        </childnode>
+      </node>
+      <node id="2098">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+      <node id="2102">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="pwm_8cpp_1a6627fac8c3872bd01f6d626e7a758f4c" prot="public" static="no" mutable="no">
+        <type><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref></type>
+        <definition>AF_DCMotor MoteurG(1, MOTOR12_64KHZ)</definition>
+        <argsstring>(1, MOTOR12_64KHZ)</argsstring>
+        <name>MoteurG</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" line="11"/>
+      </memberdef>
+      <memberdef kind="variable" id="pwm_8cpp_1a0268469be12654827a587d71e888849c" prot="public" static="no" mutable="no">
+        <type><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref></type>
+        <definition>AF_DCMotor MoteurD(2, MOTOR12_64KHZ)</definition>
+        <argsstring>(2, MOTOR12_64KHZ)</argsstring>
+        <name>MoteurD</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" line="12"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="pwm_8cpp_1a5c7263f64ab600b27241e3124b662e95" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initPWM</definition>
+        <argsstring>()</argsstring>
+        <name>initPWM</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" line="13" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" bodystart="13" bodyend="22"/>
+      </memberdef>
+      <memberdef kind="function" id="pwm_8cpp_1af16cf2bd2e0f75074fe962ef9ca2e7a7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setLeftPWM</definition>
+        <argsstring>(int value)</argsstring>
+        <name>setLeftPWM</name>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" line="24" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" bodystart="24" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="pwm_8cpp_1aa3156fdcdac371984291fa26c95a65a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setRightPWM</definition>
+        <argsstring>(int value)</argsstring>
+        <name>setRightPWM</name>
+        <param>
+          <type>int</type>
+          <declname>value</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp" bodystart="32" bodyend="38"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>pwm.cpp</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>Created<sp/>on:<sp/>13<sp/>janv.<sp/>2011</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Author:<sp/>HoHen</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2wiring_8h" kindref="compound">wiring.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="pwm_8h" kindref="compound">pwm.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="pince_control_2adafruit_2_a_f_motor_8h" kindref="compound">AFMotor.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref><sp/><ref refid="pwm_8cpp_1a6627fac8c3872bd01f6d626e7a758f4c" kindref="member">MoteurG</ref>(1,<sp/><ref refid="motor_control_2_a_f_motor_8h_1abd639f43f6c3b97a35e93aa2839877b0" kindref="member">MOTOR12_64KHZ</ref>);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref><sp/><ref refid="pwm_8cpp_1a0268469be12654827a587d71e888849c" kindref="member">MoteurD</ref>(2,<sp/><ref refid="motor_control_2_a_f_motor_8h_1abd639f43f6c3b97a35e93aa2839877b0" kindref="member">MOTOR12_64KHZ</ref>);</highlight></codeline>
+<codeline lineno="13" refid="pwm_8h_1a5c7263f64ab600b27241e3124b662e95" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2pwm_8h_1a5c7263f64ab600b27241e3124b662e95" kindref="member">initPWM</ref>(){</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref><sp/><ref refid="pwm_8cpp_1a6627fac8c3872bd01f6d626e7a758f4c" kindref="member">MoteurG</ref>(1,<sp/><ref refid="motor_control_2_a_f_motor_8h_1abd639f43f6c3b97a35e93aa2839877b0" kindref="member">MOTOR12_64KHZ</ref>);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref><sp/><ref refid="pwm_8cpp_1a0268469be12654827a587d71e888849c" kindref="member">MoteurD</ref>(2,<sp/><ref refid="motor_control_2_a_f_motor_8h_1abd639f43f6c3b97a35e93aa2839877b0" kindref="member">MOTOR12_64KHZ</ref>);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MoteurG.<ref refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" kindref="member">setSpeed</ref>(0);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MoteurG.<ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" kindref="member">FORWARD</ref>);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MoteurD.<ref refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" kindref="member">setSpeed</ref>(0);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MoteurD.<ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" kindref="member">FORWARD</ref>);</highlight></codeline>
+<codeline lineno="22"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="23"><highlight class="normal"></highlight></codeline>
+<codeline lineno="24" refid="pwm_8h_1a286d60d8b7dec05244f79165a2f2cdbc" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2pwm_8h_1a286d60d8b7dec05244f79165a2f2cdbc" kindref="member">setLeftPWM</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value){</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="pwm_8cpp_1a6627fac8c3872bd01f6d626e7a758f4c" kindref="member">MoteurG</ref>.<ref refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" kindref="member">setSpeed</ref>(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(value));</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(value&gt;0)</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="pwm_8cpp_1a6627fac8c3872bd01f6d626e7a758f4c" kindref="member">MoteurG</ref>.<ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" kindref="member">FORWARD</ref>);</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="pwm_8cpp_1a6627fac8c3872bd01f6d626e7a758f4c" kindref="member">MoteurG</ref>.<ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(<ref refid="motor_control_2_a_f_motor_8h_1adf445abfe1b77fa63f89e315ccc2f7f2" kindref="member">BACKWARD</ref>);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32" refid="pwm_8h_1a7466308648b40fe86aca9fc45967c9a5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2pwm_8h_1a7466308648b40fe86aca9fc45967c9a5" kindref="member">setRightPWM</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>value){</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="pwm_8cpp_1a0268469be12654827a587d71e888849c" kindref="member">MoteurD</ref>.<ref refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" kindref="member">setSpeed</ref>(<ref refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" kindref="member">abs</ref>(value));</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(value&gt;0)</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="pwm_8cpp_1a0268469be12654827a587d71e888849c" kindref="member">MoteurD</ref>.<ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" kindref="member">FORWARD</ref>);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="pwm_8cpp_1a0268469be12654827a587d71e888849c" kindref="member">MoteurD</ref>.<ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(<ref refid="motor_control_2_a_f_motor_8h_1adf445abfe1b77fa63f89e315ccc2f7f2" kindref="member">BACKWARD</ref>);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/pwm.cpp"/>
+  </compounddef>
+</doxygen>

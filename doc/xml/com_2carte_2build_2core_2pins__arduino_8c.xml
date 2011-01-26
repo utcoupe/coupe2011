@@ -1,0 +1,861 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="com_2carte_2build_2core_2pins__arduino_8c" kind="file">
+    <compoundname>pins_arduino.c</compoundname>
+    <includes local="no">avr/io.h</includes>
+    <includes refid="motor_control_2build_2core_2wiring__private_8h" local="yes">wiring_private.h</includes>
+    <includes refid="com_2carte_2build_2core_2pins__arduino_8c" local="yes">pins_arduino.h</includes>
+    <includes local="no">avr/pgmspace.h</includes>
+    <includedby refid="com_2carte_2build_2core_2pins__arduino_8c" local="yes">com/carte/build/core/pins_arduino.c</includedby>
+    <incdepgraph>
+      <node id="1411">
+        <label>stdarg.h</label>
+      </node>
+      <node id="1408">
+        <label>avr/interrupt.h</label>
+      </node>
+      <node id="1413">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1412">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="1406" relation="include">
+        </childnode>
+        <childnode refid="1413" relation="include">
+        </childnode>
+        <childnode refid="1414" relation="include">
+        </childnode>
+      </node>
+      <node id="1406">
+        <label>avr/io.h</label>
+      </node>
+      <node id="1409">
+        <label>avr/delay.h</label>
+      </node>
+      <node id="1415">
+        <label>avr/pgmspace.h</label>
+      </node>
+      <node id="1414">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+      <node id="1405">
+        <label>com/carte/build/core/pins_arduino.c</label>
+        <link refid="com/carte/build/core/pins_arduino.c"/>
+        <childnode refid="1406" relation="include">
+        </childnode>
+        <childnode refid="1407" relation="include">
+        </childnode>
+        <childnode refid="1405" relation="include">
+        </childnode>
+        <childnode refid="1415" relation="include">
+        </childnode>
+      </node>
+      <node id="1410">
+        <label>stdio.h</label>
+      </node>
+      <node id="1407">
+        <label>wiring_private.h</label>
+        <link refid="motor_control_2build_2core_2wiring__private_8h"/>
+        <childnode refid="1406" relation="include">
+        </childnode>
+        <childnode refid="1408" relation="include">
+        </childnode>
+        <childnode refid="1409" relation="include">
+        </childnode>
+        <childnode refid="1410" relation="include">
+        </childnode>
+        <childnode refid="1411" relation="include">
+        </childnode>
+        <childnode refid="1412" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1416">
+        <label>com/carte/build/core/pins_arduino.c</label>
+        <link refid="com/carte/build/core/pins_arduino.c"/>
+        <childnode refid="1416" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a74cb3af6041b109c53743b600ebbcf4c" prot="public" static="no">
+        <name>PA</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="68" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a2a06f3773d46878dc58f8dadd6fd0d72" prot="public" static="no">
+        <name>PB</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="69" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a600721f0222b857dc8a3ae59e5077347" prot="public" static="no">
+        <name>PC</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="70" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="70" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a960c2f6c3fca885af2c1ea2b88dee7b7" prot="public" static="no">
+        <name>PD</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="71" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="71" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a211238ffe3627f42ca7b04bc96cc8fa6" prot="public" static="no">
+        <name>PE</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="72" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="72" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1aa0e278c26c25558741febfadd7216caa" prot="public" static="no">
+        <name>PF</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="73" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="73" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a037f1be1c3e45bf4d0d4f5ddc159ff30" prot="public" static="no">
+        <name>PG</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="74" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="74" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1ae0fcc909f5a4166b625a6707cbdfa643" prot="public" static="no">
+        <name>PH</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="75" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1aca0753a98648ee4ec925869828b7cc90" prot="public" static="no">
+        <name>PJ</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="76" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a73d40890e57dadd6284d83d80c088833" prot="public" static="no">
+        <name>PK</name>
+        <initializer>11</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="77" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2pins__arduino_8c_1a726f623ff633b7060a6bbacefe6b5c5a" prot="public" static="no">
+        <name>PL</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="78" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="com_2carte_2build_2core_2pins__arduino_8c_1aa89b79b8454402ab79188f967c301015" prot="public" static="no" mutable="no">
+        <type>const uint16_t PROGMEM</type>
+        <definition>const uint16_t PROGMEM port_to_mode_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>port_to_mode_PGM</name>
+        <initializer> {
+	NOT_A_PORT,
+	NOT_A_PORT,
+	&amp;DDRB,
+	&amp;DDRC,
+	&amp;DDRD,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="364" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="358" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="com_2carte_2build_2core_2pins__arduino_8c_1a3c27bdee78e6cb316807107ee37c1d74" prot="public" static="no" mutable="no">
+        <type>const uint16_t PROGMEM</type>
+        <definition>const uint16_t PROGMEM port_to_output_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>port_to_output_PGM</name>
+        <initializer> {
+	NOT_A_PORT,
+	NOT_A_PORT,
+	&amp;PORTB,
+	&amp;PORTC,
+	&amp;PORTD,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="372" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="366" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="com_2carte_2build_2core_2pins__arduino_8c_1a1d2bcc0662263488ace7c68bc2073cb7" prot="public" static="no" mutable="no">
+        <type>const uint16_t PROGMEM</type>
+        <definition>const uint16_t PROGMEM port_to_input_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>port_to_input_PGM</name>
+        <initializer> {
+	NOT_A_PORT,
+	NOT_A_PORT,
+	&amp;PINB,
+	&amp;PINC,
+	&amp;PIND,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="380" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="374" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="com_2carte_2build_2core_2pins__arduino_8c_1a760bd344a6a02658408a872150b8b885" prot="public" static="no" mutable="no">
+        <type>const uint8_t PROGMEM</type>
+        <definition>const uint8_t PROGMEM digital_pin_to_port_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>digital_pin_to_port_PGM</name>
+        <initializer> {
+	PD, 
+	PD,
+	PD,
+	PD,
+	PD,
+	PD,
+	PD,
+	PD,
+	PB, 
+	PB,
+	PB,
+	PB,
+	PB,
+	PB,
+	PC, 
+	PC,
+	PC,
+	PC,
+	PC,
+	PC,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="403" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="382" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="com_2carte_2build_2core_2pins__arduino_8c_1ac161b9268b58f75c06875fd9fd432ff7" prot="public" static="no" mutable="no">
+        <type>const uint8_t PROGMEM</type>
+        <definition>const uint8_t PROGMEM digital_pin_to_bit_mask_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>digital_pin_to_bit_mask_PGM</name>
+        <initializer> {
+	_BV(0), 
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(4),
+	_BV(5),
+	_BV(6),
+	_BV(7),
+	_BV(0), 
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(4),
+	_BV(5),
+	_BV(0), 
+	_BV(1),
+	_BV(2),
+	_BV(3),
+	_BV(4),
+	_BV(5),
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="426" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="405" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="com_2carte_2build_2core_2pins__arduino_8c_1ae253f497127926f0ee4ca1d5568ad6a8" prot="public" static="no" mutable="no">
+        <type>const uint8_t PROGMEM</type>
+        <definition>const uint8_t PROGMEM digital_pin_to_timer_PGM[]</definition>
+        <argsstring>[]</argsstring>
+        <name>digital_pin_to_timer_PGM</name>
+        <initializer> {
+	NOT_ON_TIMER, 
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	
+
+
+
+	TIMER2B,
+
+	NOT_ON_TIMER,
+	
+
+
+
+
+	TIMER0B,
+	TIMER0A,
+
+	NOT_ON_TIMER,
+	NOT_ON_TIMER, 
+	TIMER1A,
+	TIMER1B,
+
+
+
+	TIMER2A,
+
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER, 
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+	NOT_ON_TIMER,
+}</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" line="464" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c" bodystart="428" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/>pins_arduino.c<sp/>-<sp/>pin<sp/>definitions<sp/>for<sp/>the<sp/>Arduino<sp/>board</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/>Part<sp/>of<sp/>Arduino<sp/>/<sp/>Wiring<sp/>Lite</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/>Copyright<sp/>(c)<sp/>2005<sp/>David<sp/>A.<sp/>Mellis</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/>License<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/>version<sp/>2.1<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the<sp/>GNU</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"></highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/>Public<sp/>License<sp/>along<sp/>with<sp/>this<sp/>library;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>59<sp/>Temple<sp/>Place,<sp/>Suite<sp/>330,</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/>Boston,<sp/>MA<sp/><sp/>02111-1307<sp/><sp/>USA</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"></highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/>$Id$</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;avr/io.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2wiring__private_8h" kindref="compound">wiring_private.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;pins_arduino.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="comment">//<sp/>On<sp/>the<sp/>Arduino<sp/>board,<sp/>digital<sp/>pins<sp/>are<sp/>also<sp/>used</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="comment">//<sp/>for<sp/>the<sp/>analog<sp/>output<sp/>(software<sp/>PWM).<sp/><sp/>Analog<sp/>input</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="comment">//<sp/>pins<sp/>are<sp/>a<sp/>separate<sp/>set.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ATMEL<sp/>ATMEGA8<sp/>&amp;<sp/>168<sp/>/<sp/>ARDUINO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+-\/-+</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC6<sp/><sp/>1|<sp/><sp/><sp/><sp/>|28<sp/><sp/>PC5<sp/>(AI<sp/>5)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>(D<sp/>0)<sp/>PD0<sp/><sp/>2|<sp/><sp/><sp/><sp/>|27<sp/><sp/>PC4<sp/>(AI<sp/>4)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>(D<sp/>1)<sp/>PD1<sp/><sp/>3|<sp/><sp/><sp/><sp/>|26<sp/><sp/>PC3<sp/>(AI<sp/>3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>(D<sp/>2)<sp/>PD2<sp/><sp/>4|<sp/><sp/><sp/><sp/>|25<sp/><sp/>PC2<sp/>(AI<sp/>2)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="comment">//<sp/>PWM+<sp/>(D<sp/>3)<sp/>PD3<sp/><sp/>5|<sp/><sp/><sp/><sp/>|24<sp/><sp/>PC1<sp/>(AI<sp/>1)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>(D<sp/>4)<sp/>PD4<sp/><sp/>6|<sp/><sp/><sp/><sp/>|23<sp/><sp/>PC0<sp/>(AI<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>VCC<sp/><sp/>7|<sp/><sp/><sp/><sp/>|22<sp/><sp/>GND</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>GND<sp/><sp/>8|<sp/><sp/><sp/><sp/>|21<sp/><sp/>AREF</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB6<sp/><sp/>9|<sp/><sp/><sp/><sp/>|20<sp/><sp/>AVCC</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB7<sp/>10|<sp/><sp/><sp/><sp/>|19<sp/><sp/>PB5<sp/>(D<sp/>13)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="comment">//<sp/>PWM+<sp/>(D<sp/>5)<sp/>PD5<sp/>11|<sp/><sp/><sp/><sp/>|18<sp/><sp/>PB4<sp/>(D<sp/>12)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="comment">//<sp/>PWM+<sp/>(D<sp/>6)<sp/>PD6<sp/>12|<sp/><sp/><sp/><sp/>|17<sp/><sp/>PB3<sp/>(D<sp/>11)<sp/>PWM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>(D<sp/>7)<sp/>PD7<sp/>13|<sp/><sp/><sp/><sp/>|16<sp/><sp/>PB2<sp/>(D<sp/>10)<sp/>PWM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>(D<sp/>8)<sp/>PB0<sp/>14|<sp/><sp/><sp/><sp/>|15<sp/><sp/>PB1<sp/>(D<sp/>9)<sp/>PWM</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>+----+</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight><highlight class="comment">//<sp/>(PWM+<sp/>indicates<sp/>the<sp/>additional<sp/>PWM<sp/>pins<sp/>on<sp/>the<sp/>ATmega168.)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="53"><highlight class="normal"></highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight><highlight class="comment">//<sp/>ATMEL<sp/>ATMEGA1280<sp/>/<sp/>ARDUINO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight><highlight class="comment">//</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="comment">//<sp/>0-7<sp/>PE0-PE7<sp/><sp/><sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight><highlight class="comment">//<sp/>8-13<sp/>PB0-PB5<sp/><sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="58"><highlight class="normal"></highlight><highlight class="comment">//<sp/>14-21<sp/>PA0-PA7<sp/>works<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="59"><highlight class="normal"></highlight><highlight class="comment">//<sp/>22-29<sp/>PH0-PH7<sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="60"><highlight class="normal"></highlight><highlight class="comment">//<sp/>30-35<sp/>PG5-PG0<sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="comment">//<sp/>36-43<sp/>PC7-PC0<sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"></highlight><highlight class="comment">//<sp/>44-51<sp/>PJ7-PJ0<sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"></highlight><highlight class="comment">//<sp/>52-59<sp/>PL7-PL0<sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="64"><highlight class="normal"></highlight><highlight class="comment">//<sp/>60-67<sp/>PD7-PD0<sp/>works</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="comment">//<sp/>A0-A7<sp/>PF0-PF7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"></highlight><highlight class="comment">//<sp/>A8-A15<sp/>PK0-PK7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="com_2carte_2build_2core_2pins__arduino_8c_1a74cb3af6041b109c53743b600ebbcf4c" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PA<sp/>1</highlight></codeline>
+<codeline lineno="69" refid="com_2carte_2build_2core_2pins__arduino_8c_1a2a06f3773d46878dc58f8dadd6fd0d72" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PB<sp/>2</highlight></codeline>
+<codeline lineno="70" refid="com_2carte_2build_2core_2pins__arduino_8c_1a600721f0222b857dc8a3ae59e5077347" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PC<sp/>3</highlight></codeline>
+<codeline lineno="71" refid="com_2carte_2build_2core_2pins__arduino_8c_1a960c2f6c3fca885af2c1ea2b88dee7b7" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PD<sp/>4</highlight></codeline>
+<codeline lineno="72" refid="com_2carte_2build_2core_2pins__arduino_8c_1a211238ffe3627f42ca7b04bc96cc8fa6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PE<sp/>5</highlight></codeline>
+<codeline lineno="73" refid="com_2carte_2build_2core_2pins__arduino_8c_1aa0e278c26c25558741febfadd7216caa" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PF<sp/>6</highlight></codeline>
+<codeline lineno="74" refid="com_2carte_2build_2core_2pins__arduino_8c_1a037f1be1c3e45bf4d0d4f5ddc159ff30" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PG<sp/>7</highlight></codeline>
+<codeline lineno="75" refid="com_2carte_2build_2core_2pins__arduino_8c_1ae0fcc909f5a4166b625a6707cbdfa643" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PH<sp/>8</highlight></codeline>
+<codeline lineno="76" refid="com_2carte_2build_2core_2pins__arduino_8c_1aca0753a98648ee4ec925869828b7cc90" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PJ<sp/>10</highlight></codeline>
+<codeline lineno="77" refid="com_2carte_2build_2core_2pins__arduino_8c_1a73d40890e57dadd6284d83d80c088833" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PK<sp/>11</highlight></codeline>
+<codeline lineno="78" refid="com_2carte_2build_2core_2pins__arduino_8c_1a726f623ff633b7060a6bbacefe6b5c5a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PL<sp/>12</highlight></codeline>
+<codeline lineno="79"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="82"><highlight class="preprocessor"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1aa89b79b8454402ab79188f967c301015" kindref="member">port_to_mode_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRA,</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRB,</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRC,</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRD,</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRE,</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRF,</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRG,</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRH,</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRJ,</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRK,</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRL,</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a3c27bdee78e6cb316807107ee37c1d74" kindref="member">port_to_output_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTA,</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTB,</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTC,</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTD,</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTE,</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTF,</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTG,</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTH,</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTJ,</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTK,</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTL,</highlight></codeline>
+<codeline lineno="112"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a1d2bcc0662263488ace7c68bc2073cb7" kindref="member">port_to_input_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a62486102324ad2f7185279ce943e3152" kindref="member">NOT_A_PIN</ref>,</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINA,</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINB,</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINC,</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PIND,</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINE,</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINF,</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PING,</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINH,</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a62486102324ad2f7185279ce943e3152" kindref="member">NOT_A_PIN</ref>,</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINJ,</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINK,</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINL,</highlight></codeline>
+<codeline lineno="128"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a760bd344a6a02658408a872150b8b885" kindref="member">digital_pin_to_port_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>PORTLIST<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a211238ffe3627f42ca7b04bc96cc8fa6" kindref="member">PE</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>0<sp/>**<sp/>0<sp/>**<sp/>USART0_RX<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a211238ffe3627f42ca7b04bc96cc8fa6" kindref="member">PE</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>1<sp/>**<sp/>1<sp/>**<sp/>USART0_TX<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PE<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>4<sp/>**<sp/>2<sp/>**<sp/>PWM2<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PE<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>5<sp/>**<sp/>3<sp/>**<sp/>PWM3<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a037f1be1c3e45bf4d0d4f5ddc159ff30" kindref="member">PG</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>5<sp/>**<sp/>4<sp/>**<sp/>PWM4<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PE<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>3<sp/>**<sp/>5<sp/>**<sp/>PWM5<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ae0fcc909f5a4166b625a6707cbdfa643" kindref="member">PH</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>3<sp/>**<sp/>6<sp/>**<sp/>PWM6<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PH<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>4<sp/>**<sp/>7<sp/>**<sp/>PWM7<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PH<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>5<sp/>**<sp/>8<sp/>**<sp/>PWM8<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PH<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>6<sp/>**<sp/>9<sp/>**<sp/>PWM9<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a2a06f3773d46878dc58f8dadd6fd0d72" kindref="member">PB</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>4<sp/>**<sp/>10<sp/>**<sp/>PWM10<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>5<sp/>**<sp/>11<sp/>**<sp/>PWM11<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>6<sp/>**<sp/>12<sp/>**<sp/>PWM12<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>7<sp/>**<sp/>13<sp/>**<sp/>PWM13<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1aca0753a98648ee4ec925869828b7cc90" kindref="member">PJ</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PJ<sp/>1<sp/>**<sp/>14<sp/>**<sp/>USART3_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PJ<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PJ<sp/>0<sp/>**<sp/>15<sp/>**<sp/>USART3_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PH<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>1<sp/>**<sp/>16<sp/>**<sp/>USART2_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PH<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>0<sp/>**<sp/>17<sp/>**<sp/>USART2_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a960c2f6c3fca885af2c1ea2b88dee7b7" kindref="member">PD</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>3<sp/>**<sp/>18<sp/>**<sp/>USART1_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>2<sp/>**<sp/>19<sp/>**<sp/>USART1_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>1<sp/>**<sp/>20<sp/>**<sp/>I2C_SDA<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>0<sp/>**<sp/>21<sp/>**<sp/>I2C_SCL<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a74cb3af6041b109c53743b600ebbcf4c" kindref="member">PA</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>0<sp/>**<sp/>22<sp/>**<sp/>D22<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>1<sp/>**<sp/>23<sp/>**<sp/>D23<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>2<sp/>**<sp/>24<sp/>**<sp/>D24<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>3<sp/>**<sp/>25<sp/>**<sp/>D25<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>4<sp/>**<sp/>26<sp/>**<sp/>D26<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>5<sp/>**<sp/>27<sp/>**<sp/>D27<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>6<sp/>**<sp/>28<sp/>**<sp/>D28<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PA<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>7<sp/>**<sp/>29<sp/>**<sp/>D29<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a600721f0222b857dc8a3ae59e5077347" kindref="member">PC</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>7<sp/>**<sp/>30<sp/>**<sp/>D30<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>6<sp/>**<sp/>31<sp/>**<sp/>D31<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>5<sp/>**<sp/>32<sp/>**<sp/>D32<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>4<sp/>**<sp/>33<sp/>**<sp/>D33<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>3<sp/>**<sp/>34<sp/>**<sp/>D34<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>2<sp/>**<sp/>35<sp/>**<sp/>D35<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>1<sp/>**<sp/>36<sp/>**<sp/>D36<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>0<sp/>**<sp/>37<sp/>**<sp/>D37<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>7<sp/>**<sp/>38<sp/>**<sp/>D38<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PG<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>2<sp/>**<sp/>39<sp/>**<sp/>D39<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PG<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>1<sp/>**<sp/>40<sp/>**<sp/>D40<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PG<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>0<sp/>**<sp/>41<sp/>**<sp/>D41<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a726f623ff633b7060a6bbacefe6b5c5a" kindref="member">PL</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>7<sp/>**<sp/>42<sp/>**<sp/>D42<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>6<sp/>**<sp/>43<sp/>**<sp/>D43<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>5<sp/>**<sp/>44<sp/>**<sp/>D44<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>4<sp/>**<sp/>45<sp/>**<sp/>D45<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>3<sp/>**<sp/>46<sp/>**<sp/>D46<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>2<sp/>**<sp/>47<sp/>**<sp/>D47<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>1<sp/>**<sp/>48<sp/>**<sp/>D48<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PL<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>0<sp/>**<sp/>49<sp/>**<sp/>D49<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>3<sp/>**<sp/>50<sp/>**<sp/>SPI_MISO<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>2<sp/>**<sp/>51<sp/>**<sp/>SPI_MOSI<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>1<sp/>**<sp/>52<sp/>**<sp/>SPI_SCK<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>0<sp/>**<sp/>53<sp/>**<sp/>SPI_SS<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1aa0e278c26c25558741febfadd7216caa" kindref="member">PF</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>0<sp/>**<sp/>54<sp/>**<sp/>A0<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="188"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>1<sp/>**<sp/>55<sp/>**<sp/>A1<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>2<sp/>**<sp/>56<sp/>**<sp/>A2<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>3<sp/>**<sp/>57<sp/>**<sp/>A3<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>4<sp/>**<sp/>58<sp/>**<sp/>A4<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>5<sp/>**<sp/>59<sp/>**<sp/>A5<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>6<sp/>**<sp/>60<sp/>**<sp/>A6<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PF<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>7<sp/>**<sp/>61<sp/>**<sp/>A7<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a73d40890e57dadd6284d83d80c088833" kindref="member">PK</ref><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>0<sp/>**<sp/>62<sp/>**<sp/>A8<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>1<sp/>**<sp/>63<sp/>**<sp/>A9<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>2<sp/>**<sp/>64<sp/>**<sp/>A10<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>3<sp/>**<sp/>65<sp/>**<sp/>A11<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>4<sp/>**<sp/>66<sp/>**<sp/>A12<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>5<sp/>**<sp/>67<sp/>**<sp/>A13<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>6<sp/>**<sp/>68<sp/>**<sp/>A14<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PK<sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>7<sp/>**<sp/>69<sp/>**<sp/>A15<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="203"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="204"><highlight class="normal"></highlight></codeline>
+<codeline lineno="205"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ac161b9268b58f75c06875fd9fd432ff7" kindref="member">digital_pin_to_bit_mask_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>PIN<sp/>IN<sp/>PORT<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>0<sp/>**<sp/>0<sp/>**<sp/>USART0_RX<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>1<sp/>**<sp/>1<sp/>**<sp/>USART0_TX<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>4<sp/>**<sp/>2<sp/>**<sp/>PWM2<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>5<sp/>**<sp/>3<sp/>**<sp/>PWM3<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>5<sp/>**<sp/>4<sp/>**<sp/>PWM4<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>3<sp/>**<sp/>5<sp/>**<sp/>PWM5<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>3<sp/>**<sp/>6<sp/>**<sp/>PWM6<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>4<sp/>**<sp/>7<sp/>**<sp/>PWM7<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>5<sp/>**<sp/>8<sp/>**<sp/>PWM8<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>6<sp/>**<sp/>9<sp/>**<sp/>PWM9<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>4<sp/>**<sp/>10<sp/>**<sp/>PWM10<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>5<sp/>**<sp/>11<sp/>**<sp/>PWM11<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>6<sp/>**<sp/>12<sp/>**<sp/>PWM12<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>7<sp/>**<sp/>13<sp/>**<sp/>PWM13<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PJ<sp/>1<sp/>**<sp/>14<sp/>**<sp/>USART3_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PJ<sp/>0<sp/>**<sp/>15<sp/>**<sp/>USART3_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>1<sp/>**<sp/>16<sp/>**<sp/>USART2_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>0<sp/>**<sp/>17<sp/>**<sp/>USART2_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>3<sp/>**<sp/>18<sp/>**<sp/>USART1_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>2<sp/>**<sp/>19<sp/>**<sp/>USART1_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>1<sp/>**<sp/>20<sp/>**<sp/>I2C_SDA<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>0<sp/>**<sp/>21<sp/>**<sp/>I2C_SCL<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>0<sp/>**<sp/>22<sp/>**<sp/>D22<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>1<sp/>**<sp/>23<sp/>**<sp/>D23<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>2<sp/>**<sp/>24<sp/>**<sp/>D24<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>3<sp/>**<sp/>25<sp/>**<sp/>D25<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>4<sp/>**<sp/>26<sp/>**<sp/>D26<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>5<sp/>**<sp/>27<sp/>**<sp/>D27<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>6<sp/>**<sp/>28<sp/>**<sp/>D28<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>7<sp/>**<sp/>29<sp/>**<sp/>D29<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>7<sp/>**<sp/>30<sp/>**<sp/>D30<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>6<sp/>**<sp/>31<sp/>**<sp/>D31<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>5<sp/>**<sp/>32<sp/>**<sp/>D32<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>4<sp/>**<sp/>33<sp/>**<sp/>D33<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>3<sp/>**<sp/>34<sp/>**<sp/>D34<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>2<sp/>**<sp/>35<sp/>**<sp/>D35<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>1<sp/>**<sp/>36<sp/>**<sp/>D36<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>0<sp/>**<sp/>37<sp/>**<sp/>D37<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>7<sp/>**<sp/>38<sp/>**<sp/>D38<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>2<sp/>**<sp/>39<sp/>**<sp/>D39<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>1<sp/>**<sp/>40<sp/>**<sp/>D40<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>0<sp/>**<sp/>41<sp/>**<sp/>D41<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>7<sp/>**<sp/>42<sp/>**<sp/>D42<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>6<sp/>**<sp/>43<sp/>**<sp/>D43<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>5<sp/>**<sp/>44<sp/>**<sp/>D44<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>4<sp/>**<sp/>45<sp/>**<sp/>D45<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>3<sp/>**<sp/>46<sp/>**<sp/>D46<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>2<sp/>**<sp/>47<sp/>**<sp/>D47<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>1<sp/>**<sp/>48<sp/>**<sp/>D48<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>0<sp/>**<sp/>49<sp/>**<sp/>D49<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>3<sp/>**<sp/>50<sp/>**<sp/>SPI_MISO<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>2<sp/>**<sp/>51<sp/>**<sp/>SPI_MOSI<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>1<sp/>**<sp/>52<sp/>**<sp/>SPI_SCK<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>0<sp/>**<sp/>53<sp/>**<sp/>SPI_SS<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>0<sp/>**<sp/>54<sp/>**<sp/>A0<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>1<sp/>**<sp/>55<sp/>**<sp/>A1<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>2<sp/>**<sp/>56<sp/>**<sp/>A2<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>3<sp/>**<sp/>57<sp/>**<sp/>A3<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>4<sp/>**<sp/>58<sp/>**<sp/>A4<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>5<sp/>**<sp/>59<sp/>**<sp/>A5<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>6<sp/>**<sp/>60<sp/>**<sp/>A6<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>7<sp/>**<sp/>61<sp/>**<sp/>A7<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>0<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>0<sp/>**<sp/>62<sp/>**<sp/>A8<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>1<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>1<sp/>**<sp/>63<sp/>**<sp/>A9<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>2<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>2<sp/>**<sp/>64<sp/>**<sp/>A10<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>3<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>3<sp/>**<sp/>65<sp/>**<sp/>A11<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>4<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>4<sp/>**<sp/>66<sp/>**<sp/>A12<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>5<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>5<sp/>**<sp/>67<sp/>**<sp/>A13<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>6<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>6<sp/>**<sp/>68<sp/>**<sp/>A14<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(<sp/>7<sp/>)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>7<sp/>**<sp/>69<sp/>**<sp/>A15<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ae253f497127926f0ee4ca1d5568ad6a8" kindref="member">digital_pin_to_timer_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>TIMERS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-------------------------------------------<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a77d75bdd0dd8486dc8a52e742f1dc8a0" kindref="member">NOT_ON_TIMER</ref><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>0<sp/>**<sp/>0<sp/>**<sp/>USART0_RX<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a77d75bdd0dd8486dc8a52e742f1dc8a0" kindref="member">NOT_ON_TIMER</ref><sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>1<sp/>**<sp/>1<sp/>**<sp/>USART0_TX<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a9f36722b6c1a7e1256c239111a8d7d70" kindref="member">TIMER3B</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>4<sp/>**<sp/>2<sp/>**<sp/>PWM2<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a051b5537c0f69ff7c0e565defeefe2dc" kindref="member">TIMER3C</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>5<sp/>**<sp/>3<sp/>**<sp/>PWM3<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1ae27874b42e0356990a774d9da7161e22" kindref="member">TIMER0B</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>5<sp/>**<sp/>4<sp/>**<sp/>PWM4<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1afd0691fc61db026855e82a4bf09a619f" kindref="member">TIMER3A</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PE<sp/>3<sp/>**<sp/>5<sp/>**<sp/>PWM5<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1ac6088ef18958d9c48f1453c1f14c3555" kindref="member">TIMER4A</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>3<sp/>**<sp/>6<sp/>**<sp/>PWM6<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a0ef626a33b68c22b07ba09a4cdf84947" kindref="member">TIMER4B</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>4<sp/>**<sp/>7<sp/>**<sp/>PWM7<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a2509222007b170d0ffbaa25bced99a78" kindref="member">TIMER4C</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>5<sp/>**<sp/>8<sp/>**<sp/>PWM8<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a3c6f8d27eb3e22e69a9894cf22066152" kindref="member">TIMER2B</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>6<sp/>**<sp/>9<sp/>**<sp/>PWM9<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a029a1db02fe68e1ffed9a7e7b3910568" kindref="member">TIMER2A</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>4<sp/>**<sp/>10<sp/>**<sp/>PWM10<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a90512316aeb46f7d54fb6a53ad7b9d80" kindref="member">TIMER1A</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>5<sp/>**<sp/>11<sp/>**<sp/>PWM11<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1aaeaaaf8bf5b4cdfd864164a6e93d1fa3" kindref="member">TIMER1B</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>6<sp/>**<sp/>12<sp/>**<sp/>PWM12<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a9a45c92fe306d61cc67ee815449cc754" kindref="member">TIMER0A</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>7<sp/>**<sp/>13<sp/>**<sp/>PWM13<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PJ<sp/>1<sp/>**<sp/>14<sp/>**<sp/>USART3_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PJ<sp/>0<sp/>**<sp/>15<sp/>**<sp/>USART3_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>1<sp/>**<sp/>16<sp/>**<sp/>USART2_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PH<sp/>0<sp/>**<sp/>17<sp/>**<sp/>USART2_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>3<sp/>**<sp/>18<sp/>**<sp/>USART1_TX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>2<sp/>**<sp/>19<sp/>**<sp/>USART1_RX<sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>1<sp/>**<sp/>20<sp/>**<sp/>I2C_SDA<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>0<sp/>**<sp/>21<sp/>**<sp/>I2C_SCL<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>0<sp/>**<sp/>22<sp/>**<sp/>D22<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>1<sp/>**<sp/>23<sp/>**<sp/>D23<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>2<sp/>**<sp/>24<sp/>**<sp/>D24<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>3<sp/>**<sp/>25<sp/>**<sp/>D25<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>4<sp/>**<sp/>26<sp/>**<sp/>D26<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>5<sp/>**<sp/>27<sp/>**<sp/>D27<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>6<sp/>**<sp/>28<sp/>**<sp/>D28<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PA<sp/>7<sp/>**<sp/>29<sp/>**<sp/>D29<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>7<sp/>**<sp/>30<sp/>**<sp/>D30<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>6<sp/>**<sp/>31<sp/>**<sp/>D31<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>5<sp/>**<sp/>32<sp/>**<sp/>D32<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>4<sp/>**<sp/>33<sp/>**<sp/>D33<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>3<sp/>**<sp/>34<sp/>**<sp/>D34<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>2<sp/>**<sp/>35<sp/>**<sp/>D35<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>1<sp/>**<sp/>36<sp/>**<sp/>D36<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PC<sp/>0<sp/>**<sp/>37<sp/>**<sp/>D37<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PD<sp/>7<sp/>**<sp/>38<sp/>**<sp/>D38<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>2<sp/>**<sp/>39<sp/>**<sp/>D39<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>1<sp/>**<sp/>40<sp/>**<sp/>D40<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PG<sp/>0<sp/>**<sp/>41<sp/>**<sp/>D41<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>7<sp/>**<sp/>42<sp/>**<sp/>D42<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>6<sp/>**<sp/>43<sp/>**<sp/>D43<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1abd862e734e9180a5a624e312549af9a3" kindref="member">TIMER5C</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>5<sp/>**<sp/>44<sp/>**<sp/>D44<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a726d99899d8ec9eef95dad18ca7a2275" kindref="member">TIMER5B</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>4<sp/>**<sp/>45<sp/>**<sp/>D45<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a0bfbbf8c1f077f871e65628564a91b84" kindref="member">TIMER5A</ref><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>3<sp/>**<sp/>46<sp/>**<sp/>D46<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>2<sp/>**<sp/>47<sp/>**<sp/>D47<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>1<sp/>**<sp/>48<sp/>**<sp/>D48<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PL<sp/>0<sp/>**<sp/>49<sp/>**<sp/>D49<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>3<sp/>**<sp/>50<sp/>**<sp/>SPI_MISO<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>2<sp/>**<sp/>51<sp/>**<sp/>SPI_MOSI<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>1<sp/>**<sp/>52<sp/>**<sp/>SPI_SCK<sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PB<sp/>0<sp/>**<sp/>53<sp/>**<sp/>SPI_SS<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>0<sp/>**<sp/>54<sp/>**<sp/>A0<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>1<sp/>**<sp/>55<sp/>**<sp/>A1<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>2<sp/>**<sp/>56<sp/>**<sp/>A2<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>3<sp/>**<sp/>57<sp/>**<sp/>A3<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>4<sp/>**<sp/>58<sp/>**<sp/>A4<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>5<sp/>**<sp/>59<sp/>**<sp/>A5<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>6<sp/>**<sp/>60<sp/>**<sp/>A6<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PF<sp/>7<sp/>**<sp/>61<sp/>**<sp/>A7<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>0<sp/>**<sp/>62<sp/>**<sp/>A8<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>1<sp/>**<sp/>63<sp/>**<sp/>A9<sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>2<sp/>**<sp/>64<sp/>**<sp/>A10<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>3<sp/>**<sp/>65<sp/>**<sp/>A11<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>4<sp/>**<sp/>66<sp/>**<sp/>A12<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>5<sp/>**<sp/>67<sp/>**<sp/>A13<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>6<sp/>**<sp/>68<sp/>**<sp/>A14<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER<sp/><sp/><sp/><sp/>,<sp/></highlight><highlight class="comment">//<sp/>PK<sp/>7<sp/>**<sp/>69<sp/>**<sp/>A15<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="353"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="355"><highlight class="preprocessor"></highlight><highlight class="comment">//<sp/>these<sp/>arrays<sp/>map<sp/>port<sp/>names<sp/>(e.g.<sp/>port<sp/>B)<sp/>to<sp/>the</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"></highlight><highlight class="comment">//<sp/>appropriate<sp/>addresses<sp/>for<sp/>various<sp/>functions<sp/>(e.g.<sp/>reading</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="357"><highlight class="normal"></highlight><highlight class="comment">//<sp/>and<sp/>writing)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358" refid="motor_control_2build_2core_2pins__arduino_8h_1aa89b79b8454402ab79188f967c301015" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1aa89b79b8454402ab79188f967c301015" kindref="member">port_to_mode_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="361"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRB,</highlight></codeline>
+<codeline lineno="362"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRC,</highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;DDRD,</highlight></codeline>
+<codeline lineno="364"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="365"><highlight class="normal"></highlight></codeline>
+<codeline lineno="366" refid="motor_control_2build_2core_2pins__arduino_8h_1a3c27bdee78e6cb316807107ee37c1d74" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a3c27bdee78e6cb316807107ee37c1d74" kindref="member">port_to_output_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="367"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="368"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="369"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTB,</highlight></codeline>
+<codeline lineno="370"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTC,</highlight></codeline>
+<codeline lineno="371"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PORTD,</highlight></codeline>
+<codeline lineno="372"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="373"><highlight class="normal"></highlight></codeline>
+<codeline lineno="374" refid="motor_control_2build_2core_2pins__arduino_8h_1a1d2bcc0662263488ace7c68bc2073cb7" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint16_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a1d2bcc0662263488ace7c68bc2073cb7" kindref="member">port_to_input_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="375"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="376"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a831aab476b523619dbd3c9f0a7e49330" kindref="member">NOT_A_PORT</ref>,</highlight></codeline>
+<codeline lineno="377"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINB,</highlight></codeline>
+<codeline lineno="378"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PINC,</highlight></codeline>
+<codeline lineno="379"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;PIND,</highlight></codeline>
+<codeline lineno="380"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="381"><highlight class="normal"></highlight></codeline>
+<codeline lineno="382" refid="motor_control_2build_2core_2pins__arduino_8h_1a760bd344a6a02658408a872150b8b885" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a760bd344a6a02658408a872150b8b885" kindref="member">digital_pin_to_port_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="383"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a960c2f6c3fca885af2c1ea2b88dee7b7" kindref="member">PD</ref>,<sp/></highlight><highlight class="comment">/*<sp/>0<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="384"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a960c2f6c3fca885af2c1ea2b88dee7b7" kindref="member">PD</ref>,</highlight></codeline>
+<codeline lineno="385"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD,</highlight></codeline>
+<codeline lineno="386"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD,</highlight></codeline>
+<codeline lineno="387"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD,</highlight></codeline>
+<codeline lineno="388"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD,</highlight></codeline>
+<codeline lineno="389"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD,</highlight></codeline>
+<codeline lineno="390"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PD,</highlight></codeline>
+<codeline lineno="391"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a2a06f3773d46878dc58f8dadd6fd0d72" kindref="member">PB</ref>,<sp/></highlight><highlight class="comment">/*<sp/>8<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="392"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB,</highlight></codeline>
+<codeline lineno="393"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB,</highlight></codeline>
+<codeline lineno="394"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB,</highlight></codeline>
+<codeline lineno="395"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB,</highlight></codeline>
+<codeline lineno="396"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PB,</highlight></codeline>
+<codeline lineno="397"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1a600721f0222b857dc8a3ae59e5077347" kindref="member">PC</ref>,<sp/></highlight><highlight class="comment">/*<sp/>14<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="398"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC,</highlight></codeline>
+<codeline lineno="399"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC,</highlight></codeline>
+<codeline lineno="400"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC,</highlight></codeline>
+<codeline lineno="401"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC,</highlight></codeline>
+<codeline lineno="402"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>PC,</highlight></codeline>
+<codeline lineno="403"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="404"><highlight class="normal"></highlight></codeline>
+<codeline lineno="405" refid="motor_control_2build_2core_2pins__arduino_8h_1ac161b9268b58f75c06875fd9fd432ff7" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ac161b9268b58f75c06875fd9fd432ff7" kindref="member">digital_pin_to_bit_mask_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="406"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(0),<sp/></highlight><highlight class="comment">/*<sp/>0,<sp/>port<sp/>D<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="407"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(1),</highlight></codeline>
+<codeline lineno="408"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(2),</highlight></codeline>
+<codeline lineno="409"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(3),</highlight></codeline>
+<codeline lineno="410"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(4),</highlight></codeline>
+<codeline lineno="411"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(5),</highlight></codeline>
+<codeline lineno="412"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(6),</highlight></codeline>
+<codeline lineno="413"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(7),</highlight></codeline>
+<codeline lineno="414"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(0),<sp/></highlight><highlight class="comment">/*<sp/>8,<sp/>port<sp/>B<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="415"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(1),</highlight></codeline>
+<codeline lineno="416"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(2),</highlight></codeline>
+<codeline lineno="417"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(3),</highlight></codeline>
+<codeline lineno="418"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(4),</highlight></codeline>
+<codeline lineno="419"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(5),</highlight></codeline>
+<codeline lineno="420"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(0),<sp/></highlight><highlight class="comment">/*<sp/>14,<sp/>port<sp/>C<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="421"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(1),</highlight></codeline>
+<codeline lineno="422"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(2),</highlight></codeline>
+<codeline lineno="423"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(3),</highlight></codeline>
+<codeline lineno="424"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(4),</highlight></codeline>
+<codeline lineno="425"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>_BV(5),</highlight></codeline>
+<codeline lineno="426"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="427"><highlight class="normal"></highlight></codeline>
+<codeline lineno="428" refid="motor_control_2build_2core_2pins__arduino_8h_1ae253f497127926f0ee4ca1d5568ad6a8" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">const</highlight><highlight class="normal"><sp/>uint8_t<sp/>PROGMEM<sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8c_1ae253f497127926f0ee4ca1d5568ad6a8" kindref="member">digital_pin_to_timer_PGM</ref>[]<sp/>=<sp/>{</highlight></codeline>
+<codeline lineno="429"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a77d75bdd0dd8486dc8a52e742f1dc8a0" kindref="member">NOT_ON_TIMER</ref>,<sp/></highlight><highlight class="comment">/*<sp/>0<sp/>-<sp/>port<sp/>D<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="430"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a77d75bdd0dd8486dc8a52e742f1dc8a0" kindref="member">NOT_ON_TIMER</ref>,</highlight></codeline>
+<codeline lineno="431"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="432"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>on<sp/>the<sp/>ATmega168,<sp/>digital<sp/>pin<sp/>3<sp/>has<sp/>hardware<sp/>pwm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="433"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)</highlight></codeline>
+<codeline lineno="434"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="435"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="436"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a3c6f8d27eb3e22e69a9894cf22066152" kindref="member">TIMER2B</ref>,</highlight></codeline>
+<codeline lineno="437"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="438"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="439"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>on<sp/>the<sp/>ATmega168,<sp/>digital<sp/>pins<sp/>5<sp/>and<sp/>6<sp/>have<sp/>hardware<sp/>pwm</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="440"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)</highlight></codeline>
+<codeline lineno="441"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="442"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="443"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="444"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1ae27874b42e0356990a774d9da7161e22" kindref="member">TIMER0B</ref>,</highlight></codeline>
+<codeline lineno="445"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a9a45c92fe306d61cc67ee815449cc754" kindref="member">TIMER0A</ref>,</highlight></codeline>
+<codeline lineno="446"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="447"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="448"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,<sp/></highlight><highlight class="comment">/*<sp/>8<sp/>-<sp/>port<sp/>B<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="449"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a90512316aeb46f7d54fb6a53ad7b9d80" kindref="member">TIMER1A</ref>,</highlight></codeline>
+<codeline lineno="450"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1aaeaaaf8bf5b4cdfd864164a6e93d1fa3" kindref="member">TIMER1B</ref>,</highlight></codeline>
+<codeline lineno="451"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)</highlight></codeline>
+<codeline lineno="452"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1aca904d0e4ebb6d643c349f7f05613995" kindref="member">TIMER2</ref>,</highlight></codeline>
+<codeline lineno="453"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="454"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2pins__arduino_8h_1a029a1db02fe68e1ffed9a7e7b3910568" kindref="member">TIMER2A</ref>,</highlight></codeline>
+<codeline lineno="455"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="456"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="457"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="458"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="459"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,<sp/></highlight><highlight class="comment">/*<sp/>14<sp/>-<sp/>port<sp/>C<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="460"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="461"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="462"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="463"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>NOT_ON_TIMER,</highlight></codeline>
+<codeline lineno="464"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="465"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/pins_arduino.c"/>
+  </compounddef>
+</doxygen>

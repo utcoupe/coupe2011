@@ -1,0 +1,365 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="asserv_8c" kind="file">
+    <compoundname>asserv.c</compoundname>
+    <includes refid="asserv_8c" local="yes">ALTypes.h</includes>
+    <includes local="yes">math.h</includes>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includes refid="trajectory_8h" local="yes">trajectory.h</includes>
+    <includedby refid="asserv_8c" local="yes">asserv2010/asserv.c</includedby>
+    <incdepgraph>
+      <node id="1112">
+        <label>asserv2010/asserv.c</label>
+        <link refid="asserv.c"/>
+        <childnode refid="1112" relation="include">
+        </childnode>
+        <childnode refid="1113" relation="include">
+        </childnode>
+        <childnode refid="1114" relation="include">
+        </childnode>
+        <childnode refid="1115" relation="include">
+        </childnode>
+      </node>
+      <node id="1115">
+        <label>trajectory.h</label>
+        <link refid="trajectory_8h"/>
+        <childnode refid="1114" relation="include">
+        </childnode>
+      </node>
+      <node id="1113">
+        <label>math.h</label>
+      </node>
+      <node id="1114">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1116">
+        <label>asserv2010/asserv.c</label>
+        <link refid="asserv.c"/>
+        <childnode refid="1116" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="asserv_8c_1a8bb502c0b7288d89f1b34118acd79ef3" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float gRotationTheorique</definition>
+        <argsstring></argsstring>
+        <name>gRotationTheorique</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="9" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.c" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="asserv_8c_1a63963570a86d969aa0df3e32151792ed" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float distanceTheorique</definition>
+        <argsstring></argsstring>
+        <name>distanceTheorique</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="10" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.c" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 noCommandTimeOutFlag</definition>
+        <argsstring></argsstring>
+        <name>noCommandTimeOutFlag</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="11" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Main.c" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="asserv_8c_1ac96c1155b2173512a07f1831d0f2cf91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void detectionCalageBordure</definition>
+        <argsstring>(void)</argsstring>
+        <name>detectionCalageBordure</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" bodystart="13" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float ecretagef</definition>
+        <argsstring>(float Vmax, float val)</argsstring>
+        <name>ecretagef</name>
+        <param>
+          <type>float</type>
+          <declname>Vmax</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" bodystart="34" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float balanced_clip</definition>
+        <argsstring>(float pMax, float pValue, float *pBalance)</argsstring>
+        <name>balanced_clip</name>
+        <param>
+          <type>float</type>
+          <declname>pMax</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>pValue</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>pBalance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="42" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" bodystart="41" bodyend="72"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_8c_1a0a056c0ffd9e312447308f33f65f95ca" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void asservissementPosition</definition>
+        <argsstring>(float pEcart_d, float pEcart_rot)</argsstring>
+        <name>asservissementPosition</name>
+        <param>
+          <type>float</type>
+          <declname>pEcart_d</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>pEcart_rot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" line="76" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" bodystart="75" bodyend="186"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_distance_8h" kindref="compound">asservDistance.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_orientation_8h" kindref="compound">asservOrientation.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="speed_asserv_8h" kindref="compound">speedAsserv.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_p_w_m_8h" kindref="compound">PWM.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a8bb502c0b7288d89f1b34118acd79ef3" kindref="member">gRotationTheorique</ref>;</highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a63963570a86d969aa0df3e32151792ed" kindref="member">distanceTheorique</ref>;</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref>;</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13" refid="asserv_8h_1ac96c1155b2173512a07f1831d0f2cf91" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1ac96c1155b2173512a07f1831d0f2cf91" kindref="member">detectionCalageBordure</ref><sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="14"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><ref refid="struct_joint_config" kindref="compound">JointConfig</ref>*<sp/>jointGauche;</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><ref refid="struct_joint_config" kindref="compound">JointConfig</ref>*<sp/>jointDroite;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Get<sp/>config<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/>jointGauche<sp/>=<sp/><ref refid="config_8c_1afd26fdfe7f8e112d2805849f5358b27f" kindref="member">oGetJointConfig</ref>(<ref refid="config_8h_1af07f8bf974fdf76afd17f2b97ac15a22" kindref="member">GAUCHE</ref>);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"><sp/><sp/>jointDroite<sp/>=<sp/><ref refid="config_8c_1afd26fdfe7f8e112d2805849f5358b27f" kindref="member">oGetJointConfig</ref>(<ref refid="config_8h_1af625d3f3bc022848a558f2b18def5b15" kindref="member">DROITE</ref>);</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"><sp/></highlight><highlight class="comment">//<sp/>RECUPERATION<sp/>DES<sp/>PARAMETRE<sp/>DU<sp/>ROBOT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>detection<sp/>du<sp/>callage<sp/>bordure</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>(Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>==<sp/><ref refid="asserv_orientation_8h_1a0b2769efd8ad04fcf4de0cf8429a58d7" kindref="member">ROTATION_DISABLE</ref>)<sp/>&amp;&amp;<sp/><sp/>(fabs(Robot-&gt;<ref refid="structrobot_1ac6fa501ce3a7ed6eb10a3ebf5283aed4" kindref="member">speedConsigne</ref>)<sp/>&gt;<sp/>5)<sp/>&amp;&amp;<sp/><sp/>(fabs(jointDroite-&gt;<ref refid="struct_joint_config_1a1a76e093b95a477700e2fd7a0721ae9f" kindref="member">speed</ref>)<sp/>&lt;<sp/>2)<sp/>&amp;&amp;<sp/>(fabs(jointGauche-&gt;<ref refid="struct_joint_config_1a1a76e093b95a477700e2fd7a0721ae9f" kindref="member">speed</ref>)<sp/>&lt;<sp/>2)<sp/><sp/>)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/><sp/>{<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="asserv_8c_1a63963570a86d969aa0df3e32151792ed" kindref="member">distanceTheorique</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ac6fa501ce3a7ed6eb10a3ebf5283aed4" kindref="member">speedConsigne</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>=<sp/><ref refid="asserv_orientation_8h_1ad31500c1fa379bc91cd681af4d766da8" kindref="member">NO_PWM</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="31"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight></codeline>
+<codeline lineno="34" refid="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" kindref="member">ecretagef</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>Vmax,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>val)</highlight></codeline>
+<codeline lineno="35"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(val&gt;=Vmax)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>Vmax;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(val&lt;=-Vmax)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>-Vmax;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>val;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41" refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pMax,</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pValue,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>pBalance)</highlight></codeline>
+<codeline lineno="42"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(pValue<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>pValue<sp/>&gt;<sp/>pMax)</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pBalance<sp/><sp/>=<sp/>pValue<sp/><sp/>-<sp/>(pMax);</highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pValue<sp/>=<sp/>pMax;</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pBalance=0;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(pValue<sp/>&lt;<sp/>0)</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>pValue<sp/>&lt;<sp/>-pMax)</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pBalance<sp/><sp/><sp/>=<sp/>pValue<sp/>-<sp/>(-pMax);</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pValue<sp/>=<sp/>-pMax;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pBalance<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*pBalance<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pValue;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="asserv_8h_1abc55f4d1b5a459f489c9a302c88fbe03" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a0a056c0ffd9e312447308f33f65f95ca" kindref="member">asservissementPosition</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pEcart_d,</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pEcart_rot)</highlight></codeline>
+<codeline lineno="76"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>commande_droite,commande_gauche,command,command_rot;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>balanceDroite=0,balanceGauche=0;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ecart_d,ecart_rot;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>last_erreur_rot=0,last_erreur_d=0;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><ref refid="structasserv" kindref="compound">asserv</ref><sp/>*<sp/>pid;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>RECUPERATION<sp/>DES<sp/>PARAMETRE<sp/>DU<sp/>ROBOT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>RECUPERATION<sp/>DES<sp/>PARAMETTRES<sp/>DE<sp/>L<sp/>ASSERVISSEMENT</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>pid<sp/>=<sp/><ref refid="config_8c_1ada49cdfb49b464ff6eddc574ea087e72" kindref="member">getPID</ref>();</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="90"><highlight class="comment"><sp/><sp/>//<sp/>GESTION<sp/>DU<sp/>MAINTIEN<sp/>EN<sp/>POSITION<sp/>FIXE</highlight></codeline>
+<codeline lineno="91"><highlight class="comment"><sp/><sp/>if<sp/>(<sp/>fabs(pEcart_d)<sp/>&lt;<sp/>toCount(250))</highlight></codeline>
+<codeline lineno="92"><highlight class="comment"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="comment"><sp/><sp/>if<sp/>(<sp/>fabsf(pEcart_rot)<sp/>&gt;<sp/>PI/2)</highlight></codeline>
+<codeline lineno="94"><highlight class="comment"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="95"><highlight class="comment"><sp/><sp/><sp/><sp/>pEcart_d<sp/>*=<sp/>-1;</highlight></codeline>
+<codeline lineno="96"><highlight class="comment"><sp/><sp/><sp/><sp/>pEcart_rot+=<sp/>PI;</highlight></codeline>
+<codeline lineno="97"><highlight class="comment"><sp/><sp/><sp/><sp/>while<sp/>(pEcart_rot<sp/>&gt;<sp/><sp/>PI)<sp/>pEcart_rot-=PIx2;</highlight></codeline>
+<codeline lineno="98"><highlight class="comment"><sp/><sp/><sp/><sp/>while<sp/>(pEcart_rot<sp/>&lt;<sp/>-PI)<sp/>pEcart_rot+=PIx2;</highlight></codeline>
+<codeline lineno="99"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/>last_erreur_rot<sp/>*=-1;</highlight></codeline>
+<codeline lineno="100"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/>last_erreur_d<sp/>*=<sp/>-1;<sp/></highlight></codeline>
+<codeline lineno="101"><highlight class="comment"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="102"><highlight class="comment"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="103"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104"><highlight class="normal"></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//ecart_rot<sp/>=<sp/>calculEcart_rot(Robot-&gt;target);</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>ou<sp/>si<sp/>speedconsigne<sp/>==<sp/>0<sp/>ou<sp/>pas</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/>if<sp/>((fabs(ecart_d)<sp/>&lt;<sp/>toCount(20))<sp/>&amp;&amp;<sp/>((Robot-&gt;target.x<sp/>==<sp/>Robot-&gt;nextTarget.x)<sp/>&amp;&amp;<sp/>(Robot-&gt;target.y<sp/>==<sp/>Robot-&gt;nextTarget.y)))</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((<ref refid="asserv_8c_1a8bb502c0b7288d89f1b34118acd79ef3" kindref="member">gRotationTheorique</ref><sp/>==<sp/>0)<sp/>&amp;&amp;<sp/><sp/>(<ref refid="asserv_8c_1a63963570a86d969aa0df3e32151792ed" kindref="member">distanceTheorique</ref><sp/>==<sp/>0))</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/>pEcart_d<sp/>/=<sp/>5;</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>voir<sp/>s&apos;il<sp/>ne<sp/>vaut<sp/>mieu<sp/>pas<sp/>bosser<sp/>avec<sp/>ecartrot<sp/>qui<sp/>n&apos;a<sp/>pas<sp/>été<sp/>trafiquer</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>fabsf(pEcart_rot)<sp/>&gt;<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>/2)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pEcart_d<sp/>*=<sp/>-1;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>pEcart_rot<sp/>+=<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pEcart_rot<sp/>&gt;<sp/><sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)<sp/>pEcart_rot-=<ref refid="_a_l_types_8h_1a2a95859d7c6924f59afef24c2f3c20c9" kindref="member">PIx2</ref>;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(pEcart_rot<sp/>&lt;<sp/>-<ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)<sp/>pEcart_rot+=<ref refid="_a_l_types_8h_1a2a95859d7c6924f59afef24c2f3c20c9" kindref="member">PIx2</ref>;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>CALCUL<sp/>PID</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/>command<sp/>=<sp/>((pEcart_d<sp/>-<sp/>last_erreur_d<sp/>)<sp/>*<sp/>pid-&gt;<ref refid="structasserv_1afeb218cf07c1d67ddfb902d127c2633a" kindref="member">Kd_d</ref><sp/>+<sp/>pEcart_d<sp/>)<sp/>*<sp/>pid-&gt;<ref refid="structasserv_1aa6c642febf7ae10bfe380ba63453f963" kindref="member">Kp_d</ref>;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/>command<sp/>=<sp/><ref refid="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" kindref="member">ecretagef</ref>(<sp/><ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,<sp/>command);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/>command_rot<sp/>=<sp/>((pEcart_rot<sp/>-<sp/>last_erreur_rot<sp/>)<sp/>*<sp/>pid-&gt;<ref refid="structasserv_1a0caee5d8e4b8082118617858791b2e1a" kindref="member">Kd_o</ref><sp/>+<sp/>pEcart_rot<sp/>)<sp/>*<sp/>pid-&gt;<ref refid="structasserv_1a4d1fc0910cb249ae5af8e4007ce71d76" kindref="member">Kp_o</ref>;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/>command_rot<sp/>=<sp/><ref refid="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" kindref="member">ecretagef</ref>(<sp/><ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,<sp/>command_rot);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>==<sp/><ref refid="asserv_orientation_8h_1ad31500c1fa379bc91cd681af4d766da8" kindref="member">NO_PWM</ref>)</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>last_erreur_rot<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>last_erreur_d<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_droite<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_gauche<sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>==<sp/><ref refid="asserv_orientation_8h_1a0b2769efd8ad04fcf4de0cf8429a58d7" kindref="member">ROTATION_DISABLE</ref>)</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>RECALAGE<sp/>BORDURE<sp/>SANS<sp/>ASSERVISSEMENT<sp/>D<sp/>ORIENTATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>command_rot<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_droite<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,command<sp/>,&amp;balanceGauche);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_gauche<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,command<sp/>,&amp;balanceDroite);<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="asserv_8c_1a8bb502c0b7288d89f1b34118acd79ef3" kindref="member">gRotationTheorique</ref><sp/>==<sp/>0)</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>SANS<sp/>ASSERVISSEMENT<sp/>DE<sp/>VITESSE<sp/>DE<sp/>ROTATION</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_droite<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,command<sp/>+<sp/>command_rot,&amp;balanceGauche);</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_gauche<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,command<sp/>-<sp/>command_rot,&amp;balanceDroite);</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>==<sp/><ref refid="asserv_orientation_8h_1a84a1435b09c7f8af9aafca7b941b0964" kindref="member">ROTATION_IN_PLACE</ref>)</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>AVEC<sp/>ASSERVISSEMENT<sp/>DE<sp/>VITESSE<sp/>DE<sp/>ROTATION<sp/>SUR<sp/>PLACE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_droite<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,<sp/><sp/><sp/>command_rot,&amp;balanceGauche);</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>commande_gauche<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,<sp/>-<sp/>command_rot,&amp;balanceDroite);</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>==<sp/><ref refid="asserv_orientation_8h_1a0408feda281bb8c8ae701e042fd279a1" kindref="member">ROTATION_PIVOT</ref>)</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>AVEC<sp/>ASSERVISSEMENT<sp/>DE<sp/>VITESSE<sp/>DE<sp/>ROTATION<sp/>EN<sp/>PIVOT<sp/>AUTOUR<sp/>D<sp/>UNE<sp/>ROUE</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref>*command_rot<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>commande_droite<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,command_rot,&amp;balanceGauche);</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>commande_gauche<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,0,&amp;balanceDroite);</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>commande_droite<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,0,&amp;balanceGauche);</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>commande_gauche<sp/>=<sp/><ref refid="asserv_8c_1ad306113f6035bdde065586aa4f8704a2" kindref="member">balanced_clip</ref>(<ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,-command_rot,&amp;balanceDroite);</highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="166"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="167"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="168"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//commande_droite<sp/>-=<sp/>balanceDroite;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//commande_gauche<sp/>-=<sp/>balanceGauche;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>commande_droite<sp/>=<sp/><ref refid="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" kindref="member">ecretagef</ref>(<sp/><ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,<sp/>commande_droite<sp/>-<sp/>balanceDroite);</highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/>commande_gauche<sp/>=<sp/><ref refid="asserv_8c_1a38ae395c7022742f234eb7d24fb21ef9" kindref="member">ecretagef</ref>(<sp/><ref refid="_p_w_m_8h_1a391fa1e490bd712720989b58fa0d9904" kindref="member">PWM_MAX</ref>,<sp/>commande_gauche<sp/>-<sp/>balanceGauche);</highlight></codeline>
+<codeline lineno="173"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"><sp/><sp/>last_erreur_rot<sp/>=<sp/>pEcart_rot;</highlight></codeline>
+<codeline lineno="175"><highlight class="normal"><sp/><sp/>last_erreur_d<sp/><sp/><sp/>=<sp/>pEcart_d;</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="asserv_8c_1a6541de02098c9c007d512a9d8931e18f" kindref="member">noCommandTimeOutFlag</ref>)</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_p_w_m_8c_1abc914689ec2b324a10eba7605e63576f" kindref="member">oApplyPWM</ref>(<sp/>0,<sp/><ref refid="config_8h_1af625d3f3bc022848a558f2b18def5b15" kindref="member">DROITE</ref>);</highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_p_w_m_8c_1abc914689ec2b324a10eba7605e63576f" kindref="member">oApplyPWM</ref>(<sp/>0,<sp/><ref refid="config_8h_1af07f8bf974fdf76afd17f2b97ac15a22" kindref="member">GAUCHE</ref>);</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_p_w_m_8c_1abc914689ec2b324a10eba7605e63576f" kindref="member">oApplyPWM</ref>(<sp/>commande_droite,<sp/><ref refid="config_8h_1af625d3f3bc022848a558f2b18def5b15" kindref="member">DROITE</ref>);</highlight></codeline>
+<codeline lineno="184"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_p_w_m_8c_1abc914689ec2b324a10eba7605e63576f" kindref="member">oApplyPWM</ref>(<sp/>-commande_gauche,<sp/><ref refid="config_8h_1af07f8bf974fdf76afd17f2b97ac15a22" kindref="member">GAUCHE</ref>);</highlight></codeline>
+<codeline lineno="185"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="186"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,227 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="i2c_8h" kind="file">
+    <compoundname>i2c.h</compoundname>
+    <includedby refid="_main_8c" local="yes">asserv2010/Main.c</includedby>
+    <invincdepgraph>
+      <node id="1186">
+        <label>asserv2010/i2c.h</label>
+        <link refid="i2c.h"/>
+        <childnode refid="1187" relation="include">
+        </childnode>
+      </node>
+      <node id="1187">
+        <label>asserv2010/Main.c</label>
+        <link refid="_main_8c"/>
+        <childnode refid="1187" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="i2c_8h_1a1fccca1b6dc1167906cdc3a948bbc6de" prot="public" static="no">
+        <name>NO_COMMAND</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="3" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" bodystart="3" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8h_1a79530048e9f4dff619ca3c10fa9babd6" prot="public" static="no">
+        <name>NEW_COMMAND_CONTINOUS</name>
+        <initializer>20</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="4" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" bodystart="4" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8h_1ada185962d822ceab4476f61a02d446ed" prot="public" static="no">
+        <name>NEW_COMMAND_DIFFERENT</name>
+        <initializer>25</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="5" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" bodystart="5" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8h_1ae027de2b9d8c454e3f73eeaa8dfe0d8e" prot="public" static="no">
+        <name>OLD_COMMAND</name>
+        <initializer>30</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="6" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8h_1a924846e4eecc5f7de834b151b8a156a6" prot="public" static="no">
+        <name>WRONG_COMMAND</name>
+        <initializer>40</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="7" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8h_1a66d0e9454a301ab9be73799262cb617b" prot="public" static="no">
+        <name>NO_COMMAND_TIMEOUT</name>
+        <initializer>100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="8" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="i2c_8h_1a7072845a54cdfad3cac5829d2f66b616" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void oInitI2C</definition>
+        <argsstring>(void)</argsstring>
+        <name>oInitI2C</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="10" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="37" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8h_1aec56d36cd87251be37fe2aa6fb554618" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void oWaitI2Cdata</definition>
+        <argsstring>(void)</argsstring>
+        <name>oWaitI2Cdata</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="11" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="168" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8h_1a3c914b8a170032fbe5b41aef0a40d986" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 oGetCommand</definition>
+        <argsstring>(void)</argsstring>
+        <name>oGetCommand</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="12" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8h_1ace43dce18db964a2604ac5a1478dc044" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref> *</type>
+        <definition>uInt8* oGetReceptionBuffer</definition>
+        <argsstring>(void)</argsstring>
+        <name>oGetReceptionBuffer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="13" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8h_1a20b83103d4f76fa141d2e75f909527a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+        <definition>uInt16 getBufferSize</definition>
+        <argsstring>(void)</argsstring>
+        <name>getBufferSize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="184" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8h_1a091acab55a056b7f764185d309b67e11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 checkNewCommandI2C</definition>
+        <argsstring>(void)</argsstring>
+        <name>checkNewCommandI2C</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="15" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="245" bodyend="361"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8h_1a5b5b757da1baef7d5c0501d0d3f2c500" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fillSendBuffer</definition>
+        <argsstring>(void)</argsstring>
+        <name>fillSendBuffer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h" line="16" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="189" bodyend="240"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>I2C_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>I2C_H</highlight></codeline>
+<codeline lineno="3" refid="i2c_8h_1a1fccca1b6dc1167906cdc3a948bbc6de" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>NO_COMMAND<sp/>10<sp/><sp/></highlight></codeline>
+<codeline lineno="4" refid="i2c_8h_1a79530048e9f4dff619ca3c10fa9babd6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>NEW_COMMAND_CONTINOUS<sp/>20</highlight></codeline>
+<codeline lineno="5" refid="i2c_8h_1ada185962d822ceab4476f61a02d446ed" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>NEW_COMMAND_DIFFERENT<sp/>25</highlight></codeline>
+<codeline lineno="6" refid="i2c_8h_1ae027de2b9d8c454e3f73eeaa8dfe0d8e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>OLD_COMMAND<sp/>30<sp/><sp/></highlight></codeline>
+<codeline lineno="7" refid="i2c_8h_1a924846e4eecc5f7de834b151b8a156a6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>WRONG_COMMAND<sp/>40</highlight></codeline>
+<codeline lineno="8" refid="i2c_8h_1a66d0e9454a301ab9be73799262cb617b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>NO_COMMAND_TIMEOUT<sp/>100</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a7072845a54cdfad3cac5829d2f66b616" kindref="member">oInitI2C</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1aec56d36cd87251be37fe2aa6fb554618" kindref="member">oWaitI2Cdata</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="i2c_8c_1a3c914b8a170032fbe5b41aef0a40d986" kindref="member">oGetCommand</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>*<sp/><ref refid="i2c_8c_1ace43dce18db964a2604ac5a1478dc044" kindref="member">oGetReceptionBuffer</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/><ref refid="i2c_8c_1a20b83103d4f76fa141d2e75f909527a0" kindref="member">getBufferSize</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="i2c_8c_1a091acab55a056b7f764185d309b67e11" kindref="member">checkNewCommandI2C</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1a5b5b757da1baef7d5c0501d0d3f2c500" kindref="member">fillSendBuffer</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.h"/>
+  </compounddef>
+</doxygen>

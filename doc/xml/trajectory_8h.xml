@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="trajectory_8h" kind="file">
+    <compoundname>trajectory.h</compoundname>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includedby refid="asserv_8c" local="yes">asserv2010/asserv.c</includedby>
+    <includedby refid="asserv_distance_8c" local="yes">asserv2010/asservDistance.c</includedby>
+    <includedby refid="asserv_orientation_8c" local="yes">asserv2010/asservOrientation.c</includedby>
+    <includedby refid="asserv_orientation_8h" local="yes">asserv2010/asservOrientation.h</includedby>
+    <includedby refid="config_8h" local="yes">asserv2010/config.h</includedby>
+    <includedby refid="speed_asserv_8c" local="yes">asserv2010/speedAsserv.c</includedby>
+    <includedby refid="trajectory_8c" local="yes">asserv2010/trajectory.c</includedby>
+    <incdepgraph>
+      <node id="1278">
+        <label>asserv2010/trajectory.h</label>
+        <link refid="trajectory.h"/>
+        <childnode refid="1279" relation="include">
+        </childnode>
+      </node>
+      <node id="1279">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1291">
+        <label>asserv2010/position.c</label>
+        <link refid="position_8c"/>
+      </node>
+      <node id="1288">
+        <label>asserv2010/speedAsserv.c</label>
+        <link refid="speed_asserv_8c"/>
+      </node>
+      <node id="1292">
+        <label>asserv2010/PWM.c</label>
+        <link refid="_p_w_m_8c"/>
+        <childnode refid="1292" relation="include">
+        </childnode>
+      </node>
+      <node id="1282">
+        <label>asserv2010/asservDistance.c</label>
+        <link refid="asserv_distance_8c"/>
+      </node>
+      <node id="1286">
+        <label>asserv2010/i2c.c</label>
+        <link refid="i2c_8c"/>
+        <childnode refid="1286" relation="include">
+        </childnode>
+      </node>
+      <node id="1287">
+        <label>asserv2010/Main.c</label>
+        <link refid="_main_8c"/>
+        <childnode refid="1287" relation="include">
+        </childnode>
+      </node>
+      <node id="1281">
+        <label>asserv2010/asserv.c</label>
+        <link refid="asserv_8c"/>
+        <childnode refid="1281" relation="include">
+        </childnode>
+      </node>
+      <node id="1289">
+        <label>asserv2010/trajectory.c</label>
+        <link refid="trajectory_8c"/>
+      </node>
+      <node id="1280">
+        <label>asserv2010/trajectory.h</label>
+        <link refid="trajectory.h"/>
+        <childnode refid="1281" relation="include">
+        </childnode>
+        <childnode refid="1282" relation="include">
+        </childnode>
+        <childnode refid="1283" relation="include">
+        </childnode>
+        <childnode refid="1284" relation="include">
+        </childnode>
+        <childnode refid="1290" relation="include">
+        </childnode>
+        <childnode refid="1288" relation="include">
+        </childnode>
+        <childnode refid="1289" relation="include">
+        </childnode>
+      </node>
+      <node id="1285">
+        <label>asserv2010/config.c</label>
+        <link refid="config_8c"/>
+      </node>
+      <node id="1290">
+        <label>asserv2010/config.h</label>
+        <link refid="config_8h"/>
+        <childnode refid="1282" relation="include">
+        </childnode>
+        <childnode refid="1283" relation="include">
+        </childnode>
+        <childnode refid="1285" relation="include">
+        </childnode>
+        <childnode refid="1286" relation="include">
+        </childnode>
+        <childnode refid="1287" relation="include">
+        </childnode>
+        <childnode refid="1291" relation="include">
+        </childnode>
+        <childnode refid="1292" relation="include">
+        </childnode>
+        <childnode refid="1288" relation="include">
+        </childnode>
+        <childnode refid="1289" relation="include">
+        </childnode>
+      </node>
+      <node id="1283">
+        <label>asserv2010/asservOrientation.c</label>
+        <link refid="asserv_orientation_8c"/>
+      </node>
+      <node id="1284">
+        <label>asserv2010/asservOrientation.h</label>
+        <link refid="asserv_orientation_8h"/>
+        <childnode refid="1285" relation="include">
+        </childnode>
+        <childnode refid="1286" relation="include">
+        </childnode>
+        <childnode refid="1287" relation="include">
+        </childnode>
+        <childnode refid="1288" relation="include">
+        </childnode>
+        <childnode refid="1289" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="structpoint" prot="public">point</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="trajectory_8h_1ab08b2e807dfc5aea0fe098f99c9f3f44" prot="public" static="no">
+        <name>DIMENSION_Y</name>
+        <initializer>3000</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" line="6" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" bodystart="6" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="trajectory_8h_1a4734ac4c9414c31e4772483473aa6ea1" prot="public" static="no">
+        <name>DIMENSION_X</name>
+        <initializer>2100</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" line="7" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="trajectory_8h_1abc9e36332ee3746d18ff525266622a55" prot="public" static="no">
+        <type>struct <ref refid="structpoint" kindref="compound">point</ref></type>
+        <definition>typedef struct point  point</definition>
+        <argsstring></argsstring>
+        <name>point</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" line="14"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="trajectory_8h_1a86b34ef046b15853e51654f3579bfad0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+        <definition>uInt16 insidePoint</definition>
+        <argsstring>(point pA)</argsstring>
+        <name>insidePoint</name>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref></type>
+          <declname>pA</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" line="17" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.c" bodystart="13" bodyend="23"/>
+      </memberdef>
+      <memberdef kind="function" id="trajectory_8h_1afefab840827700eeda0e24c711916d14" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+        <definition>uInt16 orientationHack</definition>
+        <argsstring>(void)</argsstring>
+        <name>orientationHack</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" line="18" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.c" bodystart="25" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="trajectory_8h_1ac845a572b6a2f20dba1053ee6366e1a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void nextTargetPointManagement</definition>
+        <argsstring>(float pEcart_d, uInt16 pPlanificationAsked)</argsstring>
+        <name>nextTargetPointManagement</name>
+        <param>
+          <type>float</type>
+          <declname>pEcart_d</declname>
+        </param>
+        <param>
+          <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+          <declname>pPlanificationAsked</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h" line="19" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.c" bodystart="41" bodyend="153"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>TRAJECTORY_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TRAJECTORY_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Oui<sp/>mais<sp/>bon</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6" refid="trajectory_8h_1ab08b2e807dfc5aea0fe098f99c9f3f44" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DIMENSION_Y<sp/>3000</highlight></codeline>
+<codeline lineno="7" refid="trajectory_8h_1a4734ac4c9414c31e4772483473aa6ea1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DIMENSION_X<sp/>2100</highlight></codeline>
+<codeline lineno="8"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9" refid="structpoint" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="structpoint" kindref="compound">point</ref><sp/></highlight></codeline>
+<codeline lineno="10"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="11" refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="12" refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" refkind="member"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>sInt16<sp/>last;<sp/>//<sp/>flag<sp/>to<sp/>know<sp/>if<sp/>deceleration<sp/>is<sp/>needed&lt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal">}<sp/><ref refid="structpoint" kindref="compound">point</ref>;<sp/></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/><ref refid="trajectory_8c_1a86b34ef046b15853e51654f3579bfad0" kindref="member">insidePoint</ref>(<ref refid="structpoint" kindref="compound">point</ref><sp/>pA);</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/><ref refid="trajectory_8c_1afefab840827700eeda0e24c711916d14" kindref="member">orientationHack</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="trajectory_8c_1ac845a572b6a2f20dba1053ee6366e1a6" kindref="member">nextTargetPointManagement</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pEcart_d,<sp/><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/>pPlanificationAsked);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">#define<sp/>MAX_NB_POINT<sp/>30</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"></highlight></codeline>
+<codeline lineno="24"><highlight class="comment">typedef<sp/>struct<sp/>trajectory</highlight></codeline>
+<codeline lineno="25"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="26"><highlight class="comment"><sp/><sp/>point<sp/>list[MAX_NB_POINT];</highlight></codeline>
+<codeline lineno="27"><highlight class="comment"><sp/><sp/>sInt16<sp/>index;</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"><sp/><sp/>sInt16<sp/>size;</highlight></codeline>
+<codeline lineno="29"><highlight class="comment">}trajectory;</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"></highlight></codeline>
+<codeline lineno="31"><highlight class="comment">void<sp/>initTrajectory(trajectory<sp/>*<sp/>pTrajectory)</highlight></codeline>
+<codeline lineno="32"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="33"><highlight class="comment"><sp/><sp/>pTrajectory-&gt;index=0;</highlight></codeline>
+<codeline lineno="34"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="35"><highlight class="comment"></highlight></codeline>
+<codeline lineno="36"><highlight class="comment">point<sp/>getNextPoint(trajectory<sp/>*<sp/>pTrajectory)</highlight></codeline>
+<codeline lineno="37"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/><sp/>if<sp/>(pTrajectory-&gt;index<sp/>&lt;<sp/>pTrajectory-&gt;size)</highlight></codeline>
+<codeline lineno="39"><highlight class="comment"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="comment"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="comment"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="42"><highlight class="comment">}<sp/></highlight></codeline>
+<codeline lineno="43"><highlight class="comment"></highlight></codeline>
+<codeline lineno="44"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/trajectory.h"/>
+  </compounddef>
+</doxygen>

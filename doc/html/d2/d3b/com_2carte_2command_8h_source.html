@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de com/carte/command.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>com/carte/command.h</h1><a href="../../d2/d3b/com_2carte_2command_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="keywordtype">void</span> <a class="code" href="../../d4/dae/com_2carte_2command_8cpp.html#ab1e0af7e339409190e61c32b7d9942be">cmd</a>(<span class="keywordtype">int</span> c, <span class="keywordtype">float</span>* message, <span class="keywordtype">int</span> m);
+<a name="l00003"></a>00003 <span class="keywordtype">int</span> <a class="code" href="../../d4/dae/com_2carte_2command_8cpp.html#ad0562fd3d2bf12af5d5d43bf1e4a1494">getSharp</a>();                 <span class="comment">// 1</span>
+<a name="l00004"></a>00004 <span class="keywordtype">void</span> <a class="code" href="../../d4/dae/com_2carte_2command_8cpp.html#a884dd2aff136a46e2ac2879051f4fef2">ledOn</a>();                   <span class="comment">// 2</span>
+<a name="l00005"></a>00005 <span class="keywordtype">void</span> <a class="code" href="../../d4/dae/com_2carte_2command_8cpp.html#a195edfd0d7d13f3749773958d9210c51">ledOff</a>();                  <span class="comment">// 3</span>
+<a name="l00006"></a>00006 <span class="keywordtype">void</span> <a class="code" href="../../d4/dae/com_2carte_2command_8cpp.html#a1e275b8c2a892c42d7447637833f837e">indexError</a>();              <span class="comment">// -1</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008 
+<a name="l00009"></a>00009 <span class="comment">/*</span>
+<a name="l00010"></a>00010 <span class="comment">typedef int (*aa)();</span>
+<a name="l00011"></a>00011 <span class="comment"></span>
+<a name="l00012"></a>00012 <span class="comment">void cmd(int name);</span>
+<a name="l00013"></a>00013 <span class="comment">int identification()</span>
+<a name="l00014"></a>00014 <span class="comment">{</span>
+<a name="l00015"></a>00015 <span class="comment">        Serial.println(3);</span>
+<a name="l00016"></a>00016 <span class="comment">}</span>
+<a name="l00017"></a>00017 <span class="comment"></span>
+<a name="l00018"></a>00018 <span class="comment">int getSharp()</span>
+<a name="l00019"></a>00019 <span class="comment">{</span>
+<a name="l00020"></a>00020 <span class="comment">        int sensorValue = analogRead(A0);</span>
+<a name="l00021"></a>00021 <span class="comment">        Serial.println(sensorValue);</span>
+<a name="l00022"></a>00022 <span class="comment">}</span>
+<a name="l00023"></a>00023 <span class="comment">//int identification(); // 0</span>
+<a name="l00024"></a>00024 <span class="comment">//int getSharp();                       // 1</span>
+<a name="l00025"></a>00025 <span class="comment">inline int ledOn();                     // 2</span>
+<a name="l00026"></a>00026 <span class="comment">inline int ledOff();                    // 3</span>
+<a name="l00027"></a>00027 <span class="comment">inline int indexError();                // -1</span>
+<a name="l00028"></a>00028 <span class="comment"></span>
+<a name="l00029"></a>00029 <span class="comment">aa tab [] = { //Etrange hein?</span>
+<a name="l00030"></a>00030 <span class="comment">    identification,</span>
+<a name="l00031"></a>00031 <span class="comment">    getSharp</span>
+<a name="l00032"></a>00032 <span class="comment">};</span>
+<a name="l00033"></a>00033 <span class="comment">*/</span>
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

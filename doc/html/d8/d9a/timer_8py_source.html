@@ -1,0 +1,77 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de com/pc/timer.py</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>com/pc/timer.py</h1><a href="../../d8/d9a/timer_8py.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="../../d5/d83/namespacetimer.html">00001</a> <span class="comment"># -*- coding: utf-8 -*-</span>
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="keyword">import</span> threading
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html">00007</a> <span class="keyword">class </span><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html">MyTimer</a>:
+<a name="l00008"></a><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a9b9c68c2c606a18c0cb175ba0a7f904d">00008</a>     <span class="keyword">def </span><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a9b9c68c2c606a18c0cb175ba0a7f904d">__init__</a>(self, tempo, target, args= [], kwargs={}):
+<a name="l00009"></a>00009         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#ad7bf951a8114f64283ea5e71f348a307">_target</a> = target
+<a name="l00010"></a>00010         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#aa52c34ae5ad106a088525da394583929">_args</a> = args
+<a name="l00011"></a>00011         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a7a00cae68b04c42d0d65f0b211fa255c">_kwargs</a> = kwargs
+<a name="l00012"></a>00012         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#aae2a7f9d76ddc20c20c2260b88ef0270">_tempo</a> = tempo
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014     <span class="keyword">def </span>_run(self):
+<a name="l00015"></a>00015         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a936cdbffc967700ebd74e5bfca02afd4">_timer</a> = threading.Timer(self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#aae2a7f9d76ddc20c20c2260b88ef0270">_tempo</a>, self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a400c50fc1bb3f94fe37d12cf9b1f9e19">_run</a>)
+<a name="l00016"></a>00016         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a936cdbffc967700ebd74e5bfca02afd4">_timer</a>.start()
+<a name="l00017"></a>00017         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#ad7bf951a8114f64283ea5e71f348a307">_target</a>(*self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#aa52c34ae5ad106a088525da394583929">_args</a>, **self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a7a00cae68b04c42d0d65f0b211fa255c">_kwargs</a>)
+<a name="l00018"></a>00018         
+<a name="l00019"></a><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a574061c189db3245ad982ac60a0194cd">00019</a>     <span class="keyword">def </span><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a574061c189db3245ad982ac60a0194cd">start</a>(self):
+<a name="l00020"></a>00020         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a936cdbffc967700ebd74e5bfca02afd4">_timer</a> = threading.Timer(self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#aae2a7f9d76ddc20c20c2260b88ef0270">_tempo</a>, self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a400c50fc1bb3f94fe37d12cf9b1f9e19">_run</a>)
+<a name="l00021"></a>00021         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a936cdbffc967700ebd74e5bfca02afd4">_timer</a>.start()
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#ab53d51ab9e889089112aa0a1d133b84e">00023</a>     <span class="keyword">def </span><a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#ab53d51ab9e889089112aa0a1d133b84e">stop</a>(self):
+<a name="l00024"></a>00024         self.<a class="code" href="../../d5/dbd/classtimer_1_1_my_timer.html#a936cdbffc967700ebd74e5bfca02afd4">_timer</a>.cancel()
+<a name="l00025"></a>00025         
+<a name="l00026"></a>00026 
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="../../d5/d83/namespacetimer.html#a1b8d3764fadd74cbd7ef6d7a75506ce0">00029</a> <span class="keyword">def </span><a class="code" href="../../d5/d83/namespacetimer.html#a1b8d3764fadd74cbd7ef6d7a75506ce0">timeout</a>(timeout_duration, func, args=(), kwargs={}, default=<span class="keywordtype">None</span>):
+<a name="l00030"></a>00030     <span class="stringliteral">&quot;&quot;&quot;This function will spawn a thread and run the given function</span>
+<a name="l00031"></a>00031 <span class="stringliteral">    using the args, kwargs and return the given default value if the</span>
+<a name="l00032"></a>00032 <span class="stringliteral">    timeout_duration is exceeded.</span>
+<a name="l00033"></a>00033 <span class="stringliteral">    &quot;&quot;&quot;</span> 
+<a name="l00034"></a>00034     <span class="keyword">class </span>InterruptableThread(threading.Thread):
+<a name="l00035"></a>00035         <span class="keyword">def </span>__init__(self):
+<a name="l00036"></a>00036             threading.Thread.__init__(self)
+<a name="l00037"></a><a class="code" href="../../d5/d83/namespacetimer.html#a9b3240e5583e9ce751f9187b250cd5a9">00037</a>             self.result = default
+<a name="l00038"></a>00038         <span class="keyword">def </span>run(self):
+<a name="l00039"></a>00039             self.result = func(*args, **kwargs)
+<a name="l00040"></a>00040     it = InterruptableThread()
+<a name="l00041"></a>00041     it.start()
+<a name="l00042"></a>00042     it.join(timeout_duration)
+<a name="l00043"></a>00043     <span class="keywordflow">if</span> it.isAlive():
+<a name="l00044"></a>00044         <span class="keywordflow">return</span> it.result
+<a name="l00045"></a>00045     <span class="keywordflow">else</span>:
+<a name="l00046"></a>00046         <span class="keywordflow">return</span> it.result
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

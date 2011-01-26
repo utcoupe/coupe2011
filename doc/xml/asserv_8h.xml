@@ -1,0 +1,57 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="asserv_8h" kind="file">
+    <compoundname>asserv.h</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="asserv_8h_1ac96c1155b2173512a07f1831d0f2cf91" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void detectionCalageBordure</definition>
+        <argsstring>(void)</argsstring>
+        <name>detectionCalageBordure</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.h" line="3" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" bodystart="13" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_8h_1abc55f4d1b5a459f489c9a302c88fbe03" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void asservissementPosition</definition>
+        <argsstring>(float ecart_d, float ecart_rot)</argsstring>
+        <name>asservissementPosition</name>
+        <param>
+          <type>float</type>
+          <declname>ecart_d</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>ecart_rot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.h" line="4" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.c" bodystart="75" bodyend="186"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>ASSERV_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ASSERV_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1ac96c1155b2173512a07f1831d0f2cf91" kindref="member">detectionCalageBordure</ref><sp/>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a0a056c0ffd9e312447308f33f65f95ca" kindref="member">asservissementPosition</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ecart_d,</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ecart_rot);</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asserv.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de pinceControl/adafruit/examples/MotorTest/MotorTest.pde</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>pinceControl/adafruit/examples/MotorTest/MotorTest.pde</h1><a href="../../d8/d0c/_motor_test_8pde.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">// Adafruit Motor shield library</span>
+<a name="l00002"></a>00002 <span class="comment">// copyright Adafruit Industries LLC, 2009</span>
+<a name="l00003"></a>00003 <span class="comment">// this code is public domain, enjoy!</span>
+<a name="l00004"></a>00004 
+<a name="l00005"></a>00005 <span class="preprocessor">#include &lt;<a class="code" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html">AFMotor.h</a>&gt;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html">AF_DCMotor</a> <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a65d1d6978a6e6a4cde00796bcbcfae5b">motorG</a>(1, <a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#abd639f43f6c3b97a35e93aa2839877b0">MOTOR12_64KHZ</a>);
+<a name="l00008"></a>00008 <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html">AF_DCMotor</a> <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a1056575f3d80941e8f7d915819bc4e7e">motorD</a>(2, <a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#abd639f43f6c3b97a35e93aa2839877b0">MOTOR12_64KHZ</a>);
+<a name="l00009"></a>00009 
+<a name="l00010"></a><a class="code" href="../../d8/d0c/_motor_test_8pde.html#a4fc01d736fe50cf5b977f755b675f11d">00010</a> <span class="keywordtype">void</span> <a class="code" href="../../d4/de6/carte_8cpp.html#a4fc01d736fe50cf5b977f755b675f11d">setup</a>() {
+<a name="l00011"></a>00011   Serial.begin(9600);           <span class="comment">// set up Serial library at 9600 bps</span>
+<a name="l00012"></a>00012   Serial.println(<span class="stringliteral">&quot;Motor test!&quot;</span>);
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014   <span class="comment">// turn on motor</span>
+<a name="l00015"></a>00015   <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html">AF_DCMotor</a> <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a65d1d6978a6e6a4cde00796bcbcfae5b">motorG</a>(1, <a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#abd639f43f6c3b97a35e93aa2839877b0">MOTOR12_64KHZ</a>);
+<a name="l00016"></a>00016   motorG.<a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#a655aa89c20d3391809d3616914ce6532">setSpeed</a>(25);
+<a name="l00017"></a>00017  
+<a name="l00018"></a>00018   <a class="code" href="../../d2/d78/class_a_f___d_c_motor.html">AF_DCMotor</a> <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a1056575f3d80941e8f7d915819bc4e7e">motorD</a>(2, <a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#abd639f43f6c3b97a35e93aa2839877b0">MOTOR12_64KHZ</a>);
+<a name="l00019"></a>00019   motorD.<a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#a655aa89c20d3391809d3616914ce6532">setSpeed</a>(25);
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 }
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="../../d8/d0c/_motor_test_8pde.html#afe461d27b9c48d5921c00d521181f12f">00023</a> <span class="keywordtype">void</span> <a class="code" href="../../d4/de6/carte_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a>() {
+<a name="l00024"></a>00024   <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a65d1d6978a6e6a4cde00796bcbcfae5b">motorG</a>.<a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#aadb632824a197a86a8264b337c3c3110">run</a>(<a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a6ddfdda7a062d10cff4a72b76b44aeb8">FORWARD</a>);
+<a name="l00025"></a>00025   <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a1056575f3d80941e8f7d915819bc4e7e">motorD</a>.<a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#aadb632824a197a86a8264b337c3c3110">run</a>(<a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#adf445abfe1b77fa63f89e315ccc2f7f2">BACKWARD</a>);
+<a name="l00026"></a>00026   <a class="code" href="../../d9/d21/com_2carte_2build_2core_2wiring_8c.html#a6bc5f943544a887f8b23cadfb26a5e30">delay</a>(2000);
+<a name="l00027"></a>00027   <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a65d1d6978a6e6a4cde00796bcbcfae5b">motorG</a>.<a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#aadb632824a197a86a8264b337c3c3110">run</a>(<a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#adf445abfe1b77fa63f89e315ccc2f7f2">BACKWARD</a>);
+<a name="l00028"></a>00028   <a class="code" href="../../d8/d0c/_motor_test_8pde.html#a1056575f3d80941e8f7d915819bc4e7e">motorD</a>.<a class="code" href="../../d2/d78/class_a_f___d_c_motor.html#aadb632824a197a86a8264b337c3c3110">run</a>(<a class="code" href="../../d9/d82/motor_control_2_a_f_motor_8h.html#a6ddfdda7a062d10cff4a72b76b44aeb8">FORWARD</a>);
+<a name="l00029"></a>00029   <a class="code" href="../../d9/d21/com_2carte_2build_2core_2wiring_8c.html#a6bc5f943544a887f8b23cadfb26a5e30">delay</a>(2000);
+<a name="l00030"></a>00030 <span class="comment">/*  uint8_t i;</span>
+<a name="l00031"></a>00031 <span class="comment">  </span>
+<a name="l00032"></a>00032 <span class="comment">  Serial.print(&quot;tick&quot;);</span>
+<a name="l00033"></a>00033 <span class="comment">  </span>
+<a name="l00034"></a>00034 <span class="comment">  motor.run(FORWARD);</span>
+<a name="l00035"></a>00035 <span class="comment">  for (i=0; i&lt;255; i++) {</span>
+<a name="l00036"></a>00036 <span class="comment">    motor.setSpeed(i);  </span>
+<a name="l00037"></a>00037 <span class="comment">    delay(10);</span>
+<a name="l00038"></a>00038 <span class="comment"> }</span>
+<a name="l00039"></a>00039 <span class="comment"> </span>
+<a name="l00040"></a>00040 <span class="comment">  for (i=255; i!=0; i--) {</span>
+<a name="l00041"></a>00041 <span class="comment">    motor.setSpeed(i);  </span>
+<a name="l00042"></a>00042 <span class="comment">    delay(10);</span>
+<a name="l00043"></a>00043 <span class="comment"> }</span>
+<a name="l00044"></a>00044 <span class="comment">  </span>
+<a name="l00045"></a>00045 <span class="comment">  Serial.print(&quot;tock&quot;);</span>
+<a name="l00046"></a>00046 <span class="comment"></span>
+<a name="l00047"></a>00047 <span class="comment">  motor.run(BACKWARD);</span>
+<a name="l00048"></a>00048 <span class="comment">  for (i=0; i&lt;255; i++) {</span>
+<a name="l00049"></a>00049 <span class="comment">    motor.setSpeed(i);  </span>
+<a name="l00050"></a>00050 <span class="comment">    delay(10);</span>
+<a name="l00051"></a>00051 <span class="comment"> }</span>
+<a name="l00052"></a>00052 <span class="comment"> </span>
+<a name="l00053"></a>00053 <span class="comment">  for (i=255; i!=0; i--) {</span>
+<a name="l00054"></a>00054 <span class="comment">    motor.setSpeed(i);  </span>
+<a name="l00055"></a>00055 <span class="comment">    delay(10);</span>
+<a name="l00056"></a>00056 <span class="comment"> }</span>
+<a name="l00057"></a>00057 <span class="comment">  </span>
+<a name="l00058"></a>00058 <span class="comment"></span>
+<a name="l00059"></a>00059 <span class="comment">  Serial.print(&quot;tech&quot;);</span>
+<a name="l00060"></a>00060 <span class="comment">  motor.run(RELEASE);</span>
+<a name="l00061"></a>00061 <span class="comment">  delay(1000);*/</span>
+<a name="l00062"></a>00062 }
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

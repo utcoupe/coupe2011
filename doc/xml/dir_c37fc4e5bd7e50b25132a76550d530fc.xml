@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_c37fc4e5bd7e50b25132a76550d530fc" kind="dir">
+    <compoundname>motorControl/</compoundname>
+    <innerdir refid="dir_a6788f9636e343da53ac380389c253ae">motorControl/build/</innerdir>
+    <innerfile refid="motor_control_2_a_f_motor_8cpp">AFMotor.cpp</innerfile>
+    <innerfile refid="motor_control_2_a_f_motor_8h">AFMotor.h</innerfile>
+    <innerfile refid="motor_control_2command_8cpp">command.cpp</innerfile>
+    <innerfile refid="motor_control_2command_8h">command.h</innerfile>
+    <innerfile refid="control_8cpp">control.cpp</innerfile>
+    <innerfile refid="control_8h">control.h</innerfile>
+    <innerfile refid="encoder_8cpp">encoder.cpp</innerfile>
+    <innerfile refid="encoder_8h">encoder.h</innerfile>
+    <innerfile refid="fifo_8cpp">fifo.cpp</innerfile>
+    <innerfile refid="fifo_8h">fifo.h</innerfile>
+    <innerfile refid="motor_control_2message_8cpp">message.cpp</innerfile>
+    <innerfile refid="motor_control_2message_8h">message.h</innerfile>
+    <innerfile refid="parameters_8h">parameters.h</innerfile>
+    <innerfile refid="_p_i_d___beta6_8cpp">PID_Beta6.cpp</innerfile>
+    <innerfile refid="_p_i_d___beta6_8h">PID_Beta6.h</innerfile>
+    <innerfile refid="pwm_8cpp">pwm.cpp</innerfile>
+    <innerfile refid="pwm_8h">pwm.h</innerfile>
+    <innerfile refid="robotstate_8cpp">robotstate.cpp</innerfile>
+    <innerfile refid="robotstate_8h">robotstate.h</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/"/>
+  </compounddef>
+</doxygen>

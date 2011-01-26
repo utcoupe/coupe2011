@@ -1,0 +1,12 @@
+<map id="G" name="G">
+<area shape="rect" href="$db/d85/com_2carte_2build_2core_2_print_8h.html" title="com/carte/build/core/Print.h" alt="" coords="5,83,187,112"/>
+<area shape="rect" href="$dc/d3c/com_2carte_2build_2core_2_w_string_8cpp.html" title="com/carte/build/core/WString.cpp" alt="" coords="211,83,424,112"/>
+<area shape="rect" href="$da/d8d/motor_control_2build_2core_2_print_8h.html" title="motorControl/build/core/Print.h" alt="" coords="472,83,669,112"/>
+<area shape="rect" href="$dc/dff/motor_control_2build_2core_2_w_string_8cpp.html" title="motorControl/build/core/WString.cpp" alt="" coords="693,83,923,112"/>
+<area shape="rect" href="$dc/d39/com_2carte_2build_2core_2_print_8cpp.html" title="com/carte/build/core/Print.cpp" alt="" coords="141,160,336,189"/>
+<area shape="rect" href="$da/d0e/com_2carte_2build_2core_2_stream_8h.html" title="com/carte/build/core/Stream.h" alt="" coords="360,160,555,189"/>
+<area shape="rect" href="$dd/d49/motor_control_2build_2core_2_print_8cpp.html" title="motorControl/build/core/Print.cpp" alt="" coords="579,160,789,189"/>
+<area shape="rect" href="$d7/df7/motor_control_2build_2core_2_stream_8h.html" title="motorControl/build/core/Stream.h" alt="" coords="813,160,1024,189"/>
+<area shape="rect" href="$dd/d48/demo__ax12_8pde.html" title="pinceControl/demo_ax12/demo_ax12.pde" alt="" coords="643,237,901,267"/>
+<area shape="rect" href="$de/d61/_serial_bis_8h.html" title="pinceControl/demo_ax12/SerialBis.h" alt="" coords="949,237,1181,267"/>
+</map>

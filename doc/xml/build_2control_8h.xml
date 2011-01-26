@@ -1,0 +1,290 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="build_2control_8h" kind="file">
+    <compoundname>control.h</compoundname>
+    <includes local="no">math.h</includes>
+    <includes refid="build_2control_8h" local="yes">parameters.h</includes>
+    <includes refid="motor_control_2build_2core_2wiring_8h" local="yes">wiring.h</includes>
+    <includedby refid="build_2control_8h" local="yes">motorControl/build/control.h</includedby>
+    <incdepgraph>
+      <node id="1965">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1963">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="1964" relation="include">
+        </childnode>
+        <childnode refid="1965" relation="include">
+        </childnode>
+        <childnode refid="1966" relation="include">
+        </childnode>
+      </node>
+      <node id="1961">
+        <label>motorControl/build/control.h</label>
+        <link refid="build/control.h"/>
+        <childnode refid="1962" relation="include">
+        </childnode>
+        <childnode refid="1961" relation="include">
+        </childnode>
+        <childnode refid="1963" relation="include">
+        </childnode>
+      </node>
+      <node id="1964">
+        <label>avr/io.h</label>
+      </node>
+      <node id="1962">
+        <label>math.h</label>
+      </node>
+      <node id="1966">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1967">
+        <label>motorControl/build/control.h</label>
+        <link refid="build/control.h"/>
+        <childnode refid="1967" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+    <innerclass refid="struct_current_goal" prot="public">CurrentGoal</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="build_2control_8h_1a3bc60c00ac0493cc2a60b3aeadfe3c2d" prot="public" static="no">
+        <name>PHASE_1</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="15" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" prot="public" static="no">
+        <name>PHASE_2</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="16" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="16" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="build_2control_8h_1adbc28675de3a486a093bb7896f70c817" prot="public" static="no">
+        <name>PHASE_3</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="17" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="build_2control_8h_1a1ce1b1d3b01797b8faeeedfc85d60ade" prot="public" static="no">
+        <name>PHASE_4</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="18" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="build_2control_8h_1a67c6f2868245a5d0c374e61663cf48fd" prot="public" static="no">
+        <type>struct <ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref></type>
+        <definition>typedef struct CurrentGoal  CurrentGoal</definition>
+        <argsstring></argsstring>
+        <name>CurrentGoal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="29"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="build_2control_8h_1a0e510825641ecd3f7861a66a12f4a952" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref></type>
+        <definition>CurrentGoal current_goal</definition>
+        <argsstring></argsstring>
+        <name>current_goal</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="31" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="build_2control_8h_1a126d81d79aac606e100d7bf6974d60f4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initController</definition>
+        <argsstring>()</argsstring>
+        <name>initController</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="33" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="34" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="build_2control_8h_1a8febe790f4954110a1e26aa6865d121e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void speedControl</definition>
+        <argsstring>(int *, int *)</argsstring>
+        <name>speedControl</name>
+        <param>
+          <type>int *</type>
+        </param>
+        <param>
+          <type>int *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="46" bodyend="105"/>
+      </memberdef>
+      <memberdef kind="function" id="build_2control_8h_1af42eb2c4f9bb043f1a737c7febf61a79" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void angleControl</definition>
+        <argsstring>(int *, int *)</argsstring>
+        <name>angleControl</name>
+        <param>
+          <type>int *</type>
+        </param>
+        <param>
+          <type>int *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="113" bodyend="158"/>
+      </memberdef>
+      <memberdef kind="function" id="build_2control_8h_1afa3541cbb488d296f15002a42a3200d7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void positionControl</definition>
+        <argsstring>(int *, int *)</argsstring>
+        <name>positionControl</name>
+        <param>
+          <type>int *</type>
+        </param>
+        <param>
+          <type>int *</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="178" bodyend="252"/>
+      </memberdef>
+      <memberdef kind="function" id="build_2control_8h_1a14205b503643eae869c101e5f77b42fa" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void computeRobotState</definition>
+        <argsstring>()</argsstring>
+        <name>computeRobotState</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/control.cpp" bodystart="257" bodyend="294"/>
+      </memberdef>
+      <memberdef kind="function" id="build_2control_8h_1a5ef071b26cbeaf4744db31b647c639ba" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int computePID</definition>
+        <argsstring>(double, int, int, int)</argsstring>
+        <name>computePID</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h" line="41"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/>*<sp/>control.h</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"><sp/>*<sp/><sp/>Created<sp/>on:<sp/>13<sp/>janv.<sp/>2011</highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>Author:<sp/>HoHen</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>CONTROL_H_</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>CONTROL_H_</highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;math.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;parameters.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2wiring_8h" kindref="compound">wiring.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight></codeline>
+<codeline lineno="15" refid="build_2control_8h_1a3bc60c00ac0493cc2a60b3aeadfe3c2d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PHASE_1<sp/>1</highlight></codeline>
+<codeline lineno="16" refid="build_2control_8h_1ae2778b96e6089232402c381f8ad19ca9" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PHASE_2<sp/>2</highlight></codeline>
+<codeline lineno="17" refid="build_2control_8h_1adbc28675de3a486a093bb7896f70c817" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PHASE_3<sp/>3</highlight></codeline>
+<codeline lineno="18" refid="build_2control_8h_1a1ce1b1d3b01797b8faeeedfc85d60ade" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>PHASE_4<sp/>4</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="struct_current_goal" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">struct<sp/></highlight><highlight class="normal"><ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref><sp/>{</highlight></codeline>
+<codeline lineno="21" refid="struct_current_goal_1add21cf5b478e9ed6b3cb8d3890a327f1" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1add21cf5b478e9ed6b3cb8d3890a327f1" kindref="member">type</ref>;</highlight></codeline>
+<codeline lineno="22" refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1a87cfb79b5af0a4299154b7c69a42a6a4" kindref="member">speed</ref>;</highlight></codeline>
+<codeline lineno="23" refid="struct_current_goal_1a6e92007beaa37c762cfd35d884b1a6bc" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1a6e92007beaa37c762cfd35d884b1a6bc" kindref="member">periode</ref>;</highlight></codeline>
+<codeline lineno="24" refid="struct_current_goal_1a3c29420a39256dd332de3ccda9947d25" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1a3c29420a39256dd332de3ccda9947d25" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="25" refid="struct_current_goal_1a286f9ecda5511dca05030186fa0c3c7c" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1a286f9ecda5511dca05030186fa0c3c7c" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="26" refid="struct_current_goal_1aa3f39d39acbff67e93d36d1a96ca7ee4" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1aa3f39d39acbff67e93d36d1a96ca7ee4" kindref="member">angle</ref>;</highlight></codeline>
+<codeline lineno="27" refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1a8d39d8d2fa7fef466b0feef1eea1ea22" kindref="member">isReached</ref>;</highlight></codeline>
+<codeline lineno="28" refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" refkind="member"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal_1a6bc07b5ef7b50ab35dc9c0b5b435bd48" kindref="member">phase</ref>;</highlight></codeline>
+<codeline lineno="29"><highlight class="normal">}<sp/><ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref>;</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/><ref refid="struct_current_goal" kindref="compound">CurrentGoal</ref><sp/><ref refid="build_2control_8h_1a0e510825641ecd3f7861a66a12f4a952" kindref="member">current_goal</ref>;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a126d81d79aac606e100d7bf6974d60f4" kindref="member">initController</ref>();</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a8febe790f4954110a1e26aa6865d121e" kindref="member">speedControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1af42eb2c4f9bb043f1a737c7febf61a79" kindref="member">angleControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1afa3541cbb488d296f15002a42a3200d7" kindref="member">positionControl</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">*);</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a14205b503643eae869c101e5f77b42fa" kindref="member">computeRobotState</ref>();</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="build_2control_8h_1a5ef071b26cbeaf4744db31b647c639ba" kindref="member">computePID</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal">,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">,</highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="42"><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight><highlight class="preprocessor">#endif<sp/></highlight><highlight class="comment">/*<sp/>CONTROL_H_<sp/>*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/control.h"/>
+  </compounddef>
+</doxygen>

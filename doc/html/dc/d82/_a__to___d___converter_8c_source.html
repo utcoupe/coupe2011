@@ -1,0 +1,157 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de asserv2010/A_to_D_Converter.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- GÃ©nÃ©rÃ© par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>asserv2010/A_to_D_Converter.c</h1><a href="../../dc/d82/_a__to___d___converter_8c.html">Aller Ã  la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment">; © 2005  Microchip Technology Inc.</span>
+<a name="l00003"></a>00003 <span class="comment">;</span>
+<a name="l00004"></a>00004 <span class="comment">; Microchip Technology Inc. (“Microchip”) licenses this software to you</span>
+<a name="l00005"></a>00005 <span class="comment">; solely for use with Microchip dsPIC® digital signal controller</span>
+<a name="l00006"></a>00006 <span class="comment">; products.  The software is owned by Microchip and is protected under</span>
+<a name="l00007"></a>00007 <span class="comment">; applicable copyright laws.  All rights reserved.</span>
+<a name="l00008"></a>00008 <span class="comment">;</span>
+<a name="l00009"></a>00009 <span class="comment">; SOFTWARE IS PROVIDED “AS IS.”  MICROCHIP EXPRESSLY DISCLAIMS ANY</span>
+<a name="l00010"></a>00010 <span class="comment">; WARRANTY OF ANY KIND, WHETHER EXPRESS OR IMPLIED, INCLUDING BUT NOT</span>
+<a name="l00011"></a>00011 <span class="comment">; LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A</span>
+<a name="l00012"></a>00012 <span class="comment">; PARTICULAR PURPOSE, OR NON-INFRINGEMENT. IN NO EVENT SHALL MICROCHIP</span>
+<a name="l00013"></a>00013 <span class="comment">; BE LIABLE FOR ANY INCIDENTAL, SPECIAL, INDIRECT OR CONSEQUENTIAL</span>
+<a name="l00014"></a>00014 <span class="comment">; DAMAGES, LOST PROFITS OR LOST DATA, HARM TO YOUR EQUIPMENT, COST OF</span>
+<a name="l00015"></a>00015 <span class="comment">; PROCUREMENT OF SUBSTITUTE GOODS, TECHNOLOGY OR SERVICES, ANY CLAIMS</span>
+<a name="l00016"></a>00016 <span class="comment">; BY THIRD PARTIES (INCLUDING BUT NOT LIMITED TO ANY DEFENSE THEREOF),</span>
+<a name="l00017"></a>00017 <span class="comment">; ANY CLAIMS FOR INDEMNITY OR CONTRIBUTION, OR OTHER SIMILAR COSTS.</span>
+<a name="l00018"></a>00018 <span class="comment">;</span>
+<a name="l00019"></a>00019 <span class="comment">;</span>
+<a name="l00020"></a>00020 <span class="comment">;FILE DESCRIPTION:</span>
+<a name="l00021"></a>00021 <span class="comment">;  This file contains A/D set up and interrupt service routines for</span>
+<a name="l00022"></a>00022 <span class="comment">;  the dsPIC30F processor. These routines may be use to convert analog</span>
+<a name="l00023"></a>00023 <span class="comment">;  signals provided by the potentiometer and the temperature sensor</span>
+<a name="l00024"></a>00024 <span class="comment">;  on the dsPICDEM2 development board.</span>
+<a name="l00025"></a>00025 <span class="comment">;</span>
+<a name="l00026"></a>00026 <span class="comment">;REVISION HISTORY:</span>
+<a name="l00027"></a>00027 <span class="comment">;  $Log: A_to_D_Converter.c,v $</span>
+<a name="l00028"></a>00028 <span class="comment">;  Revision 1.1.1.1  2005/06/06 09:16:45  VasukiH</span>
+<a name="l00029"></a>00029 <span class="comment">;  First release of software</span>
+<a name="l00030"></a>00030 <span class="comment">;</span>
+<a name="l00031"></a>00031 <span class="comment">;</span>
+<a name="l00032"></a>00032 <span class="comment">*/</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034 <span class="comment">//Pre-Processor Directives:</span>
+<a name="l00035"></a>00035 <span class="preprocessor">#include &lt;p30fxxxx.h&gt;</span>
+<a name="l00036"></a>00036 <span class="preprocessor">#include &quot;system.h&quot;</span>
+<a name="l00037"></a>00037 <span class="preprocessor">#include &quot;<a class="code" href="../../d4/dce/_conversion_a_n_8h.html">ConversionAN.h</a>&quot;</span>
+<a name="l00038"></a>00038 
+<a name="l00039"></a><a class="code" href="../../d6/dda/_display_routines_8c.html#a887a496a7bba012e985b0d9ce1fc3fa1">00039</a> <span class="keywordtype">int</span> <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a887a496a7bba012e985b0d9ce1fc3fa1">TempSensor</a> = 0;
+<a name="l00040"></a><a class="code" href="../../d6/dda/_display_routines_8c.html#a55a1549e0efaab525b3500dc1c5b5e57">00040</a> <span class="keywordtype">int</span> <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a55a1549e0efaab525b3500dc1c5b5e57">Potentiometer</a> = 0;
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042 <span class="comment">//Functions:</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044 <span class="comment">//ADC_Init() is used to configure A/D to scan and convert 2 input channels</span>
+<a name="l00045"></a>00045 <span class="comment">//per interrupt. The A/D is set up for a total sampling rate of 8KHz</span>
+<a name="l00046"></a>00046 <span class="comment">//or 4KHz per channel. The internal counter in the A/D is used to provide</span>
+<a name="l00047"></a>00047 <span class="comment">//Acquisition time delay. The input pins being scanned are AN2 and AN3.</span>
+<a name="l00048"></a>00048 <span class="comment">//AN2 and AN3 are connected to the Temperature Sensor and the Potentiometer</span>
+<a name="l00049"></a>00049 <span class="comment">//on the dsPICDEM2 board.</span>
+<a name="l00050"></a><a class="code" href="../../d4/dce/_conversion_a_n_8h.html#a5137b551f1b83b0f4d8df7d071a3d3a6">00050</a> <span class="keywordtype">void</span> <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a5137b551f1b83b0f4d8df7d071a3d3a6">ADC_Init</a>(<span class="keywordtype">void</span>)
+<a name="l00051"></a>00051 {
+<a name="l00052"></a>00052         <span class="comment">//ADCON1 Register</span>
+<a name="l00053"></a>00053         <span class="comment">//Set up A/D for Automatic Sampling, Auto-Convert</span>
+<a name="l00054"></a>00054         <span class="comment">//All other bits to their default state</span>
+<a name="l00055"></a>00055         ADCON1bits.SSRC = 7;
+<a name="l00056"></a>00056         ADCON1bits.ASAM = 1;
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058         <span class="comment">//ADCON2 Register</span>
+<a name="l00059"></a>00059         <span class="comment">//Set up A/D for interrupting after 2 samples get filled in the buffer</span>
+<a name="l00060"></a>00060         <span class="comment">//Also, enable Channel scanning</span>
+<a name="l00061"></a>00061         <span class="comment">//All other bits to their default state</span>
+<a name="l00062"></a>00062         ADCON2bits.SMPI = 1;
+<a name="l00063"></a>00063         ADCON2bits.CSCNA = 1;
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065         <span class="comment">//ADCON3 Register</span>
+<a name="l00066"></a>00066         <span class="comment">//Set up Acquisition time (Tacq) for 31 Tad periods</span>
+<a name="l00067"></a>00067         <span class="comment">//where, Tad = A/D conversion clock time.</span>
+<a name="l00068"></a>00068         <span class="comment">//Set up Tad period to be 20.5 Tcy (Tcy = instruction cycle time)</span>
+<a name="l00069"></a>00069         <span class="comment">//Given that each conversion takes 14*Tad (=Tconv) periods,</span>
+<a name="l00070"></a>00070         <span class="comment">//Total Sample Time = Acquisition Time + Conversion Time</span>
+<a name="l00071"></a>00071         <span class="comment">// = (31 + 14)*Tad = 45*Tad periods</span>
+<a name="l00072"></a>00072         <span class="comment">// = 45 * 20.5 * Tcy = 922.5*Tcy periods</span>
+<a name="l00073"></a>00073         <span class="comment">//At 7.3728 MIPS, Tcy = 135 ns = Instruction Cycle Time</span>
+<a name="l00074"></a>00074         <span class="comment">//So Tsamp = Tacq + Tconv = 45*Tad(in this example)= 125.1 microseconds</span>
+<a name="l00075"></a>00075         <span class="comment">//So Fsamp = Sampling Rate ~= 8 KHz</span>
+<a name="l00076"></a>00076         <span class="comment">//All other bits to their default state</span>
+<a name="l00077"></a>00077         ADCON3bits.SAMC = 31;
+<a name="l00078"></a>00078         ADCON3bits.ADCS = 40;
+<a name="l00079"></a>00079 
+<a name="l00080"></a>00080         <span class="comment">//ADCHS Register</span>
+<a name="l00081"></a>00081         <span class="comment">//When Channel scanning is enabled (ADCON2bits.CSCNA=1)</span>
+<a name="l00082"></a>00082         <span class="comment">//AND Alternate mux sampling is disabled (ADCON2bits.ALTS=0)</span>
+<a name="l00083"></a>00083         <span class="comment">//then ADCHS is a &quot;don&#39;t care&quot;</span>
+<a name="l00084"></a>00084         ADCHS = 0x0000;
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086         <span class="comment">//ADCSSL Register</span>
+<a name="l00087"></a>00087         <span class="comment">//Scan channels AN2, AN3 fas part of scanning sequence</span>
+<a name="l00088"></a>00088         ADCSSL = 0x000C;
+<a name="l00089"></a>00089 
+<a name="l00090"></a>00090         <span class="comment">//ADPCFG Register</span>
+<a name="l00091"></a>00091         <span class="comment">//Set up channels AN2, AN3 as analog inputs and leave rest as digital</span>
+<a name="l00092"></a>00092         <span class="comment">//Recall that we configured all A/D pins as digital when code execution</span>
+<a name="l00093"></a>00093         <span class="comment">//entered main() out of reset</span>
+<a name="l00094"></a>00094         ADPCFGbits.PCFG2 = 0;
+<a name="l00095"></a>00095         ADPCFGbits.PCFG3 = 0;
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097         <span class="comment">//Clear the A/D interrupt flag bit</span>
+<a name="l00098"></a>00098         IFS0bits.ADIF = 0;
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100         <span class="comment">//Set the A/D interrupt enable bit</span>
+<a name="l00101"></a>00101         IEC0bits.ADIE = 1;
+<a name="l00102"></a>00102 
+<a name="l00103"></a>00103         <span class="comment">//Turn on the A/D converter</span>
+<a name="l00104"></a>00104         <span class="comment">//This is typically done after configuring other registers</span>
+<a name="l00105"></a>00105         ADCON1bits.ADON = 1;
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107 }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109 <span class="comment">//_ADCInterrupt() is the A/D interrupt service routine (ISR).</span>
+<a name="l00110"></a>00110 <span class="comment">//The routine must have global scope in order to be an ISR.</span>
+<a name="l00111"></a>00111 <span class="comment">//The ISR name is chosen from the device linker script.</span>
+<a name="l00112"></a><a class="code" href="../../d4/dce/_conversion_a_n_8h.html#ac2e9d6360d613b389c6eb0c5d78dc110">00112</a> <span class="keywordtype">void</span> <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a5ae93c640ed17451158a34e49c241ef0">__attribute__</a>((__interrupt__, __no_auto_psv__)) _ADCInterrupt(<span class="keywordtype">void</span>)
+<a name="l00113"></a>00113 {
+<a name="l00114"></a>00114         <span class="comment">//Copy the A/D conversion results from ADCBUFn to variables-</span>
+<a name="l00115"></a>00115         <span class="comment">//&quot;Potentiometer&quot; and &quot;TempSensor&quot;.</span>
+<a name="l00116"></a>00116         <span class="comment">//Since ADCON2bits.SMPI = 1, only the first two (i.e. SMPI+1) ADCBUFn</span>
+<a name="l00117"></a>00117         <span class="comment">//locations are used by the module to store conversion results</span>
+<a name="l00118"></a>00118         <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a55a1549e0efaab525b3500dc1c5b5e57">Potentiometer</a> = ADCBUF0;
+<a name="l00119"></a>00119         <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a887a496a7bba012e985b0d9ce1fc3fa1">TempSensor</a> = ADCBUF1;
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121         <span class="comment">//Clear the A/D Interrupt flag bit or else the CPU will</span>
+<a name="l00122"></a>00122         <span class="comment">//keep vectoring back to the ISR</span>
+<a name="l00123"></a>00123         IFS0bits.ADIF = 0;
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125 }
+<a name="l00126"></a>00126 
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>GÃ©nÃ©rÃ© le Wed Jan 26 14:42:54 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

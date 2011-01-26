@@ -1,0 +1,111 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de pinceControl/demo_ax12/ax12.cpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>pinceControl/demo_ax12/ax12.cpp</h1><a href="../../d5/d95/ax12_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment">  ax12.cpp - arbotiX Library for AX-12 Servos</span>
+<a name="l00003"></a>00003 <span class="comment">  Copyright (c) 2008,2009 Michael E. Ferguson.  All right reserved.</span>
+<a name="l00004"></a>00004 <span class="comment">  Modificada el 15/11/09 por Pablo Gindel. </span>
+<a name="l00005"></a>00005 <span class="comment">*/</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 <span class="preprocessor">#include &quot;<a class="code" href="../../d4/d80/motor_control_2build_2core_2wiring_8h.html">wiring.h</a>&quot;</span> <span class="comment">// we need this for the serial port defines</span>
+<a name="l00008"></a>00008 <span class="preprocessor">#include &quot;<a class="code" href="../../de/d72/ax12_8h.html">ax12.h</a>&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor">#include &lt;avr/interrupt.h&gt;</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a>00011 <span class="comment">/******************************************************************************</span>
+<a name="l00012"></a>00012 <span class="comment"> * Hardware Serial Level, this uses the same stuff as Serial, therefore </span>
+<a name="l00013"></a>00013 <span class="comment"> *  you should not use the Arduino Serial library.</span>
+<a name="l00014"></a>00014 <span class="comment"> ******************************************************************************/</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a3345ac4b686485318698ddae96e09648">00016</a> <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> <a class="code" href="../../d5/d95/ax12_8cpp.html#a3345ac4b686485318698ddae96e09648">ax_rx_buffer</a>[<a class="code" href="../../de/d72/ax12_8h.html#a866556576eb33ef7176a4a327a690435">AX12_BUFFER_SIZE</a>];    <span class="comment">//buffer de recepción</span>
+<a name="l00017"></a><a class="code" href="../../de/d72/ax12_8h.html#adcb8c79071acfeddc1e3ee5ba850f9fd">00017</a> <span class="keywordtype">int</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#adcb8c79071acfeddc1e3ee5ba850f9fd">status_id</a>;
+<a name="l00018"></a><a class="code" href="../../de/d72/ax12_8h.html#a2d214386ded91ac21e0109b5007850e9">00018</a> <span class="keywordtype">int</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#a2d214386ded91ac21e0109b5007850e9">status_error</a>;
+<a name="l00019"></a><a class="code" href="../../de/d72/ax12_8h.html#a169aa592b90193637296ec07df7a92dc">00019</a> <span class="keywordtype">int</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#a169aa592b90193637296ec07df7a92dc">status_data</a>;
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 <span class="comment">// making these volatile keeps the compiler from optimizing loops of available()</span>
+<a name="l00022"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a5ef3917b39ff3d581e47ca82260372f8">00022</a> <span class="keyword">volatile</span> <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> <a class="code" href="../../d5/d95/ax12_8cpp.html#a5ef3917b39ff3d581e47ca82260372f8">ax_rx_Pointer</a>;
+<a name="l00023"></a>00023 
+<a name="l00025"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a71702dba1d5fb56b032cd23a36d7b479">00025</a> <span class="keywordtype">void</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#a71702dba1d5fb56b032cd23a36d7b479">setTX</a>(){
+<a name="l00026"></a>00026     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#abbe843c0521806a4ab2e7cffe44769e2">bitClear</a>(UCSR1B, RXCIE1);    <span class="comment">// deshabilita la interrupción de recepción </span>
+<a name="l00027"></a>00027     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#abbe843c0521806a4ab2e7cffe44769e2">bitClear</a>(UCSR1B, RXEN1);     <span class="comment">// deshabilila la recepción</span>
+<a name="l00028"></a>00028     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#a6a8195c0e930f86c6af03ba6af8b41dd">bitSet</a>(UCSR1B, TXEN1);       <span class="comment">// habilita la trasmisión</span>
+<a name="l00029"></a>00029 }
+<a name="l00030"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a2a51af3bc74320a24a07c30124b28d6e">00030</a> <span class="keywordtype">void</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#a2a51af3bc74320a24a07c30124b28d6e">setRX</a>(){
+<a name="l00031"></a>00031     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#abbe843c0521806a4ab2e7cffe44769e2">bitClear</a>(UCSR1B, TXEN1);
+<a name="l00032"></a>00032     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#a6a8195c0e930f86c6af03ba6af8b41dd">bitSet</a>(UCSR1B, RXEN1);
+<a name="l00033"></a>00033     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#a6a8195c0e930f86c6af03ba6af8b41dd">bitSet</a>(UCSR1B, RXCIE1); 
+<a name="l00034"></a>00034     <a class="code" href="../../d5/d95/ax12_8cpp.html#a5ef3917b39ff3d581e47ca82260372f8">ax_rx_Pointer</a> = 0;         <span class="comment">// resetea el puntero del buffer</span>
+<a name="l00035"></a>00035 }
+<a name="l00036"></a>00036 
+<a name="l00038"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">00038</a> <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(<a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> data){
+<a name="l00039"></a>00039     <span class="keywordflow">while</span> (bit_is_clear(UCSR1A, UDRE1));    <span class="comment">// espera que el micro estÈ pronto para trasmitir</span>
+<a name="l00040"></a>00040     UDR1 = data;                            <span class="comment">// escribe el byte a trasmitir</span>
+<a name="l00041"></a>00041     <span class="keywordflow">return</span> data; 
+<a name="l00042"></a>00042 }
+<a name="l00043"></a>00043 
+<a name="l00046"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#ae6e8a8009a9ae0c59f25a496d1cf5a84">00046</a> <a class="code" href="../../d8/de4/com_2carte_2build_2core_2_tone_8cpp.html#a5686c229bdef50123688ab6cb1404230">ISR</a>(USART1_RX_vect){  
+<a name="l00047"></a>00047     <a class="code" href="../../d5/d95/ax12_8cpp.html#a3345ac4b686485318698ddae96e09648">ax_rx_buffer</a>[(<a class="code" href="../../d5/d95/ax12_8cpp.html#a5ef3917b39ff3d581e47ca82260372f8">ax_rx_Pointer</a>++)] = UDR1;    <span class="comment">// esta es la rutina de interrupción de recepción</span>
+<a name="l00048"></a>00048 }                                              <span class="comment">// lo que hace es meter el byte recibido en el buffer</span>
+<a name="l00049"></a>00049 
+<a name="l00051"></a><a class="code" href="../../de/d72/ax12_8h.html#aa1747d06f8e978618fbabb25709e2970">00051</a> <span class="keywordtype">void</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#aa1747d06f8e978618fbabb25709e2970">ax12Init</a>(<span class="keywordtype">long</span> baud){
+<a name="l00052"></a>00052     UBRR1H = ((F_CPU / 16 + baud / 2) / baud - 1) &gt;&gt; 8;
+<a name="l00053"></a>00053     UBRR1L = ((F_CPU / 16 + baud / 2) / baud - 1);        <span class="comment">// setea la velocidad del USART</span>
+<a name="l00054"></a>00054     <a class="code" href="../../d5/d95/ax12_8cpp.html#a5ef3917b39ff3d581e47ca82260372f8">ax_rx_Pointer</a> = 0;                                    
+<a name="l00055"></a>00055     <span class="comment">// enable rx</span>
+<a name="l00056"></a>00056     <a class="code" href="../../d5/d95/ax12_8cpp.html#a2a51af3bc74320a24a07c30124b28d6e">setRX</a>();
+<a name="l00057"></a>00057 }
+<a name="l00058"></a>00058 
+<a name="l00059"></a>00059 <span class="comment">/******************************************************************************</span>
+<a name="l00060"></a>00060 <span class="comment"> * Packet Level</span>
+<a name="l00061"></a>00061 <span class="comment"> ******************************************************************************/</span>
+<a name="l00062"></a>00062 
+<a name="l00064"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a865cd73244d327d5dc12045beea2e330">00064</a> <span class="keywordtype">void</span> <a class="code" href="../../d5/d95/ax12_8cpp.html#a865cd73244d327d5dc12045beea2e330">ax12SendPacket</a> (<a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> <span class="keywordtype">id</span>, <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> datalength, <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> instruction, <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> *data){
+<a name="l00065"></a>00065     <a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> checksum = 0;
+<a name="l00066"></a>00066     <a class="code" href="../../d5/d95/ax12_8cpp.html#a71702dba1d5fb56b032cd23a36d7b479">setTX</a>();    
+<a name="l00067"></a>00067     <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(0xFF);
+<a name="l00068"></a>00068     <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(0xFF);
+<a name="l00069"></a>00069     checksum += <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(<span class="keywordtype">id</span>);
+<a name="l00070"></a>00070     checksum += <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(datalength + 2);
+<a name="l00071"></a>00071     checksum += <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(instruction);
+<a name="l00072"></a>00072     <span class="keywordflow">for</span> (<a class="code" href="../../de/daa/com_2carte_2build_2core_2wiring_8h.html#ab8ef12fab634c171394422d0ee8baf94">byte</a> f=0; f&lt;datalength; f++) {     <span class="comment">// data = parámetros</span>
+<a name="l00073"></a>00073       checksum += <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(data[f]);
+<a name="l00074"></a>00074     }
+<a name="l00075"></a>00075     <span class="comment">// checksum = </span>
+<a name="l00076"></a>00076     <a class="code" href="../../d5/d95/ax12_8cpp.html#ad9ad6c6e933568d12d293a5c91608ff0">ax12writeB</a>(~checksum);
+<a name="l00077"></a>00077     <a class="code" href="../../d5/d95/ax12_8cpp.html#a2a51af3bc74320a24a07c30124b28d6e">setRX</a>();
+<a name="l00078"></a>00078 }
+<a name="l00079"></a>00079 
+<a name="l00082"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a2efd6f1cfb8453bfff9b4e9de4f68898">00082</a> 
+<a name="l00138"></a><a class="code" href="../../de/d72/ax12_8h.html#ab1cb6e4bee6f83b0eae057112cc507ae">00138</a> 
+<a name="l00145"></a><a class="code" href="../../de/d72/ax12_8h.html#a6291d447cef642376a89fc5af6ae138a">00145</a> 
+<a name="l00152"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#a72d0bbf8e2445302752061f04d125246">00152</a> 
+<a name="l00159"></a><a class="code" href="../../de/d72/ax12_8h.html#a015d72f1a8091256fbcd539688d239cc">00159</a> 
+<a name="l00167"></a><a class="code" href="../../de/d72/ax12_8h.html#a9f29916514368bc9e57339822e4e0898">00167</a> 
+<a name="l00176"></a><a class="code" href="../../d5/d95/ax12_8cpp.html#abf02dc1cb1ba4daac686638f9861a608">00176</a> 
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

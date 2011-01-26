@@ -1,0 +1,50 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="input__capture_8h" kind="file">
+    <compoundname>input_capture.h</compoundname>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <incdepgraph>
+      <node id="1188">
+        <label>asserv2010/input_capture.h</label>
+        <link refid="input_capture.h"/>
+        <childnode refid="1189" relation="include">
+        </childnode>
+      </node>
+      <node id="1189">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="input__capture_8h_1a04ec286539b1064af690d849386cdd8b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void oCAInitInputCapture</definition>
+        <argsstring>()</argsstring>
+        <name>oCAInitInputCapture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="author"><para>(c) 2007 All Rights Reserved - This file is confidential.</para></simplesect>
+Version : $Id$ Initialize the input capture for the chained addressing </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/input_capture.h" line="16"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="8"><highlight class="preprocessor">#ifndef<sp/>INPUT_CAPTURE_H</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#<sp/>define<sp/>INPUT_CAPTURE_H</highlight></codeline>
+<codeline lineno="10"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight><highlight class="preprocessor">#<sp/>include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="input__capture_8h_1a04ec286539b1064af690d849386cdd8b" kindref="member">oCAInitInputCapture</ref>();</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/input_capture.h"/>
+  </compounddef>
+</doxygen>

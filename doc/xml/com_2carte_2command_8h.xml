@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="com_2carte_2command_8h" kind="file">
+    <compoundname>command.h</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="com_2carte_2command_8h_1ab1e0af7e339409190e61c32b7d9942be" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void cmd</definition>
+        <argsstring>(int c, float *message, int m)</argsstring>
+        <name>cmd</name>
+        <param>
+          <type>int</type>
+          <declname>c</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>message</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>m</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.h" line="2" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.cpp" bodystart="7" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2command_8h_1ad0562fd3d2bf12af5d5d43bf1e4a1494" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int getSharp</definition>
+        <argsstring>()</argsstring>
+        <name>getSharp</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.h" line="3" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.cpp" bodystart="51" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2command_8h_1a884dd2aff136a46e2ac2879051f4fef2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ledOn</definition>
+        <argsstring>()</argsstring>
+        <name>ledOn</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.h" line="4" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.cpp" bodystart="62" bodyend="65"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2command_8h_1a195edfd0d7d13f3749773958d9210c51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ledOff</definition>
+        <argsstring>()</argsstring>
+        <name>ledOff</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.h" line="5" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.cpp" bodystart="67" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2command_8h_1a1e275b8c2a892c42d7447637833f837e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void indexError</definition>
+        <argsstring>()</argsstring>
+        <name>indexError</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.h" line="6" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.cpp" bodystart="57" bodyend="60"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2command_8cpp_1ab1e0af7e339409190e61c32b7d9942be" kindref="member">cmd</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>c,<sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal">*<sp/>message,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>m);</highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2command_8cpp_1ad0562fd3d2bf12af5d5d43bf1e4a1494" kindref="member">getSharp</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2command_8cpp_1a884dd2aff136a46e2ac2879051f4fef2" kindref="member">ledOn</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2command_8cpp_1a195edfd0d7d13f3749773958d9210c51" kindref="member">ledOff</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2command_8cpp_1a1e275b8c2a892c42d7447637833f837e" kindref="member">indexError</ref>();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="10"><highlight class="comment">typedef<sp/>int<sp/>(*aa)();</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment">void<sp/>cmd(int<sp/>name);</highlight></codeline>
+<codeline lineno="13"><highlight class="comment">int<sp/>identification()</highlight></codeline>
+<codeline lineno="14"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serial.println(3);</highlight></codeline>
+<codeline lineno="16"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="17"><highlight class="comment"></highlight></codeline>
+<codeline lineno="18"><highlight class="comment">int<sp/>getSharp()</highlight></codeline>
+<codeline lineno="19"><highlight class="comment">{</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>int<sp/>sensorValue<sp/>=<sp/>analogRead(A0);</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Serial.println(sensorValue);</highlight></codeline>
+<codeline lineno="22"><highlight class="comment">}</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">//int<sp/>identification();<sp/>//<sp/>0</highlight></codeline>
+<codeline lineno="24"><highlight class="comment">//int<sp/>getSharp();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>1</highlight></codeline>
+<codeline lineno="25"><highlight class="comment">inline<sp/>int<sp/>ledOn();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>2</highlight></codeline>
+<codeline lineno="26"><highlight class="comment">inline<sp/>int<sp/>ledOff();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>3</highlight></codeline>
+<codeline lineno="27"><highlight class="comment">inline<sp/>int<sp/>indexError();<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>//<sp/>-1</highlight></codeline>
+<codeline lineno="28"><highlight class="comment"></highlight></codeline>
+<codeline lineno="29"><highlight class="comment">aa<sp/>tab<sp/>[]<sp/>=<sp/>{<sp/>//Etrange<sp/>hein?</highlight></codeline>
+<codeline lineno="30"><highlight class="comment"><sp/><sp/><sp/><sp/>identification,</highlight></codeline>
+<codeline lineno="31"><highlight class="comment"><sp/><sp/><sp/><sp/>getSharp</highlight></codeline>
+<codeline lineno="32"><highlight class="comment">};</highlight></codeline>
+<codeline lineno="33"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/command.h"/>
+  </compounddef>
+</doxygen>

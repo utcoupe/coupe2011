@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de Visio/ObjectCamera/main.cpp</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>Visio/ObjectCamera/main.cpp</h1><a href="../../df/d0a/main_8cpp.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &lt;iostream&gt;</span>
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 <span class="preprocessor">#include &quot;cv.h&quot;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;highgui.h&quot;</span>
+<a name="l00005"></a>00005 
+<a name="l00006"></a>00006 <span class="preprocessor">#include &quot;<a class="code" href="../../d5/dab/_u_t_camera_8hpp.html">UTCamera.hpp</a>&quot;</span>
+<a name="l00007"></a>00007 
+<a name="l00008"></a><a class="code" href="../../df/d0a/main_8cpp.html#aca8e7557f96e80eb3b2d463ee0e49b71">00008</a> <span class="preprocessor">#define NOM_FENETRE &quot;CamCaptor&quot;</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span>
+<a name="l00010"></a>00010 <span class="keyword">using namespace </span>std;
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 
+<a name="l00013"></a><a class="code" href="../../df/d0a/main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4">00013</a> <span class="keywordtype">int</span> <a class="code" href="../../d4/de6/carte_8cpp.html#a840291bc02cba5474a4cb46a9b9566fe">main</a>()
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015 
+<a name="l00016"></a>00016     <span class="comment">//UTCamera *camAv = new UTCamera(CAMERA_AVA, 1280, 800);</span>
+<a name="l00017"></a>00017     <a class="code" href="../../d5/d1c/class_u_t_camera.html">UTCamera</a> *camAv = <span class="keyword">new</span> <a class="code" href="../../d5/d1c/class_u_t_camera.html">UTCamera</a>(<a class="code" href="../../d5/dab/_u_t_camera_8hpp.html#a31bb4cf8760c4914e3b29689b8d448ab">CAMERA_ARR</a>, 1280, 800);
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019     camAv-&gt;<a class="code" href="../../d5/d1c/class_u_t_camera.html#ab5b597937e7edfc94fcfc1796d8041a5">calibrage</a>();
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022     <span class="keywordflow">return</span> 0;
+<a name="l00023"></a>00023 }
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

@@ -1,0 +1,180 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="class_liste_region" kind="class" prot="public">
+    <compoundname>ListeRegion</compoundname>
+    <includes refid="_liste_region_8hpp" local="no">ListeRegion.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_liste_region_1a9fd47d138a0a8289497c9c952ef38b69" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_region" kindref="compound">region</ref> *</type>
+        <definition>region* ListeRegion::deb</definition>
+        <argsstring></argsstring>
+        <name>deb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="61" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="61" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_liste_region_1a7da572c74138d8ab7b9ea1d72989b91f" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_region" kindref="compound">region</ref> *</type>
+        <definition>region* ListeRegion::fin</definition>
+        <argsstring></argsstring>
+        <name>fin</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="62" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="62" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_liste_region_1a9bc29572bb369e07d68231ed15e95f1e" prot="private" static="no" mutable="no">
+        <type><ref refid="struct_region" kindref="compound">region</ref> *</type>
+        <definition>region* ListeRegion::ptr</definition>
+        <argsstring></argsstring>
+        <name>ptr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="63" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="63" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_liste_region_1a9e60498b643751377c93c8eb857300ed" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ListeRegion::ListeRegion</definition>
+        <argsstring>()</argsstring>
+        <name>ListeRegion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Copyright (c) RODRIGUEZ Xavier <ulink url="mailto:xavier.rodriguez@hds.utc.fr">xavier.rodriguez@hds.utc.fr</ulink> FRICOT Pierre-Henri</para><para>UTCoupe 2010-2011 All rights reserved.</para><para>Objet qui permet de gérer les listes chainées de régions </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="49" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp" bodystart="16" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="class_liste_region_1a52237208776a602498934fda5eaab38c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void ListeRegion::iniPtr</definition>
+        <argsstring>()</argsstring>
+        <name>iniPtr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="51" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="51" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_liste_region_1a4224b2c76a6fc6dba1ea7f0a3d51aa3b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ListeRegion::ptrSuiv</definition>
+        <argsstring>()</argsstring>
+        <name>ptrSuiv</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="52" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp" bodystart="50" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_liste_region_1a3a047736effb53bbe193c1ff3763440a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type><ref refid="struct_region" kindref="compound">region</ref> *</type>
+        <definition>region* ListeRegion::getEle</definition>
+        <argsstring>()</argsstring>
+        <name>getEle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="53" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="53" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_liste_region_1a1c0b81162a1f30378180a3b27d13b00a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ListeRegion::add</definition>
+        <argsstring>(region *r)</argsstring>
+        <name>add</name>
+        <param>
+          <type><ref refid="struct_region" kindref="compound">region</ref> *</type>
+          <declname>r</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp" bodystart="22" bodyend="33"/>
+      </memberdef>
+      <memberdef kind="function" id="class_liste_region_1ab162dcd73dfe53c120591c758162c9ef" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ListeRegion::destroy</definition>
+        <argsstring>()</argsstring>
+        <name>destroy</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="55" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp" bodystart="35" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_liste_region_1a93ce98f95b1034efd330a4a5d9b06bd2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>ListeRegion::~ListeRegion</definition>
+        <argsstring>()</argsstring>
+        <name>~ListeRegion</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="57" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp" bodystart="55" bodyend="58"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="71">
+        <label>Region</label>
+        <link refid="struct_region"/>
+        <childnode refid="71" relation="usage">
+          <edgelabel>suiv</edgelabel>
+        </childnode>
+      </node>
+      <node id="70">
+        <label>ListeRegion</label>
+        <link refid="class_liste_region"/>
+        <childnode refid="71" relation="usage">
+          <edgelabel>fin</edgelabel>
+          <edgelabel>ptr</edgelabel>
+          <edgelabel>deb</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp" bodystart="45" bodyend="65"/>
+    <listofallmembers>
+      <member refid="class_liste_region_1a1c0b81162a1f30378180a3b27d13b00a" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>add</name></member>
+      <member refid="class_liste_region_1a9fd47d138a0a8289497c9c952ef38b69" prot="private" virt="non-virtual"><scope>ListeRegion</scope><name>deb</name></member>
+      <member refid="class_liste_region_1ab162dcd73dfe53c120591c758162c9ef" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>destroy</name></member>
+      <member refid="class_liste_region_1a7da572c74138d8ab7b9ea1d72989b91f" prot="private" virt="non-virtual"><scope>ListeRegion</scope><name>fin</name></member>
+      <member refid="class_liste_region_1a3a047736effb53bbe193c1ff3763440a" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>getEle</name></member>
+      <member refid="class_liste_region_1a52237208776a602498934fda5eaab38c" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>iniPtr</name></member>
+      <member refid="class_liste_region_1a9e60498b643751377c93c8eb857300ed" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>ListeRegion</name></member>
+      <member refid="class_liste_region_1a9bc29572bb369e07d68231ed15e95f1e" prot="private" virt="non-virtual"><scope>ListeRegion</scope><name>ptr</name></member>
+      <member refid="class_liste_region_1a4224b2c76a6fc6dba1ea7f0a3d51aa3b" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>ptrSuiv</name></member>
+      <member refid="class_liste_region_1a93ce98f95b1034efd330a4a5d9b06bd2" prot="public" virt="non-virtual"><scope>ListeRegion</scope><name>~ListeRegion</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

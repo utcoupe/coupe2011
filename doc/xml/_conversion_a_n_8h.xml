@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_conversion_a_n_8h" kind="file">
+    <compoundname>ConversionAN.h</compoundname>
+    <includedby refid="_main_8c" local="yes">asserv2010/Main.c</includedby>
+    <invincdepgraph>
+      <node id="1166">
+        <label>asserv2010/ConversionAN.h</label>
+        <link refid="ConversionAN.h"/>
+        <childnode refid="1167" relation="include">
+        </childnode>
+      </node>
+      <node id="1167">
+        <label>asserv2010/Main.c</label>
+        <link refid="_main_8c"/>
+        <childnode refid="1167" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="_conversion_a_n_8h_1a46d6654facb7de5107bd683ec93bd403" prot="public" static="no">
+        <name>CONVERSION_AN</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/ConversionAN.h" line="2" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/ConversionAN.h" bodystart="2" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="_conversion_a_n_8h_1a5137b551f1b83b0f4d8df7d071a3d3a6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void ADC_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>ADC_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/ConversionAN.h" line="4" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/A_to_D_Converter.c" bodystart="50" bodyend="107"/>
+      </memberdef>
+      <memberdef kind="function" id="_conversion_a_n_8h_1ac2e9d6360d613b389c6eb0c5d78dc110" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void __attribute__</definition>
+        <argsstring>((__interrupt__, __no_auto_psv__)) _ADCInterrupt(void)</argsstring>
+        <name>__attribute__</name>
+        <param>
+          <type>(__interrupt__, __no_auto_psv__)</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/ConversionAN.h" line="5" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/A_to_D_Converter.c" bodystart="112" bodyend="125"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>CONVERSION_AN_H</highlight></codeline>
+<codeline lineno="2" refid="_conversion_a_n_8h_1a46d6654facb7de5107bd683ec93bd403" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>CONVERSION_AN</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_a__to___d___converter_8c_1a5137b551f1b83b0f4d8df7d071a3d3a6" kindref="member">ADC_Init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((__interrupt__,<sp/>__no_auto_psv__))<sp/>_ADCInterrupt(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/ConversionAN.h"/>
+  </compounddef>
+</doxygen>

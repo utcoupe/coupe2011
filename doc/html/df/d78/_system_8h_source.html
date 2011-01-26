@@ -1,0 +1,51 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de asserv2010/System.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>asserv2010/System.h</h1><a href="../../df/d78/_system_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 
+<a name="l00002"></a>00002 <span class="preprocessor">#include &lt;p30fxxxx.h&gt;</span>
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="comment">//Defines for System Clock Timing -</span>
+<a name="l00005"></a>00005 <span class="comment">//For oscillator configuration XT x PLL16 mode,</span>
+<a name="l00006"></a>00006 <span class="comment">//Device Throughput in MIPS = Fcy = 7372800*16/4 = ~29.48 MIPS</span>
+<a name="l00007"></a>00007 <span class="comment">//Instruction Cycle time = Tcy = 1/(Fcy) = ~34 nanoseconds</span>
+<a name="l00008"></a><a class="code" href="../../df/d78/_system_8h.html#aa712b60f035c79a30c5e41a01f3341c0">00008</a> <span class="preprocessor">#define XTFREQ          7372800         //On-board Crystal frequency</span>
+<a name="l00009"></a><a class="code" href="../../df/d78/_system_8h.html#a3696325d0172af596e0055248e4a8fe4">00009</a> <span class="preprocessor"></span><span class="preprocessor">#define PLLMODE         16               //On-chip PLL setting</span>
+<a name="l00010"></a><a class="code" href="../../df/d78/_system_8h.html#a99d7c812ba23bfdba5d29ec2fddf1e83">00010</a> <span class="preprocessor"></span><span class="preprocessor">#define FCY             XTFREQ*PLLMODE/4        //Instruction Cycle Frequency</span>
+<a name="l00011"></a>00011 <span class="preprocessor"></span>
+<a name="l00012"></a>00012 <span class="comment">//Defines that equate Switches on board to specific interrupt pins on device</span>
+<a name="l00013"></a><a class="code" href="../../df/d78/_system_8h.html#adc91f873cde8f6ce7758b5ca40131e19">00013</a> <span class="preprocessor">#define Switch_S5       PORTEbits.RE8   //Switch S5 is connected to RE8</span>
+<a name="l00014"></a><a class="code" href="../../df/d78/_system_8h.html#a745576036530e6b459bbf5b017659fac">00014</a> <span class="preprocessor"></span><span class="preprocessor">#define Switch_S6       PORTDbits.RD0   //Switch S6 is connected to RD0</span>
+<a name="l00015"></a>00015 <span class="preprocessor"></span>
+<a name="l00016"></a>00016 
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020 
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 14:42:54 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

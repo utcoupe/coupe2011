@@ -1,0 +1,273 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011: Référence du fichier motorControl/build/core/wiring_private.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>Référence du fichier motorControl/build/core/wiring_private.h</h1><code>#include &lt;avr/io.h&gt;</code><br/>
+<code>#include &lt;avr/interrupt.h&gt;</code><br/>
+<code>#include &lt;avr/delay.h&gt;</code><br/>
+<code>#include &lt;stdio.h&gt;</code><br/>
+<code>#include &lt;stdarg.h&gt;</code><br/>
+<code>#include &quot;<a class="el" href="../../d4/d80/motor_control_2build_2core_2wiring_8h_source.html">wiring.h</a>&quot;</code><br/>
+<div class="dynheader">
+Graphe des dépendances par inclusion de wiring_private.h:</div>
+<div class="dynsection">
+<div class="center"><img src="../../d0/d95/motor_control_2build_2core_2wiring__private_8h__incl.png" border="0" usemap="#motor_control_2build_2core_2wiring__private_8h_map" alt=""/></div>
+<map name="motor_control_2build_2core_2wiring__private_8h_map" id="motor_control_2build_2core_2wiring__private_8h">
+<area shape="rect" href="../../d4/d80/motor_control_2build_2core_2wiring_8h.html" title="wiring.h" alt="" coords="425,83,489,112"/><area shape="rect" href="../../dc/dd0/motor_control_2build_2core_2binary_8h.html" title="binary.h" alt="" coords="468,160,535,189"/></map>
+</div>
+<div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dynsection">
+<div class="center"><img src="../../d0/d93/motor_control_2build_2core_2wiring__private_8h__dep__incl.png" border="0" usemap="#motor_control_2build_2core_2wiring__private_8hdep_map" alt=""/></div>
+<map name="motor_control_2build_2core_2wiring__private_8hdep_map" id="motor_control_2build_2core_2wiring__private_8hdep">
+<area shape="rect" href="../../df/d57/com_2carte_2build_2core_2pins__arduino_8c.html" title="com/carte/build/core/pins_arduino.c" alt="" coords="5,83,232,112"/><area shape="rect" href="../../dc/d63/com_2carte_2build_2core_2_w_interrupts_8c.html" title="com/carte/build/core/WInterrupts.c" alt="" coords="280,83,501,112"/><area shape="rect" href="../../d9/d21/com_2carte_2build_2core_2wiring_8c.html" title="com/carte/build/core/wiring.c" alt="" coords="549,83,736,112"/><area shape="rect" href="../../d4/da4/com_2carte_2build_2core_2wiring__analog_8c.html" title="com/carte/build/core/wiring_analog.c" alt="" coords="760,83,992,112"/><area shape="rect" href="../../de/da4/com_2carte_2build_2core_2wiring__digital_8c.html" title="com/carte/build/core/wiring_digital.c" alt="" coords="1016,83,1243,112"/><area shape="rect" href="../../dd/d88/com_2carte_2build_2core_2wiring__pulse_8c.html" title="com/carte/build/core/wiring_pulse.c" alt="" coords="1267,83,1491,112"/><area shape="rect" href="../../df/d14/com_2carte_2build_2core_2wiring__shift_8c.html" title="com/carte/build/core/wiring_shift.c" alt="" coords="1515,83,1733,112"/><area shape="rect" href="../../dd/d23/motor_control_2build_2core_2pins__arduino_8c.html" title="motorControl/build/core/pins_arduino.c" alt="" coords="1757,83,2000,112"/><area shape="rect" href="../../db/d39/motor_control_2build_2core_2_w_interrupts_8c.html" title="motorControl/build/core/WInterrupts.c" alt="" coords="2048,83,2285,112"/><area shape="rect" href="../../d8/d58/motor_control_2build_2core_2wiring_8c.html" title="motorControl/build/core/wiring.c" alt="" coords="2333,83,2536,112"/><area shape="rect" href="../../d8/d5d/motor_control_2build_2core_2wiring__analog_8c.html" title="motorControl/build/core/wiring_analog.c" alt="" coords="2560,83,2808,112"/><area shape="rect" href="../../d2/d42/motor_control_2build_2core_2wiring__digital_8c.html" title="motorControl/build/core/wiring_digital.c" alt="" coords="2832,83,3075,112"/><area shape="rect" href="../../d1/d29/motor_control_2build_2core_2wiring__pulse_8c.html" title="motorControl/build/core/wiring_pulse.c" alt="" coords="3099,83,3339,112"/><area shape="rect" href="../../df/d7b/motor_control_2build_2core_2wiring__shift_8c.html" title="motorControl/build/core/wiring_shift.c" alt="" coords="3363,83,3597,112"/><area shape="rect" href="../../da/d36/_serial_bis_8cpp.html" title="pinceControl/demo_ax12/SerialBis.cpp" alt="" coords="3621,83,3867,112"/></map>
+</div>
+
+<p><a href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Macros</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#ae70baf5399951da1e7ad45a0ed890832">cbi</a>(sfr, bit)&nbsp;&nbsp;&nbsp;(_SFR_BYTE(sfr) &amp;= ~_BV(bit))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#ac4a5536d9bf092116f88b94797ddc882">sbi</a>(sfr, bit)&nbsp;&nbsp;&nbsp;(_SFR_BYTE(sfr) |= _BV(bit))</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#ae5fd0cb8976ac0c88ec4b1fc954132c0">EXTERNAL_INT_0</a>&nbsp;&nbsp;&nbsp;0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a8c2c195748bb5496b510a201f1c57c08">EXTERNAL_INT_1</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a934a70c53ad0fb697134ff64bc7bf5df">EXTERNAL_INT_2</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#ac5041114b634c03558741a0ae7439be7">EXTERNAL_INT_3</a>&nbsp;&nbsp;&nbsp;3</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a715be2c5d2474b26366616943537d9df">EXTERNAL_INT_4</a>&nbsp;&nbsp;&nbsp;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a553812a383ca304c6e1709aea750cc1b">EXTERNAL_INT_5</a>&nbsp;&nbsp;&nbsp;5</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a0464af4de80670cce58e82c5d2aa6979">EXTERNAL_INT_6</a>&nbsp;&nbsp;&nbsp;6</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a1865700db9dfb6627f79d3f3fcedbda4">EXTERNAL_INT_7</a>&nbsp;&nbsp;&nbsp;7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a3dab12da9f749340b6fc78148a7e3bd7">EXTERNAL_NUM_INTERRUPTS</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+<tr><td colspan="2"><h2>Définition de type</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">typedef void(*&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a44181537ab6ea5631069dcd97b51bcff">voidFuncPtr</a> )(void)</td></tr>
+</table>
+<hr/><h2>Documentation des macros</h2>
+<a class="anchor" id="ae70baf5399951da1e7ad45a0ed890832"></a><!-- doxytag: member="wiring_private.h::cbi" ref="ae70baf5399951da1e7ad45a0ed890832" args="(sfr, bit)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define cbi</td>
+          <td>(</td>
+          <td class="paramtype">sfr, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bit&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(_SFR_BYTE(sfr) &amp;= ~_BV(bit))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00041">41</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ae5fd0cb8976ac0c88ec4b1fc954132c0"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_0" ref="ae5fd0cb8976ac0c88ec4b1fc954132c0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_0&nbsp;&nbsp;&nbsp;0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00047">47</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8c2c195748bb5496b510a201f1c57c08"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_1" ref="a8c2c195748bb5496b510a201f1c57c08" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_1&nbsp;&nbsp;&nbsp;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00048">48</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a934a70c53ad0fb697134ff64bc7bf5df"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_2" ref="a934a70c53ad0fb697134ff64bc7bf5df" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_2&nbsp;&nbsp;&nbsp;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00049">49</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac5041114b634c03558741a0ae7439be7"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_3" ref="ac5041114b634c03558741a0ae7439be7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_3&nbsp;&nbsp;&nbsp;3</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00050">50</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a715be2c5d2474b26366616943537d9df"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_4" ref="a715be2c5d2474b26366616943537d9df" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_4&nbsp;&nbsp;&nbsp;4</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00051">51</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a553812a383ca304c6e1709aea750cc1b"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_5" ref="a553812a383ca304c6e1709aea750cc1b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_5&nbsp;&nbsp;&nbsp;5</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00052">52</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a0464af4de80670cce58e82c5d2aa6979"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_6" ref="a0464af4de80670cce58e82c5d2aa6979" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_6&nbsp;&nbsp;&nbsp;6</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00053">53</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a1865700db9dfb6627f79d3f3fcedbda4"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_INT_7" ref="a1865700db9dfb6627f79d3f3fcedbda4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_INT_7&nbsp;&nbsp;&nbsp;7</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00054">54</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a3dab12da9f749340b6fc78148a7e3bd7"></a><!-- doxytag: member="wiring_private.h::EXTERNAL_NUM_INTERRUPTS" ref="a3dab12da9f749340b6fc78148a7e3bd7" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define EXTERNAL_NUM_INTERRUPTS&nbsp;&nbsp;&nbsp;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00059">59</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ac4a5536d9bf092116f88b94797ddc882"></a><!-- doxytag: member="wiring_private.h::sbi" ref="ac4a5536d9bf092116f88b94797ddc882" args="(sfr, bit)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define sbi</td>
+          <td>(</td>
+          <td class="paramtype">sfr, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">bit&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td>&nbsp;&nbsp;&nbsp;(_SFR_BYTE(sfr) |= _BV(bit))</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00044">44</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Documentation des définitions de type</h2>
+<a class="anchor" id="a44181537ab6ea5631069dcd97b51bcff"></a><!-- doxytag: member="wiring_private.h::voidFuncPtr" ref="a44181537ab6ea5631069dcd97b51bcff" args=")(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">typedef void(* <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h.html#a44181537ab6ea5631069dcd97b51bcff">voidFuncPtr</a>)(void)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html#l00062">62</a> du fichier <a class="el" href="../../d9/d5a/motor_control_2build_2core_2wiring__private_8h_source.html">wiring_private.h</a>.</p>
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

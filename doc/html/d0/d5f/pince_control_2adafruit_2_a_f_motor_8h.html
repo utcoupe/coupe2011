@@ -1,0 +1,526 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011: Référence du fichier pinceControl/adafruit/AFMotor.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>Référence du fichier pinceControl/adafruit/AFMotor.h</h1><code>#include &lt;inttypes.h&gt;</code><br/>
+<code>#include &lt;avr/io.h&gt;</code><br/>
+<div class="dynheader">
+Graphe des dépendances par inclusion de AFMotor.h:</div>
+<div class="dynsection">
+<div class="center"><img src="../../df/d81/pince_control_2adafruit_2_a_f_motor_8h__incl.png" border="0" usemap="#pince_control_2adafruit_2_a_f_motor_8h_map" alt=""/></div>
+</div>
+<div class="dynheader">
+Ce graphe montre quels fichiers incluent directement ou indirectement ce fichier :</div>
+<div class="dynsection">
+<div class="center"><img src="../../dc/d92/pince_control_2adafruit_2_a_f_motor_8h__dep__incl.png" border="0" usemap="#pince_control_2adafruit_2_a_f_motor_8hdep_map" alt=""/></div>
+<map name="pince_control_2adafruit_2_a_f_motor_8hdep_map" id="pince_control_2adafruit_2_a_f_motor_8hdep">
+<area shape="rect" href="../../d5/d84/pwm_8cpp.html" title="motorControl/pwm.cpp" alt="" coords="5,83,155,112"/><area shape="rect" href="../../d1/dc4/_motor_party_8pde.html" title="pinceControl/adafruit/examples/MotorParty/MotorParty.pde" alt="" coords="179,83,539,112"/><area shape="rect" href="../../d8/d0c/_motor_test_8pde.html" title="pinceControl/adafruit/examples/MotorTest/MotorTest.pde" alt="" coords="563,83,912,112"/><area shape="rect" href="../../d1/d98/_stepper_test_8pde.html" title="pinceControl/adafruit/examples/StepperTest/StepperTest.pde" alt="" coords="936,83,1309,112"/></map>
+</div>
+
+<p><a href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">Aller au code source de ce fichier.</a></p>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr><td colspan="2"><h2>Classes</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../da/dce/class_a_f_motor_controller.html">AFMotorController</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d2/d78/class_a_f___d_c_motor.html">AF_DCMotor</a></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">class &nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../db/d84/class_a_f___stepper.html">AF_Stepper</a></td></tr>
+<tr><td colspan="2"><h2>Macros</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a793cd9403fa1b683e3da533bfa929788">MICROSTEPS</a>&nbsp;&nbsp;&nbsp;16</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#abd639f43f6c3b97a35e93aa2839877b0">MOTOR12_64KHZ</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a25da17ead327d0d7506d08141aa4bd23">MOTOR12_8KHZ</a>&nbsp;&nbsp;&nbsp;_BV(CS21)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#adc02102ff568a44bf2dfdd680157f25a">MOTOR12_2KHZ</a>&nbsp;&nbsp;&nbsp;_BV(CS21) | _BV(CS20)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a4790d8e2237e091c734111ec06e9ba8b">MOTOR12_1KHZ</a>&nbsp;&nbsp;&nbsp;_BV(CS22)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#adde4e189b313de7985b586f2797f3080">MOTOR34_64KHZ</a>&nbsp;&nbsp;&nbsp;_BV(CS00)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#ad8581336bf38dbf64609fa9ec188d050">MOTOR34_8KHZ</a>&nbsp;&nbsp;&nbsp;_BV(CS01)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a2b496f98aaa18762ae6c3e93018e0ba4">MOTOR34_1KHZ</a>&nbsp;&nbsp;&nbsp;_BV(CS01) | _BV(CS00)</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#acf59cc2c2015737f006876736aa67a52">MOTOR1_A</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a910ad8b79b5f2ccd1024d8d46d18db59">MOTOR1_B</a>&nbsp;&nbsp;&nbsp;3</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a10d9dc2baccb61a1ff9ec726e6d8925f">MOTOR2_A</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a96c25b04428137f29a841f7109a924df">MOTOR2_B</a>&nbsp;&nbsp;&nbsp;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a06e738bd22322fd754315610e45de0b9">MOTOR4_A</a>&nbsp;&nbsp;&nbsp;0</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a433140d781f341e8d4042c2a9dffeaf1">MOTOR4_B</a>&nbsp;&nbsp;&nbsp;6</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a52212efbb8d325595f04d94f79f86017">MOTOR3_A</a>&nbsp;&nbsp;&nbsp;5</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a13043ae90f94a51906e6d8b50f870ed1">MOTOR3_B</a>&nbsp;&nbsp;&nbsp;7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a6ddfdda7a062d10cff4a72b76b44aeb8">FORWARD</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#adf445abfe1b77fa63f89e315ccc2f7f2">BACKWARD</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#af78f6af13b9c032bf9d48ef40aa7e683">BRAKE</a>&nbsp;&nbsp;&nbsp;3</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a5bd9a30fc22d9a737ee060d41a4ec479">RELEASE</a>&nbsp;&nbsp;&nbsp;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#aae597f206a8cf88b5a0593f39044b937">SINGLE</a>&nbsp;&nbsp;&nbsp;1</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a8747af38b86aa2bbcda2f1b1aa0888c2">DOUBLE</a>&nbsp;&nbsp;&nbsp;2</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a6e81d295de1c4dd83546fac23badcac2">INTERLEAVE</a>&nbsp;&nbsp;&nbsp;3</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#aca9cca604052ac7a6f173b58b7d6e126">MICROSTEP</a>&nbsp;&nbsp;&nbsp;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a9adb6c649aa99a2a183580c86a0d2f27">MOTORLATCH</a>&nbsp;&nbsp;&nbsp;12</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#afa59e8328b3a75754a126029404d7dfd">MOTORCLK</a>&nbsp;&nbsp;&nbsp;4</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a2c02e633ae1f35fd2ac9801b1b1e169f">MOTORENABLE</a>&nbsp;&nbsp;&nbsp;7</td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">#define&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#a2df66546257ff0aa00dcfb202b123263">MOTORDATA</a>&nbsp;&nbsp;&nbsp;8</td></tr>
+<tr><td colspan="2"><h2>Fonctions</h2></td></tr>
+<tr><td class="memItemLeft" align="right" valign="top">uint8_t&nbsp;</td><td class="memItemRight" valign="bottom"><a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h.html#acf0ac2a6910c5e5ba344dc98f009c62c">getlatchstate</a> (void)</td></tr>
+</table>
+<hr/><h2>Documentation des macros</h2>
+<a class="anchor" id="adf445abfe1b77fa63f89e315ccc2f7f2"></a><!-- doxytag: member="AFMotor.h::BACKWARD" ref="adf445abfe1b77fa63f89e315ccc2f7f2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BACKWARD&nbsp;&nbsp;&nbsp;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00034">34</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="af78f6af13b9c032bf9d48ef40aa7e683"></a><!-- doxytag: member="AFMotor.h::BRAKE" ref="af78f6af13b9c032bf9d48ef40aa7e683" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define BRAKE&nbsp;&nbsp;&nbsp;3</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00035">35</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a8747af38b86aa2bbcda2f1b1aa0888c2"></a><!-- doxytag: member="AFMotor.h::DOUBLE" ref="a8747af38b86aa2bbcda2f1b1aa0888c2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define DOUBLE&nbsp;&nbsp;&nbsp;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00039">39</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6ddfdda7a062d10cff4a72b76b44aeb8"></a><!-- doxytag: member="AFMotor.h::FORWARD" ref="a6ddfdda7a062d10cff4a72b76b44aeb8" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define FORWARD&nbsp;&nbsp;&nbsp;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00033">33</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a6e81d295de1c4dd83546fac23badcac2"></a><!-- doxytag: member="AFMotor.h::INTERLEAVE" ref="a6e81d295de1c4dd83546fac23badcac2" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define INTERLEAVE&nbsp;&nbsp;&nbsp;3</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00040">40</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aca9cca604052ac7a6f173b58b7d6e126"></a><!-- doxytag: member="AFMotor.h::MICROSTEP" ref="aca9cca604052ac7a6f173b58b7d6e126" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MICROSTEP&nbsp;&nbsp;&nbsp;4</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00041">41</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a793cd9403fa1b683e3da533bfa929788"></a><!-- doxytag: member="AFMotor.h::MICROSTEPS" ref="a793cd9403fa1b683e3da533bfa929788" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MICROSTEPS&nbsp;&nbsp;&nbsp;16</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00013">13</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a4790d8e2237e091c734111ec06e9ba8b"></a><!-- doxytag: member="AFMotor.h::MOTOR12_1KHZ" ref="a4790d8e2237e091c734111ec06e9ba8b" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR12_1KHZ&nbsp;&nbsp;&nbsp;_BV(CS22)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00018">18</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adc02102ff568a44bf2dfdd680157f25a"></a><!-- doxytag: member="AFMotor.h::MOTOR12_2KHZ" ref="adc02102ff568a44bf2dfdd680157f25a" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR12_2KHZ&nbsp;&nbsp;&nbsp;_BV(CS21) | _BV(CS20)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00017">17</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="abd639f43f6c3b97a35e93aa2839877b0"></a><!-- doxytag: member="AFMotor.h::MOTOR12_64KHZ" ref="abd639f43f6c3b97a35e93aa2839877b0" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR12_64KHZ&nbsp;&nbsp;&nbsp;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00015">15</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a25da17ead327d0d7506d08141aa4bd23"></a><!-- doxytag: member="AFMotor.h::MOTOR12_8KHZ" ref="a25da17ead327d0d7506d08141aa4bd23" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR12_8KHZ&nbsp;&nbsp;&nbsp;_BV(CS21)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00016">16</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="acf59cc2c2015737f006876736aa67a52"></a><!-- doxytag: member="AFMotor.h::MOTOR1_A" ref="acf59cc2c2015737f006876736aa67a52" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR1_A&nbsp;&nbsp;&nbsp;2</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00024">24</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a910ad8b79b5f2ccd1024d8d46d18db59"></a><!-- doxytag: member="AFMotor.h::MOTOR1_B" ref="a910ad8b79b5f2ccd1024d8d46d18db59" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR1_B&nbsp;&nbsp;&nbsp;3</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00025">25</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a10d9dc2baccb61a1ff9ec726e6d8925f"></a><!-- doxytag: member="AFMotor.h::MOTOR2_A" ref="a10d9dc2baccb61a1ff9ec726e6d8925f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR2_A&nbsp;&nbsp;&nbsp;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00026">26</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a96c25b04428137f29a841f7109a924df"></a><!-- doxytag: member="AFMotor.h::MOTOR2_B" ref="a96c25b04428137f29a841f7109a924df" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR2_B&nbsp;&nbsp;&nbsp;4</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00027">27</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2b496f98aaa18762ae6c3e93018e0ba4"></a><!-- doxytag: member="AFMotor.h::MOTOR34_1KHZ" ref="a2b496f98aaa18762ae6c3e93018e0ba4" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR34_1KHZ&nbsp;&nbsp;&nbsp;_BV(CS01) | _BV(CS00)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00022">22</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="adde4e189b313de7985b586f2797f3080"></a><!-- doxytag: member="AFMotor.h::MOTOR34_64KHZ" ref="adde4e189b313de7985b586f2797f3080" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR34_64KHZ&nbsp;&nbsp;&nbsp;_BV(CS00)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00020">20</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="ad8581336bf38dbf64609fa9ec188d050"></a><!-- doxytag: member="AFMotor.h::MOTOR34_8KHZ" ref="ad8581336bf38dbf64609fa9ec188d050" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR34_8KHZ&nbsp;&nbsp;&nbsp;_BV(CS01)</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00021">21</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a52212efbb8d325595f04d94f79f86017"></a><!-- doxytag: member="AFMotor.h::MOTOR3_A" ref="a52212efbb8d325595f04d94f79f86017" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR3_A&nbsp;&nbsp;&nbsp;5</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00030">30</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a13043ae90f94a51906e6d8b50f870ed1"></a><!-- doxytag: member="AFMotor.h::MOTOR3_B" ref="a13043ae90f94a51906e6d8b50f870ed1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR3_B&nbsp;&nbsp;&nbsp;7</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00031">31</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a06e738bd22322fd754315610e45de0b9"></a><!-- doxytag: member="AFMotor.h::MOTOR4_A" ref="a06e738bd22322fd754315610e45de0b9" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR4_A&nbsp;&nbsp;&nbsp;0</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00028">28</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a433140d781f341e8d4042c2a9dffeaf1"></a><!-- doxytag: member="AFMotor.h::MOTOR4_B" ref="a433140d781f341e8d4042c2a9dffeaf1" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTOR4_B&nbsp;&nbsp;&nbsp;6</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00029">29</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="afa59e8328b3a75754a126029404d7dfd"></a><!-- doxytag: member="AFMotor.h::MOTORCLK" ref="afa59e8328b3a75754a126029404d7dfd" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTORCLK&nbsp;&nbsp;&nbsp;4</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00063">63</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2df66546257ff0aa00dcfb202b123263"></a><!-- doxytag: member="AFMotor.h::MOTORDATA" ref="a2df66546257ff0aa00dcfb202b123263" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTORDATA&nbsp;&nbsp;&nbsp;8</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00065">65</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a2c02e633ae1f35fd2ac9801b1b1e169f"></a><!-- doxytag: member="AFMotor.h::MOTORENABLE" ref="a2c02e633ae1f35fd2ac9801b1b1e169f" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTORENABLE&nbsp;&nbsp;&nbsp;7</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00064">64</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a9adb6c649aa99a2a183580c86a0d2f27"></a><!-- doxytag: member="AFMotor.h::MOTORLATCH" ref="a9adb6c649aa99a2a183580c86a0d2f27" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define MOTORLATCH&nbsp;&nbsp;&nbsp;12</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00062">62</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="a5bd9a30fc22d9a737ee060d41a4ec479"></a><!-- doxytag: member="AFMotor.h::RELEASE" ref="a5bd9a30fc22d9a737ee060d41a4ec479" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define RELEASE&nbsp;&nbsp;&nbsp;4</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00036">36</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aae597f206a8cf88b5a0593f39044b937"></a><!-- doxytag: member="AFMotor.h::SINGLE" ref="aae597f206a8cf88b5a0593f39044b937" args="" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">#define SINGLE&nbsp;&nbsp;&nbsp;1</td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+<p>Définition à la ligne <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html#l00038">38</a> du fichier <a class="el" href="../../d0/d5f/pince_control_2adafruit_2_a_f_motor_8h_source.html">AFMotor.h</a>.</p>
+
+</div>
+</div>
+<hr/><h2>Documentation des fonctions</h2>
+<a class="anchor" id="acf0ac2a6910c5e5ba344dc98f009c62c"></a><!-- doxytag: member="AFMotor.h::getlatchstate" ref="acf0ac2a6910c5e5ba344dc98f009c62c" args="(void)" -->
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">uint8_t getlatchstate </td>
+          <td>(</td>
+          <td class="paramtype">void&nbsp;</td>
+          <td class="paramname"></td>
+          <td>&nbsp;)&nbsp;</td>
+          <td></td>
+        </tr>
+      </table>
+</div>
+<div class="memdoc">
+
+</div>
+</div>
+</div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

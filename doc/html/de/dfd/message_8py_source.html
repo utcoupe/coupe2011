@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de com/pc/message.py</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>com/pc/message.py</h1><a href="../../de/dfd/message_8py.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a><a class="code" href="../../df/da9/namespacemessage.html">00001</a> <span class="comment"># -*- coding: utf-8 -*-</span>
+<a name="l00002"></a>00002 
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="keyword">import</span> serial
+<a name="l00005"></a>00005 <span class="keyword">import</span> threading
+<a name="l00006"></a>00006 <span class="keyword">import</span> time
+<a name="l00007"></a>00007 <span class="keyword">import</span> subprocess
+<a name="l00008"></a>00008 <span class="keyword">from</span> Queue <span class="keyword">import</span> *
+<a name="l00009"></a>00009 <span class="comment">#from struct import *</span>
+<a name="l00010"></a>00010 <span class="comment">#import binascii</span>
+<a name="l00011"></a>00011 
+<a name="l00012"></a>00012 <span class="keyword">from</span> timer <span class="keyword">import</span> *
+<a name="l00013"></a>00013 
+<a name="l00014"></a>00014 
+<a name="l00015"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html">00015</a> <span class="keyword">class </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html">Server</a>():
+<a name="l00016"></a>00016         <span class="stringliteral">&quot;&quot;&quot;</span>
+<a name="l00017"></a>00017 <span class="stringliteral">        Cette classe permet la communication avec les différents ports série</span>
+<a name="l00018"></a>00018 <span class="stringliteral">        </span>
+<a name="l00019"></a>00019 <span class="stringliteral">        @author Thomas</span>
+<a name="l00020"></a>00020 <span class="stringliteral">        &quot;&quot;&quot;</span>
+<a name="l00021"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#accfca64554cfd74adf492e7050bb1619">00021</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#accfca64554cfd74adf492e7050bb1619">__init__</a>(self, ports):
+<a name="l00022"></a>00022                 <span class="stringliteral">&quot;&quot;&quot; Constructeur</span>
+<a name="l00023"></a>00023 <span class="stringliteral">                </span>
+<a name="l00024"></a>00024 <span class="stringliteral">                @param</span>
+<a name="l00025"></a>00025 <span class="stringliteral">                        ports: tableau de paire (nom du port, vitesse de rafraichissement)</span>
+<a name="l00026"></a>00026 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00027"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">00027</a>                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>                =       dict()
+<a name="l00028"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">00028</a>                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>    =       []
+<a name="l00029"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a784747b2fb511b4ccc2ac8911735ae7f">00029</a>                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a784747b2fb511b4ccc2ac8911735ae7f">queuedCmd</a>  =       dict()  <span class="comment"># liste des commandes à envoyer par port</span>
+<a name="l00030"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">00030</a>                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>    =       dict()  <span class="comment"># liste des réponses attendues par port</span>
+<a name="l00031"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae4290dfc29361ae5b14663525cb6103a">00031</a>                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae4290dfc29361ae5b14663525cb6103a">cmdLoops</a>   =       dict() <span class="comment"># threads</span>
+<a name="l00032"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#afa24b0845502583b18267353e6f2100b">00032</a>                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afa24b0845502583b18267353e6f2100b">rcvLoops</a>   =       dict() <span class="comment"># threads</span>
+<a name="l00033"></a>00033                 
+<a name="l00034"></a>00034                 <span class="comment"># lancement des tentatives de connection</span>
+<a name="l00035"></a>00035                 threads = []
+<a name="l00036"></a>00036                 <span class="keywordflow">for</span> port,refresh <span class="keywordflow">in</span> ports:
+<a name="l00037"></a>00037                         <span class="keywordflow">print</span> port,refresh
+<a name="l00038"></a>00038                         thread = threading.Thread(<span class="keywordtype">None</span>, self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae2cac71a27f7869ad4ae75edf1bdc0bb">connect</a>, <span class="keywordtype">None</span>, (port,refresh,))
+<a name="l00039"></a>00039                         thread.start()
+<a name="l00040"></a>00040                         threads.append(thread)
+<a name="l00041"></a>00041                 
+<a name="l00042"></a>00042                 <span class="comment"># attendre que les connections soient établies</span>
+<a name="l00043"></a>00043                 <span class="keywordflow">while</span> <span class="keyword">True</span>:
+<a name="l00044"></a>00044                         <span class="keywordflow">for</span> t <span class="keywordflow">in</span> threads:
+<a name="l00045"></a>00045                                 <span class="keywordflow">if</span> t.isAlive():
+<a name="l00046"></a>00046                                         time.sleep(2)
+<a name="l00047"></a>00047                                         <span class="keywordflow">break</span> <span class="comment"># break que le for</span>
+<a name="l00048"></a>00048                         <span class="keywordflow">break</span>
+<a name="l00049"></a>00049                 
+<a name="l00050"></a>00050                 <span class="comment"># Verification que les connections ont reussi</span>
+<a name="l00051"></a>00051                 <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>.values():
+<a name="l00052"></a>00052                         <span class="keywordflow">if</span> <span class="keywordflow">not</span> s: 
+<a name="l00053"></a>00053                                 exit()
+<a name="l00054"></a>00054                 
+<a name="l00055"></a>00055                 <span class="comment"># créarion de la queue pour l&#39;envoie de commande</span>
+<a name="l00056"></a>00056                 <span class="comment"># et du dict pour récupérer les réponses</span>
+<a name="l00057"></a>00057                 <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>:
+<a name="l00058"></a>00058                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a784747b2fb511b4ccc2ac8911735ae7f">queuedCmd</a>[s] = Queue() <span class="comment"># on envoi les commandes les unes après les autres</span>
+<a name="l00059"></a>00059                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>[s] = dict() <span class="comment"># on reçoit dans n&#39;importe quel ordre</span>
+<a name="l00060"></a>00060                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae4290dfc29361ae5b14663525cb6103a">cmdLoops</a>[s] = threading.Thread(<span class="keywordtype">None</span>, self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a52fc04e965da7a7e123ec7b2a4825c05">loopCmd</a>, <span class="keywordtype">None</span>, (s,))
+<a name="l00061"></a>00061                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae4290dfc29361ae5b14663525cb6103a">cmdLoops</a>[s].start()
+<a name="l00062"></a>00062                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afa24b0845502583b18267353e6f2100b">rcvLoops</a>[s] = threading.Thread(<span class="keywordtype">None</span>, self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a31f422f0cca8159e41cead3daa23298d">loopRcv</a>, <span class="keywordtype">None</span>, (s,))
+<a name="l00063"></a>00063                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afa24b0845502583b18267353e6f2100b">rcvLoops</a>[s].start()
+<a name="l00064"></a>00064                 
+<a name="l00065"></a>00065                 <span class="comment"># petite pause avant de pouvoir envoyer et recevoir des données</span>
+<a name="l00066"></a>00066                 time.sleep(1)
+<a name="l00067"></a>00067                 
+<a name="l00068"></a>00068                 <span class="comment"># lancement des loups</span>
+<a name="l00069"></a>00069                 
+<a name="l00070"></a>00070                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;fin init&#39;</span>
+<a name="l00071"></a>00071         
+<a name="l00072"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae2cac71a27f7869ad4ae75edf1bdc0bb">00072</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ae2cac71a27f7869ad4ae75edf1bdc0bb">connect</a>(self, port, refresh):
+<a name="l00073"></a>00073                 <span class="stringliteral">&quot;&quot;&quot; Connection à un port</span>
+<a name="l00074"></a>00074 <span class="stringliteral">                </span>
+<a name="l00075"></a>00075 <span class="stringliteral">                @param</span>
+<a name="l00076"></a>00076 <span class="stringliteral">                        port: numéro du port</span>
+<a name="l00077"></a>00077 <span class="stringliteral">                        refresh: vitesse de rafraichissement</span>
+<a name="l00078"></a>00078 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00079"></a>00079                 <span class="keywordflow">for</span> i <span class="keywordflow">in</span> range(10):
+<a name="l00080"></a>00080                         <span class="keywordflow">try</span>:
+<a name="l00081"></a>00081                                 <span class="comment">#print &#39;tentative de connection sur %s&#39;%port</span>
+<a name="l00082"></a>00082                                 s = serial.Serial(<span class="stringliteral">&#39;/dev/tty&#39;</span>+port, refresh, timeout=1, writeTimeout=1)
+<a name="l00083"></a>00083                                 <span class="comment">#s = serial.Serial(&#39;/dev/tty&#39;+port, refresh, writeTimeout=1)</span>
+<a name="l00084"></a>00084                         <span class="keywordflow">except</span> serial.SerialException <span class="keyword">as</span> ex:
+<a name="l00085"></a>00085                                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;connection echouée sur %s, nouvelle tentative&#39;</span>%port, ex
+<a name="l00086"></a>00086                         <span class="keywordflow">else</span>:
+<a name="l00087"></a>00087                                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;connection %s établie&#39;</span>%port
+<a name="l00088"></a>00088                                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>[port] = s
+<a name="l00089"></a>00089                                 <span class="keywordflow">return</span> s
+<a name="l00090"></a>00090                 <span class="keywordflow">print</span> <span class="stringliteral">&#39;echec de la connection %s après 10 tentatives, relancer le programme&#39;</span>%port
+<a name="l00091"></a>00091                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>[port] = <span class="keywordtype">None</span>
+<a name="l00092"></a>00092                 <span class="keywordflow">return</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>[port]
+<a name="l00093"></a>00093         
+<a name="l00094"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a52fc04e965da7a7e123ec7b2a4825c05">00094</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a52fc04e965da7a7e123ec7b2a4825c05">loopCmd</a>(self, port):
+<a name="l00095"></a>00095                 <span class="stringliteral">&quot;&quot;&quot; la loop envoyant à la suite les commandes de la queue &quot;&quot;&quot;</span>
+<a name="l00096"></a>00096                 queue = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a784747b2fb511b4ccc2ac8911735ae7f">queuedCmd</a>[port]
+<a name="l00097"></a>00097                 <span class="keywordflow">while</span> <span class="keyword">True</span>:
+<a name="l00098"></a>00098                         cmd = queue.get()
+<a name="l00099"></a>00099                         r = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a10ba902f0d51b1657fcc013f6ea89152">_sendCmd</a>(cmd, port)
+<a name="l00100"></a>00100                         <span class="keywordflow">if</span> r &lt; 0:
+<a name="l00101"></a>00101                                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>[port] = <span class="stringliteral">&#39;timeout&#39;</span>
+<a name="l00102"></a>00102                         queue.task_done()
+<a name="l00103"></a>00103         
+<a name="l00104"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a31f422f0cca8159e41cead3daa23298d">00104</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a31f422f0cca8159e41cead3daa23298d">loopRcv</a>(self, port):
+<a name="l00105"></a>00105                 <span class="stringliteral">&quot;&quot;&quot; la loop récupérant les réponses au différentes commandes &quot;&quot;&quot;</span>
+<a name="l00106"></a>00106                 di = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>[port]
+<a name="l00107"></a>00107                 <span class="keywordflow">while</span> <span class="keyword">True</span>:
+<a name="l00108"></a>00108                         r = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a0bed0ef4997392580956ea20b1fc2b62">_readInput</a>(port).split(<span class="stringliteral">&#39;,&#39;</span>)
+<a name="l00109"></a>00109                         <span class="comment">#print r</span>
+<a name="l00110"></a>00110                         <span class="keywordflow">if</span> len(r) == 2 <span class="keywordflow">and</span> r[0] != <span class="stringliteral">&#39;timeout&#39;</span>:
+<a name="l00111"></a>00111                                 cmd,recv = r
+<a name="l00112"></a>00112                                 di[cmd] = recv
+<a name="l00113"></a>00113         
+<a name="l00114"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#aaaf3eebf21c2b29456ca34e104dae598">00114</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#aaaf3eebf21c2b29456ca34e104dae598">addCmd</a>(self, cmd, port):
+<a name="l00115"></a>00115                 <span class="stringliteral">&quot;&quot;&quot; ajoute une commande à envoyer dans la queue des commandes</span>
+<a name="l00116"></a>00116 <span class="stringliteral">                </span>
+<a name="l00117"></a>00117 <span class="stringliteral">                @param</span>
+<a name="l00118"></a>00118 <span class="stringliteral">                        cmd: commande à envoyer</span>
+<a name="l00119"></a>00119 <span class="stringliteral">                        port: port sur lequel envoyer</span>
+<a name="l00120"></a>00120 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00121"></a>00121                 cmdid = cmd[0]
+<a name="l00122"></a>00122                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a784747b2fb511b4ccc2ac8911735ae7f">queuedCmd</a>[port].put(cmd)
+<a name="l00123"></a>00123                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>[port][cmdid] = <span class="keywordtype">None</span>
+<a name="l00124"></a>00124         
+<a name="l00125"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#afff8fa13942ef9a9496db80f64a47a4b">00125</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#afff8fa13942ef9a9496db80f64a47a4b">getRcv</a>(self, cmd, port, bloquant=False):
+<a name="l00126"></a>00126                 <span class="stringliteral">&quot;&quot;&quot; renvoie la réponse à la commande</span>
+<a name="l00127"></a>00127 <span class="stringliteral">                </span>
+<a name="l00128"></a>00128 <span class="stringliteral">                @param</span>
+<a name="l00129"></a>00129 <span class="stringliteral">                        cmd: la commande dont on veut la réponse</span>
+<a name="l00130"></a>00130 <span class="stringliteral">                        port: port sur lequel on veut écouter la réponse</span>
+<a name="l00131"></a>00131 <span class="stringliteral">                        bloquant: True &lt;=&gt; boucle en attendant la réponse</span>
+<a name="l00132"></a>00132 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00133"></a>00133                 cmdid = cmd[0]
+<a name="l00134"></a>00134                 rcv = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>[port][cmdid]
+<a name="l00135"></a>00135                 <span class="keywordflow">if</span> bloquant:
+<a name="l00136"></a>00136                         <span class="keywordflow">while</span> <span class="keywordflow">not</span> rcv:
+<a name="l00137"></a>00137                                 rcv = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afd2ae827787508de5c21ad6bf99cb12b">waitRcv</a>[port][cmdid]
+<a name="l00138"></a>00138                 <span class="keywordflow">return</span> rcv
+<a name="l00139"></a>00139                 
+<a name="l00140"></a>00140         <span class="keyword">def </span>_sendCmd(self, cmd, port):
+<a name="l00141"></a>00141                 <span class="keywordflow">try</span>:
+<a name="l00142"></a>00142                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>[port].write(<span class="stringliteral">&#39;&lt;&#39;</span>+cmd+<span class="stringliteral">&#39;&gt;&#39;</span>)
+<a name="l00143"></a>00143                         <span class="keywordflow">return</span> 1
+<a name="l00144"></a>00144                 <span class="keywordflow">except</span> serial.SerialException <span class="keyword">as</span> ex:
+<a name="l00145"></a>00145                         <span class="keywordflow">print</span> <span class="stringliteral">&#39;timeout, writing on&#39;</span>, port, ex
+<a name="l00146"></a>00146                         <span class="keywordflow">return</span> -1
+<a name="l00147"></a>00147         
+<a name="l00148"></a>00148         
+<a name="l00149"></a>00149         <span class="keyword">def </span>_readInput(self, port):
+<a name="l00150"></a>00150                 val = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a7ca9bff889d10b888ce8ffc300f0d33a">ser</a>[port].readline()
+<a name="l00151"></a>00151                 val = val.replace(<span class="stringliteral">&quot;§&quot;</span>,<span class="stringliteral">&quot;\n&quot;</span>)
+<a name="l00152"></a>00152                 <span class="keywordflow">if</span> val:
+<a name="l00153"></a>00153                         <span class="keywordflow">return</span> val <span class="comment"># int(binascii.hexlify(val),16)  #unpack(&#39;c&#39;, val)</span>
+<a name="l00154"></a>00154                 <span class="keywordflow">else</span>:
+<a name="l00155"></a>00155                         <span class="keywordflow">return</span> <span class="stringliteral">&#39;timeout, on : &#39;</span>+port
+<a name="l00156"></a>00156         
+<a name="l00157"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a0f7d04d979e89cce61111dfe5e25b7ed">00157</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a0f7d04d979e89cce61111dfe5e25b7ed">testPing</a>(self, port, cmd):
+<a name="l00158"></a>00158                 <span class="stringliteral">&quot;&quot;&quot; test la reactivitée de la cmd en envoyant et recevant </span>
+<a name="l00159"></a>00159 <span class="stringliteral">                la sortie est écrite sur un autre écran</span>
+<a name="l00160"></a>00160 <span class="stringliteral">                </span>
+<a name="l00161"></a>00161 <span class="stringliteral">                @param</span>
+<a name="l00162"></a>00162 <span class="stringliteral">                        port: sur quel port balancer la commande</span>
+<a name="l00163"></a>00163 <span class="stringliteral">                        cmd: commande</span>
+<a name="l00164"></a>00164 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00165"></a>00165                 n = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">addScreen</a>()
+<a name="l00166"></a>00166                 <span class="keyword">def </span><a class="code" href="../../d4/de6/carte_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a>():
+<a name="l00167"></a>00167                         tot = 0
+<a name="l00168"></a>00168                         nb_iter = 300
+<a name="l00169"></a>00169                         <span class="keywordflow">print</span> <span class="stringliteral">&#39;test du port&#39;</span>, port, <span class="stringliteral">&#39;avec la commande :&#39;</span>, cmd
+<a name="l00170"></a>00170                         <span class="keywordflow">for</span> i <span class="keywordflow">in</span> xrange(nb_iter):
+<a name="l00171"></a>00171                                 t = time.time()
+<a name="l00172"></a>00172                                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#aaaf3eebf21c2b29456ca34e104dae598">addCmd</a>(cmd, port)
+<a name="l00173"></a>00173                                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afff8fa13942ef9a9496db80f64a47a4b">getRcv</a>(cmd, port,<span class="keyword">True</span>), n)
+<a name="l00174"></a>00174                                 tEllapsed = time.time() - t
+<a name="l00175"></a>00175                                 tot += tEllapsed
+<a name="l00176"></a>00176                                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(<span class="stringliteral">&quot;&quot;</span>+str(i)+<span class="stringliteral">&quot; &quot;</span>+str(tEllapsed), n)
+<a name="l00177"></a>00177                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(<span class="stringliteral">&quot;nb d&#39;iters : &quot;</span> + nb_iter)
+<a name="l00178"></a>00178                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(<span class="stringliteral">&quot;temps total&quot;</span>+str(tot), n)
+<a name="l00179"></a>00179                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(<span class="stringliteral">&quot;moy&quot;</span>+str(tot/nb_iter), n)
+<a name="l00180"></a>00180                 
+<a name="l00181"></a>00181                 t = threading.Thread(<span class="keywordtype">None</span>, loop, <span class="keywordtype">None</span>)
+<a name="l00182"></a>00182                 t.start()
+<a name="l00183"></a>00183         
+<a name="l00184"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">00184</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">addScreen</a>(self, live=None):
+<a name="l00185"></a>00185                 <span class="stringliteral">&quot;&quot;&quot; live: timer du live</span>
+<a name="l00186"></a>00186 <span class="stringliteral">                </span>
+<a name="l00187"></a>00187 <span class="stringliteral">                @return numero de l&#39;écran créé</span>
+<a name="l00188"></a>00188 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00189"></a>00189                 screens = [ s <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a> <span class="keywordflow">if</span> s[0] ]
+<a name="l00190"></a>00190                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a> = screens
+<a name="l00191"></a>00191                 screen = subprocess.Popen([<span class="stringliteral">&quot;python&quot;</span>,<span class="stringliteral">&quot;screen.py&quot;</span>], shell=<span class="keyword">False</span>, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+<a name="l00192"></a>00192                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>.append([screen, live])
+<a name="l00193"></a>00193                 <span class="keywordflow">return</span> len(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>)-1 <span class="comment"># return l&#39;index du screen créé</span>
+<a name="l00194"></a>00194         
+<a name="l00195"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">00195</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self, msg, n=0):
+<a name="l00196"></a>00196                 <span class="stringliteral">&quot;&quot;&quot; écrit sur un écran </span>
+<a name="l00197"></a>00197 <span class="stringliteral">                </span>
+<a name="l00198"></a>00198 <span class="stringliteral">                @param</span>
+<a name="l00199"></a>00199 <span class="stringliteral">                        msg: le message</span>
+<a name="l00200"></a>00200 <span class="stringliteral">                        n: l&#39;écran sur lequel écrire</span>
+<a name="l00201"></a>00201 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00202"></a>00202                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].stdin.write(str(msg)+<span class="stringliteral">&quot;\n&quot;</span>) <span class="comment"># envoie au child</span>
+<a name="l00203"></a>00203                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].stdin.flush()
+<a name="l00204"></a>00204         
+<a name="l00205"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ad09f37276dfc6bc7e543dbc5c713df71">00205</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ad09f37276dfc6bc7e543dbc5c713df71">getLive</a>(self, port, cmd, speed=0.3):
+<a name="l00206"></a>00206                 <span class="stringliteral">&quot;&quot;&quot; Lance en boucle infinie une commande et l&#39;affiche sur un nouvel écran</span>
+<a name="l00207"></a>00207 <span class="stringliteral">                </span>
+<a name="l00208"></a>00208 <span class="stringliteral">                @param</span>
+<a name="l00209"></a>00209 <span class="stringliteral">                        port: le port sur lequel envoyer la commande</span>
+<a name="l00210"></a>00210 <span class="stringliteral">                        cmd: la commande</span>
+<a name="l00211"></a>00211 <span class="stringliteral">                        speed: l&#39;interval entre chaque envoi</span>
+<a name="l00212"></a>00212 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00213"></a>00213                 <span class="keyword">def </span><a class="code" href="../../d4/de6/carte_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a>():
+<a name="l00214"></a>00214                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#aaaf3eebf21c2b29456ca34e104dae598">addCmd</a>(cmd, <span class="stringliteral">&#39;ACM0&#39;</span>)
+<a name="l00215"></a>00215                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afff8fa13942ef9a9496db80f64a47a4b">getRcv</a>(cmd, <span class="stringliteral">&#39;ACM0&#39;</span>, <span class="keyword">True</span>),n)
+<a name="l00216"></a>00216                 timer = MyTimer(float(speed),loop)
+<a name="l00217"></a>00217                 n = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">addScreen</a>(timer)
+<a name="l00218"></a>00218                 timer.start()
+<a name="l00219"></a>00219         
+<a name="l00220"></a>00220         <span class="keyword">def </span>_stopLive(self, n):
+<a name="l00221"></a>00221                 <span class="stringliteral">&quot;&quot;&quot; arreter un &quot;live&quot;</span>
+<a name="l00222"></a>00222 <span class="stringliteral">                </span>
+<a name="l00223"></a>00223 <span class="stringliteral">                @param</span>
+<a name="l00224"></a>00224 <span class="stringliteral">                        n: numéro du live à stopper</span>
+<a name="l00225"></a>00225 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00226"></a>00226                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1].stop()
+<a name="l00227"></a>00227                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1] = <span class="keywordtype">None</span>
+<a name="l00228"></a>00228         
+<a name="l00229"></a>00229         <span class="keyword">def </span>_stopProcess(self, n):
+<a name="l00230"></a>00230                 <span class="stringliteral">&quot;&quot;&quot; arrete le process faisant tourner un écran</span>
+<a name="l00231"></a>00231 <span class="stringliteral">                </span>
+<a name="l00232"></a>00232 <span class="stringliteral">                @param</span>
+<a name="l00233"></a>00233 <span class="stringliteral">                        n: numéro de l&#39;écran</span>
+<a name="l00234"></a>00234 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00235"></a>00235                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].terminate()
+<a name="l00236"></a>00236                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0] = <span class="keywordtype">None</span>
+<a name="l00237"></a>00237         
+<a name="l00238"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a30f257df7816e4191c561b99c63c8411">00238</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a30f257df7816e4191c561b99c63c8411">stopScreen</a>(self, n):
+<a name="l00239"></a>00239                 <span class="stringliteral">&quot;&quot;&quot; arreter un écran (et la boucle derrière)</span>
+<a name="l00240"></a>00240 <span class="stringliteral">                </span>
+<a name="l00241"></a>00241 <span class="stringliteral">                @param</span>
+<a name="l00242"></a>00242 <span class="stringliteral">                        n: numéro de l&#39;écran</span>
+<a name="l00243"></a>00243 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00244"></a>00244                 <span class="keywordflow">if</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1]:
+<a name="l00245"></a>00245                         self.stopLive(n)
+<a name="l00246"></a>00246                 self.stopProcess(n)
+<a name="l00247"></a>00247                         
+<a name="l00248"></a>00248                         
+<a name="l00249"></a>00249                                 
+<a name="l00250"></a>00250                 
+<a name="l00251"></a>00251         
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

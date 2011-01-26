@@ -1,0 +1,1065 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="class_print" kind="class" prot="public">
+    <compoundname>Print</compoundname>
+    <derivedcompoundref refid="class_stream" prot="public" virt="non-virtual">Stream</derivedcompoundref>
+    <derivedcompoundref refid="class_stream" prot="public" virt="non-virtual">Stream</derivedcompoundref>
+    <includes refid="com_2carte_2build_2core_2_print_8h" local="no">Print.h</includes>
+      <sectiondef kind="private-func">
+      <memberdef kind="function" id="class_print_1ae6dc349a48650e771a4443e93bfa9c65" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::printNumber</definition>
+        <argsstring>(unsigned long, uint8_t)</argsstring>
+        <name>printNumber</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <defname>base</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="166" bodyend="185"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1afd7abd9d94aa5210d2d0f97e614e4625" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::printFloat</definition>
+        <argsstring>(double, uint8_t)</argsstring>
+        <name>printFloat</name>
+        <param>
+          <type>double</type>
+          <defname>number</defname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <defname>digits</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="38" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="187" bodyend="220"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ae6dc349a48650e771a4443e93bfa9c65" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::printNumber</definition>
+        <argsstring>(unsigned long, uint8_t)</argsstring>
+        <name>printNumber</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1afd7abd9d94aa5210d2d0f97e614e4625" prot="private" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::printFloat</definition>
+        <argsstring>(double, uint8_t)</argsstring>
+        <name>printFloat</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="38"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_print_1ad9393033793cfc17f3e37202ba244892" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Print::write</definition>
+        <argsstring>(uint8_t)=0</argsstring>
+        <name>write</name>
+        <reimplementedby refid="class_hardware_serial_bis_1acf30320646884cf482e3d65e72c51c0a">write</reimplementedby>
+        <reimplementedby refid="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c">write</reimplementedby>
+        <reimplementedby refid="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c">write</reimplementedby>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ae083258d224bae2e5d8a27a4f8338880" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Print::write</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>write</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="41" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="33" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a03094428e21f210e59cc1be63353225d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>void Print::write</definition>
+        <argsstring>(const uint8_t *buffer, size_t size)</argsstring>
+        <name>write</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="42" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="40" bodyend="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a6c1f2f9a1988fe2d4ed593b3ac0185c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(const String &amp;)</argsstring>
+        <name>print</name>
+        <param>
+          <type>const <ref refid="class_string" kindref="compound">String</ref> &amp;</type>
+          <defname>s</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="44" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="46" bodyend="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aa7b0a6dc63e3d27effd8459e3d443b83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(const char[])</argsstring>
+        <name>print</name>
+        <param>
+          <type>const </type>
+          <declname>char</declname>
+          <defname>str</defname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="45" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ada24638921c2e86e13c5939c94cf67db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(char, int=BYTE)</argsstring>
+        <name>print</name>
+        <param>
+          <type>char</type>
+          <defname>c</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="58" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ad7778084a6fe96551d2ec9ce532c5164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(unsigned char, int=BYTE)</argsstring>
+        <name>print</name>
+        <param>
+          <type>unsigned</type>
+          <declname>char</declname>
+          <defname>b</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="47" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a35a6196999c85e5afc5fd852d088e886" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(int, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>int</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="48" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="68" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a5f8df5d4f941b411ce9d660b48996bea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(unsigned int, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>unsigned</type>
+          <declname>int</declname>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="49" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="73" bodyend="76"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1afab3f8d07a58a8d37fec32d7fcb67b56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(long, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>long</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="50" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="78" bodyend="91"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a4be58e920bdddcaf5496d0ba2ae4ea81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(unsigned long, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="51" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="93" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aa5fe80d3a3e8d2dc64f346eb08dcb43f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(double, int=2)</argsstring>
+        <name>print</name>
+        <param>
+          <type>double</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>digits</defname>
+          <defval>2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="52" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="99" bodyend="102"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1abeb8bc6c2d103469679b88c1a966a21f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(const String &amp;s)</argsstring>
+        <name>println</name>
+        <param>
+          <type>const <ref refid="class_string" kindref="compound">String</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="110" bodyend="114"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a09db74a8d51c6b2420c478267f958a51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(const char[])</argsstring>
+        <name>println</name>
+        <param>
+          <type>const </type>
+          <declname>char</declname>
+          <defname>c</defname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="55" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="116" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a49bbefc9016ddda486edf3dddaaa07e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(char, int=BYTE)</argsstring>
+        <name>println</name>
+        <param>
+          <type>char</type>
+          <defname>c</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="56" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="122" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a4eaaf09c278a5927ba2ddcffb6b01e64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(unsigned char, int=BYTE)</argsstring>
+        <name>println</name>
+        <param>
+          <type>unsigned</type>
+          <declname>char</declname>
+          <defname>b</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="57" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="128" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a350bdfe3569acb05a2fdefb7c54e292d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(int, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>int</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="58" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="134" bodyend="138"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1af0aeb581689c6e9c9f8331b342a91e20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(unsigned int, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>unsigned</type>
+          <declname>int</declname>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="59" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="140" bodyend="144"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a1999020b07369721caa16c52fdba4341" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(long, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>long</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="60" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="146" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aacf64fb9630526fb6c666f038a9dc4e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(unsigned long, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>base</defname>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="61" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="152" bodyend="156"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a4302b58946b9355b0491118227beed07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(double, int=2)</argsstring>
+        <name>println</name>
+        <param>
+          <type>double</type>
+          <defname>n</defname>
+        </param>
+        <param>
+          <type>int</type>
+          <defname>digits</defname>
+          <defval>2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="62" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="158" bodyend="162"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a525b37c566658ff8113a067f6e8d5bf1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(void)</argsstring>
+        <name>println</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="63" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.cpp" bodystart="104" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ad9393033793cfc17f3e37202ba244892" prot="public" static="no" const="no" explicit="no" inline="no" virt="pure-virtual">
+        <type>void</type>
+        <definition>virtual void Print::write</definition>
+        <argsstring>(uint8_t)=0</argsstring>
+        <name>write</name>
+        <reimplementedby refid="class_hardware_serial_bis_1acf30320646884cf482e3d65e72c51c0a">write</reimplementedby>
+        <reimplementedby refid="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c">write</reimplementedby>
+        <reimplementedby refid="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c">write</reimplementedby>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="40"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aa6d255e68e0527f189aa7c44cb28037f" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Print::write</definition>
+        <argsstring>(const char *str)</argsstring>
+        <name>write</name>
+        <param>
+          <type>const char *</type>
+          <declname>str</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="41"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a5caec00ce5c9d6572db659747a811406" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void Print::write</definition>
+        <argsstring>(const uint8_t *buffer, size_t size)</argsstring>
+        <name>write</name>
+        <param>
+          <type>const uint8_t *</type>
+          <declname>buffer</declname>
+        </param>
+        <param>
+          <type>size_t</type>
+          <declname>size</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="42"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a6c1f2f9a1988fe2d4ed593b3ac0185c7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(const String &amp;)</argsstring>
+        <name>print</name>
+        <param>
+          <type>const <ref refid="class_string" kindref="compound">String</ref> &amp;</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="44"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aa7b0a6dc63e3d27effd8459e3d443b83" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(const char[])</argsstring>
+        <name>print</name>
+        <param>
+          <type>const </type>
+          <declname>char</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="45"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ada24638921c2e86e13c5939c94cf67db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(char, int=BYTE)</argsstring>
+        <name>print</name>
+        <param>
+          <type>char</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="46"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1ad7778084a6fe96551d2ec9ce532c5164" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(unsigned char, int=BYTE)</argsstring>
+        <name>print</name>
+        <param>
+          <type>unsigned</type>
+          <declname>char</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="47"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a35a6196999c85e5afc5fd852d088e886" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(int, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="48"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a5f8df5d4f941b411ce9d660b48996bea" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(unsigned int, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>unsigned</type>
+          <declname>int</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="49"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1afab3f8d07a58a8d37fec32d7fcb67b56" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(long, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>long</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a4be58e920bdddcaf5496d0ba2ae4ea81" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(unsigned long, int=DEC)</argsstring>
+        <name>print</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aa5fe80d3a3e8d2dc64f346eb08dcb43f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::print</definition>
+        <argsstring>(double, int=2)</argsstring>
+        <name>print</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1abeb8bc6c2d103469679b88c1a966a21f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(const String &amp;s)</argsstring>
+        <name>println</name>
+        <param>
+          <type>const <ref refid="class_string" kindref="compound">String</ref> &amp;</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a09db74a8d51c6b2420c478267f958a51" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(const char[])</argsstring>
+        <name>println</name>
+        <param>
+          <type>const </type>
+          <declname>char</declname>
+          <array>[]</array>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a49bbefc9016ddda486edf3dddaaa07e9" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(char, int=BYTE)</argsstring>
+        <name>println</name>
+        <param>
+          <type>char</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a4eaaf09c278a5927ba2ddcffb6b01e64" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(unsigned char, int=BYTE)</argsstring>
+        <name>println</name>
+        <param>
+          <type>unsigned</type>
+          <declname>char</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>BYTE</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="57"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a350bdfe3569acb05a2fdefb7c54e292d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(int, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>int</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="58"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1af0aeb581689c6e9c9f8331b342a91e20" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(unsigned int, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>unsigned</type>
+          <declname>int</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="59"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a1999020b07369721caa16c52fdba4341" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(long, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>long</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="60"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1aacf64fb9630526fb6c666f038a9dc4e6" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(unsigned long, int=DEC)</argsstring>
+        <name>println</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>DEC</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="61"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a4302b58946b9355b0491118227beed07" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(double, int=2)</argsstring>
+        <name>println</name>
+        <param>
+          <type>double</type>
+        </param>
+        <param>
+          <type>int</type>
+          <defval>2</defval>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="62"/>
+      </memberdef>
+      <memberdef kind="function" id="class_print_1a525b37c566658ff8113a067f6e8d5bf1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Print::println</definition>
+        <argsstring>(void)</argsstring>
+        <name>println</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/Print.h" line="63"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="82">
+        <label>HardwareSerial</label>
+        <link refid="class_hardware_serial"/>
+        <childnode refid="81" relation="public-inheritance">
+        </childnode>
+        <childnode refid="81" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="83">
+        <label>HardwareSerialBis</label>
+        <link refid="class_hardware_serial_bis"/>
+        <childnode refid="81" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="80">
+        <label>Print</label>
+        <link refid="class_print"/>
+      </node>
+      <node id="81">
+        <label>Stream</label>
+        <link refid="class_stream"/>
+        <childnode refid="80" relation="public-inheritance">
+        </childnode>
+        <childnode refid="80" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/Print.h" bodystart="34" bodyend="64"/>
+    <listofallmembers>
+      <member refid="class_print_1a6c1f2f9a1988fe2d4ed593b3ac0185c7" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1aa7b0a6dc63e3d27effd8459e3d443b83" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1ada24638921c2e86e13c5939c94cf67db" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1ad7778084a6fe96551d2ec9ce532c5164" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a35a6196999c85e5afc5fd852d088e886" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a5f8df5d4f941b411ce9d660b48996bea" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1afab3f8d07a58a8d37fec32d7fcb67b56" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a4be58e920bdddcaf5496d0ba2ae4ea81" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1aa5fe80d3a3e8d2dc64f346eb08dcb43f" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a6c1f2f9a1988fe2d4ed593b3ac0185c7" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1aa7b0a6dc63e3d27effd8459e3d443b83" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1ada24638921c2e86e13c5939c94cf67db" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1ad7778084a6fe96551d2ec9ce532c5164" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a35a6196999c85e5afc5fd852d088e886" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a5f8df5d4f941b411ce9d660b48996bea" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1afab3f8d07a58a8d37fec32d7fcb67b56" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1a4be58e920bdddcaf5496d0ba2ae4ea81" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1aa5fe80d3a3e8d2dc64f346eb08dcb43f" prot="public" virt="non-virtual"><scope>Print</scope><name>print</name></member>
+      <member refid="class_print_1afd7abd9d94aa5210d2d0f97e614e4625" prot="private" virt="non-virtual"><scope>Print</scope><name>printFloat</name></member>
+      <member refid="class_print_1afd7abd9d94aa5210d2d0f97e614e4625" prot="private" virt="non-virtual"><scope>Print</scope><name>printFloat</name></member>
+      <member refid="class_print_1abeb8bc6c2d103469679b88c1a966a21f" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a09db74a8d51c6b2420c478267f958a51" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a49bbefc9016ddda486edf3dddaaa07e9" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a4eaaf09c278a5927ba2ddcffb6b01e64" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a350bdfe3569acb05a2fdefb7c54e292d" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1af0aeb581689c6e9c9f8331b342a91e20" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a1999020b07369721caa16c52fdba4341" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1aacf64fb9630526fb6c666f038a9dc4e6" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a4302b58946b9355b0491118227beed07" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a525b37c566658ff8113a067f6e8d5bf1" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1abeb8bc6c2d103469679b88c1a966a21f" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a09db74a8d51c6b2420c478267f958a51" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a49bbefc9016ddda486edf3dddaaa07e9" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a4eaaf09c278a5927ba2ddcffb6b01e64" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a350bdfe3569acb05a2fdefb7c54e292d" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1af0aeb581689c6e9c9f8331b342a91e20" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a1999020b07369721caa16c52fdba4341" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1aacf64fb9630526fb6c666f038a9dc4e6" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a4302b58946b9355b0491118227beed07" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1a525b37c566658ff8113a067f6e8d5bf1" prot="public" virt="non-virtual"><scope>Print</scope><name>println</name></member>
+      <member refid="class_print_1ae6dc349a48650e771a4443e93bfa9c65" prot="private" virt="non-virtual"><scope>Print</scope><name>printNumber</name></member>
+      <member refid="class_print_1ae6dc349a48650e771a4443e93bfa9c65" prot="private" virt="non-virtual"><scope>Print</scope><name>printNumber</name></member>
+      <member refid="class_print_1ad9393033793cfc17f3e37202ba244892" prot="public" virt="pure-virtual"><scope>Print</scope><name>write</name></member>
+      <member refid="class_print_1ae083258d224bae2e5d8a27a4f8338880" prot="public" virt="virtual"><scope>Print</scope><name>write</name></member>
+      <member refid="class_print_1a03094428e21f210e59cc1be63353225d" prot="public" virt="virtual"><scope>Print</scope><name>write</name></member>
+      <member refid="class_print_1ad9393033793cfc17f3e37202ba244892" prot="public" virt="pure-virtual"><scope>Print</scope><name>write</name></member>
+      <member refid="class_print_1aa6d255e68e0527f189aa7c44cb28037f" prot="public" virt="virtual"><scope>Print</scope><name>write</name></member>
+      <member refid="class_print_1a5caec00ce5c9d6572db659747a811406" prot="public" virt="virtual"><scope>Print</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,769 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="i2c_8c" kind="file">
+    <compoundname>i2c.c</compoundname>
+    <includes local="no">p30fxxxx.h</includes>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includes refid="i2c_8c" local="yes">i2c.h</includes>
+    <includes local="yes">math.h</includes>
+    <includes refid="config_8h" local="yes">config.h</includes>
+    <includes refid="asserv_orientation_8h" local="yes">asservOrientation.h</includes>
+    <includedby refid="i2c_8c" local="yes">asserv2010/i2c.c</includedby>
+    <incdepgraph>
+      <node id="1178">
+        <label>p30fxxxx.h</label>
+      </node>
+      <node id="1177">
+        <label>asserv2010/i2c.c</label>
+        <link refid="i2c.c"/>
+        <childnode refid="1178" relation="include">
+        </childnode>
+        <childnode refid="1179" relation="include">
+        </childnode>
+        <childnode refid="1177" relation="include">
+        </childnode>
+        <childnode refid="1180" relation="include">
+        </childnode>
+        <childnode refid="1181" relation="include">
+        </childnode>
+        <childnode refid="1183" relation="include">
+        </childnode>
+      </node>
+      <node id="1182">
+        <label>trajectory.h</label>
+        <link refid="trajectory_8h"/>
+        <childnode refid="1179" relation="include">
+        </childnode>
+      </node>
+      <node id="1180">
+        <label>math.h</label>
+      </node>
+      <node id="1179">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+      <node id="1181">
+        <label>config.h</label>
+        <link refid="config_8h"/>
+        <childnode refid="1179" relation="include">
+        </childnode>
+        <childnode refid="1182" relation="include">
+        </childnode>
+      </node>
+      <node id="1183">
+        <label>asservOrientation.h</label>
+        <link refid="asserv_orientation_8h"/>
+        <childnode refid="1182" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1184">
+        <label>asserv2010/i2c.c</label>
+        <link refid="i2c.c"/>
+        <childnode refid="1184" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="i2c_8c_1a280feb883e9d4a7edcc69c8bcb9f38f2" prot="public" static="no">
+        <name>ADDRESS</name>
+        <initializer>37</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="author"><para>code written by Sammy ZIDANE (c) 2007 All Rights Reserved - This file is confidential.</para></simplesect>
+Version : $Id$ </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="19" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="19" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" prot="public" static="no">
+        <name>INPUT_BUFFER_MAX</name>
+        <initializer>128</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="20" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8c_1a103d506139fb9eeef17bbcb090a2e208" prot="public" static="no">
+        <name>LOCK_SEND_BUFFER</name>
+        <initializer>99</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="21" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8c_1ae02c038555dfdad6150ffd658c61dc53" prot="public" static="no">
+        <name>SEND_MESSAGE_LENGTH</name>
+        <initializer>8</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="22" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8c_1adf0f6a6ec98f9e8512e4680a0526b6f9" prot="public" static="no">
+        <name>TRAME_STANDARD</name>
+        <initializer>10</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="243" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="243" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="i2c_8c_1ae570f320d2b8d5f007fcb8d87b1915e6" prot="public" static="no">
+        <name>TRAME_CONFIGURATION</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="244" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="244" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="i2c_8c_1ad602f5f74d2e70f560449e49b3a45a2d" prot="public" static="yes" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>volatile uInt8 gInputBufferIndex</definition>
+        <argsstring></argsstring>
+        <name>gInputBufferIndex</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="24" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 gIndexByteRead</definition>
+        <argsstring></argsstring>
+        <name>gIndexByteRead</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="25" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1a493c76ef7801a877ba2fd5bb92314a2f" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 gCommand</definition>
+        <argsstring></argsstring>
+        <name>gCommand</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1aab0bccb41a3a1a4b155510deb28d3225" prot="public" static="yes" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>volatile uInt8 gLastAddress</definition>
+        <argsstring></argsstring>
+        <name>gLastAddress</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>volatile uInt8 g_byteReceived[INPUT_BUFFER_MAX]</definition>
+        <argsstring>[INPUT_BUFFER_MAX]</argsstring>
+        <name>g_byteReceived</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="28" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="28" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>volatile uInt8 g_bufferSend[INPUT_BUFFER_MAX]</definition>
+        <argsstring>[INPUT_BUFFER_MAX]</argsstring>
+        <name>g_bufferSend</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="29" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>volatile uInt8 gDataAvailable</definition>
+        <argsstring></argsstring>
+        <name>gDataAvailable</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="30" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>volatile uInt8 sendBufferLock</definition>
+        <argsstring></argsstring>
+        <name>sendBufferLock</name>
+        <initializer> 1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="31" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1a9cbc04df9cd1654912f3f5e4d647e980" prot="public" static="no" mutable="no">
+        <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+        <definition>uInt16 TruePositionReceived</definition>
+        <argsstring></argsstring>
+        <name>TruePositionReceived</name>
+        <initializer> 0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="33" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="33" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="i2c_8c_1a63963570a86d969aa0df3e32151792ed" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float distanceTheorique</definition>
+        <argsstring></argsstring>
+        <name>distanceTheorique</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="34" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.c" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="i2c_8c_1a7072845a54cdfad3cac5829d2f66b616" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void oInitI2C</definition>
+        <argsstring>(void)</argsstring>
+        <name>oInitI2C</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="38" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="37" bodyend="54"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1a5ae93c640ed17451158a34e49c241ef0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void __attribute__</definition>
+        <argsstring>((__interrupt__, __no_auto_psv__))</argsstring>
+        <name>__attribute__</name>
+        <param>
+          <type>(__interrupt__, __no_auto_psv__)</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="57" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="56" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1aec56d36cd87251be37fe2aa6fb554618" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void oWaitI2Cdata</definition>
+        <argsstring>(void)</argsstring>
+        <name>oWaitI2Cdata</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="169" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="168" bodyend="173"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1a3c914b8a170032fbe5b41aef0a40d986" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 oGetCommand</definition>
+        <argsstring>(void)</argsstring>
+        <name>oGetCommand</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="176" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="175" bodyend="178"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1ace43dce18db964a2604ac5a1478dc044" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref> *</type>
+        <definition>uInt8* oGetReceptionBuffer</definition>
+        <argsstring>(void)</argsstring>
+        <name>oGetReceptionBuffer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="181" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="180" bodyend="183"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1a20b83103d4f76fa141d2e75f909527a0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+        <definition>uInt16 getBufferSize</definition>
+        <argsstring>(void)</argsstring>
+        <name>getBufferSize</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="185" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="184" bodyend="187"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1a5b5b757da1baef7d5c0501d0d3f2c500" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void fillSendBuffer</definition>
+        <argsstring>(void)</argsstring>
+        <name>fillSendBuffer</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="190" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="189" bodyend="240"/>
+      </memberdef>
+      <memberdef kind="function" id="i2c_8c_1a091acab55a056b7f764185d309b67e11" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref></type>
+        <definition>uInt8 checkNewCommandI2C</definition>
+        <argsstring>(void)</argsstring>
+        <name>checkNewCommandI2C</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" line="246" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c" bodystart="245" bodyend="361"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="9"><highlight class="comment">//Pre-Processor<sp/>Directives:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;p30fxxxx.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="i2c_8h" kindref="compound">i2c.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_orientation_8h" kindref="compound">asservOrientation.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="18"><highlight class="normal"></highlight></codeline>
+<codeline lineno="19" refid="i2c_8c_1a280feb883e9d4a7edcc69c8bcb9f38f2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>ADDRESS<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>37</highlight></codeline>
+<codeline lineno="20" refid="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>INPUT_BUFFER_MAX<sp/><sp/><sp/><sp/><sp/><sp/>128</highlight></codeline>
+<codeline lineno="21" refid="i2c_8c_1a103d506139fb9eeef17bbcb090a2e208" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>LOCK_SEND_BUFFER<sp/><sp/><sp/><sp/><sp/><sp/>99</highlight></codeline>
+<codeline lineno="22" refid="i2c_8c_1ae02c038555dfdad6150ffd658c61dc53" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>SEND_MESSAGE_LENGTH<sp/>8</highlight></codeline>
+<codeline lineno="23"><highlight class="preprocessor"></highlight><highlight class="comment">//Functions<sp/>and<sp/>Variables<sp/>with<sp/>Global<sp/>Scope:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/>gInputBufferIndex<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="25" refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref>=0;</highlight></codeline>
+<codeline lineno="26" refid="i2c_8c_1a493c76ef7801a877ba2fd5bb92314a2f" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a493c76ef7801a877ba2fd5bb92314a2f" kindref="member">gCommand</ref>=0;</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/>gLastAddress<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="28" refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[<ref refid="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" kindref="member">INPUT_BUFFER_MAX</ref>];</highlight></codeline>
+<codeline lineno="29" refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[<ref refid="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" kindref="member">INPUT_BUFFER_MAX</ref>];</highlight></codeline>
+<codeline lineno="30" refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref>;</highlight></codeline>
+<codeline lineno="31" refid="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">volatile</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" kindref="member">sendBufferLock</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33" refid="_main_8c_1a9cbc04df9cd1654912f3f5e4d647e980" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/><ref refid="i2c_8c_1a9cbc04df9cd1654912f3f5e4d647e980" kindref="member">TruePositionReceived</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_8c_1a63963570a86d969aa0df3e32151792ed" kindref="member">distanceTheorique</ref>;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37" refid="i2c_8h_1a7072845a54cdfad3cac5829d2f66b616" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a7072845a54cdfad3cac5829d2f66b616" kindref="member">oInitI2C</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="38"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/><sp/><sp/><sp/><sp/>LATEbits.LATE2<sp/>=<sp/>1;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.A10M<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>7<sp/>bit<sp/>address</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.IPMIEN<sp/>=<sp/>0;<sp/><sp/></highlight><highlight class="comment">//<sp/>IPMI<sp/>mode<sp/>not<sp/>enabled<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.GCEN<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Broadast</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.DISSLW<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Slew<sp/>rate<sp/>control<sp/>disabled</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.STREN<sp/>=<sp/>0;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>software<sp/>or<sp/>receive<sp/>clock<sp/>stretching</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CADD<sp/>=<sp/><ref refid="i2c_8c_1a280feb883e9d4a7edcc69c8bcb9f38f2" kindref="member">ADDRESS</ref>;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Address</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.SCLREL<sp/>=<sp/>1;<sp/><sp/></highlight><highlight class="comment">//<sp/>Release<sp/>SCL</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I2CCONbits.I2CEN<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>I2C<sp/>module</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>IPC3bits.SI2CIP<sp/>=<sp/>6;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/><ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/><ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IFS0bits.SI2CIF<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IEC0bits.SI2CIE<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56" refid="i2c_8c_1a5ae93c640ed17451158a34e49c241ef0" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((__interrupt__,<sp/>__no_auto_psv__))_SI2CInterrupt(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="57"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="58"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/>gNbByteToReceiv=0;</highlight></codeline>
+<codeline lineno="59"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><sp/><sp/><sp/><sp/>crc=0;</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Master<sp/>read,<sp/>last<sp/>byte<sp/>was<sp/>an<sp/>adress</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((I2CSTATbits.S)<sp/>&amp;&amp;<sp/>(I2CSTATbits.R_W)<sp/>&amp;&amp;<sp/>(!I2CSTATbits.D_A)</highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>(I2CSTATbits.RBF))</highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Ask<sp/>for<sp/>a<sp/>reply<sp/>!</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>the<sp/>addess</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>gLastAddress<sp/>=<sp/>I2CRCV;</highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Send<sp/>the<sp/>1st<sp/>byte</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/>I2CTRN<sp/>=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[<ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref>++];</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref><sp/>%=<sp/><ref refid="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" kindref="member">INPUT_BUFFER_MAX</ref>;</highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Master<sp/>read,<sp/>last<sp/>byte<sp/>was<sp/>data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((I2CSTATbits.S)<sp/>&amp;&amp;<sp/>(I2CSTATbits.R_W)<sp/>&amp;&amp;<sp/>(!I2CSTATbits.D_A)</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>(!I2CSTATbits.RBF))</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>I2CTRN<sp/>=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[<ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref>++];</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref><sp/>%=<sp/><ref refid="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" kindref="member">INPUT_BUFFER_MAX</ref>;</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1ac8fa1ff53a08926acc800a5b94761f87" kindref="member">gIndexByteRead</ref><sp/>&gt;=<sp/><ref refid="i2c_8c_1ae02c038555dfdad6150ffd658c61dc53" kindref="member">SEND_MESSAGE_LENGTH</ref>)</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>all<sp/>data<sp/>have<sp/>been<sp/>send<sp/>release<sp/>the<sp/>send<sp/>buffer<sp/>lock</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" kindref="member">sendBufferLock</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Master<sp/>write,<sp/>last<sp/>byte<sp/>was<sp/>an<sp/>address</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((I2CSTATbits.S)<sp/>&amp;&amp;<sp/>(!I2CSTATbits.R_W)<sp/>&amp;&amp;<sp/>(!I2CSTATbits.D_A)<sp/>&amp;&amp;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>(I2CSTATbits.RBF))</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Read<sp/>the<sp/>addess,<sp/>but<sp/>do<sp/>nothing</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gLastAddress<sp/>=<sp/>I2CRCV;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gInputBufferIndex<sp/>=<sp/>128;</highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>crc=0;</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Master<sp/>write,<sp/>last<sp/>byte<sp/>was<sp/>data</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((I2CSTATbits.S)<sp/>&amp;&amp;<sp/>(!I2CSTATbits.R_W)<sp/>&amp;&amp;<sp/>(I2CSTATbits.D_A)</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>(I2CSTATbits.RBF))</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>check<sp/>if<sp/>the<sp/>byte<sp/>received<sp/>is<sp/>the<sp/>first<sp/>=<sp/>message<sp/>length</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(gInputBufferIndex<sp/>==<sp/>128)</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gNbByteToReceiv<sp/>=<sp/>I2CRCV;</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(gNbByteToReceiv<sp/>==<sp/><ref refid="i2c_8c_1a103d506139fb9eeef17bbcb090a2e208" kindref="member">LOCK_SEND_BUFFER</ref>)</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" kindref="member">sendBufferLock</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" kindref="member">sendBufferLock</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/>gNbByteToReceiv;</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gInputBufferIndex<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>receivedData;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>receiv<sp/>buffer<sp/>must<sp/>be<sp/>flush<sp/>even<sp/>if<sp/>there<sp/>is<sp/>an<sp/>error</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>receivedData<sp/>=<sp/>I2CRCV;</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(gInputBufferIndex<sp/>&lt;<sp/><ref refid="i2c_8c_1aeafcb12030150002e24d53600f7fbf8e" kindref="member">INPUT_BUFFER_MAX</ref>)</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[gInputBufferIndex]<sp/>=<sp/>receivedData<sp/>;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/>receivedData;</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gInputBufferIndex++;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>gNbByteToReceiv--;</highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>whole<sp/>message<sp/>received,<sp/>check<sp/>if<sp/>it<sp/>is<sp/>correct<sp/>and<sp/>signal<sp/>it</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((<sp/>gNbByteToReceiv<sp/>==<sp/>0)<sp/>&amp;&amp;<sp/>(<sp/><sp/>crc<sp/>==<sp/>0))</highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref>=1;</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a493c76ef7801a877ba2fd5bb92314a2f" kindref="member">gCommand</ref><sp/>=<sp/>gInputBufferIndex;</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Master<sp/>NACK</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>((I2CSTATbits.S)<sp/>&amp;&amp;<sp/>(!I2CSTATbits.R_W)<sp/>&amp;&amp;<sp/>(I2CSTATbits.D_A)</highlight></codeline>
+<codeline lineno="145"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>&amp;&amp;<sp/>(!I2CSTATbits.RBF))</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="147"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Do<sp/>nothing<sp/>...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="148"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="149"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="150"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="151"><highlight class="normal"><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="152"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="153"><highlight class="normal"></highlight></codeline>
+<codeline lineno="154"><highlight class="normal"><sp/><sp/>I2CCONbits.SCLREL<sp/>=<sp/>1;<sp/></highlight><highlight class="comment">//<sp/>Release<sp/>SCL<sp/>in<sp/>any<sp/>cases</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="155"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>for<sp/>overflow</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>I2CSTATbits.IWCOL)</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/>I2CSTATbits.IWCOL=0;</highlight></codeline>
+<codeline lineno="159"><highlight class="normal"></highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Check<sp/>for<sp/>write<sp/>collision</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(<sp/>I2CSTATbits.I2COV)</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/>I2CSTATbits.I2COV<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>Clear<sp/>the<sp/>interrupt</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/>IFS0bits.SI2CIF<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="167"><highlight class="normal"></highlight></codeline>
+<codeline lineno="168" refid="i2c_8h_1aec56d36cd87251be37fe2aa6fb554618" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1aec56d36cd87251be37fe2aa6fb554618" kindref="member">oWaitI2Cdata</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="169"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="170"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal">(!<ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref>){</highlight></codeline>
+<codeline lineno="171"><highlight class="normal"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="172"><highlight class="normal"><sp/><sp/><ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="173"><highlight class="normal">}<sp/><sp/></highlight></codeline>
+<codeline lineno="174"><highlight class="normal"></highlight></codeline>
+<codeline lineno="175" refid="i2c_8h_1a3c914b8a170032fbe5b41aef0a40d986" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="i2c_8c_1a3c914b8a170032fbe5b41aef0a40d986" kindref="member">oGetCommand</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="176"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[0];</highlight></codeline>
+<codeline lineno="178"><highlight class="normal">}<sp/><sp/></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"></highlight></codeline>
+<codeline lineno="180" refid="i2c_8h_1ace43dce18db964a2604ac5a1478dc044" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>*<sp/><ref refid="i2c_8c_1ace43dce18db964a2604ac5a1478dc044" kindref="member">oGetReceptionBuffer</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="181"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="182"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>;</highlight></codeline>
+<codeline lineno="183"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="184" refid="i2c_8h_1a20b83103d4f76fa141d2e75f909527a0" refkind="member"><highlight class="normal"><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/><ref refid="i2c_8c_1a20b83103d4f76fa141d2e75f909527a0" kindref="member">getBufferSize</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="185"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="186"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>gInputBufferIndex;</highlight></codeline>
+<codeline lineno="187"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="188"><highlight class="normal"></highlight></codeline>
+<codeline lineno="189" refid="i2c_8h_1a5b5b757da1baef7d5c0501d0d3f2c500" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1a5b5b757da1baef7d5c0501d0d3f2c500" kindref="member">fillSendBuffer</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="190"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref><sp/>orientation_sInt16;</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref><sp/>temp;</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>status<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>crc<sp/>=<sp/>10;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="motor_control_8cpp_1a2a94042027892d5d3ad23bac2d7d8207" kindref="member">index</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="197"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>check<sp/>if<sp/>no<sp/>new<sp/>point<sp/>are<sp/>available</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>==<sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>)<sp/>&amp;&amp;<sp/>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>==<sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>)<sp/>)</highlight></codeline>
+<codeline lineno="200"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="201"><highlight class="normal"><sp/><sp/><sp/><sp/>status<sp/>|=<sp/>0x80;</highlight></codeline>
+<codeline lineno="202"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="203"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>Robot-&gt;<ref refid="structrobot_1ac6fa501ce3a7ed6eb10a3ebf5283aed4" kindref="member">speedConsigne</ref><sp/>==<sp/>0)<sp/></highlight></codeline>
+<codeline lineno="204"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="205"><highlight class="normal"><sp/><sp/><sp/><sp/>status<sp/>|=<sp/>0x40;<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="206"><highlight class="normal"><sp/><sp/>}<sp/></highlight></codeline>
+<codeline lineno="207"><highlight class="normal"></highlight></codeline>
+<codeline lineno="208"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>==<sp/><ref refid="asserv_orientation_8h_1ad31500c1fa379bc91cd681af4d766da8" kindref="member">NO_PWM</ref><sp/>)</highlight></codeline>
+<codeline lineno="209"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="210"><highlight class="normal"><sp/><sp/><sp/><sp/>status<sp/>|=<sp/>0x20;</highlight></codeline>
+<codeline lineno="211"><highlight class="normal"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="212"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="213"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1a77b464121aedde699fa9dc81995f87d2" kindref="member">sendBufferLock</ref><sp/>)</highlight></codeline>
+<codeline lineno="214"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="215"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>this<sp/>operation<sp/>is<sp/>locked<sp/>after<sp/>a<sp/>write<sp/>command<sp/>99</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="216"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>and<sp/>release<sp/>with<sp/>the<sp/>begining<sp/>of<sp/>a<sp/>write<sp/>command<sp/>or<sp/>after<sp/>8<sp/>bytes<sp/>transmission</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="217"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>this<sp/>whole<sp/>operation<sp/>takes<sp/>14<sp/>us</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="218"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>a<sp/>byte<sp/>(the<sp/>address<sp/>with<sp/>read<sp/>flag<sp/>)is<sp/>transfered<sp/>in<sp/>25<sp/>us<sp/>on<sp/>i2c<sp/>just<sp/>after<sp/>the<sp/>99<sp/>write<sp/>command</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="219"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>in<sp/>the<sp/>worst<sp/>case<sp/>11<sp/>us<sp/>is<sp/>free<sp/>if<sp/>no<sp/>other<sp/>interruption<sp/>like<sp/>input<sp/>capture<sp/>or<sp/>timer<sp/>interruption<sp/>happen</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="220"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>this<sp/>should<sp/>works<sp/>:p</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="221"><highlight class="normal"><sp/><sp/><sp/><sp/>temp<sp/>=<sp/>(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="config_8c_1ab1f5d29f4f72309b0f218578650bb330" kindref="member">toMillimeter</ref>(Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>);</highlight></codeline>
+<codeline lineno="222"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=temp<sp/>&gt;&gt;<sp/>8<sp/>;</highlight></codeline>
+<codeline lineno="223"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=temp;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="226"><highlight class="normal"><sp/><sp/><sp/><sp/>temp<sp/>=<sp/>(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="config_8c_1ab1f5d29f4f72309b0f218578650bb330" kindref="member">toMillimeter</ref>(Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>);</highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=temp<sp/>&gt;&gt;<sp/>8;</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=<sp/>temp;</highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/>orientation_sInt16<sp/>=<sp/>(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)(Robot-&gt;<ref refid="structrobot_1abc0768ef4ba84a1e5701fd071ffa9d6f" kindref="member">orientation</ref><sp/>*<sp/>180.0<sp/>/<ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>);</highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=(orientation_sInt16<sp/>&gt;&gt;<sp/>8)<sp/>;</highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=orientation_sInt16<sp/>;</highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=status;</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/>crc<sp/>^=<sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index++];</highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1ac289477fd1da6cf4923291542e2e101a" kindref="member">g_bufferSend</ref>[index]=crc;</highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="240"><highlight class="normal">}<sp/><sp/></highlight></codeline>
+<codeline lineno="241"><highlight class="normal"></highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243" refid="i2c_8c_1adf0f6a6ec98f9e8512e4680a0526b6f9" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>TRAME_STANDARD<sp/>10</highlight></codeline>
+<codeline lineno="244" refid="i2c_8c_1ae570f320d2b8d5f007fcb8d87b1915e6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TRAME_CONFIGURATION<sp/>7</highlight></codeline>
+<codeline lineno="245" refid="i2c_8h_1a091acab55a056b7f764185d309b67e11" refkind="member"><highlight class="preprocessor"></highlight><highlight class="normal"><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/><ref refid="i2c_8c_1a091acab55a056b7f764185d309b67e11" kindref="member">checkNewCommandI2C</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="246"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structpoint" kindref="compound">point</ref><sp/>target;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structpoint" kindref="compound">point</ref><sp/>nextTarget;</highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structpoint" kindref="compound">point</ref><sp/>targetLast;</highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="structpoint" kindref="compound">point</ref><sp/>nextTargetLast;</highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>speedMaxLast=0;</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>speedMax;</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/></highlight><highlight class="keyword">static</highlight><highlight class="normal"><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>initLast=0;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!initLast)</highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/>targetLast.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>=0;</highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/>targetLast.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>=0;</highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/>nextTargetLast.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>=0;</highlight></codeline>
+<codeline lineno="261"><highlight class="normal"><sp/><sp/><sp/><sp/>nextTargetLast.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>=0;</highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/>initLast<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"></highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref>)</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="269"><highlight class="normal"><sp/><sp/><sp/><sp/>LATBbits.LATB1<sp/>=<sp/>!LATBbits.LATB1;</highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a90518a0713800f7eed51f39f5c0f64f6" kindref="member">gDataAvailable</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(<ref refid="i2c_8c_1a493c76ef7801a877ba2fd5bb92314a2f" kindref="member">gCommand</ref>)<sp/></highlight></codeline>
+<codeline lineno="272"><highlight class="normal"><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1adf0f6a6ec98f9e8512e4680a0526b6f9" kindref="member">TRAME_STANDARD</ref><sp/>:</highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="_a_l_types_8h_1aa4e0f27a9aca905e340c06d2dcae843c" kindref="member">uInt8</ref><sp/>newTrame=0;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//READ<sp/>COMMAND</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>target.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[0]&lt;&lt;(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8)<sp/>+<sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[1]));</highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(target.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>!=<sp/>targetLast.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>)<sp/>newTrame<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>target.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[2]&lt;&lt;(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8)<sp/>+<sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[3]));</highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(target.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>!=<sp/>targetLast.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>)<sp/>newTrame<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="281"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nextTarget.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[4]&lt;&lt;(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8)<sp/>+<sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[5]));</highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nextTarget.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>!=<sp/>nextTargetLast.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>)<sp/>newTrame<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nextTarget.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[6]&lt;&lt;(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8)<sp/>+<sp/><ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[7]));</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(nextTarget.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>!=<sp/>nextTargetLast.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>)<sp/>newTrame<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>speedMax<sp/>=<sp/>(float)((<ref refid="_a_l_types_8h_1a6c122052434f8d43d1478998d8aa07ff" kindref="member">sInt8</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[8]);</highlight></codeline>
+<codeline lineno="286"><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//if<sp/>(speedMax<sp/>!=<sp/>speedMaxLast)<sp/>newTrame<sp/>=<sp/>1;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>UPDATE<sp/>LAST<sp/>COMMAND</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>targetLast.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/>target.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="291"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>targetLast.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/>target.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="292"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nextTargetLast.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/>nextTarget.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nextTargetLast.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/>nextTarget.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="294"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>speedMaxLast<sp/>=<sp/>speedMax;</highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight></codeline>
+<codeline lineno="296"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>UPDATE<sp/>ROBOT<sp/>PARAMETER<sp/>IN<sp/>CASE<sp/>OF<sp/>NEWCOMMAND</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="297"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(newTrame)</highlight></codeline>
+<codeline lineno="298"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(<sp/>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>!=<sp/>target.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>)<sp/>||<sp/>(Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>!=<sp/>target.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>)<sp/>)</highlight></codeline>
+<codeline lineno="300"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="301"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/>target.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/>target.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/>nextTarget.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="304"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/>nextTarget.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="305"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref><sp/>=<sp/>speedMax;</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae793c7709db3862629798d9845ec15d8" kindref="member">speedRotMax</ref><sp/>=<sp/>(fabs(Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref>)<sp/>*<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)/(Robot-&gt;<ref refid="structrobot_1a1a032a501f457b2b537b08ccc5e3af30" kindref="member">entraxe</ref>);</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1ada185962d822ceab4476f61a02d446ed" kindref="member">NEW_COMMAND_DIFFERENT</ref>;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="310"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="311"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/>target.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/>target.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/>nextTarget.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>;</highlight></codeline>
+<codeline lineno="314"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/>nextTarget.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>;</highlight></codeline>
+<codeline lineno="315"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref><sp/>=<sp/>speedMax;</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae793c7709db3862629798d9845ec15d8" kindref="member">speedRotMax</ref><sp/>=<sp/>(fabs(Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref>)<sp/>*<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)/(Robot-&gt;<ref refid="structrobot_1a1a032a501f457b2b537b08ccc5e3af30" kindref="member">entraxe</ref>);</highlight></codeline>
+<codeline lineno="317"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a79530048e9f4dff619ca3c10fa9babd6" kindref="member">NEW_COMMAND_CONTINOUS</ref>;</highlight></codeline>
+<codeline lineno="318"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="319"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="321"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="322"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1ae027de2b9d8c454e3f73eeaa8dfe0d8e" kindref="member">OLD_COMMAND</ref>;</highlight></codeline>
+<codeline lineno="323"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="326"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="i2c_8c_1ae570f320d2b8d5f007fcb8d87b1915e6" kindref="member">TRAME_CONFIGURATION</ref><sp/>:</highlight></codeline>
+<codeline lineno="327"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>newOrientation;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>=<sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[0]&lt;&lt;(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8)<sp/>+<sp/>(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)<ref refid="i2c_8c_1a48f2c28f70928dbb7e6137f650921ceb" kindref="member">g_byteReceived</ref>[1]));</highlight></codeline>
+<codeline lineno="330"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>=<sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>((</highlight><highlight class="keywordtype">float</highlight><highlight class="normal">)(((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)g_byteReceived[2]&lt;&lt;(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8)<sp/>+<sp/>(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)g_byteReceived[3]));</highlight></codeline>
+<codeline lineno="331"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref><sp/>=<sp/>Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>;</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref><sp/>=<sp/>Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>;</highlight></codeline>
+<codeline lineno="333"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>targetLast<sp/>=<sp/>Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>;</highlight></codeline>
+<codeline lineno="334"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nextTargetLast<sp/>=<sp/>Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>;</highlight></codeline>
+<codeline lineno="335"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>speedMaxLast<sp/>=<sp/>Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref>;</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newOrientation<sp/>=<sp/>((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)g_byteReceived[4]&lt;&lt;((<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)8))<sp/>+<sp/>(<ref refid="_a_l_types_8h_1ae9014d6aa3241454fd2548b913ce3f5f" kindref="member">sInt16</ref>)g_byteReceived[5];</highlight></codeline>
+<codeline lineno="337"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>newOrientation<sp/>*=<sp/>-<ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>/180;</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(newOrientation<sp/>&gt;<sp/><sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)<sp/>newOrientation<sp/>-=<ref refid="_a_l_types_8h_1a2a95859d7c6924f59afef24c2f3c20c9" kindref="member">PIx2</ref>;</highlight></codeline>
+<codeline lineno="339"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">while</highlight><highlight class="normal"><sp/>(newOrientation<sp/>&lt;<sp/>-<ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)<sp/>newOrientation<sp/>+=<ref refid="_a_l_types_8h_1a2a95859d7c6924f59afef24c2f3c20c9" kindref="member">PIx2</ref>;</highlight></codeline>
+<codeline lineno="340"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>Robot-&gt;<ref refid="structrobot_1a787011f82ee0b8d1c269f97d890410e4" kindref="member">orientation_initiale</ref><sp/>=<sp/>newOrientation<sp/>-<sp/>(<sp/>Robot-&gt;<ref refid="structrobot_1abc0768ef4ba84a1e5701fd071ffa9d6f" kindref="member">orientation</ref><sp/>-<sp/>Robot-&gt;<ref refid="structrobot_1a787011f82ee0b8d1c269f97d890410e4" kindref="member">orientation_initiale</ref><sp/>)<sp/>;</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IEC0bits.IC1IE<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>interrupts<sp/>on<sp/>IC1</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="342"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IEC0bits.IC2IE<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>interrupts<sp/>on<sp/>IC2</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="343"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IEC1bits.IC7IE<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>interrupts<sp/>on<sp/>IC7</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>IEC1bits.IC8IE<sp/>=<sp/>1;<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>Enable<sp/>interrupts<sp/>on<sp/>IC8</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="i2c_8c_1a9cbc04df9cd1654912f3f5e4d647e980" kindref="member">TruePositionReceived</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="347"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a1fccca1b6dc1167906cdc3a948bbc6de" kindref="member">NO_COMMAND</ref>;</highlight></codeline>
+<codeline lineno="348"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="349"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="350"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal"><sp/>:</highlight></codeline>
+<codeline lineno="351"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="352"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a924846e4eecc5f7de834b151b8a156a6" kindref="member">WRONG_COMMAND</ref>;</highlight></codeline>
+<codeline lineno="353"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="354"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="355"><highlight class="normal"><sp/><sp/><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="356"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="357"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="358"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="359"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/><ref refid="i2c_8h_1a1fccca1b6dc1167906cdc3a948bbc6de" kindref="member">NO_COMMAND</ref>;</highlight></codeline>
+<codeline lineno="360"><highlight class="normal"><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="361"><highlight class="normal">}<sp/><sp/></highlight></codeline>
+<codeline lineno="362"><highlight class="normal"></highlight></codeline>
+<codeline lineno="363"><highlight class="normal"><sp/></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/i2c.c"/>
+  </compounddef>
+</doxygen>

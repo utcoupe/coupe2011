@@ -1,0 +1,1036 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="com_2carte_2build_2core_2wiring_8h" kind="file">
+    <compoundname>wiring.h</compoundname>
+    <includes local="no">avr/io.h</includes>
+    <includes local="no">stdlib.h</includes>
+    <includes refid="motor_control_2build_2core_2binary_8h" local="yes">binary.h</includes>
+    <incdepgraph>
+      <node id="1595">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1593">
+        <label>com/carte/build/core/wiring.h</label>
+        <link refid="com/carte/build/core/wiring.h"/>
+        <childnode refid="1594" relation="include">
+        </childnode>
+        <childnode refid="1595" relation="include">
+        </childnode>
+        <childnode refid="1596" relation="include">
+        </childnode>
+      </node>
+      <node id="1594">
+        <label>avr/io.h</label>
+      </node>
+      <node id="1596">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a5bb885982ff66a2e0a0a45a8ee9c35e2" prot="public" static="no">
+        <name>HIGH</name>
+        <initializer>0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" prot="public" static="no">
+        <name>LOW</name>
+        <initializer>0x0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a1bb283bd7893b9855e2f23013891fc82" prot="public" static="no">
+        <name>INPUT</name>
+        <initializer>0x0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a61a3c9a18380aafb6e430e79bf596557" prot="public" static="no">
+        <name>OUTPUT</name>
+        <initializer>0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="40" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a41f9c5fb8b08eb5dc3edce4dcb37fee7" prot="public" static="no">
+        <name>true</name>
+        <initializer>0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="42" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a65e9886d74aaee76545e83dd09011727" prot="public" static="no">
+        <name>false</name>
+        <initializer>0x0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="43" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a598a3330b3c21701223ee0ca14316eca" prot="public" static="no">
+        <name>PI</name>
+        <initializer>3.1415926535897932384626433832795</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="45" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="45" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ae3ec3219e4eee3b0992bfd59c2e2bc42" prot="public" static="no">
+        <name>HALF_PI</name>
+        <initializer>1.5707963267948966192313216916398</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="46" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="46" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a3b947f4b635461030ff2d87833e5049e" prot="public" static="no">
+        <name>TWO_PI</name>
+        <initializer>6.283185307179586476925286766559</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="47" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="47" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a212460e743fecb084d717bb2180c5a56" prot="public" static="no">
+        <name>DEG_TO_RAD</name>
+        <initializer>0.017453292519943295769236907684886</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="48" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="48" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a89e47af0449640d4f15191aba5ca24c6" prot="public" static="no">
+        <name>RAD_TO_DEG</name>
+        <initializer>57.295779513082320876798154814105</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="49" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="49" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1aae3f0b4211ba45d265973d40ccbb5fd1" prot="public" static="no">
+        <name>SERIAL</name>
+        <initializer>0x0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="51" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ab4bf926a45354a2f328f1a7b94ebd3c5" prot="public" static="no">
+        <name>DISPLAY</name>
+        <initializer>0x1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="52" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="52" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a5811613d98580676f67f0dde8125433e" prot="public" static="no">
+        <name>LSBFIRST</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="54" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a1c7ef42eff02618bde70868af4944d81" prot="public" static="no">
+        <name>MSBFIRST</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="55" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1aa39fdb6674592214dc56eacc0808eec4" prot="public" static="no">
+        <name>CHANGE</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="57" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="57" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ac00eb6fc2047dc399280f31b0c5f4472" prot="public" static="no">
+        <name>FALLING</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="58" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="58" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1aeea2b49478f3b13faedba764985c6e96" prot="public" static="no">
+        <name>RISING</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="59" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="59" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a02c5e2eafaed44878fd8e6c54c8dde4d" prot="public" static="no">
+        <name>INTERNAL</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="65" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="65" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a3da44afeba217135a680a7477b5e3ce3" prot="public" static="no">
+        <name>DEFAULT</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="67" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="67" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1af3fe37c1cda80aa7202b5a3bb7557dc9" prot="public" static="no">
+        <name>EXTERNAL</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="68" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="68" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ac6afabdc09a49a433ee19d8a9486056d" prot="public" static="no">
+        <name>min</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <initializer>((a)&lt;(b)?(a):(b))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="75" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="75" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1affe776513b24d84b39af8ab0930fef7f" prot="public" static="no">
+        <name>max</name>
+        <param><defname>a</defname></param>
+        <param><defname>b</defname></param>
+        <initializer>((a)&gt;(b)?(a):(b))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="76" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="76" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" prot="public" static="no">
+        <name>abs</name>
+        <param><defname>x</defname></param>
+        <initializer>((x)&gt;0?(x):-(x))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="77" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="77" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a7df4a1319e5665c9040aa1838eef987c" prot="public" static="no">
+        <name>constrain</name>
+        <param><defname>amt</defname></param>
+        <param><defname>low</defname></param>
+        <param><defname>high</defname></param>
+        <initializer>((amt)&lt;(low)?(low):((amt)&gt;(high)?(high):(amt)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="78" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="78" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a6ea10f4260b54a61665ead26cb995ba3" prot="public" static="no">
+        <name>round</name>
+        <param><defname>x</defname></param>
+        <initializer>((x)&gt;=0?(long)((x)+0.5):(long)((x)-0.5))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="79" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="79" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a7571dba2995b9cb57259345fe49d2f97" prot="public" static="no">
+        <name>radians</name>
+        <param><defname>deg</defname></param>
+        <initializer>((deg)*DEG_TO_RAD)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="80" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="80" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1afe93c2c14da376a1621194c15c1de496" prot="public" static="no">
+        <name>degrees</name>
+        <param><defname>rad</defname></param>
+        <initializer>((rad)*RAD_TO_DEG)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="81" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ae7616788b30810a219d9cdee95904ba4" prot="public" static="no">
+        <name>sq</name>
+        <param><defname>x</defname></param>
+        <initializer>((x)*(x))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="82" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="82" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1aeab54da5ac84f3441a91cb982b2276bc" prot="public" static="no">
+        <name>interrupts</name>
+        <param></param>
+        <initializer>sei()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="84" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="84" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a8dfd0b70aa3eb3c592d6de11711fce91" prot="public" static="no">
+        <name>noInterrupts</name>
+        <param></param>
+        <initializer>cli()</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="85" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="85" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1ae6741cdb6d1d3f17299b9874ddc2c12e" prot="public" static="no">
+        <name>clockCyclesPerMicrosecond</name>
+        <param></param>
+        <initializer>( F_CPU / 1000000L )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="87" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="87" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a262d28355fa4b64b12743b5e93f7516b" prot="public" static="no">
+        <name>clockCyclesToMicroseconds</name>
+        <param><defname>a</defname></param>
+        <initializer>( ((a) * 1000L) / (F_CPU / 1000L) )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="88" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="88" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1aa4a5bbc71d71ab25856c1366b6ca15bb" prot="public" static="no">
+        <name>microsecondsToClockCycles</name>
+        <param><defname>a</defname></param>
+        <initializer>( ((a) * (F_CPU / 1000L)) / 1000L )</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="89" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="89" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a57600234f6e26049357fbecfbdca9537" prot="public" static="no">
+        <name>lowByte</name>
+        <param><defname>w</defname></param>
+        <initializer>((uint8_t) ((w) &amp; 0xff))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="91" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="91" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a32fff07c58e569ce66ad409fe85c73bb" prot="public" static="no">
+        <name>highByte</name>
+        <param><defname>w</defname></param>
+        <initializer>((uint8_t) ((w) &gt;&gt; 8))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="92" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="92" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1aff20d8c0a05ad3043afa2e4ad9ebe768" prot="public" static="no">
+        <name>bitRead</name>
+        <param><defname>value</defname></param>
+        <param><defname>bit</defname></param>
+        <initializer>(((value) &gt;&gt; (bit)) &amp; 0x01)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="94" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="94" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a6a8195c0e930f86c6af03ba6af8b41dd" prot="public" static="no">
+        <name>bitSet</name>
+        <param><defname>value</defname></param>
+        <param><defname>bit</defname></param>
+        <initializer>((value) |= (1UL &lt;&lt; (bit)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="95" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="95" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1abbe843c0521806a4ab2e7cffe44769e2" prot="public" static="no">
+        <name>bitClear</name>
+        <param><defname>value</defname></param>
+        <param><defname>bit</defname></param>
+        <initializer>((value) &amp;= ~(1UL &lt;&lt; (bit)))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="96" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="96" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1a42c17f59f3f9a3112d01246760067a8e" prot="public" static="no">
+        <name>bitWrite</name>
+        <param><defname>value</defname></param>
+        <param><defname>bit</defname></param>
+        <param><defname>bitvalue</defname></param>
+        <initializer>(bitvalue ? bitSet(value, bit) : bitClear(value, bit))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="97" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="97" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="com_2carte_2build_2core_2wiring_8h_1af419eea95c24741f969fbe9eb534404e" prot="public" static="no">
+        <name>bit</name>
+        <param><defname>b</defname></param>
+        <initializer>(1UL &lt;&lt; (b))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="102" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="102" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="typedef">
+      <memberdef kind="typedef" id="com_2carte_2build_2core_2wiring_8h_1abad51e07ab6d26bec9f1f786c8d65bcd" prot="public" static="no">
+        <type>unsigned int</type>
+        <definition>typedef unsigned int word</definition>
+        <argsstring></argsstring>
+        <name>word</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="100" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="100" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="com_2carte_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" prot="public" static="no">
+        <type>uint8_t</type>
+        <definition>typedef uint8_t boolean</definition>
+        <argsstring></argsstring>
+        <name>boolean</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="104" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="104" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="typedef" id="com_2carte_2build_2core_2wiring_8h_1ab8ef12fab634c171394422d0ee8baf94" prot="public" static="no">
+        <type>uint8_t</type>
+        <definition>typedef uint8_t byte</definition>
+        <argsstring></argsstring>
+        <name>byte</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="105" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" bodystart="105" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a2858154e2009b0e6e616f313177762bc" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void init</definition>
+        <argsstring>(void)</argsstring>
+        <name>init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="107" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.c" bodystart="167" bodyend="289"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1aedf28437b0c388082e19f9f6e4f47cf0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void pinMode</definition>
+        <argsstring>(uint8_t, uint8_t)</argsstring>
+        <name>pinMode</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="109" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_digital.c" bodystart="30" bodyend="52"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void digitalWrite</definition>
+        <argsstring>(uint8_t, uint8_t)</argsstring>
+        <name>digitalWrite</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="110" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_digital.c" bodystart="124" bodyend="150"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a47ebd125381c211f80468fb47f717a35" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int digitalRead</definition>
+        <argsstring>(uint8_t)</argsstring>
+        <name>digitalRead</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="111" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_digital.c" bodystart="152" bodyend="166"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a13782c0f73097cea014616d749e7c52d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int</type>
+        <definition>int analogRead</definition>
+        <argsstring>(uint8_t)</argsstring>
+        <name>analogRead</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="112" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_analog.c" bodystart="40" bodyend="87"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a529863849f86a63b517cd96cbcd47705" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void analogReference</definition>
+        <argsstring>(uint8_t mode)</argsstring>
+        <name>analogReference</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="113" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_analog.c" bodystart="32" bodyend="38"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a428477da35f3b1cf51bc2653125d9d9d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void analogWrite</definition>
+        <argsstring>(uint8_t, int)</argsstring>
+        <name>analogWrite</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>int</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="114" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_analog.c" bodystart="93" bodyend="259"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a1871228c14c912ca1479cf826ddcb07f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long millis</definition>
+        <argsstring>(void)</argsstring>
+        <name>millis</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="116" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.c" bodystart="63" bodyend="75"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a705e7f8e2a34e0e2447e933ebf56b4d4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long micros</definition>
+        <argsstring>(void)</argsstring>
+        <name>micros</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="117" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.c" bodystart="77" bodyend="103"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1ab074fe18b447a055b6dbcd5f9a484db5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delay</definition>
+        <argsstring>(unsigned long)</argsstring>
+        <name>delay</name>
+        <param>
+          <type>unsigned</type>
+          <declname>long</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="118" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.c" bodystart="105" bodyend="115"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a62e0a53bc261f9de8700cc5a92307e85" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void delayMicroseconds</definition>
+        <argsstring>(unsigned int us)</argsstring>
+        <name>delayMicroseconds</name>
+        <param>
+          <type>unsigned int</type>
+          <declname>us</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="119" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.c" bodystart="118" bodyend="165"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a1ed2ad1a8590a020e15ba2b485428415" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>unsigned long</type>
+        <definition>unsigned long pulseIn</definition>
+        <argsstring>(uint8_t pin, uint8_t state, unsigned long timeout)</argsstring>
+        <name>pulseIn</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>pin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>state</declname>
+        </param>
+        <param>
+          <type>unsigned long</type>
+          <declname>timeout</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="120" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_pulse.c" bodystart="32" bodyend="69"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1ac44afc7b9d1ec5feb1179b2e3454690a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void shiftOut</definition>
+        <argsstring>(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder, uint8_t val)</argsstring>
+        <name>shiftOut</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>dataPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>clockPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitOrder</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="122" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_shift.c" bodystart="42" bodyend="55"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a1efecc975119046403adc60af645015d" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>uint8_t</type>
+        <definition>uint8_t shiftIn</definition>
+        <argsstring>(uint8_t dataPin, uint8_t clockPin, uint8_t bitOrder)</argsstring>
+        <name>shiftIn</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>dataPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>clockPin</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>bitOrder</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="123" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring_shift.c" bodystart="27" bodyend="40"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a3ed3d1d750935833a6f9b0363a5e6f13" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void attachInterrupt</definition>
+        <argsstring>(uint8_t, void(*)(void), int mode)</argsstring>
+        <name>attachInterrupt</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <param>
+          <type>void(*)(void)</type>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="125" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/WInterrupts.c" bodystart="39" bodyend="117"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1ad13089b6768dfc38c8cbdf9ddee6db8a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void detachInterrupt</definition>
+        <argsstring>(uint8_t)</argsstring>
+        <name>detachInterrupt</name>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="126" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/WInterrupts.c" bodystart="119" bodyend="179"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a7dfd9b79bc5a37d7df40207afbc5431f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void setup</definition>
+        <argsstring>(void)</argsstring>
+        <name>setup</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="128" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/carte.cpp" bodystart="25" bodyend="30"/>
+      </memberdef>
+      <memberdef kind="function" id="com_2carte_2build_2core_2wiring_8h_1a0b33edabd7f1c4e4a0bf32c67269be2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void loop</definition>
+        <argsstring>(void)</argsstring>
+        <name>loop</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h" line="129" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/carte.cpp" bodystart="32" bodyend="35"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">/*</highlight></codeline>
+<codeline lineno="2"><highlight class="comment"><sp/><sp/>wiring.h<sp/>-<sp/>Partial<sp/>implementation<sp/>of<sp/>the<sp/>Wiring<sp/>API<sp/>for<sp/>the<sp/>ATmega8.</highlight></codeline>
+<codeline lineno="3"><highlight class="comment"><sp/><sp/>Part<sp/>of<sp/>Arduino<sp/>-<sp/>http://www.arduino.cc/</highlight></codeline>
+<codeline lineno="4"><highlight class="comment"></highlight></codeline>
+<codeline lineno="5"><highlight class="comment"><sp/><sp/>Copyright<sp/>(c)<sp/>2005-2006<sp/>David<sp/>A.<sp/>Mellis</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"></highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>free<sp/>software;<sp/>you<sp/>can<sp/>redistribute<sp/>it<sp/>and/or</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/><sp/>modify<sp/>it<sp/>under<sp/>the<sp/>terms<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General<sp/>Public</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/><sp/>License<sp/>as<sp/>published<sp/>by<sp/>the<sp/>Free<sp/>Software<sp/>Foundation;<sp/>either</highlight></codeline>
+<codeline lineno="10"><highlight class="comment"><sp/><sp/>version<sp/>2.1<sp/>of<sp/>the<sp/>License,<sp/>or<sp/>(at<sp/>your<sp/>option)<sp/>any<sp/>later<sp/>version.</highlight></codeline>
+<codeline lineno="11"><highlight class="comment"></highlight></codeline>
+<codeline lineno="12"><highlight class="comment"><sp/><sp/>This<sp/>library<sp/>is<sp/>distributed<sp/>in<sp/>the<sp/>hope<sp/>that<sp/>it<sp/>will<sp/>be<sp/>useful,</highlight></codeline>
+<codeline lineno="13"><highlight class="comment"><sp/><sp/>but<sp/>WITHOUT<sp/>ANY<sp/>WARRANTY;<sp/>without<sp/>even<sp/>the<sp/>implied<sp/>warranty<sp/>of</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/>MERCHANTABILITY<sp/>or<sp/>FITNESS<sp/>FOR<sp/>A<sp/>PARTICULAR<sp/>PURPOSE.<sp/><sp/>See<sp/>the<sp/>GNU</highlight></codeline>
+<codeline lineno="15"><highlight class="comment"><sp/><sp/>Lesser<sp/>General<sp/>Public<sp/>License<sp/>for<sp/>more<sp/>details.</highlight></codeline>
+<codeline lineno="16"><highlight class="comment"></highlight></codeline>
+<codeline lineno="17"><highlight class="comment"><sp/><sp/>You<sp/>should<sp/>have<sp/>received<sp/>a<sp/>copy<sp/>of<sp/>the<sp/>GNU<sp/>Lesser<sp/>General</highlight></codeline>
+<codeline lineno="18"><highlight class="comment"><sp/><sp/>Public<sp/>License<sp/>along<sp/>with<sp/>this<sp/>library;<sp/>if<sp/>not,<sp/>write<sp/>to<sp/>the</highlight></codeline>
+<codeline lineno="19"><highlight class="comment"><sp/><sp/>Free<sp/>Software<sp/>Foundation,<sp/>Inc.,<sp/>59<sp/>Temple<sp/>Place,<sp/>Suite<sp/>330,</highlight></codeline>
+<codeline lineno="20"><highlight class="comment"><sp/><sp/>Boston,<sp/>MA<sp/><sp/>02111-1307<sp/><sp/>USA</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"></highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/><sp/>$Id$</highlight></codeline>
+<codeline lineno="23"><highlight class="comment">*/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"></highlight></codeline>
+<codeline lineno="25"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>Wiring_h</highlight></codeline>
+<codeline lineno="26"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>Wiring_h</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;avr/io.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;stdlib.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2binary_8h" kindref="compound">binary.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="keyword">extern</highlight><highlight class="normal"><sp/></highlight><highlight class="stringliteral">&quot;C&quot;</highlight><highlight class="normal">{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36" refid="com_2carte_2build_2core_2wiring_8h_1a5bb885982ff66a2e0a0a45a8ee9c35e2" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>HIGH<sp/>0x1</highlight></codeline>
+<codeline lineno="37" refid="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>LOW<sp/><sp/>0x0</highlight></codeline>
+<codeline lineno="38"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="com_2carte_2build_2core_2wiring_8h_1a1bb283bd7893b9855e2f23013891fc82" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>INPUT<sp/>0x0</highlight></codeline>
+<codeline lineno="40" refid="com_2carte_2build_2core_2wiring_8h_1a61a3c9a18380aafb6e430e79bf596557" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>OUTPUT<sp/>0x1</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42" refid="com_2carte_2build_2core_2wiring_8h_1a41f9c5fb8b08eb5dc3edce4dcb37fee7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>true<sp/>0x1</highlight></codeline>
+<codeline lineno="43" refid="com_2carte_2build_2core_2wiring_8h_1a65e9886d74aaee76545e83dd09011727" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>false<sp/>0x0</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45" refid="com_2carte_2build_2core_2wiring_8h_1a598a3330b3c21701223ee0ca14316eca" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>PI<sp/>3.1415926535897932384626433832795</highlight></codeline>
+<codeline lineno="46" refid="com_2carte_2build_2core_2wiring_8h_1ae3ec3219e4eee3b0992bfd59c2e2bc42" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>HALF_PI<sp/>1.5707963267948966192313216916398</highlight></codeline>
+<codeline lineno="47" refid="com_2carte_2build_2core_2wiring_8h_1a3b947f4b635461030ff2d87833e5049e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TWO_PI<sp/>6.283185307179586476925286766559</highlight></codeline>
+<codeline lineno="48" refid="com_2carte_2build_2core_2wiring_8h_1a212460e743fecb084d717bb2180c5a56" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DEG_TO_RAD<sp/>0.017453292519943295769236907684886</highlight></codeline>
+<codeline lineno="49" refid="com_2carte_2build_2core_2wiring_8h_1a89e47af0449640d4f15191aba5ca24c6" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>RAD_TO_DEG<sp/>57.295779513082320876798154814105</highlight></codeline>
+<codeline lineno="50"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="51" refid="com_2carte_2build_2core_2wiring_8h_1aae3f0b4211ba45d265973d40ccbb5fd1" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>SERIAL<sp/><sp/>0x0</highlight></codeline>
+<codeline lineno="52" refid="com_2carte_2build_2core_2wiring_8h_1ab4bf926a45354a2f328f1a7b94ebd3c5" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DISPLAY<sp/>0x1</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="54" refid="com_2carte_2build_2core_2wiring_8h_1a5811613d98580676f67f0dde8125433e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>LSBFIRST<sp/>0</highlight></codeline>
+<codeline lineno="55" refid="com_2carte_2build_2core_2wiring_8h_1a1c7ef42eff02618bde70868af4944d81" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MSBFIRST<sp/>1</highlight></codeline>
+<codeline lineno="56"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="57" refid="com_2carte_2build_2core_2wiring_8h_1aa39fdb6674592214dc56eacc0808eec4" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>CHANGE<sp/>1</highlight></codeline>
+<codeline lineno="58" refid="com_2carte_2build_2core_2wiring_8h_1ac00eb6fc2047dc399280f31b0c5f4472" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>FALLING<sp/>2</highlight></codeline>
+<codeline lineno="59" refid="com_2carte_2build_2core_2wiring_8h_1aeea2b49478f3b13faedba764985c6e96" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>RISING<sp/>3</highlight></codeline>
+<codeline lineno="60"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="61"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="62"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERNAL1V1<sp/>2</highlight></codeline>
+<codeline lineno="63"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERNAL2V56<sp/>3</highlight></codeline>
+<codeline lineno="64"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="65" refid="com_2carte_2build_2core_2wiring_8h_1a02c5e2eafaed44878fd8e6c54c8dde4d" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>INTERNAL<sp/>3</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="67" refid="com_2carte_2build_2core_2wiring_8h_1a3da44afeba217135a680a7477b5e3ce3" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>DEFAULT<sp/>1</highlight></codeline>
+<codeline lineno="68" refid="com_2carte_2build_2core_2wiring_8h_1af3fe37c1cda80aa7202b5a3bb7557dc9" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>EXTERNAL<sp/>0</highlight></codeline>
+<codeline lineno="69"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="comment">//<sp/>undefine<sp/>stdlib&apos;s<sp/>abs<sp/>if<sp/>encountered</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>abs</highlight></codeline>
+<codeline lineno="72"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#undef<sp/>abs</highlight></codeline>
+<codeline lineno="73"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="74"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="75" refid="com_2carte_2build_2core_2wiring_8h_1ac6afabdc09a49a433ee19d8a9486056d" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>min(a,b)<sp/>((a)&lt;(b)?(a):(b))</highlight></codeline>
+<codeline lineno="76" refid="com_2carte_2build_2core_2wiring_8h_1affe776513b24d84b39af8ab0930fef7f" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>max(a,b)<sp/>((a)&gt;(b)?(a):(b))</highlight></codeline>
+<codeline lineno="77" refid="com_2carte_2build_2core_2wiring_8h_1a3aa069ac3980707dae1e0530f50d59e4" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>abs(x)<sp/>((x)&gt;0?(x):-(x))</highlight></codeline>
+<codeline lineno="78" refid="com_2carte_2build_2core_2wiring_8h_1a7df4a1319e5665c9040aa1838eef987c" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>constrain(amt,low,high)<sp/>((amt)&lt;(low)?(low):((amt)&gt;(high)?(high):(amt)))</highlight></codeline>
+<codeline lineno="79" refid="com_2carte_2build_2core_2wiring_8h_1a6ea10f4260b54a61665ead26cb995ba3" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>round(x)<sp/><sp/><sp/><sp/><sp/>((x)&gt;=0?(long)((x)+0.5):(long)((x)-0.5))</highlight></codeline>
+<codeline lineno="80" refid="com_2carte_2build_2core_2wiring_8h_1a7571dba2995b9cb57259345fe49d2f97" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>radians(deg)<sp/>((deg)*DEG_TO_RAD)</highlight></codeline>
+<codeline lineno="81" refid="com_2carte_2build_2core_2wiring_8h_1afe93c2c14da376a1621194c15c1de496" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>degrees(rad)<sp/>((rad)*RAD_TO_DEG)</highlight></codeline>
+<codeline lineno="82" refid="com_2carte_2build_2core_2wiring_8h_1ae7616788b30810a219d9cdee95904ba4" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>sq(x)<sp/>((x)*(x))</highlight></codeline>
+<codeline lineno="83"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="84" refid="com_2carte_2build_2core_2wiring_8h_1aeab54da5ac84f3441a91cb982b2276bc" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>interrupts()<sp/>sei()</highlight></codeline>
+<codeline lineno="85" refid="com_2carte_2build_2core_2wiring_8h_1a8dfd0b70aa3eb3c592d6de11711fce91" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>noInterrupts()<sp/>cli()</highlight></codeline>
+<codeline lineno="86"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="87" refid="com_2carte_2build_2core_2wiring_8h_1ae6741cdb6d1d3f17299b9874ddc2c12e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>clockCyclesPerMicrosecond()<sp/>(<sp/>F_CPU<sp/>/<sp/>1000000L<sp/>)</highlight></codeline>
+<codeline lineno="88" refid="com_2carte_2build_2core_2wiring_8h_1a262d28355fa4b64b12743b5e93f7516b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>clockCyclesToMicroseconds(a)<sp/>(<sp/>((a)<sp/>*<sp/>1000L)<sp/>/<sp/>(F_CPU<sp/>/<sp/>1000L)<sp/>)</highlight></codeline>
+<codeline lineno="89" refid="com_2carte_2build_2core_2wiring_8h_1aa4a5bbc71d71ab25856c1366b6ca15bb" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>microsecondsToClockCycles(a)<sp/>(<sp/>((a)<sp/>*<sp/>(F_CPU<sp/>/<sp/>1000L))<sp/>/<sp/>1000L<sp/>)</highlight></codeline>
+<codeline lineno="90"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="91" refid="com_2carte_2build_2core_2wiring_8h_1a57600234f6e26049357fbecfbdca9537" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>lowByte(w)<sp/>((uint8_t)<sp/>((w)<sp/>&amp;<sp/>0xff))</highlight></codeline>
+<codeline lineno="92" refid="com_2carte_2build_2core_2wiring_8h_1a32fff07c58e569ce66ad409fe85c73bb" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>highByte(w)<sp/>((uint8_t)<sp/>((w)<sp/>&gt;&gt;<sp/>8))</highlight></codeline>
+<codeline lineno="93"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94" refid="com_2carte_2build_2core_2wiring_8h_1aff20d8c0a05ad3043afa2e4ad9ebe768" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>bitRead(value,<sp/>bit)<sp/>(((value)<sp/>&gt;&gt;<sp/>(bit))<sp/>&amp;<sp/>0x01)</highlight></codeline>
+<codeline lineno="95" refid="com_2carte_2build_2core_2wiring_8h_1a6a8195c0e930f86c6af03ba6af8b41dd" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>bitSet(value,<sp/>bit)<sp/>((value)<sp/>|=<sp/>(1UL<sp/>&lt;&lt;<sp/>(bit)))</highlight></codeline>
+<codeline lineno="96" refid="com_2carte_2build_2core_2wiring_8h_1abbe843c0521806a4ab2e7cffe44769e2" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>bitClear(value,<sp/>bit)<sp/>((value)<sp/>&amp;=<sp/>~(1UL<sp/>&lt;&lt;<sp/>(bit)))</highlight></codeline>
+<codeline lineno="97" refid="com_2carte_2build_2core_2wiring_8h_1a42c17f59f3f9a3112d01246760067a8e" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>bitWrite(value,<sp/>bit,<sp/>bitvalue)<sp/>(bitvalue<sp/>?<sp/>bitSet(value,<sp/>bit)<sp/>:<sp/>bitClear(value,<sp/>bit))</highlight></codeline>
+<codeline lineno="98"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="com_2carte_2build_2core_2wiring_8h_1abad51e07ab6d26bec9f1f786c8d65bcd" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1abad51e07ab6d26bec9f1f786c8d65bcd" kindref="member">word</ref>;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"></highlight></codeline>
+<codeline lineno="102" refid="com_2carte_2build_2core_2wiring_8h_1af419eea95c24741f969fbe9eb534404e" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>bit(b)<sp/>(1UL<sp/>&lt;&lt;<sp/>(b))</highlight></codeline>
+<codeline lineno="103"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="104" refid="com_2carte_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9c639bd343606632b938f16f4adf516a" kindref="member">boolean</ref>;</highlight></codeline>
+<codeline lineno="105" refid="com_2carte_2build_2core_2wiring_8h_1ab8ef12fab634c171394422d0ee8baf94" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">typedef</highlight><highlight class="normal"><sp/>uint8_t<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ab8ef12fab634c171394422d0ee8baf94" kindref="member">byte</ref>;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a02fd73d861ef2e4aabb38c0c9ff82947" kindref="member">init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="108"><highlight class="normal"></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1aedf28437b0c388082e19f9f6e4f47cf0" kindref="member">pinMode</ref>(uint8_t,<sp/>uint8_t);</highlight></codeline>
+<codeline lineno="110"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(uint8_t,<sp/>uint8_t);</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a47ebd125381c211f80468fb47f717a35" kindref="member">digitalRead</ref>(uint8_t);</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a13782c0f73097cea014616d749e7c52d" kindref="member">analogRead</ref>(uint8_t);</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a529863849f86a63b517cd96cbcd47705" kindref="member">analogReference</ref>(uint8_t<sp/>mode);</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a428477da35f3b1cf51bc2653125d9d9d" kindref="member">analogWrite</ref>(uint8_t,<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a6ff7f2532a22366f0013bc41397129fd" kindref="member">millis</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a8b24cbb7c3486e1bfa05c86db83ecb01" kindref="member">micros</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a6bc5f943544a887f8b23cadfb26a5e30" kindref="member">delay</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a62e0a53bc261f9de8700cc5a92307e85" kindref="member">delayMicroseconds</ref>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>us);</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a1ed2ad1a8590a020e15ba2b485428415" kindref="member">pulseIn</ref>(uint8_t<sp/>pin,<sp/>uint8_t<sp/>state,<sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/><ref refid="namespacetimer_1a1b8d3764fadd74cbd7ef6d7a75506ce0" kindref="member">timeout</ref>);</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"></highlight></codeline>
+<codeline lineno="122"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ac44afc7b9d1ec5feb1179b2e3454690a" kindref="member">shiftOut</ref>(uint8_t<sp/>dataPin,<sp/>uint8_t<sp/>clockPin,<sp/>uint8_t<sp/>bitOrder,<sp/>uint8_t<sp/>val);</highlight></codeline>
+<codeline lineno="123"><highlight class="normal">uint8_t<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a1efecc975119046403adc60af645015d" kindref="member">shiftIn</ref>(uint8_t<sp/>dataPin,<sp/>uint8_t<sp/>clockPin,<sp/>uint8_t<sp/>bitOrder);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_interrupts_8c_1ad0d73becebba7c663f8e9ed73efee544" kindref="member">attachInterrupt</ref>(uint8_t,<sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>(*)(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">),<sp/></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>mode);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="com_2carte_2build_2core_2_w_interrupts_8c_1aa47ad728b5e830ac48f4085affea7d1c" kindref="member">detachInterrupt</ref>(uint8_t);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="carte_8cpp_1a4fc01d736fe50cf5b977f755b675f11d" kindref="member">setup</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="carte_8cpp_1afe461d27b9c48d5921c00d521181f12f" kindref="member">loop</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="130"><highlight class="normal"></highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight><highlight class="preprocessor">#ifdef<sp/>__cplusplus</highlight></codeline>
+<codeline lineno="132"><highlight class="preprocessor"></highlight><highlight class="normal">}<sp/></highlight><highlight class="comment">//<sp/>extern<sp/>&quot;C&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="134"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/wiring.h"/>
+  </compounddef>
+</doxygen>

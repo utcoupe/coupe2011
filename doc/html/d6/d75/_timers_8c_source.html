@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de asserv2010/Timers.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>asserv2010/Timers.c</h1><a href="../../d6/d75/_timers_8c.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="comment">/*</span>
+<a name="l00002"></a>00002 <span class="comment">;FILE DESCRIPTION:</span>
+<a name="l00003"></a>00003 <span class="comment">; This file contains General-purpose timer set up and interrupt</span>
+<a name="l00004"></a>00004 <span class="comment">; service routines for 16-bit Timer 1. Timer 1 interrupts are</span>
+<a name="l00005"></a>00005 <span class="comment">; used to toggle both the LEDs on the dsPICDEM2 board.</span>
+<a name="l00006"></a>00006 <span class="comment">; Timer2 and Timer3 are used together in 32-bit mode with interrupts</span>
+<a name="l00007"></a>00007 <span class="comment">; disabled. The 32-bit Timer is used to decide how often the LCD and</span>
+<a name="l00008"></a>00008 <span class="comment">; RS232 displays need to be refreshed.</span>
+<a name="l00009"></a>00009 <span class="comment">;</span>
+<a name="l00010"></a>00010 <span class="comment">;REVISION HISTORY:</span>
+<a name="l00011"></a>00011 <span class="comment">;  $Log: Timers.c,v $</span>
+<a name="l00012"></a>00012 <span class="comment">;  Revision 1.1.1.1  2005/06/06 09:16:45  VasukiH</span>
+<a name="l00013"></a>00013 <span class="comment">;  First release of software</span>
+<a name="l00014"></a>00014 <span class="comment">;</span>
+<a name="l00015"></a>00015 <span class="comment">;</span>
+<a name="l00016"></a>00016 <span class="comment">*/</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018 <span class="comment">//Pre-Processor Directives:</span>
+<a name="l00019"></a>00019 <span class="preprocessor">#include &lt;p30fxxxx.h&gt;</span>
+<a name="l00020"></a>00020 <span class="preprocessor">#include &quot;<a class="code" href="../../dd/df6/_a_l_types_8h.html">ALTypes.h</a>&quot;</span>
+<a name="l00021"></a>00021 <span class="preprocessor">#include &quot;system.h&quot;</span>
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023 <span class="preprocessor">#include &quot;<a class="code" href="../../d7/d59/timers_8h.html">timers.h</a>&quot;</span>
+<a name="l00024"></a><a class="code" href="../../d6/d75/_timers_8c.html#a80c3019b7eb3da73b390528ea55076be">00024</a> <a class="code" href="../../dd/df6/_a_l_types_8h.html#aa4e0f27a9aca905e340c06d2dcae843c">uInt8</a> <a class="code" href="../../d1/d1f/_main_8c.html#a80c3019b7eb3da73b390528ea55076be">gOneMsTemp</a>;
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026 <span class="comment">//Timer1_Init() sets up Timer1 to count up to the maximum 16-bit value, 0xFFFF,</span>
+<a name="l00027"></a>00027 <span class="comment">//and interrupt the CPU. ISR processing is enabled for Timer 1.</span>
+<a name="l00028"></a><a class="code" href="../../d7/d59/timers_8h.html#a8df1ec489d8960f0cd45f6dc49ae2d36">00028</a> <span class="keywordtype">void</span> <a class="code" href="../../d6/d75/_timers_8c.html#a8df1ec489d8960f0cd45f6dc49ae2d36">Timer1_Init</a>(<span class="keywordtype">void</span>)
+<a name="l00029"></a>00029 {
+<a name="l00030"></a>00030         T1CON = 0x0000;         <span class="comment">//Timer1 set up to count on instruction cycle</span>
+<a name="l00031"></a>00031                                 <span class="comment">//edge with 1:1 prescaler applied initially.</span>
+<a name="l00032"></a>00032         PR1 = 0xFFFF;           <span class="comment">//Period Register, PR1, set to maximum count</span>
+<a name="l00033"></a>00033         IFS0bits.T1IF = 0;      <span class="comment">//Clear the Timer1 Interrupt Flag</span>
+<a name="l00034"></a>00034         IEC0bits.T1IE = 1;      <span class="comment">//Enable Timer1 Interrupt Service Routine</span>
+<a name="l00035"></a>00035         T1CONbits.TON=1;        <span class="comment">//Start Timer 1</span>
+<a name="l00036"></a>00036 }
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038 <span class="comment">//Timer2_Init() sets up Timer2 and Timer3 to count up to a 32-bit value,</span>
+<a name="l00039"></a>00039 <span class="comment">//0x003FFFFF with a prescaler of 1:1. 32-bit Timer ISR is disabled.</span>
+<a name="l00040"></a><a class="code" href="../../d7/d59/timers_8h.html#a65e9e0399e5c1c01ab76fcc1a19630b3">00040</a> <span class="keywordtype">void</span> <a class="code" href="../../d6/d75/_timers_8c.html#a65e9e0399e5c1c01ab76fcc1a19630b3">Timer2_Init</a>(<span class="keywordtype">void</span>)
+<a name="l00041"></a>00041 {
+<a name="l00042"></a>00042         T2CON = 0x0000;         <span class="comment">//32-bit Timer3:Timer2 pair set up</span>
+<a name="l00043"></a>00043         T2CONbits.T32 = 1;      <span class="comment">//to increment every instruction cycle</span>
+<a name="l00044"></a>00044         PR3 = 0x003F;
+<a name="l00045"></a>00045         PR2 = 0xFFFF;           <span class="comment">//Period Register, PR3:PR2, set to 0x003FFFFF</span>
+<a name="l00046"></a>00046         IFS0bits.T3IF = 0;      <span class="comment">//Clear the Timer3 Interrupt Flag</span>
+<a name="l00047"></a>00047         IEC0bits.T3IE = 0;      <span class="comment">//Disable Timer3 Interrup Service Routine</span>
+<a name="l00048"></a>00048         T2CONbits.TON=1;        <span class="comment">//Start 32-bit timer, setting Timer 2 ON bit</span>
+<a name="l00049"></a>00049 }
+<a name="l00050"></a>00050 
+<a name="l00051"></a>00051 <span class="comment">//_T1Interrupt() is the Timer1 Interrupt Service Routine</span>
+<a name="l00052"></a>00052 <span class="comment">//The routine must have global scope in order to be an ISR.</span>
+<a name="l00053"></a>00053 <span class="comment">//The ISR name is the same name provided for the module in the device linker</span>
+<a name="l00054"></a>00054 <span class="comment">//script.</span>
+<a name="l00055"></a>00055 <span class="comment">//At every Timer1 interrupt event, the state of the two LEDs, D3 and D4,</span>
+<a name="l00056"></a>00056 <span class="comment">//is toggled/flipped.</span>
+<a name="l00057"></a><a class="code" href="../../d6/d75/_timers_8c.html#a5ae93c640ed17451158a34e49c241ef0">00057</a> <span class="keywordtype">void</span> <a class="code" href="../../dc/d82/_a__to___d___converter_8c.html#a5ae93c640ed17451158a34e49c241ef0">__attribute__</a>((__interrupt__, __no_auto_psv__)) _T1Interrupt(<span class="keywordtype">void</span>)
+<a name="l00058"></a>00058 {
+<a name="l00059"></a>00059  IFS0bits.T1IF = 0;
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061         <span class="comment">// 1ms tempo</span>
+<a name="l00062"></a>00062         <a class="code" href="../../d1/d1f/_main_8c.html#a80c3019b7eb3da73b390528ea55076be">gOneMsTemp</a> = 1;
+<a name="l00063"></a>00063   IFS0bits.T1IF = 0;                      <span class="comment">//Clear Timer1 Interrupt Flag</span>
+<a name="l00064"></a>00064 }
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066 
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 14:42:54 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

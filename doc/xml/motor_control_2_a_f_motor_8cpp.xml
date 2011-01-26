@@ -1,0 +1,299 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="motor_control_2_a_f_motor_8cpp" kind="file">
+    <compoundname>AFMotor.cpp</compoundname>
+    <includes local="no">avr/io.h</includes>
+    <includes refid="motor_control_2build_2core_2_w_program_8h" local="yes">WProgram.h</includes>
+    <includes refid="motor_control_2_a_f_motor_8cpp" local="yes">AFMotor.h</includes>
+    <includes local="no">inttypes.h</includes>
+    <includedby refid="motor_control_2_a_f_motor_8cpp" local="yes">motorControl/AFMotor.cpp</includedby>
+    <incdepgraph>
+      <node id="1936">
+        <label>avr/interrupt.h</label>
+      </node>
+      <node id="1933">
+        <label>stdlib.h</label>
+      </node>
+      <node id="1937">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="1931" relation="include">
+        </childnode>
+        <childnode refid="1933" relation="include">
+        </childnode>
+        <childnode refid="1938" relation="include">
+        </childnode>
+      </node>
+      <node id="1931">
+        <label>avr/io.h</label>
+      </node>
+      <node id="1934">
+        <label>string.h</label>
+      </node>
+      <node id="1932">
+        <label>WProgram.h</label>
+        <link refid="motor_control_2build_2core_2_w_program_8h"/>
+        <childnode refid="1933" relation="include">
+        </childnode>
+        <childnode refid="1934" relation="include">
+        </childnode>
+        <childnode refid="1935" relation="include">
+        </childnode>
+        <childnode refid="1936" relation="include">
+        </childnode>
+        <childnode refid="1937" relation="include">
+        </childnode>
+      </node>
+      <node id="1935">
+        <label>math.h</label>
+      </node>
+      <node id="1938">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+      <node id="1939">
+        <label>inttypes.h</label>
+      </node>
+      <node id="1930">
+        <label>motorControl/AFMotor.cpp</label>
+        <link refid="motorControl/AFMotor.cpp"/>
+        <childnode refid="1931" relation="include">
+        </childnode>
+        <childnode refid="1932" relation="include">
+        </childnode>
+        <childnode refid="1930" relation="include">
+        </childnode>
+        <childnode refid="1939" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <invincdepgraph>
+      <node id="1940">
+        <label>motorControl/AFMotor.cpp</label>
+        <link refid="motorControl/AFMotor.cpp"/>
+        <childnode refid="1940" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="motor_control_2_a_f_motor_8cpp_1a274e305727a70fbbf670057b7f02d36a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void initPWM1</definition>
+        <argsstring>(uint8_t freq)</argsstring>
+        <name>initPWM1</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>freq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" line="16" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" bodystart="16" bodyend="37"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2_a_f_motor_8cpp_1a42469faf8ebb13763c5f88944c113e0f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setPWM1</definition>
+        <argsstring>(uint8_t s)</argsstring>
+        <name>setPWM1</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" bodystart="39" bodyend="53"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2_a_f_motor_8cpp_1a1e459ec58989d01faac9f809e8b98c5f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void initPWM2</definition>
+        <argsstring>(uint8_t freq)</argsstring>
+        <name>initPWM2</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>freq</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" line="55" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" bodystart="55" bodyend="74"/>
+      </memberdef>
+      <memberdef kind="function" id="motor_control_2_a_f_motor_8cpp_1a2f50c9c9fe0266cdfa468060f1dfd257" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void setPWM2</definition>
+        <argsstring>(uint8_t s)</argsstring>
+        <name>setPWM2</name>
+        <param>
+          <type>uint8_t</type>
+          <declname>s</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" line="76" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp" bodystart="76" bodyend="90"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Adafruit<sp/>Motor<sp/>shield<sp/>library</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>copyright<sp/>Adafruit<sp/>Industries<sp/>LLC,<sp/>2009</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>this<sp/>code<sp/>is<sp/>public<sp/>domain,<sp/>enjoy!</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Adapté<sp/>pour<sp/>UTCoupe2011<sp/>par<sp/>Arthur,<sp/>19/01/2011</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">//<sp/>Moteurs<sp/>1<sp/>et<sp/>2<sp/>correspondent<sp/>à<sp/>la<sp/>carte<sp/>Rugged</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;avr/io.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="motor_control_2build_2core_2_w_program_8h" kindref="compound">WProgram.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;AFMotor.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"></highlight><highlight class="comment">/******************************************</highlight></codeline>
+<codeline lineno="14"><highlight class="comment"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>MOTORS</highlight></codeline>
+<codeline lineno="15"><highlight class="comment">******************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16" refid="motor_control_2_a_f_motor_8cpp_1a274e305727a70fbbf670057b7f02d36a" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a274e305727a70fbbf670057b7f02d36a" kindref="member">initPWM1</ref>(uint8_t<sp/>freq)<sp/>{</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="18"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega48__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega88__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="20"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega168__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="21"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega328P__)</highlight></codeline>
+<codeline lineno="22"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>PWM<sp/>from<sp/>timer2B<sp/>(pin<sp/>3)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="23"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR2A<sp/>|=<sp/>_BV(COM2B1)<sp/>|<sp/>_BV(WGM20)<sp/>|<sp/>_BV(WGM21);<sp/></highlight><highlight class="comment">//<sp/>fast<sp/>PWM,<sp/>turn<sp/>on<sp/>oc2b</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR2B<sp/>=<sp/>freq<sp/>&amp;<sp/>0x7;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR2B<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="27"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>on<sp/>arduino<sp/>mega,<sp/>pin<sp/>3<sp/>is<sp/>now<sp/>PE5<sp/>(OC3C)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR3A<sp/>|=<sp/>_BV(COM1C1)<sp/>|<sp/>_BV(WGM10);<sp/></highlight><highlight class="comment">//<sp/>fast<sp/>PWM,<sp/>turn<sp/>on<sp/>oc3c</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR3B<sp/>=<sp/>(freq<sp/>&amp;<sp/>0x7)<sp/>|<sp/>_BV(WGM12);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR3C<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/>#error<sp/>&quot;This<sp/>chip<sp/>is<sp/>not<sp/>supported!&quot;</highlight></codeline>
+<codeline lineno="34"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="35"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1aedf28437b0c388082e19f9f6e4f47cf0" kindref="member">pinMode</ref>(3,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a61a3c9a18380aafb6e430e79bf596557" kindref="member">OUTPUT</ref>);</highlight></codeline>
+<codeline lineno="37"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"></highlight></codeline>
+<codeline lineno="39" refid="motor_control_2_a_f_motor_8cpp_1a42469faf8ebb13763c5f88944c113e0f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a42469faf8ebb13763c5f88944c113e0f" kindref="member">setPWM1</ref>(uint8_t<sp/>s)<sp/>{</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="41"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega48__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="42"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega88__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="43"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega168__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="44"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega328P__)</highlight></codeline>
+<codeline lineno="45"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>PWM<sp/>from<sp/>timer2A<sp/>on<sp/>PB3<sp/>(Arduino<sp/>pin<sp/>#11)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR2B<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="48"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>on<sp/>arduino<sp/>mega,<sp/>pin<sp/>11<sp/>is<sp/>now<sp/>PB5<sp/>(OC1A)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR3C<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="51"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/>#error<sp/>&quot;This<sp/>chip<sp/>is<sp/>not<sp/>supported!&quot;</highlight></codeline>
+<codeline lineno="52"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="53"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55" refid="motor_control_2_a_f_motor_8cpp_1a1e459ec58989d01faac9f809e8b98c5f" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a1e459ec58989d01faac9f809e8b98c5f" kindref="member">initPWM2</ref>(uint8_t<sp/>freq)<sp/>{</highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="57"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega48__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="58"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega88__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="59"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega168__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="60"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega328P__)</highlight></codeline>
+<codeline lineno="61"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>PWM<sp/>from<sp/>timer2A<sp/>on<sp/>PB3<sp/>(Arduino<sp/>pin<sp/>#11)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="62"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR2A<sp/>|=<sp/>_BV(COM2A1)<sp/>|<sp/>_BV(WGM20)<sp/>|<sp/>_BV(WGM21);<sp/></highlight><highlight class="comment">//<sp/>fast<sp/>PWM,<sp/>turn<sp/>on<sp/>oc2a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR2B<sp/>=<sp/>freq<sp/>&amp;<sp/>0x7;</highlight></codeline>
+<codeline lineno="64"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR2A<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="66"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>on<sp/>arduino<sp/>mega,<sp/>pin<sp/>11<sp/>is<sp/>now<sp/>PB5<sp/>(OC1A)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR1A<sp/>|=<sp/>_BV(COM1A1)<sp/>|<sp/>_BV(WGM10);<sp/></highlight><highlight class="comment">//<sp/>fast<sp/>PWM,<sp/>turn<sp/>on<sp/>oc1a</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/>TCCR1B<sp/>=<sp/>(freq<sp/>&amp;<sp/>0x7)<sp/>|<sp/>_BV(WGM12);</highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR1A<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="71"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/>#error<sp/>&quot;This<sp/>chip<sp/>is<sp/>not<sp/>supported!&quot;</highlight></codeline>
+<codeline lineno="72"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="73"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1aedf28437b0c388082e19f9f6e4f47cf0" kindref="member">pinMode</ref>(11,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a61a3c9a18380aafb6e430e79bf596557" kindref="member">OUTPUT</ref>);</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"></highlight></codeline>
+<codeline lineno="76" refid="motor_control_2_a_f_motor_8cpp_1a2f50c9c9fe0266cdfa468060f1dfd257" refkind="member"><highlight class="normal"></highlight><highlight class="keyword">inline</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a2f50c9c9fe0266cdfa468060f1dfd257" kindref="member">setPWM2</ref>(uint8_t<sp/>s)<sp/>{</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"></highlight><highlight class="preprocessor">#if<sp/>defined(__AVR_ATmega8__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="78"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega48__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="79"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega88__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="80"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega168__)<sp/>||<sp/>\</highlight></codeline>
+<codeline lineno="81"><highlight class="preprocessor"><sp/><sp/><sp/><sp/>defined(__AVR_ATmega328P__)</highlight></codeline>
+<codeline lineno="82"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>use<sp/>PWM<sp/>from<sp/>timer2A<sp/>on<sp/>PB3<sp/>(Arduino<sp/>pin<sp/>#11)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR2A<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"></highlight><highlight class="preprocessor">#elif<sp/>defined(__AVR_ATmega1280__)<sp/>||<sp/>defined(__AVR_ATmega2560__)</highlight></codeline>
+<codeline lineno="85"><highlight class="preprocessor"></highlight><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>on<sp/>arduino<sp/>mega,<sp/>pin<sp/>11<sp/>is<sp/>now<sp/>PB5<sp/>(OC1A)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/><sp/><sp/>OCR1A<sp/>=<sp/>s;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"></highlight><highlight class="preprocessor">#else</highlight></codeline>
+<codeline lineno="88"><highlight class="preprocessor"></highlight><highlight class="preprocessor"><sp/><sp/><sp/>#error<sp/>&quot;This<sp/>chip<sp/>is<sp/>not<sp/>supported!&quot;</highlight></codeline>
+<codeline lineno="89"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+<codeline lineno="90"><highlight class="preprocessor"></highlight><highlight class="normal">}</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"></highlight></codeline>
+<codeline lineno="92" refid="class_a_f___d_c_motor_1a66c3fff3c1a530bac1ec1f545e016857" refkind="member"><highlight class="normal"><ref refid="class_a_f___d_c_motor_1a66c3fff3c1a530bac1ec1f545e016857" kindref="member">AF_DCMotor::AF_DCMotor</ref>(uint8_t<sp/>num,<sp/>uint8_t<sp/>freq)<sp/>{</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/>motornum<sp/>=<sp/>num;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>pwmfreq<sp/>=<sp/>freq;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(num)<sp/>{</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>1:</highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1aedf28437b0c388082e19f9f6e4f47cf0" kindref="member">pinMode</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a81e59bddb13c0a7898a9eb4cdd811bc7" kindref="member">MOTOR1_DIR</ref>,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a61a3c9a18380aafb6e430e79bf596557" kindref="member">OUTPUT</ref>);</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a81e59bddb13c0a7898a9eb4cdd811bc7" kindref="member">MOTOR1_DIR</ref>,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" kindref="member">LOW</ref>);</highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a274e305727a70fbbf670057b7f02d36a" kindref="member">initPWM1</ref>(freq);</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>2:</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1aedf28437b0c388082e19f9f6e4f47cf0" kindref="member">pinMode</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a2967bf5c2085f6433131c100608edd61" kindref="member">MOTOR2_DIR</ref>,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a61a3c9a18380aafb6e430e79bf596557" kindref="member">OUTPUT</ref>);</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(<ref refid="motor_control_2_a_f_motor_8h_1a2967bf5c2085f6433131c100608edd61" kindref="member">MOTOR2_DIR</ref>,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" kindref="member">LOW</ref>);</highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a1e459ec58989d01faac9f809e8b98c5f" kindref="member">initPWM2</ref>(freq);</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">AF_DCMotor::run</ref>(uint8_t<sp/><ref refid="com_2carte_2command_8cpp_1ab1e0af7e339409190e61c32b7d9942be" kindref="member">cmd</ref>)<sp/>{</highlight></codeline>
+<codeline lineno="111"><highlight class="normal"><sp/><sp/>uint8_t<sp/>dirPin;</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(motornum)<sp/>{</highlight></codeline>
+<codeline lineno="113"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>1:</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/>dirPin<sp/>=<sp/><ref refid="motor_control_2_a_f_motor_8h_1a81e59bddb13c0a7898a9eb4cdd811bc7" kindref="member">MOTOR1_DIR</ref>;<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>2:</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"><sp/><sp/><sp/><sp/>dirPin<sp/>=<sp/><ref refid="motor_control_2_a_f_motor_8h_1a2967bf5c2085f6433131c100608edd61" kindref="member">MOTOR2_DIR</ref>;<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">default</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(cmd)<sp/>{</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" kindref="member">FORWARD</ref>:</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(dirPin,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1ab811d8c6ff3a505312d3276590444289" kindref="member">LOW</ref>);</highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8h_1adf445abfe1b77fa63f89e315ccc2f7f2" kindref="member">BACKWARD</ref>:</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a9d505fa07341c65c11e2c236550b748f" kindref="member">digitalWrite</ref>(dirPin,<sp/><ref refid="com_2carte_2build_2core_2wiring_8h_1a5bb885982ff66a2e0a0a45a8ee9c35e2" kindref="member">HIGH</ref>);</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/><ref refid="motor_control_2_a_f_motor_8h_1a5bd9a30fc22d9a737ee060d41a4ec479" kindref="member">RELEASE</ref>:</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//TODO</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="132"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"></highlight></codeline>
+<codeline lineno="134" refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" kindref="member">AF_DCMotor::setSpeed</ref>(uint8_t<sp/>speed)<sp/>{</highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">switch</highlight><highlight class="normal"><sp/>(motornum)<sp/>{</highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>1:</highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a42469faf8ebb13763c5f88944c113e0f" kindref="member">setPWM1</ref>(speed);<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">case</highlight><highlight class="normal"><sp/>2:</highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><ref refid="motor_control_2_a_f_motor_8cpp_1a2f50c9c9fe0266cdfa468060f1dfd257" kindref="member">setPWM2</ref>(speed);<sp/></highlight><highlight class="keywordflow">break</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="142"><highlight class="normal"></highlight></codeline>
+<codeline lineno="143"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.cpp"/>
+  </compounddef>
+</doxygen>

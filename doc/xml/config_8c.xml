@@ -1,0 +1,415 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="config_8c" kind="file">
+    <compoundname>config.c</compoundname>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includes refid="config_8h" local="yes">config.h</includes>
+    <includes local="yes">math.h</includes>
+    <includes refid="asserv_orientation_8h" local="yes">asservOrientation.h</includes>
+    <incdepgraph>
+      <node id="1148">
+        <label>trajectory.h</label>
+        <link refid="trajectory_8h"/>
+        <childnode refid="1146" relation="include">
+        </childnode>
+      </node>
+      <node id="1149">
+        <label>math.h</label>
+      </node>
+      <node id="1146">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+      <node id="1145">
+        <label>asserv2010/config.c</label>
+        <link refid="config.c"/>
+        <childnode refid="1146" relation="include">
+        </childnode>
+        <childnode refid="1147" relation="include">
+        </childnode>
+        <childnode refid="1149" relation="include">
+        </childnode>
+        <childnode refid="1150" relation="include">
+        </childnode>
+      </node>
+      <node id="1147">
+        <label>config.h</label>
+        <link refid="config_8h"/>
+        <childnode refid="1146" relation="include">
+        </childnode>
+        <childnode refid="1148" relation="include">
+        </childnode>
+      </node>
+      <node id="1150">
+        <label>asservOrientation.h</label>
+        <link refid="asserv_orientation_8h"/>
+        <childnode refid="1148" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="config_8c_1a78db1a72334ee5f8aab8e960a4c792b9" prot="public" static="no">
+        <name>NB_JOINTS</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><simplesect kind="author"><para>joseph pinkasfeld (c) 2007 All Rights Reserved - This file is confidential.</para></simplesect>
+Version : $Id$ Ram configuration data. Main struct with configuration used in the program. This struct is directly readable/writable by the Mother Board Main struct with data </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="20" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="config_8c_1aeba951631e83bfd8f0c464f8c35a5c95" prot="public" static="no" mutable="no">
+        <type><ref refid="struct_joint_config" kindref="compound">JointConfig</ref></type>
+        <definition>JointConfig joints[NB_JOINTS]</definition>
+        <argsstring>[NB_JOINTS]</argsstring>
+        <name>joints</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="21" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="config_8c_1a5cb06f0ed9ecd7a6820f1b170416f81a" prot="public" static="no" mutable="no">
+        <type><ref refid="structrobot" kindref="compound">robot</ref></type>
+        <definition>robot ROBOT</definition>
+        <argsstring></argsstring>
+        <name>ROBOT</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="50" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="50" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="config_8c_1a579f1aec865cc117f44a053e363a7549" prot="public" static="no" mutable="no">
+        <type><ref refid="structrobot" kindref="compound">robot</ref></type>
+        <definition>robot RobotLast</definition>
+        <argsstring></argsstring>
+        <name>RobotLast</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="51" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="51" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="config_8c_1a028ff85d4be4b3e50f1c850ba57bef9f" prot="public" static="no" mutable="no">
+        <type><ref refid="structasserv" kindref="compound">asserv</ref></type>
+        <definition>asserv PID</definition>
+        <argsstring></argsstring>
+        <name>PID</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="98" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="98" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="config_8c_1afd26fdfe7f8e112d2805849f5358b27f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="struct_joint_config" kindref="compound">JointConfig</ref> *</type>
+        <definition>JointConfig* oGetJointConfig</definition>
+        <argsstring>(uInt16 pJoint)</argsstring>
+        <name>oGetJointConfig</name>
+        <param>
+          <type><ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref></type>
+          <declname>pJoint</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Get main struct with data.</para><para><simplesect kind="return"><para>the struct configuration </para></simplesect>
+</para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="24" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="23" bodyend="26"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1a8374cc689fdf02e60f74e948bb968363" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void oInitConfig</definition>
+        <argsstring>(void)</argsstring>
+        <name>oInitConfig</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para>Initialise the configuration data </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="31" bodyend="48"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1a2f0c2c19c34d9311e70f16bab886a6f3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateLastRobot</definition>
+        <argsstring>(void)</argsstring>
+        <name>updateLastRobot</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="54" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="53" bodyend="56"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1a2a3a4b17631927355bf220a65fc9d96b" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void updateJoints</definition>
+        <argsstring>(void)</argsstring>
+        <name>updateJoints</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="59" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="58" bodyend="62"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structrobot" kindref="compound">robot</ref> *</type>
+        <definition>robot* getRobot</definition>
+        <argsstring>(void)</argsstring>
+        <name>getRobot</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="64" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="63" bodyend="66"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1ad995c80b8e2bfe4f2b8dc4228fb493f0" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structrobot" kindref="compound">robot</ref> *</type>
+        <definition>robot* getRobotLast</definition>
+        <argsstring>(void)</argsstring>
+        <name>getRobotLast</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="69" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="68" bodyend="71"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1ae896e514fc90ada138adb9662bc40077" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initRobot</definition>
+        <argsstring>(void)</argsstring>
+        <name>initRobot</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="74" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="73" bodyend="96"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1a5e71b7f680e74ecb24a5d99be79af082" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void initPid</definition>
+        <argsstring>(void)</argsstring>
+        <name>initPid</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="101" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="100" bodyend="108"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1ada49cdfb49b464ff6eddc574ea087e72" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type><ref refid="structasserv" kindref="compound">asserv</ref> *</type>
+        <definition>asserv* getPID</definition>
+        <argsstring>(void)</argsstring>
+        <name>getPID</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="111" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="110" bodyend="113"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1ab1f5d29f4f72309b0f218578650bb330" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float toMillimeter</definition>
+        <argsstring>(float pDistance)</argsstring>
+        <name>toMillimeter</name>
+        <param>
+          <type>float</type>
+          <declname>pDistance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="117" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="116" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="config_8c_1a511465638abac4418bc774d5d36b6ad4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float toCount</definition>
+        <argsstring>(float pDistance)</argsstring>
+        <name>toCount</name>
+        <param>
+          <type>float</type>
+          <declname>pDistance</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" line="122" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c" bodystart="121" bodyend="124"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"></codeline>
+<codeline lineno="13"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="15"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="asserv_orientation_8h" kindref="compound">asservOrientation.h</ref>&quot;</highlight></codeline>
+<codeline lineno="20" refid="config_8c_1a78db1a72334ee5f8aab8e960a4c792b9" refkind="member"><highlight class="preprocessor">#define<sp/>NB_JOINTS<sp/>2</highlight></codeline>
+<codeline lineno="21" refid="config_8c_1aeba951631e83bfd8f0c464f8c35a5c95" refkind="member"><highlight class="preprocessor"></highlight><highlight class="normal"><ref refid="struct_joint_config" kindref="compound">JointConfig</ref><sp/><ref refid="config_8c_1aeba951631e83bfd8f0c464f8c35a5c95" kindref="member">joints</ref>[<ref refid="config_8c_1a78db1a72334ee5f8aab8e960a4c792b9" kindref="member">NB_JOINTS</ref>];<sp/></highlight><highlight class="comment">//<sp/>2<sp/>joints</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="22"><highlight class="normal"></highlight></codeline>
+<codeline lineno="23" refid="config_8h_1afd26fdfe7f8e112d2805849f5358b27f" refkind="member"><highlight class="normal"><ref refid="struct_joint_config" kindref="compound">JointConfig</ref><sp/>*<sp/><ref refid="config_8c_1afd26fdfe7f8e112d2805849f5358b27f" kindref="member">oGetJointConfig</ref>(<ref refid="_a_l_types_8h_1a3b65128d2644e9b80cec9a69bfa7e094" kindref="member">uInt16</ref><sp/>pJoint)</highlight></codeline>
+<codeline lineno="24"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;(joints[pJoint]);</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">}<sp/><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="31" refid="config_8h_1a8374cc689fdf02e60f74e948bb968363" refkind="member"><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="config_8c_1a8374cc689fdf02e60f74e948bb968363" kindref="member">oInitConfig</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="32"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//joints[0].motor.reductionRateMotor<sp/>=<sp/>201.3;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[0].<ref refid="struct_joint_config_1a19be44a8da122af386c71da9a7c1747d" kindref="member">motor</ref>.<ref refid="struct_joint_config_1a6884aa6bfe2b9d21f058817463dd7096" kindref="member">InvertControlDirection</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[0].<ref refid="struct_joint_config_1a19be44a8da122af386c71da9a7c1747d" kindref="member">motor</ref>.<ref refid="struct_joint_config_1af6d824d71a1cf988650d0277f3039e9c" kindref="member">motorPosition</ref><sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="36"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[0].<ref refid="struct_joint_config_1a23d1828957ef9a6b862510999275687a" kindref="member">sensors</ref>.<ref refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" kindref="member">position</ref><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[0].<ref refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" kindref="member">position</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[0].<ref refid="struct_joint_config_1a11ed95f40a458dd539ddfebc75959b24" kindref="member">lastPosition</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[0].<ref refid="struct_joint_config_1a1a76e093b95a477700e2fd7a0721ae9f" kindref="member">speed</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//joints[1].motor.reductionRateMotor<sp/>=<sp/>201.3;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[1].<ref refid="struct_joint_config_1a19be44a8da122af386c71da9a7c1747d" kindref="member">motor</ref>.<ref refid="struct_joint_config_1a6884aa6bfe2b9d21f058817463dd7096" kindref="member">InvertControlDirection</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[1].<ref refid="struct_joint_config_1a19be44a8da122af386c71da9a7c1747d" kindref="member">motor</ref>.<ref refid="struct_joint_config_1af6d824d71a1cf988650d0277f3039e9c" kindref="member">motorPosition</ref><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[1].<ref refid="struct_joint_config_1a23d1828957ef9a6b862510999275687a" kindref="member">sensors</ref>.<ref refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" kindref="member">position</ref><sp/>=<sp/>2;</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[1].<ref refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" kindref="member">position</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[1].<ref refid="struct_joint_config_1a11ed95f40a458dd539ddfebc75959b24" kindref="member">lastPosition</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"><sp/><sp/><sp/><sp/>joints[1].<ref refid="struct_joint_config_1a1a76e093b95a477700e2fd7a0721ae9f" kindref="member">speed</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="48"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"></highlight></codeline>
+<codeline lineno="50" refid="config_8c_1a5cb06f0ed9ecd7a6820f1b170416f81a" refkind="member"><highlight class="normal"><ref refid="structrobot" kindref="compound">robot</ref><sp/><ref refid="config_8c_1a5cb06f0ed9ecd7a6820f1b170416f81a" kindref="member">ROBOT</ref>;</highlight></codeline>
+<codeline lineno="51" refid="config_8c_1a579f1aec865cc117f44a053e363a7549" refkind="member"><highlight class="normal"><ref refid="structrobot" kindref="compound">robot</ref><sp/><ref refid="config_8c_1a579f1aec865cc117f44a053e363a7549" kindref="member">RobotLast</ref>;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"></highlight></codeline>
+<codeline lineno="53" refid="config_8h_1a2f0c2c19c34d9311e70f16bab886a6f3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="config_8c_1a2f0c2c19c34d9311e70f16bab886a6f3" kindref="member">updateLastRobot</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="54"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="55"><highlight class="normal"><sp/><sp/>RobotLast<sp/>=<sp/>ROBOT;</highlight></codeline>
+<codeline lineno="56"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="57"><highlight class="normal"></highlight></codeline>
+<codeline lineno="58" refid="config_8h_1a2a3a4b17631927355bf220a65fc9d96b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="config_8c_1a2a3a4b17631927355bf220a65fc9d96b" kindref="member">updateJoints</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="59"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="60"><highlight class="normal"><sp/><sp/>joints[0].<ref refid="struct_joint_config_1a11ed95f40a458dd539ddfebc75959b24" kindref="member">lastPosition</ref><sp/>=<sp/>joints[0].<ref refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" kindref="member">position</ref>;</highlight></codeline>
+<codeline lineno="61"><highlight class="normal"><sp/><sp/>joints[1].<ref refid="struct_joint_config_1a11ed95f40a458dd539ddfebc75959b24" kindref="member">lastPosition</ref><sp/>=<sp/>joints[1].<ref refid="struct_joint_config_1ac924dc2db109da5029b358be2c3fec75" kindref="member">position</ref>;<sp/><sp/></highlight></codeline>
+<codeline lineno="62"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="63" refid="config_8h_1a1620e709da932be9c3f2fff78ecf50e3" refkind="member"><highlight class="normal"><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;ROBOT;</highlight></codeline>
+<codeline lineno="66"><highlight class="normal">}<sp/></highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68" refid="config_8h_1ad995c80b8e2bfe4f2b8dc4228fb493f0" refkind="member"><highlight class="normal"><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/><ref refid="config_8c_1ad995c80b8e2bfe4f2b8dc4228fb493f0" kindref="member">getRobotLast</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="69"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;ROBOT;</highlight></codeline>
+<codeline lineno="71"><highlight class="normal">}<sp/></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"></highlight></codeline>
+<codeline lineno="73" refid="config_8h_1ae896e514fc90ada138adb9662bc40077" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="config_8c_1ae896e514fc90ada138adb9662bc40077" kindref="member">initRobot</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="74"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>=0;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>.<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>=0;</highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1afb99e8bacc7d2d725332276f6a30625c" kindref="member">tx</ref>=0;</highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a33ac7fece30e948e841ef0626178e821" kindref="member">ty</ref>=0;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1af44c2db40230064fd8239dfd1cca799c" kindref="member">speed</ref>=0;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal"></highlight><highlight class="comment">//<sp/><sp/>ROBOT.acceleration=0.032;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="81"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1ae2b19308c3681cbc09f35cec13c50d58" kindref="member">acceleration</ref>=0.082;</highlight></codeline>
+<codeline lineno="82"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1ad35f77fdbb109c792af47137a2ad5f74" kindref="member">decceleration</ref>=-0.084;</highlight></codeline>
+<codeline lineno="83"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1abc0768ef4ba84a1e5701fd071ffa9d6f" kindref="member">orientation</ref>=0.0;</highlight></codeline>
+<codeline lineno="84"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a787011f82ee0b8d1c269f97d890410e4" kindref="member">orientation_initiale</ref>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="85"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a1a032a501f457b2b537b08ccc5e3af30" kindref="member">entraxe</ref><sp/>=<sp/>5510;<sp/></highlight><highlight class="comment">//<sp/>5680<sp/>//<sp/>was<sp/>in<sp/>2008<sp/>:<sp/>7049.3</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="86"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref><sp/>=<sp/>ROBOT.<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>;</highlight></codeline>
+<codeline lineno="87"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a35a150ced7a4f6bf96b91549b761f4b7" kindref="member">nextTarget</ref><sp/>=<sp/>ROBOT.<ref refid="structrobot_1ae86408e7874d1ef673a57c10832d14e9" kindref="member">target</ref>;</highlight></codeline>
+<codeline lineno="88"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1ac6fa501ce3a7ed6eb10a3ebf5283aed4" kindref="member">speedConsigne</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="89"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref><sp/>=<sp/>20;</highlight></codeline>
+<codeline lineno="90"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a0a7ff302376daa4ab84f6aa6c533181c" kindref="member">speedConsigneRot</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="91"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1ae793c7709db3862629798d9845ec15d8" kindref="member">speedRotMax</ref><sp/>=<sp/>(ROBOT.<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref><sp/>*<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref>)/(ROBOT.<ref refid="structrobot_1a1a032a501f457b2b537b08ccc5e3af30" kindref="member">entraxe</ref>);</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1aa0a610505d0a33429e9f6c9f2a7f08c3" kindref="member">accelerationRot</ref><sp/>=<sp/>(ROBOT.<ref refid="structrobot_1ae2b19308c3681cbc09f35cec13c50d58" kindref="member">acceleration</ref><sp/>*<sp/><ref refid="_a_l_types_8h_1a598a3330b3c21701223ee0ca14316eca" kindref="member">PI</ref><sp/>)/(<sp/>ROBOT.<ref refid="structrobot_1a1a032a501f457b2b537b08ccc5e3af30" kindref="member">entraxe</ref>);</highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//ROBOT.speedConsigneRot<sp/>=<sp/>0.009;<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="94"><highlight class="normal"><sp/><sp/>ROBOT.<ref refid="structrobot_1a4f3f020964f1c13e38678513aac86b73" kindref="member">rotationMode</ref><sp/>=<sp/><ref refid="asserv_orientation_8h_1a84a1435b09c7f8af9aafca7b941b0964" kindref="member">ROTATION_IN_PLACE</ref>;</highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><ref refid="config_8c_1a2f0c2c19c34d9311e70f16bab886a6f3" kindref="member">updateLastRobot</ref>();</highlight></codeline>
+<codeline lineno="96"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98" refid="config_8c_1a028ff85d4be4b3e50f1c850ba57bef9f" refkind="member"><highlight class="normal"><ref refid="structasserv" kindref="compound">asserv</ref><sp/><ref refid="class_p_i_d" kindref="compound">PID</ref>;</highlight></codeline>
+<codeline lineno="99"><highlight class="normal"></highlight></codeline>
+<codeline lineno="100" refid="config_8h_1a5e71b7f680e74ecb24a5d99be79af082" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="config_8c_1a5e71b7f680e74ecb24a5d99be79af082" kindref="member">initPid</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="101"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"><sp/><sp/>PID.<ref refid="structasserv_1aa6c642febf7ae10bfe380ba63453f963" kindref="member">Kp_d</ref><sp/>=<sp/>64;</highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/>PID.<ref refid="structasserv_1a93e5b5fc771c7a0877f0971a567c6f72" kindref="member">Ki_d</ref><sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/>PID.<ref refid="structasserv_1afeb218cf07c1d67ddfb902d127c2633a" kindref="member">Kd_d</ref><sp/>=<sp/>30;<sp/><sp/></highlight></codeline>
+<codeline lineno="105"><highlight class="normal"><sp/><sp/>PID.<ref refid="structasserv_1a4d1fc0910cb249ae5af8e4007ce71d76" kindref="member">Kp_o</ref><sp/>=<sp/>131000;</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"><sp/><sp/>PID.<ref refid="structasserv_1a4206b0bbf2c1b60c44df113e37016c47" kindref="member">Ki_o</ref><sp/>=<sp/>0;<sp/></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"><sp/><sp/>PID.<ref refid="structasserv_1a0caee5d8e4b8082118617858791b2e1a" kindref="member">Kd_o</ref><sp/>=<sp/>32;</highlight></codeline>
+<codeline lineno="108"><highlight class="normal">}<sp/><sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="normal"></highlight></codeline>
+<codeline lineno="110" refid="config_8h_1ada49cdfb49b464ff6eddc574ea087e72" refkind="member"><highlight class="normal"><ref refid="structasserv" kindref="compound">asserv</ref><sp/>*<sp/><ref refid="config_8c_1ada49cdfb49b464ff6eddc574ea087e72" kindref="member">getPID</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">)</highlight></codeline>
+<codeline lineno="111"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="112"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>&amp;PID;</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"></highlight></codeline>
+<codeline lineno="116" refid="config_8h_1ab1f5d29f4f72309b0f218578650bb330" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="config_8c_1ab1f5d29f4f72309b0f218578650bb330" kindref="member">toMillimeter</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pDistance)</highlight></codeline>
+<codeline lineno="117"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pDistance/<ref refid="config_8h_1acacca3b69daf2bb5962520d6c2ec747e" kindref="member">COUNT_MILLIMETER</ref>;</highlight></codeline>
+<codeline lineno="119"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="120"><highlight class="normal"></highlight></codeline>
+<codeline lineno="121" refid="config_8h_1a511465638abac4418bc774d5d36b6ad4" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="config_8c_1a511465638abac4418bc774d5d36b6ad4" kindref="member">toCount</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pDistance)</highlight></codeline>
+<codeline lineno="122"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>pDistance*<ref refid="config_8h_1acacca3b69daf2bb5962520d6c2ec747e" kindref="member">COUNT_MILLIMETER</ref>;</highlight></codeline>
+<codeline lineno="124"><highlight class="normal">}</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/config.c"/>
+  </compounddef>
+</doxygen>

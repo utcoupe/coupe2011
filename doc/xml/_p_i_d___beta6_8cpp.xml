@@ -1,0 +1,396 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="_p_i_d___beta6_8cpp" kind="file">
+    <compoundname>PID_Beta6.cpp</compoundname>
+    <includes refid="motor_control_2build_2core_2wiring_8h" local="no">wiring.h</includes>
+    <includes refid="_p_i_d___beta6_8h" local="yes">PID_Beta6.h</includes>
+    <incdepgraph>
+      <node id="2087">
+        <label>stdlib.h</label>
+      </node>
+      <node id="2089">
+        <label>PID_Beta6.h</label>
+        <link refid="_p_i_d___beta6_8h"/>
+      </node>
+      <node id="2085">
+        <label>wiring.h</label>
+        <link refid="motor_control_2build_2core_2wiring_8h"/>
+        <childnode refid="2086" relation="include">
+        </childnode>
+        <childnode refid="2087" relation="include">
+        </childnode>
+        <childnode refid="2088" relation="include">
+        </childnode>
+      </node>
+      <node id="2086">
+        <label>avr/io.h</label>
+      </node>
+      <node id="2088">
+        <label>binary.h</label>
+        <link refid="motor_control_2build_2core_2binary_8h"/>
+      </node>
+      <node id="2084">
+        <label>motorControl/PID_Beta6.cpp</label>
+        <link refid="PID_Beta6.cpp"/>
+        <childnode refid="2085" relation="include">
+        </childnode>
+        <childnode refid="2089" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;<ref refid="motor_control_2build_2core_2wiring_8h" kindref="compound">wiring.h</ref>&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_p_i_d___beta6_8h" kindref="compound">PID_Beta6.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Standard<sp/>Constructor<sp/>(...)***********************************************</highlight></codeline>
+<codeline lineno="6"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>constructor<sp/>used<sp/>by<sp/>most<sp/>users.<sp/><sp/>the<sp/>parameters<sp/>specified<sp/>are<sp/>those<sp/>for</highlight></codeline>
+<codeline lineno="7"><highlight class="comment"><sp/>*<sp/>for<sp/>which<sp/>we<sp/>can&apos;t<sp/>set<sp/>up<sp/>reliable<sp/>defaults,<sp/>so<sp/>we<sp/>need<sp/>to<sp/>have<sp/>the<sp/>user</highlight></codeline>
+<codeline lineno="8"><highlight class="comment"><sp/>*<sp/>set<sp/>them.</highlight></codeline>
+<codeline lineno="9"><highlight class="comment"><sp/>***************************************************************************/</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="10" refid="class_p_i_d_1ad77bcca94be1c706e1c8a0905c00742f" refkind="member"><highlight class="normal"><ref refid="class_p_i_d_1ad77bcca94be1c706e1c8a0905c00742f" kindref="member">PID::PID</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Input,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Output,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Setpoint,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>Kc,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauI,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauD)</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="12"><highlight class="normal"></highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/>PID::ConstructorCommon(Input,<sp/>Output,<sp/>Setpoint,<sp/>Kc,<sp/>TauI,<sp/>TauD);<sp/><sp/></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/>UsingFeedForward<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><ref refid="class_p_i_d_1a9f949fd4445477ee9bf1af2bfa3e1a84" kindref="member">PID::Reset</ref>();</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"></highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="18"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="19"><highlight class="normal"></highlight></codeline>
+<codeline lineno="20"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Overloaded<sp/>Constructor(...)**********************************************</highlight></codeline>
+<codeline lineno="21"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>This<sp/>one<sp/>is<sp/>for<sp/>more<sp/>advanced<sp/>users.<sp/><sp/>it&apos;s<sp/>essentially<sp/>the<sp/>same<sp/>as<sp/>the</highlight></codeline>
+<codeline lineno="22"><highlight class="comment"><sp/>*<sp/>standard<sp/>constructor,<sp/>with<sp/>one<sp/>addition.<sp/><sp/>you<sp/>can<sp/>link<sp/>to<sp/>a<sp/>Feed<sp/>Forward<sp/>bias,</highlight></codeline>
+<codeline lineno="23"><highlight class="comment"><sp/>*<sp/>which<sp/>lets<sp/>you<sp/>implement...<sp/>um..<sp/>Feed<sp/>Forward<sp/>Control.<sp/><sp/>good<sp/>stuff.</highlight></codeline>
+<codeline lineno="24"><highlight class="comment"><sp/>***************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="25" refid="class_p_i_d_1acecababa16d6682fa855efdfecffb5ac" refkind="member"><highlight class="normal"><ref refid="class_p_i_d_1ad77bcca94be1c706e1c8a0905c00742f" kindref="member">PID::PID</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Input,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Output,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Setpoint,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*FFBias,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>Kc,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauI,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauD)</highlight></codeline>
+<codeline lineno="26"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="27"><highlight class="normal"></highlight></codeline>
+<codeline lineno="28"><highlight class="normal"><sp/><sp/>PID::ConstructorCommon(Input,<sp/>Output,<sp/>Setpoint,<sp/>Kc,<sp/>TauI,<sp/>TauD);<sp/><sp/></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>UsingFeedForward<sp/>=<sp/></highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//tell<sp/>the<sp/>controller<sp/>that<sp/>we&apos;ll<sp/>be<sp/>using<sp/>an<sp/>external</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/>myBias<sp/>=<sp/>FFBias;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//bias,<sp/>and<sp/>where<sp/>to<sp/>find<sp/>it</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/><ref refid="class_p_i_d_1a9f949fd4445477ee9bf1af2bfa3e1a84" kindref="member">PID::Reset</ref>();</highlight></codeline>
+<codeline lineno="32"><highlight class="normal"></highlight></codeline>
+<codeline lineno="33"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>ConstructorCommon(...)****************************************************</highlight></codeline>
+<codeline lineno="36"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>Most<sp/>of<sp/>what<sp/>is<sp/>done<sp/>in<sp/>the<sp/>two<sp/>constructors<sp/>is<sp/>the<sp/>same.<sp/><sp/>that<sp/>code</highlight></codeline>
+<codeline lineno="37"><highlight class="comment"><sp/>*<sp/>was<sp/>put<sp/>here<sp/>for<sp/>ease<sp/>of<sp/>maintenance<sp/>and<sp/>(minor)<sp/>reduction<sp/>of<sp/>library<sp/>size</highlight></codeline>
+<codeline lineno="38"><highlight class="comment"><sp/>****************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="39"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/>PID::ConstructorCommon(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Input,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Output,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>*Setpoint,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>Kc,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauI,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauD)</highlight></codeline>
+<codeline lineno="40"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"><sp/><sp/><ref refid="class_p_i_d_1a864f9398830acea7c2ddd1aa43248ab9" kindref="member">PID::SetInputLimits</ref>(0,<sp/>1023);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//default<sp/>the<sp/>limits<sp/>to<sp/>the<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/><sp/><ref refid="class_p_i_d_1a5645914427bd740b12faa97cc25a8414" kindref="member">PID::SetOutputLimits</ref>(0,<sp/>255);<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//full<sp/>ranges<sp/>of<sp/>the<sp/>I/O</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="43"><highlight class="normal"></highlight></codeline>
+<codeline lineno="44"><highlight class="normal"><sp/><sp/>tSample<sp/>=<sp/>1000;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//default<sp/>Controller<sp/>Sample<sp/>Time<sp/>is<sp/>1<sp/>second</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"><sp/><sp/><ref refid="class_p_i_d_1a848bb1bbeabd59d38c9c955958e3e798" kindref="member">PID::SetTunings</ref>(<sp/>Kc,<sp/>TauI,<sp/>TauD);</highlight></codeline>
+<codeline lineno="47"><highlight class="normal"></highlight></codeline>
+<codeline lineno="48"><highlight class="normal"><sp/><sp/>nextCompTime<sp/>=<sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a6ff7f2532a22366f0013bc41397129fd" kindref="member">millis</ref>();</highlight></codeline>
+<codeline lineno="49"><highlight class="normal"><sp/><sp/>inAuto<sp/>=<sp/></highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="50"><highlight class="normal"><sp/><sp/>myOutput<sp/>=<sp/>Output;</highlight></codeline>
+<codeline lineno="51"><highlight class="normal"><sp/><sp/>myInput<sp/>=<sp/>Input;</highlight></codeline>
+<codeline lineno="52"><highlight class="normal"><sp/><sp/>mySetpoint<sp/>=<sp/>Setpoint;</highlight></codeline>
+<codeline lineno="53"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="54"><highlight class="normal"></highlight></codeline>
+<codeline lineno="55"><highlight class="normal"></highlight></codeline>
+<codeline lineno="56"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SetInputLimits(...)*****************************************************</highlight></codeline>
+<codeline lineno="57"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>I<sp/>don&apos;t<sp/>see<sp/>this<sp/>function<sp/>being<sp/>called<sp/>all<sp/>that<sp/>much<sp/>(other<sp/>than<sp/>from<sp/>the</highlight></codeline>
+<codeline lineno="58"><highlight class="comment"><sp/>*<sp/><sp/>constructor.)<sp/><sp/>it<sp/>needs<sp/>to<sp/>be<sp/>here<sp/>so<sp/>we<sp/>can<sp/>tell<sp/>the<sp/>controller<sp/>what<sp/>it&apos;s</highlight></codeline>
+<codeline lineno="59"><highlight class="comment"><sp/>*<sp/><sp/>input<sp/>limits<sp/>are,<sp/>and<sp/>in<sp/>most<sp/>cases<sp/>the<sp/>0-1023<sp/>default<sp/>should<sp/>be<sp/>fine.<sp/><sp/>if</highlight></codeline>
+<codeline lineno="60"><highlight class="comment"><sp/>*<sp/><sp/>there&apos;s<sp/>an<sp/>application<sp/>where<sp/>the<sp/>signal<sp/>being<sp/>fed<sp/>to<sp/>the<sp/>controller<sp/>is</highlight></codeline>
+<codeline lineno="61"><highlight class="comment"><sp/>*<sp/><sp/>outside<sp/>that<sp/>range,<sp/>well,<sp/>then<sp/>this<sp/>function&apos;s<sp/>here<sp/>for<sp/>you.</highlight></codeline>
+<codeline lineno="62"><highlight class="comment"><sp/>**************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="63" refid="class_p_i_d_1a864f9398830acea7c2ddd1aa43248ab9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a864f9398830acea7c2ddd1aa43248ab9" kindref="member">PID::SetInputLimits</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>INMin,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>INMax)</highlight></codeline>
+<codeline lineno="64"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="65"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//after<sp/>verifying<sp/>that<sp/>mins<sp/>are<sp/>smaller<sp/>than<sp/>maxes,<sp/>set<sp/>the<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="66"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(INMin<sp/>&gt;=<sp/>INMax)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="67"><highlight class="normal"></highlight></codeline>
+<codeline lineno="68"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//rescale<sp/>the<sp/>working<sp/>variables<sp/>to<sp/>reflect<sp/>the<sp/>changes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="69"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastInput<sp/>=<sp/>(lastInput)<sp/>*<sp/>(INMax<sp/>-<sp/>INMin)<sp/>/<sp/>(inSpan);</highlight></codeline>
+<codeline lineno="70"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>accError<sp/>*=<sp/>(INMax<sp/>-<sp/>INMin)<sp/>/<sp/>(inSpan);</highlight></codeline>
+<codeline lineno="71"><highlight class="normal"></highlight></codeline>
+<codeline lineno="72"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//make<sp/>sure<sp/>the<sp/>working<sp/>variables<sp/>are<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="73"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//within<sp/>the<sp/>new<sp/>limits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="74"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(lastInput<sp/>&gt;<sp/>1)<sp/>lastInput<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="75"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(lastInput<sp/>&lt;<sp/>0)<sp/>lastInput<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="76"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="77"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="78"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inMin<sp/>=<sp/>INMin;</highlight></codeline>
+<codeline lineno="79"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inSpan<sp/>=<sp/>INMax<sp/>-<sp/>INMin;</highlight></codeline>
+<codeline lineno="80"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="81"><highlight class="normal"></highlight></codeline>
+<codeline lineno="82"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SetOutputLimits(...)****************************************************</highlight></codeline>
+<codeline lineno="83"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>This<sp/>function<sp/>will<sp/>be<sp/>used<sp/>far<sp/>more<sp/>often<sp/>than<sp/>SetInputLimits.<sp/><sp/>while</highlight></codeline>
+<codeline lineno="84"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>input<sp/>to<sp/>the<sp/>controller<sp/>will<sp/>generally<sp/>be<sp/>in<sp/>the<sp/>0-1023<sp/>range<sp/>(which<sp/>is</highlight></codeline>
+<codeline lineno="85"><highlight class="comment"><sp/>*<sp/><sp/>the<sp/>default<sp/>already,)<sp/><sp/>the<sp/>output<sp/>will<sp/>be<sp/>a<sp/>little<sp/>different.<sp/><sp/>maybe<sp/>they&apos;ll</highlight></codeline>
+<codeline lineno="86"><highlight class="comment"><sp/>*<sp/><sp/>be<sp/>doing<sp/>a<sp/>time<sp/>window<sp/>and<sp/>will<sp/>need<sp/>0-8000<sp/>or<sp/>something.<sp/><sp/>or<sp/>maybe<sp/>they&apos;ll</highlight></codeline>
+<codeline lineno="87"><highlight class="comment"><sp/>*<sp/><sp/>want<sp/>to<sp/>clamp<sp/>it<sp/>from<sp/>0-125.<sp/><sp/>who<sp/>knows.<sp/><sp/>at<sp/>any<sp/>rate,<sp/>that<sp/>can<sp/>all<sp/>be<sp/>done</highlight></codeline>
+<codeline lineno="88"><highlight class="comment"><sp/>*<sp/><sp/>here.</highlight></codeline>
+<codeline lineno="89"><highlight class="comment"><sp/>**************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="90" refid="class_p_i_d_1a5645914427bd740b12faa97cc25a8414" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a5645914427bd740b12faa97cc25a8414" kindref="member">PID::SetOutputLimits</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>OUTMin,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>OUTMax)</highlight></codeline>
+<codeline lineno="91"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="92"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//after<sp/>verifying<sp/>that<sp/>mins<sp/>are<sp/>smaller<sp/>than<sp/>maxes,<sp/>set<sp/>the<sp/>values</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="93"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(OUTMin<sp/>&gt;=<sp/>OUTMax)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="94"><highlight class="normal"></highlight></codeline>
+<codeline lineno="95"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//rescale<sp/>the<sp/>working<sp/>variables<sp/>to<sp/>reflect<sp/>the<sp/>changes</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="96"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastOutput<sp/>=<sp/>(lastOutput)<sp/>*<sp/>(OUTMax<sp/>-<sp/>OUTMin)<sp/>/<sp/>(outSpan);</highlight></codeline>
+<codeline lineno="97"><highlight class="normal"></highlight></codeline>
+<codeline lineno="98"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//make<sp/>sure<sp/>the<sp/>working<sp/>variables<sp/>are<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="99"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//within<sp/>the<sp/>new<sp/>limits</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="100"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(lastOutput<sp/>&gt;<sp/>1)<sp/>lastOutput<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="101"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(lastOutput<sp/>&lt;<sp/>0)<sp/>lastOutput<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="102"><highlight class="normal"></highlight></codeline>
+<codeline lineno="103"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>outMin<sp/>=<sp/>OUTMin;</highlight></codeline>
+<codeline lineno="104"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>outSpan<sp/>=<sp/>OUTMax<sp/>-<sp/>OUTMin;</highlight></codeline>
+<codeline lineno="105"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="106"><highlight class="normal"></highlight></codeline>
+<codeline lineno="107"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SetTunings(...)*************************************************************</highlight></codeline>
+<codeline lineno="108"><highlight class="comment"><sp/>*<sp/>This<sp/>function<sp/>allows<sp/>the<sp/>controller&apos;s<sp/>dynamic<sp/>performance<sp/>to<sp/>be<sp/>adjusted.<sp/></highlight></codeline>
+<codeline lineno="109"><highlight class="comment"><sp/>*<sp/>it&apos;s<sp/>called<sp/>automatically<sp/>from<sp/>the<sp/>constructor,<sp/>but<sp/>tunings<sp/>can<sp/>also</highlight></codeline>
+<codeline lineno="110"><highlight class="comment"><sp/>*<sp/>be<sp/>adjusted<sp/>on<sp/>the<sp/>fly<sp/>during<sp/>normal<sp/>operation</highlight></codeline>
+<codeline lineno="111"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="112" refid="class_p_i_d_1a848bb1bbeabd59d38c9c955958e3e798" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a848bb1bbeabd59d38c9c955958e3e798" kindref="member">PID::SetTunings</ref>(</highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>Kc,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauI,<sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>TauD)</highlight></codeline>
+<codeline lineno="113"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="114"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//verify<sp/>that<sp/>the<sp/>tunings<sp/>make<sp/>sense</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="115"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Kc<sp/>==<sp/>0.0<sp/>||<sp/>TauI<sp/>&lt;<sp/>0.0<sp/>||<sp/>TauD<sp/>&lt;<sp/>0.0)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="116"><highlight class="normal"></highlight></codeline>
+<codeline lineno="117"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//we&apos;re<sp/>going<sp/>to<sp/>do<sp/>some<sp/>funky<sp/>things<sp/>to<sp/>the<sp/>input<sp/>numbers<sp/>so<sp/>all</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="118"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//our<sp/>math<sp/>works<sp/>out,<sp/>but<sp/>we<sp/>want<sp/>to<sp/>store<sp/>the<sp/>numbers<sp/>intact</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="119"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//so<sp/>we<sp/>can<sp/>return<sp/>them<sp/>to<sp/>the<sp/>user<sp/>when<sp/>asked.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="120"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>P_Param<sp/>=<sp/>Kc;</highlight></codeline>
+<codeline lineno="121"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>I_Param<sp/>=<sp/>TauI;</highlight></codeline>
+<codeline lineno="122"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>D_Param<sp/>=<sp/>TauD;</highlight></codeline>
+<codeline lineno="123"><highlight class="normal"></highlight></codeline>
+<codeline lineno="124"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//convert<sp/>Reset<sp/>Time<sp/>into<sp/>Reset<sp/>Rate,<sp/>and<sp/>compensate<sp/>for<sp/>Calculation<sp/>frequency</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="125"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tSampleInSec<sp/>=<sp/>((double)tSample<sp/>/<sp/>1000.0);</highlight></codeline>
+<codeline lineno="126"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>tempTauR;</highlight></codeline>
+<codeline lineno="127"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(TauI<sp/>==<sp/>0.0)<sp/></highlight></codeline>
+<codeline lineno="128"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tempTauR<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="129"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="130"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tempTauR<sp/>=<sp/>(1.0<sp/>/<sp/>TauI)<sp/>*<sp/>tSampleInSec;</highlight></codeline>
+<codeline lineno="131"><highlight class="normal"></highlight></codeline>
+<codeline lineno="132"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(inAuto)</highlight></codeline>
+<codeline lineno="133"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//if<sp/>we&apos;re<sp/>in<sp/>auto,<sp/>and<sp/>we<sp/>just<sp/>change<sp/>the<sp/>tunings,<sp/>the<sp/>integral<sp/>term<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="134"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//will<sp/>become<sp/>very,<sp/>very,<sp/>confused<sp/>(trust<sp/>me.)<sp/>to<sp/>achieve<sp/>&quot;bumpless</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="135"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>transfer&quot;<sp/>we<sp/>need<sp/>to<sp/>rescale<sp/>the<sp/>accumulated<sp/>error.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="136"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(tempTauR<sp/>!=<sp/>0.0)<sp/></highlight><highlight class="comment">//(avoid<sp/>divide<sp/>by<sp/>0)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="137"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>accError<sp/>*=<sp/>(kc<sp/>*<sp/>taur)/(Kc<sp/>*<sp/>tempTauR);</highlight></codeline>
+<codeline lineno="138"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="139"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>accError<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="140"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="141"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="142"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>kc<sp/>=<sp/>Kc;</highlight></codeline>
+<codeline lineno="143"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>taur<sp/>=<sp/>tempTauR;</highlight></codeline>
+<codeline lineno="144"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>taud<sp/>=<sp/>TauD<sp/>/<sp/>tSampleInSec;</highlight></codeline>
+<codeline lineno="145"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="146"><highlight class="normal"></highlight></codeline>
+<codeline lineno="147"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Reset()*********************************************************************</highlight></codeline>
+<codeline lineno="148"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/><sp/>does<sp/>all<sp/>the<sp/>things<sp/>that<sp/>need<sp/>to<sp/>happen<sp/>to<sp/>ensure<sp/>a<sp/>bumpless<sp/>transfer</highlight></codeline>
+<codeline lineno="149"><highlight class="comment"><sp/>*<sp/><sp/>from<sp/>manual<sp/>to<sp/>automatic<sp/>mode.<sp/><sp/>this<sp/>shouldn&apos;t<sp/>have<sp/>to<sp/>be<sp/>called<sp/>from<sp/>the</highlight></codeline>
+<codeline lineno="150"><highlight class="comment"><sp/>*<sp/><sp/>outside.<sp/>In<sp/>practice<sp/>though,<sp/>it<sp/>is<sp/>sometimes<sp/>helpful<sp/>to<sp/>start<sp/>from<sp/>scratch,</highlight></codeline>
+<codeline lineno="151"><highlight class="comment"><sp/>*<sp/><sp/>so<sp/>it<sp/>was<sp/>made<sp/>publicly<sp/>available</highlight></codeline>
+<codeline lineno="152"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="153" refid="class_p_i_d_1a9f949fd4445477ee9bf1af2bfa3e1a84" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a9f949fd4445477ee9bf1af2bfa3e1a84" kindref="member">PID::Reset</ref>()</highlight></codeline>
+<codeline lineno="154"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="155"><highlight class="normal"></highlight></codeline>
+<codeline lineno="156"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(UsingFeedForward)</highlight></codeline>
+<codeline lineno="157"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bias<sp/>=<sp/>(*myBias<sp/>-<sp/>outMin)<sp/>/<sp/>outSpan;</highlight></codeline>
+<codeline lineno="158"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="159"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bias<sp/>=<sp/>(*myOutput<sp/>-<sp/>outMin)<sp/>/<sp/>outSpan;</highlight></codeline>
+<codeline lineno="160"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="161"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastOutput<sp/>=<sp/>bias;</highlight></codeline>
+<codeline lineno="162"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastInput<sp/>=<sp/>(*myInput<sp/>-<sp/>inMin)<sp/>/<sp/>inSpan;</highlight></codeline>
+<codeline lineno="163"><highlight class="normal"></highlight></codeline>
+<codeline lineno="164"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>-<sp/>clear<sp/>any<sp/>error<sp/>in<sp/>the<sp/>integral</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="165"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>accError<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="166"><highlight class="normal"></highlight></codeline>
+<codeline lineno="167"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="168"><highlight class="normal"></highlight></codeline>
+<codeline lineno="169"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SetMode(...)****************************************************************</highlight></codeline>
+<codeline lineno="170"><highlight class="comment"><sp/>*<sp/>Allows<sp/>the<sp/>controller<sp/>Mode<sp/>to<sp/>be<sp/>set<sp/>to<sp/>manual<sp/>(0)<sp/>or<sp/>Automatic<sp/>(non-zero)</highlight></codeline>
+<codeline lineno="171"><highlight class="comment"><sp/>*<sp/>when<sp/>the<sp/>transition<sp/>from<sp/>manual<sp/>to<sp/>auto<sp/>occurs,<sp/>the<sp/>controller<sp/>is</highlight></codeline>
+<codeline lineno="172"><highlight class="comment"><sp/>*<sp/>automatically<sp/>initialized</highlight></codeline>
+<codeline lineno="173"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="174" refid="class_p_i_d_1a68074bad88a8cc442ee03a036073d5d5" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a68074bad88a8cc442ee03a036073d5d5" kindref="member">PID::SetMode</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>Mode)</highlight></codeline>
+<codeline lineno="175"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="176"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Mode!=0<sp/>&amp;&amp;<sp/>!inAuto)</highlight></codeline>
+<codeline lineno="177"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//we<sp/>were<sp/>in<sp/>manual,<sp/>and<sp/>we<sp/>just<sp/>got<sp/>set<sp/>to<sp/>auto.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="178"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//reset<sp/>the<sp/>controller<sp/>internals</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="179"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><ref refid="class_p_i_d_1a9f949fd4445477ee9bf1af2bfa3e1a84" kindref="member">PID::Reset</ref>();</highlight></codeline>
+<codeline lineno="180"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="181"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>inAuto<sp/>=<sp/>(Mode!=0);</highlight></codeline>
+<codeline lineno="182"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="183"><highlight class="normal"></highlight></codeline>
+<codeline lineno="184"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>SetSampleTime(...)*******************************************************</highlight></codeline>
+<codeline lineno="185"><highlight class="comment"><sp/>*<sp/>sets<sp/>the<sp/>frequency,<sp/>in<sp/>Milliseconds,<sp/>with<sp/>which<sp/>the<sp/>PID<sp/>calculation<sp/>is<sp/>performed<sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="186"><highlight class="comment"><sp/>******************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="187" refid="class_p_i_d_1aaa1e0e67a0c97571bd62b326e6cf3b2e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1aaa1e0e67a0c97571bd62b326e6cf3b2e" kindref="member">PID::SetSampleTime</ref>(</highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/>NewSampleTime)</highlight></codeline>
+<codeline lineno="188"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="189"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(NewSampleTime<sp/>&gt;<sp/>0)</highlight></codeline>
+<codeline lineno="190"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{<sp/></highlight></codeline>
+<codeline lineno="191"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//convert<sp/>the<sp/>time-based<sp/>tunings<sp/>to<sp/>reflect<sp/>this<sp/>change</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="192"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>taur<sp/>*=<sp/>((double)NewSampleTime)/((double)<sp/>tSample);</highlight></codeline>
+<codeline lineno="193"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>accError<sp/>*=<sp/>((double)<sp/>tSample)/((double)NewSampleTime);</highlight></codeline>
+<codeline lineno="194"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>taud<sp/>*=<sp/>((double)NewSampleTime)/((double)<sp/>tSample);</highlight></codeline>
+<codeline lineno="195"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>tSample<sp/>=<sp/>(</highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/>long)NewSampleTime;</highlight></codeline>
+<codeline lineno="196"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="197"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="198"><highlight class="normal"></highlight></codeline>
+<codeline lineno="199"><highlight class="normal"></highlight><highlight class="comment">/*<sp/>Compute()<sp/>**********************************************************************</highlight></codeline>
+<codeline lineno="200"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/><sp/>This,<sp/>as<sp/>they<sp/>say,<sp/>is<sp/>where<sp/>the<sp/>magic<sp/>happens.<sp/><sp/>this<sp/>function<sp/>should<sp/>be<sp/>called</highlight></codeline>
+<codeline lineno="201"><highlight class="comment"><sp/>*<sp/><sp/><sp/>every<sp/>time<sp/>&quot;void<sp/>loop()&quot;<sp/>executes.<sp/><sp/>the<sp/>function<sp/>will<sp/>decide<sp/>for<sp/>itself<sp/>whether<sp/>a<sp/>new</highlight></codeline>
+<codeline lineno="202"><highlight class="comment"><sp/>*<sp/><sp/><sp/>pid<sp/>Output<sp/>needs<sp/>to<sp/>be<sp/>computed</highlight></codeline>
+<codeline lineno="203"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="204"><highlight class="comment"><sp/>*<sp/><sp/>Some<sp/>notes<sp/>for<sp/>people<sp/>familiar<sp/>with<sp/>the<sp/>nuts<sp/>and<sp/>bolts<sp/>of<sp/>PID<sp/>control:</highlight></codeline>
+<codeline lineno="205"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>I<sp/>used<sp/>the<sp/>Ideal<sp/>form<sp/>of<sp/>the<sp/>PID<sp/>equation.<sp/><sp/>mainly<sp/>because<sp/>I<sp/>like<sp/>IMC</highlight></codeline>
+<codeline lineno="206"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>tunings.<sp/><sp/>lock<sp/>in<sp/>the<sp/>I<sp/>and<sp/>D,<sp/>and<sp/>then<sp/>just<sp/>vary<sp/>P<sp/>to<sp/>get<sp/>more<sp/></highlight></codeline>
+<codeline lineno="207"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>aggressive<sp/>or<sp/>conservative</highlight></codeline>
+<codeline lineno="208"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="209"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>While<sp/>this<sp/>controller<sp/>presented<sp/>to<sp/>the<sp/>outside<sp/>world<sp/>as<sp/>being<sp/>a<sp/>Reset<sp/>Time</highlight></codeline>
+<codeline lineno="210"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>controller,<sp/>when<sp/>the<sp/>user<sp/>enters<sp/>their<sp/>tunings<sp/>the<sp/>I<sp/>term<sp/>is<sp/>converted<sp/>to</highlight></codeline>
+<codeline lineno="211"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>Reset<sp/>Rate.<sp/><sp/>I<sp/>did<sp/>this<sp/>merely<sp/>to<sp/>avoid<sp/>the<sp/>div0<sp/>error<sp/>when<sp/>the<sp/>user<sp/>wants</highlight></codeline>
+<codeline lineno="212"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>to<sp/>turn<sp/>Integral<sp/>action<sp/>off.</highlight></codeline>
+<codeline lineno="213"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="214"><highlight class="comment"><sp/>*<sp/><sp/>-<sp/>Derivative<sp/>on<sp/>Measurement<sp/>is<sp/>being<sp/>used<sp/>instead<sp/>of<sp/>Derivative<sp/>on<sp/>Error.<sp/><sp/>The</highlight></codeline>
+<codeline lineno="215"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>performance<sp/>is<sp/>identical,<sp/>with<sp/>one<sp/>notable<sp/>exception.<sp/><sp/>DonE<sp/>causes<sp/>a<sp/>kick<sp/>in</highlight></codeline>
+<codeline lineno="216"><highlight class="comment"><sp/>*<sp/><sp/><sp/><sp/>the<sp/>controller<sp/>output<sp/>whenever<sp/>there&apos;s<sp/>a<sp/>setpoint<sp/>change.<sp/>DonM<sp/>does<sp/>not.</highlight></codeline>
+<codeline lineno="217"><highlight class="comment"><sp/>*</highlight></codeline>
+<codeline lineno="218"><highlight class="comment"><sp/>*<sp/><sp/>If<sp/>none<sp/>of<sp/>the<sp/>above<sp/>made<sp/>sense<sp/>to<sp/>you,<sp/>and<sp/>you<sp/>would<sp/>like<sp/>it<sp/>to,<sp/>go<sp/>to:</highlight></codeline>
+<codeline lineno="219"><highlight class="comment"><sp/>*<sp/><sp/>http://www.controlguru.com<sp/>.<sp/><sp/>Dr.<sp/>Cooper<sp/>was<sp/>my<sp/>controls<sp/>professor,<sp/>and<sp/>is</highlight></codeline>
+<codeline lineno="220"><highlight class="comment"><sp/>*<sp/><sp/>gifted<sp/>at<sp/>concisely<sp/>and<sp/>clearly<sp/>explaining<sp/>PID<sp/>control</highlight></codeline>
+<codeline lineno="221"><highlight class="comment"><sp/>*********************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="222" refid="class_p_i_d_1a05a3258d4b553e7a121f7360ffe88065" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a05a3258d4b553e7a121f7360ffe88065" kindref="member">PID::Compute</ref>()</highlight></codeline>
+<codeline lineno="223"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="224"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>justCalced=</highlight><highlight class="keyword">false</highlight><highlight class="normal">;</highlight></codeline>
+<codeline lineno="225"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!inAuto)<sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal">;<sp/></highlight><highlight class="comment">//if<sp/>we&apos;re<sp/>in<sp/>manual<sp/>just<sp/>leave;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="226"><highlight class="normal"></highlight></codeline>
+<codeline lineno="227"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">unsigned</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordtype">long</highlight><highlight class="normal"><sp/>now<sp/>=<sp/><ref refid="com_2carte_2build_2core_2wiring_8c_1a6ff7f2532a22366f0013bc41397129fd" kindref="member">millis</ref>();</highlight></codeline>
+<codeline lineno="228"><highlight class="normal"></highlight></codeline>
+<codeline lineno="229"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//millis()<sp/>wraps<sp/>around<sp/>to<sp/>0<sp/>at<sp/>some<sp/>point.<sp/><sp/>depending<sp/>on<sp/>the<sp/>version<sp/>of<sp/>the<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="230"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//Arduino<sp/>Program<sp/>you<sp/>are<sp/>using,<sp/>it<sp/>could<sp/>be<sp/>in<sp/>9<sp/>hours<sp/>or<sp/>50<sp/>days.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="231"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//this<sp/>is<sp/>not<sp/>currently<sp/>addressed<sp/>by<sp/>this<sp/>algorithm.</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="232"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="233"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="234"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//...Perform<sp/>PID<sp/>Computations<sp/>if<sp/>it&apos;s<sp/>time...</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="235"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(now&gt;=nextCompTime)<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="236"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="237"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="238"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//pull<sp/>in<sp/>the<sp/>input<sp/>and<sp/>setpoint,<sp/>and<sp/>scale<sp/>them<sp/>into<sp/>percent<sp/>span</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="239"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>scaledInput<sp/>=<sp/>(*myInput<sp/>-<sp/>inMin)<sp/>/<sp/>inSpan;</highlight></codeline>
+<codeline lineno="240"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(scaledInput&gt;1.0)<sp/>scaledInput<sp/>=<sp/>1.0;</highlight></codeline>
+<codeline lineno="241"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(scaledInput&lt;0.0)<sp/>scaledInput<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="242"><highlight class="normal"></highlight></codeline>
+<codeline lineno="243"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>scaledSP<sp/>=<sp/>(*mySetpoint<sp/>-<sp/>inMin)<sp/>/<sp/>inSpan;</highlight></codeline>
+<codeline lineno="244"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(scaledSP&gt;1.0)<sp/>scaledSP<sp/>=<sp/>1;</highlight></codeline>
+<codeline lineno="245"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(scaledSP&lt;0.0)<sp/>scaledSP<sp/>=<sp/>0;</highlight></codeline>
+<codeline lineno="246"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="247"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//compute<sp/>the<sp/>error</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="248"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>err<sp/>=<sp/>scaledSP<sp/>-<sp/>scaledInput;</highlight></codeline>
+<codeline lineno="249"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="250"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>check<sp/>and<sp/>see<sp/>if<sp/>the<sp/>output<sp/>is<sp/>pegged<sp/>at<sp/>a<sp/>limit<sp/>and<sp/>only<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="251"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>integrate<sp/>if<sp/>it<sp/>is<sp/>not.<sp/>(this<sp/>is<sp/>to<sp/>prevent<sp/>reset-windup)</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="252"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(!(lastOutput<sp/>&gt;=<sp/>1<sp/>&amp;&amp;<sp/>err&gt;0)<sp/>&amp;&amp;<sp/>!(lastOutput<sp/>&lt;=<sp/>0<sp/>&amp;&amp;<sp/>err&lt;0))</highlight></codeline>
+<codeline lineno="253"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="254"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>accError<sp/>=<sp/>accError<sp/>+<sp/>err;</highlight></codeline>
+<codeline lineno="255"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="256"><highlight class="normal"></highlight></codeline>
+<codeline lineno="257"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>compute<sp/>the<sp/>current<sp/>slope<sp/>of<sp/>the<sp/>input<sp/>signal</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="258"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>dMeas<sp/>=<sp/>(scaledInput<sp/>-<sp/>lastInput);<sp/><sp/></highlight><highlight class="comment">//<sp/>we&apos;ll<sp/>assume<sp/>that<sp/>dTime<sp/>(the<sp/>denominator)<sp/>is<sp/>1<sp/>second.<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="259"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>if<sp/>it<sp/>isn&apos;t,<sp/>the<sp/>taud<sp/>term<sp/>will<sp/>have<sp/>been<sp/>adjusted<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="260"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>in<sp/>&quot;SetTunings&quot;<sp/>to<sp/>compensate</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="261"><highlight class="normal"></highlight></codeline>
+<codeline lineno="262"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//if<sp/>we&apos;re<sp/>using<sp/>an<sp/>external<sp/>bias<sp/>(i.e.<sp/>the<sp/>user<sp/>used<sp/>the<sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="263"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//overloaded<sp/>constructor,)<sp/>then<sp/>pull<sp/>that<sp/>in<sp/>now</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="264"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(UsingFeedForward)</highlight></codeline>
+<codeline lineno="265"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>{</highlight></codeline>
+<codeline lineno="266"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>bias<sp/>=<sp/>(*myBias<sp/>-<sp/>outMin)<sp/>/<sp/>outSpan;</highlight></codeline>
+<codeline lineno="267"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}</highlight></codeline>
+<codeline lineno="268"><highlight class="normal"></highlight></codeline>
+<codeline lineno="269"><highlight class="normal"></highlight></codeline>
+<codeline lineno="270"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>perform<sp/>the<sp/>PID<sp/>calculation.<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="271"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/>output<sp/>=<sp/>bias<sp/>+<sp/>kc<sp/>*<sp/>(err<sp/>+<sp/>taur<sp/>*<sp/>accError<sp/>-<sp/>taud<sp/>*<sp/>dMeas);</highlight></codeline>
+<codeline lineno="272"><highlight class="normal"></highlight></codeline>
+<codeline lineno="273"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//make<sp/>sure<sp/>the<sp/>computed<sp/>output<sp/>is<sp/>within<sp/>output<sp/>constraints</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="274"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(output<sp/>&lt;<sp/>0.0)<sp/>output<sp/>=<sp/>0.0;</highlight></codeline>
+<codeline lineno="275"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(output<sp/>&gt;<sp/>1.0)<sp/>output<sp/>=<sp/>1.0;</highlight></codeline>
+<codeline lineno="276"><highlight class="normal"></highlight></codeline>
+<codeline lineno="277"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastOutput<sp/>=<sp/>output;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>remember<sp/>this<sp/>output<sp/>for<sp/>the<sp/>windup</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="278"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>check<sp/>next<sp/>time<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="279"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>lastInput<sp/>=<sp/>scaledInput;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>remember<sp/>the<sp/>Input<sp/>for<sp/>the<sp/>derivative</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="280"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>calculation<sp/>next<sp/>time</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="281"><highlight class="normal"></highlight></codeline>
+<codeline lineno="282"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//scale<sp/>the<sp/>output<sp/>from<sp/>percent<sp/>span<sp/>back<sp/>out<sp/>to<sp/>a<sp/>real<sp/>world<sp/>number</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="283"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>*myOutput<sp/>=<sp/>((output<sp/>*<sp/>outSpan)<sp/>+<sp/>outMin);</highlight></codeline>
+<codeline lineno="284"><highlight class="normal"></highlight></codeline>
+<codeline lineno="285"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>nextCompTime<sp/>+=<sp/>tSample;<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>determine<sp/>the<sp/>next<sp/>time<sp/>the<sp/>computation</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="286"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(nextCompTime<sp/>&lt;<sp/>now)<sp/>nextCompTime<sp/>=<sp/>now<sp/>+<sp/>tSample;<sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>should<sp/>be<sp/>performed<sp/><sp/></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="287"><highlight class="normal"></highlight></codeline>
+<codeline lineno="288"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>justCalced=</highlight><highlight class="keyword">true</highlight><highlight class="normal">;<sp/><sp/></highlight><highlight class="comment">//set<sp/>the<sp/>flag<sp/>that<sp/>will<sp/>tell<sp/>the<sp/>outside<sp/>world<sp/>that<sp/>the<sp/>output<sp/>was<sp/>just<sp/>computed</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="289"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>}<sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="290"><highlight class="normal"></highlight></codeline>
+<codeline lineno="291"><highlight class="normal"></highlight></codeline>
+<codeline lineno="292"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="293"><highlight class="normal"></highlight></codeline>
+<codeline lineno="294"><highlight class="normal"></highlight></codeline>
+<codeline lineno="295"><highlight class="normal"></highlight><highlight class="comment">/*****************************************************************************</highlight></codeline>
+<codeline lineno="296"><highlight class="comment"><sp/>*<sp/>STATUS<sp/>SECTION</highlight></codeline>
+<codeline lineno="297"><highlight class="comment"><sp/>*<sp/>These<sp/>functions<sp/>allow<sp/>the<sp/>outside<sp/>world<sp/>to<sp/>query<sp/>the<sp/>status<sp/>of<sp/>the<sp/>PID</highlight></codeline>
+<codeline lineno="298"><highlight class="comment"><sp/>*****************************************************************************/</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="299"><highlight class="normal"></highlight></codeline>
+<codeline lineno="300" refid="class_p_i_d_1a34178c5110d89a8029e403f6ef5d003d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">bool</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a34178c5110d89a8029e403f6ef5d003d" kindref="member">PID::JustCalculated</ref>()</highlight></codeline>
+<codeline lineno="301"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="302"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>justCalced;</highlight></codeline>
+<codeline lineno="303"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="304" refid="class_p_i_d_1acc325db5e6a140b92c8199a66e03491b" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1acc325db5e6a140b92c8199a66e03491b" kindref="member">PID::GetMode</ref>()</highlight></codeline>
+<codeline lineno="305"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="306"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal">(inAuto)</highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>1;</highlight></codeline>
+<codeline lineno="307"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">else</highlight><highlight class="normal"><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>0;</highlight></codeline>
+<codeline lineno="308"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="309"><highlight class="normal"></highlight></codeline>
+<codeline lineno="310" refid="class_p_i_d_1aad301ae788217d101db9920e5bea87d9" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1aad301ae788217d101db9920e5bea87d9" kindref="member">PID::GetINMin</ref>()</highlight></codeline>
+<codeline lineno="311"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="312"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inMin;</highlight></codeline>
+<codeline lineno="313"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="314" refid="class_p_i_d_1a9f2f86d985e64cb8964a1983e72730d0" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a9f2f86d985e64cb8964a1983e72730d0" kindref="member">PID::GetINMax</ref>()</highlight></codeline>
+<codeline lineno="315"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="316"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>inMin<sp/>+<sp/>inSpan;</highlight></codeline>
+<codeline lineno="317"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="318" refid="class_p_i_d_1a32ca94a318928956b5c0ae8df05e0719" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a32ca94a318928956b5c0ae8df05e0719" kindref="member">PID::GetOUTMin</ref>()</highlight></codeline>
+<codeline lineno="319"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="320"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>outMin;</highlight></codeline>
+<codeline lineno="321"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="322" refid="class_p_i_d_1add9858b10dd4f047cb61c13d8f7d960e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1add9858b10dd4f047cb61c13d8f7d960e" kindref="member">PID::GetOUTMax</ref>()</highlight></codeline>
+<codeline lineno="323"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="324"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>outMin+outSpan;</highlight></codeline>
+<codeline lineno="325"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="326" refid="class_p_i_d_1aefa4318e7ab26fbdfd7a2f6870d694e8" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">int</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1aefa4318e7ab26fbdfd7a2f6870d694e8" kindref="member">PID::GetSampleTime</ref>()</highlight></codeline>
+<codeline lineno="327"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="328"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>tSample;</highlight></codeline>
+<codeline lineno="329"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="330" refid="class_p_i_d_1aea3e79c84e5c6a57368255f9cba2d34e" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1aea3e79c84e5c6a57368255f9cba2d34e" kindref="member">PID::GetP_Param</ref>()</highlight></codeline>
+<codeline lineno="331"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="332"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>P_Param;</highlight></codeline>
+<codeline lineno="333"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="334" refid="class_p_i_d_1a3bea5dd3597f890cc6617aca1dd91583" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1a3bea5dd3597f890cc6617aca1dd91583" kindref="member">PID::GetI_Param</ref>()</highlight></codeline>
+<codeline lineno="335"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="336"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>I_Param;</highlight></codeline>
+<codeline lineno="337"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="338"><highlight class="normal"></highlight></codeline>
+<codeline lineno="339" refid="class_p_i_d_1af6527704d50bc48bbd5d15219b02e54d" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">double</highlight><highlight class="normal"><sp/><ref refid="class_p_i_d_1af6527704d50bc48bbd5d15219b02e54d" kindref="member">PID::GetD_Param</ref>()</highlight></codeline>
+<codeline lineno="340"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="341"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>D_Param;</highlight></codeline>
+<codeline lineno="342"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="343"><highlight class="normal"></highlight></codeline>
+<codeline lineno="344"><highlight class="normal"></highlight></codeline>
+<codeline lineno="345"><highlight class="normal"></highlight></codeline>
+<codeline lineno="346"><highlight class="normal"></highlight></codeline>
+<codeline lineno="347"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/PID_Beta6.cpp"/>
+  </compounddef>
+</doxygen>

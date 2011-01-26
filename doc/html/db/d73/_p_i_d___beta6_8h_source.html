@@ -1,0 +1,141 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de motorControl/PID_Beta6.h</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>motorControl/PID_Beta6.h</h1><a href="../../db/d73/_p_i_d___beta6_8h.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#ifndef PID_Beta6_h</span>
+<a name="l00002"></a>00002 <span class="preprocessor"></span><span class="preprocessor">#define PID_Beta6_h</span>
+<a name="l00003"></a>00003 <span class="preprocessor"></span>
+<a name="l00004"></a><a class="code" href="../../d6/d5a/class_p_i_d.html">00004</a> <span class="keyword">class </span><a class="code" href="../../d6/d5a/class_p_i_d.html">PID</a>
+<a name="l00005"></a>00005 {
+<a name="l00006"></a>00006 
+<a name="l00007"></a>00007 
+<a name="l00008"></a>00008   <span class="keyword">public</span>:
+<a name="l00009"></a>00009 
+<a name="l00010"></a><a class="code" href="../../db/d73/_p_i_d___beta6_8h.html#a0cc6f7717df9fbdc0f33efb88720a639">00010</a> <span class="preprocessor">  #define AUTO  1</span>
+<a name="l00011"></a><a class="code" href="../../db/d73/_p_i_d___beta6_8h.html#a8187a9af791c0a44ba67edd9cf266961">00011</a> <span class="preprocessor"></span><span class="preprocessor">  #define MANUAL        0</span>
+<a name="l00012"></a><a class="code" href="../../db/d73/_p_i_d___beta6_8h.html#a8650e6793d46032c617bb7b824f90bfd">00012</a> <span class="preprocessor"></span><span class="preprocessor">  #define LIBRARY_VERSION       0.6</span>
+<a name="l00013"></a>00013 <span class="preprocessor"></span>
+<a name="l00014"></a>00014   <span class="comment">//commonly used functions **************************************************************************</span>
+<a name="l00015"></a>00015     <a class="code" href="../../d6/d5a/class_p_i_d.html#ad77bcca94be1c706e1c8a0905c00742f">PID</a>(<span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*,        <span class="comment">// * constructor.  links the PID to the Input, Output, and </span>
+<a name="l00016"></a>00016         <span class="keywordtype">double</span>, <span class="keywordtype">double</span>, <span class="keywordtype">double</span>);          <span class="comment">//   Setpoint.  Initial tuning parameters are also set here</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a>00018     <a class="code" href="../../d6/d5a/class_p_i_d.html#ad77bcca94be1c706e1c8a0905c00742f">PID</a>(<span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*,        <span class="comment">// * Overloaded Constructor.  if the user wants to implement</span>
+<a name="l00019"></a>00019         <span class="keywordtype">double</span>*, <span class="keywordtype">double</span>, <span class="keywordtype">double</span>, <span class="keywordtype">double</span>); <span class="comment">//   feed-forward</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a68074bad88a8cc442ee03a036073d5d5">SetMode</a>(<span class="keywordtype">int</span> Mode);               <span class="comment">// * sets PID to either Manual (0) or Auto (non-0)</span>
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a05a3258d4b553e7a121f7360ffe88065">Compute</a>();                       <span class="comment">// * performs the PID calculation.  it should be</span>
+<a name="l00024"></a>00024                                           <span class="comment">//   called every time loop() cycles. ON/OFF and</span>
+<a name="l00025"></a>00025                                           <span class="comment">//   calculation frequency can be set using SetMode</span>
+<a name="l00026"></a>00026                                           <span class="comment">//   SetSampleTime respectively</span>
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a864f9398830acea7c2ddd1aa43248ab9">SetInputLimits</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>);  <span class="comment">//Tells the PID what 0-100% are for the Input</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a5645914427bd740b12faa97cc25a8414">SetOutputLimits</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>); <span class="comment">//Tells the PID what 0-100% are for the Output</span>
+<a name="l00031"></a>00031 
+<a name="l00032"></a>00032 
+<a name="l00033"></a>00033   <span class="comment">//available but not commonly used functions ********************************************************</span>
+<a name="l00034"></a>00034     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a848bb1bbeabd59d38c9c955958e3e798">SetTunings</a>(<span class="keywordtype">double</span>, <span class="keywordtype">double</span>,       <span class="comment">// * While most users will set the tunings once in the </span>
+<a name="l00035"></a>00035                     <span class="keywordtype">double</span>);              <span class="comment">//   constructor, this function gives the user the option</span>
+<a name="l00036"></a>00036                                           <span class="comment">//   of changing tunings during runtime for Adaptive control</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a>00038     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#aaa1e0e67a0c97571bd62b326e6cf3b2e">SetSampleTime</a>(<span class="keywordtype">int</span>);           <span class="comment">// * sets the frequency, in Milliseconds, with which </span>
+<a name="l00039"></a>00039                                           <span class="comment">//   the PID calculation is performed.  default is 1000 </span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041     <span class="keywordtype">void</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a9f949fd4445477ee9bf1af2bfa3e1a84">Reset</a>();                         <span class="comment">// * reinitializes controller internals.  automatically</span>
+<a name="l00042"></a>00042                                           <span class="comment">//   called on a manual to auto transition</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044     <span class="keywordtype">bool</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a34178c5110d89a8029e403f6ef5d003d">JustCalculated</a>();                <span class="comment">// * in certain situations, it helps to know when the PID has</span>
+<a name="l00045"></a>00045                                           <span class="comment">//   computed this bit will be true for one cycle after the</span>
+<a name="l00046"></a>00046                                           <span class="comment">//   pid calculation has occurred</span>
+<a name="l00047"></a>00047     
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049    <span class="comment">//Status functions allow you to query current PID constants ***************************************</span>
+<a name="l00050"></a>00050     <span class="keywordtype">int</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#acc325db5e6a140b92c8199a66e03491b">GetMode</a>();
+<a name="l00051"></a>00051     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#aad301ae788217d101db9920e5bea87d9">GetINMin</a>();
+<a name="l00052"></a>00052     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a9f2f86d985e64cb8964a1983e72730d0">GetINMax</a>();
+<a name="l00053"></a>00053     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a32ca94a318928956b5c0ae8df05e0719">GetOUTMin</a>();
+<a name="l00054"></a>00054     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#add9858b10dd4f047cb61c13d8f7d960e">GetOUTMax</a>();
+<a name="l00055"></a>00055     <span class="keywordtype">int</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#aefa4318e7ab26fbdfd7a2f6870d694e8">GetSampleTime</a>();
+<a name="l00056"></a>00056     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#aea3e79c84e5c6a57368255f9cba2d34e">GetP_Param</a>();
+<a name="l00057"></a>00057     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#a3bea5dd3597f890cc6617aca1dd91583">GetI_Param</a>();
+<a name="l00058"></a>00058     <span class="keywordtype">double</span> <a class="code" href="../../d6/d5a/class_p_i_d.html#af6527704d50bc48bbd5d15219b02e54d">GetD_Param</a>();
+<a name="l00059"></a>00059 
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061   <span class="keyword">private</span>:
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     <span class="keywordtype">void</span> ConstructorCommon(<span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*, <span class="keywordtype">double</span>*,           <span class="comment">// * code that is shared by the constructors</span>
+<a name="l00064"></a>00064         <span class="keywordtype">double</span>, <span class="keywordtype">double</span>, <span class="keywordtype">double</span>);
+<a name="l00065"></a>00065 
+<a name="l00066"></a>00066    <span class="comment">//scaled, tweaked parameters we&#39;ll actually be using</span>
+<a name="l00067"></a>00067     <span class="keywordtype">double</span> kc;                    <span class="comment">// * (P)roportional Tuning Parameter</span>
+<a name="l00068"></a>00068     <span class="keywordtype">double</span> taur;                  <span class="comment">// * (I)ntegral Tuning Parameter</span>
+<a name="l00069"></a>00069     <span class="keywordtype">double</span> taud;                  <span class="comment">// * (D)erivative Tuning Parameter</span>
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071    <span class="comment">//nice, pretty parameters we&#39;ll give back to the user if they ask what the tunings are</span>
+<a name="l00072"></a>00072     <span class="keywordtype">double</span> P_Param;
+<a name="l00073"></a>00073     <span class="keywordtype">double</span> I_Param;
+<a name="l00074"></a>00074     <span class="keywordtype">double</span> D_Param;
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077     <span class="keywordtype">double</span> *myInput;              <span class="comment">// * Pointers to the Input, Output, and Setpoint variables</span>
+<a name="l00078"></a>00078     <span class="keywordtype">double</span> *myOutput;             <span class="comment">//   This creates a hard link between the variables and the </span>
+<a name="l00079"></a>00079     <span class="keywordtype">double</span> *mySetpoint;           <span class="comment">//   PID, freeing the user from having to constantly tell us</span>
+<a name="l00080"></a>00080                                   <span class="comment">//   what these values are.  with pointers we&#39;ll just know.</span>
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     <span class="keywordtype">double</span> *myBias;               <span class="comment">// * Pointer to the External FeedForward bias, only used </span>
+<a name="l00083"></a>00083                                   <span class="comment">//   if the advanced constructor is used</span>
+<a name="l00084"></a>00084     <span class="keywordtype">bool</span> UsingFeedForward;        <span class="comment">// * internal flag that tells us if we&#39;re using FeedForward or not</span>
+<a name="l00085"></a>00085 
+<a name="l00086"></a>00086     <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> nextCompTime;    <span class="comment">// * Helps us figure out when the PID Calculation needs to</span>
+<a name="l00087"></a>00087                                   <span class="comment">//   be performed next</span>
+<a name="l00088"></a>00088                                   <span class="comment">//   to determine when to compute next</span>
+<a name="l00089"></a>00089     <span class="keywordtype">unsigned</span> <span class="keywordtype">long</span> tSample;       <span class="comment">// * the frequency, in milliseconds, with which we want the</span>
+<a name="l00090"></a>00090                                   <span class="comment">//   the PID calculation to occur.</span>
+<a name="l00091"></a>00091     <span class="keywordtype">bool</span> inAuto;                  <span class="comment">// * Flag letting us know if we are in Automatic or not</span>
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093     <span class="keywordtype">double</span> lastOutput;            <span class="comment">// * remembering the last output is used to prevent</span>
+<a name="l00094"></a>00094                                   <span class="comment">//   reset windup.</span>
+<a name="l00095"></a>00095     <span class="keywordtype">double</span> lastInput;             <span class="comment">// * we need to remember the last Input Value so we can compute</span>
+<a name="l00096"></a>00096                                   <span class="comment">//   the derivative required for the D term</span>
+<a name="l00097"></a>00097     <span class="keywordtype">double</span> accError;              <span class="comment">// * the (I)ntegral term is based on the sum of error over</span>
+<a name="l00098"></a>00098                                   <span class="comment">//   time.  this variable keeps track of that</span>
+<a name="l00099"></a>00099     <span class="keywordtype">double</span> bias;                  <span class="comment">// * the base output from which the PID operates</span>
+<a name="l00100"></a>00100     
+<a name="l00101"></a>00101 
+<a name="l00102"></a>00102     
+<a name="l00103"></a>00103     <span class="keywordtype">double</span> inMin, inSpan;         <span class="comment">// * input and output limits, and spans.  used convert</span>
+<a name="l00104"></a>00104     <span class="keywordtype">double</span> outMin, outSpan;       <span class="comment">//   real world numbers into percent span, with which</span>
+<a name="l00105"></a>00105                                   <span class="comment">//   the PID algorithm is more comfortable.</span>
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107     <span class="keywordtype">bool</span> justCalced;              <span class="comment">// * flag gets set for one cycle after the pid calculates</span>
+<a name="l00108"></a>00108 };
+<a name="l00109"></a>00109 <span class="preprocessor">#endif</span>
+<a name="l00110"></a>00110 <span class="preprocessor"></span>
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="classscreen_1_1_screen" kind="class" prot="public">
+    <compoundname>screen::Screen</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classscreen_1_1_screen_1aaf6f3c8488ab0ae54f58846f3a29caa3" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>screen::Screen::parent</definition>
+        <argsstring></argsstring>
+        <name>parent</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" line="12" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="classscreen_1_1_screen_1a40f50c897774a6d4c5fa0f6feeeef14e" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>screen::Screen::text</definition>
+        <argsstring></argsstring>
+        <name>text</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" line="17" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classscreen_1_1_screen_1aef8f0f814ad0c80a043c22a0a2158fa8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def screen::Screen::__init__</definition>
+        <argsstring></argsstring>
+        <name>__init__</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" line="10" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" bodystart="10" bodyend="14"/>
+      </memberdef>
+      <memberdef kind="function" id="classscreen_1_1_screen_1a0f9d788a09fc4a612253ac13bb773a7a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def screen::Screen::initialize</definition>
+        <argsstring></argsstring>
+        <name>initialize</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>create view </verbatim> </para>        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" line="15" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" bodystart="15" bodyend="19"/>
+      </memberdef>
+      <memberdef kind="function" id="classscreen_1_1_screen_1a6299147fa5c0bd619f7a9dde60e09bc7" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def screen::Screen::write</definition>
+        <argsstring></argsstring>
+        <name>write</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" line="20" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" bodystart="20" bodyend="24"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" line="10" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/pc/screen.py" bodystart="9" bodyend="25"/>
+    <listofallmembers>
+      <member refid="classscreen_1_1_screen_1aef8f0f814ad0c80a043c22a0a2158fa8" prot="public" virt="non-virtual"><scope>screen::Screen</scope><name>__init__</name></member>
+      <member refid="classscreen_1_1_screen_1a0f9d788a09fc4a612253ac13bb773a7a" prot="public" virt="non-virtual"><scope>screen::Screen</scope><name>initialize</name></member>
+      <member refid="classscreen_1_1_screen_1aaf6f3c8488ab0ae54f58846f3a29caa3" prot="public" virt="non-virtual"><scope>screen::Screen</scope><name>parent</name></member>
+      <member refid="classscreen_1_1_screen_1a40f50c897774a6d4c5fa0f6feeeef14e" prot="public" virt="non-virtual"><scope>screen::Screen</scope><name>text</name></member>
+      <member refid="classscreen_1_1_screen_1a6299147fa5c0bd619f7a9dde60e09bc7" prot="public" virt="non-virtual"><scope>screen::Screen</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

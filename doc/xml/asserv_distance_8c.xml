@@ -1,0 +1,157 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="asserv_distance_8c" kind="file">
+    <compoundname>asservDistance.c</compoundname>
+    <includes refid="_a_l_types_8h" local="yes">ALTypes.h</includes>
+    <includes local="yes">math.h</includes>
+    <includes refid="trajectory_8h" local="yes">trajectory.h</includes>
+    <includes refid="config_8h" local="yes">config.h</includes>
+    <incdepgraph>
+      <node id="1119">
+        <label>asserv2010/asservDistance.c</label>
+        <link refid="asservDistance.c"/>
+        <childnode refid="1120" relation="include">
+        </childnode>
+        <childnode refid="1121" relation="include">
+        </childnode>
+        <childnode refid="1122" relation="include">
+        </childnode>
+        <childnode refid="1123" relation="include">
+        </childnode>
+      </node>
+      <node id="1122">
+        <label>trajectory.h</label>
+        <link refid="trajectory_8h"/>
+        <childnode refid="1120" relation="include">
+        </childnode>
+      </node>
+      <node id="1121">
+        <label>math.h</label>
+      </node>
+      <node id="1120">
+        <label>ALTypes.h</label>
+        <link refid="_a_l_types_8h"/>
+      </node>
+      <node id="1123">
+        <label>config.h</label>
+        <link refid="config_8h"/>
+        <childnode refid="1120" relation="include">
+        </childnode>
+        <childnode refid="1122" relation="include">
+        </childnode>
+      </node>
+    </incdepgraph>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="asserv_distance_8c_1a82d8fad64f895864e2aa8926c4ca396b" prot="public" static="no">
+        <name>DECELERATION</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" line="7" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" bodystart="7" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="asserv_distance_8c_1a3fa2d9e8a3ff5bc7ac576fda26265b44" prot="public" static="no">
+        <name>ACCELERATION</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" line="8" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" bodystart="8" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="asserv_distance_8c_1a5b6d02bb076ddacc3da059ec0cd5cec3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float distance</definition>
+        <argsstring>(point *pA, point *pB)</argsstring>
+        <name>distance</name>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref> *</type>
+          <declname>pA</declname>
+        </param>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref> *</type>
+          <declname>pB</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" line="11" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" bodystart="10" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_distance_8c_1a6f8121ce0d03ce3742599f5afef5f925" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float calculConsigne_d</definition>
+        <argsstring>(point t)</argsstring>
+        <name>calculConsigne_d</name>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" line="23" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" bodystart="22" bodyend="39"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#include<sp/>&quot;<ref refid="_a_l_types_8h" kindref="compound">ALTypes.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="trajectory_8h" kindref="compound">trajectory.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;<ref refid="config_8h" kindref="compound">config.h</ref>&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&quot;math.h&quot;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight></codeline>
+<codeline lineno="7" refid="asserv_distance_8c_1a82d8fad64f895864e2aa8926c4ca396b" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>DECELERATION<sp/>1</highlight></codeline>
+<codeline lineno="8" refid="asserv_distance_8c_1a3fa2d9e8a3ff5bc7ac576fda26265b44" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ACCELERATION<sp/>1</highlight></codeline>
+<codeline lineno="9"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10" refid="asserv_distance_8h_1a5b6d02bb076ddacc3da059ec0cd5cec3" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_distance_8c_1a5b6d02bb076ddacc3da059ec0cd5cec3" kindref="member">distance</ref>(<ref refid="structpoint" kindref="compound">point</ref><sp/>*<sp/>pA,<sp/><ref refid="structpoint" kindref="compound">point</ref><sp/>*<sp/>pB)</highlight></codeline>
+<codeline lineno="11"><highlight class="normal">{<sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="12"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>temp,temp2;</highlight></codeline>
+<codeline lineno="13"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="comment">//<sp/>pythagore<sp/>décomposé</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="14"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp<sp/>=<sp/>fabsf(pA-&gt;<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref><sp/>-<sp/>pB-&gt;<ref refid="structpoint_1a8293fd2de3ce739deb6d53691fd21fcf" kindref="member">x</ref>);</highlight></codeline>
+<codeline lineno="15"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp<sp/>*=<sp/>temp;</highlight></codeline>
+<codeline lineno="16"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp2<sp/>=<sp/>fabsf(pA-&gt;<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref><sp/>-<sp/>pB-&gt;<ref refid="structpoint_1a616ad85a2096d1566f5971666bbc3b3f" kindref="member">y</ref>);</highlight></codeline>
+<codeline lineno="17"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/>temp2<sp/>*=<sp/>temp2;</highlight></codeline>
+<codeline lineno="18"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="19"><highlight class="normal"><sp/><sp/><sp/><sp/><sp/><sp/><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>sqrt(temp<sp/>+<sp/>temp2);</highlight></codeline>
+<codeline lineno="20"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="21"><highlight class="normal"></highlight></codeline>
+<codeline lineno="22" refid="asserv_distance_8h_1a6f8121ce0d03ce3742599f5afef5f925" refkind="member"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_distance_8c_1a6f8121ce0d03ce3742599f5afef5f925" kindref="member">calculConsigne_d</ref>(<ref refid="structpoint" kindref="compound">point</ref><sp/><ref refid="namespacescreen_1a391180925962f2d8178b40fbbb862d17" kindref="member">t</ref>)</highlight></codeline>
+<codeline lineno="23"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="24"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>ecart_d;</highlight></codeline>
+<codeline lineno="25"><highlight class="normal"><sp/><sp/><ref refid="structrobot" kindref="compound">robot</ref><sp/>*<sp/>Robot;</highlight></codeline>
+<codeline lineno="26"><highlight class="normal"><sp/></highlight></codeline>
+<codeline lineno="27"><highlight class="normal"><sp/><sp/>Robot<sp/>=<sp/><ref refid="config_8c_1a1620e709da932be9c3f2fff78ecf50e3" kindref="member">getRobot</ref>();</highlight></codeline>
+<codeline lineno="28"><highlight class="normal"></highlight></codeline>
+<codeline lineno="29"><highlight class="normal"><sp/><sp/>ecart_d<sp/>=<sp/><ref refid="asserv_distance_8c_1a5b6d02bb076ddacc3da059ec0cd5cec3" kindref="member">distance</ref>(&amp;Robot-&gt;<ref refid="structrobot_1a5d839619db2bffea3a5ebbc12d7dd8d3" kindref="member">position</ref>,<sp/>&amp;t);</highlight></codeline>
+<codeline lineno="30"><highlight class="normal"><sp/><sp/></highlight></codeline>
+<codeline lineno="31"><highlight class="normal"><sp/><sp/></highlight><highlight class="comment">//<sp/>for<sp/>reverse<sp/>way</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="32"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">if</highlight><highlight class="normal"><sp/>(Robot-&gt;<ref refid="structrobot_1abfa9412b2ff33905ffa70ea6d839eda7" kindref="member">speedMax</ref><sp/>&lt;<sp/>0)</highlight></codeline>
+<codeline lineno="33"><highlight class="normal"><sp/><sp/>{</highlight></codeline>
+<codeline lineno="34"><highlight class="normal"><sp/><sp/><sp/><sp/>ecart_d*=-1;</highlight></codeline>
+<codeline lineno="35"><highlight class="normal"><sp/><sp/>}<sp/><sp/></highlight></codeline>
+<codeline lineno="36"><highlight class="normal"></highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordflow">return</highlight><highlight class="normal"><sp/>ecart_d;</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><sp/><sp/></highlight></codeline>
+<codeline lineno="39"><highlight class="normal">}</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"></highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c"/>
+  </compounddef>
+</doxygen>

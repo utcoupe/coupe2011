@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="timers_8h" kind="file">
+    <compoundname>timers.h</compoundname>
+    <includedby refid="_timers_8c" local="yes">asserv2010/Timers.c</includedby>
+    <invincdepgraph>
+      <node id="1269">
+        <label>asserv2010/Timers.c</label>
+        <link refid="_timers_8c"/>
+      </node>
+      <node id="1268">
+        <label>asserv2010/timers.h</label>
+        <link refid="timers.h"/>
+        <childnode refid="1269" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="timers_8h_1a8df1ec489d8960f0cd45f6dc49ae2d36" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Timer1_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>Timer1_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/timers.h" line="5" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Timers.c" bodystart="28" bodyend="36"/>
+      </memberdef>
+      <memberdef kind="function" id="timers_8h_1a65e9e0399e5c1c01ab76fcc1a19630b3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void Timer2_Init</definition>
+        <argsstring>(void)</argsstring>
+        <name>Timer2_Init</name>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/timers.h" line="6" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/Timers.c" bodystart="40" bodyend="49"/>
+      </memberdef>
+      <memberdef kind="function" id="timers_8h_1a12937c7d4ddc5b98ab64e7e7278088e2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void __attribute__</definition>
+        <argsstring>((__interrupt__)) _T1Interrupt(void)</argsstring>
+        <name>__attribute__</name>
+        <param>
+          <type>(__interrupt__)</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/timers.h" line="7"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>TIMERS_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>TIMERS_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="comment">//Functions<sp/>and<sp/>Variables<sp/>with<sp/>Global<sp/>Scope:</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timers_8c_1a8df1ec489d8960f0cd45f6dc49ae2d36" kindref="member">Timer1_Init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_timers_8c_1a65e9e0399e5c1c01ab76fcc1a19630b3" kindref="member">Timer2_Init</ref>(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="_a__to___d___converter_8c_1a5ae93c640ed17451158a34e49c241ef0" kindref="member">__attribute__</ref>((__interrupt__))<sp/>_T1Interrupt(</highlight><highlight class="keywordtype">void</highlight><highlight class="normal">);</highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/timers.h"/>
+  </compounddef>
+</doxygen>

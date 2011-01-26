@@ -1,0 +1,616 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="class_hardware_serial" kind="class" prot="public">
+    <compoundname>HardwareSerial</compoundname>
+    <basecompoundref refid="class_stream" prot="public" virt="non-virtual">Stream</basecompoundref>
+    <basecompoundref refid="class_stream" prot="public" virt="non-virtual">Stream</basecompoundref>
+    <includes refid="com_2carte_2build_2core_2_hardware_serial_8h" local="no">HardwareSerial.h</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_hardware_serial_1ad51ffe8a750a3fd997075c638e07f180" prot="private" static="no" mutable="no">
+        <type>ring_buffer *</type>
+        <definition>ring_buffer * HardwareSerial::_rx_buffer</definition>
+        <argsstring></argsstring>
+        <name>_rx_buffer</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="34" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a53871b9684224866778418d4a59d5650" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>volatile uint8_t * HardwareSerial::_ubrrh</definition>
+        <argsstring></argsstring>
+        <name>_ubrrh</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="35" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="35" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1af49180d30f2610929eff75c3517cbdff" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>volatile uint8_t * HardwareSerial::_ubrrl</definition>
+        <argsstring></argsstring>
+        <name>_ubrrl</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="36" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1ab26400b0f7e4155b069d14d1036c5ff1" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>volatile uint8_t * HardwareSerial::_ucsra</definition>
+        <argsstring></argsstring>
+        <name>_ucsra</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="37" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="37" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a76dea1ced70dfbd6606eb166505c5d1f" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>volatile uint8_t * HardwareSerial::_ucsrb</definition>
+        <argsstring></argsstring>
+        <name>_ucsrb</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="38" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="38" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a3eb58046a259488121ddf34efa06cc2f" prot="private" static="no" mutable="no">
+        <type>uint8_t *</type>
+        <definition>volatile uint8_t * HardwareSerial::_udr</definition>
+        <argsstring></argsstring>
+        <name>_udr</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="39" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1aec2e0de363176be3a0b1adffacb7b10f" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t HardwareSerial::_rxen</definition>
+        <argsstring></argsstring>
+        <name>_rxen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="40" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="40" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a12a1083bf8f83be14a7f95a94c565d3e" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t HardwareSerial::_txen</definition>
+        <argsstring></argsstring>
+        <name>_txen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="41" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="41" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a1cdda80a060ed1f1510d15ab8a6c50f5" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t HardwareSerial::_rxcie</definition>
+        <argsstring></argsstring>
+        <name>_rxcie</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="42" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a655935b232454c19cc34ff59b577f2ae" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t HardwareSerial::_udre</definition>
+        <argsstring></argsstring>
+        <name>_udre</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="43" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_hardware_serial_1a26a0eb817863234e4cb1958f329bc158" prot="private" static="no" mutable="no">
+        <type>uint8_t</type>
+        <definition>uint8_t HardwareSerial::_u2x</definition>
+        <argsstring></argsstring>
+        <name>_u2x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="44" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="44" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_hardware_serial_1adf3e7a7ac1006aeb934b506d502859b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>HardwareSerial::HardwareSerial</definition>
+        <argsstring>(ring_buffer *rx_buffer, volatile uint8_t *ubrrh, volatile uint8_t *ubrrl, volatile uint8_t *ucsra, volatile uint8_t *ucsrb, volatile uint8_t *udr, uint8_t rxen, uint8_t txen, uint8_t rxcie, uint8_t udre, uint8_t u2x)</argsstring>
+        <name>HardwareSerial</name>
+        <param>
+          <type>ring_buffer *</type>
+          <declname>rx_buffer</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ubrrh</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ubrrl</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ucsra</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ucsrb</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>udr</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>rxen</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>txen</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>rxcie</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>udre</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>u2x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1acea43a2b9c704ddf0a7c5f8b7859816c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HardwareSerial::begin</definition>
+        <argsstring>(long)</argsstring>
+        <name>begin</name>
+        <param>
+          <type>long</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a0f86c41f580e04bdf30ea00e9014eacd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HardwareSerial::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a60e2bb4a3f40cfaf94601cd4e3333f43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int HardwareSerial::available</definition>
+        <argsstring>(void)</argsstring>
+        <name>available</name>
+        <reimplements refid="class_stream_1a9c98a763395005c08ce95afb2f06c7b1">available</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a69b3cfa7d35cc8102fe14e302034f194" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int HardwareSerial::peek</definition>
+        <argsstring>(void)</argsstring>
+        <name>peek</name>
+        <reimplements refid="class_stream_1a30c3c212ec6ea67277a708c5ea2501a5">peek</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a760f254188b4687f5a8a74f4ddd3c83d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int HardwareSerial::read</definition>
+        <argsstring>(void)</argsstring>
+        <name>read</name>
+        <reimplements refid="class_stream_1aea5dee9fcb038148515b7c9212d38dc0">read</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a33a5d5c5ffa184e2c303a21152fa2abe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void HardwareSerial::flush</definition>
+        <argsstring>(void)</argsstring>
+        <name>flush</name>
+        <reimplements refid="class_stream_1aa3ef2c34f152a0b2ea8de9139b9461da">flush</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void HardwareSerial::write</definition>
+        <argsstring>(uint8_t)</argsstring>
+        <name>write</name>
+        <reimplements refid="class_print_1ad9393033793cfc17f3e37202ba244892">write</reimplements>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="57"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1adf3e7a7ac1006aeb934b506d502859b1" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>HardwareSerial::HardwareSerial</definition>
+        <argsstring>(ring_buffer *rx_buffer, volatile uint8_t *ubrrh, volatile uint8_t *ubrrl, volatile uint8_t *ucsra, volatile uint8_t *ucsrb, volatile uint8_t *udr, uint8_t rxen, uint8_t txen, uint8_t rxcie, uint8_t udre, uint8_t u2x)</argsstring>
+        <name>HardwareSerial</name>
+        <param>
+          <type>ring_buffer *</type>
+          <declname>rx_buffer</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ubrrh</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ubrrl</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ucsra</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>ucsrb</declname>
+        </param>
+        <param>
+          <type>volatile uint8_t *</type>
+          <declname>udr</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>rxen</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>txen</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>rxcie</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>udre</declname>
+        </param>
+        <param>
+          <type>uint8_t</type>
+          <declname>u2x</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="50"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1acea43a2b9c704ddf0a7c5f8b7859816c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HardwareSerial::begin</definition>
+        <argsstring>(long)</argsstring>
+        <name>begin</name>
+        <param>
+          <type>long</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="51"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a0f86c41f580e04bdf30ea00e9014eacd" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void HardwareSerial::end</definition>
+        <argsstring>()</argsstring>
+        <name>end</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="52"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a60e2bb4a3f40cfaf94601cd4e3333f43" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int HardwareSerial::available</definition>
+        <argsstring>(void)</argsstring>
+        <name>available</name>
+        <reimplements refid="class_stream_1a9c98a763395005c08ce95afb2f06c7b1">available</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="53"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a69b3cfa7d35cc8102fe14e302034f194" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int HardwareSerial::peek</definition>
+        <argsstring>(void)</argsstring>
+        <name>peek</name>
+        <reimplements refid="class_stream_1a30c3c212ec6ea67277a708c5ea2501a5">peek</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="54"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a760f254188b4687f5a8a74f4ddd3c83d" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>int</type>
+        <definition>virtual int HardwareSerial::read</definition>
+        <argsstring>(void)</argsstring>
+        <name>read</name>
+        <reimplements refid="class_stream_1aea5dee9fcb038148515b7c9212d38dc0">read</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="55"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1a33a5d5c5ffa184e2c303a21152fa2abe" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void HardwareSerial::flush</definition>
+        <argsstring>(void)</argsstring>
+        <name>flush</name>
+        <reimplements refid="class_stream_1aa3ef2c34f152a0b2ea8de9139b9461da">flush</reimplements>
+        <param>
+          <type>void</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="56"/>
+      </memberdef>
+      <memberdef kind="function" id="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c" prot="public" static="no" const="no" explicit="no" inline="no" virt="virtual">
+        <type>void</type>
+        <definition>virtual void HardwareSerial::write</definition>
+        <argsstring>(uint8_t)</argsstring>
+        <name>write</name>
+        <reimplements refid="class_print_1ad9393033793cfc17f3e37202ba244892">write</reimplements>
+        <param>
+          <type>uint8_t</type>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/core/HardwareSerial.h" line="57"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="53">
+        <label>HardwareSerial</label>
+        <link refid="class_hardware_serial"/>
+        <childnode refid="54" relation="public-inheritance">
+        </childnode>
+        <childnode refid="54" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="55">
+        <label>Print</label>
+        <link refid="class_print"/>
+      </node>
+      <node id="54">
+        <label>Stream</label>
+        <link refid="class_stream"/>
+        <childnode refid="55" relation="public-inheritance">
+        </childnode>
+        <childnode refid="55" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="56">
+        <label>HardwareSerial</label>
+        <link refid="class_hardware_serial"/>
+        <childnode refid="57" relation="public-inheritance">
+        </childnode>
+        <childnode refid="57" relation="public-inheritance">
+        </childnode>
+      </node>
+      <node id="58">
+        <label>Print</label>
+        <link refid="class_print"/>
+      </node>
+      <node id="57">
+        <label>Stream</label>
+        <link refid="class_stream"/>
+        <childnode refid="58" relation="public-inheritance">
+        </childnode>
+        <childnode refid="58" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/com/carte/build/core/HardwareSerial.h" bodystart="31" bodyend="59"/>
+    <listofallmembers>
+      <member refid="class_hardware_serial_1ad51ffe8a750a3fd997075c638e07f180" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_rx_buffer</name></member>
+      <member refid="class_hardware_serial_1a1cdda80a060ed1f1510d15ab8a6c50f5" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_rxcie</name></member>
+      <member refid="class_hardware_serial_1aec2e0de363176be3a0b1adffacb7b10f" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_rxen</name></member>
+      <member refid="class_hardware_serial_1a12a1083bf8f83be14a7f95a94c565d3e" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_txen</name></member>
+      <member refid="class_hardware_serial_1a26a0eb817863234e4cb1958f329bc158" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_u2x</name></member>
+      <member refid="class_hardware_serial_1a53871b9684224866778418d4a59d5650" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_ubrrh</name></member>
+      <member refid="class_hardware_serial_1af49180d30f2610929eff75c3517cbdff" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_ubrrl</name></member>
+      <member refid="class_hardware_serial_1ab26400b0f7e4155b069d14d1036c5ff1" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_ucsra</name></member>
+      <member refid="class_hardware_serial_1a76dea1ced70dfbd6606eb166505c5d1f" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_ucsrb</name></member>
+      <member refid="class_hardware_serial_1a3eb58046a259488121ddf34efa06cc2f" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_udr</name></member>
+      <member refid="class_hardware_serial_1a655935b232454c19cc34ff59b577f2ae" prot="private" virt="non-virtual"><scope>HardwareSerial</scope><name>_udre</name></member>
+      <member refid="class_hardware_serial_1a60e2bb4a3f40cfaf94601cd4e3333f43" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>available</name></member>
+      <member refid="class_hardware_serial_1a60e2bb4a3f40cfaf94601cd4e3333f43" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>available</name></member>
+      <member refid="class_hardware_serial_1acea43a2b9c704ddf0a7c5f8b7859816c" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>begin</name></member>
+      <member refid="class_hardware_serial_1acea43a2b9c704ddf0a7c5f8b7859816c" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>begin</name></member>
+      <member refid="class_hardware_serial_1a0f86c41f580e04bdf30ea00e9014eacd" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>end</name></member>
+      <member refid="class_hardware_serial_1a0f86c41f580e04bdf30ea00e9014eacd" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>end</name></member>
+      <member refid="class_hardware_serial_1a33a5d5c5ffa184e2c303a21152fa2abe" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>flush</name></member>
+      <member refid="class_hardware_serial_1a33a5d5c5ffa184e2c303a21152fa2abe" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>flush</name></member>
+      <member refid="class_hardware_serial_1adf3e7a7ac1006aeb934b506d502859b1" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>HardwareSerial</name></member>
+      <member refid="class_hardware_serial_1adf3e7a7ac1006aeb934b506d502859b1" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>HardwareSerial</name></member>
+      <member refid="class_hardware_serial_1a69b3cfa7d35cc8102fe14e302034f194" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>peek</name></member>
+      <member refid="class_hardware_serial_1a69b3cfa7d35cc8102fe14e302034f194" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>peek</name></member>
+      <member refid="class_print_1a6c1f2f9a1988fe2d4ed593b3ac0185c7" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1aa7b0a6dc63e3d27effd8459e3d443b83" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1ada24638921c2e86e13c5939c94cf67db" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1ad7778084a6fe96551d2ec9ce532c5164" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a35a6196999c85e5afc5fd852d088e886" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a5f8df5d4f941b411ce9d660b48996bea" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1afab3f8d07a58a8d37fec32d7fcb67b56" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a4be58e920bdddcaf5496d0ba2ae4ea81" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1aa5fe80d3a3e8d2dc64f346eb08dcb43f" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a6c1f2f9a1988fe2d4ed593b3ac0185c7" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1aa7b0a6dc63e3d27effd8459e3d443b83" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1ada24638921c2e86e13c5939c94cf67db" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1ad7778084a6fe96551d2ec9ce532c5164" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a35a6196999c85e5afc5fd852d088e886" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a5f8df5d4f941b411ce9d660b48996bea" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1afab3f8d07a58a8d37fec32d7fcb67b56" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1a4be58e920bdddcaf5496d0ba2ae4ea81" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1aa5fe80d3a3e8d2dc64f346eb08dcb43f" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>print</name></member>
+      <member refid="class_print_1abeb8bc6c2d103469679b88c1a966a21f" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a09db74a8d51c6b2420c478267f958a51" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a49bbefc9016ddda486edf3dddaaa07e9" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a4eaaf09c278a5927ba2ddcffb6b01e64" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a350bdfe3569acb05a2fdefb7c54e292d" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1af0aeb581689c6e9c9f8331b342a91e20" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a1999020b07369721caa16c52fdba4341" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1aacf64fb9630526fb6c666f038a9dc4e6" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a4302b58946b9355b0491118227beed07" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a525b37c566658ff8113a067f6e8d5bf1" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1abeb8bc6c2d103469679b88c1a966a21f" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a09db74a8d51c6b2420c478267f958a51" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a49bbefc9016ddda486edf3dddaaa07e9" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a4eaaf09c278a5927ba2ddcffb6b01e64" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a350bdfe3569acb05a2fdefb7c54e292d" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1af0aeb581689c6e9c9f8331b342a91e20" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a1999020b07369721caa16c52fdba4341" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1aacf64fb9630526fb6c666f038a9dc4e6" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a4302b58946b9355b0491118227beed07" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_print_1a525b37c566658ff8113a067f6e8d5bf1" prot="public" virt="non-virtual"><scope>HardwareSerial</scope><name>println</name></member>
+      <member refid="class_hardware_serial_1a760f254188b4687f5a8a74f4ddd3c83d" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>read</name></member>
+      <member refid="class_hardware_serial_1a760f254188b4687f5a8a74f4ddd3c83d" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>read</name></member>
+      <member refid="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>write</name></member>
+      <member refid="class_hardware_serial_1aed5cd72cb685534be43eb1e87468ae8c" prot="public" virt="virtual"><scope>HardwareSerial</scope><name>write</name></member>
+      <member refid="class_print_1ae083258d224bae2e5d8a27a4f8338880" prot="public" virt="virtual" ambiguityscope="Stream::"><scope>HardwareSerial</scope><name>write</name></member>
+      <member refid="class_print_1a03094428e21f210e59cc1be63353225d" prot="public" virt="virtual" ambiguityscope="Stream::"><scope>HardwareSerial</scope><name>write</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

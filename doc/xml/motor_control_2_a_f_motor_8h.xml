@@ -1,0 +1,278 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="motor_control_2_a_f_motor_8h" kind="file">
+    <compoundname>AFMotor.h</compoundname>
+    <includes local="no">inttypes.h</includes>
+    <includes local="no">avr/io.h</includes>
+    <incdepgraph>
+      <node id="1952">
+        <label>motorControl/AFMotor.h</label>
+        <link refid="motorControl/AFMotor.h"/>
+        <childnode refid="1953" relation="include">
+        </childnode>
+        <childnode refid="1954" relation="include">
+        </childnode>
+      </node>
+      <node id="1954">
+        <label>avr/io.h</label>
+      </node>
+      <node id="1953">
+        <label>inttypes.h</label>
+      </node>
+    </incdepgraph>
+    <innerclass refid="class_a_f___d_c_motor" prot="public">AF_DCMotor</innerclass>
+      <sectiondef kind="define">
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1abd639f43f6c3b97a35e93aa2839877b0" prot="public" static="no">
+        <name>MOTOR12_64KHZ</name>
+        <initializer>_BV(CS20)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="12" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a25da17ead327d0d7506d08141aa4bd23" prot="public" static="no">
+        <name>MOTOR12_8KHZ</name>
+        <initializer>_BV(CS21)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="13" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1adc02102ff568a44bf2dfdd680157f25a" prot="public" static="no">
+        <name>MOTOR12_2KHZ</name>
+        <initializer>_BV(CS21) | _BV(CS20)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a4790d8e2237e091c734111ec06e9ba8b" prot="public" static="no">
+        <name>MOTOR12_1KHZ</name>
+        <initializer>_BV(CS22)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="15" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="15" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a81e59bddb13c0a7898a9eb4cdd811bc7" prot="public" static="no">
+        <name>MOTOR1_DIR</name>
+        <initializer>12</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="17" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="17" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a2967bf5c2085f6433131c100608edd61" prot="public" static="no">
+        <name>MOTOR2_DIR</name>
+        <initializer>13</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="18" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="18" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1acf59cc2c2015737f006876736aa67a52" prot="public" static="no">
+        <name>MOTOR1_A</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="20" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="20" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a910ad8b79b5f2ccd1024d8d46d18db59" prot="public" static="no">
+        <name>MOTOR1_B</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="21" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="21" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a10d9dc2baccb61a1ff9ec726e6d8925f" prot="public" static="no">
+        <name>MOTOR2_A</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="22" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="22" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a96c25b04428137f29a841f7109a924df" prot="public" static="no">
+        <name>MOTOR2_B</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="23" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="23" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a06e738bd22322fd754315610e45de0b9" prot="public" static="no">
+        <name>MOTOR4_A</name>
+        <initializer>0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="24" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="24" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a433140d781f341e8d4042c2a9dffeaf1" prot="public" static="no">
+        <name>MOTOR4_B</name>
+        <initializer>6</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="25" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="25" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a52212efbb8d325595f04d94f79f86017" prot="public" static="no">
+        <name>MOTOR3_A</name>
+        <initializer>5</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="26" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="26" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a13043ae90f94a51906e6d8b50f870ed1" prot="public" static="no">
+        <name>MOTOR3_B</name>
+        <initializer>7</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="27" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="27" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" prot="public" static="no">
+        <name>FORWARD</name>
+        <initializer>1</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="29" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="29" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1adf445abfe1b77fa63f89e315ccc2f7f2" prot="public" static="no">
+        <name>BACKWARD</name>
+        <initializer>2</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="30" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="30" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1af78f6af13b9c032bf9d48ef40aa7e683" prot="public" static="no">
+        <name>BRAKE</name>
+        <initializer>3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="31" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="31" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="define" id="motor_control_2_a_f_motor_8h_1a5bd9a30fc22d9a737ee060d41a4ec479" prot="public" static="no">
+        <name>RELEASE</name>
+        <initializer>4</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" line="32" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h" bodystart="32" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="comment">//<sp/>Adafruit<sp/>Motor<sp/>shield<sp/>library</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="2"><highlight class="normal"></highlight><highlight class="comment">//<sp/>copyright<sp/>Adafruit<sp/>Industries<sp/>LLC,<sp/>2009</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="3"><highlight class="normal"></highlight><highlight class="comment">//<sp/>this<sp/>code<sp/>is<sp/>public<sp/>domain,<sp/>enjoy!</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#ifndef<sp/>_AFMotor_h_</highlight></codeline>
+<codeline lineno="6"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>_AFMotor_h_</highlight></codeline>
+<codeline lineno="7"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="8"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;inttypes.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="9"><highlight class="normal"></highlight><highlight class="preprocessor">#include<sp/>&lt;avr/io.h&gt;</highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="10"><highlight class="normal"></highlight></codeline>
+<codeline lineno="11"><highlight class="normal"></highlight></codeline>
+<codeline lineno="12" refid="motor_control_2_a_f_motor_8h_1abd639f43f6c3b97a35e93aa2839877b0" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOTOR12_64KHZ<sp/>_BV(CS20)<sp/><sp/>//<sp/>no<sp/>prescale</highlight></codeline>
+<codeline lineno="13" refid="motor_control_2_a_f_motor_8h_1a25da17ead327d0d7506d08141aa4bd23" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR12_8KHZ<sp/>_BV(CS21)<sp/><sp/><sp/>//<sp/>divide<sp/>by<sp/>8</highlight></codeline>
+<codeline lineno="14" refid="motor_control_2_a_f_motor_8h_1adc02102ff568a44bf2dfdd680157f25a" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR12_2KHZ<sp/>_BV(CS21)<sp/>|<sp/>_BV(CS20)<sp/>//<sp/>divide<sp/>by<sp/>32</highlight></codeline>
+<codeline lineno="15" refid="motor_control_2_a_f_motor_8h_1a4790d8e2237e091c734111ec06e9ba8b" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR12_1KHZ<sp/>_BV(CS22)<sp/><sp/>//<sp/>divide<sp/>by<sp/>64</highlight></codeline>
+<codeline lineno="16"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="17" refid="motor_control_2_a_f_motor_8h_1a81e59bddb13c0a7898a9eb4cdd811bc7" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOTOR1_DIR<sp/>12</highlight></codeline>
+<codeline lineno="18" refid="motor_control_2_a_f_motor_8h_1a2967bf5c2085f6433131c100608edd61" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR2_DIR<sp/>13</highlight></codeline>
+<codeline lineno="19"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="20" refid="motor_control_2_a_f_motor_8h_1acf59cc2c2015737f006876736aa67a52" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>MOTOR1_A<sp/>2</highlight></codeline>
+<codeline lineno="21" refid="motor_control_2_a_f_motor_8h_1a910ad8b79b5f2ccd1024d8d46d18db59" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR1_B<sp/>3</highlight></codeline>
+<codeline lineno="22" refid="motor_control_2_a_f_motor_8h_1a10d9dc2baccb61a1ff9ec726e6d8925f" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR2_A<sp/>1</highlight></codeline>
+<codeline lineno="23" refid="motor_control_2_a_f_motor_8h_1a96c25b04428137f29a841f7109a924df" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR2_B<sp/>4</highlight></codeline>
+<codeline lineno="24" refid="motor_control_2_a_f_motor_8h_1a06e738bd22322fd754315610e45de0b9" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR4_A<sp/>0</highlight></codeline>
+<codeline lineno="25" refid="motor_control_2_a_f_motor_8h_1a433140d781f341e8d4042c2a9dffeaf1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR4_B<sp/>6</highlight></codeline>
+<codeline lineno="26" refid="motor_control_2_a_f_motor_8h_1a52212efbb8d325595f04d94f79f86017" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR3_A<sp/>5</highlight></codeline>
+<codeline lineno="27" refid="motor_control_2_a_f_motor_8h_1a13043ae90f94a51906e6d8b50f870ed1" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>MOTOR3_B<sp/>7</highlight></codeline>
+<codeline lineno="28"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="29" refid="motor_control_2_a_f_motor_8h_1a6ddfdda7a062d10cff4a72b76b44aeb8" refkind="member"><highlight class="normal"></highlight><highlight class="preprocessor">#define<sp/>FORWARD<sp/>1</highlight></codeline>
+<codeline lineno="30" refid="motor_control_2_a_f_motor_8h_1adf445abfe1b77fa63f89e315ccc2f7f2" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>BACKWARD<sp/>2</highlight></codeline>
+<codeline lineno="31" refid="motor_control_2_a_f_motor_8h_1af78f6af13b9c032bf9d48ef40aa7e683" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>BRAKE<sp/>3</highlight></codeline>
+<codeline lineno="32" refid="motor_control_2_a_f_motor_8h_1a5bd9a30fc22d9a737ee060d41a4ec479" refkind="member"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>RELEASE<sp/>4</highlight></codeline>
+<codeline lineno="33"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="34"><highlight class="normal"></highlight></codeline>
+<codeline lineno="35" refid="class_a_f___d_c_motor" refkind="compound"><highlight class="normal"></highlight><highlight class="keyword">class<sp/></highlight><highlight class="normal"><ref refid="class_a_f___d_c_motor" kindref="compound">AF_DCMotor</ref></highlight></codeline>
+<codeline lineno="36"><highlight class="normal">{</highlight></codeline>
+<codeline lineno="37"><highlight class="normal"><sp/></highlight><highlight class="keyword">public</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="38"><highlight class="normal"><sp/><sp/><ref refid="class_a_f___d_c_motor_1a66c3fff3c1a530bac1ec1f545e016857" kindref="member">AF_DCMotor</ref>(uint8_t<sp/>motornum,<sp/>uint8_t<sp/>freq<sp/>=<sp/><sp/><ref refid="motor_control_2_a_f_motor_8h_1a25da17ead327d0d7506d08141aa4bd23" kindref="member">MOTOR12_8KHZ</ref>);</highlight></codeline>
+<codeline lineno="39"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_a_f___d_c_motor_1aadb632824a197a86a8264b337c3c3110" kindref="member">run</ref>(uint8_t);</highlight></codeline>
+<codeline lineno="40"><highlight class="normal"><sp/><sp/></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="class_a_f___d_c_motor_1a655aa89c20d3391809d3616914ce6532" kindref="member">setSpeed</ref>(uint8_t);</highlight></codeline>
+<codeline lineno="41"><highlight class="normal"></highlight></codeline>
+<codeline lineno="42"><highlight class="normal"><sp/></highlight><highlight class="keyword">private</highlight><highlight class="normal">:</highlight></codeline>
+<codeline lineno="43"><highlight class="normal"><sp/><sp/>uint8_t<sp/>motornum,<sp/>pwmfreq;</highlight></codeline>
+<codeline lineno="44"><highlight class="normal">};</highlight></codeline>
+<codeline lineno="45"><highlight class="normal"></highlight></codeline>
+<codeline lineno="46"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/AFMotor.h"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,100 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="struct_robot_state" kind="struct" prot="public">
+    <compoundname>RobotState</compoundname>
+    <includes refid="build_2robotstate_8h" local="no">robotstate.h</includes>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="struct_robot_state_1a7ca6f4e88ac7982242ab32cf5fba15e6" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RobotState::x</definition>
+        <argsstring></argsstring>
+        <name>x</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="9" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="9" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_robot_state_1ac96a8e033454034c95745aee1811ffc2" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RobotState::y</definition>
+        <argsstring></argsstring>
+        <name>y</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="10" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="10" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_robot_state_1a2a1c1785dcde22c18396aaad1ab6e608" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RobotState::speed_left</definition>
+        <argsstring></argsstring>
+        <name>speed_left</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="11" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="11" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_robot_state_1a28932ded61842c77697853499bc2d046" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RobotState::speed_right</definition>
+        <argsstring></argsstring>
+        <name>speed_right</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="12" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="12" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RobotState::speed</definition>
+        <argsstring></argsstring>
+        <name>speed</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="13" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="13" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" prot="public" static="no" mutable="no">
+        <type>double</type>
+        <definition>double RobotState::angle</definition>
+        <argsstring></argsstring>
+        <name>angle</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="14" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="14" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" line="8" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/motorControl/build/robotstate.h" bodystart="8" bodyend="15"/>
+    <listofallmembers>
+      <member refid="struct_robot_state_1ae98121ca3b7f8579c751ee06a618b854" prot="public" virt="non-virtual"><scope>RobotState</scope><name>angle</name></member>
+      <member refid="struct_robot_state_1a9ecbfe314138697456a87bfaa6059569" prot="public" virt="non-virtual"><scope>RobotState</scope><name>speed</name></member>
+      <member refid="struct_robot_state_1a2a1c1785dcde22c18396aaad1ab6e608" prot="public" virt="non-virtual"><scope>RobotState</scope><name>speed_left</name></member>
+      <member refid="struct_robot_state_1a28932ded61842c77697853499bc2d046" prot="public" virt="non-virtual"><scope>RobotState</scope><name>speed_right</name></member>
+      <member refid="struct_robot_state_1a7ca6f4e88ac7982242ab32cf5fba15e6" prot="public" virt="non-virtual"><scope>RobotState</scope><name>x</name></member>
+      <member refid="struct_robot_state_1ac96a8e033454034c95745aee1811ffc2" prot="public" virt="non-virtual"><scope>RobotState</scope><name>y</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

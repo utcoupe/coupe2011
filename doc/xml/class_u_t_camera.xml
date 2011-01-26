@@ -1,0 +1,751 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="class_u_t_camera" kind="class" prot="public">
+    <compoundname>UTCamera</compoundname>
+    <includes refid="_u_t_camera_8hpp" local="no">UTCamera.hpp</includes>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="class_u_t_camera_1ac54cb02aad974041e6f2422d0a45e9f4" prot="private" static="no" mutable="no">
+        <type>string</type>
+        <definition>string UTCamera::nameCam</definition>
+        <argsstring></argsstring>
+        <name>nameCam</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="143" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="143" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a8fe4dedc90ec0f3e6dc6e959ed9ffb30" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::width</definition>
+        <argsstring></argsstring>
+        <name>width</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="144" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="144" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a7ad6e294dd984e98c004e39812b92fb2" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::height</definition>
+        <argsstring></argsstring>
+        <name>height</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="145" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="145" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1ad522125bfac40fa8e4cbd41849df318a" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::wScreen</definition>
+        <argsstring></argsstring>
+        <name>wScreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="147" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="147" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1aca706cb570f5715127e526ca96df24cf" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::hScreen</definition>
+        <argsstring></argsstring>
+        <name>hScreen</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="148" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="148" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a4d13ce94ef12f54c73d8f757043f416b" prot="private" static="no" mutable="no">
+        <type>CvCapture *</type>
+        <definition>CvCapture* UTCamera::ptrCamera</definition>
+        <argsstring></argsstring>
+        <name>ptrCamera</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="150" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="150" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1aa5054914cbc77052d75ea8f5ced10e5c" prot="private" static="no" mutable="no">
+        <type>IplImage *</type>
+        <definition>IplImage* UTCamera::frame</definition>
+        <argsstring></argsstring>
+        <name>frame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="151" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="151" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a62e7727a67408783cb2b171e0d5039e9" prot="private" static="no" mutable="no">
+        <type>unsigned char **</type>
+        <definition>unsigned char** UTCamera::imgTab</definition>
+        <argsstring></argsstring>
+        <name>imgTab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="152" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="152" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a7cdcf7f46767c4303f2cf1a3f10ac7ab" prot="private" static="no" mutable="no">
+        <type><ref refid="class_liste_region" kindref="compound">ListeRegion</ref></type>
+        <definition>ListeRegion UTCamera::listeR</definition>
+        <argsstring></argsstring>
+        <name>listeR</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="153" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="153" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1ad405796eef34ce22598f9f6ce5d84a0d" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::ind</definition>
+        <argsstring></argsstring>
+        <name>ind</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="155" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="155" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a47de0eaaf305628d334ffd084800936f" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::Htab[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>Htab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="157" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="157" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a68b18c2925a6d90a6f2033095c615f5f" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::Htol[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>Htol</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="158" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="158" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a8ba7117ce8f9483b1a904e3d0aa3630b" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::Stab[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>Stab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="159" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="159" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a84394863ae69eadcfe0d37c0ca69c892" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::Stol[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>Stol</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="160" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="160" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1af378d01de32f25b64c7580a48b917a1e" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::Vtab[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>Vtab</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="161" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="161" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="class_u_t_camera_1a8675aba062f4923f05ad20c0a71f6791" prot="private" static="no" mutable="no">
+        <type>int</type>
+        <definition>int UTCamera::Vtol[7]</definition>
+        <argsstring>[7]</argsstring>
+        <name>Vtol</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="162" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="162" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="class_u_t_camera_1a3d519db26513a1eec75abbe027aa0206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTCamera::UTCamera</definition>
+        <argsstring>(int camera, int wScreen, int hScreen)</argsstring>
+        <name>UTCamera</name>
+        <param>
+          <type>int</type>
+          <declname>camera</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>wScreen</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>hScreen</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="96" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="70" bodyend="97"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1ab5b597937e7edfc94fcfc1796d8041a5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::calibrage</definition>
+        <argsstring>()</argsstring>
+        <name>calibrage</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="99" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="101" bodyend="186"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a6fcff5718caaa4fcc16d192f34d74d94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>int *</type>
+        <definition>int* UTCamera::analyseZoneVerte</definition>
+        <argsstring>()</argsstring>
+        <name>analyseZoneVerte</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="101"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a555f596bb0867ea161eeb88d28a88796" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::record</definition>
+        <argsstring>(int mode)</argsstring>
+        <name>record</name>
+        <param>
+          <type>int</type>
+          <declname>mode</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="106" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="414" bodyend="438"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1aa65e8f397823bdc54b18e72f73db1f66" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::maskApplication</definition>
+        <argsstring>()</argsstring>
+        <name>maskApplication</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="109" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="193" bodyend="238"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1aefc11931e72ebe4e10164463197a26f5" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::RegGApplication</definition>
+        <argsstring>()</argsstring>
+        <name>RegGApplication</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="110" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="268" bodyend="301"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1afc4391f9379336abb42bbfe81b3733db" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::afficherMask</definition>
+        <argsstring>()</argsstring>
+        <name>afficherMask</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="112" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="356" bodyend="359"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a7cb87687ba17986525f4d0e2dd7eb421" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::afficherMask</definition>
+        <argsstring>(char *WindowMaskName)</argsstring>
+        <name>afficherMask</name>
+        <param>
+          <type>char *</type>
+          <declname>WindowMaskName</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="113" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="363" bodyend="410"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a7a7bbc3c30827e53cf558d4d785e68cf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::afficherRegi</definition>
+        <argsstring>()</argsstring>
+        <name>afficherRegi</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="114" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="346" bodyend="354"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1af76b96e69eec45286474239a33c805bb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::saveConfig</definition>
+        <argsstring>()</argsstring>
+        <name>saveConfig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="116" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="445" bodyend="466"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a72e42245bebc87c959f34db3c60f4beb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::loadConfig</definition>
+        <argsstring>()</argsstring>
+        <name>loadConfig</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="117" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="469" bodyend="543"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a649059d56fa4be02dab3a091546cfc4f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>string</type>
+        <definition>string UTCamera::getName</definition>
+        <argsstring>()</argsstring>
+        <name>getName</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="119" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="119" bodyend="119"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1ac90a38f802e54e12e547829348ed541a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>CvCapture *</type>
+        <definition>CvCapture* UTCamera::getCapture</definition>
+        <argsstring>()</argsstring>
+        <name>getCapture</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="120" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="120" bodyend="120"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a68ebed18fce4becfd30fbfa2e8c60428" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>IplImage *</type>
+        <definition>IplImage* UTCamera::getFrame</definition>
+        <argsstring>()</argsstring>
+        <name>getFrame</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="121" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="121" bodyend="121"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a7f7b3a41f1c3eed421dfa5978df10666" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::setHtab</definition>
+        <argsstring>(int ind, int val)</argsstring>
+        <name>setHtab</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="123" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="123" bodyend="123"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a96f62f719e7f4459df1aee0a947946a2" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::setHtol</definition>
+        <argsstring>(int ind, int val)</argsstring>
+        <name>setHtol</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="124" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="124" bodyend="124"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1aa91e9ef0af70cdb7bb026f25ce0fff0b" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::setStab</definition>
+        <argsstring>(int ind, int val)</argsstring>
+        <name>setStab</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="125" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="125" bodyend="125"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a08e9aeabfbc455bf16393df878181949" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::setStol</definition>
+        <argsstring>(int ind, int val)</argsstring>
+        <name>setStol</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="126" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="126" bodyend="126"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a3cb8c1b95dec465ade26dd35bf04f24c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::setVtab</definition>
+        <argsstring>(int ind, int val)</argsstring>
+        <name>setVtab</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="127" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="127" bodyend="127"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1ab1f6f27c51376f2fc631fe2d478eb45f" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>void</type>
+        <definition>void UTCamera::setVtol</definition>
+        <argsstring>(int ind, int val)</argsstring>
+        <name>setVtol</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <param>
+          <type>int</type>
+          <declname>val</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="128" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="128" bodyend="128"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a4c4d6d710cb04396ab5e4e7659577ee0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getHtab</definition>
+        <argsstring>(int ind)</argsstring>
+        <name>getHtab</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="130" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="130" bodyend="130"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a5aa2e50a3a1bf9dfbf6287f20d4d1e49" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getHtol</definition>
+        <argsstring>(int ind)</argsstring>
+        <name>getHtol</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="131" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="131" bodyend="131"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1ad77eaebf33d934443bb8df7c051e9b62" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getStab</definition>
+        <argsstring>(int ind)</argsstring>
+        <name>getStab</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="132" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="132" bodyend="132"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a5cdb8f99ae48e381b3e34fa651cecfc0" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getStol</definition>
+        <argsstring>(int ind)</argsstring>
+        <name>getStol</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="133" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="133" bodyend="133"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1aec3ce1234932b90a855f819efa862e3c" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getVtab</definition>
+        <argsstring>(int ind)</argsstring>
+        <name>getVtab</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="134" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="134" bodyend="134"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1af6a33512572b43af999112617f0e2f6a" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getVtol</definition>
+        <argsstring>(int ind)</argsstring>
+        <name>getVtol</name>
+        <param>
+          <type>int</type>
+          <declname>ind</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="135" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="135" bodyend="135"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a2763b11a57035b36eae75c10325b1f04" prot="public" static="no" const="no" explicit="no" inline="yes" virt="non-virtual">
+        <type>int</type>
+        <definition>int UTCamera::getInd</definition>
+        <argsstring>()</argsstring>
+        <name>getInd</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="137" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="137" bodyend="137"/>
+      </memberdef>
+      <memberdef kind="function" id="class_u_t_camera_1a463e6334c1a0155651d04e2fb9011249" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type></type>
+        <definition>UTCamera::~UTCamera</definition>
+        <argsstring>()</argsstring>
+        <name>~UTCamera</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="139" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp" bodystart="549" bodyend="551"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <collaborationgraph>
+      <node id="107">
+        <label>Region</label>
+        <link refid="struct_region"/>
+        <childnode refid="107" relation="usage">
+          <edgelabel>suiv</edgelabel>
+        </childnode>
+      </node>
+      <node id="105">
+        <label>UTCamera</label>
+        <link refid="class_u_t_camera"/>
+        <childnode refid="106" relation="usage">
+          <edgelabel>listeR</edgelabel>
+        </childnode>
+      </node>
+      <node id="106">
+        <label>ListeRegion</label>
+        <link refid="class_liste_region"/>
+        <childnode refid="107" relation="usage">
+          <edgelabel>fin</edgelabel>
+          <edgelabel>ptr</edgelabel>
+          <edgelabel>deb</edgelabel>
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" line="92" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp" bodystart="91" bodyend="164"/>
+    <listofallmembers>
+      <member refid="class_u_t_camera_1afc4391f9379336abb42bbfe81b3733db" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>afficherMask</name></member>
+      <member refid="class_u_t_camera_1a7cb87687ba17986525f4d0e2dd7eb421" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>afficherMask</name></member>
+      <member refid="class_u_t_camera_1a7a7bbc3c30827e53cf558d4d785e68cf" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>afficherRegi</name></member>
+      <member refid="class_u_t_camera_1a6fcff5718caaa4fcc16d192f34d74d94" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>analyseZoneVerte</name></member>
+      <member refid="class_u_t_camera_1ab5b597937e7edfc94fcfc1796d8041a5" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>calibrage</name></member>
+      <member refid="class_u_t_camera_1aa5054914cbc77052d75ea8f5ced10e5c" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>frame</name></member>
+      <member refid="class_u_t_camera_1ac90a38f802e54e12e547829348ed541a" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getCapture</name></member>
+      <member refid="class_u_t_camera_1a68ebed18fce4becfd30fbfa2e8c60428" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getFrame</name></member>
+      <member refid="class_u_t_camera_1a4c4d6d710cb04396ab5e4e7659577ee0" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getHtab</name></member>
+      <member refid="class_u_t_camera_1a5aa2e50a3a1bf9dfbf6287f20d4d1e49" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getHtol</name></member>
+      <member refid="class_u_t_camera_1a2763b11a57035b36eae75c10325b1f04" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getInd</name></member>
+      <member refid="class_u_t_camera_1a649059d56fa4be02dab3a091546cfc4f" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getName</name></member>
+      <member refid="class_u_t_camera_1ad77eaebf33d934443bb8df7c051e9b62" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getStab</name></member>
+      <member refid="class_u_t_camera_1a5cdb8f99ae48e381b3e34fa651cecfc0" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getStol</name></member>
+      <member refid="class_u_t_camera_1aec3ce1234932b90a855f819efa862e3c" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getVtab</name></member>
+      <member refid="class_u_t_camera_1af6a33512572b43af999112617f0e2f6a" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>getVtol</name></member>
+      <member refid="class_u_t_camera_1a7ad6e294dd984e98c004e39812b92fb2" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>height</name></member>
+      <member refid="class_u_t_camera_1aca706cb570f5715127e526ca96df24cf" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>hScreen</name></member>
+      <member refid="class_u_t_camera_1a47de0eaaf305628d334ffd084800936f" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>Htab</name></member>
+      <member refid="class_u_t_camera_1a68b18c2925a6d90a6f2033095c615f5f" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>Htol</name></member>
+      <member refid="class_u_t_camera_1a62e7727a67408783cb2b171e0d5039e9" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>imgTab</name></member>
+      <member refid="class_u_t_camera_1ad405796eef34ce22598f9f6ce5d84a0d" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>ind</name></member>
+      <member refid="class_u_t_camera_1a7cdcf7f46767c4303f2cf1a3f10ac7ab" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>listeR</name></member>
+      <member refid="class_u_t_camera_1a72e42245bebc87c959f34db3c60f4beb" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>loadConfig</name></member>
+      <member refid="class_u_t_camera_1aa65e8f397823bdc54b18e72f73db1f66" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>maskApplication</name></member>
+      <member refid="class_u_t_camera_1ac54cb02aad974041e6f2422d0a45e9f4" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>nameCam</name></member>
+      <member refid="class_u_t_camera_1a4d13ce94ef12f54c73d8f757043f416b" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>ptrCamera</name></member>
+      <member refid="class_u_t_camera_1a555f596bb0867ea161eeb88d28a88796" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>record</name></member>
+      <member refid="class_u_t_camera_1aefc11931e72ebe4e10164463197a26f5" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>RegGApplication</name></member>
+      <member refid="class_u_t_camera_1af76b96e69eec45286474239a33c805bb" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>saveConfig</name></member>
+      <member refid="class_u_t_camera_1a7f7b3a41f1c3eed421dfa5978df10666" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>setHtab</name></member>
+      <member refid="class_u_t_camera_1a96f62f719e7f4459df1aee0a947946a2" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>setHtol</name></member>
+      <member refid="class_u_t_camera_1aa91e9ef0af70cdb7bb026f25ce0fff0b" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>setStab</name></member>
+      <member refid="class_u_t_camera_1a08e9aeabfbc455bf16393df878181949" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>setStol</name></member>
+      <member refid="class_u_t_camera_1a3cb8c1b95dec465ade26dd35bf04f24c" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>setVtab</name></member>
+      <member refid="class_u_t_camera_1ab1f6f27c51376f2fc631fe2d478eb45f" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>setVtol</name></member>
+      <member refid="class_u_t_camera_1a8ba7117ce8f9483b1a904e3d0aa3630b" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>Stab</name></member>
+      <member refid="class_u_t_camera_1a84394863ae69eadcfe0d37c0ca69c892" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>Stol</name></member>
+      <member refid="class_u_t_camera_1a3d519db26513a1eec75abbe027aa0206" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>UTCamera</name></member>
+      <member refid="class_u_t_camera_1af378d01de32f25b64c7580a48b917a1e" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>Vtab</name></member>
+      <member refid="class_u_t_camera_1a8675aba062f4923f05ad20c0a71f6791" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>Vtol</name></member>
+      <member refid="class_u_t_camera_1a8fe4dedc90ec0f3e6dc6e959ed9ffb30" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>width</name></member>
+      <member refid="class_u_t_camera_1ad522125bfac40fa8e4cbd41849df318a" prot="private" virt="non-virtual"><scope>UTCamera</scope><name>wScreen</name></member>
+      <member refid="class_u_t_camera_1a463e6334c1a0155651d04e2fb9011249" prot="public" virt="non-virtual"><scope>UTCamera</scope><name>~UTCamera</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

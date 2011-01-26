@@ -1,0 +1,72 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<title>utcoupe2011:  Fichier source de asserv2010/asservDistance.c</title>
+<link href="../../tabs.css" rel="stylesheet" type="text/css"/>
+<link href="../../doxygen.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<!-- Généré par Doxygen 1.6.3 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="../../main.html"><span>Page&nbsp;principale</span></a></li>
+      <li><a href="../../namespaces.html"><span>Espaces&nbsp;de&nbsp;nommage</span></a></li>
+      <li><a href="../../annotated.html"><span>Classes</span></a></li>
+      <li class="current"><a href="../../files.html"><span>Fichiers</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="../../files.html"><span>Liste&nbsp;des&nbsp;fichiers</span></a></li>
+      <li><a href="../../globals.html"><span>Membres&nbsp;de&nbsp;fichier</span></a></li>
+    </ul>
+  </div>
+<h1>asserv2010/asservDistance.c</h1><a href="../../d0/dcf/asserv_distance_8c.html">Aller à la documentation de ce fichier.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 <span class="preprocessor">#include &quot;<a class="code" href="../../dd/df6/_a_l_types_8h.html">ALTypes.h</a>&quot;</span>
+<a name="l00002"></a>00002 <span class="preprocessor">#include &quot;math.h&quot;</span>
+<a name="l00003"></a>00003 <span class="preprocessor">#include &quot;<a class="code" href="../../de/d67/trajectory_8h.html">trajectory.h</a>&quot;</span>
+<a name="l00004"></a>00004 <span class="preprocessor">#include &quot;<a class="code" href="../../db/d16/config_8h.html">config.h</a>&quot;</span>
+<a name="l00005"></a>00005 <span class="preprocessor">#include &quot;math.h&quot;</span>
+<a name="l00006"></a>00006 
+<a name="l00007"></a><a class="code" href="../../d0/dcf/asserv_distance_8c.html#a82d8fad64f895864e2aa8926c4ca396b">00007</a> <span class="preprocessor">#define DECELERATION 1</span>
+<a name="l00008"></a><a class="code" href="../../d0/dcf/asserv_distance_8c.html#a3fa2d9e8a3ff5bc7ac576fda26265b44">00008</a> <span class="preprocessor"></span><span class="preprocessor">#define ACCELERATION 1</span>
+<a name="l00009"></a>00009 <span class="preprocessor"></span>
+<a name="l00010"></a><a class="code" href="../../dc/d27/asserv_distance_8h.html#a5b6d02bb076ddacc3da059ec0cd5cec3">00010</a> <span class="keywordtype">float</span> <a class="code" href="../../d0/dcf/asserv_distance_8c.html#a5b6d02bb076ddacc3da059ec0cd5cec3">distance</a>(<a class="code" href="../../d8/dae/structpoint.html">point</a> * pA, <a class="code" href="../../d8/dae/structpoint.html">point</a> * pB)
+<a name="l00011"></a>00011 {       
+<a name="l00012"></a>00012   <span class="keywordtype">float</span> temp,temp2;
+<a name="l00013"></a>00013         <span class="comment">// pythagore d�compos�</span>
+<a name="l00014"></a>00014         temp = fabsf(pA-&gt;<a class="code" href="../../d8/dae/structpoint.html#a8293fd2de3ce739deb6d53691fd21fcf">x</a> - pB-&gt;<a class="code" href="../../d8/dae/structpoint.html#a8293fd2de3ce739deb6d53691fd21fcf">x</a>);
+<a name="l00015"></a>00015         temp *= temp;
+<a name="l00016"></a>00016         temp2 = fabsf(pA-&gt;<a class="code" href="../../d8/dae/structpoint.html#a616ad85a2096d1566f5971666bbc3b3f">y</a> - pB-&gt;<a class="code" href="../../d8/dae/structpoint.html#a616ad85a2096d1566f5971666bbc3b3f">y</a>);
+<a name="l00017"></a>00017         temp2 *= temp2;
+<a name="l00018"></a>00018         
+<a name="l00019"></a>00019         <span class="keywordflow">return</span> sqrt(temp + temp2);
+<a name="l00020"></a>00020 }
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="../../dc/d27/asserv_distance_8h.html#a6f8121ce0d03ce3742599f5afef5f925">00022</a> <span class="keywordtype">float</span> <a class="code" href="../../d0/dcf/asserv_distance_8c.html#a6f8121ce0d03ce3742599f5afef5f925">calculConsigne_d</a>(<a class="code" href="../../d8/dae/structpoint.html">point</a> <a class="code" href="../../d3/dd0/namespacescreen.html#a391180925962f2d8178b40fbbb862d17">t</a>)
+<a name="l00023"></a>00023 {
+<a name="l00024"></a>00024   <span class="keywordtype">float</span> ecart_d;
+<a name="l00025"></a>00025   <a class="code" href="../../db/dd0/structrobot.html">robot</a> * Robot;
+<a name="l00026"></a>00026  
+<a name="l00027"></a>00027   Robot = <a class="code" href="../../d3/d95/config_8c.html#a1620e709da932be9c3f2fff78ecf50e3">getRobot</a>();
+<a name="l00028"></a>00028 
+<a name="l00029"></a>00029   ecart_d = <a class="code" href="../../d0/dcf/asserv_distance_8c.html#a5b6d02bb076ddacc3da059ec0cd5cec3">distance</a>(&amp;Robot-&gt;<a class="code" href="../../db/dd0/structrobot.html#a5d839619db2bffea3a5ebbc12d7dd8d3">position</a>, &amp;t);
+<a name="l00030"></a>00030   
+<a name="l00031"></a>00031   <span class="comment">// for reverse way</span>
+<a name="l00032"></a>00032   <span class="keywordflow">if</span> (Robot-&gt;<a class="code" href="../../db/dd0/structrobot.html#abfa9412b2ff33905ffa70ea6d839eda7">speedMax</a> &lt; 0)
+<a name="l00033"></a>00033   {
+<a name="l00034"></a>00034     ecart_d*=-1;
+<a name="l00035"></a>00035   }  
+<a name="l00036"></a>00036 
+<a name="l00037"></a>00037   <span class="keywordflow">return</span> ecart_d;
+<a name="l00038"></a>00038     
+<a name="l00039"></a>00039 }
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041 
+</pre></div></div>
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 14:42:54 2011 pour utcoupe2011 par&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
+</body>
+</html>

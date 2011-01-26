@@ -1,0 +1,106 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="asserv_distance_8h" kind="file">
+    <compoundname>asservDistance.h</compoundname>
+    <includedby refid="_main_8c" local="yes">asserv2010/Main.c</includedby>
+    <includedby refid="speed_asserv_8c" local="yes">asserv2010/speedAsserv.c</includedby>
+    <includedby refid="trajectory_8c" local="yes">asserv2010/trajectory.c</includedby>
+    <invincdepgraph>
+      <node id="1128">
+        <label>asserv2010/speedAsserv.c</label>
+        <link refid="speed_asserv_8c"/>
+      </node>
+      <node id="1126">
+        <label>asserv2010/asservDistance.h</label>
+        <link refid="asservDistance.h"/>
+        <childnode refid="1127" relation="include">
+        </childnode>
+        <childnode refid="1128" relation="include">
+        </childnode>
+        <childnode refid="1129" relation="include">
+        </childnode>
+      </node>
+      <node id="1127">
+        <label>asserv2010/Main.c</label>
+        <link refid="_main_8c"/>
+        <childnode refid="1127" relation="include">
+        </childnode>
+      </node>
+      <node id="1129">
+        <label>asserv2010/trajectory.c</label>
+        <link refid="trajectory_8c"/>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="asserv_distance_8h_1a5b6d02bb076ddacc3da059ec0cd5cec3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float distance</definition>
+        <argsstring>(point *pA, point *pB)</argsstring>
+        <name>distance</name>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref> *</type>
+          <declname>pA</declname>
+        </param>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref> *</type>
+          <declname>pB</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.h" line="4" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" bodystart="10" bodyend="20"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_distance_8h_1a6f8121ce0d03ce3742599f5afef5f925" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float calculConsigne_d</definition>
+        <argsstring>(point t)</argsstring>
+        <name>calculConsigne_d</name>
+        <param>
+          <type><ref refid="structpoint" kindref="compound">point</ref></type>
+          <declname>t</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.h" line="5" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.c" bodystart="22" bodyend="39"/>
+      </memberdef>
+      <memberdef kind="function" id="asserv_distance_8h_1a87b3828028279dbf7cd0c9255303738e" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float decreaseDistanceTheorique</definition>
+        <argsstring>(float pDistanceTheorique)</argsstring>
+        <name>decreaseDistanceTheorique</name>
+        <param>
+          <type>float</type>
+          <declname>pDistanceTheorique</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.h" line="6" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.c" bodystart="198" bodyend="224"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>ASSERV_DISTANCE_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>ASSERV_DISTANCE_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="normal"></highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_distance_8c_1a5b6d02bb076ddacc3da059ec0cd5cec3" kindref="member">distance</ref>(<ref refid="structpoint" kindref="compound">point</ref><sp/>*<sp/>pA,<sp/><ref refid="structpoint" kindref="compound">point</ref><sp/>*<sp/>pB);</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_distance_8c_1a6f8121ce0d03ce3742599f5afef5f925" kindref="member">calculConsigne_d</ref>(<ref refid="structpoint" kindref="compound">point</ref><sp/><ref refid="namespacescreen_1a391180925962f2d8178b40fbbb862d17" kindref="member">t</ref>);</highlight></codeline>
+<codeline lineno="6"><highlight class="normal"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="asserv_distance_8h_1a87b3828028279dbf7cd0c9255303738e" kindref="member">decreaseDistanceTheorique</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pDistanceTheorique);</highlight></codeline>
+<codeline lineno="7"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/asservDistance.h"/>
+  </compounddef>
+</doxygen>

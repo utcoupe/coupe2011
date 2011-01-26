@@ -1,0 +1,17 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="dir_819a09d889cb98ca0af2c3bcb67d17ce" kind="dir">
+    <compoundname>Visio/ObjectCamera/</compoundname>
+    <innerfile refid="_fps_8hpp">Fps.hpp</innerfile>
+    <innerfile refid="_liste_region_8cpp">ListeRegion.cpp</innerfile>
+    <innerfile refid="_liste_region_8hpp">ListeRegion.hpp</innerfile>
+    <innerfile refid="main_8cpp">main.cpp</innerfile>
+    <innerfile refid="_u_t_camera_8cpp">UTCamera.cpp</innerfile>
+    <innerfile refid="_u_t_camera_8hpp">UTCamera.hpp</innerfile>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/ObjectCamera/"/>
+  </compounddef>
+</doxygen>

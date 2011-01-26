@@ -1,13 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import threading
-import sys
-
-from message import *
-from timer import *
-
-
 """
 	commandes funky:
 		live <cmd>: aficher une nouvelle fenetre avec en boucle un envoi/reception de la commande spécifiée
@@ -16,12 +9,40 @@ from timer import *
 """
 
 
+import threading
+import sys
+
+from message import *
+from timer import *
+
+
 ports = []
 ports.append(('ACM0',115200))
 #ports.append(('ACM1',115200))
 
 server = Server(ports)
 
+class Ordre(self):
+	def __init__(self, cmd, fonction, isAliveCmd):
+		self.cmd = cmd
+		self.fonction = fonction
+		self.timeSinceLastReponse = 0
+	
+	""" regarde si il y a un retour """
+	def check(self):
+		server.getRcv, (cmd, 'ACM0'
+		
+
+class IA():
+	def __init__(self):
+		self.cmdRunning = dict() # les commandes en cours
+		self.errors		= dict() # les erreurs reçues
+	
+	def allerA(self):
+	
+	
+	
+	
 # read, send and get output of a command
 def loopCmd():
 	cmd = raw_input()

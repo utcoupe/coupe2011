@@ -1,0 +1,77 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.6.3">
+  <compounddef id="speed_asserv_8h" kind="file">
+    <compoundname>speedAsserv.h</compoundname>
+    <includedby refid="_main_8c" local="yes">asserv2010/Main.c</includedby>
+    <invincdepgraph>
+      <node id="1254">
+        <label>asserv2010/speedAsserv.h</label>
+        <link refid="speedAsserv.h"/>
+        <childnode refid="1255" relation="include">
+        </childnode>
+      </node>
+      <node id="1255">
+        <label>asserv2010/Main.c</label>
+        <link refid="_main_8c"/>
+        <childnode refid="1255" relation="include">
+        </childnode>
+      </node>
+    </invincdepgraph>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="speed_asserv_8h_1a7505a51f997fedc2cb97bd5cef17d12a" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>float</type>
+        <definition>float calculAcceleration</definition>
+        <argsstring>(float pEcart, float pDistanceTheorique)</argsstring>
+        <name>calculAcceleration</name>
+        <param>
+          <type>float</type>
+          <declname>pEcart</declname>
+        </param>
+        <param>
+          <type>float</type>
+          <declname>pDistanceTheorique</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.h" line="3" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.c" bodystart="97" bodyend="195"/>
+      </memberdef>
+      <memberdef kind="function" id="speed_asserv_8h_1ac9ede30e16e5e9c15755344affd44445" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>void</type>
+        <definition>void asservissementVitesse</definition>
+        <argsstring>(float *ecart_d, float *ecart_rot)</argsstring>
+        <name>asservissementVitesse</name>
+        <param>
+          <type>float *</type>
+          <declname>ecart_d</declname>
+        </param>
+        <param>
+          <type>float *</type>
+          <declname>ecart_rot</declname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.h" line="4" bodyfile="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.c" bodystart="252" bodyend="323"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <programlisting>
+<codeline lineno="1"><highlight class="preprocessor">#ifndef<sp/>SPEED_ASSERV_H</highlight></codeline>
+<codeline lineno="2"><highlight class="preprocessor"></highlight><highlight class="preprocessor">#define<sp/>SPEED_ASSERV_H</highlight></codeline>
+<codeline lineno="3"><highlight class="preprocessor"></highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/><ref refid="speed_asserv_8c_1a7505a51f997fedc2cb97bd5cef17d12a" kindref="member">calculAcceleration</ref><sp/>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pEcart,</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>pDistanceTheorique);</highlight></codeline>
+<codeline lineno="4"><highlight class="normal"></highlight><highlight class="keywordtype">void</highlight><highlight class="normal"><sp/><ref refid="speed_asserv_8c_1ac9ede30e16e5e9c15755344affd44445" kindref="member">asservissementVitesse</ref>(</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>ecart_d,</highlight><highlight class="keywordtype">float</highlight><highlight class="normal"><sp/>*<sp/>ecart_rot);</highlight></codeline>
+<codeline lineno="5"><highlight class="normal"></highlight><highlight class="preprocessor">#endif</highlight></codeline>
+    </programlisting>
+    <location file="/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/asserv2010/speedAsserv.h"/>
+  </compounddef>
+</doxygen>
