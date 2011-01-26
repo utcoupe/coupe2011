@@ -57,10 +57,12 @@ class Server():
 		for s in self.ser:
 			self.queuedCmd[s] = Queue() # on envoi les commandes les unes après les autres
 			self.waitRcv[s] = dict() # on reçoit dans n'importe quel ordre
-			self.cmdLoops[s] = threading.Thread(None, self.loopCmd, None, (s,))
-			self.cmdLoops[s].start()
-			self.rcvLoops[s] = threading.Thread(None, self.loopRcv, None, (s,))
-			self.rcvLoops[s].start()
+			it = InteruptableThreadedLoop(None, "cmdLoop : "+s)
+			it.start(self.loopCmd, (s,))
+			self.cmdLoops[s] = it
+			it = InteruptableThreadedLoop(None, "rcvLoop : "+s)
+			it.start(self.loopRcv, (s,))
+			self.rcvLoops[s] = it
 		
 		# petite pause avant de pouvoir envoyer et recevoir des données
 		time.sleep(1)
@@ -69,6 +71,17 @@ class Server():
 		
 		print 'fin init'
 	
+	def stop(self):
+		print 'stop server'
+		n = 0
+		for screen,loop in self.screens:
+			self.stopScreen(n)
+			n += 1
+		for it in self.cmdLoops.values():
+			it.stop()
+		for it in self.rcvLoops.values():
+			it.stop()
+		
 	def connect(self, port, refresh):
 		""" Connection à un port
 		
@@ -94,22 +107,23 @@ class Server():
 	def loopCmd(self, port):
 		""" la loop envoyant à la suite les commandes de la queue """
 		queue = self.queuedCmd[port]
-		while True:
-			cmd = queue.get()
-			r = self._sendCmd(cmd, port)
-			if r < 0:
-				self.waitRcv[port] = 'timeout'
-			queue.task_done()
+		try:
+			cmd = queue.get(True, 2)
+		except Empty:
+			return
+		r = self._sendCmd(cmd, port)
+		if r < 0:
+			self.waitRcv[port] = 'timeout'
+		queue.task_done()
 	
 	def loopRcv(self, port):
 		""" la loop récupérant les réponses au différentes commandes """
 		di = self.waitRcv[port]
-		while True:
-			r = self._readInput(port).split(',')
-			#print r
-			if len(r) == 2 and r[0] != 'timeout':
-				cmd,recv = r
-				di[cmd] = recv
+		r = self._readInput(port).split(',')
+		#print r
+		if len(r) == 2 and r[0] != 'timeout':
+			cmd,recv = r
+			di[cmd] = recv
 	
 	def addCmd(self, cmd, port):
 		""" ajoute une commande à envoyer dans la queue des commandes
@@ -135,6 +149,7 @@ class Server():
 		if bloquant:
 			while not rcv:
 				rcv = self.waitRcv[port][cmdid]
+		self.waitRcv[port][cmdid] = None
 		return rcv
 		
 	def _sendCmd(self, cmd, port):
@@ -144,7 +159,6 @@ class Server():
 		except serial.SerialException as ex:
 			print 'timeout, writing on', port, ex
 			return -1
-	
 	
 	def _readInput(self, port):
 		val = self.ser[port].readline()
@@ -184,7 +198,7 @@ class Server():
 	def addScreen(self, live=None):
 		""" 
 		@param
-			live: timer du live
+			live: timer de la loop
 		
 		@return numero de l'écran créé
 		"""
@@ -204,7 +218,7 @@ class Server():
 		self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
 		self.screens[n][0].stdin.flush()
 	
-	def getLive(self, port, cmd, speed=0.3):
+	def makeLoop(self, port, cmd, speed=0.3):
 		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
 		
 		@param
@@ -213,14 +227,14 @@ class Server():
 			speed: l'interval entre chaque envoi
 		"""
 		def loop():
-			self.addCmd(cmd, 'ACM0')
-			self.write(self.getRcv(cmd, 'ACM0', True),n)
+			self.addCmd(cmd, port)
+			self.write(self.getRcv(cmd, port, True),n)
 		timer = MyTimer(float(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()
 	
-	def _stopLive(self, n):
-		""" arreter un "live"
+	def _stopLoop(self, n):
+		""" arreter une loop
 		
 		@param
 			n: numéro du live à stopper
@@ -244,10 +258,19 @@ class Server():
 			n: numéro de l'écran
 		"""
 		if self.screens[n][1]:
-			self._stopLive(n)
+			self._stopLoop(n)
 		self._stopProcess(n)
 			
-			
-				
+	def bin(self, port):
+		""" affiche tout ce que l'ordi reçoit
+		"""
+		def loop():
+			for waitRcv in self.waitRcv.values():
+				for rcv in waitRcv.values():
+					if rcv:
+						self.write(rcv,n)
+		timer = MyTimer(0.03,loop)
+		n = self.addScreen(timer)
+		timer.start()
 		
 	

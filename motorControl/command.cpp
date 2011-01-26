@@ -11,11 +11,14 @@
 
 // Message est le tableau de message
 // m est le message
-void cmd(int c, float* message, int m)
+void cmd(int c, int* message)
 {
 	int i;
 	// On analyse le message en fonction de son type
 	switch(c){
+		case 'x':
+			Serial.print("x,");Serial.println(M_PI);
+		break;
 		case 'P': // Ping
 			sendMessage(c, "Pong");
 		break;
@@ -40,7 +43,7 @@ void cmd(int c, float* message, int m)
 		break;
 		//case T_POSITION:
 		case 'g':
-			pushGoal(TYPE_POSITION, message[1], message[2], message[3]);
+			pushGoal(TYPE_POSITION, message[0]*18, message[1]*18, message[2]);
 			//x , y , ratio vitesse max [0-200]
 			sendMessage(c, "Go...");
 		break;
@@ -59,6 +62,15 @@ void cmd(int c, float* message, int m)
 			clearGoals();
 			sendMessage(c, "The fifo is empty...");
 		break;
+		case 'p':
+			Serial.print("p,");
+			Serial.print(robot_state.x*ENC_TICKS_TO_MM);
+			Serial.print(" ");
+			Serial.print(robot_state.y*ENC_TICKS_TO_MM);
+			Serial.print(" ");
+			Serial.print(robot_state.angle*360/(2*M_PI));
+			Serial.println();
+
 		case '?':
 			Serial.print("?,_________________§");
 			Serial.print("time: ");Serial.print(millis());
@@ -73,7 +85,7 @@ void cmd(int c, float* message, int m)
 		break;
 		// If not found
 		default:
-			Serial.println("Command not found");
+			sendMessage(c,"Command not found");
 		break;
 	}
 }
