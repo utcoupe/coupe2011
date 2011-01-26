@@ -40,12 +40,8 @@ class Server():
 			threads.append(thread)
 		
 		# attendre que les connections soient établies
-		while True:
-			for t in threads:
-				if t.isAlive():
-					time.sleep(2)
-					break # break que le for
-			break
+		for t in threads:
+			t.join()
 		
 		# Verification que les connections ont reussi
 		for s in self.ser.values():
@@ -81,6 +77,7 @@ class Server():
 			it.stop()
 		for it in self.rcvLoops.values():
 			it.stop()
+		print threading.enumerate()
 		
 	def connect(self, port, refresh):
 		""" Connection à un port
@@ -95,7 +92,8 @@ class Server():
 				s = serial.Serial('/dev/tty'+port, refresh, timeout=1, writeTimeout=1)
 				#s = serial.Serial('/dev/tty'+port, refresh, writeTimeout=1)
 			except serial.SerialException as ex:
-				print 'connection echouée sur %s, nouvelle tentative'%port, ex
+				print 'connection echouée sur %s, nouvelle tentative'%port
+				print ex
 			else:
 				print 'connection %s établie'%port
 				self.ser[port] = s
@@ -215,8 +213,9 @@ class Server():
 			msg: le message
 			n: l'écran sur lequel écrire
 		"""
-		self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
-		self.screens[n][0].stdin.flush()
+		if self.screens[n][0]:
+			self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
+			self.screens[n][0].stdin.flush()
 	
 	def makeLoop(self, port, cmd, speed=0.3):
 		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
@@ -239,8 +238,9 @@ class Server():
 		@param
 			n: numéro du live à stopper
 		"""
-		self.screens[n][1].stop()
-		self.screens[n][1] = None
+		if self.screens[n][1]:
+			self.screens[n][1].stop()
+			self.screens[n][1] = None
 	
 	def _stopProcess(self, n):
 		""" arrete le process faisant tourner un écran
@@ -248,8 +248,9 @@ class Server():
 		@param
 			n: numéro de l'écran
 		"""
-		self.screens[n][0].terminate()
-		self.screens[n][0] = None
+		if self.screens[n][0]:
+			self.screens[n][0].terminate()
+			self.screens[n][0] = None
 	
 	def stopScreen(self, n):
 		""" arreter un écran (et la boucle derrière)
@@ -274,3 +275,13 @@ class Server():
 		timer.start()
 		
 	
+def traiterReponseCamera(msg):
+	listObjets = msg.split(',')
+	for obj in listObjets:
+		obj = obj.split()
+	return listObjets
+	
+
+
+
+
