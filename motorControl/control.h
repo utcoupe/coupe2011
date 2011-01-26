@@ -35,7 +35,7 @@ void initController();
 void speedControl(int*,int*);
 void angleControl(int*,int*);
 void positionControl(int*,int*);
-
+double moduloPI(double Nb);
 void computeRobotState();
 
 int computePID(double,int,int,int);
