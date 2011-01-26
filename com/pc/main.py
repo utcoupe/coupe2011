@@ -21,7 +21,7 @@ ports.append(('ACM0',115200))
 #ports.append(('ACM1',115200))
 
 server = Server(ports)
-
+'''
 class Ordre(self):
 	def __init__(self, cmd, fonction, isAliveCmd):
 		self.cmd = cmd
@@ -40,7 +40,7 @@ class IA():
 	
 	def allerA(self):
 	
-	
+'''
 	
 	
 # read, send and get output of a command
