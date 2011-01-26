@@ -207,75 +207,77 @@
 <a name="l00182"></a>00182                 t.start()
 <a name="l00183"></a>00183         
 <a name="l00184"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">00184</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">addScreen</a>(self, live=None):
-<a name="l00185"></a>00185                 <span class="stringliteral">&quot;&quot;&quot; live: timer du live</span>
-<a name="l00186"></a>00186 <span class="stringliteral">                </span>
-<a name="l00187"></a>00187 <span class="stringliteral">                @return numero de l&#39;écran créé</span>
-<a name="l00188"></a>00188 <span class="stringliteral">                &quot;&quot;&quot;</span>
-<a name="l00189"></a>00189                 screens = [ s <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a> <span class="keywordflow">if</span> s[0] ]
-<a name="l00190"></a>00190                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a> = screens
-<a name="l00191"></a>00191                 screen = subprocess.Popen([<span class="stringliteral">&quot;python&quot;</span>,<span class="stringliteral">&quot;screen.py&quot;</span>], shell=<span class="keyword">False</span>, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-<a name="l00192"></a>00192                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>.append([screen, live])
-<a name="l00193"></a>00193                 <span class="keywordflow">return</span> len(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>)-1 <span class="comment"># return l&#39;index du screen créé</span>
-<a name="l00194"></a>00194         
-<a name="l00195"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">00195</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self, msg, n=0):
-<a name="l00196"></a>00196                 <span class="stringliteral">&quot;&quot;&quot; écrit sur un écran </span>
-<a name="l00197"></a>00197 <span class="stringliteral">                </span>
-<a name="l00198"></a>00198 <span class="stringliteral">                @param</span>
-<a name="l00199"></a>00199 <span class="stringliteral">                        msg: le message</span>
-<a name="l00200"></a>00200 <span class="stringliteral">                        n: l&#39;écran sur lequel écrire</span>
-<a name="l00201"></a>00201 <span class="stringliteral">                &quot;&quot;&quot;</span>
-<a name="l00202"></a>00202                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].stdin.write(str(msg)+<span class="stringliteral">&quot;\n&quot;</span>) <span class="comment"># envoie au child</span>
-<a name="l00203"></a>00203                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].stdin.flush()
-<a name="l00204"></a>00204         
-<a name="l00205"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ad09f37276dfc6bc7e543dbc5c713df71">00205</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ad09f37276dfc6bc7e543dbc5c713df71">getLive</a>(self, port, cmd, speed=0.3):
-<a name="l00206"></a>00206                 <span class="stringliteral">&quot;&quot;&quot; Lance en boucle infinie une commande et l&#39;affiche sur un nouvel écran</span>
-<a name="l00207"></a>00207 <span class="stringliteral">                </span>
-<a name="l00208"></a>00208 <span class="stringliteral">                @param</span>
-<a name="l00209"></a>00209 <span class="stringliteral">                        port: le port sur lequel envoyer la commande</span>
-<a name="l00210"></a>00210 <span class="stringliteral">                        cmd: la commande</span>
-<a name="l00211"></a>00211 <span class="stringliteral">                        speed: l&#39;interval entre chaque envoi</span>
-<a name="l00212"></a>00212 <span class="stringliteral">                &quot;&quot;&quot;</span>
-<a name="l00213"></a>00213                 <span class="keyword">def </span><a class="code" href="../../d4/de6/carte_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a>():
-<a name="l00214"></a>00214                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#aaaf3eebf21c2b29456ca34e104dae598">addCmd</a>(cmd, <span class="stringliteral">&#39;ACM0&#39;</span>)
-<a name="l00215"></a>00215                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afff8fa13942ef9a9496db80f64a47a4b">getRcv</a>(cmd, <span class="stringliteral">&#39;ACM0&#39;</span>, <span class="keyword">True</span>),n)
-<a name="l00216"></a>00216                 timer = MyTimer(float(speed),loop)
-<a name="l00217"></a>00217                 n = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">addScreen</a>(timer)
-<a name="l00218"></a>00218                 timer.start()
-<a name="l00219"></a>00219         
-<a name="l00220"></a>00220         <span class="keyword">def </span>_stopLive(self, n):
-<a name="l00221"></a>00221                 <span class="stringliteral">&quot;&quot;&quot; arreter un &quot;live&quot;</span>
-<a name="l00222"></a>00222 <span class="stringliteral">                </span>
-<a name="l00223"></a>00223 <span class="stringliteral">                @param</span>
-<a name="l00224"></a>00224 <span class="stringliteral">                        n: numéro du live à stopper</span>
-<a name="l00225"></a>00225 <span class="stringliteral">                &quot;&quot;&quot;</span>
-<a name="l00226"></a>00226                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1].stop()
-<a name="l00227"></a>00227                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1] = <span class="keywordtype">None</span>
-<a name="l00228"></a>00228         
-<a name="l00229"></a>00229         <span class="keyword">def </span>_stopProcess(self, n):
-<a name="l00230"></a>00230                 <span class="stringliteral">&quot;&quot;&quot; arrete le process faisant tourner un écran</span>
-<a name="l00231"></a>00231 <span class="stringliteral">                </span>
-<a name="l00232"></a>00232 <span class="stringliteral">                @param</span>
-<a name="l00233"></a>00233 <span class="stringliteral">                        n: numéro de l&#39;écran</span>
-<a name="l00234"></a>00234 <span class="stringliteral">                &quot;&quot;&quot;</span>
-<a name="l00235"></a>00235                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].terminate()
-<a name="l00236"></a>00236                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0] = <span class="keywordtype">None</span>
-<a name="l00237"></a>00237         
-<a name="l00238"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a30f257df7816e4191c561b99c63c8411">00238</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a30f257df7816e4191c561b99c63c8411">stopScreen</a>(self, n):
-<a name="l00239"></a>00239                 <span class="stringliteral">&quot;&quot;&quot; arreter un écran (et la boucle derrière)</span>
-<a name="l00240"></a>00240 <span class="stringliteral">                </span>
-<a name="l00241"></a>00241 <span class="stringliteral">                @param</span>
-<a name="l00242"></a>00242 <span class="stringliteral">                        n: numéro de l&#39;écran</span>
-<a name="l00243"></a>00243 <span class="stringliteral">                &quot;&quot;&quot;</span>
-<a name="l00244"></a>00244                 <span class="keywordflow">if</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1]:
-<a name="l00245"></a>00245                         self.stopLive(n)
-<a name="l00246"></a>00246                 self.stopProcess(n)
-<a name="l00247"></a>00247                         
-<a name="l00248"></a>00248                         
-<a name="l00249"></a>00249                                 
-<a name="l00250"></a>00250                 
-<a name="l00251"></a>00251         
+<a name="l00185"></a>00185                 <span class="stringliteral">&quot;&quot;&quot; </span>
+<a name="l00186"></a>00186 <span class="stringliteral">                @param</span>
+<a name="l00187"></a>00187 <span class="stringliteral">                        live: timer du live</span>
+<a name="l00188"></a>00188 <span class="stringliteral">                </span>
+<a name="l00189"></a>00189 <span class="stringliteral">                @return numero de l&#39;écran créé</span>
+<a name="l00190"></a>00190 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00191"></a>00191                 screens = [ s <span class="keywordflow">for</span> s <span class="keywordflow">in</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a> <span class="keywordflow">if</span> s[0] ]
+<a name="l00192"></a>00192                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a> = screens
+<a name="l00193"></a>00193                 screen = subprocess.Popen([<span class="stringliteral">&quot;python&quot;</span>,<span class="stringliteral">&quot;screen.py&quot;</span>], shell=<span class="keyword">False</span>, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+<a name="l00194"></a>00194                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>.append([screen, live])
+<a name="l00195"></a>00195                 <span class="keywordflow">return</span> len(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>)-1 <span class="comment"># return l&#39;index du screen créé</span>
+<a name="l00196"></a>00196         
+<a name="l00197"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">00197</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self, msg, n=0):
+<a name="l00198"></a>00198                 <span class="stringliteral">&quot;&quot;&quot; écrit sur un écran </span>
+<a name="l00199"></a>00199 <span class="stringliteral">                </span>
+<a name="l00200"></a>00200 <span class="stringliteral">                @param</span>
+<a name="l00201"></a>00201 <span class="stringliteral">                        msg: le message</span>
+<a name="l00202"></a>00202 <span class="stringliteral">                        n: l&#39;écran sur lequel écrire</span>
+<a name="l00203"></a>00203 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00204"></a>00204                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].stdin.write(str(msg)+<span class="stringliteral">&quot;\n&quot;</span>) <span class="comment"># envoie au child</span>
+<a name="l00205"></a>00205                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].stdin.flush()
+<a name="l00206"></a>00206         
+<a name="l00207"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ad09f37276dfc6bc7e543dbc5c713df71">00207</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#ad09f37276dfc6bc7e543dbc5c713df71">getLive</a>(self, port, cmd, speed=0.3):
+<a name="l00208"></a>00208                 <span class="stringliteral">&quot;&quot;&quot; Lance en boucle infinie une commande et l&#39;affiche sur un nouvel écran</span>
+<a name="l00209"></a>00209 <span class="stringliteral">                </span>
+<a name="l00210"></a>00210 <span class="stringliteral">                @param</span>
+<a name="l00211"></a>00211 <span class="stringliteral">                        port: le port sur lequel envoyer la commande</span>
+<a name="l00212"></a>00212 <span class="stringliteral">                        cmd: la commande</span>
+<a name="l00213"></a>00213 <span class="stringliteral">                        speed: l&#39;interval entre chaque envoi</span>
+<a name="l00214"></a>00214 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00215"></a>00215                 <span class="keyword">def </span><a class="code" href="../../d4/de6/carte_8cpp.html#afe461d27b9c48d5921c00d521181f12f">loop</a>():
+<a name="l00216"></a>00216                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#aaaf3eebf21c2b29456ca34e104dae598">addCmd</a>(cmd, <span class="stringliteral">&#39;ACM0&#39;</span>)
+<a name="l00217"></a>00217                         self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a6e9ab857310ddb5a1e7d33b90d6d171d">write</a>(self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#afff8fa13942ef9a9496db80f64a47a4b">getRcv</a>(cmd, <span class="stringliteral">&#39;ACM0&#39;</span>, <span class="keyword">True</span>),n)
+<a name="l00218"></a>00218                 timer = MyTimer(float(speed),loop)
+<a name="l00219"></a>00219                 n = self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#adc6bf04f812a9e6bcd683ceda15bf623">addScreen</a>(timer)
+<a name="l00220"></a>00220                 timer.start()
+<a name="l00221"></a>00221         
+<a name="l00222"></a>00222         <span class="keyword">def </span>_stopLive(self, n):
+<a name="l00223"></a>00223                 <span class="stringliteral">&quot;&quot;&quot; arreter un &quot;live&quot;</span>
+<a name="l00224"></a>00224 <span class="stringliteral">                </span>
+<a name="l00225"></a>00225 <span class="stringliteral">                @param</span>
+<a name="l00226"></a>00226 <span class="stringliteral">                        n: numéro du live à stopper</span>
+<a name="l00227"></a>00227 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00228"></a>00228                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1].stop()
+<a name="l00229"></a>00229                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1] = <span class="keywordtype">None</span>
+<a name="l00230"></a>00230         
+<a name="l00231"></a>00231         <span class="keyword">def </span>_stopProcess(self, n):
+<a name="l00232"></a>00232                 <span class="stringliteral">&quot;&quot;&quot; arrete le process faisant tourner un écran</span>
+<a name="l00233"></a>00233 <span class="stringliteral">                </span>
+<a name="l00234"></a>00234 <span class="stringliteral">                @param</span>
+<a name="l00235"></a>00235 <span class="stringliteral">                        n: numéro de l&#39;écran</span>
+<a name="l00236"></a>00236 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00237"></a>00237                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0].terminate()
+<a name="l00238"></a>00238                 self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][0] = <span class="keywordtype">None</span>
+<a name="l00239"></a>00239         
+<a name="l00240"></a><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a30f257df7816e4191c561b99c63c8411">00240</a>         <span class="keyword">def </span><a class="code" href="../../de/dd3/classmessage_1_1_server.html#a30f257df7816e4191c561b99c63c8411">stopScreen</a>(self, n):
+<a name="l00241"></a>00241                 <span class="stringliteral">&quot;&quot;&quot; arreter un écran (et la boucle derrière)</span>
+<a name="l00242"></a>00242 <span class="stringliteral">                </span>
+<a name="l00243"></a>00243 <span class="stringliteral">                @param</span>
+<a name="l00244"></a>00244 <span class="stringliteral">                        n: numéro de l&#39;écran</span>
+<a name="l00245"></a>00245 <span class="stringliteral">                &quot;&quot;&quot;</span>
+<a name="l00246"></a>00246                 <span class="keywordflow">if</span> self.<a class="code" href="../../de/dd3/classmessage_1_1_server.html#a20b71d87063a5d13c8c8044188ecacc0">screens</a>[n][1]:
+<a name="l00247"></a>00247                         self.stopLive(n)
+<a name="l00248"></a>00248                 self.stopProcess(n)
+<a name="l00249"></a>00249                         
+<a name="l00250"></a>00250                         
+<a name="l00251"></a>00251                                 
+<a name="l00252"></a>00252                 
+<a name="l00253"></a>00253         
 </pre></div></div>
-<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:20:29 2011 pour utcoupe2011 par&nbsp;
+<hr class="footer"/><address style="text-align: right;"><small>Généré le Wed Jan 26 15:28:01 2011 pour utcoupe2011 par&nbsp;
 <a href="http://www.doxygen.org/index.html">
 <img class="footer" src="../../doxygen.png" alt="doxygen"/></a> 1.6.3 </small></address>
 </body>
