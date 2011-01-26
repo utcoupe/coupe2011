@@ -145,7 +145,7 @@ void analyzeMessage(int size, unsigned char* buffer)
 			valeur[indexValeur] = '\0'; // on rajoute la fin de chaine
 			message[indexMessage] = atoi(valeur); // on transforme en int
 			++indexMessage; // on incrémente l'index des messages
-			indexValeur = 0; // on réinitialise l'index de la chaine
+			indexValeur = -1; // on réinitialise l'index de la chaine
 		}
 		++indexValeur; // on incremente l'index de la chaine
 	}
