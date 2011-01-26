@@ -73,6 +73,10 @@ class Server():
 	
 	def stop(self):
 		print 'stop server'
+		n = 0
+		for screen,loop in self.screens:
+			self.stopScreen(n)
+			n += 1
 		for it in self.cmdLoops.values():
 			it.stop()
 		for it in self.rcvLoops.values():
@@ -155,7 +159,6 @@ class Server():
 		except serial.SerialException as ex:
 			print 'timeout, writing on', port, ex
 			return -1
-	
 	
 	def _readInput(self, port):
 		val = self.ser[port].readline()
