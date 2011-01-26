@@ -3,6 +3,10 @@
 #include "command.h"
 
 
+
+using namespace std;
+
+
 void initSerialLink(){
 	Serial.begin(SERIAL_BAUD);
 }
@@ -31,18 +35,83 @@ void readIncomingData(){
 	}
 }
 
-// c : Command qui était appelé (et qui donc fait la reponse)
-// message : string
-
-void sendMessage(unsigned char c, char* str)
+///
+/// Envoie un int
+///
+void sendMessage(char cmd, int i)
 {
-	Serial.print(c);Serial.print(",");Serial.println(str);
+	Serial.print(cmd);
+	Serial.print(",");
+	Serial.println(i);
+}
+///
+/// Envoie un tableau d'int
+///
+void sendMessage(char cmd, int *tabi, int size)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	for (int i=0; i<size-1; ++i)
+	{
+		Serial.print(tabi[i]);
+		Serial.print(' ');
+	}
+	Serial.println(tabi[size-1]);
+}
+///
+/// Envoie un string
+///
+void sendMessage(unsigned char cmd, char* str)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	Serial.println(str);
+}
+///
+/// Envoie des strings et des int
+/// aucune protection, il faut au moins envoyer une chaine et un int
+///
+void sendMessage(unsigned char cmd, char** tabs, int nbStr, int *tabi, int nbInt)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	
+	for (int i=0; i<nbStr; ++i)
+	{
+		Serial.print(tabs[i]);
+		Serial.print(' ');
+	}
+	
+	for (int i=0; i<nbInt-1; ++i)
+	{
+		Serial.print(tabi[i]);
+		Serial.print(' ');
+	}
+	Serial.println(tabi[nbInt-1]);
+}
+///
+/// Envoie des int et des strings
+/// aucune protection, il faut au moins envoyer une chaine et un int
+///
+void sendMessage(unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	
+	for (int i=0; i<nbInt; ++i)
+	{
+		Serial.print(tabi[i]);
+		Serial.print(' ');
+	}
+	
+	for (int i=0; i<nbStr-1; ++i)
+	{
+		Serial.print(tabs[i]);
+		Serial.print(' ');
+	}
+	Serial.println(tabs[nbStr-1]);
 }
 
-void sendMessage(unsigned char c, int str)
-{
-	Serial.print(c);Serial.print(",");Serial.println(str);
-}
 
 void analyzeMessage(int bufferIndex, unsigned char* buffer){
 	int i, j, lasti=0;
