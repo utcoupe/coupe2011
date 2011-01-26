@@ -11,7 +11,7 @@
 
 // Message est le tableau de message
 // m est le message
-void cmd(int c, float* message, int m)
+void cmd(int c, int* message)
 {
 	int i;
 	// On analyse le message en fonction de son type
