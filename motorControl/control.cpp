@@ -220,12 +220,14 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	
 	currentAlpha = -currentAlpha;
 
+        /*
         Serial.print("coeff:");
         Serial.print(angularCoeff);
         Serial.print("  angle:");
         Serial.print(robot_state.angle);
         Serial.print("  alpha:");
         Serial.println(currentAlpha);
+        */
 
  	double dx = current_goal.x-robot_state.x;
 	double dy = current_goal.y-robot_state.y;
