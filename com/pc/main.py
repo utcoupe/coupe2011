@@ -58,6 +58,8 @@ def loopCmd(live, stopCmd):
 		elif cperso[0] == 'exit':
 			stopCmd()
 			server.stop()
+		elif cperso[0] == 'bin': # poubelle
+			server.bin('ACM0')
 		elif cperso[0] == 'loop':
 			server.makeLoop('ACM0', cperso[1], cperso[2])
 		elif cperso[0] == 'stop':

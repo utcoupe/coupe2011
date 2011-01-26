@@ -145,6 +145,7 @@ class Server():
 		if bloquant:
 			while not rcv:
 				rcv = self.waitRcv[port][cmdid]
+		self.waitRcv[port][cmdid] = None
 		return rcv
 		
 	def _sendCmd(self, cmd, port):
@@ -194,7 +195,7 @@ class Server():
 	def addScreen(self, live=None):
 		""" 
 		@param
-			live: timer du live
+			live: timer de la loop
 		
 		@return numero de l'écran créé
 		"""
@@ -223,8 +224,8 @@ class Server():
 			speed: l'interval entre chaque envoi
 		"""
 		def loop():
-			self.addCmd(cmd, 'ACM0')
-			self.write(self.getRcv(cmd, 'ACM0', True),n)
+			self.addCmd(cmd, port)
+			self.write(self.getRcv(cmd, port, True),n)
 		timer = MyTimer(float(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()
@@ -257,7 +258,16 @@ class Server():
 			self._stopLoop(n)
 		self._stopProcess(n)
 			
-			
-				
+	def bin(self, port):
+		""" affiche tout ce que l'ordi reçoit
+		"""
+		def loop():
+			for waitRcv in self.waitRcv.values():
+				for rcv in waitRcv.values():
+					if rcv:
+						self.write(rcv,n)
+		timer = MyTimer(0.03,loop)
+		n = self.addScreen(timer)
+		timer.start()
 		
 	
