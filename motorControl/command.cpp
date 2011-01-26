@@ -17,7 +17,7 @@ void cmd(int c, int* message)
 	// On analyse le message en fonction de son type
 	switch(c){
 		case 'x':
-			Serial.print("x,");Serial.println(M_PI);
+			Serial.print("x,");Serial.print(message[0]);Serial.print("§");Serial.print(message[1]);Serial.print("§");Serial.print(message[2]);Serial.println();
 		break;
 		case 'P': // Ping
 			sendMessage(c, "Pong");
@@ -50,7 +50,7 @@ void cmd(int c, int* message)
 		case 'g':
 			pushGoal(TYPE_POSITION, message[0]*18+robot_state.x*ENC_TICKS_TO_MM, message[1]*18+robot_state.y*ENC_TICKS_TO_MM, message[2]);
 			//x , y , ratio vitesse max [0-200]
-			sendMessage(c, "Go...");
+			sendMessage(c, "Go... relatif");
 		break;
 		//case T_SPEED:
 		case 's':
@@ -64,7 +64,7 @@ void cmd(int c, int* message)
 		break;
 		case 'a':
 			pushGoal(TYPE_ANGLE, message[0], message[1], moduloPI(message[2]/360 * 2*M_PI + robot_state.angle)); // x,y,angle
-			sendMessage(c, "Tourne...");
+			sendMessage(c, "Tourne... relatif");
 		break;
 		//case T_RESET:
 		case 'r':

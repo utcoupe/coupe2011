@@ -137,15 +137,16 @@ void analyzeMessage(int size, unsigned char* buffer)
 	for (int i=2; i<size; ++i)
 	{
 		c = buffer[i]; // on lit
+		valeur[indexValeur] = c;
 		if (c == ' ' || i == size-1)
 		{
+			if (i == size-1)
+				++indexValeur;
 			valeur[indexValeur] = '\0'; // on rajoute la fin de chaine
 			message[indexMessage] = atoi(valeur); // on transforme en int
 			++indexMessage; // on incrémente l'index des messages
-			indexValeur = 0; // on réinitialise l'index de la chaine
+			indexValeur = -1; // on réinitialise l'index de la chaine
 		}
-		else
-			valeur[indexValeur] = c; // on rajoute le caractere à la chaine
 		++indexValeur; // on incremente l'index de la chaine
 	}
 	
