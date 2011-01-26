@@ -119,7 +119,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		currentEcart = .0;
 		consigne = .0;
 		pid4AngleControl.Reset();
-		pid4AngleControl.SetInputLimits(-M_PI,M_PI); // <- le problème venait de là
+		pid4AngleControl.SetInputLimits(-M_PI,M_PI); // <- le problÔøΩme venait de lÔøΩ
 		pid4AngleControl.SetOutputLimits(-255,255);
 		pid4AngleControl.SetSampleTime(2); //2ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
 		pid4AngleControl.SetMode(AUTO);
@@ -189,12 +189,12 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4DeltaControl.Reset();
 		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
 		pid4DeltaControl.SetSampleTime(2);
-		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante liée à la vitesse lineaire*/
+		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante liÔøΩe ÔøΩ la vitesse lineaire*/
 		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
 		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetOutputLimits(-200,200); /*composante liée à la vitesse de rotation*/
+		pid4AlphaControl.SetOutputLimits(-200,200); /*composante liÔøΩe ÔøΩ la vitesse de rotation*/
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
@@ -209,23 +209,33 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	 * Si cet angle est inferieur a PI/2 en valeur absolue, le robot avance en marche avant (il avance quoi)
 	 * Si cet angle est superieur a PI/2 en valeur absolue, le robot recule en marche arriere (= il recule)
 	 */
+
+
+
 	int sens = 1;
-	if(abs(currentAlpha) > M_PI/2){/* c'est à dire qu'on a meilleur temps de partir en marche arriere */
+	if(abs(currentAlpha) > M_PI/2){/* c'est ÔøΩ dire qu'on a meilleur temps de partir en marche arriere */
 		sens = -1;
-		currentAlpha = M_PI - angularCoeff - robot_state.angle;
+		currentAlpha = M_PI - abs(angularCoeff) - robot_state.angle;
 	}
 	
 	currentAlpha = -currentAlpha;
-	
+
+        Serial.print("coeff:");
+        Serial.print(angularCoeff);
+        Serial.print("  angle:");
+        Serial.print(robot_state.angle);
+        Serial.print("  alpha:");
+        Serial.println(currentAlpha);
+
  	double dx = current_goal.x-robot_state.x;
 	double dy = current_goal.y-robot_state.y;
-	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part à l'envers
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part ÔøΩ l'envers
 
 	/*Serial.print("ad");
 	Serial.print(currentAlpha);
 	Serial.println(currentDelta);*/
 
-	if(abs(currentDelta) < 36) /*si l'ecart n'est plus que de 36 ticks (environ 1mm), on considere la consigne comme atteinte*/
+	if(abs(currentDelta) < 72) /*si l'ecart n'est plus que de 72 ticks (environ 2mm), on considere la consigne comme atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
@@ -244,7 +254,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	}
 
 	/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
-	if(current_goal.phase == PHASE_2){// && fifoIsEmpty()){
+	if(current_goal.phase == PHASE_2 && !fifoIsEmpty()){
 		current_goal.isReached = true;
 		initDone = false;
 	}
@@ -258,15 +268,15 @@ void computeRobotState(){
 	static long prev_value_left_enc = 0;
 	static long prev_value_right_enc = 0;
 
-	/*calcul du deplacement depuis la dernière fois en ticks */
+	/*calcul du deplacement depuis la derniÔøΩre fois en ticks */
 	long dl = value_left_enc - prev_value_left_enc;
 	long dr = value_right_enc - prev_value_right_enc;
 
-	/*préparation de la prochaine itération*/
+	/*prÔøΩparation de la prochaine itÔøΩration*/
 	prev_value_left_enc = value_left_enc;
 	prev_value_right_enc = value_right_enc;
 
-	/*ce déplacement a été réalisé en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
+	/*ce dÔøΩplacement a ÔøΩtÔøΩ rÔøΩalisÔøΩ en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
 	double speed_left = (double)dl/(double)DUREE_CYCLE;
 	double speed_right = (double)dr/(double)DUREE_CYCLE;
 	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
@@ -274,17 +284,17 @@ void computeRobotState(){
 	/* mise a jour de l'orientation en rad */
 	double delta_angle = (double)(dr-dl)*(double)ENC_TICKS_TO_MM/(double)ENC_CENTER_DIST;
 
-	// Angle du robot par rapport à l'axe X
+	// Angle du robot par rapport ÔøΩ l'axe X
 	double angle = moduloPI(robot_state.angle + delta_angle); /*Attention au modulo PI (oui ca change tous les jours)*/
 
 	/* mise a jour de la position en ticks
-	 * on utilise des cos et des sin et c'est pas très opti.
-	 * A voir si l'approximation par un dev limité d'ordre 2 est plus efficace
+	 * on utilise des cos et des sin et c'est pas trÔøΩs opti.
+	 * A voir si l'approximation par un dev limitÔøΩ d'ordre 2 est plus efficace
 	 */
 	double dx = speed*DUREE_CYCLE*cos(angle);
 	double dy = speed*DUREE_CYCLE*sin(angle);
 
-	/*mise a jour de l'état du robot  */
+	/*mise a jour de l'ÔøΩtat du robot  */
 	robot_state.speed = speed;
 	robot_state.speed_left = speed_left;
 	robot_state.speed_right = speed_right;
