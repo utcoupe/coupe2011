@@ -49,7 +49,7 @@ void cmd(int c, int* message)
 			sendMessage(c, "Go...");
 		break;
 		case 'g':
-			pushGoal(TYPE_POSITION, (message[0]*18)*cos(robot_state.angle))+robot_state.x*ENC_TICKS_TO_MM, (message[1]*18)*sin(robot_state.angle))+robot_state.y*ENC_TICKS_TO_MM, message[2]);
+			pushGoal(TYPE_POSITION, ((message[0]*18)*cos(robot_state.angle))+robot_state.x*ENC_TICKS_TO_MM, ((message[1]*18)*sin(robot_state.angle))+robot_state.y*ENC_TICKS_TO_MM, message[2]);
 			//x , y , ratio vitesse max [0-200]
 			sendMessage(c, "Go... relatif");
 		break;
