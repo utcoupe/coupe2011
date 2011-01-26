@@ -1,6 +1,7 @@
 
-void cmd(int c, float* message, int m);
-int getSharp();			// 1
+void cmd(int c, int* message);
+void error(char c);
+int getSharp(int id);			// 1
 void ledOn();			// 2
 void ledOff();			// 3
 void indexError();		// -1

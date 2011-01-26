@@ -4,53 +4,64 @@
 
 // Message est le tableau de message
 // m est le message
-void cmd(int c, float* message, int m)
+void cmd(int c, int* message)
 {
 	int i;
 	// On analyse le message en fonction de son type
 	switch(c){
-		/*
-			DEBUG ZONE
-
-			Ces fonctions permettent entre autre le debug...
-		*/
-		case 'W': // Echo (renvoit le message qu'elle a reçu)
-			Serial.print("W,");
-			for (i=1;i<m;i++) {
-				Serial.print("§message ");Serial.print(i);Serial.print(" ");Serial.print(message[i]); 
-			}
-				Serial.print("\n");
-		break;
 		case 'P': // Ping (renvoit time : pong)
-			sendMessage(c, "Pong");
+			sendMessage(c, (char*)"Pong");
 		break;
 
 		case 'I': // Identification
-			sendMessage(c, "Test Card");
+			sendMessage(c, (char*)"Test Card");
 		break;
 		case 'S':
-			sendMessage(c, getSharp());
+			int v;
+			v = getSharp(message[0]);
+			if (v < 0)
+				error(c);
+			else
+				sendMessage(c, v);
 		break;
 		case 'L':
 			ledOn();
-			sendMessage(c, "Led ON");
+			sendMessage(c, (char*)"Led ON");
 		break;
 		case 'l':
 			ledOff();
-			sendMessage(c, "Led OFF");
+			sendMessage(c, (char*)"Led OFF");
 		break;
 		case 't':
 			sendMessage(c, millis());
 		break;
 		default:
-			sendMessage('E', "-1");
+			error(c);
 		break;
 	}
 }
 
-int getSharp()
+int getSharp(int id)
 {
-  	int sensorValue = analogRead(A0);
+  	int sensorValue = 0;
+  	switch (id)
+  	{
+		case 0:
+			sensorValue = analogRead(A0);
+			break;
+		case 1:
+			sensorValue = analogRead(A1);
+			break;
+		case 2:
+			sensorValue = analogRead(A2);
+			break;
+		case 3:
+			sensorValue = analogRead(A3);
+			break;
+		default:
+			sensorValue = -1;
+			break;
+	}
 	return sensorValue;
 }
 
@@ -68,3 +79,10 @@ void ledOff()
 {
 	digitalWrite(12, LOW);
 }
+
+void error(char c)
+{
+	sendMessage(c, (char*)"-1");
+}
+
+
