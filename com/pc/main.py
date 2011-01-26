@@ -41,19 +41,25 @@ class IA():
 	def allerA(self):
 	
 '''
-	
-	
+
+
 # read, send and get output of a command
-def loopCmd():
+def loopCmd(live, stopCmd):
 	cmd = raw_input()
+	
 	cperso = cmd.split()
 	try:
 		if not cmd:
-			cmd = 'p'
+			print 'P'
+			cmd = 'P'
+			cperso = ['P']
 		if cperso[0] == 'test':
 			server.testPing('ACM0', cperso[1])
-		elif cperso[0] == 'live':
-			server.getLive('ACM0', cperso[1], cperso[2])
+		elif cperso[0] == 'exit':
+			stopCmd()
+			server.stop()
+		elif cperso[0] == 'loop':
+			server.makeLoop('ACM0', cperso[1], cperso[2])
 		elif cperso[0] == 'stop':
 			server.stopScreen(int(cperso[1]))
 		else:
@@ -67,11 +73,13 @@ def loopCmd():
 def makeLoop(target, args= [], kwargs={}):
 	while True:
 		target(*args, **kwargs)
-	
 
-loopCmd = threading.Thread(None, makeLoop, None, (loopCmd,))
-loopCmd.start()
 
-time.sleep(60)
+loop = InteruptableThreadedLoop(None, "loopCmd")
+loop.start(loopCmd, (False, loop.stop,))
+
+
+
+
 
 

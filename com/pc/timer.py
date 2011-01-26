@@ -25,6 +25,43 @@ class MyTimer:
 	
 
 
+class InteruptableThreadedLoop(threading.Thread):
+	""" Thread qui peut être interompue
+	"""
+	def __init__(self, group = None, name=None):
+		threading.Thread.__init__(self, group, None, name)
+		self._stopevent = threading.Event()
+	
+	def start(self, target, args=(), kwargs={}, pause=0.0001):
+		"""
+		@param
+			target: la fonction à boucler
+			args & kwargs: les args sous forme de liste ou de key/value
+			pause: le temps entre chaque appelle de la fonction
+		"""
+		pause = max(0.0001,pause)
+		self._target = target
+		self._args = args
+		self._kwargs = kwargs
+		self._pause = pause
+		threading.Thread.start(self)
+	
+	def run(self):
+		i = 0
+		while not self._stopevent.isSet():
+			self._stopevent.wait(self._pause)
+			self._target(*self._args, **self._kwargs)
+		print 'le thread :', self.name, 'est fini'
+	
+	def stop(self):
+		self._stopevent.set()
+
+def timeoutLoop(timeout_duration, target, args=(), kwargs={}, pause=0):
+	it = InteruptableThreadedLoop()
+	it.start(target, args, kwargs, pause)
+	it.join(timeout_duration)
+	it.stop()
+
 
 def timeout(timeout_duration, func, args=(), kwargs={}, default=None):
     """This function will spawn a thread and run the given function
@@ -40,7 +77,4 @@ def timeout(timeout_duration, func, args=(), kwargs={}, default=None):
     it = InterruptableThread()
     it.start()
     it.join(timeout_duration)
-    if it.isAlive():
-        return it.result
-    else:
-        return it.result
+    return it.result
