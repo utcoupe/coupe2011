@@ -174,7 +174,7 @@ class Server():
 				tEllapsed = time.time() - t
 				tot += tEllapsed
 				self.write(""+str(i)+" "+str(tEllapsed), n)
-			self.write("nb d'iters : " + nb_iter)
+			self.write("nb d'iters : " + str(nb_iter))
 			self.write("temps total"+str(tot), n)
 			self.write("moy"+str(tot/nb_iter), n)
 		
@@ -244,8 +244,8 @@ class Server():
 			n: numéro de l'écran
 		"""
 		if self.screens[n][1]:
-			self.stopLive(n)
-		self.stopProcess(n)
+			self._stopLive(n)
+		self._stopProcess(n)
 			
 			
 				
