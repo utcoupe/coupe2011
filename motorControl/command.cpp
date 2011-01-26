@@ -42,19 +42,28 @@ void cmd(int c, int* message)
 	                    Serial.print(EOF);
 		break;
 		//case T_POSITION:
-		case 'g':
+		case 'G':
 			pushGoal(TYPE_POSITION, message[0]*18, message[1]*18, message[2]);
+			//x , y , ratio vitesse max [0-200]
+			sendMessage(c, "Go...");
+		break;
+		case 'g':
+			pushGoal(TYPE_POSITION, message[0]*18+robot_state.x*ENC_TICKS_TO_MM, message[1]*18+robot_state.y*ENC_TICKS_TO_MM, message[2]);
 			//x , y , ratio vitesse max [0-200]
 			sendMessage(c, "Go...");
 		break;
 		//case T_SPEED:
 		case 's':
-			pushGoal(TYPE_SPEED, message[1], message[2], 0);
+			pushGoal(TYPE_SPEED, message[0], message[1], 0);
 			sendMessage(c, "Right...");
 		break;
 		//case T_ANGLE:
+		case 'A':
+			pushGoal(TYPE_ANGLE, message[0], message[1], message[2]/360 * 2*M_PI); // x,y,angle
+			sendMessage(c, "Tourne...");
+		break;
 		case 'a':
-			pushGoal(TYPE_ANGLE, message[1], message[2], message[3]/360 * 2*M_PI); // x,y,angle
+			pushGoal(TYPE_ANGLE, message[0], message[1], moduloPI(message[2]/360 * 2*M_PI + robot_state.angle)); // x,y,angle
 			sendMessage(c, "Tourne...");
 		break;
 		//case T_RESET:

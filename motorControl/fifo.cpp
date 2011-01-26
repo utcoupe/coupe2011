@@ -15,7 +15,7 @@ void initGoals(){
 	goals.out = 0;
 
 	/*pour tester le robot*/
-//	pushGoal(TYPE_ANGLE,0,0,-1.57); // 0, 0, angle
+/*	pushGoal(TYPE_ANGLE,0,0,-1.57); // 0, 0, angle
 	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
 	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
 	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
@@ -23,7 +23,7 @@ void initGoals(){
 	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
 	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
 	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
+	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]*/
 
 //	pushGoal(TYPE_SPEED,2,1000,0); // vitesse (en ticks/ms), timeout, O
 }
