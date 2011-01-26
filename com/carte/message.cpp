@@ -134,7 +134,6 @@ void analyzeMessage(int size, unsigned char* buffer)
 	int indexValeur = 0;
 	char c;
 	
-	message[0] = 2;
 	for (int i=2; i<size; ++i)
 	{
 		c = buffer[i]; // on lit
