@@ -3,11 +3,98 @@
 #include "command.h"
 
 
+using namespace std;
+
+
 void initSerialLink(){
 	Serial.begin(SERIAL_BAUD);
 }
 
-void readIncomingData(){	
+
+///
+/// Envoie un int
+///
+void sendMessage(char cmd, int i)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	Serial.println(i);
+}
+///
+/// Envoie un tableau d'int
+///
+void sendMessage(char cmd, int *tabi, int size)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	for (int i=0; i<size-1; ++i)
+	{
+		Serial.print(tabi[i]);
+		Serial.print(' ');
+	}
+	Serial.println(tabi[size-1]);
+}
+///
+/// Envoie un string
+///
+void sendMessage(unsigned char cmd, char* str)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	Serial.println(str);
+}
+///
+/// Envoie des strings et des int
+/// aucune protection, il faut au moins envoyer une chaine et un int
+///
+void sendMessage(unsigned char cmd, char** tabs, int nbStr, int *tabi, int nbInt)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	
+	for (int i=0; i<nbStr; ++i)
+	{
+		Serial.print(tabs[i]);
+		Serial.print(' ');
+	}
+	
+	for (int i=0; i<nbInt-1; ++i)
+	{
+		Serial.print(tabi[i]);
+		Serial.print(' ');
+	}
+	Serial.println(tabi[nbInt-1]);
+}
+///
+/// Envoie des int et des strings
+/// aucune protection, il faut au moins envoyer une chaine et un int
+///
+void sendMessage(unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
+{
+	Serial.print(cmd);
+	Serial.print(",");
+	
+	for (int i=0; i<nbInt; ++i)
+	{
+		Serial.print(tabi[i]);
+		Serial.print(' ');
+	}
+	
+	for (int i=0; i<nbStr-1; ++i)
+	{
+		Serial.print(tabs[i]);
+		Serial.print(' ');
+	}
+	Serial.println(tabs[nbStr-1]);
+}
+
+///
+/// lit les données entrant puis appelle analyseMessage quand le message est complet
+/// pour savoir un début et fin du message, le message doit être encadré de chevrons
+/// <msg>
+///
+void readIncomingData()
+{
 	static unsigned char buffer[100];
 	static int bufferIndex = 0;
 	/*
@@ -31,45 +118,39 @@ void readIncomingData(){
 	}
 }
 
-// c : Command qui était appelé (et qui donc fait la reponse)
-// message : string
-
-void sendMessage(unsigned char c, char* str)
+///
+/// analyse le message puis lance la fonction 'cmd' de comùande.cpp
+/// 
+/// @author Matthieu Thomas
+/// @param
+/// 	size	: la taille du buffer (calculée dans readIncomingData())
+///		buffer	: le message
+///
+void analyzeMessage(int size, unsigned char* buffer)
 {
-	Serial.print(c);Serial.print(",");Serial.println(str);
-}
-
-void sendMessage(unsigned char c, int str)
-{
-	Serial.print(c);Serial.print(",");Serial.println(str);
-}
-
-void analyzeMessage(int bufferIndex, unsigned char* buffer){
-	int i, j, lasti=0;
-	float message[50];
-	int m = 0, neg = 1;
-	message[0] = buffer[0];
-	message[1] = 0;
-	m=1;
-	lasti=2;
-	for (i=2; i<=bufferIndex; i++) {
-		if(buffer[i]==' ' or i==(bufferIndex)) {
-			for(j=lasti; j<i; j++) {
-				if(buffer[j]=='-') { 
-					neg = -1; 
-				} else {
-					message[m] = ((float) buffer[j]-'0')+(message[m]*10);
-				}
-			}
-			if (neg<0) { message[m] *= -1; }
-			m++;
-			message[m] = 0;
-			neg = 1;
-			lasti = i + 1;
+	int message[10];
+	int indexMessage = 0;
+	char valeur[20];
+	int indexValeur = 0;
+	char c;
+	
+	for (int i=2; i<size; ++i)
+	{
+		c = buffer[i]; // on lit
+		if (c == ' ' || i == size-1)
+		{
+			valeur[indexValeur] = '\0'; // on rajoute la fin de chaine
+			message[indexMessage] = atoi(valeur); // on transforme en int
+			++indexMessage; // on incrémente l'index des messages
+			indexValeur = 0; // on réinitialise l'index de la chaine
 		}
+		else
+			valeur[indexValeur] = c; // on rajoute le caractere à la chaine
+		++indexValeur; // on incremente l'index de la chaine
 	}
+	
 	// CALL command.cpp (Don't forget this file is generic for all our arduino board)
-	cmd(buffer[0], message, m);
+	cmd(buffer[0], message);
 
 }
 
