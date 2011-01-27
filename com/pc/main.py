@@ -43,10 +43,15 @@ class IA():
 	def allerA(self):
 	
 '''
-
-
+arreter = False
+def stop():
+	global arreter
+	print 'timeout'
+	arreter = True
 # read, send and get output of a command
 def loopCmd(stopCmd):
+	global arreter
+	print 'mainLoop'
 	cmd = raw_input()
 	
 	cperso = cmd.split()
@@ -69,9 +74,16 @@ def loopCmd(stopCmd):
 			server.stopScreen(int(cperso[1]))
 		else:
 			server.addCmd(cmd, port)
-			r = timeout(1.0, server.getRcv, (cmd, port, True,))
+			t = threading.Timer(1,stop)
+			t.start()
+			r = server.getRcv(cmd, port)
+			while not r and not arreter:
+				r = server.getRcv(cmd, port)
+			t.cancel()
+			arreter = False
 			print r
 	except Exception as ex:
+		print ex
 		print sys.exc_info()
 """
 def loopCmd(stopCmd):
@@ -92,9 +104,13 @@ def makeLoop(target, args= [], kwargs={}):
 		target(*args, **kwargs)
 
 
-loop = InteruptableThreadedLoop(None, "loopCmd")
+loop = InteruptableThreadedLoop(None, "loop principale")
 loop.start(loopCmd, (loop.stop,))
 
+while loop.isAlive():
+	time.sleep(3)
+
+print 'fin thread pcincipal'
 
 
 

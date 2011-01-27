@@ -6,6 +6,7 @@ import threading
 import time
 import subprocess
 from Queue import *
+import sys
 #from struct import *
 #import binascii
 
@@ -69,6 +70,8 @@ class Server():
 	
 	def stop(self):
 		print 'stop server'
+		for t in threading.enumerate():
+			print t
 		n = 0
 		for screen,loop in self.screens:
 			self.stopScreen(n)
@@ -77,7 +80,6 @@ class Server():
 			it.stop()
 		for it in self.rcvLoops.values():
 			it.stop()
-		print threading.enumerate()
 		
 	def connect(self, port, refresh):
 		""" Connection à un port
@@ -103,7 +105,9 @@ class Server():
 		return self.ser[port]
 	
 	def loopCmd(self, port):
-		""" la loop envoyant à la suite les commandes de la queue """
+		""" la loop envoyant à la suite les commandes de la queue
+		si l'envoi échoue (self._sendCmd(..) < 0), stock le retour d'erreur dans self.waitRcv[port]['send']
+		"""
 		queue = self.queuedCmd[port]
 		try:
 			cmd = queue.get(True, 2)
@@ -111,7 +115,7 @@ class Server():
 			return
 		r = self._sendCmd(cmd, port)
 		if r < 0:
-			self.waitRcv[port] = 'timeout'
+			self.waitRcv[port]['send'] = r
 		queue.task_done()
 	
 	def loopRcv(self, port):
@@ -147,6 +151,7 @@ class Server():
 		if bloquant:
 			while not rcv:
 				rcv = self.waitRcv[port][cmdid]
+				time.sleep(0.001)
 		self.waitRcv[port][cmdid] = None
 		return rcv
 		
@@ -155,11 +160,18 @@ class Server():
 			self.ser[port].write('<'+cmd+'>')
 			return 1
 		except serial.SerialException as ex:
-			print 'timeout, writing on', port, ex
+			print 'timeout, writing on', port
 			return -1
+		except OSError as ex:
+			print 'port ', port, 'débranché'
+			return -2
 	
 	def _readInput(self, port):
-		val = self.ser[port].readline()
+		try:
+			val = self.ser[port].readline()
+		except OSError as ex:
+			print 'port ', port, 'débranché'
+			return 'E,-1'
 		val = val.replace("§","\n")
 		if val:
 			return val # int(binascii.hexlify(val),16)  #unpack('c', val)
