@@ -57,6 +57,7 @@ class Server():
 	
 	def stop(self):
 		print 'stop server'
+		self.camera.terminate()
 		for t in threading.enumerate():
 			print t
 		for n,screen in enumerate(self.screens):

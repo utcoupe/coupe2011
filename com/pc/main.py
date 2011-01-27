@@ -43,11 +43,16 @@ class IA():
 	def allerA(self):
 	
 '''
+
+
 arreter = False
 def stop():
 	global arreter
 	print 'timeout'
 	arreter = True
+	
+	
+"""
 # read, send and get output of a command
 def loopCmd(stopCmd):
 	global arreter
@@ -64,7 +69,7 @@ def loopCmd(stopCmd):
 			server.testPing(port, cperso[1])
 		elif cperso[0] == 'cam':
 			print 'ok'
-			server.sendToCam(1)
+			server.sendToCam(cperso[1])
 			r = server.listenCam()
 			if r > 0:
 				list = traiterReponseCamera(r)
@@ -94,17 +99,32 @@ def loopCmd(stopCmd):
 		print sys.exc_info()
 """
 def loopCmd(stopCmd):
+	global arreter
 	# demander la liste à la camera
-	server.addCmd('c', 'ACM0')
-	reponseCamera = timeout(1.0, server.getRcv, ('c', 'ACM0', True,))
-	while not reponseCamera:
-		reponseCamera = timeout(1.0, server.getRcv, ('c', 'ACM0', True,))
+	print "envoie à la cam..."
+	server.sendToCam(1)
+	print "récupération des valeures..."
+	reponseCamera = server.listenCam()
 	listeObjets = traiterReponseCamera(reponseCamera)
 	# on récupère le premier pion de la liste
 	type, x, y = listeObjets[0]
 	# on va au premier pour le pousser
-	server.addCmd(", 'ACM1')
-	"""
+	print "on va vers %s %s"%(x,y)
+	cmd = "g %s %s"%(x,y)
+	#server.addCmd("g %s %s"%(x,y), 'ACM0')
+	
+	server.addCmd(cmd, port)
+	t = threading.Timer(1,stop)
+	t.start()
+	r = server.getRcv(cmd, port)
+	while not r and not arreter:
+		r = server.getRcv(cmd, port)
+	t.cancel()
+	arreter = False
+	print r
+	
+	time.sleep(10)
+
 
 def makeLoop(target, args= [], kwargs={}):
 	while True:
