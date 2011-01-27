@@ -339,11 +339,16 @@ class Server():
 		
 	
 def traiterReponseCamera(msg):
-	lignes = msg.strip().split(',')
-	listObjets = []
-	for obj in lignes:
-		listObjets.append(obj.split())
-	return listObjets
+	if msg != 'r':
+		lignes = msg.strip().split(',')
+		listObjets = []
+		for obj in lignes:
+			obj_data = obj.split()
+			if len(obj_data) == 3:
+				listObjets.append(obj_data)
+		return listObjets
+	else:
+		return []
 	
 
 

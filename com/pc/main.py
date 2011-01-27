@@ -25,64 +25,10 @@ ports.append((port,115200))
 server = Server(ports)
 
 
-
-arreter = False
-def stop():
-	global arreter
-	print 'timeout'
-	arreter = True
-	
-
-
-# read, send and get output of a command
-while True:
-	print 'debut mainLoop'
-	cmd = raw_input()
-	
-	cperso = cmd.split()
-	try:
-		if not cmd:
-			print 'P'
-			cmd = 'P'
-			cperso = ['P']
-		if cperso[0] == 'test':
-			server.testPing(port, cperso[1])
-		elif cperso[0] == 'cam':
-			print 'ok'
-			server.sendToCam(cperso[1])
-			r = server.listenCam()
-			if r > 0:
-				list = traiterReponseCamera(r)
-				print list
-		elif cperso[0] == 'exit':
-			server.stop()
-			break
-		elif cperso[0] == 'bin': # poubelle
-			server.bin(port)
-		elif cperso[0] == 'loop':
-			cmd = raw_input()
-			server.makeLoop(port, cmd, cperso[1])
-		elif cperso[0] == 'stop':
-			server.stopScreen(int(cperso[1]))
-		else:
-			server.addCmd(cmd, port)
-			t = threading.Timer(1,stop)
-			t.start()
-			r = server.getRcv(cmd, port)
-			while not r and not arreter:
-				r = server.getRcv(cmd, port)
-			t.cancel()
-			arreter = False
-			print r
-	except Exception as ex:
-		print ex
-		print sys.exc_info()
-
-"""
 # exemple interaction automatique camera
 # le robot fait une demande à la camera
 # puis il demande à l'asserv d'aller sur la position de ce pion
-while True:
+def loopTestTracking():
 	global arreter
 	# demander la liste à la camera
 	print "envoie à la cam..."
@@ -108,7 +54,68 @@ while True:
 	print r
 	
 	time.sleep(10)
-"""
+
+
+
+arreter = False
+def stop():
+	global arreter
+	print 'timeout'
+	arreter = True
+	
+
+
+# read, send and get output of a command
+while True:
+	print 'debut mainLoop'
+	cmd = raw_input()
+	
+	cperso = cmd.split()
+	try:
+		if not cmd:
+			print 'P'
+			cmd = 'P'
+			cperso = ['P']
+		if cperso[0] == 'test':
+			server.testPing(port, cperso[1])
+		elif cperso[0] == 'cam':
+			server.sendToCam(cperso[1])
+			r = server.listenCam()
+			if r > 0:
+				list = traiterReponseCamera(r)
+				print list
+		elif cperso[0] == 'track':
+			it = InteruptableThreadedLoop(None, 'tracking')
+			it.start(loopTestTracking)
+			c = raw_input()
+			it.stop()
+			print 'arret du thread tracking en cours...'
+		elif cperso[0] == 'exit':
+			server.stop()
+			break
+		elif cperso[0] == 'bin': # poubelle
+			server.bin(port)
+		elif cperso[0] == 'loop':
+			cmd = raw_input()
+			server.makeLoop(port, cmd, cperso[1])
+		elif cperso[0] == 'stop':
+			server.stopScreen(int(cperso[1]))
+		else:
+			server.addCmd(cmd, port)
+			t = threading.Timer(1,stop)
+			t.start()
+			r = server.getRcv(cmd, port)
+			while not r and not arreter:
+				r = server.getRcv(cmd, port)
+			t.cancel()
+			arreter = False
+			print r
+	except Exception as ex:
+		print ex
+		print sys.exc_info()
+
+
+
 
 """
 # read, send and get output of a command
