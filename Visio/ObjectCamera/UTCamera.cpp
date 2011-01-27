@@ -8,13 +8,14 @@
     All rights reserved.
 
 *   Objet qui permet de gérer les caméras du robot.
-*   Permet de récupérer les informations importantes
-*   de l'environnement grâce à du traitement d'image.
 
-*   Distance en mm
+*   Permet de récupérer les informations importantes
+*   de l'environnement grâce aux caméras.
 *****************************************************
  **/
 #include "UTCamera.hpp"
+#include "UTCameraFct.hpp"
+#include "Fps.hpp"
 
 
 /**       NORMES DANS CE FICHIER                   **
@@ -33,147 +34,153 @@ Coordonnées dans l'image.
 Pour l'accés dans une IplImage :
 CV_IMAGE_ELEM( hsv, uchar, y, ( x * 3 ) + n );
 
+Distance en mm
+x' et y' coordonnées relatives aux robots
+                  x'
+              |---------O obejctif
+           y' |
+              |
+            ----
+            |  | robot
+            ----
 *****************************************************
 **/
 
 /****************************************************
-*****       FONCTIONS DE LA TRACKBAR            *****
-****************************************************/
-
-
-// Fonctions qui récupére la position de la souris et calibre la couleur séléctionnée
-void souris(int event, int x, int y, int flags, void *param) {
-
-    if(event == CV_EVENT_LBUTTONUP) {
-        IplImage* f;
-        UTCamera* cam = (UTCamera*)param;
-
-        f=cvRetrieveFrame(cam->getCapture());
-        cvCvtColor(f, f, CV_BGR2HSV);
-        CvScalar scal;
-        scal = cvGet2D(f, y, x);
-
-        cam->setHtab(cam->getInd(),scal.val[0]);
-        cam->setStab(cam->getInd(),scal.val[1]);
-        cam->setVtab(cam->getInd(),scal.val[2]);
-
-        cout << "H-S-V" << "    " << scal.val[0] << "-" << scal.val[1] << "-" << scal.val[2] << endl;
-    }
-
-}
-
-/****************************************************
 *****           DEBUT DE L'OBJET                *****
 ****************************************************/
-// ********************
-// *** CONSTRUCTEUR ***
-UTCamera::UTCamera(int camera, int wScreen, int hScreen) {
 
-    // Nommage automatique de l'objet
-    if(camera==CAMERA_AVA) { nameCam="camera avant";  }
+void UTCamera::generalRun()
+{
+    int ordre=0;
+    while(1){
+        if(idCamera==waitOrder()){
+            int i=0;
+            do{
+                for(int y=0; y<40 ; y++){
+                basFrame = cvQueryFrame( ptrCamera );
+                if(!basFrame){break;}}
+            }while( !basFrame );
+
+            maskApplication(MASK_BINARISATION);
+            reggApplication();
+            analyseRegion();
+            send(listeP);
+        }
+    }
+}
+
+
+// **************************************************
+// ***************** CONSTRUCTEUR *******************
+UTCamera::UTCamera(int camera, int wScreen, int hScreen)
+{
+    idCamera = camera;
+
+    // Attribution automatique d'un nom à l'objet
+    if(camera==CAMERA_AVA) { nameCam="camera avant  ";}
     if(camera==CAMERA_ARR) { nameCam="camera arriere";}
 
-    // Affectation à une caméra
-    ptrCamera = cvCreateCameraCapture(camera);
-
-    frame     = cvQueryFrame( ptrCamera );
-    if( !frame ){ cout << "Erreur initialisation : " << nameCam << endl; return;}
+    // Affectation de la caméra
+    ptrCamera = cvCaptureFromCAM( camera       );
+    basFrame     = cvQueryFrame    ( ptrCamera );
+    if( !basFrame ){ cout << "Erreur initialisation : " << nameCam << endl; return;}
 
     // Dimension des images de la caméra
-    width = frame->width;
-    height= frame->height;
+    width = basFrame->width;
+    height= basFrame->height;
 
     this->wScreen = wScreen;
     this->hScreen = hScreen;
 
-    // Initialisation du tableau masque
-    imgTab = (unsigned char**)malloc(sizeof(unsigned char*)*width);
-    for(int x=0 ; x<width ; x++){
-        imgTab[x] = (unsigned char*)malloc(sizeof(unsigned char)*height);
+    // Initialisation de la police d'écriture
+    double hScale=0.5;
+    double vScale=0.5;
+    int    lineWidth=1;
+    cvInitFont(&font,CV_FONT_HERSHEY_SIMPLEX|CV_FONT_ITALIC, hScale,vScale,0,lineWidth);
+
+    //
+    listeR = new regionLister();
+    listeP = new regionLister();
+
+    // Réservation de la place pour data
+    data = (threaddata**)malloc(sizeof(threaddata*)*NB_THREAD);
+    for(int i=0 ; i<NB_THREAD ; i++){
+        data[i] = (threaddata*)malloc(sizeof(threaddata));
     }
+
+    for(int i=0 ; i<NB_THREAD ; i++){
+        data[i]->nbRow = height/4;
+        data[i]->firstRow = i * data[i]->nbRow;
+        data[i]->Htab = Htab; data[i]->Htol = Htol;
+        data[i]->Stab = Stab; data[i]->Stol = Stol;
+        data[i]->Vtab = Vtab; data[i]->Vtol = Vtol;
+        data[i]->width = width;
+        data[i]->height = height;
+    }
+
+    // Initialisation des images
+    binFrame = cvCreateImage(cvSize(width, height), IPL_DEPTH_8U   , 1                  );
+    colFrame = cvCreateImage(cvSize(width, height), basFrame->depth, basFrame->nChannels);
+    hsvFrame = cvCreateImage(cvSize(width, height), basFrame->depth, basFrame->nChannels);
 
     // Chargement de la config
     loadConfig();
 }
 
-// **********************************************
-// *** Methode de calibrage avant utilisation ***
+// **************************************************
+// ***** Methode de calibrage avant utilisation *****
 void UTCamera::calibrage()
 {
+    Fps fpsVisio;
+
     // Création des fenetres de seuillages
     cvNamedWindow( nameCam.c_str()  , CV_WINDOW_NORMAL );
     cvNamedWindow( "Mask Test"      , CV_WINDOW_NORMAL );
-
     cvNamedWindow( "parametre 1"    , CV_WINDOW_NORMAL );
     cvNamedWindow( "parametre 2"    , CV_WINDOW_NORMAL );
-
     cvResizeWindow(nameCam.c_str(), DIV2INF(wScreen),DIV2INF(hScreen));
     cvMoveWindow(  nameCam.c_str(), DIV2SUP(wScreen),DIV2SUP(hScreen));
     cvResizeWindow("Mask Test"    , DIV2INF(wScreen),DIV2SUP(hScreen));
     cvMoveWindow(  "Mask Test"    , DIV2SUP(wScreen),0               );
-    afficherMask(  "Mask Test"                                       );
     cvResizeWindow("parametre 1"  , DIV2SUP(DIV2SUP(wScreen)),hScreen);
     cvMoveWindow(  "parametre 1"  , 0               ,0               );
     cvResizeWindow("parametre 2"  , DIV2INF(DIV2SUP(wScreen)),hScreen);
     cvMoveWindow(  "parametre 2"  , DIV2INF(DIV2SUP(wScreen)),0      );
 
     cvCreateTrackbar( TEXTE, "parametre 1" , &ind    , 6  , NULL);
-
-    cvCreateTrackbar("NOIR  : tolerance H" , "parametre 1", Htol+NOIR, 255, NULL);
-    cvCreateTrackbar("NOIR  : tolerance S" , "parametre 1", Stol+NOIR, 255, NULL);
-    cvCreateTrackbar("NOIR  : tolerance V" , "parametre 1", Vtol+NOIR, 255, NULL);
-    cvCreateTrackbar("ROUGE : tolerance H", "parametre 1", Htol+ROUGE, 255, NULL);
-    cvCreateTrackbar("ROUGE : tolerance S", "parametre 1", Stol+ROUGE, 255, NULL);
-    cvCreateTrackbar("ROUGE : tolerance V", "parametre 1", Vtol+ROUGE, 255, NULL);
-    cvCreateTrackbar("VERT  : tolerance H", "parametre 2", Htol+VERT,  255, NULL);
-    cvCreateTrackbar("VERT  : tolerance S", "parametre 2", Stol+VERT,  255, NULL);
-    cvCreateTrackbar("VERT  : tolerance V", "parametre 2", Vtol+VERT,  255, NULL);
-    cvCreateTrackbar("BLEU  : tolerance H", "parametre 2", Htol+BLEU,  255, NULL);
-    cvCreateTrackbar("BLEU  : tolerance S", "parametre 2", Stol+BLEU,  255, NULL);
-    cvCreateTrackbar("BLEU  : tolerance V", "parametre 2", Vtol+BLEU,  255, NULL);
-    cvCreateTrackbar("JAUNE : tolerance H", "parametre 1", Htol+JAUNE, 255, NULL);
-    cvCreateTrackbar("JAUNE : tolerance S", "parametre 1", Stol+JAUNE, 255, NULL);
-    cvCreateTrackbar("JAUNE : tolerance V", "parametre 1", Vtol+JAUNE, 255, NULL);
-    cvCreateTrackbar("BLANC : tolerance H", "parametre 2", Htol+BLANC, 255, NULL);
-    cvCreateTrackbar("BLANC : tolerance S", "parametre 2", Stol+BLANC, 255, NULL);
-    cvCreateTrackbar("BLANC : tolerance V", "parametre 2", Vtol+BLANC, 255, NULL);
+    TRACKBARS
 
     cvSetMouseCallback(nameCam.c_str(), souris, this);
 
-    // Boucle principale
-    while(1) {
-        frame = cvQueryFrame( ptrCamera );
-        if( !frame ) break;
+    // *********************
+    while(1){
 
-        maskApplication();
-        afficherMask("Mask Test");
-        RegGApplication();
+        fpsVisio.debutMesureTime();
+
+            // --- Traitements ---
+        basFrame = cvQueryFrame( ptrCamera );
+        if( !basFrame ) break;
+        maskApplication(MASK_COLOR);
+        maskApplication(MASK_BINARISATION);
+        reggApplication();
+        analyseRegion();
         afficherRegi();
 
-        cvCreateTrackbar("NOIR  : tolerance H" , "parametre 1", Htol+NOIR, 255, NULL);
-        cvCreateTrackbar("NOIR  : tolerance S" , "parametre 1", Stol+NOIR, 255, NULL);
-        cvCreateTrackbar("NOIR  : tolerance V" , "parametre 1", Vtol+NOIR, 255, NULL);
-        cvCreateTrackbar("ROUGE : tolerance H", "parametre 1", Htol+ROUGE, 255, NULL);
-        cvCreateTrackbar("ROUGE : tolerance S", "parametre 1", Stol+ROUGE, 255, NULL);
-        cvCreateTrackbar("ROUGE : tolerance V", "parametre 1", Vtol+ROUGE, 255, NULL);
-        cvCreateTrackbar("VERT  : tolerance H", "parametre 2", Htol+VERT,  255, NULL);
-        cvCreateTrackbar("VERT  : tolerance S", "parametre 2", Stol+VERT,  255, NULL);
-        cvCreateTrackbar("VERT  : tolerance V", "parametre 2", Vtol+VERT,  255, NULL);
-        cvCreateTrackbar("BLEU  : tolerance H", "parametre 2", Htol+BLEU,  255, NULL);
-        cvCreateTrackbar("BLEU  : tolerance S", "parametre 2", Stol+BLEU,  255, NULL);
-        cvCreateTrackbar("BLEU  : tolerance V", "parametre 2", Vtol+BLEU,  255, NULL);
-        cvCreateTrackbar("JAUNE : tolerance H", "parametre 1", Htol+JAUNE, 255, NULL);
-        cvCreateTrackbar("JAUNE : tolerance S", "parametre 1", Stol+JAUNE, 255, NULL);
-        cvCreateTrackbar("JAUNE : tolerance V", "parametre 1", Vtol+JAUNE, 255, NULL);
-        cvCreateTrackbar("BLANC : tolerance H", "parametre 2", Htol+BLANC, 255, NULL);
-        cvCreateTrackbar("BLANC : tolerance S", "parametre 2", Stol+BLANC, 255, NULL);
-        cvCreateTrackbar("BLANC : tolerance V", "parametre 2", Vtol+BLANC, 255, NULL);
+        //cvLine(basFrame, cvPoint(0,400), cvPoint(width,400), cvScalar(0,0,0), 3);
 
-        cvShowImage( nameCam.c_str(), frame );
+        fpsVisio.finMesureTime();
 
+            // --- Affichages ---
+        cvShowImage( "Mask Test", colFrame );
+        cvShowImage( nameCam.c_str(), basFrame );
+        TRACKBARS
+
+        //cout << fpsVisio.getMilli() << " ms" << endl;
         char c = cvWaitKey(10);
         if( c == 'q' ) break;
     }
+    // *********************
 
     // Sauvegarde de fin
     saveConfig();
@@ -181,7 +188,7 @@ void UTCamera::calibrage()
     // Destruction
     cvDestroyWindow("parametre 1");
     cvDestroyWindow("parametre 2");
-    cvDestroyWindow("Mask Test");
+    cvDestroyWindow("Mask Test  ");
     cvDestroyWindow(nameCam.c_str());
 }
 
@@ -189,92 +196,41 @@ void UTCamera::calibrage()
 /****************************************************
 *****          METHODES DE TRAITEMENTS          *****
 ****************************************************/
-// Application du filtre de couleur
-void UTCamera::maskApplication()
+
+// **************************************************
+// ********* Binarisation ou Colorisation ***********
+void UTCamera::maskApplication(int mode)
 {
+    // Image temporaire convertie en hsv
+    cvCvtColor(basFrame, hsvFrame, CV_BGR2HSV);
 
-    IplImage * hsv = cvCreateImage(cvSize(frame->width, frame->height), frame->depth, frame->nChannels);
-    cvCvtColor(frame, hsv, CV_BGR2HSV);
-
-    int h,s,v;
-
-    for(int x=0; x<width; x++) {
-        for(int y=0; y<height; y++) {
-
-            h = CV_IMAGE_ELEM( hsv, uchar, y, ( x * 3 ) );
-            s = CV_IMAGE_ELEM( hsv, uchar, y, ( x * 3 ) +1);
-            v = CV_IMAGE_ELEM( hsv, uchar, y, ( x * 3 ) +2);
-
-            if(IS_COLOR(h,s,v,BLEU))
-                {
-                    imgTab[x][y]=BLEU;
-                }
-       else if(IS_COLOR(h,s,v,ROUGE))
-                {
-                    imgTab[x][y]=ROUGE;
-                }
-       else if(IS_COLOR(h,s,v,VERT))
-                {
-                    imgTab[x][y]=VERT;
-                }
-       else if(IS_COLOR(h,s,v,NOIR))
-                {
-                    imgTab[x][y]=NOIR;
-                }
-       else if(IS_COLOR(h,s,v,BLANC))
-                {
-                    imgTab[x][y]=BLANC;
-                }
-          else
-                {
-                    //if( SEUIL( h, Htab[JAUNE], Htol[JAUNE]) )
-                    //{
-                        imgTab[x][y]=JAUNE;
-                    //}
-                }
+    for(int i=0 ; i<NB_THREAD ; i++){
+        data[i]->src = hsvFrame;
+        if(mode==MASK_BINARISATION){
+            data[i]->dst = binFrame;
+            pthread_create((th+i), NULL, binThread, (void*)*(data+i));
+        }else{
+            data[i]->dst = colFrame;
+            pthread_create((th+i), NULL, colThread, (void*)*(data+i));
         }
     }
-    cvReleaseImage(&hsv);
-}
 
-// Fonction pour étendre une zone
-void extendRegion(region* z, int width, int height, unsigned char** imgTab, int x, int y, int stop)
-{
-    if(stop<STOP_REC){
-		(z->nbPixel)++;
-		imgTab[x][y] = UNDEFINE;
-
-		if( y < z->max[HAUT     ].y ) { z->max[HAUT     ] = cvPoint(x,y); }
-		if( y > z->max[BAS      ].y ) { z->max[BAS      ] = cvPoint(x,y); }
-		if( x > z->max[DROITE   ].x ) { z->max[DROITE   ] = cvPoint(x,y); }
-		if( x < z->max[GAUCHE   ].x ) { z->max[GAUCHE   ] = cvPoint(x,y); }
-
-		if( (x+1<height)    && (imgTab[x+1][y]==z->color) ){
-			extendRegion(z, width, height, imgTab, x+1, y, stop+1);
-		}
-		if( (x-1>=0)        && (imgTab[x-1][y]==z->color) ){
-			extendRegion(z, width, height, imgTab, x-1, y, stop+1);
-		}
-		if( (y+1<width)     && (imgTab[x][y+1]==z->color) ){
-			extendRegion(z, width, height, imgTab, x, y+1, stop+1);
-		}
-		if( (y-1>=0)        && (imgTab[x][y-1]==z->color) ){
-			extendRegion(z, width, height, imgTab, x, y-1, stop+1);
-		}
+    for(int i=0 ; i<NB_THREAD ; i++){
+        pthread_join (th[i], NULL);
     }
 }
 
+// **************************************************
 // Methode pour appliquer le region growing et remplir la liste des regions de l'objet
-void UTCamera::RegGApplication()
+void UTCamera::reggApplication()
 {
-
-    listeR.destroy();
-    region *r;
+    listeR->destroy();
+    region *r; int c;
 
 	for( int x=0 ; x<width ; x++ ){
 		for( int y=0 ; y<height ; y++ ){
-
-			if(imgTab[x][y]!=UNDEFINE)
+                c = CV_IMAGE_ELEM( binFrame, uchar, y, x );
+			if(c==0)
 			{
 			    r = (region*)malloc(sizeof(region));
 
@@ -282,14 +238,14 @@ void UTCamera::RegGApplication()
 				r->max[BAS   ] = cvPoint(x,y);
 				r->max[DROITE] = cvPoint(x,y);
 				r->max[GAUCHE] = cvPoint(x,y);
-				r->color       = imgTab[x][y];
+				r->color       = c;
 				r->nbPixel     = 0;
 
-				extendRegion(r, width, height, imgTab, x, y, 0);
+				extendRegion(r, width, height, binFrame, x, y, 0);
 
 				if( (r->nbPixel > 1000) )
 				{
-				    listeR.add(r);
+				    listeR->add(r);
 				}
 				else
 				{
@@ -300,147 +256,59 @@ void UTCamera::RegGApplication()
 	}
 }
 
+// **************************************************
+// ********** Methode d'analyse des zones ***********
+void UTCamera::analyseRegion()
+{
+    listeP = analyseListeRegion(listeR,width,height);
+}
+
+
 /****************************************************
 *****             METHODES D'AFFICHAGE          *****
 ****************************************************/
-void afficheRegion(IplImage* imgPtr, Region *z)
-{
-    if(z!=NULL){
-        CvFont font;
-        double hScale=0.5;
-        double vScale=0.5;
-        int    lineWidth=1;
-        cvInitFont(&font,CV_FONT_HERSHEY_SIMPLEX|CV_FONT_ITALIC, hScale,vScale,0,lineWidth);
 
-        int affiche = FALSE;
-
-        if(z->color==JAUNE){
-            cvPutText (imgPtr,"PIONT",cvPoint( (z->max[DROITE].x+z->max[GAUCHE].x)/2,(z->max[HAUT].y+z->max[BAS].y)/2 ), &font, cvScalar(0,0,0));
-            affiche = TRUE;
-        }
-        if(z->color==ROUGE){
-            cvPutText (imgPtr,"zone rouge",cvPoint( (z->max[DROITE].x+z->max[GAUCHE].x)/2,(z->max[HAUT].y+z->max[BAS].y)/2 ), &font, cvScalar(0,0,0));
-            affiche = TRUE;
-        }
-        if(z->color==BLEU){
-            cvPutText (imgPtr,"zone bleu",cvPoint( (z->max[DROITE].x+z->max[GAUCHE].x)/2,(z->max[HAUT].y+z->max[BAS].y)/2 ), &font, cvScalar(0,0,0));
-            affiche = TRUE;
-        }
-        if(z->color==VERT){
-            cvPutText (imgPtr,"zone verte",cvPoint( (z->max[DROITE].x+z->max[GAUCHE].x)/2,(z->max[HAUT].y+z->max[BAS].y)/2 ), &font, cvScalar(0,0,0));
-            affiche = TRUE;
-        }
-
-        if(affiche){
-            cvLine(imgPtr, z->max[HAUT], z->max[DROITE], cvScalar(0,0,0), 3);
-            cvLine(imgPtr, z->max[HAUT], z->max[GAUCHE], cvScalar(0,0,0), 3);
-            cvLine(imgPtr, z->max[BAS ], z->max[DROITE], cvScalar(0,0,0), 3);
-            cvLine(imgPtr, z->max[BAS ], z->max[GAUCHE], cvScalar(0,0,0), 3);
-        }
-    }
-}
-
-
-
-// Fonction qui affiche les régions sur l'image principale
+// **************************************************
+// Methode qui affiche les régions sur l'image principale
 void UTCamera::afficherRegi()
 {
-    listeR.iniPtr();
-
-    while(listeR.getEle()!=NULL){
-        afficheRegion(frame, listeR.getEle());
-        listeR.ptrSuiv();
-    }
+    afficheListeRegion(listeP, basFrame);
 }
 
-void UTCamera::afficherMask(){
-    cvNamedWindow( "Mask", CV_WINDOW_AUTOSIZE );
-    afficherMask("Mask");
-}
-
-// Methodes pour afficher l'image après application du masque
-// Il faut créer une fenetre et passer en paramétre le nome de cette fenetre
-void UTCamera::afficherMask(char* WindowMaskName)
-{
-
-    IplImage * imgPrint = cvCreateImage(cvSize(width, height), frame->depth, frame->nChannels);
-    for(int x=0; x < width; x++) {
-        for(int y=0; y < height; y++) {
-
-            if(imgTab[x][y]==JAUNE){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 255;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 255;
-            }
-            if(imgTab[x][y]==BLEU){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 255;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 0;
-            }
-            if(imgTab[x][y]==ROUGE){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 255;
-            }
-            if(imgTab[x][y]==VERT){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 255;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 0;
-            }
-            if(imgTab[x][y]==BLANC){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 255;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 255;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 255;
-            }
-            if(imgTab[x][y]==NOIR){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 0;
-            }
-            if(imgTab[x][y]==UNDEFINE){
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 )    ) = 255;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 1) = 0;
-                 CV_IMAGE_ELEM( imgPrint, uchar, y, ( x * 3 ) + 2) = 255;
-            }
-
-        }
-    }
-    cvShowImage(WindowMaskName, imgPrint);
-    cvReleaseData(imgPrint);
-}
-
-
-// Methode pour l'enregistrement
-void UTCamera::record(int mode){
+// **************************************************
+// ********  Methode pour l'enregistrement  *********
+void UTCamera::record(char* nom, int mode){
 
     CvSize size = cvSize (
             (int)cvGetCaptureProperty( ptrCamera, CV_CAP_PROP_FRAME_WIDTH),
             (int)cvGetCaptureProperty( ptrCamera, CV_CAP_PROP_FRAME_HEIGHT) );
+    CvVideoWriter *writer = cvCreateVideoWriter( nom, CV_FOURCC('M','J','P','G'), 20, size );
+    if(writer == NULL){ cout << "RECORD PROBLEME !!!" << endl; return; }
 
-    CvVideoWriter *writer = cvCreateVideoWriter(
-            "out.avi", CV_FOURCC('M','J','P','G'), 22, size );
+    cvNamedWindow( nameCam.c_str()  , CV_WINDOW_AUTOSIZE );
 
-    if(writer == NULL){
-            cout << "RECORD PROBLEME !!!" << endl; }
+    while(1){
+        basFrame = cvQueryFrame( ptrCamera );
+        if( !basFrame ) break;
 
-    if(mode == VISION_NORMAL){
-        //cvWriteFrame( writer, frame );
-    }
-    if(mode == VISION_MASK){
-        //cvWriteFrame( writer, frame );
-    }
-    if(mode == VISION_ZONE){
-        //cvWriteFrame( writer, frame );
+        if(mode == VISION_NORMAL){
+            cvWriteFrame( writer, basFrame );
+            cvShowImage(nameCam.c_str(),basFrame);
+        }
+
+
+        char c = cvWaitKey(10);
+        if( c == 'q' ) break;
     }
 
     cvReleaseVideoWriter( &writer );
-
+    cvDestroyWindow(nameCam.c_str());
 }
 
 /****************************************************
 *****     METHODES DE GESTION DES CONFIG        *****
 ****************************************************/
-
+// **************************************************
 // Permet de sauvgarder les valeurs de configuration
 void UTCamera::saveConfig()
 {
@@ -465,6 +333,7 @@ void UTCamera::saveConfig()
     fclose(fichierConfig);
 }
 
+// **************************************************
 // Permet de charger le fichier de configuration des caméras
 void UTCamera::loadConfig()
 {
@@ -479,9 +348,9 @@ void UTCamera::loadConfig()
 
     if(Htab[NOIR ]==0){Htab[NOIR ]=0;}
     if(Htab[ROUGE]==0){Htab[ROUGE]=0;}
-    if(Htab[VERT ]==0){Htab[VERT ]=0;}
-    if(Htab[BLEU ]==0){Htab[BLEU ]=0;}
-    if(Htab[JAUNE]==0){Htab[JAUNE]=0;}
+    if(Htab[VERT ]==0){Htab[VERT ]=120;}
+    if(Htab[BLEU ]==0){Htab[BLEU ]=240;}
+    if(Htab[JAUNE]==0){Htab[JAUNE]=32;}
     if(Htab[BLANC]==0){Htab[BLANC]=0;}
 
     //    --- TOLERANCE DE H ---
@@ -547,6 +416,8 @@ void UTCamera::loadConfig()
 ****************************************************/
 // ---
 UTCamera::~UTCamera() {
+    cvReleaseImage(&hsvFrame);
     cvReleaseCapture( &ptrCamera );
+    free(data);
 }
 

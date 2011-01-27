@@ -20,69 +20,89 @@
 /****************************************************
 *****           INCLUDES                        *****
 ****************************************************/
+// System
 #include <iostream>
 using namespace std;
 #include <stdlib.h>
 #include <stdio.h>
+#include <pthread.h>
 
 // OpenCV
 #include <cv.h>
 using namespace cv;
 #include <highgui.h>
 
-// Librairie Interne
-#include "ListeRegion.hpp"
-
+// Extern
+#include "cam_regionLister.hpp"
+#include "cam_regionAnalyser.hpp"
+#include "cam_comManager.hpp"
 /****************************************************
 *****           MACRO-DEFINITION                *****
 ****************************************************/
 // Choix de la caméra
-#define CAMERA_AVA 0
-#define CAMERA_ARR 1
-
-//
-#define PIONT
-#define FIGUR
+#define CAMERA_TEST                 0
+#define CAMERA_AVA                  1
+#define CAMERA_ARR                  2
 
 // Valeurs identifiants les couleurs
-#define NB_COLOR            7
+#define NB_COLOR                    7
 
-#define UNDEFINE 			0
-#define	NOIR				1
-#define ROUGE 				2
-#define VERT				3
-#define	BLEU				4
-#define	JAUNE				5
-#define	BLANC				6
+#define UNDEFINE 			        0
+#define	NOIR				        1
+#define ROUGE 				        2
+#define VERT				        3
+#define	BLEU				        4
+#define	JAUNE				        5
+#define	BLANC				        6
 
-#define TEXTE               "num : HSV\n1) NOIR\n2) ROUGE\n3) VERT\n4) BLEU\n5) JAUNE\n6) BLANC"
+#define TEXTE                       "num : HSV\n1) NOIR\n2) ROUGE\n3) VERT\n4) BLEU\n5) JAUNE\n6) BLANC"
 
-// Valeurs identifiants les positions des maximum des regions
-#define HAUT 	            0
-#define BAS 	            1
-#define DROITE 	            2
-#define GAUCHE 	            3
+
+
+// Mode d'application du masque
+#define MASK_BINARISATION           0
+#define MASK_COLOR                  1
 
 // Mode d'enregistrement
-#define VISION_NORMAL       0
-#define VISION_MASK         1
-#define VISION_ZONE         2
+#define VISION_NORMAL               0
+#define VISION_BINAR                1
+#define VISION_COLOR                2
+#define VISION_ZONE                 3
 
 // Limte de recursivité
-#define STOP_REC            100000
+#define STOP_REC                    100000
+// Nombre de thread maximum
+#define NB_THREAD                   4
 
-// Calcul des seuils avec la tolerance
-#define SEUIL(nb, cherche, tol) (nb > (cherche-tol) && nb < (cherche+tol))
-// Renvoie true si la couleur en hsv est dans les seuils de tolerance de color.
-#define IS_COLOR(h,s,v,color)   (SEUIL( h, Htab[color], Htol[color]) && SEUIL( s, Stab[color], Stol[color])   && SEUIL( v, Vtab[color], Vtol[color]))
+// Vérifie si la couleur rgb du pixel est bien la même que les paramétres
+#define CHECK_COLOR(f,x,y,r,g,b)   (CV_IMAGE_ELEM( f, uchar, y, ( x * 3 )   ) == b && \
+                                    CV_IMAGE_ELEM( f, uchar, y, ( x * 3 ) +1) == g && \
+                                    CV_IMAGE_ELEM( f, uchar, y, ( x * 3 ) +2) == r    )
+
 // Division par 2 avec prise en compte du reste
-#define DIV2SUP(x) 		( (x%2)==0 ?   ((x)/2) : (((x)+1)/2) )
-#define DIV2INF(x) 		( (x%2)==0 ?   ((x)/2) : (((x)-1)/2) )
+#define DIV2SUP(x) 		           ( (x%2)==0 ?   ((x)/2) : (((x)+1)/2) )
+#define DIV2INF(x) 		           ( (x%2)==0 ?   ((x)/2) : (((x)-1)/2) )
 
 /****************************************************
 *****           PROTOTYPES                      *****
 ****************************************************/
 
+// **************************************************
+// *         Structure utilisée par les threads     *
+typedef struct ThreadData{
+    int firstRow;   // Premiére ligne à traiter par le thread
+    int nbRow;      // Nombre de ligne à traiter
+
+    int mode;
+
+    int width,height;
+
+    int *Htab,*Htol,*Stab;
+    int *Stol,*Vtab,*Vtol;
+
+    IplImage* src;
+    IplImage* dst;
+}threaddata;
 
 /****************************************************
 *****           UTCamera                        *****
@@ -103,22 +123,24 @@ class UTCamera
                                                     // 0 -> plus proche  4 -> plus loin
 
 
-        void record(int mode);                      // Pour enregistrer la vidéo produite
+        void generalRun();
+
+        void record(char* nom, int mode);           // Pour enregistrer la vidéo produite
 
         //--- Methodes Avancées ---
-        void maskApplication();
-        void RegGApplication();
+        void        maskApplication(int mode);
+        void        reggApplication();
+        void        analyseRegion();
 
-        void afficherMask();
-        void afficherMask(char* WindowMaskName);
-        void afficherRegi();
+        void        afficherMask();
+        void        afficherRegi();
 
-        void saveConfig();
-        void loadConfig();
+        void        saveConfig();
+        void        loadConfig();
 
-        string      getName()                   {return nameCam;    };
-        CvCapture*  getCapture()                {return ptrCamera;  };
-        IplImage*   getFrame()                  {return frame;      };
+        string      getName()                   {return nameCam;   };
+        CvCapture*  getCapture()                {return ptrCamera; };
+        IplImage*   getFrame()                  {return basFrame;  };
 
         void        setHtab(int ind, int val)   {Htab[ind]=val;};
         void        setHtol(int ind, int val)   {Htol[ind]=val;};
@@ -140,17 +162,27 @@ class UTCamera
 
     private:
 
-        string          nameCam;
-        int             width;
-        int             height;
+        int             idCamera;
+        string          nameCam;    // Nom des fenetres de l'objet
+        CvCapture*      ptrCamera;
 
-        int             wScreen;
+        int             width;      // Résolution de l'image venant de la caméra
+        int             height;
+        int             wScreen;    // Résolution de l'écran
         int             hScreen;
 
-        CvCapture*      ptrCamera;
-        IplImage*       frame;
-        unsigned char** imgTab;
-        ListeRegion    listeR;
+        IplImage*       basFrame;   // Image de base
+        IplImage*       hsvFrame;   // Image converti en hsv
+        IplImage*       colFrame;   // Image colorisée
+        IplImage*       binFrame;   // Image binarisée
+
+        regionLister*     listeR;   // Liste des Régions primaires
+        regionLister*     listeP;   // Liste des pionts
+
+        threaddata**    data;       // Structure pour le multithread
+        pthread_t       th[NB_THREAD];
+
+        CvFont font;
 
         int ind;
 
@@ -160,6 +192,8 @@ class UTCamera
         int Stol[7];
         int Vtab[7];
         int Vtol[7];
+
+        int nbPiont;
 
 };
 

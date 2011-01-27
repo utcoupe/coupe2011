@@ -37,11 +37,18 @@
 			<Add option="`pkg-config --libs opencv`" />
 		</Linker>
 		<Unit filename="Fps.hpp" />
-		<Unit filename="ListeRegion.cpp" />
-		<Unit filename="ListeRegion.hpp" />
 		<Unit filename="UTCamera.cpp" />
 		<Unit filename="UTCamera.hpp" />
+		<Unit filename="UTCameraFct.hpp" />
 		<Unit filename="UTConfig.txt" />
+		<Unit filename="cam_comManager.cpp" />
+		<Unit filename="cam_comManager.hpp" />
+		<Unit filename="cam_regionAnalyser.cpp" />
+		<Unit filename="cam_regionAnalyser.hpp" />
+		<Unit filename="cam_regionLister.cpp" />
+		<Unit filename="cam_regionLister.hpp" />
+		<Unit filename="cam_utility.cpp" />
+		<Unit filename="cam_utility.hpp" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<code_completion />

@@ -1,8 +1,8 @@
 # depslib dependency file v1.0
-1295440949 source:/home/xavier/WorkSpace/UTCoupe/ObjectCamera/ListeRegion.cpp
+1295724882 source:/home/xavier/WorkSpace/UTCoupe/ObjectCamera/ListeRegion.cpp
 	"ListeRegion.hpp"
 
-1295440751 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/ListeRegion.hpp
+1295725719 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/ListeRegion.hpp
 	<iostream>
 	<cv.h>
 
@@ -260,10 +260,10 @@
 	"opencv2/core/core_c.h"
 	"opencv2/core/core.hpp"
 
-1295457938 source:/home/xavier/WorkSpace/UTCoupe/ObjectCamera/UTCamera.cpp
+1295729064 source:/home/xavier/WorkSpace/UTCoupe/ObjectCamera/UTCamera.cpp
 	"UTCamera.hpp"
 
-1295440956 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/UTCamera.hpp
+1295724441 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/UTCamera.hpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
@@ -285,33 +285,336 @@
 	"opencv2/core/core.hpp"
 	"opencv2/highgui/highgui_c.h"
 
-1295458136 source:/home/xavier/WorkSpace/UTCoupe/ObjectCamera/main.cpp
+1295718974 source:/home/xavier/WorkSpace/UTCoupe/ObjectCamera/main.cpp
 	<iostream>
 	"cv.h"
 	"highgui.h"
 	"UTCamera.hpp"
 
-1295794888 source:/home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/ListeRegion.cpp
+1264600442 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Randomizer.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Unicode.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1264600442 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/Config.hpp
+	<climits>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Clock.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Lock.hpp
+	<SFML/System/NonCopyable.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/NonCopyable.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Mutex.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Win32/Mutex.hpp>
+	<SFML/System/Unix/Mutex.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Win32/Mutex.hpp
+	<SFML/System/NonCopyable.hpp>
+	<windows.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Unix/Mutex.hpp
+	<SFML/System/NonCopyable.hpp>
+	<pthread.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Randomizer.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Sleep.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Thread.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Win32/Thread.hpp>
+	<SFML/System/Unix/Thread.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Win32/Thread.hpp
+	<SFML/System/NonCopyable.hpp>
+	<windows.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Unix/Thread.hpp
+	<SFML/System/NonCopyable.hpp>
+	<pthread.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Unicode.hpp
+	<SFML/Config.hpp>
+	<iterator>
+	<locale>
+	<string>
+	<stdlib.h>
+	<SFML/System/Unicode.inl>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Unicode.inl
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Vector2.inl
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6_UNIX/include/SFML/System/Vector3.inl
+
+1295707208 /usr/local/include/SFML/System.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Randomizer.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Unicode.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1295707208 /usr/local/include/SFML/Config.hpp
+	<climits>
+
+1295707208 /usr/local/include/SFML/System/Clock.hpp
+	<SFML/Config.hpp>
+
+1295707208 /usr/local/include/SFML/System/Lock.hpp
+	<SFML/System/NonCopyable.hpp>
+
+1295707208 /usr/local/include/SFML/System/NonCopyable.hpp
+	<SFML/Config.hpp>
+
+1295707208 /usr/local/include/SFML/System/Mutex.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Win32/Mutex.hpp>
+	<SFML/System/Unix/Mutex.hpp>
+
+1295707208 /usr/local/include/SFML/System/Win32/Mutex.hpp
+	<SFML/System/NonCopyable.hpp>
+	<windows.h>
+
+1295707208 /usr/local/include/SFML/System/Unix/Mutex.hpp
+	<SFML/System/NonCopyable.hpp>
+	<pthread.h>
+
+1295707208 /usr/local/include/SFML/System/Randomizer.hpp
+	<SFML/Config.hpp>
+
+1295707208 /usr/local/include/SFML/System/Sleep.hpp
+	<SFML/Config.hpp>
+
+1295707208 /usr/local/include/SFML/System/Thread.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Win32/Thread.hpp>
+	<SFML/System/Unix/Thread.hpp>
+
+1295707208 /usr/local/include/SFML/System/Win32/Thread.hpp
+	<SFML/System/NonCopyable.hpp>
+	<windows.h>
+
+1295707208 /usr/local/include/SFML/System/Unix/Thread.hpp
+	<SFML/System/NonCopyable.hpp>
+	<pthread.h>
+
+1295707208 /usr/local/include/SFML/System/Unicode.hpp
+	<SFML/Config.hpp>
+	<iterator>
+	<locale>
+	<string>
+	<stdlib.h>
+	<SFML/System/Unicode.inl>
+
+1295707208 /usr/local/include/SFML/System/Unicode.inl
+
+1295707208 /usr/local/include/SFML/System/Vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1295707208 /usr/local/include/SFML/System/Vector2.inl
+
+1295707208 /usr/local/include/SFML/System/Vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1295707208 /usr/local/include/SFML/System/Vector3.inl
+
+1264600441 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Clock.hpp>
+	<SFML/System/Lock.hpp>
+	<SFML/System/Mutex.hpp>
+	<SFML/System/Randomizer.hpp>
+	<SFML/System/Sleep.hpp>
+	<SFML/System/Thread.hpp>
+	<SFML/System/Unicode.hpp>
+	<SFML/System/Vector2.hpp>
+	<SFML/System/Vector3.hpp>
+
+1264600441 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/Config.hpp
+	<climits>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Clock.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Lock.hpp
+	<SFML/System/NonCopyable.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/NonCopyable.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Mutex.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Win32/Mutex.hpp>
+	<SFML/System/Unix/Mutex.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Win32/Mutex.hpp
+	<SFML/System/NonCopyable.hpp>
+	<windows.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Unix/Mutex.hpp
+	<SFML/System/NonCopyable.hpp>
+	<pthread.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Randomizer.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Sleep.hpp
+	<SFML/Config.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Thread.hpp
+	<SFML/Config.hpp>
+	<SFML/System/Win32/Thread.hpp>
+	<SFML/System/Unix/Thread.hpp>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Win32/Thread.hpp
+	<SFML/System/NonCopyable.hpp>
+	<windows.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Unix/Thread.hpp
+	<SFML/System/NonCopyable.hpp>
+	<pthread.h>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Unicode.hpp
+	<SFML/Config.hpp>
+	<iterator>
+	<locale>
+	<string>
+	<stdlib.h>
+	<SFML/System/Unicode.inl>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Unicode.inl
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Vector2.hpp
+	<SFML/System/Vector2.inl>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Vector2.inl
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Vector3.hpp
+	<SFML/System/Vector3.inl>
+
+1264600434 /home/xavier/WorkSpace/UTCoupe/ObjectCamera/SFML-1.6/include/SFML/System/Vector3.inl
+
+1295901059 source:/home/xavier/WorkSpace/ObjectCamera/ListeRegion.cpp
 	"ListeRegion.hpp"
 
-1295794888 /home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/ListeRegion.hpp
+1295901883 /home/xavier/WorkSpace/ObjectCamera/ListeRegion.hpp
 	<iostream>
 	<cv.h>
 
-1295794888 source:/home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp
+1296162962 source:/home/xavier/WorkSpace/ObjectCamera/UTCamera.cpp
 	"UTCamera.hpp"
+	"UTCameraFct.hpp"
+	"Fps.hpp"
 
-1295794888 /home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp
+1296162896 /home/xavier/WorkSpace/ObjectCamera/UTCamera.hpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
+	<pthread.h>
 	<cv.h>
 	<highgui.h>
-	"ListeRegion.hpp"
+	"cam_regionLister.hpp"
+	"cam_regionAnalyser.hpp"
+	"cam_comManager.hpp"
 
-1295794888 source:/home/utcoupe/Bureau/2011/arduino/test-matthieu/utcoupe-mega/Visio/ObjectCamera/main.cpp
+1296164452 source:/home/xavier/WorkSpace/ObjectCamera/main.cpp
 	<iostream>
 	"cv.h"
 	"highgui.h"
 	"UTCamera.hpp"
+	"cam_regionAnalyser.hpp"
+
+1295368748 /home/xavier/WorkSpace/ObjectCamera/Fps.hpp
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+
+1295813774 /home/xavier/WorkSpace/ObjectCamera/UTCameraFct.cpp
+
+1296164203 /home/xavier/WorkSpace/ObjectCamera/UTCameraFct.hpp
+
+1296069119 source:/home/xavier/WorkSpace/ObjectCamera/cam_lengthConverter.cpp
+	"cam_lengthConverter.hpp"
+	<sstream>
+
+1296063902 /home/xavier/WorkSpace/ObjectCamera/cam_lengthConverter.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+	<string>
+	<cv.h>
+	<highgui.h>
+
+1296156614 /home/xavier/WorkSpace/ObjectCamera/cam_regionLister.hpp
+	<iostream>
+	<cv.h>
+
+1296162604 source:/home/xavier/WorkSpace/ObjectCamera/cam_comManager.cpp
+	"cam_comManager.hpp"
+
+1296129870 source:/home/xavier/WorkSpace/ObjectCamera/cam_regionLister.cpp
+	"cam_regionLister.hpp"
+
+1296160115 source:/home/xavier/WorkSpace/ObjectCamera/cam_regionAnalyser.cpp
+	"cam_regionAnalyser.hpp"
+
+1296159995 /home/xavier/WorkSpace/ObjectCamera/cam_regionAnalyser.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+	"cam_utility.hpp"
+
+1296134546 /home/xavier/WorkSpace/ObjectCamera/cam_utility.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	<sstream>
+
+1296133827 source:/home/xavier/WorkSpace/ObjectCamera/cam_utility.cpp
+	"cam_utility.hpp"
+
+1296163270 /home/xavier/WorkSpace/ObjectCamera/cam_comManager.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
 
