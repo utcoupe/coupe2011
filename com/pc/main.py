@@ -79,6 +79,38 @@ while True:
 		print sys.exc_info()
 
 """
+# exemple interaction automatique camera
+# le robot fait une demande à la camera
+# puis il demande à l'asserv d'aller sur la position de ce pion
+while True:
+	global arreter
+	# demander la liste à la camera
+	print "envoie à la cam..."
+	server.sendToCam(1)
+	print "récupération des valeures..."
+	reponseCamera = server.listenCam()
+	listeObjets = traiterReponseCamera(reponseCamera)
+	# on récupère le premier pion de la liste
+	type, x, y = listeObjets[0]
+	# on va au premier pour le pousser
+	print "on va vers %s %s"%(x,y)
+	cmd = "g %s %s"%(x,y)
+	#server.addCmd("g %s %s"%(x,y), 'ACM0')
+	
+	server.addCmd(cmd, port)
+	t = threading.Timer(1,stop)
+	t.start()
+	r = server.getRcv(cmd, port)
+	while not r and not arreter:
+		r = server.getRcv(cmd, port)
+	t.cancel()
+	arreter = False
+	print r
+	
+	time.sleep(10)
+"""
+
+"""
 # read, send and get output of a command
 def loopCmd(stopCmd):
 	global arreter
