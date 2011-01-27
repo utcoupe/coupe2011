@@ -44,14 +44,32 @@ void cmd(int c, int* message)
 		break;
 		//case T_POSITION:
 		case 'G':
-			pushGoal(TYPE_POSITION, message[0]*18, message[1]*18, message[2]);
+			pushGoal(TYPE_POSITION, (double)message[0]*18, (double)message[1]*18, message[2]);
 			//x , y , ratio vitesse max [0-200]
 			sendMessage(c, "Go...");
 		break;
 		case 'g':
-			pushGoal(TYPE_POSITION, ((message[0]*18)*cos(robot_state.angle))+robot_state.x*ENC_TICKS_TO_MM, ((message[1]*18)*sin(robot_state.angle))+robot_state.y*ENC_TICKS_TO_MM, message[2]);
+			Serial.print("g,");
+			double co, si;
+			co = cos(robot_state.angle);
+			si = sin(robot_state.angle);
+
+pushGoal(TYPE_POSITION, (message[0]*co-message[1]*si)*18+robot_state.x, (message[0]*si+message[1]*co)*18+robot_state.y, (double)message[2]);
+			Serial.print("§X : "); Serial.print(message[0]*co-message[1]*si+robot_state.x*ENC_TICKS_TO_MM);
+			Serial.print("§Y : "); Serial.print(message[1]*co+message[1]*si+robot_state.y*ENC_TICKS_TO_MM);
+			Serial.print("§ ...");Serial.println();
+
+			/*double H;
+			H = sqrt(message[0]*message[0] + message[1]*message[1]);
+			Serial.print("§H : "); Serial.print(H);
+			double teta;
+			teta = robot_state.angle - atan2(message[1],message[0]);
+			Serial.print("§tetaprimprim : "); Serial.print(teta);
+			pushGoal(TYPE_POSITION, -H*cos(teta)+robot_state.x, -H*sin(teta) + robot_state.y, (double)message[2]);
+			Serial.print("§X : "); Serial.print(-H*sin(teta)+robot_state.x*ENC_TICKS_TO_MM);
+			Serial.print("§Y : "); Serial.print(-H*cos(teta)+robot_state.y*ENC_TICKS_TO_MM);
 			//x , y , ratio vitesse max [0-200]
-			sendMessage(c, "Go... relatif");
+			Serial.print("§ ...");Serial.println();*/
 		break;
 		//case T_SPEED:
 		case 's':
