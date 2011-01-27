@@ -33,6 +33,8 @@ CurrentGoal current_goal;
 
 void initController(){
 	current_goal.isReached = true;
+	current_goal.isCanceled = false;
+	current_goal.isPaused = false;
 }
 
 
@@ -66,6 +68,25 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		pid4SpeedControl.SetMode(AUTO);
 		initDone = true;
 	}
+
+	/* Gestion de l'arret d'urgence */
+	if(current_goal.isCanceled){
+		initDone = false;
+		current_goal.isReached = true;
+		current_goal.isCanceled = false;
+		/* et juste pour etre sur */
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+	/* Gestion de la pause */
+	if(current_goal.isPaused){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
 
 	if(current_goal.phase == PHASE_1){ //phase d'acceleration
 		consigne = current_goal.speed;
@@ -124,6 +145,24 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		pid4AngleControl.SetSampleTime(2); //2ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
 		pid4AngleControl.SetMode(AUTO);
 		initDone = true;
+	}
+
+	/* Gestion de l'arret d'urgence */
+	if(current_goal.isCanceled){
+		initDone = false;
+		current_goal.isReached = true;
+		current_goal.isCanceled = false;
+		/* et juste pour etre sur */
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+	/* Gestion de la pause */
+	if(current_goal.isPaused){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
 	}
 
 	/*l'angle consigne doit etre comprise entre ]-PI, PI]
@@ -189,15 +228,34 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4DeltaControl.Reset();
 		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
 		pid4DeltaControl.SetSampleTime(2);
-		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante li�e � la vitesse lineaire*/
+		pid4DeltaControl.SetOutputLimits(-155,155); /*composante liee a la vitesse lineaire*/
 		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
 		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetOutputLimits(-200,200); /*composante li�e � la vitesse de rotation*/
+		pid4AlphaControl.SetOutputLimits(-100,100); /*composante li�e � la vitesse de rotation*/
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
+
+	/* Gestion de l'arret d'urgence */
+	if(current_goal.isCanceled){
+		initDone = false;
+		current_goal.isReached = true;
+		current_goal.isCanceled = false;
+		/* et juste pour etre sur */
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+	/* Gestion de la pause */
+	if(current_goal.isPaused){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
 
 	/*calcul de l'angle alpha a combler avant d'etre aligne avec le point cible
 	 * borne = [-PI PI] */
@@ -213,7 +271,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
 
 	int sens = 1;
-	if(abs(currentAlpha) > M_PI/2){/* c'est � dire qu'on a meilleur temps de partir en marche arriere */
+	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
 		sens = -1;
 		currentAlpha = M_PI - abs(angularCoeff) - robot_state.angle;
 	}
@@ -231,11 +289,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
  	double dx = current_goal.x-robot_state.x;
 	double dy = current_goal.y-robot_state.y;
-	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part � l'envers
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part a l'envers
 
-	/*Serial.print("ad");
-	Serial.print(currentAlpha);
-	Serial.println(currentDelta);*/
 
 	if(abs(currentDelta) < 72) /*si l'ecart n'est plus que de 72 ticks (environ 2mm), on considere la consigne comme atteinte*/
 		current_goal.phase = PHASE_2;
