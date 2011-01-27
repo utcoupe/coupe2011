@@ -62,6 +62,13 @@ def loopCmd(stopCmd):
 			cperso = ['P']
 		if cperso[0] == 'test':
 			server.testPing(port, cperso[1])
+		elif cperso[0] == 'cam':
+			print 'ok'
+			server.sendToCam(1)
+			r = server.listenCam()
+			if r > 0:
+				list = traiterReponseCamera(r)
+				print list
 		elif cperso[0] == 'exit':
 			stopCmd()
 			server.stop()

@@ -19,7 +19,7 @@ class Server():
 	
 	@author Thomas
 	"""
-	def __init__(self, ports):
+	def __init__(self, ports=None):
 		""" Constructeur
 		
 		@param
@@ -32,22 +32,9 @@ class Server():
 		self.cmdLoops	=	dict() # threads
 		self.rcvLoops	=	dict() # threads
 		
-		# lancement des tentatives de connection
-		threads = []
-		for port,refresh in ports:
-			print port,refresh
-			thread = threading.Thread(None, self.connect, None, (port,refresh,))
-			thread.start()
-			threads.append(thread)
+		self.connectCamera()
 		
-		# attendre que les connections soient établies
-		for t in threads:
-			t.join()
-		
-		# Verification que les connections ont reussi
-		for s in self.ser.values():
-			if not s: 
-				exit()
+		self.connectSerials(ports)
 		
 		# créarion de la queue pour l'envoie de commande
 		# et du dict pour récupérer les réponses
@@ -72,14 +59,47 @@ class Server():
 		print 'stop server'
 		for t in threading.enumerate():
 			print t
-		n = 0
-		for screen,loop in self.screens:
+		for n,screen in enumerate(self.screens):
 			self.stopScreen(n)
-			n += 1
 		for it in self.cmdLoops.values():
 			it.stop()
 		for it in self.rcvLoops.values():
 			it.stop()
+	
+	def tryAllSerials(self):
+		ports = []
+		for i in xrange(10):
+			ports.append(('ACM'+str(i), 115200))
+		
+		# tentative de connection de ports
+		connectSerials(ports)
+		
+		# check
+		ser = dict()
+		for id,ser in self.ser.items():
+			if port:
+				addCmd('I', id) # demande à la carte de s'identifier
+				
+	def connectSerials(self,ports):
+		# lancement des tentatives de connection
+		threads = []
+		for port,refresh in ports:
+			print port,refresh
+			thread = threading.Thread(None, self.connect, None, (port,refresh,))
+			thread.start()
+			threads.append(thread)
+		
+		# attendre que les connections soient établies
+		for t in threads:
+			t.join()
+		
+		# check
+		"""
+		ser = {}
+		for s in self.ser:
+			if s:
+				self.ser[port] = s
+		self.ser = ser"""
 		
 	def connect(self, port, refresh):
 		""" Connection à un port
@@ -94,8 +114,9 @@ class Server():
 				s = serial.Serial('/dev/tty'+port, refresh, timeout=1, writeTimeout=1)
 				#s = serial.Serial('/dev/tty'+port, refresh, writeTimeout=1)
 			except serial.SerialException as ex:
-				print 'connection echouée sur %s, nouvelle tentative'%port
-				print ex
+				#print 'connection echouée sur %s, nouvelle tentative'%port
+				#print ex
+				pass
 			else:
 				print 'connection %s établie'%port
 				self.ser[port] = s
@@ -104,6 +125,15 @@ class Server():
 		self.ser[port] = None
 		return self.ser[port]
 	
+	def connectCamera(self):
+		try:
+			self.camera = subprocess.Popen("../exe", shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+		except OSError as ex:
+			print 'camera not found'
+			print ex
+		else:
+			print 'connection camera établie'
+		
 	def loopCmd(self, port):
 		""" la loop envoyant à la suite les commandes de la queue
 		si l'envoi échoue (self._sendCmd(..) < 0), stock le retour d'erreur dans self.waitRcv[port]['send']
@@ -178,6 +208,22 @@ class Server():
 		else:
 			return 'timeout, on : '+port
 	
+	def sendToCam(self, cmd):
+		try:
+			self.camera.stdin.write(str(cmd)+"\n") # envoie au child
+			self.camera.stdin.flush()
+		except:
+			print ("Unexpected error:", sys.exc_info())
+	
+	def listenCam(self):
+		""" get ouput of child number n """
+		output = -1
+		try:
+			output = self.camera.stdout.readline() # recupération du msg du child
+		except:
+			print ("Unexpected error:", sys.exc_info())
+		return output
+	
 	def testPing(self, port, cmd):
 		""" test la reactivitée de la cmd en envoyant et recevant 
 		la sortie est écrite sur un autre écran
@@ -226,8 +272,11 @@ class Server():
 			n: l'écran sur lequel écrire
 		"""
 		if self.screens[n][0]:
-			self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
-			self.screens[n][0].stdin.flush()
+			try:
+				self.screens[n][0].stdin.write(str(msg)+"\n") # envoie au child
+				self.screens[n][0].stdin.flush()
+			except:
+				print ("Unexpected error:", sys.exc_info())
 	
 	def makeLoop(self, port, cmd, speed=0.3):
 		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
@@ -288,9 +337,10 @@ class Server():
 		
 	
 def traiterReponseCamera(msg):
-	listObjets = msg.split(',')
-	for obj in listObjets:
-		obj = obj.split()
+	lignes = msg.strip().split(',')
+	listObjets = []
+	for obj in lignes:
+		listObjets.append(obj.split())
 	return listObjets
 	
 
