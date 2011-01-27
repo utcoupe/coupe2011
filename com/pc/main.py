@@ -31,11 +31,17 @@ server = Server(ports)
 def loopTestTracking():
 	global arreter
 	# demander la liste à la camera
-	print "envoie à la cam..."
-	server.sendToCam(1)
-	print "récupération des valeures..."
-	reponseCamera = server.listenCam()
-	listeObjets = traiterReponseCamera(reponseCamera)
+	listeObjets = []
+	while not listeObjets:
+		print "envoie à la cam..."
+		server.sendToCam(1)
+		print "récupération des valeures..."
+		reponseCamera = server.listenCam()
+		# on format la réponse pour avoir une liste
+		listeObjets = traiterReponseCamera(reponseCamera)
+		if not listeObjets:
+			print "rien trouvé, on retente dans 1 seconde"
+			time.sleep(1)
 	# on récupère le premier pion de la liste
 	type, x, y = listeObjets[0]
 	# on va au premier pour le pousser
@@ -53,7 +59,7 @@ def loopTestTracking():
 	arreter = False
 	print r
 	
-	time.sleep(10)
+	time.sleep(6)
 
 
 
