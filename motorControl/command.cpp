@@ -88,6 +88,7 @@ pushGoal(TYPE_POSITION, (message[0]*co-message[1]*si)*18+robot_state.x, (message
 		//case T_RESET:
 		case 'r':
 			clearGoals();
+			current_goal.isCanceled = true;
 			sendMessage(c, "The fifo is empty...");
 		break;
 		case 'p':
