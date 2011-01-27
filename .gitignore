@@ -3,5 +3,4 @@
 *.o
 *.dblite
 *.pyc
-*build/*
 *build/
