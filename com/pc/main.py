@@ -23,26 +23,6 @@ ports.append((port,115200))
 #ports.append(('ACM1',115200))
 
 server = Server(ports)
-'''
-class Ordre(self):
-	def __init__(self, cmd, fonction, isAliveCmd):
-		self.cmd = cmd
-		self.fonction = fonction
-		self.timeSinceLastReponse = 0
-	
-	""" regarde si il y a un retour """
-	def check(self):
-		server.getRcv, (cmd, 'ACM0'
-		
-
-class IA():
-	def __init__(self):
-		self.cmdRunning = dict() # les commandes en cours
-		self.errors		= dict() # les erreurs reçues
-	
-	def allerA(self):
-	
-'''
 
 
 arreter = False
