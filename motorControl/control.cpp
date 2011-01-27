@@ -228,12 +228,12 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4DeltaControl.Reset();
 		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
 		pid4DeltaControl.SetSampleTime(2);
-		pid4DeltaControl.SetOutputLimits(-155,155); /*composante liee a la vitesse lineaire*/
+		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante liee a la vitesse lineaire*/
 		pid4DeltaControl.SetMode(AUTO);
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(2);
 		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetOutputLimits(-100,100); /*composante li�e � la vitesse de rotation*/
+		pid4AlphaControl.SetOutputLimits(-200,200); /*composante lie a la vitesse de rotation*/
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
@@ -300,6 +300,111 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
 	pid4AlphaControl.Compute();
 	pid4DeltaControl.Compute();
+
+	if(current_goal.phase == PHASE_2){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+	}
+	else{
+		(*value_pwm_right) = output4Delta+output4Alpha;
+		(*value_pwm_left) = output4Delta-output4Alpha;
+	}
+
+	/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
+	if(current_goal.phase == PHASE_2 && !fifoIsEmpty()){
+		current_goal.isReached = true;
+		initDone = false;
+	}
+
+}
+
+/* Calcule les pwm a appliquer pour un asservissement en position non curviligne : 2 etapes, reduction de l'angle alpha et reduction de la distance delta
+ * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
+ * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
+ * */
+void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
+
+	static bool initDone = false;
+
+	if(!initDone){
+		output4Delta = 0;
+		output4Alpha = 0;
+		currentDelta = .0;
+		currentAlpha = .0;
+		consigneDelta = .0;
+		consigneAlpha = .0;
+		pid4DeltaControl.Reset();
+		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
+		pid4DeltaControl.SetSampleTime(2);
+		pid4DeltaControl.SetOutputLimits(-200,200);
+		pid4DeltaControl.SetMode(AUTO);
+		pid4AlphaControl.Reset();
+		pid4AlphaControl.SetSampleTime(2);
+		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
+		pid4AlphaControl.SetMode(AUTO);
+		initDone = true;
+	}
+
+	/* Gestion de l'arret d'urgence */
+	if(current_goal.isCanceled){
+		initDone = false;
+		current_goal.isReached = true;
+		current_goal.isCanceled = false;
+		/* et juste pour etre sur */
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+	/* Gestion de la pause */
+	if(current_goal.isPaused){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+
+	/*calcul de l'angle alpha a combler avant d'etre aligne avec le point cible
+	 * borne = [-PI PI] */
+	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
+	currentAlpha = angularCoeff - robot_state.angle;
+
+
+	int sens = 1;
+	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
+		sens = -1;
+		currentAlpha = M_PI - abs(angularCoeff) - robot_state.angle;
+	}
+
+	currentAlpha = -currentAlpha;
+
+ 	double dx = current_goal.x-robot_state.x;
+	double dy = current_goal.y-robot_state.y;
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part a l'envers
+
+
+	/*dans le cas non curviligne, on va d'abord corriger l'angle alpha*/
+
+	if(abs(currentAlpha)>M_PI/45){
+		/* dans le cas ou l'angle alpha est superieur a 4deg, toute la pwm est allouee a la rotation */
+		pid4AlphaControl.SetOutputLimits(-255,255);
+		pid4AlphaControl.Compute();
+		output4Delta = 0;
+	}
+
+	else{
+		/* l'angle alpha est relativement petit */
+		pid4AlphaControl.SetOutputLimits(-55,55);
+		pid4AlphaControl.Compute();
+		pid4DeltaControl.Compute();
+	}
+
+
+	if(abs(currentDelta) < 72) /*si l'ecart n'est plus que de 72 ticks (environ 2mm), on considere la consigne comme atteinte*/
+		current_goal.phase = PHASE_2;
+	else
+		current_goal.phase = PHASE_1;
+
 
 	if(current_goal.phase == PHASE_2){
 		(*value_pwm_right) = 0;
