@@ -27,12 +27,13 @@ class MyTimer:
 
 class InteruptableThreadedLoop(threading.Thread):
 	""" Thread qui peut être interompue
+	le timeout et l'arret marchent moyennement, la timer ne s'arrete pas tant que la fonction n'est pas finie
 	"""
 	def __init__(self, group = None, name=None):
 		threading.Thread.__init__(self, group, None, name)
 		self._stopevent = threading.Event()
 	
-	def start(self, target, args=(), kwargs={}, pause=0.0001):
+	def start(self, target, args=(), kwargs={}, timeout=None, pause=0.0001):
 		"""
 		@param
 			target: la fonction à boucler
@@ -44,13 +45,19 @@ class InteruptableThreadedLoop(threading.Thread):
 		self._args = args
 		self._kwargs = kwargs
 		self._pause = pause
+		self._timeout = timeout
 		threading.Thread.start(self)
 	
 	def run(self):
-		i = 0
-		while not self._stopevent.isSet():
-			self._stopevent.wait(self._pause)
-			self._target(*self._args, **self._kwargs)
+		if not self._timeout:
+			while not self._stopevent.isSet():
+				self._stopevent.wait(self._pause)
+				self._target(*self._args, **self._kwargs)
+		else:
+			threading.Timer(self._timeout, self.stop).start()
+			while not self._stopevent.isSet():
+				self._stopevent.wait(self._pause)
+				self._target(*self._args, **self._kwargs)
 		print 'le thread :', self.name, 'est fini'
 	
 	def stop(self):
@@ -63,14 +70,15 @@ def timeoutLoop(timeout_duration, target, args=(), kwargs={}, pause=0):
 	it.stop()
 
 
-def timeout(timeout_duration, func, args=(), kwargs={}, default=None):
+def timeout(timeout_duration, func, args=(), kwargs={}, name=None, default=None):
     """This function will spawn a thread and run the given function
     using the args, kwargs and return the given default value if the
     timeout_duration is exceeded.
-    """ 
+    """
     class InterruptableThread(threading.Thread):
         def __init__(self):
-            threading.Thread.__init__(self)
+            threading.Thread.__init__(self, name=name)
+            print 'start timeout :', name
             self.result = default
         def run(self):
             self.result = func(*args, **kwargs)
