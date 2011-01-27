@@ -25,6 +25,8 @@ typedef struct CurrentGoal {
 	int y;
 	double angle;
 	bool isReached;
+	bool isCanceled;
+	bool isPaused;
 	int phase;
 } CurrentGoal;
 
@@ -34,6 +36,7 @@ void initController();
 
 void speedControl(int*,int*);
 void angleControl(int*,int*);
+void positionControlCurviligne(int*,int*);
 void positionControl(int*,int*);
 double moduloPI(double Nb);
 void computeRobotState();
