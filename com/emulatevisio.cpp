@@ -29,7 +29,7 @@ int main() {
 			}
 			i++;
 		} else if(ask==2) {
-			cout << "t 987, 321" << endl;
+			cout << "t 987 321" << endl;
 		} else if(ask ==9) {
 			return 0;		
 		} else {
