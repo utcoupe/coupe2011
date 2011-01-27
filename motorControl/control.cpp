@@ -150,7 +150,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		(*value_pwm_left) = -pwm;
 	}
 
-	if(current_goal.phase == PHASE_2 && fifoIsEmpty()){
+	if(current_goal.phase == PHASE_2 && !fifoIsEmpty()){
 		current_goal.isReached = true;
 		initDone = false;
 	}

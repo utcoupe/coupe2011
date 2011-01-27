@@ -17,6 +17,7 @@ void cmd(int c, int* message)
 	// On analyse le message en fonction de son type
 	switch(c){
 		case 'x':
+			pushGoal(TYPE_ANGLE, 0, 0, 1.5);			
 			Serial.print("x,");Serial.print(message[0]);Serial.print("§");Serial.print(message[1]);Serial.print("§");Serial.print(message[2]);Serial.println();
 		break;
 		case 'P': // Ping
@@ -48,7 +49,7 @@ void cmd(int c, int* message)
 			sendMessage(c, "Go...");
 		break;
 		case 'g':
-			pushGoal(TYPE_POSITION, message[0]*18+robot_state.x*ENC_TICKS_TO_MM, message[1]*18+robot_state.y*ENC_TICKS_TO_MM, message[2]);
+			pushGoal(TYPE_POSITION, ((message[0]*18)*cos(robot_state.angle))+robot_state.x*ENC_TICKS_TO_MM, ((message[1]*18)*sin(robot_state.angle))+robot_state.y*ENC_TICKS_TO_MM, message[2]);
 			//x , y , ratio vitesse max [0-200]
 			sendMessage(c, "Go... relatif");
 		break;
@@ -59,12 +60,12 @@ void cmd(int c, int* message)
 		break;
 		//case T_ANGLE:
 		case 'A':
-			pushGoal(TYPE_ANGLE, message[0], message[1], message[2]/360 * 2*M_PI); // x,y,angle
-			sendMessage(c, "Tourne...");
+			pushGoal(TYPE_ANGLE, 0, 0, (double)message[0]/360 * 2*M_PI); // x,y,angle
+			sendMessage(c, (double)message[0]/360 * 2*M_PI);
 		break;
 		case 'a':
-			pushGoal(TYPE_ANGLE, message[0], message[1], moduloPI(message[2]/360 * 2*M_PI + robot_state.angle)); // x,y,angle
-			sendMessage(c, "Tourne... relatif");
+			pushGoal(TYPE_ANGLE, 0, 0, moduloPI((double)message[0]/360 * 2*M_PI + robot_state.angle)); // x,y,angle
+			sendMessage(c, moduloPI((double)message[0]/360 * 2*M_PI + robot_state.angle));
 		break;
 		//case T_RESET:
 		case 'r':
