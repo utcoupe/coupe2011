@@ -1,6 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$d8/d90/class_print.html" title="Print" alt="" coords="5,32,53,61"/>
-<area shape="rect" href="$d1/d51/class_stream.html" title="Stream" alt="" coords="101,32,165,61"/>
-<area shape="rect" href="$d4/db1/class_hardware_serial.html" title="HardwareSerial" alt="" coords="224,5,331,35"/>
-<area shape="rect" href="$d3/d22/class_hardware_serial_bis.html" title="HardwareSerialBis" alt="" coords="213,59,341,88"/>
-</map>

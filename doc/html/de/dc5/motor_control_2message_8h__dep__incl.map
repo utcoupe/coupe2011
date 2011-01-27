@@ -1,8 +1,0 @@
-<map id="G" name="G">
-<area shape="rect" href="$de/de6/build_2carte_8pde.html" title="com/carte/build/carte.pde" alt="" coords="5,83,173,112"/>
-<area shape="rect" href="$d4/dae/com_2carte_2command_8cpp.html" title="com/carte/command.cpp" alt="" coords="197,83,363,112"/>
-<area shape="rect" href="$d3/d49/com_2carte_2message_8cpp.html" title="com/carte/message.cpp" alt="" coords="411,83,571,112"/>
-<area shape="rect" href="$d0/dc6/build_2motor_control_8pde.html" title="motorControl/build/motorControl.pde" alt="" coords="595,83,824,112"/>
-<area shape="rect" href="$db/db0/motor_control_2message_8cpp.html" title="motorControl/message.cpp" alt="" coords="848,83,1024,112"/>
-<area shape="rect" href="$d2/dca/motor_control_8pde.html" title="motorControl/motorControl.pde" alt="" coords="1048,83,1245,112"/>
-</map>

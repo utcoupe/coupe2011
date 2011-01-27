@@ -210,6 +210,7 @@ class Server():
 			return 'timeout, on : '+port
 	
 	def sendToCam(self, cmd):
+		""" envoyer une commande à la camera """
 		try:
 			self.camera.stdin.write(str(cmd)+"\n") # envoie au child
 			self.camera.stdin.flush()
@@ -217,7 +218,7 @@ class Server():
 			print ("Unexpected error:", sys.exc_info())
 	
 	def listenCam(self):
-		""" get ouput of child number n """
+		""" récupérer le retour de la caméra """
 		output = -1
 		try:
 			output = self.camera.stdout.readline() # recupération du msg du child
