@@ -141,7 +141,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		consigne = .0;
 		pid4AngleControl.Reset();
 		pid4AngleControl.SetInputLimits(-M_PI,M_PI); // <- le probl�me venait de l�
-		pid4AngleControl.SetOutputLimits(-150,150);
+		pid4AngleControl.SetOutputLimits(-255,255);
 		pid4AngleControl.SetSampleTime(2); //2ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
 		pid4AngleControl.SetMode(AUTO);
 		initDone = true;
