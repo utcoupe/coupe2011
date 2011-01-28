@@ -68,7 +68,7 @@ void cmd(int c, int* message)
 		break;
 		case 'g':
 			Serial.print("g,");
-			double co, si;
+			//double co, si;
 			co = cos(robot_state.angle);
 			si = sin(robot_state.angle);
 
