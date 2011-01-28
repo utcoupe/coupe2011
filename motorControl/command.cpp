@@ -43,6 +43,24 @@ void cmd(int c, int* message)
 	                    Serial.print(EOF);
 		break;
 		//case T_POSITION:
+		case 'M':
+			current_goal.isReached = false;
+			current_goal.x = (double)message[0]*18;
+			current_goal.y = (double)message[1]*18;
+			current_goal.speed = message[2];
+			sendMessage(c, "Modification absolue...");
+		break;
+		case 'm':
+			double co, si;
+			co = cos(robot_state.angle);
+			si = sin(robot_state.angle);
+
+			current_goal.isReached = false;
+			current_goal.x = (message[0]*co-message[1]*si)*18+robot_state.x;
+			current_goal.y = (message[0]*si+message[1]*co)*18+robot_state.y;
+			current_goal.speed = message[2];
+			sendMessage(c, "Modification relative...");
+		break;
 		case 'G':
 			pushGoal(TYPE_POSITION, (double)message[0]*18, (double)message[1]*18, message[2]);
 			//x , y , ratio vitesse max [0-200]
@@ -54,7 +72,7 @@ void cmd(int c, int* message)
 			co = cos(robot_state.angle);
 			si = sin(robot_state.angle);
 
-pushGoal(TYPE_POSITION, (message[0]*co-message[1]*si)*18+robot_state.x, (message[0]*si+message[1]*co)*18+robot_state.y, (double)message[2]);
+			pushGoal(TYPE_POSITION, (message[0]*co-message[1]*si)*18+robot_state.x, (message[0]*si+message[1]*co)*18+robot_state.y, (double)message[2]);
 			Serial.print("§X : "); Serial.print(message[0]*co-message[1]*si+robot_state.x*ENC_TICKS_TO_MM);
 			Serial.print("§Y : "); Serial.print(message[1]*co+message[1]*si+robot_state.y*ENC_TICKS_TO_MM);
 			Serial.print("§ ...");Serial.println();
