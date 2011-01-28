@@ -97,12 +97,12 @@ void cmd(int c, int* message)
 		break;
 		//case T_ANGLE:
 		case 'A':
-			pushGoal(TYPE_ANGLE, 0, 0, (double)message[0]/360 * 2*M_PI); // x,y,angle
-			sendMessage(c, (double)message[0]/360 * 2*M_PI);
+			pushGoal(TYPE_ANGLE, 0, 0, (double)message[0]/180.0 * M_PI); // x,y,angle
+			sendMessage(c, (double)message[0]/180.0 * M_PI);
 		break;
 		case 'a':
-			pushGoal(TYPE_ANGLE, 0, 0, moduloPI((double)message[0]/360 * 2*M_PI + robot_state.angle)); // x,y,angle
-			sendMessage(c, moduloPI((double)message[0]/360 * 2*M_PI + robot_state.angle));
+			pushGoal(TYPE_ANGLE, 0, 0, moduloPI((double)message[0]/180 * M_PI + robot_state.angle)); // x,y,angle
+			sendMessage(c, moduloPI((double)message[0]/180 * M_PI + robot_state.angle));
 		break;
 		//case T_RESET:
 		case 'r':

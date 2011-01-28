@@ -6,6 +6,7 @@
  */
 
 #include "fifo.h"
+#include "math.h"
 
 Fifo goals;
 
@@ -15,20 +16,16 @@ void initGoals(){
 	goals.out = 0;
 
 	/*pour tester le robot*/
-/*	pushGoal(TYPE_ANGLE,0,0,-1.57); // 0, 0, angle
-	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,-2000,0,150); //x , y , ratio vitesse max [0-200]
-	pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]*/
+	//pushGoal(TYPE_ANGLE,0,0,3.14); // 0, 0, angle
+	//pushGoal(TYPE_POSITION,14000,0,150); //x , y , ratio vitesse max [0-200]
+	//pushGoal(TYPE_POSITION,16000,-16000,150); //x , y , ratio vitesse max [0-200]
+	//pushGoal(TYPE_POSITION,0,-16000,150); //x , y , ratio vitesse max [0-200]
+	//pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
 
 //	pushGoal(TYPE_SPEED,2,1000,0); // vitesse (en ticks/ms), timeout, O
 }
 
-void pushGoal(int type,int data_1,int data_2,double data_3){
+void pushGoal(int type,long data_1,long data_2,double data_3){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = type;

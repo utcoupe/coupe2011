@@ -141,7 +141,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		consigne = .0;
 		pid4AngleControl.Reset();
 		pid4AngleControl.SetInputLimits(-M_PI,M_PI); // <- le probl�me venait de l�
-		pid4AngleControl.SetOutputLimits(-255,255);
+		pid4AngleControl.SetOutputLimits(-150,150);
 		pid4AngleControl.SetSampleTime(2); //2ms, tout ce qu'il faut c'est que l'observateur soit plus rapide que le PID
 		pid4AngleControl.SetMode(AUTO);
 		initDone = true;
@@ -171,8 +171,16 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	la consigne (SetPoint) du PID sera 0
 	la sortie du PID sera le double pwm
 	*/
-	currentEcart = moduloPI(current_goal.angle + robot_state.angle);
+	currentEcart = -moduloPI(current_goal.angle - robot_state.angle);
 
+        /*
+        Serial.print("goal: ");
+        Serial.print(current_goal.angle);
+        Serial.print(" current: ");
+        Serial.print(robot_state.angle);
+        Serial.print(" ecart: ");
+        Serial.println(currentEcart);
+        */
 
 	if(abs(currentEcart) < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;

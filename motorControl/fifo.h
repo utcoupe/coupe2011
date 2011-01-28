@@ -27,7 +27,7 @@ typedef struct {
 
 
 void initGoals();
-void pushGoal(int,int,int,double);
+void pushGoal(int,long,long,double);
 void popGoal();
 void clearGoals();
 bool fifoIsEmpty();
