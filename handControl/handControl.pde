@@ -63,7 +63,24 @@ void loop(){
 	//}
 
 	/*ecriture de la sortie*/
+	if(abs(value_pwm_left)<60 && value_pwm_left != 0) {
+		if(value_pwm_left>0) {
+			value_pwm_left = 60;
+		} else {
+			value_pwm_left = -60;
+		}
+	}
+
 	setLeftPWM(value_pwm_left);
+        if(abs(value_pwm_right)<60 && value_pwm_right != 0) {
+                if(value_pwm_right>0) {
+                        value_pwm_right = 60;
+                } else {
+                        value_pwm_right = -60;
+                }
+        }
+
+
 	setRightPWM(value_pwm_right);
 
 	/*modele d'evolution*/

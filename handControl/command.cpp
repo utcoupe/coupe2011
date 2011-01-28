@@ -16,41 +16,41 @@ void cmd(int c, float* message, int m)
 	int i;
 	// On analyse le message en fonction de son type
 	switch(c){
-		case '7':
+		case 'a':
 			value_pwm_left+=15;;
 			sendMessage(c, value_pwm_left);
 		break;
-		case '4':
+		case 'q':
 			value_pwm_left-=15;;
 			sendMessage(c, value_pwm_left);
 		break;
-		case '8':
+		case 'z':
 			value_pwm_left+=15;
 			value_pwm_right+=15;
 			sendMessage(c, "tout droit..");
 		break;
-		case '5':
+		case 's':
 			value_pwm_left-=15;
 			value_pwm_right-=15;
 			sendMessage(c, "moins vite..");
 		break;
-		case '9':
+		case 'e':
 			value_pwm_right+=15;;
 			sendMessage(c, value_pwm_right);
 		break;
-		case '6':
+		case 'd':
 			value_pwm_right-=15;;
 			sendMessage(c, value_pwm_right);
 		break;
-		case '1':
+		case 'w':
 			value_pwm_left = 0;
 			sendMessage(c, "Left Stop");
 		break;
-		case '3':
+		case 'c':
 			value_pwm_right = 0;
 			sendMessage(c, "Right Stop");
 		break;
-		case '2':
+		case 'x':
 			value_pwm_right = 0;
 			value_pwm_left = 0;
 			sendMessage(c, "All Stop");
@@ -69,7 +69,7 @@ void cmd(int c, float* message, int m)
 		#define T_SETX 9
 		#define T_SETY 10
 		*/ 
-		case T_QUERY:
+/*		case T_QUERY:
 	        Serial.print(SOF);
 			Serial.print(robot_state.x, DEC);
 			Serial.print(robot_state.y, DEC);
@@ -97,7 +97,7 @@ void cmd(int c, float* message, int m)
 		case 'r':
 			clearGoals();
 			sendMessage(c, "The fifo is empty...");
-		break;
+		break;*/
 		case 'p':
 			Serial.print("p,");
 			Serial.print(robot_state.x*ENC_TICKS_TO_MM);
