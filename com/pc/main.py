@@ -18,7 +18,7 @@ from message import *
 from timer import *
 
 
-port = 'ACM1'
+port = 'ACM0'
 ports = []
 ports.append((port,115200))
 #ports.append(('ACM1',115200))
@@ -42,7 +42,11 @@ def loopTestTracking():
 		listeObjets = traiterReponseCamera(reponseCamera)
 		if not listeObjets:
 			print "rien trouvé, on retente dans 1 seconde"
-			time.sleep(1)
+			cmd = "a 60"
+        		server.addCmd(cmd, port)
+			time.sleep(0.3)
+			server.addCmd("r", port)
+			
 	# on récupère le premier pion de la liste
 	type, x, y = listeObjets[0]
 	# on va au premier pour le pousser
@@ -51,7 +55,7 @@ def loopTestTracking():
 	#server.addCmd("g %s %s 100"%(x,y), 'ACM0')
 	
 	server.addCmd(cmd, port)
-	t = threading.Timer(2,stop)
+	t = threading.Timer(1,stop)
 	t.start()
 	r = server.getRcv(cmd, port)
 	while not r and not arreter:
@@ -60,7 +64,7 @@ def loopTestTracking():
 	arreter = False
 	print r
 	
-	time.sleep(1)
+	#time.sleep(1)
 
 
 
