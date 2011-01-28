@@ -18,7 +18,7 @@ from message import *
 from timer import *
 
 
-port = 'ACM0'
+port = 'ACM1'
 ports = []
 ports.append((port,115200))
 #ports.append(('ACM1',115200))
@@ -51,7 +51,7 @@ def loopTestTracking():
 	#server.addCmd("g %s %s 100"%(x,y), 'ACM0')
 	
 	server.addCmd(cmd, port)
-	t = threading.Timer(1,stop)
+	t = threading.Timer(2,stop)
 	t.start()
 	r = server.getRcv(cmd, port)
 	while not r and not arreter:
@@ -109,7 +109,7 @@ while True:
 			server.stopScreen(int(cperso[1]))
 		else:
 			server.addCmd(cmd, port)
-			t = threading.Timer(1,stop)
+			t = threading.Timer(2,stop)
 			t.start()
 			r = server.getRcv(cmd, port)
 			while not r and not arreter:
