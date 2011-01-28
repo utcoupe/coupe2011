@@ -20,9 +20,9 @@
 typedef struct CurrentGoal {
 	int type;
 	int speed;
-	int periode;
-	int x;
-	int y;
+	long periode;
+	long x;
+	long y;
 	double angle;
 	bool isReached;
 	bool isCanceled;
@@ -41,6 +41,5 @@ void positionControl(int*,int*);
 double moduloPI(double Nb);
 void computeRobotState();
 
-int computePID(double,int,int,int);
 
 #endif /* CONTROL_H_ */

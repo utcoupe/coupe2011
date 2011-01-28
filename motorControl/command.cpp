@@ -39,14 +39,14 @@ void cmd(int c, int* message)
 			Serial.print(robot_state.x, DEC);
 			Serial.print(robot_state.y, DEC);
 			Serial.print(robot_state.angle, DEC);
-			//Serial.print(checksum);
-	                    Serial.print(EOF);
+	        Serial.print(EOF);
 		break;
 		//case T_POSITION:
 		case 'M':
+			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
-			current_goal.x = (double)message[0]*18;
-			current_goal.y = (double)message[1]*18;
+			current_goal.x = message[0]*18;
+			current_goal.y = message[1]*18;
 			current_goal.speed = message[2];
 			sendMessage(c, "Modification absolue...");
 		break;
@@ -55,6 +55,7 @@ void cmd(int c, int* message)
 			co = cos(robot_state.angle);
 			si = sin(robot_state.angle);
 
+			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
 			current_goal.x = (message[0]*co-message[1]*si)*18+robot_state.x;
 			current_goal.y = (message[0]*si+message[1]*co)*18+robot_state.y;
@@ -62,7 +63,7 @@ void cmd(int c, int* message)
 			sendMessage(c, "Modification relative...");
 		break;
 		case 'G':
-			pushGoal(TYPE_POSITION, (double)message[0]*18, (double)message[1]*18, message[2]);
+			pushGoal(TYPE_POSITION, message[0]*18, message[1]*18, (double)message[2]);
 			//x , y , ratio vitesse max [0-200]
 			sendMessage(c, "Go...");
 		break;
