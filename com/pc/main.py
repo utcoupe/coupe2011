@@ -6,6 +6,7 @@
 		loop <time> puis <cmd>: aficher une nouvelle fenetre avec en boucle un envoi/reception de la commande spécifiée
 		stop <n>: killer le nième écran
 		test <cmd>: lance 300 fois la commande et affiche le temps d'execution
+		cam <num>: Recuperer les données de la nieme cam
 		exit: quitter
 """
 
