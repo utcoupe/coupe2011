@@ -47,8 +47,8 @@ def loopTestTracking():
 	type, x, y = listeObjets[0]
 	# on va au premier pour le pousser
 	print "on va vers %s %s"%(x,y)
-	cmd = "g %s %s"%(x,y)
-	#server.addCmd("g %s %s"%(x,y), 'ACM0')
+	cmd = "m %s %s 100"%(x,y)
+	#server.addCmd("g %s %s 100"%(x,y), 'ACM0')
 	
 	server.addCmd(cmd, port)
 	t = threading.Timer(1,stop)
@@ -60,7 +60,7 @@ def loopTestTracking():
 	arreter = False
 	print r
 	
-	time.sleep(6)
+	time.sleep(1)
 
 
 
