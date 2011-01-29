@@ -13,10 +13,10 @@
 
 
 typedef struct {
-	int type;
-	int data_1; /*speed ou x*/
-	int data_2; /* y */
-	double data_3; /* angle */
+	int type; /*1,2,3 selon le type d'asserv*/
+	double data_1; /*speed (pour but en vitesse) ou x ou angle*/
+	double data_2; /* y ou speed (pour but en angle)*/
+	double data_3; /* speed (pour but en position)*/
 } Goal;
 
 typedef struct {
@@ -27,7 +27,9 @@ typedef struct {
 
 
 void initGoals();
-void pushGoal(int,long,long,double);
+void pushGoalPosition(double,double,double);
+void pushGoalOrientation(double,double);
+void pushGoalSpeed(double,double);
 void popGoal();
 void clearGoals();
 bool fifoIsEmpty();

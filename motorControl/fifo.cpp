@@ -15,23 +15,40 @@ void initGoals(){
 	goals.in = 0;
 	goals.out = 0;
 
-	/*pour tester le robot*/
-	//pushGoal(TYPE_ANGLE,0,0,3.14); // 0, 0, angle
-	//pushGoal(TYPE_POSITION,14000,0,150); //x , y , ratio vitesse max [0-200]
-	//pushGoal(TYPE_POSITION,16000,-16000,150); //x , y , ratio vitesse max [0-200]
-	//pushGoal(TYPE_POSITION,0,-16000,150); //x , y , ratio vitesse max [0-200]
-	//pushGoal(TYPE_POSITION,0,0,150); //x , y , ratio vitesse max [0-200]
-
-//	pushGoal(TYPE_SPEED,2,1000,0); // vitesse (en ticks/ms), timeout, O
+	/*pour tester le robot
+	pushGoalOrientation(3.14,255); //angle,vitesse
+	pushGoalPosition(10000,9000,255); //x,y,vitesse
+	pushGoalSpeed(2.0,10000); //vitesse,periode
+	*/
 }
 
-void pushGoal(int type,long data_1,long data_2,double data_3){
+void pushGoalPosition(double x, double y, double speed){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
-		incGoal->type = type;
-		incGoal->data_1 = data_1;
-		incGoal->data_2 = data_2;
-		incGoal->data_3 = data_3;
+		incGoal->type = TYPE_POSITION;
+		incGoal->data_1 = x;
+		incGoal->data_2 = y;
+		incGoal->data_3 = speed;
+		goals.in = (goals.in+1)%SIZE;
+	}
+}
+
+void pushGoalOrientation(double angle, double speed){
+	if((goals.in+1)%SIZE != goals.out){
+		Goal* incGoal = goals.goal+goals.in;
+		incGoal->type = TYPE_ANGLE;
+		incGoal->data_1 = angle;
+		incGoal->data_2 = speed;
+		goals.in = (goals.in+1)%SIZE;
+	}
+}
+
+void pushGoalSpeed(double speed, double period){
+	if((goals.in+1)%SIZE != goals.out){
+		Goal* incGoal = goals.goal+goals.in;
+		incGoal->type = TYPE_SPEED;
+		incGoal->data_1 = speed;
+		incGoal->data_2 = period;
 		goals.in = (goals.in+1)%SIZE;
 	}
 }
@@ -48,7 +65,8 @@ void popGoal(){
 			current_goal.periode = outGoal->data_2;
 			break;
 		case TYPE_ANGLE:
-			current_goal.angle = outGoal->data_3;
+			current_goal.angle = outGoal->data_1;
+			current_goal.speed = outGoal->data_2;
 			break;
 		case TYPE_POSITION:
 			current_goal.x = outGoal->data_1;

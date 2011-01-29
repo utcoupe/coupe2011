@@ -33,11 +33,11 @@ void setup(){
 }
 
 void loop(){
-	// On note le temps de début
+	// On note le temps de debut
 	timeStart = micros();
 
 	/* zone libre */
-	// La del est allumée pendant le traitement
+	// La del est allumee pendant le traitement
 	digitalWrite(16, HIGH);
 	/* fin zone de programmation libre */
 
@@ -69,11 +69,12 @@ void loop(){
 	/*modele d'evolution*/
 	computeRobotState();
 	
-	// On éteint la del
+	/* On eteint la del */
 	digitalWrite(16, LOW);
 	
-	// On attend le temps qu'il faut pour boucler
-	delayMicroseconds(DUREE_CYCLE*1000-(micros()-timeStart));
+	/* On attend le temps qu'il faut pour boucler */
+	long udelay = DUREE_CYCLE*1000-(micros()-timeStart);
+	if(udelay>0) delayMicroseconds(udelay);
 }
 
 
