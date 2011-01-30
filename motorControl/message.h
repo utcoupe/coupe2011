@@ -5,7 +5,7 @@
 
 void initSerialLink();
 void readIncomingData();
-void analyzeMessage(int bufferIndex, unsigned char* buffer);
+//void analyzeMessage(int bufferIndex, unsigned char* buffer);
 void sendMessage(unsigned char c, char* str);
 void sendMessage(char cmd, int i);
 void sendMessage(char cmd, int *tabi, int size);

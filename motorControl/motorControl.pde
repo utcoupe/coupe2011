@@ -25,7 +25,7 @@ void setup(){
 	initEncoders();
 	/*Definit la position initiale du robot*/
 	initRobotState();
-	/*Active la liaison série*/
+	/*Active la liaison serie*/
 	initSerialLink();
 
 	// LED qui n'en est pas une
@@ -33,10 +33,10 @@ void setup(){
 }
 
 void loop(){
-	// On note le temps de debut
+	/* on note le temps de debut */
 	timeStart = micros();
 
-	/* zone libre */
+	/* zone programmation libre */
 	// La del est allumee pendant le traitement
 	digitalWrite(16, HIGH);
 	/* fin zone de programmation libre */
@@ -45,21 +45,26 @@ void loop(){
 	readIncomingData();
 
 	/*recuperation du but suivant (vitesse, angle ou position) */
-	// Arthur: Ne pas le faire s'il n'y a pas de nouveau point, mais maintenir la position
-	// Cedric: c'est ce qui se passe actuellement, les pwm sont nulles lorsque le but est atteint, et ne change pas tant qu'il n'y a pas de nouveau but
 	if(current_goal.isReached)
 		popGoal(); /* va changer la valeur de current_goal */
 
 
-	/*calcul des sorties*/
-
+	/*traitement des taches*/
 	if(!current_goal.isReached){
 		if(current_goal.type == TYPE_SPEED)
 			speedControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_ANGLE)
 			angleControl(&value_pwm_left,&value_pwm_right);
-		else
+		else if(current_goal.type == TYPE_POSITION)
 			positionControl(&value_pwm_left,&value_pwm_right);
+		else if(current_goal.type == TYPE_CALIB_X)
+			robot_state.x = current_goal.data_1;
+		else if(current_goal.type == TYPE_CALIB_Y)
+			robot_state.y = current_goal.data_1;
+		else if(current_goal.type == TYPE_CALIB_ANGLE)
+			robot_state.angle = current_goal.data_1;
+		else if(current_goal.type == TYPE_DELAY)
+			delayControl(&value_pwm_left,&value_pwm_right);
 	}
 
 	/*ecriture de la sortie*/

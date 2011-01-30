@@ -11,12 +11,12 @@
 
 /* Analyse le message parse auparavant et effectue les actions associees
  * 	<> c : l'entete du message (indique le type de message)
- * 	<> message : le tableau d'entier contenant le message
+ * 	<> message : le tableau d'entier contenant les arguments
  * */
-void cmd(int c, int* message){
+void cmd(int header, int* args){
 
 	/* On analyse le message en fonction de son type */
-	switch(c){
+	switch(header){
 		case 'x':
 		{
 			pushGoalOrientation(1.5,200);
@@ -65,9 +65,8 @@ void cmd(int c, int* message){
 
 		case 'm':
 		{
-			double co, si;
-			co = cos(robot_state.angle);
-			si = sin(robot_state.angle);
+			double co = cos(robot_state.angle);
+			double si = sin(robot_state.angle);
 
 			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
@@ -87,9 +86,8 @@ void cmd(int c, int* message){
 
 		case 'g':
 		{
-			double co, si;
-			co = cos(robot_state.angle);
-			si = sin(robot_state.angle);
+			double co = cos(robot_state.angle);
+			double si = sin(robot_state.angle);
 
 			pushGoalPosition((message[0]*co-message[1]*si)*18+robot_state.x, (message[0]*si+message[1]*co)*18+robot_state.y, (double)message[2]);
 			/*Serial.print("§X : "); Serial.print(message[0]*co-message[1]*si+robot_state.x*ENC_TICKS_TO_MM);
@@ -117,10 +115,17 @@ void cmd(int c, int* message){
 
 		case 'a':
 		{
-			double angle = moduloPI((double)message[0]/180 * M_PI + robot_state.angle);
+			double angle = moduloPI(message[0]/180.0 * M_PI + robot_state.angle);
 			pushGoalOrientation(angle,message[1]);
 			//sendMessage(c, moduloPI((double)message[0]/180 * M_PI + robot_state.angle));
 			sendMessage(c, "Asserv en orientation relative...");
+			break;
+		}
+
+		case 'd':
+		{
+			pushGoalDelay(message[0]);
+			sendMessage(c, "En attente");
 			break;
 		}
 

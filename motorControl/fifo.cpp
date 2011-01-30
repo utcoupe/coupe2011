@@ -53,6 +53,47 @@ void pushGoalSpeed(double speed, double period){
 	}
 }
 
+void pushGoalManualCalibration(int type,double value){
+	if((goals.in+1)%SIZE != goals.out){
+		Goal* incGoal = goals.goal+goals.in;
+		incGoal->type = type;
+		incGoal->data_1 = value;
+		goals.in = (goals.in+1)%SIZE;
+	}
+}
+
+void pushGoalDelay(double value){
+	if((goals.in+1)%SIZE != goals.out){
+		Goal* incGoal = goals.goal+goals.in;
+		incGoal->type = TYPE_DELAY;
+		incGoal->data_1 = value;
+		goals.in = (goals.in+1)%SIZE;
+	}
+}
+
+void pushGoalAutoCalibration(){
+	/* phase 1 : sortir de la zone de depart */
+	pushGoalPosition(10000,0,130);
+	/* phase 2 : tourner d'un angle PI/2 */
+	pushGoalOrientation(M_PI/2,150);
+	/* phase 3 : reculer pendant 4s */
+	pushGoalSpeed(-1,4000);
+	/* phase 4 : fixer X et angle */
+	pushGoalManualCalibration(TYPE_CALIB_X,0); //TODO preciser la valeur de X (c'est pas vraiment 0)
+	pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
+	/* phase 5 : avancer un peu pour pouvoir tourner */
+	pushGoalPosition(0,2000,130); //TODO preciser la valeur de X (c'est pas vraiment 0)
+	/* phase 6 : tourner d'un angle -PI/2 */
+	pushGoalOrientation(-M_PI/2,150);
+	/* phase 7 : reculer pendant 4s */
+	pushGoalSpeed(-1,4000);
+	/* phase 8 : fixer Y (et peut-etre speed, a voir si c'est utile) */
+	pushGoalManualCalibration(TYPE_CALIB_Y,0); //TODO preciser la valeur de Y (c'est pas vraiment 0)
+}
+
+
+
+
 void popGoal(){
 	if(goals.in!=goals.out){
 		current_goal.isReached = false;
@@ -62,7 +103,7 @@ void popGoal(){
 		switch (outGoal->type) {
 		case TYPE_SPEED:
 			current_goal.speed = outGoal->data_1;
-			current_goal.periode = outGoal->data_2;
+			current_goal.period = outGoal->data_2;
 			break;
 		case TYPE_ANGLE:
 			current_goal.angle = outGoal->data_1;
@@ -72,6 +113,18 @@ void popGoal(){
 			current_goal.x = outGoal->data_1;
 			current_goal.y = outGoal->data_2;
 			current_goal.speed = outGoal->data_3;
+			break;
+		case TYPE_DELAY:
+			current_goal.period = outGoal->data_1;
+			break;
+		case TYPE_CALIB_X:
+			current_goal.x = outGoal->data_1;
+			break;
+		case TYPE_CALIB_Y:
+			current_goal.y = outGoal->data_1;
+			break;
+		case TYPE_CALIB_ANGLE:
+			current_goal.angle = outGoal->data_1;
 			break;
 		default:
 			break;

@@ -10,13 +10,10 @@
 
 AF_DCMotor MoteurG(1, MOTOR12_64KHZ);
 AF_DCMotor MoteurD(2, MOTOR12_64KHZ);
-void initPWM(){
-	AF_DCMotor MoteurG(1, MOTOR12_64KHZ);
-	AF_DCMotor MoteurD(2, MOTOR12_64KHZ);
 
+void initPWM(){
 	MoteurG.setSpeed(0);
 	MoteurG.run(FORWARD);
-	
 	MoteurD.setSpeed(0);
 	MoteurD.run(FORWARD);
 }

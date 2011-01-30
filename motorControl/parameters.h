@@ -14,10 +14,10 @@
 #define ENC_RADIUS 18 // Rayon de la roue codeuse
 #define ENC_TICKS_TO_MM (2*M_PI*ENC_RADIUS)/(ENC_RESOLUTION*4) // en mm.tick^-1 (opti: a calculer apres) environ : 0.02826
 
-// Durée d'un cycle (en millisecondes)
+// Duree d'un cycle (en millisecondes)
 #define DUREE_CYCLE 2
 
-/* Paramètres de la carte asservissement
+/* Parametres de la carte asservissement
  * pin 0 -> USB 2 TTL
  * pin 1 -> USB 2 TTL
  * pin 3 -> enable moteur 1 (pwm)
@@ -42,12 +42,12 @@
 #define INTERRUPT_RIGHT_A 2
 #define INTERRUPT_RIGHT_B 3
 
-/* Paramètre de la table en mm*/
+/* Parametre de la table en mm*/
 #define TABLE_WIDTH_MM 2100
 #define TABLE_HEIGHT_MM 3000
 #define TABLE_DISTANCE_MAX_MM 3662
 
-/*Paramètre de l'asservissement*/
+/*Parametre de l'asservissement*/
 #define K_DIST 0.5
 #define K_ANGLE 700
 
@@ -64,7 +64,7 @@
 #define KI_ALPHA 0.0
 #define KD_ALPHA 550.0
 
-/*Paramètre de liaison série*/
+/*Parametre de liaison serie*/
 #define SOF '<'
 #define EOF '>'
 #define T_QUERY 0
@@ -78,14 +78,17 @@
 #define T_SETY 10
 
 
+/*Parametre de la file des taches a effectuer*/
+#define SIZE 15
 
-/*Paramètre de la file des buts a atteindre*/
-#define SIZE 10
-
-/*Constantes*/
+/*Constantes pour la liste des taches*/
 #define TYPE_SPEED 0
 #define TYPE_ANGLE 1
 #define TYPE_POSITION 2
+#define TYPE_CALIB_X 3
+#define TYPE_CALIB_Y 4
+#define TYPE_CALIB_ANGLE 5
+#define TYPE_DELAY 6
 
 
 

@@ -16,11 +16,12 @@
 #define PHASE_2 2
 #define PHASE_3 3
 #define PHASE_4 4
+#define PHASE_5 5
 
 typedef struct CurrentGoal {
 	int type;
 	double speed;
-	double periode;
+	double period;
 	double x;
 	double y;
 	double angle;
@@ -38,6 +39,8 @@ void speedControl(int*,int*);
 void angleControl(int*,int*);
 void positionControlCurviligne(int*,int*);
 void positionControl(int*,int*);
+void delayControl(int*, int*);
+
 void computeRobotState();
 
 double moduloPI(double Nb);

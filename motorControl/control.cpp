@@ -85,7 +85,6 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		return;
 	}
 
-
 	if(current_goal.phase == PHASE_1){ //phase d'acceleration
 		consigne = current_goal.speed;
 		currentSpeed = robot_state.speed;
@@ -97,7 +96,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 	else if(current_goal.phase == PHASE_2){ //phase de regime permanent
 		consigne = current_goal.speed;
 		currentSpeed = robot_state.speed;
-		if(millis()-start_time > current_goal.periode){ /* fin de regime permanent */
+		if(millis()-start_time > current_goal.period){ /* fin de regime permanent */
 			current_goal.phase = PHASE_3;
 		}
 	}
@@ -275,8 +274,6 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	 * Si cet angle est superieur a PI/2 en valeur absolue, le robot recule en marche arriere (= il recule)
 	 */
 
-
-
 	int sens = 1;
 	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
 		sens = -1;
@@ -285,14 +282,14 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	
 	currentAlpha = -currentAlpha;
 
-        /*
-        Serial.print("coeff:");
-        Serial.print(angularCoeff);
-        Serial.print("  angle:");
-        Serial.print(robot_state.angle);
-        Serial.print("  alpha:");
-        Serial.println(currentAlpha);
-        */
+	/*
+	Serial.print("coeff:");
+	Serial.print(angularCoeff);
+	Serial.print("  angle:");
+	Serial.print(robot_state.angle);
+	Serial.print("  alpha:");
+	Serial.println(currentAlpha);
+	*/
 
  	double dx = current_goal.x-robot_state.x;
 	double dy = current_goal.y-robot_state.y;
@@ -370,7 +367,6 @@ void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
 		return;
 	}
 
-
 	/*calcul de l'angle alpha a combler avant d'etre aligne avec le point cible
 	 * borne = [-PI PI] */
 	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
@@ -392,15 +388,15 @@ void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
 
 	/*dans le cas non curviligne, on va d'abord corriger l'angle alpha*/
 
-	if(abs(currentAlpha)>M_PI/45){
-		/* dans le cas ou l'angle alpha est superieur a 4deg, toute la pwm est allouee a la rotation */
+	if(abs(currentAlpha)>M_PI/18){
+		/* dans le cas ou l'angle alpha est superieur a 10 deg, toute la pwm est allouee a la rotation */
 		pid4AlphaControl.SetOutputLimits(-255,255);
 		pid4AlphaControl.Compute();
 		output4Delta = 0;
 	}
 
 	else{
-		/* l'angle alpha est relativement petit */
+		/* l'angle alpha est relativement petit = il peut etre corrige en avancant*/
 		pid4AlphaControl.SetOutputLimits(-55,55);
 		pid4AlphaControl.Compute();
 		pid4DeltaControl.Compute();
@@ -429,6 +425,27 @@ void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
 	}
 
 }
+
+/*
+ * Permet l'attente non bloquante sur une periode donnee (suite a un pushGoalDelay)
+ */
+void delayControl(int* value_pwm_left, int* value_pwm_right){
+	static bool initDone = false;
+
+	if(!initDone){
+		static unsigned long start = millis();
+		initDone = true;
+	}
+
+	(*value_pwm_right) = 0;
+	(*value_pwm_left) = 0;
+
+	if(millis()-start > current_goal.period){
+		current_goal.isReached = true;
+		initDone = false;
+	}
+}
+
 
 /* Implementation du modele d'evolution du robot a partir de l'odometrie
  * A appeler a intervalle regulier (a voir pour la mettre sur une interruption timer)
