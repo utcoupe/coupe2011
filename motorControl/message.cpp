@@ -90,7 +90,7 @@ void sendMessage(unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr
 ///
 void readIncomingData()
 {
-	static unsigned char currentArg[20];
+	static char currentArg[20];
 	static int args[10];
 	static int argsIndex = 0;
 	static int currentArgIndex = 0;
@@ -114,23 +114,35 @@ void readIncomingData()
 			}
 			/*separateur*/
 			case ' ': {
-				currentArg[currentArgIndex] = '\0';
-				args[argsIndex] = atoi(currentArg);
-				argsIndex++;
-				currentArgIndex = 0;
-				break;
+                if(argsIndex>0){
+                	currentArg[currentArgIndex] = '\0';
+        			args[argsIndex] = atoi(currentArg);
+                }
+                else
+                    args[argsIndex] = currentArg[0];
+                argsIndex++;
+        		currentArgIndex = 0;
+        		break;
 			}
 			/*fin de trame*/
 			case '>': {
-				currentArg[currentArgIndex] = '\0';
-				args[argsIndex] = atoi(currentArg);
+                if(argsIndex>0){
+                	currentArg[currentArgIndex] = '\0';
+        			args[argsIndex] = atoi(currentArg);
+                }
+                else
+                    args[argsIndex] = currentArg[0];
 				argsIndex = 0;
 				currentArgIndex = 0;
 				cmd(args[0], args+1);
 				break;
 			}
+            /* caracteres interdits */
+			case 10: {
+				break;
+			}
 			default: {
-				currentArg[currentArgIndex] = data;
+				currentArg[currentArgIndex] = data;    
 				currentArgIndex++;
 			    break;
 			}

@@ -14,31 +14,19 @@
  * 	<> message : le tableau d'entier contenant les arguments
  * */
 void cmd(int header, int* args){
-
+                        
 	/* On analyse le message en fonction de son type */
 	switch(header){
-		case 'x':
-		{
-			pushGoalOrientation(1.5,200);
-			Serial.print("x,");
-			Serial.print(message[0]);
-			Serial.print("§");
-			Serial.print(message[1]);
-			Serial.print("§");
-			Serial.print(message[2]);
-			Serial.println();
-			break;
-		}
 
 		case 'P': // Ping
 		{
-			sendMessage(c, "Pong");
+			sendMessage(header, "Pong");
 			break;
 		}
 
 		case 'I': // Identification
 		{
-			sendMessage(c, "Asserv Board");
+			sendMessage(header, "Asserv Board");
 			break;
 		}
 
@@ -56,10 +44,10 @@ void cmd(int header, int* args){
 		{
 			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
-			current_goal.x = message[0]*18;
-			current_goal.y = message[1]*18;
-			current_goal.speed = message[2];
-			sendMessage(c, "Modification absolue...");
+			current_goal.x = args[0]*18;
+			current_goal.y = args[1]*18;
+			current_goal.speed = args[2];
+			sendMessage(header, "Modification absolue...");
 			break;
 		}
 
@@ -70,17 +58,17 @@ void cmd(int header, int* args){
 
 			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
-			current_goal.x = (message[0]*co-message[1]*si)*18+robot_state.x;
-			current_goal.y = (message[0]*si+message[1]*co)*18+robot_state.y;
-			current_goal.speed = message[2];
-			sendMessage(c, "Modification relative...");
+			current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
+			current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
+			current_goal.speed = args[2];
+			sendMessage(header, "Modification relative...");
 			break;
 		}
 
 		case 'G':
 		{
-			pushGoalPosition(message[0]*18, message[1]*18, (double)message[2]);
-			sendMessage(c, "Asserv en position absolue...");
+			pushGoalPosition(args[0]*18, args[1]*18, args[2]);
+			sendMessage(header, "Asserv en position absolue...");
 			break;
 		}
 
@@ -89,55 +77,71 @@ void cmd(int header, int* args){
 			double co = cos(robot_state.angle);
 			double si = sin(robot_state.angle);
 
-			pushGoalPosition((message[0]*co-message[1]*si)*18+robot_state.x, (message[0]*si+message[1]*co)*18+robot_state.y, (double)message[2]);
-			/*Serial.print("§X : "); Serial.print(message[0]*co-message[1]*si+robot_state.x*ENC_TICKS_TO_MM);
-			Serial.print("§Y : "); Serial.print(message[1]*co+message[1]*si+robot_state.y*ENC_TICKS_TO_MM);
-			Serial.print("§ ...");Serial.println()*/
-			sendMessage(c, "Asserv en position relative...");
+			pushGoalPosition((args[0]*co-args[1]*si)*18+robot_state.x, (args[0]*si+args[1]*co)*18+robot_state.y, args[2]);
+			sendMessage(header, "Asserv en position relative...");
 			break;
 		}
 
-		case 's':
+		case 'v':
 		{
-			pushGoalSpeed(message[0],message[1]); /* TODO un doute sur l'ordre d'envoi des arguments */
-			sendMessage(c, "Asserv en vitesse...");
+			pushGoalSpeed(args[0],args[1]); /* TODO un doute sur l'ordre d'envoi des arguments */
+			sendMessage(header, "Asserv en vitesse...");
 			break;
 		}
 
 		case 'A':
 		{
-			double angle = message[0]/180.0 * M_PI;
-			pushGoalOrientation(angle,message[1]);
-			//sendMessage(c, angle);
-			sendMessage(c, "Asserv en orientation absolue...");
+			double angle = args[0]/180.0 * M_PI;
+			pushGoalOrientation(angle,args[1]);
+			sendMessage(header, "Asserv en orientation absolue...");
 			break;
 		}
 
 		case 'a':
 		{
-			double angle = moduloPI(message[0]/180.0 * M_PI + robot_state.angle);
-			pushGoalOrientation(angle,message[1]);
-			//sendMessage(c, moduloPI((double)message[0]/180 * M_PI + robot_state.angle));
-			sendMessage(c, "Asserv en orientation relative...");
+			double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
+			pushGoalOrientation(angle,args[1]);
+			sendMessage(header, "Asserv en orientation relative...");
 			break;
 		}
 
 		case 'd':
 		{
-			pushGoalDelay(message[0]);
-			sendMessage(c, "En attente");
+			pushGoalDelay(args[0]);
+			sendMessage(header, "En attente");
 			break;
 		}
 
-		case 'r':
+		case 'w':
+		{
+			pushGoalPwm(args[0],args[1]);
+			sendMessage(header, "Application de la pwm...");
+			break;
+		}
+
+		case 'p': /* comme pause */
+		{
+			current_goal.isPaused = true;
+			sendMessage(header, "En pause...");
+			break;
+		}
+
+		case 'r': /* comme resume */
+		{
+			current_goal.isPaused = false;
+			sendMessage(header, "C'est reparti...");
+			break;
+		}
+
+		case 's': /* comme stop */
 		{
 			clearGoals();
 			current_goal.isCanceled = true;
-			sendMessage(c, "Arret d'urgence...");
+			sendMessage(header, "Arret d'urgence...");
 			break;
 		}
 
-		case 'p':
+		case 'k':
 		{
 			Serial.print("p,");
 			Serial.print(robot_state.x*ENC_TICKS_TO_MM);
@@ -157,8 +161,6 @@ void cmd(int header, int* args){
 			Serial.print("§speed: ");Serial.print(robot_state.speed*ENC_TICKS_TO_MM, DEC);
 			Serial.print("§x: ");Serial.print(robot_state.x*ENC_TICKS_TO_MM, DEC);
 			Serial.print("§y: ");Serial.print(robot_state.y*ENC_TICKS_TO_MM, DEC);
-			/*Serial.print("pwmL: ");Serial.println(value_pwm_left);
-			Serial.print("pwmR: ");Serial.println(value_pwm_right);*/
 			Serial.print("§encL: ");Serial.print(value_left_enc);
 			Serial.print("§encR: ");Serial.println(value_right_enc);
 			break;
@@ -166,7 +168,7 @@ void cmd(int header, int* args){
 
 		default:
 		{
-			sendMessage(c,"Command not found");
+			sendMessage(header,"Command not found");
 			break;
 		}
 	}

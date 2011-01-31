@@ -58,13 +58,15 @@ void loop(){
 		else if(current_goal.type == TYPE_POSITION)
 			positionControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_CALIB_X)
-			robot_state.x = current_goal.data_1;
+			robot_state.x = current_goal.x;
 		else if(current_goal.type == TYPE_CALIB_Y)
-			robot_state.y = current_goal.data_1;
+			robot_state.y = current_goal.y;
 		else if(current_goal.type == TYPE_CALIB_ANGLE)
-			robot_state.angle = current_goal.data_1;
+			robot_state.angle = current_goal.angle;
 		else if(current_goal.type == TYPE_DELAY)
 			delayControl(&value_pwm_left,&value_pwm_right);
+		else if(current_goal.type == TYPE_PWM)
+			pwmControl(&value_pwm_left,&value_pwm_right);
 	}
 
 	/*ecriture de la sortie*/

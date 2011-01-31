@@ -430,9 +430,10 @@ void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
  */
 void delayControl(int* value_pwm_left, int* value_pwm_right){
 	static bool initDone = false;
-
+    static unsigned long start = 0;
+        
 	if(!initDone){
-		static unsigned long start = millis();
+		start = millis();
 		initDone = true;
 	}
 
@@ -450,9 +451,10 @@ void delayControl(int* value_pwm_left, int* value_pwm_right){
  */
 void pwmControl(int* value_pwm_left, int* value_pwm_right){
 	static bool initDone = false;
-
+    static unsigned long start = 0;
+        
 	if(!initDone){
-		static unsigned long start = millis();
+		start = millis();
 		initDone = true;
 	}
 
