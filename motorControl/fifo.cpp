@@ -53,6 +53,16 @@ void pushGoalSpeed(double speed, double period){
 	}
 }
 
+void pushGoalPwm(double speed, double period){
+	if((goals.in+1)%SIZE != goals.out){
+		Goal* incGoal = goals.goal+goals.in;
+		incGoal->type = TYPE_PWM;
+		incGoal->data_1 = speed;
+		incGoal->data_2 = period;
+		goals.in = (goals.in+1)%SIZE;
+	}
+}
+
 void pushGoalManualCalibration(int type,double value){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
@@ -77,7 +87,7 @@ void pushGoalAutoCalibration(){
 	/* phase 2 : tourner d'un angle PI/2 */
 	pushGoalOrientation(M_PI/2,150);
 	/* phase 3 : reculer pendant 4s */
-	pushGoalSpeed(-1,4000);
+	pushGoalPwm(-100,4000);
 	/* phase 4 : fixer X et angle */
 	pushGoalManualCalibration(TYPE_CALIB_X,0); //TODO preciser la valeur de X (c'est pas vraiment 0)
 	pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
@@ -86,7 +96,7 @@ void pushGoalAutoCalibration(){
 	/* phase 6 : tourner d'un angle -PI/2 */
 	pushGoalOrientation(-M_PI/2,150);
 	/* phase 7 : reculer pendant 4s */
-	pushGoalSpeed(-1,4000);
+	pushGoalPwm(-100,4000);
 	/* phase 8 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 	pushGoalManualCalibration(TYPE_CALIB_Y,0); //TODO preciser la valeur de Y (c'est pas vraiment 0)
 }
@@ -113,6 +123,10 @@ void popGoal(){
 			current_goal.x = outGoal->data_1;
 			current_goal.y = outGoal->data_2;
 			current_goal.speed = outGoal->data_3;
+			break;
+		case TYPE_PWM:
+			current_goal.speed = outGoal->data_1;
+			current_goal.period = outGoal->data_2;
 			break;
 		case TYPE_DELAY:
 			current_goal.period = outGoal->data_1;

@@ -119,7 +119,6 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		(*value_pwm_right) = pwm;
 		(*value_pwm_left) = pwm;
 	}
-
 }
 
 double currentEcart;
@@ -439,6 +438,26 @@ void delayControl(int* value_pwm_left, int* value_pwm_right){
 
 	(*value_pwm_right) = 0;
 	(*value_pwm_left) = 0;
+
+	if(millis()-start > current_goal.period){
+		current_goal.isReached = true;
+		initDone = false;
+	}
+}
+
+/*
+ * Permet l'application d'une pwm fixe pendant un temps donne
+ */
+void pwmControl(int* value_pwm_left, int* value_pwm_right){
+	static bool initDone = false;
+
+	if(!initDone){
+		static unsigned long start = millis();
+		initDone = true;
+	}
+
+	(*value_pwm_right) = current_goal.speed;
+	(*value_pwm_left) = current_goal.speed;
 
 	if(millis()-start > current_goal.period){
 		current_goal.isReached = true;

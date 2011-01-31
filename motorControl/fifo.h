@@ -34,6 +34,7 @@ void pushGoalSpeed(double,double);
 void pushGoalAutoCalibration();
 void pushGoalManualCalibration(int,double);
 void pushGoalDelay(double);
+void pushGoalPwm(double,double);
 
 void popGoal();
 void clearGoals();

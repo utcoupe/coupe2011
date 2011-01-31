@@ -89,6 +89,7 @@
 #define TYPE_CALIB_Y 4
 #define TYPE_CALIB_ANGLE 5
 #define TYPE_DELAY 6
+#define TYPE_PWM 7
 
 
 

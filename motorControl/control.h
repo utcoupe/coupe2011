@@ -40,6 +40,7 @@ void angleControl(int*,int*);
 void positionControlCurviligne(int*,int*);
 void positionControl(int*,int*);
 void delayControl(int*, int*);
+void pwmControl(int*, int*);
 
 void computeRobotState();
 
