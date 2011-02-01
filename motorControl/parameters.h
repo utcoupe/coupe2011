@@ -9,10 +9,14 @@
 #define PARAMETERS_H_
 
 /* Parametres mecanique du robot */
+#define DIST_MOTOR_AXIS_TO_BACK_MM 120 // Distance entre le l'axe des moteurs et l'arriere du robot
+
 #define ENC_CENTER_DIST (2*160) // Distance entre chaque roue codeuse et le centre du robot en mm
 #define ENC_RESOLUTION 500 // Nombre de points par tour d'encodeur
 #define ENC_RADIUS 18 // Rayon de la roue codeuse
+
 #define ENC_TICKS_TO_MM (2*M_PI*ENC_RADIUS)/(ENC_RESOLUTION*4) // en mm.tick^-1 (opti: a calculer apres) environ : 0.02826
+#define ENC_MM_TO_TICKS (ENC_RESOLUTION*4)/(2*M_PI*ENC_RADIUS) // environ : 17.6839
 
 // Duree d'un cycle (en millisecondes)
 #define DUREE_CYCLE 2

@@ -178,7 +178,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	Serial.println(currentEcart);
 	*/
 
-	if(abs(currentEcart) < M_PI/180) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
+	if(abs(currentEcart) < M_PI/360) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
@@ -437,6 +437,24 @@ void delayControl(int* value_pwm_left, int* value_pwm_right){
 		initDone = true;
 	}
 
+	/* Gestion de l'arret d'urgence */
+	if(current_goal.isCanceled){
+		initDone = false;
+		current_goal.isReached = true;
+		current_goal.isCanceled = false;
+		/* et juste pour etre sur */
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+	/* Gestion de la pause */
+	if(current_goal.isPaused){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
 	(*value_pwm_right) = 0;
 	(*value_pwm_left) = 0;
 
@@ -458,12 +476,32 @@ void pwmControl(int* value_pwm_left, int* value_pwm_right){
 		initDone = true;
 	}
 
+	/* Gestion de l'arret d'urgence */
+	if(current_goal.isCanceled){
+		initDone = false;
+		current_goal.isReached = true;
+		current_goal.isCanceled = false;
+		/* et juste pour etre sur */
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
+	/* Gestion de la pause */
+	if(current_goal.isPaused){
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
+		return;
+	}
+
 	(*value_pwm_right) = current_goal.speed;
 	(*value_pwm_left) = current_goal.speed;
 
 	if(millis()-start > current_goal.period){
 		current_goal.isReached = true;
 		initDone = false;
+		(*value_pwm_right) = 0;
+		(*value_pwm_left) = 0;
 	}
 }
 

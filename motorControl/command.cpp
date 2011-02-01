@@ -18,6 +18,13 @@ void cmd(int header, int* args){
 	/* On analyse le message en fonction de son type */
 	switch(header){
 
+		case 'x' :
+		{
+			pushGoalAutoCalibration();
+			sendMessage(header, "Calibration de l'odometrie en cours...");
+			break;
+		}
+
 		case 'P': // Ping
 		{
 			sendMessage(header, "Pong");
