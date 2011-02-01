@@ -54,37 +54,42 @@ void UTCamera::generalRun()
 {
     int ordre=0;
     while(1){
-        if(idCamera==waitOrder()){
+        waitOrder();
             int i=0;
-            do{
-                for(int y=0; y<40 ; y++){
-                basFrame = cvQueryFrame( ptrCamera );
-                if(!basFrame){break;}}
-            }while( !basFrame );
+            //do{
+                for(int y=0; y<5 ; y++){
+                    //basFrame = cvQueryFrame( ptrCamera );
+                    cvGrabFrame( ptrCamera );
+                }
+                basFrame = cvRetrieveFrame( ptrCamera );
+            //}while( !basFrame );
 
             maskApplication(MASK_BINARISATION);
             reggApplication();
             analyseRegion();
             send(listeP);
-        }
     }
 }
 
 
 // **************************************************
 // ***************** CONSTRUCTEUR *******************
-UTCamera::UTCamera(int camera, int wScreen, int hScreen)
+UTCamera::UTCamera(int camera, int orentation, int wScreen, int hScreen)
 {
     idCamera = camera;
 
     // Attribution automatique d'un nom à l'objet
-    if(camera==CAMERA_AVA) { nameCam="camera avant  ";}
-    if(camera==CAMERA_ARR) { nameCam="camera arriere";}
+    if(orentation==CAMERA_AVA) { nameCam="camera avant  ";}
+    if(orentation==CAMERA_ARR) { nameCam="camera arriere";}
 
     // Affectation de la caméra
-    ptrCamera = cvCaptureFromCAM( camera       );
+    ptrCamera = cvCaptureFromCAM( camera   );
     basFrame     = cvQueryFrame    ( ptrCamera );
     if( !basFrame ){ cout << "Erreur initialisation : " << nameCam << endl; return;}
+
+
+  // cout << cvGetCaptureProperty( ptrCamera, CV_CAP_PROP_POS_MSEC ) << endl;
+
 
     // Dimension des images de la caméra
     width = basFrame->width;
@@ -128,6 +133,47 @@ UTCamera::UTCamera(int camera, int wScreen, int hScreen)
     loadConfig();
 }
 
+
+
+
+void UTCamera::autoCalibrage()
+{
+    double moyenne=0, moy=0;
+    int drap = 0, dr=0;
+    int h,s,v;
+
+    for( int x=0 ; x<width ; x++ ){
+		for( int y=0 ; y<height ; y++ ){
+
+            h = CV_IMAGE_ELEM( hsvFrame, uchar, y, ( x * 3 )   );
+            s = CV_IMAGE_ELEM( hsvFrame, uchar, y, ( x * 3 ) +1);
+            v = CV_IMAGE_ELEM( hsvFrame, uchar, y, ( x * 3 ) +2);
+
+
+            if( (h>25) && (h<80) ){
+                if(drap){
+                moyenne = (moyenne + h)/2;}
+                else{moyenne = h;drap=1;}
+            }
+
+            if( (h>175) && (h<270) ){
+                if(dr){
+                moy = (moy + h)/2;}
+                else{moy = h;dr=1;}
+            }
+
+		}
+    }
+
+    Htab[JAUNE] = moyenne;
+    Htab[BLEU] = moy;
+
+    cout << "moyenne = " << moyenne << endl;
+
+}
+
+
+
 // **************************************************
 // ***** Methode de calibrage avant utilisation *****
 void UTCamera::calibrage()
@@ -163,6 +209,9 @@ void UTCamera::calibrage()
         if( !basFrame ) break;
         maskApplication(MASK_COLOR);
         maskApplication(MASK_BINARISATION);
+
+        //autoCalibrage();
+
         reggApplication();
         analyseRegion();
         afficherRegi();
@@ -279,23 +328,46 @@ void UTCamera::afficherRegi()
 // ********  Methode pour l'enregistrement  *********
 void UTCamera::record(char* nom, int mode){
 
-    CvSize size = cvSize (
-            (int)cvGetCaptureProperty( ptrCamera, CV_CAP_PROP_FRAME_WIDTH),
-            (int)cvGetCaptureProperty( ptrCamera, CV_CAP_PROP_FRAME_HEIGHT) );
-    CvVideoWriter *writer = cvCreateVideoWriter( nom, CV_FOURCC('M','J','P','G'), 20, size );
-    if(writer == NULL){ cout << "RECORD PROBLEME !!!" << endl; return; }
 
+    CvVideoWriter *writer = 0;
+    int isColor = 1;
+    int fps     = 22;  // or 30
+    int frameWe  = 640; // 744 for firewire cameras
+    int frameHe  = 480; // 480 for firewire cameras
+    writer=cvCreateVideoWriter(nom,CV_FOURCC('P','I','M','1'),
+                               fps,cvSize(frameWe,frameHe),isColor);
+
+
+    if(writer == NULL){ cout << "RECORD PROBLEME !!!" << endl; return; }
     cvNamedWindow( nameCam.c_str()  , CV_WINDOW_AUTOSIZE );
 
     while(1){
         basFrame = cvQueryFrame( ptrCamera );
         if( !basFrame ) break;
 
+        maskApplication(MASK_COLOR);
+        maskApplication(MASK_BINARISATION);
+        reggApplication();
+        analyseRegion();
+        afficherRegi();
+
+
         if(mode == VISION_NORMAL){
             cvWriteFrame( writer, basFrame );
             cvShowImage(nameCam.c_str(),basFrame);
         }
-
+        if(mode == VISION_ZONE){
+            cvWriteFrame( writer, basFrame );
+            cvShowImage(nameCam.c_str(),basFrame);
+        }
+        if(mode == VISION_BINAR){
+            cvWriteFrame( writer, binFrame );
+            cvShowImage(nameCam.c_str(),binFrame);
+        }
+        if(mode == VISION_COLOR){
+            cvWriteFrame( writer, colFrame );
+            cvShowImage(nameCam.c_str(),colFrame);
+        }
 
         char c = cvWaitKey(10);
         if( c == 'q' ) break;

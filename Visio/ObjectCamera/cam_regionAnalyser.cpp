@@ -42,7 +42,7 @@ x' et y' coordonnées relatives aux robots
 */
 regionLister* analyseListeRegion(regionLister* listeAanalyser, int width, int height)
 {
-     // Déclaration
+    // Déclaration
     region* reg;
     regionLister* liste = new regionLister();
 
@@ -55,7 +55,7 @@ regionLister* analyseListeRegion(regionLister* listeAanalyser, int width, int he
             reg->max[i] = listeAanalyser->getEle()->max[i];
         }
         // ------------
-        reg->Type = 'p';
+        reg->Type = TYPE_PIONT;
         reg->Yprime = getLengthRobotToRegion(reg->max[BAS].y);
 
         double largeurTheorique = getLargeurTheoriqueDuPiont(reg->max[BAS].y + ((2/3)*(reg->max[BAS].y-reg->max[HAUT].y)) );

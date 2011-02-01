@@ -127,9 +127,10 @@ void souris(int event, int x, int y, int flags, void *param) {
         UTCamera* cam = (UTCamera*)param;
 
         f=cvRetrieveFrame(cam->getCapture());
+
         cvCvtColor(f, f, CV_BGR2HSV);
         CvScalar scal;
-        scal = cvGet2D(f, y, x);
+         scal = cvGet2D(f, y, x);
 
         cam->setHtab(cam->getInd(),scal.val[0]);
         cam->setStab(cam->getInd(),scal.val[1]);

@@ -526,12 +526,12 @@
 	<iostream>
 	<cv.h>
 
-1296162962 source:/home/xavier/WorkSpace/ObjectCamera/UTCamera.cpp
+1296556449 source:/home/xavier/WorkSpace/ObjectCamera/UTCamera.cpp
 	"UTCamera.hpp"
 	"UTCameraFct.hpp"
 	"Fps.hpp"
 
-1296162896 /home/xavier/WorkSpace/ObjectCamera/UTCamera.hpp
+1296502480 /home/xavier/WorkSpace/ObjectCamera/UTCamera.hpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
@@ -542,10 +542,13 @@
 	"cam_regionAnalyser.hpp"
 	"cam_comManager.hpp"
 
-1296164452 source:/home/xavier/WorkSpace/ObjectCamera/main.cpp
-	<iostream>
-	"cv.h"
-	"highgui.h"
+1296556589 source:/home/xavier/WorkSpace/ObjectCamera/main.cpp
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<sys/stat.h>
+	<cv.h>
+	<highgui.h>
 	"UTCamera.hpp"
 	"cam_regionAnalyser.hpp"
 
@@ -559,7 +562,7 @@
 
 1295813774 /home/xavier/WorkSpace/ObjectCamera/UTCameraFct.cpp
 
-1296164203 /home/xavier/WorkSpace/ObjectCamera/UTCameraFct.hpp
+1296556907 /home/xavier/WorkSpace/ObjectCamera/UTCameraFct.hpp
 
 1296069119 source:/home/xavier/WorkSpace/ObjectCamera/cam_lengthConverter.cpp
 	"cam_lengthConverter.hpp"
@@ -574,17 +577,17 @@
 	<cv.h>
 	<highgui.h>
 
-1296156614 /home/xavier/WorkSpace/ObjectCamera/cam_regionLister.hpp
+1296555055 /home/xavier/WorkSpace/ObjectCamera/cam_regionLister.hpp
 	<iostream>
 	<cv.h>
 
-1296162604 source:/home/xavier/WorkSpace/ObjectCamera/cam_comManager.cpp
+1296555710 source:/home/xavier/WorkSpace/ObjectCamera/cam_comManager.cpp
 	"cam_comManager.hpp"
 
-1296129870 source:/home/xavier/WorkSpace/ObjectCamera/cam_regionLister.cpp
+1296554775 source:/home/xavier/WorkSpace/ObjectCamera/cam_regionLister.cpp
 	"cam_regionLister.hpp"
 
-1296160115 source:/home/xavier/WorkSpace/ObjectCamera/cam_regionAnalyser.cpp
+1296555073 source:/home/xavier/WorkSpace/ObjectCamera/cam_regionAnalyser.cpp
 	"cam_regionAnalyser.hpp"
 
 1296159995 /home/xavier/WorkSpace/ObjectCamera/cam_regionAnalyser.hpp
@@ -597,7 +600,7 @@
 	"cam_regionLister.hpp"
 	"cam_utility.hpp"
 
-1296134546 /home/xavier/WorkSpace/ObjectCamera/cam_utility.hpp
+1296222670 /home/xavier/WorkSpace/ObjectCamera/cam_utility.hpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>
@@ -606,10 +609,10 @@
 	<highgui.h>
 	<sstream>
 
-1296133827 source:/home/xavier/WorkSpace/ObjectCamera/cam_utility.cpp
+1296222613 source:/home/xavier/WorkSpace/ObjectCamera/cam_utility.cpp
 	"cam_utility.hpp"
 
-1296163270 /home/xavier/WorkSpace/ObjectCamera/cam_comManager.hpp
+1296555710 /home/xavier/WorkSpace/ObjectCamera/cam_comManager.hpp
 	<iostream>
 	<stdlib.h>
 	<stdio.h>

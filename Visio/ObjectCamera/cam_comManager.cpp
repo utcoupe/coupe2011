@@ -12,9 +12,9 @@
 
 #include "cam_comManager.hpp"
 
-int waitOrder()
+char waitOrder()
 {
-    int c;
+    char c;
     cin >> c;
     fflush(stdin);
     return c;
@@ -30,7 +30,8 @@ void send(regionLister* rl)
         rg = rl->getEle();
         compteur++;
         // ----------
-        cout << rg->Type << " " << (int)rg->Xprime << " " << (int)rg->Yprime << ",";
+        if(compteur>0){cout << ",";}
+        cout << rg->Type << " " << (int)rg->Yprime << " " << (int)rg->Xprime;
         // ----------
         rl->ptrSuiv();
     }

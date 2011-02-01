@@ -113,10 +113,11 @@ class UTCamera
 
     public:
 
-        UTCamera(int camera, int wScreen, int hScreen);          // Utiliser les macros pour choisir la caméra
+        UTCamera(int camera, int orentation, int wScreen, int hScreen);          // Utiliser les macros pour choisir la caméra
 
         //--- Methodes pour l'utilisateur ---
         void calibrage();
+        void autoCalibrage();
 
         int* analyseZoneVerte();                    // Retourne un tableau de 5 entiers indiquant l'ordre des pionts
                                                     // et des figures sur la zone verte.

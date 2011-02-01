@@ -49,3 +49,4 @@ using namespace cv;
 *****           PROTOTYPES                      *****
 ****************************************************/
 string intToString(int entier);
+int chareToInt(char* car);

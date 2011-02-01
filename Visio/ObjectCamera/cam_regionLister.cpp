@@ -59,6 +59,21 @@ void regionLister::ptrSuiv()
     ptr = ptr->suiv;
 }
 
+
+// **************************************************
+region* regionLister::copie(region* r)
+{
+    region *n = (region*)malloc(sizeof(region));
+
+    n->nbPixel = r->nbPixel;
+    for(int i=0; i<4 ; i++){
+        n->max[i] = r->max[i];
+    }
+
+    return n;
+}
+
+
 // **************************************************
 // ******************* DESTRUCTEUR ******************
 regionLister::~regionLister()
