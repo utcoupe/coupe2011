@@ -26,6 +26,10 @@
 #define BAS 	                    1
 #define DROITE 	                    2
 #define GAUCHE 	                    3
+
+// Type des zones
+#define TYPE_PIONT                  'p'
+
 /****************************************************
 *****           STRUCTURE                       *****
 ****************************************************/
@@ -59,6 +63,8 @@ class regionLister
         region* getEle  ()        {return ptr;};
         void    add(region* r);
         void    destroy ();
+
+        region* copie(region* r);
 
         ~regionLister();
 

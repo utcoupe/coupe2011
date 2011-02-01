@@ -21,3 +21,10 @@ string intToString(int entier)
     return out.str();
 }
 
+int chareToInt(char* car)
+{
+    return atoi(car);
+}
+
+
+
