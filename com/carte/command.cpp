@@ -14,7 +14,7 @@ void cmd(int c, int* message)
 		break;
 
 		case 'I': // Identification
-			sendMessage(c, (char*)"Test Card");
+			sendMessage(c, (char*)"autre");
 		break;
 		case 'S':
 			int v;
