@@ -14,7 +14,7 @@
 import threading
 import sys
 
-from message import *
+from server import *
 from timer import *
 
 
@@ -112,7 +112,7 @@ while True:
 		event = server.addCmd(cmd, port)
 		event.wait(1)
 		r = server.getReponse(cmd,port)
-		print "Reponse : ", r
+		print "Reponse :", r
 
 
 print 'fin thread pcincipal'

@@ -2,7 +2,7 @@
 
 
 import threading
-import message
+import server
 import time
 from envoyeur import *
 from receveur import *
@@ -48,7 +48,7 @@ class DisconnectListener(EventListener):
 		print "%s : carte '%s' on port %s deconnected..."%(self.name, str(self._id_client), self._server.ports[self._id_client])
 		port_actuel = self._server.ports[self._id_client]
 		self._server.ports_connection[port_actuel] = False
-		scan = message.scanPorts("ttyACM")
+		scan = server.scanPorts("ttyACM")
 		for port in scan:
 			# si le port n'est pas enregistré dans le serveur ou qu'il est indiqué inactif
 			if port not in self._server.ports_connection or not self._server.ports_connection[port]:
