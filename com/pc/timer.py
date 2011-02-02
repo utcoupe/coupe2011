@@ -32,6 +32,7 @@ class InteruptableThreadedLoop(threading.Thread):
 	def __init__(self, group = None, name=None):
 		threading.Thread.__init__(self, group, None, name)
 		self._stopevent = threading.Event()
+		self.result = None
 	
 	def start(self, target, args=(), kwargs={}, timeout=None, pause=0.0001):
 		"""
@@ -49,15 +50,11 @@ class InteruptableThreadedLoop(threading.Thread):
 		threading.Thread.start(self)
 	
 	def run(self):
-		if not self._timeout:
-			while not self._stopevent.isSet():
-				self._stopevent.wait(self._pause)
-				self._target(*self._args, **self._kwargs)
-		else:
+		if self._timeout:
 			threading.Timer(self._timeout, self.stop).start()
-			while not self._stopevent.isSet():
-				self._stopevent.wait(self._pause)
-				self._target(*self._args, **self._kwargs)
+		while not self._stopevent.isSet():
+			self._stopevent.wait(self._pause)
+			self.result = self._target(*self._args, **self._kwargs)
 		print 'le thread :', self.name, 'est fini'
 	
 	def stop(self):
