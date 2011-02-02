@@ -4,7 +4,15 @@
 import threading
 
 class Receveur(threading.Thread):
+	""" Thread qui va lire en permanence sur la sortie de la carte
+	"""
 	def __init__(self, id_client, client, disconnect_event, reconnect_event):
+		"""
+		@param:
+			id_client: l'identifiant du client (récupérer après une demande d'identification '<I>')
+			client: le serial associé
+			disconnect_event: desactivé en temps normal, activé pendant une deconnection
+		"""
 		threading.Thread.__init__(self, None, None, "Receveur(%s)"%str(id_client))
 		self._stopevent = threading.Event()
 		self._client = client
@@ -35,10 +43,15 @@ class Receveur(threading.Thread):
 		self._stopevent.set()
 	
 	def _readLine(self):
+		"""
+		@return:
+			None si rien (timeout) ou deconnection
+			(string) si on a réussi à lire
+		"""
 		try:
 			val = self._client.readline()
 		except OSError as ex:
-			print "deconnection...1"
+			print "%s : deconnection..."%self.name
 			self._disconnect_event.set()
 			return None
 		else:

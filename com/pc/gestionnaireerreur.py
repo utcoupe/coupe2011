@@ -22,6 +22,7 @@ class EventListener(threading.Thread):
 		print "%s arreté"%self.name
 	
 	def action(self):
+		""" à surcharger, fonction appellée quand l'event se produit """
 		pass
 	
 	def stop(self):
@@ -32,6 +33,7 @@ class EventListener(threading.Thread):
 
 
 class DisconnectListener(EventListener):
+	""" Catch les event de deconection et tente une reconnection """
 	def __init__(self, disconnect_event, reconnect_event, server, id_client):
 		EventListener.__init__(self, disconnect_event, id_client)
 		self._server = server
