@@ -5,12 +5,16 @@ import serial
 import threading
 import time
 import subprocess
-from Queue import *
 import sys
 #from struct import *
 #import binascii
 
 from timer import *
+from receveur import *
+from envoyeur import *
+from gestionnaireerreur import *
+
+
 
 
 class Server():
@@ -25,36 +29,40 @@ class Server():
 		@param
 			ports: tableau de paire (nom du port, vitesse de rafraichissement)
 		"""
-		self.ser		= 	dict()
+		self.clients	= 	dict()
+		self.ports		=	dict()	# pour retrouver le port en cas de deconnection
 		self.screens	= 	[]
-		self.queuedCmd 	= 	dict() 	# liste des commandes à envoyer par port
-		self.waitRcv 	=	dict() 	# liste des réponses attendues par port
-		self.cmdLoops	=	dict() # threads
-		self.rcvLoops	=	dict() # threads
+		self.envoyeurs	=	dict()  # threads
+		self.receveurs	=	dict()  # threads
+		self.disconnectListener	= dict()
 		
 		self.connectCamera()
 		
-		self.connectSerials(ports)
+		self.connectClients(ports)
 		
-		# créarion de la queue pour l'envoie de commande
-		# et du dict pour récupérer les réponses
-		for s in self.ser:
-			self.queuedCmd[s] = Queue() # on envoi les commandes les unes après les autres
-			self.waitRcv[s] = dict() # on reçoit dans n'importe quel ordre
-			it = InteruptableThreadedLoop(None, "cmdLoop : "+s)
-			it.start(self.loopCmd, (s,))
-			self.cmdLoops[s] = it
-			it = InteruptableThreadedLoop(None, "rcvLoop : "+s)
-			it.start(self.loopRcv, (s,))
-			self.rcvLoops[s] = it
-		
-		# petite pause avant de pouvoir envoyer et recevoir des données
-		time.sleep(1)
-		
-		# lancement des loups
+		#
+		for id,client in self.clients.items():
+			disconnectEvent = threading.Event()
+			reconnectEvent = threading.Event()
+			reconnectEvent.set()
+			# le thread pour rebrancher en cas de deconnection
+			self.disconnectListener[id]	= DisconnectListener(disconnectEvent, reconnectEvent, self, id)
+			self.disconnectListener[id].start()
+			
+			self.associateThreads(id,client,disconnectEvent,reconnectEvent)
 		
 		print 'fin init'
 	
+	def associateThreads(self, id_client, client, disconnectEvent, reconnectEvent):
+		# le thread permettant l'envoie
+		envoyeur = Envoyeur(id_client, client, disconnectEvent, reconnectEvent)
+		envoyeur.start()
+		self.envoyeurs[id_client] = envoyeur
+		# le thread permettant la reception
+		receveur = Receveur(id_client, client, disconnectEvent, reconnectEvent)
+		receveur.start()
+		self.receveurs[id_client] = receveur
+		
 	def stop(self):
 		print 'stop server'
 		self.camera.terminate()
@@ -62,31 +70,26 @@ class Server():
 			print t
 		for n,screen in enumerate(self.screens):
 			self.stopScreen(n)
-		for it in self.cmdLoops.values():
+		for it in self.envoyeurs.values():
 			it.stop()
-		for it in self.rcvLoops.values():
+		for it in self.receveurs.values():
 			it.stop()
+		for listener in self.disconnectListener.values():
+			listener.stop()
 	
-	def tryAllSerials(self):
-		ports = []
-		for i in xrange(10):
-			ports.append(('ACM'+str(i), 115200))
+	def connectClients(self,clients):
+		""" tente de connecter tous les clients de la liste
 		
-		# tentative de connection de ports
-		connectSerials(ports)
+		@params:
+			clients: (list)[(port, baudrate)...]
 		
-		# check
-		ser = dict()
-		for id,ser in self.ser.items():
-			if port:
-				addCmd('I', id) # demande à la carte de s'identifier
-				
-	def connectSerials(self,ports):
+		@return: None
+		"""
 		# lancement des tentatives de connection
 		threads = []
-		for port,refresh in ports:
-			print port,refresh
-			thread = threading.Thread(None, self.connect, None, (port,refresh,))
+		for id_client,refresh in clients:
+			print id_client,refresh
+			thread = threading.Thread(None, self.connect, None, (id_client,refresh,))
 			thread.start()
 			threads.append(thread)
 		
@@ -94,37 +97,42 @@ class Server():
 		for t in threads:
 			t.join()
 		
-		# check
-		"""
-		ser = {}
-		for s in self.ser:
-			if s:
-				self.ser[port] = s
-		self.ser = ser"""
-		
 	def connect(self, port, refresh):
 		""" Connection à un port
 		
 		@param
 			port: numéro du port
 			refresh: vitesse de rafraichissement
+		
+		@return:
+			echec: None,None
+			success: id_client, client
 		"""
+		client = None
 		for i in range(10):
 			try:
 				#print 'tentative de connection sur %s'%port
-				s = serial.Serial('/dev/tty'+port, refresh, timeout=1, writeTimeout=1)
-				#s = serial.Serial('/dev/tty'+port, refresh, writeTimeout=1)
+				s = serial.Serial('/dev/'+port, refresh, timeout=1, writeTimeout=1)
 			except serial.SerialException as ex:
-				#print 'connection echouée sur %s, nouvelle tentative'%port
+				print 'connection echouée sur %s, nouvelle tentative'%port
 				#print ex
 				pass
 			else:
 				print 'connection %s établie'%port
-				self.ser[port] = s
-				return s
-		print 'echec de la connection %s après 10 tentatives, relancer le programme'%port
-		self.ser[port] = None
-		return self.ser[port]
+				client = s
+				break
+		if not client:
+			print 'echec de la connection %s après 10 tentatives'%port
+			return None,None
+		else:
+			time.sleep(1) # necessaire avant d'écrire
+			client.readline()
+			client.write('<I>') # demande à la carte de s'identifier
+			id = client.readline().split(',')[1].strip()
+			print "identification",port," :",id
+			self.clients[id] = client
+			self.ports[id] = port
+			return id,client
 	
 	def connectCamera(self):
 		try:
@@ -134,81 +142,23 @@ class Server():
 			print ex
 		else:
 			print 'connection camera établie'
-		
-	def loopCmd(self, port):
-		""" la loop envoyant à la suite les commandes de la queue
-		si l'envoi échoue (self._sendCmd(..) < 0), stock le retour d'erreur dans self.waitRcv[port]['send']
-		"""
-		queue = self.queuedCmd[port]
-		try:
-			cmd = queue.get(True, 2)
-		except Empty:
-			return
-		r = self._sendCmd(cmd, port)
-		if r < 0:
-			self.waitRcv[port]['send'] = r
-		queue.task_done()
 	
-	def loopRcv(self, port):
-		""" la loop récupérant les réponses au différentes commandes """
-		di = self.waitRcv[port]
-		r = self._readInput(port).split(',')
-		#print r
-		if len(r) == 2 and r[0] != 'timeout':
-			cmd,recv = r
-			di[cmd] = recv
-	
-	def addCmd(self, cmd, port):
-		""" ajoute une commande à envoyer dans la queue des commandes
+	def addCmd(self, cmd, id_client):
+		""" ajoute une commande à envoyer
 		
-		@param
+		@param:
 			cmd: commande à envoyer
 			port: port sur lequel envoyer
-		"""
-		cmdid = cmd[0]
-		self.queuedCmd[port].put(cmd)
-		self.waitRcv[port][cmdid] = None
-	
-	def getRcv(self, cmd, port, bloquant=False):
-		""" renvoie la réponse à la commande
 		
-		@param
-			cmd: la commande dont on veut la réponse
-			port: port sur lequel on veut écouter la réponse
-			bloquant: True <=> boucle en attendant la réponse
+		@return: event prevenant de la reception
 		"""
-		cmdid = cmd[0]
-		rcv = self.waitRcv[port][cmdid]
-		if bloquant:
-			while not rcv:
-				rcv = self.waitRcv[port][cmdid]
-				time.sleep(0.001)
-		self.waitRcv[port][cmdid] = None
-		return rcv
+		self.envoyeurs[id_client].addCmd(cmd)
+		return self.receveurs[id_client].addIdCmd(cmd)
+	
+	def getReponse(self, cmd, id_client):
+		id_cmd = cmd[0]
+		return self.receveurs[id_client].reponses[id_cmd]
 		
-	def _sendCmd(self, cmd, port):
-		try:
-			self.ser[port].write('<'+cmd+'>')
-			return 1
-		except serial.SerialException as ex:
-			print 'timeout, writing on', port
-			return -1
-		except OSError as ex:
-			print 'port ', port, 'débranché'
-			return -2
-	
-	def _readInput(self, port):
-		try:
-			val = self.ser[port].readline()
-		except OSError as ex:
-			print 'port ', port, 'débranché'
-			return 'E,-1'
-		val = val.replace("§","\n")
-		if val:
-			return val # int(binascii.hexlify(val),16)  #unpack('c', val)
-		else:
-			return 'timeout, on : '+port
-	
 	def sendToCam(self, cmd):
 		""" envoyer une commande à la camera """
 		try:
@@ -226,7 +176,7 @@ class Server():
 			print ("Unexpected error:", sys.exc_info())
 		return output
 	
-	def testPing(self, port, cmd):
+	def testPing(self, id_client, cmd):
 		""" test la reactivitée de la cmd en envoyant et recevant 
 		la sortie est écrite sur un autre écran
 		
@@ -238,11 +188,12 @@ class Server():
 		def loop():
 			tot = 0
 			nb_iter = 300
-			print 'test du port', port, 'avec la commande :', cmd
+			print 'test du port', id_client, 'avec la commande :', cmd
 			for i in xrange(nb_iter):
 				t = time.time()
-				self.addCmd(cmd, port)
-				self.write(self.getRcv(cmd, port,True), n)
+				e = self.addCmd(cmd, id_client)
+				e.wait()
+				self.write(self.getReponse(cmd, id_client), n)
 				tEllapsed = time.time() - t
 				tot += tEllapsed
 				self.write(""+str(i)+" "+str(tEllapsed), n)
@@ -280,7 +231,7 @@ class Server():
 			except:
 				print ("Unexpected error:", sys.exc_info())
 	
-	def makeLoop(self, port, cmd, speed=0.3):
+	def makeLoop(self, id_client, cmd, speed=0.3):
 		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
 		
 		@param
@@ -289,8 +240,9 @@ class Server():
 			speed: l'interval entre chaque envoi
 		"""
 		def loop():
-			self.addCmd(cmd, port)
-			self.write(self.getRcv(cmd, port, True),n)
+			e = self.addCmd(cmd, id_client)
+			e.wait(1)
+			self.write(self.getReponse(cmd, id_client),n)
 		timer = MyTimer(float(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()
@@ -351,6 +303,17 @@ def traiterReponseCamera(msg):
 		return []
 	
 
-
+def scanPorts(grep):
+	process = subprocess.Popen("ls /dev/ | grep "+grep, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+	scan = ""
+	output = process.stdout.readline()
+	while output:
+		scan += output
+		output = process.stdout.readline()
+	scan = scan.strip()
+	if scan:
+		return scan.split('\n')
+	else:
+		return []
 
 
