@@ -4,6 +4,9 @@
 import threading
 
 
+class TimeoutException(Exception):
+	pass
+
 class MyTimer:
     def __init__(self, tempo, target, args= [], kwargs={}):
         self._target = target
@@ -31,7 +34,7 @@ class InteruptableThreadedLoop(threading.Thread):
 	"""
 	def __init__(self, group = None, name=None):
 		threading.Thread.__init__(self, group, None, name)
-		self._stopevent = threading.Event()
+		self._kill_event = threading.Event()
 		self.result = None
 	
 	def start(self, target, args=(), kwargs={}, timeout=None, pause=0.0001):
@@ -52,30 +55,34 @@ class InteruptableThreadedLoop(threading.Thread):
 	def run(self):
 		if self._timeout:
 			threading.Timer(self._timeout, self.stop).start()
-		while not self._stopevent.isSet():
-			self._stopevent.wait(self._pause)
+		while not self._kill_event.isSet():
+			self._kill_event.wait(self._pause)
 			self.result = self._target(*self._args, **self._kwargs)
 		print 'le thread :', self.name, 'est fini'
 	
-	def stop(self):
-		self._stopevent.set()
+	def kill(self):
+		self._kill_event.set()
+		
+		
 
+	
+"""
 def timeoutLoop(timeout_duration, target, args=(), kwargs={}, pause=0):
 	it = InteruptableThreadedLoop()
 	it.start(target, args, kwargs, pause)
 	it.join(timeout_duration)
 	it.stop()
 
-
+# /!\ WARNING /!\
+# faux timeout, le thread n'est pas détruit, si la fonction ne se finie jammais, elle continuer à tourner
 def timeout(timeout_duration, func, args=(), kwargs={}, name=None, default=None):
-    """This function will spawn a thread and run the given function
+    ""This function will spawn a thread and run the given function
     using the args, kwargs and return the given default value if the
     timeout_duration is exceeded.
-    """
+    ""
     class InterruptableThread(threading.Thread):
         def __init__(self):
             threading.Thread.__init__(self, name=name)
-            print 'start timeout :', name
             self.result = default
         def run(self):
             self.result = func(*args, **kwargs)
@@ -83,3 +90,4 @@ def timeout(timeout_duration, func, args=(), kwargs={}, name=None, default=None)
     it.start()
     it.join(timeout_duration)
     return it.result
+"""

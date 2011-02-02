@@ -2,8 +2,9 @@
 
 
 import threading
-import serial
 from Queue import *
+import serial
+
 
 class Envoyeur(threading.Thread):
 	""" Thread qui va envoyer en permanence les ordre stocké dans sa Queue()
@@ -13,11 +14,11 @@ class Envoyeur(threading.Thread):
 		"""
 		@param:
 			id_client: l'identifiant du client (récupérer après une demande d'identification '<I>')
-			client: le serial associé
+			client: le serial ou subprocess associé
 			disconnect_event: desactivé en temps normal, activé pendant une deconnection
 		"""
 		threading.Thread.__init__(self, None, None, "Envoyeur(%s)"%str(id_client))
-		self._stopevent = threading.Event()
+		self._kill_event = threading.Event()
 		self._client = client
 		self._queue = Queue()
 		self._disconnect_event = disconnect_event
@@ -28,13 +29,14 @@ class Envoyeur(threading.Thread):
 		self._queue.put(cmd)		
 		
 	def run(self):
-		while not self._stopevent.isSet():
+		while not self._kill_event.isSet():
 			self._loop()
-			self._stopevent.wait(0.0001)
+			self._kill_event.wait(0.0001)
 		print "%s arreté"%self.name
 			
-	def stop(self):
-		self._stopevent.set()
+	def kill(self):
+		self._kill_event.set()
+		self._client.close()
 	
 	def _sendCmd(self, cmd):
 		""" envoie la commande de debut de queue """
@@ -42,10 +44,17 @@ class Envoyeur(threading.Thread):
 			self._client.write('<'+cmd+'>')
 			return 1
 		except serial.SerialException as ex:
-			raise Exception, "timeout, writing on"+str(self._client)
+			print ex
+			return -1
 		except OSError as ex:
-			print "%s : (ERROR) deconnection..."%self.name
+			print "%s : (ERROR) %s"%(self.name,ex)
 			self._disconnect_event.set()
+			self._reconnect_event.clear()
+			return -1
+		except IOError as ex:
+			print "%s : (ERROR) %s"%(self.name,ex)
+			self._disconnect_event.set()
+			self._reconnect_event.clear()
 			return -1
 	
 	def _loop(self):

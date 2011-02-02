@@ -13,7 +13,7 @@ from timer import *
 from receveur import *
 from envoyeur import *
 from gestionnaireerreur import *
-
+from client import *
 
 
 
@@ -37,27 +37,16 @@ class Server():
 		self.receveurs			=	dict()  # threads
 		self.disconnectListener	=	dict()
 		
-		self.connectCamera()
+		self._verrou_connectClients = threading.Lock() # sert à ce que les disconnectListener ne tente pas tous une reconnection en m^eme temps
+		
 		
 		self.connectClients(ports)
 		
+		
 		#
-		verrou = threading.Lock()
 		for id_client,client in self.clients.items():
-			disconnectEvent = threading.Event()
-			reconnectEvent = threading.Event()
-			reconnectEvent.set()
-			# le thread pour rebrancher en cas de deconnection
-			self.disconnectListener[id_client]	= DisconnectListener(disconnectEvent, reconnectEvent, self, id_client, verrou)
-			self.disconnectListener[id_client].start()
-			# le thread permettant l'envoie
-			envoyeur = Envoyeur(id_client, client, disconnectEvent, reconnectEvent)
-			envoyeur.start()
-			self.envoyeurs[id_client] = envoyeur
-			# le thread permettant la reception
-			receveur = Receveur(id_client, client, disconnectEvent, reconnectEvent)
-			receveur.start()
-			self.receveurs[id_client] = receveur
+			self.connectToThreads(id_client,client)
+		
 		
 		
 		print 'fin init'
@@ -66,17 +55,16 @@ class Server():
 		
 	def stop(self):
 		print 'stop server'
-		self.camera.terminate()
 		for t in threading.enumerate():
 			print t
 		for n,screen in enumerate(self.screens):
 			self.stopScreen(n)
 		for it in self.envoyeurs.values():
-			it.stop()
+			it.kill()
 		for it in self.receveurs.values():
-			it.stop()
+			it.kill()
 		for listener in self.disconnectListener.values():
-			listener.stop()
+			listener.kill()
 	
 	def connectClients(self,clients, verbose=True):
 		""" tente de connecter tous les clients de la liste
@@ -89,7 +77,7 @@ class Server():
 		# lancement des tentatives de connection
 		threads = []
 		for id_client,refresh in clients:
-			print id_client,refresh
+			#print id_client,refresh
 			thread = threading.Thread(None, self.connect, None, (id_client,refresh,verbose,))
 			thread.start()
 			threads.append(thread)
@@ -97,8 +85,32 @@ class Server():
 		# attendre que les connections soient établies
 		for t in threads:
 			t.join()
+	
+	def connect(self, port, baudrate=None, verbose=True):
+		if baudrate:
+			id_client, client = self._connectSerial(port, baudrate, verbose)
+		else:
+			id_client, client = self._connectSubprocess(port)
+		return id_client, client
+	
+	def connectToThreads(self, id_client, client):
+		disconnectEvent = threading.Event()
+		reconnectEvent = threading.Event()
+		reconnectEvent.set()
+		# le thread pour rebrancher en cas de deconnection
+		self.disconnectListener[id_client]	= DisconnectListener(disconnectEvent, reconnectEvent, self, id_client, self._verrou_connectClients)
+		self.disconnectListener[id_client].start()
+		# le thread permettant l'envoie
+		envoyeur = Envoyeur(id_client, client, disconnectEvent, reconnectEvent)
+		envoyeur.start()
+		self.envoyeurs[id_client] = envoyeur
+		# le thread permettant la reception
+		receveur = Receveur(id_client, client, disconnectEvent, reconnectEvent)
+		receveur.start()
+		self.receveurs[id_client] = receveur
 		
-	def connect(self, port, refresh, verbose=True):
+		
+	def _connectSerial(self, port, refresh, verbose=True):
 		""" Connection à un port
 		
 		@param
@@ -120,8 +132,8 @@ class Server():
 				#print ex
 				pass
 			else:
-				print 'connection %s établie'%port
-				client = s
+				print "connection '%s' établie"%port
+				client = ClientSerial(s,port, refresh)
 				break
 		if not client:
 			print 'echec de la connection %s après 10 tentatives'%port
@@ -129,30 +141,41 @@ class Server():
 		else:
 			# si on a reussi à se connecter on demande une identification
 			time.sleep(1) # necessaire avant d'écrire
-			client.readline()
-			client.write('<I>') # demande à la carte de s'identifier
-			id = client.readline().split(',')[1].strip()
+			id = self._identification(client)
 			print "identification",port," :",id
 			self.clients[id] = client
 			self.ports[id] = port
 			self.ports_connection[port] = True
 			return id,client
-	
-	def connectCamera(self):
+		
+	def _connectSubprocess(self, port):
 		try:
-			self.camera = subprocess.Popen("../exe", shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+			process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 		except OSError as ex:
-			print 'camera not found'
+			print "%s not found"%port
 			print ex
+			return None,None
 		else:
-			print 'connection camera établie'
+			print "connection '%s' établie"%port
+			client = ClientSubprocess(process,port,None)
+			id = self._identification(client)
+			print "identification '%s' : %s"%(port,id)
+			self.clients[id] = client
+			self.ports[id] = port
+			self.ports_connection[port] = True
+			return id,client
 	
+	def _identification(self, client):
+		client.write('<I>') # demande au programme de s'identifier
+		id_client = client.readline().split(',')[1].strip()
+		return id_client
+		
 	def addCmd(self, cmd, id_client):
 		""" ajoute une commande à envoyer
 		
 		@param:
 			cmd: commande à envoyer
-			port: port sur lequel envoyer
+			id_client: le client qui doit recevoir
 		
 		@return: event prevenant de la reception
 		"""
@@ -280,20 +303,9 @@ class Server():
 		if self.screens[n][1]:
 			self._stopLoop(n)
 		self._stopProcess(n)
-			
-	def bin(self, port):
-		""" affiche tout ce que l'ordi reçoit
-		"""
-		def loop():
-			for waitRcv in self.waitRcv.values():
-				for rcv in waitRcv.values():
-					if rcv:
-						self.write(rcv,n)
-		timer = MyTimer(0.03,loop)
-		n = self.addScreen(timer)
-		timer.start()
 		
-	
+
+
 def traiterReponseCamera(msg):
 	if msg != 'r':
 		lignes = msg.strip().split(',')
@@ -307,8 +319,8 @@ def traiterReponseCamera(msg):
 		return []
 	
 
-def scanPorts(grep):
-	process = subprocess.Popen("ls /dev/ | grep "+grep, shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+def scanPorts():
+	process = subprocess.Popen("ls /dev/ | grep ttyACM", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 	scan = ""
 	output = process.stdout.readline()
 	while output:

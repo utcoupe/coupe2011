@@ -19,7 +19,7 @@ from timer import *
 
 
 
-scan = scanPorts("ttyACM") # présent aussi dans gestionnaireerreur.py
+scan = scanPorts()
 if not scan:
 	print "aucun port connecté..."
 	exit()
@@ -28,6 +28,8 @@ if not scan:
 ports = []
 for s in scan:
 	ports.append((s, 115200))
+ports.append(("../exe",None))
+
 
 server = Server(ports)
 port = "autre"
@@ -78,40 +80,34 @@ def loopTestTracking():
 while True:
 	cmd = raw_input()
 	
-	cperso = cmd.split()
+	cmd_split = cmd.split(' ',1) # <carte><cmd>
+	
 	
 	if not cmd:
 		print 'P'
 		cmd = 'P'
-		cperso = ['P']
-	if cperso[0] == 'test':
-		server.testPing(port, cperso[1])
-	elif cperso[0] == 'cam':
-		server.sendToCam(cperso[1])
-		r = server.listenCam()
-		if r > 0:
-			list = traiterReponseCamera(r)
-			print list
-	elif cperso[0] == 'track':
+		cmd_split = ['P']
+	if cmd_split[0] == 'test':
+		server.testPing(port, cmd_split[1])
+	elif cmd_split[0] == 'track':
 		it = InteruptableThreadedLoop(None, 'tracking')
 		it.start(loopTestTracking)
 		c = raw_input()
 		it.stop()
 		print 'arret du thread tracking en cours...'
-	elif cperso[0] == 'exit':
+	elif cmd_split[0] == 'exit':
 		server.stop()
 		break
-	elif cperso[0] == 'bin': # poubelle
-		server.bin(port)
-	elif cperso[0] == 'loop':
-		cmd = raw_input()
-		server.makeLoop(port, cmd, cperso[1])
-	elif cperso[0] == 'stop':
-		server.stopScreen(int(cperso[1]))
+	elif cmd_split[0] == 'loop':
+		cmd_split2 = raw_input().split(' ',1)
+		server.makeLoop(cmd_split2[0], cmd_split2[1], cmd_split[1])
+	elif cmd_split[0] == 'stop':
+		server.stopScreen(int(cmd_split[1]))
 	else:
-		event = server.addCmd(cmd, port)
+		# cmd_split[0] = "Asserv Board"
+		event = server.addCmd(cmd_split[1], cmd_split[0])
 		event.wait(1)
-		r = server.getReponse(cmd,port)
+		r = server.getReponse(cmd_split[1], cmd_split[0])
 		print "Reponse :", r
 
 

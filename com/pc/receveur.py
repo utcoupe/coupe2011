@@ -2,6 +2,8 @@
 
 
 import threading
+import serial
+
 
 class Receveur(threading.Thread):
 	""" Thread qui va lire en permanence sur la sortie de la carte
@@ -10,11 +12,11 @@ class Receveur(threading.Thread):
 		"""
 		@param:
 			id_client: l'identifiant du client (récupérer après une demande d'identification '<I>')
-			client: le serial associé
+			client: le serial ou subprocess associé
 			disconnect_event: desactivé en temps normal, activé pendant une deconnection
 		"""
 		threading.Thread.__init__(self, None, None, "Receveur(%s)"%str(id_client))
-		self._stopevent = threading.Event()
+		self._kill_event = threading.Event()
 		self._client = client
 		self.reponses = dict()
 		self._reception_events = dict()
@@ -34,26 +36,35 @@ class Receveur(threading.Thread):
 		return self._reception_events[id_cmd]
 		
 	def run(self):
-		while not self._stopevent.isSet():
+		while not self._kill_event.isSet():
 			self._loop()
-			self._stopevent.wait(0.0001)
+			self._kill_event.wait(0.0001)
 		print "%s arreté"%self.name
 			
-	def stop(self):
-		self._stopevent.set()
+	def kill(self):
+		self._kill_event.set()
+		self._client.close()
 	
 	def _readLine(self):
 		"""
 		@return:
-			None si rien (timeout) ou deconnection
+			None si rien, timeout ou deconnection
 			(string) si on a réussi à lire
 		"""
 		try:
 			val = self._client.readline()
+		except serial.SerialException as ex:
+			print ex
 		except OSError as ex:
 			print "%s : (ERROR) deconnection..."%self.name
 			self._disconnect_event.set()
+			self._reconnect_event.clear()
 			return None
+		except IOError as ex:
+			print "%s : (ERROR) %s"%(self.name,ex)
+			self._disconnect_event.set()
+			self._reconnect_event.clear()
+			return -1
 		else:
 			val = val.replace("§","\n")
 			if val:
