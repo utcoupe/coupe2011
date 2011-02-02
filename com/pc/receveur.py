@@ -51,7 +51,7 @@ class Receveur(threading.Thread):
 		try:
 			val = self._client.readline()
 		except OSError as ex:
-			print "%s : deconnection..."%self.name
+			print "%s : (ERROR) deconnection..."%self.name
 			self._disconnect_event.set()
 			return None
 		else:
@@ -63,7 +63,7 @@ class Receveur(threading.Thread):
 		self._reconnect_event.wait()
 		r = self._readLine()
 		if r:
-			print r
+			#print r
 			id_cmd,rep_cmd = r.strip().split(',')
 			self.reponses[id_cmd] = rep_cmd
 			self._reception_events[id_cmd].set()

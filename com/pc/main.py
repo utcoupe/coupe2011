@@ -112,7 +112,7 @@ while True:
 		event = server.addCmd(cmd, port)
 		event.wait(1)
 		r = server.getReponse(cmd,port)
-		print r
+		print "Reponse : ", r
 
 
 print 'fin thread pcincipal'

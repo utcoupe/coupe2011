@@ -29,39 +29,40 @@ class Server():
 		@param
 			ports: tableau de paire (nom du port, vitesse de rafraichissement)
 		"""
-		self.clients	= 	dict()
-		self.ports		=	dict()	# pour retrouver le port en cas de deconnection
-		self.screens	= 	[]
-		self.envoyeurs	=	dict()  # threads
-		self.receveurs	=	dict()  # threads
-		self.disconnectListener	= dict()
+		self.clients			= 	dict()
+		self.ports				=	dict()	# pour retrouver le port en cas de deconnection
+		self.ports_connection	=	dict()
+		self.screens			= 	[]
+		self.envoyeurs			=	dict()  # threads
+		self.receveurs			=	dict()  # threads
+		self.disconnectListener	=	dict()
 		
 		self.connectCamera()
 		
 		self.connectClients(ports)
 		
 		#
-		for id,client in self.clients.items():
+		verrou = threading.Lock()
+		for id_client,client in self.clients.items():
 			disconnectEvent = threading.Event()
 			reconnectEvent = threading.Event()
 			reconnectEvent.set()
 			# le thread pour rebrancher en cas de deconnection
-			self.disconnectListener[id]	= DisconnectListener(disconnectEvent, reconnectEvent, self, id)
-			self.disconnectListener[id].start()
-			
-			self.associateThreads(id,client,disconnectEvent,reconnectEvent)
+			self.disconnectListener[id_client]	= DisconnectListener(disconnectEvent, reconnectEvent, self, id_client, verrou)
+			self.disconnectListener[id_client].start()
+			# le thread permettant l'envoie
+			envoyeur = Envoyeur(id_client, client, disconnectEvent, reconnectEvent)
+			envoyeur.start()
+			self.envoyeurs[id_client] = envoyeur
+			# le thread permettant la reception
+			receveur = Receveur(id_client, client, disconnectEvent, reconnectEvent)
+			receveur.start()
+			self.receveurs[id_client] = receveur
+		
 		
 		print 'fin init'
 	
-	def associateThreads(self, id_client, client, disconnectEvent, reconnectEvent):
-		# le thread permettant l'envoie
-		envoyeur = Envoyeur(id_client, client, disconnectEvent, reconnectEvent)
-		envoyeur.start()
-		self.envoyeurs[id_client] = envoyeur
-		# le thread permettant la reception
-		receveur = Receveur(id_client, client, disconnectEvent, reconnectEvent)
-		receveur.start()
-		self.receveurs[id_client] = receveur
+	
 		
 	def stop(self):
 		print 'stop server'
@@ -77,7 +78,7 @@ class Server():
 		for listener in self.disconnectListener.values():
 			listener.stop()
 	
-	def connectClients(self,clients):
+	def connectClients(self,clients, verbose=True):
 		""" tente de connecter tous les clients de la liste
 		
 		@params:
@@ -89,7 +90,7 @@ class Server():
 		threads = []
 		for id_client,refresh in clients:
 			print id_client,refresh
-			thread = threading.Thread(None, self.connect, None, (id_client,refresh,))
+			thread = threading.Thread(None, self.connect, None, (id_client,refresh,verbose,))
 			thread.start()
 			threads.append(thread)
 		
@@ -97,7 +98,7 @@ class Server():
 		for t in threads:
 			t.join()
 		
-	def connect(self, port, refresh):
+	def connect(self, port, refresh, verbose=True):
 		""" Connection à un port
 		
 		@param
@@ -114,7 +115,8 @@ class Server():
 				#print 'tentative de connection sur %s'%port
 				s = serial.Serial('/dev/'+port, refresh, timeout=1, writeTimeout=1)
 			except serial.SerialException as ex:
-				print 'connection echouée sur %s, nouvelle tentative'%port
+				if verbose:
+					print 'connection echouée sur %s, nouvelle tentative'%port
 				#print ex
 				pass
 			else:
@@ -125,6 +127,7 @@ class Server():
 			print 'echec de la connection %s après 10 tentatives'%port
 			return None,None
 		else:
+			# si on a reussi à se connecter on demande une identification
 			time.sleep(1) # necessaire avant d'écrire
 			client.readline()
 			client.write('<I>') # demande à la carte de s'identifier
@@ -132,6 +135,7 @@ class Server():
 			print "identification",port," :",id
 			self.clients[id] = client
 			self.ports[id] = port
+			self.ports_connection[port] = True
 			return id,client
 	
 	def connectCamera(self):

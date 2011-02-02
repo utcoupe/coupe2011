@@ -44,7 +44,7 @@ class Envoyeur(threading.Thread):
 		except serial.SerialException as ex:
 			raise Exception, "timeout, writing on"+str(self._client)
 		except OSError as ex:
-			print "%s : deconnection..."%self.name
+			print "%s : (ERROR) deconnection..."%self.name
 			self._disconnect_event.set()
 			return -1
 	
