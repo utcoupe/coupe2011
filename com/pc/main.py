@@ -32,50 +32,29 @@ ports.append(("../exe",None))
 
 
 server = Server(ports)
-port = "autre"
 
-# exemple interaction automatique camera
-# le robot fait une demande à la camera
-# puis il demande à l'asserv d'aller sur la position de ce pion
-def loopTestTracking():
-	global arreter
-	# demander la liste à la camera
-	listeObjets = []
-	while not listeObjets:
-		print "envoie à la cam..."
-		server.sendToCam(1)
-		print "récupération des valeures..."
-		reponseCamera = server.listenCam()
-		# on format la réponse pour avoir une liste
-		listeObjets = traiterReponseCamera(reponseCamera)
-		if not listeObjets:
-			print "rien trouvé, on retente dans 1 seconde"
-			cmd = "a 60"
-        		server.addCmd(cmd, port)
-			time.sleep(0.3)
-			server.addCmd("r", port)
-			
-	# on récupère le premier pion de la liste
-	type, x, y = listeObjets[0]
-	# on va au premier pour le pousser
-	print "on va vers %s %s"%(x,y)
-	cmd = "m %s %s 100"%(x,y)
-	#server.addCmd("g %s %s 100"%(x,y), 'ACM0')
-	
-	server.addCmd(cmd, port)
-	t = threading.Timer(1,stop)
-	t.start()
-	r = server.getRcv(cmd, port)
-	while not r and not arreter:
-		r = server.getRcv(cmd, port)
-	t.cancel()
-	arreter = False
-	print r
-	
-	#time.sleep(1)
+
+#
+# début d'IA
+#
+
+# se recaler
+print "recalage..."
+event = server.addCmd("x", "asserv")
+event.wait(1)
+print "Reponse :", server.getReponse("x", "asserv")
+print "on attend ~5 secondes"
+for i in range(5):
+	event = server.addCmd("k")
+	event.wait(1)
+	print "Reponse :", server.getReponse("x", "asserv")
+	time.sleep(1)
 
 
 
+
+
+"""
 # read, send and get output of a command
 while True:
 	cmd = raw_input()
@@ -108,7 +87,7 @@ while True:
 		event.wait(1)
 		r = server.getReponse(cmd_split[1], cmd_split[0])
 		print "Reponse :", r
-
+"""
 
 print 'fin thread pcincipal'
 
