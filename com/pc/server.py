@@ -170,7 +170,7 @@ class Server():
 		client.write('I') # demande au programme de s'identifier
 		try:
 			id_client = client.readline().split(',')[1].strip()
-		except IOError as ex:
+		except Exception as ex:
 			print "Serial('%s')::identifiaction : (ERROR) %s"%(client.port,ex)
 			id_client = client.port
 		return id_client
