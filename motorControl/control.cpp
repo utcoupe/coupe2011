@@ -300,7 +300,6 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	else
 		current_goal.phase = PHASE_1;
 
-
 	pid4AlphaControl.Compute();
 	pid4DeltaControl.Compute();
 
@@ -337,7 +336,7 @@ void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
 		consigneDelta = .0;
 		consigneAlpha = .0;
 		pid4DeltaControl.Reset();
-		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
+		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM*ENC_MM_TO_TICKS,TABLE_DISTANCE_MAX_MM*ENC_MM_TO_TICKS);
 		pid4DeltaControl.SetSampleTime(DUREE_CYCLE);
 		pid4DeltaControl.SetOutputLimits(-200,200);
 		pid4DeltaControl.SetMode(AUTO);
@@ -371,33 +370,34 @@ void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
 	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
 	currentAlpha = angularCoeff - robot_state.angle;
 
-
-	int sens = 1;
-	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
-		sens = -1;
-		currentAlpha = M_PI - abs(angularCoeff) - robot_state.angle;
-	}
-
 	currentAlpha = -currentAlpha;
 
  	double dx = current_goal.x-robot_state.x;
 	double dy = current_goal.y-robot_state.y;
-	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part a l'envers
+	currentDelta = sqrt(dx*dx+dy*dy); // - parce que le robot part a l'envers
 
 
 	/*dans le cas non curviligne, on va d'abord corriger l'angle alpha*/
 
 	if(abs(currentAlpha)>M_PI/18){
 		/* dans le cas ou l'angle alpha est superieur a 10 deg, toute la pwm est allouee a la rotation */
-		pid4AlphaControl.SetOutputLimits(-255,255);
+		pid4AlphaControl.SetOutputLimits(-200,200);
 		pid4AlphaControl.Compute();
 		output4Delta = 0;
 	}
 
-	else{
+	else if(abs(currentDelta) > 500){
 		/* l'angle alpha est relativement petit = il peut etre corrige en avancant*/
 		pid4AlphaControl.SetOutputLimits(-55,55);
 		pid4AlphaControl.Compute();
+		pid4DeltaControl.SetOutputLimits(-100,100);
+		pid4DeltaControl.Compute();
+	}
+	else{
+		/* l'angle alpha est relativement petit et on est plutot pres du but*/
+		pid4AlphaControl.SetOutputLimits(-100,100);
+		pid4AlphaControl.Compute();
+		pid4DeltaControl.SetOutputLimits(-100,100);
 		pid4DeltaControl.Compute();
 	}
 

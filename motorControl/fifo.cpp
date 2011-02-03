@@ -96,24 +96,24 @@ void pushGoalAutoCalibration(){
 	pushGoalManualCalibration(TYPE_CALIB_Y,0);
 	pushGoalManualCalibration(TYPE_CALIB_ANGLE,0);
 	/* phase 1 : tourner d'un angle PI/2 */
-	pushGoalOrientation(M_PI/2,100);
+	pushGoalOrientation(M_PI/2,80);
 	/* phase 2 : reculer pendant 2s */
 	pushGoalPwm(-50,2000);
 	/* phase 3 : fixer X et angle */
 	pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 	pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
 	/* phase 4 : avancer un peu pour pouvoir tourner */
-	pushGoalPosition(DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS,200,50);
+	pushGoalPosition(0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
 	/* phase 5 : tourner d'un angle -PI/2 */
-	pushGoalOrientation(0,100);
+	pushGoalOrientation(0,80);
 	/* phase 6 : reculer pendant 2s */
 	pushGoalPwm(-50,2000);
 	/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 	pushGoalManualCalibration(TYPE_CALIB_X,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 	/* phase 8 : avancer de quelques cm */
-	pushGoalPosition(200,240,100);
+	pushGoalPosition(DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
 	/* phase 9 : reorientation exact */
-	pushGoalOrientation(0,160);
+	pushGoalOrientation(0,150);
 }
 
 
@@ -148,15 +148,12 @@ void popGoal(){
 			break;
 		case TYPE_CALIB_X:
 			current_goal.x = outGoal->data_1;
-			current_goal.isReached = true;
 			break;
 		case TYPE_CALIB_Y:
 			current_goal.y = outGoal->data_1;
-			current_goal.isReached = true;
 			break;
 		case TYPE_CALIB_ANGLE:
 			current_goal.angle = outGoal->data_1;
-			current_goal.isReached = true;
 			break;
 		default:
 			break;

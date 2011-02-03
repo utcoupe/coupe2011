@@ -57,12 +57,18 @@ void loop(){
 			angleControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_POSITION)
 			positionControl(&value_pwm_left,&value_pwm_right);
-		else if(current_goal.type == TYPE_CALIB_X)
+		else if(current_goal.type == TYPE_CALIB_X){
 			robot_state.x = current_goal.x;
-		else if(current_goal.type == TYPE_CALIB_Y)
+			current_goal.isReached = true;
+		}
+		else if(current_goal.type == TYPE_CALIB_Y){
 			robot_state.y = current_goal.y;
-		else if(current_goal.type == TYPE_CALIB_ANGLE)
+			current_goal.isReached = true;
+		}
+		else if(current_goal.type == TYPE_CALIB_ANGLE){
 			robot_state.angle = current_goal.angle;
+			current_goal.isReached = true;
+		}
 		else if(current_goal.type == TYPE_DELAY)
 			delayControl(&value_pwm_left,&value_pwm_right);
 		else if(current_goal.type == TYPE_PWM)

@@ -12,10 +12,13 @@ int state_left_pinB;
 int state_right_pinA;
 int state_right_pinB;
 
-unsigned long value_left_enc;
-unsigned long value_right_enc;
+long value_left_enc;
+long value_right_enc;
 
 void initEncoders(){
+	value_left_enc = 0;
+	value_right_enc = 0;
+
 	pinMode(PIN_LEFT_A,INPUT);
 	pinMode(PIN_LEFT_B,INPUT);
 	pinMode(PIN_RIGHT_A,INPUT);

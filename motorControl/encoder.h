@@ -24,8 +24,8 @@ void valueChangeOnEncoderLeftPinB();
 void valueChangeOnEncoderRightPinA();
 void valueChangeOnEncoderRightPinB();
 
-extern unsigned long value_left_enc;
-extern unsigned long value_right_enc;
+extern long value_left_enc;
+extern long value_right_enc;
 
 
 #endif /* ENCODER_H_ */
