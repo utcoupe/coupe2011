@@ -52,9 +52,14 @@ x' et y' coordonnées relatives aux robots
 
 void UTCamera::generalRun()
 {
-    int ordre=0;
+    char ordre;
     while(1){
-        waitOrder();
+        ordre = waitOrder();
+		if(ordre=='i'){
+			cout << "camb" << endl; 
+		}
+		else
+		{
             int i=0;
             //do{
                 for(int y=0; y<5 ; y++){
@@ -68,6 +73,7 @@ void UTCamera::generalRun()
             reggApplication();
             analyseRegion();
             send(listeP);
+		}
     }
 }
 
