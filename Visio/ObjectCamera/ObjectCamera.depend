@@ -621,3 +621,68 @@
 	<highgui.h>
 	"cam_regionLister.hpp"
 
+1296555710 source:/media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_comManager.cpp
+	"cam_comManager.hpp"
+
+1296555710 /media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_comManager.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+
+1296555054 /media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_regionLister.hpp
+	<iostream>
+	<cv.h>
+
+1296555072 source:/media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_regionAnalyser.cpp
+	"cam_regionAnalyser.hpp"
+
+1296159994 /media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_regionAnalyser.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+	"cam_utility.hpp"
+
+1296222670 /media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_utility.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	<sstream>
+
+1296554774 source:/media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_regionLister.cpp
+	"cam_regionLister.hpp"
+
+1296222612 source:/media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/cam_utility.cpp
+	"cam_utility.hpp"
+
+1296556588 source:/media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/main.cpp
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<sys/stat.h>
+	<cv.h>
+	<highgui.h>
+	"UTCamera.hpp"
+	"cam_regionAnalyser.hpp"
+
+1296502480 /media/MYLINUXLIVE/Nouveau dossier/Visio/ObjectCamera/UTCamera.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+	"cam_regionAnalyser.hpp"
+	"cam_comManager.hpp"
+
