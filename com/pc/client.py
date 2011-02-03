@@ -8,7 +8,7 @@ class ClientSerial():
 		self.baudrate = baudrate
 		
 	def write(self, msg):
-		self._serial.write('<'+msg+'>')
+		self._serial.write(str(msg)+"\n")
 		
 	def readline(self):
 		return self._serial.readline()

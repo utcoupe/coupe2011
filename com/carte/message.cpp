@@ -106,12 +106,6 @@ void readIncomingData()
 		/*recuperer l'octet courant*/
 		int data = Serial.read();
 		switch(data){
-			/*debut de trame*/
-			case '<': {
-				argsIndex = 0;
-				currentArgIndex = 0;
-				break;
-			}
 			/*separateur*/
 			case ' ': {
                 if(argsIndex>0){
@@ -125,7 +119,7 @@ void readIncomingData()
         		break;
 			}
 			/*fin de trame*/
-			case '>': {
+			case '\n': {
                 if(argsIndex>0){
                 	currentArg[currentArgIndex] = '\0';
         			args[argsIndex] = atoi(currentArg);
@@ -135,10 +129,9 @@ void readIncomingData()
 				argsIndex = 0;
 				currentArgIndex = 0;
 				cmd(args[0], args+1);
-				break;
-			}
-            /* caracteres interdits */
-			case 10: {
+				// remise à zéro
+				argsIndex = 0;
+				currentArgIndex = 0;
 				break;
 			}
 			default: {
