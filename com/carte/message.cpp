@@ -2,10 +2,6 @@
 #include "message.h"
 #include "command.h"
 
-
-using namespace std;
-
-
 void initSerialLink(){
 	Serial.begin(SERIAL_BAUD);
 }
@@ -89,41 +85,80 @@ void sendMessage(unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr
 }
 
 ///
-/// lit les données entrant puis appelle analyseMessage quand le message est complet
-/// pour savoir un début et fin du message, le message doit être encadré de chevrons
-/// <msg>
+/// Parse les donnees recues sur le port serie et appel la fonction cmd pour effectuer les traitements
+/// Exemple : <G 1000 1000 150>
 ///
 void readIncomingData()
 {
-	static unsigned char buffer[100];
-	static int bufferIndex = 0;
+	static char currentArg[20];
+	static int args[10];
+	static int argsIndex = 0;
+	static int currentArgIndex = 0;
+
 	/*
-	A propos du protcole :
+	A propos du protocole :
 	- un message commence par < et se termine par >
-	- le format des trames est dans Spec_protocole.pdf
 	*/
-	// S'il y a des données à lire
+
+	/*s'il y a des donnees a lire*/
 	int available = Serial.available();
-	for(int i = 0; i < available; i ++){
+	for(int i = 0; i < available; i++){
+		/*recuperer l'octet courant*/
 		int data = Serial.read();
-		
 		switch(data){
-			case '<': bufferIndex = 0; break;
-			case '>': analyzeMessage(bufferIndex, buffer); break;
-			default:
-				buffer[bufferIndex] = data;
-			        bufferIndex++;
-			break;
+			/*debut de trame*/
+			case '<': {
+				argsIndex = 0;
+				currentArgIndex = 0;
+				break;
+			}
+			/*separateur*/
+			case ' ': {
+                if(argsIndex>0){
+                	currentArg[currentArgIndex] = '\0';
+        			args[argsIndex] = atoi(currentArg);
+                }
+                else
+                    args[argsIndex] = currentArg[0];
+                argsIndex++;
+        		currentArgIndex = 0;
+        		break;
+			}
+			/*fin de trame*/
+			case '>': {
+                if(argsIndex>0){
+                	currentArg[currentArgIndex] = '\0';
+        			args[argsIndex] = atoi(currentArg);
+                }
+                else
+                    args[argsIndex] = currentArg[0];
+				argsIndex = 0;
+				currentArgIndex = 0;
+				cmd(args[0], args+1);
+				break;
+			}
+            /* caracteres interdits */
+			case 10: {
+				break;
+			}
+			default: {
+				currentArg[currentArgIndex] = data;    
+				currentArgIndex++;
+			    break;
+			}
 		}
 	}
 }
 
+
+
+/*
 ///
-/// analyse le message puis lance la fonction 'cmd' de comùande.cpp
+/// analyse le message puis lance la fonction 'cmd' de commande.cpp
 /// 
 /// @author Matthieu Thomas
 /// @param
-/// 	size	: la taille du buffer (calculée dans readIncomingData())
+/// 	size	: la taille du buffer (calculee dans readIncomingData())
 ///		buffer	: le message
 ///
 void analyzeMessage(int size, unsigned char* buffer)
@@ -144,8 +179,8 @@ void analyzeMessage(int size, unsigned char* buffer)
 				++indexValeur;
 			valeur[indexValeur] = '\0'; // on rajoute la fin de chaine
 			message[indexMessage] = atoi(valeur); // on transforme en int
-			++indexMessage; // on incrémente l'index des messages
-			indexValeur = -1; // on réinitialise l'index de la chaine
+			++indexMessage; // on incremente l'index des messages
+			indexValeur = -1; // on reinitialise l'index de la chaine
 		}
 		++indexValeur; // on incremente l'index de la chaine
 	}
@@ -155,4 +190,4 @@ void analyzeMessage(int size, unsigned char* buffer)
 
 }
 
-
+*/
