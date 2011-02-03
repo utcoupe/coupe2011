@@ -37,12 +37,16 @@ server = Server(ports)
 #
 # début d'IA
 #
-
-# se recaler
+"""
 print "recalage..."
+# se recaler
 event = server.addCmd("x", "asserv")
 event.wait(1)
 print "Reponse :", server.getReponse("x", "asserv")
+# avancer d'1m
+event = server.addCmd("a 1 0", "asserv")
+event.wait(1)
+print "Reponse :", server.getReponse("a 1 0", "asserv")
 print "on attend ~5 secondes"
 for i in range(5):
 	event = server.addCmd("k")
@@ -50,7 +54,9 @@ for i in range(5):
 	print "Reponse :", server.getReponse("x", "asserv")
 	time.sleep(1)
 
+# scan de la carte
 
+"""
 
 
 

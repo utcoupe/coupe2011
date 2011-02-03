@@ -309,12 +309,14 @@ class Server():
 
 def traiterReponseCamera(msg):
 	if msg != 'r':
-		lignes = msg.strip().split(',')
+		lignes = msg.strip().split(';')
 		listObjets = []
 		for obj in lignes:
 			obj_data = obj.split()
 			if len(obj_data) == 3:
 				listObjets.append(obj_data)
+			else:
+				print "données corrompues : "+obj
 		return listObjets
 	else:
 		return []
