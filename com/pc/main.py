@@ -104,7 +104,6 @@ while True:
 	elif cmd_split[0] == 'stop':
 		server.stopScreen(int(cmd_split[1]))
 	else:
-		# cmd_split[0] = "Asserv Board"
 		event = server.addCmd(cmd_split[1], cmd_split[0])
 		event.wait(1)
 		r = server.getReponse(cmd_split[1], cmd_split[0])

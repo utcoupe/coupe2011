@@ -40,7 +40,7 @@ void cmd(int header, int* args){
 
 		case 'I': // Identification
 		{
-			sendMessage(header, "Asserv Board");
+			sendMessage(header, "asserv");
 			break;
 		}
 
