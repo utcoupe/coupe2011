@@ -4,6 +4,4 @@
 *.dblite
 *.pyc
 *build/
-*.layout
-*.depend
 exe
