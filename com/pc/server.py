@@ -167,7 +167,7 @@ class Server():
 			return id,client
 	
 	def _identification(self, client):
-		client.write('<I>') # demande au programme de s'identifier
+		client.write('I') # demande au programme de s'identifier
 		id_client = client.readline().split(',')[1].strip()
 		return id_client
 		

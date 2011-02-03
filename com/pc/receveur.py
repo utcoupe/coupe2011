@@ -75,7 +75,10 @@ class Receveur(threading.Thread):
 		r = self._readLine()
 		if r:
 			#print r
-			id_cmd,rep_cmd = r.strip().split(',')
+			try:
+				id_cmd,rep_cmd = r.strip().split(',')
+			except Exception as ex:
+				print "%s : (ERROR) données reçues corrompues, %s"%(self.name,ex)
 			self.reponses[id_cmd] = rep_cmd
 			self._reception_events[id_cmd].set()
 

@@ -9,7 +9,7 @@ int main() {
 	int i = 1;
 	while(1) {	
 		cin >> ask;
-		if (ask == "<I>")
+		if (ask == "I")
 			cout << "I, cam" << endl;
 		else
 			int a = 3/0;

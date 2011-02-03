@@ -41,7 +41,7 @@ class Envoyeur(threading.Thread):
 	def _sendCmd(self, cmd):
 		""" envoie la commande de debut de queue """
 		try:
-			self._client.write('<'+cmd+'>')
+			self._client.write(cmd)
 			return 1
 		except serial.SerialException as ex:
 			print ex
