@@ -151,7 +151,7 @@ class Server():
 		
 	def _connectSubprocess(self, port):
 		try:
-			process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+			process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
 		except OSError as ex:
 			print "%s not found"%port
 			print ex
