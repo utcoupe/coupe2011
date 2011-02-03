@@ -6,6 +6,7 @@ import threading
 import time
 import subprocess
 import sys
+import glob
 #from struct import *
 #import binascii
 
@@ -125,7 +126,7 @@ class Server():
 		for i in range(10):
 			try:
 				#print 'tentative de connection sur %s'%port
-				s = serial.Serial('/dev/'+port, refresh, timeout=1, writeTimeout=1)
+				s = serial.Serial(port, refresh, timeout=1, writeTimeout=1)
 			except serial.SerialException as ex:
 				if verbose:
 					print 'connection echouée sur %s, nouvelle tentative'%port
@@ -320,16 +321,12 @@ def traiterReponseCamera(msg):
 	
 
 def scanPorts():
-	process = subprocess.Popen("ls /dev/ | grep ttyACM", shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-	scan = ""
-	output = process.stdout.readline()
-	while output:
-		scan += output
-		output = process.stdout.readline()
-	scan = scan.strip()
-	if scan:
-		return scan.split('\n')
+	pathname = '/dev/ttyACM*'
+	if sys.platform == 'darwin':
+		pathname = '/dev/tty.ACM*'
 	else:
-		return []
+		print "systeme non reconnu, par default on cherche les ports en %s"%pathname
+
+	return glob.glob(pathname)
 
 
