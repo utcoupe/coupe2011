@@ -1,0 +1,57 @@
+// ------------------ EXECUTER ObjectCamera ---------------------------
+
+	ARGUMENTS : 
+
+	// Choix de la camera (marqué sur la camera)
+	-f 	camera avant 	(front)		
+	-b	camera arriere	(back)		
+		 
+	// Choix du mode
+	-m mode  // Chacun de ces modes doit être utiliser séparément sous rique de gros plantages
+		n : mode normal
+		d : debug (mode normal + vision de l'image normal avec les zones affichées)  // pas encore implémenté
+		c : calibration (toutes les vues + barres de réglages)						
+		r : Enregistrement de la vision de l'image normal avec les zones affichées  // pas encore implémenté
+
+// ---------------------- COMMUNICATION  ---------------------------------
+Dans cette partie j'utilise les cout pour qu'il n'y est pas d'ambiguité sur le format
+
+
+	// **** COMMUNICATION NORMAL **** 
+Distance en mm
+x' et y' coordonnées relatives aux robots
+x' est dans le sens trigo donc objet sur la droite - et sur la gauche +
+
+                  x'
+              |---------O obejctif
+           y' |
+              |
+            ----
+            |  | robot
+            ----
+
+	-Pour demander se qu'elle voit à une camera on envoie 'f' pour la camera avant et 'b' pour l'autre :
+		-Soit elle ne trouve pas de piont et retourne 
+			cout << 'r' << endl;
+		-Soit elle trouve des pionts et retourne
+			cout << type << " " << y' << " " << x' << endl; // 1 piont
+			On sépare chaque piont par une virgule
+			cout << type << " " << y' << " " << x' << "," << type << " " << x' << " " << y' << endl; // plusieurs
+
+	-Pour demander une calibration automatique envoyez 'a' comme automatic
+
+	// **** RETOUR D'ERREUR ****
+	-Si la camera demandé n'est pas branché
+		retour cout << 'c' << endl;
+
+// ------------------------  Probléme existant ---------------------------
+
+!!! Si vous avez le message : "RECORD PROBLEME" vérifiez que les codecs divx et ffmpeg sont installer et recompiler 
+les sources d'opencv en vérifant après le cmake que les codecs ont bien été pris en compte !!!
+
+// ------------------------ Référence matériel ----------------------------
+
+camera idVendeur:idProduit	==	046d:0807
+
+-f 	camera avant 	(front)		// iSerial : 0A124C80	
+-b	camera arriere	(back)		// iSerial : 96124C80
