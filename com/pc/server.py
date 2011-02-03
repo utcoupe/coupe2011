@@ -168,7 +168,11 @@ class Server():
 	
 	def _identification(self, client):
 		client.write('I') # demande au programme de s'identifier
-		id_client = client.readline().split(',')[1].strip()
+		try:
+			id_client = client.readline().split(',')[1].strip()
+		except IOError as ex:
+			print "Serial('%s')::identifiaction : (ERROR) %s"%(client.port,ex)
+			id_client = client.port
 		return id_client
 		
 	def addCmd(self, cmd, id_client):
