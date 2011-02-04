@@ -60,9 +60,10 @@ def searchTarget():
 			else:
 				break
 		if inMap(target[1],target[2]):
-			approchTarget(target)
+			return target
 		else:
 			print "pas de cible dans la map"
+			return None
 	
 
 def approchTarget(t):
@@ -128,7 +129,16 @@ for i in range(10):
 	time.sleep(1)
 
 # scan de la carte
-searchTarget()
+target = searchTarget()
+while not target:
+	event = server.addCmd("a 60", "asserv")
+	event.wait(1)
+	print "Reponse :", server.getReponse("x", "asserv")
+	time.sleep(1)
+	target = searchTarget()
+
+approchTarget(target)
+	
 
 	
 server.stop()
