@@ -111,15 +111,15 @@ def inMap(x,y):
 	else:
 		return True
 
-print "recalage..."
+print "recalage et avance..."
 # se recaler
 event = server.addCmd("x", "asserv")
 event.wait(1)
 print "Reponse :", server.getReponse("x", "asserv")
 # avancer d'1m
-event = server.addCmd("a 1 0", "asserv")
+event = server.addCmd("G 1500 350", "asserv")
 event.wait(1)
-print "Reponse :", server.getReponse("a 1 0", "asserv")
+print "Reponse :", server.getReponse("G 1500 350", "asserv")
 print "on attend ~10 secondes"
 for i in range(10):
 	event = server.addCmd("k","asserv")
