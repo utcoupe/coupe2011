@@ -25,17 +25,20 @@ void send(regionLister* rl)
     int compteur=0;
     region* rg;
 
+    cout << "1 ," ;
+
     rl->iniPtr();
     while(rl->getEle()!=NULL){
         rg = rl->getEle();
         compteur++;
         // ----------
-        if(compteur>0){cout << ",";}
+        if(compteur>1){cout << ";";}
         cout << rg->Type << " " << (int)rg->Yprime << " " << (int)rg->Xprime;
         // ----------
         rl->ptrSuiv();
     }
     if(compteur<1){
-        cout << "r" << ",";
+        cout << "r" ;
     }
+    cout << endl;
 }

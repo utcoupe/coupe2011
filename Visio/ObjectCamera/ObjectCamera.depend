@@ -686,3 +686,80 @@
 	"cam_regionAnalyser.hpp"
 	"cam_comManager.hpp"
 
+1296770446 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_regionAnalyser.cpp
+	"cam_regionAnalyser.hpp"
+
+1296167712 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_regionAnalyser.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+	"cam_utility.hpp"
+
+1296770446 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_regionLister.hpp
+	<iostream>
+	<cv.h>
+
+1296770446 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_utility.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	<sstream>
+
+1296770446 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_regionLister.cpp
+	"cam_regionLister.hpp"
+
+1296770446 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_utility.cpp
+	"cam_utility.hpp"
+
+1296770446 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/main.cpp
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<sys/stat.h>
+	<cv.h>
+	<highgui.h>
+	"UTCamera.hpp"
+	"cam_regionAnalyser.hpp"
+
+1296770446 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/UTCamera.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+	"cam_regionAnalyser.hpp"
+	"cam_comManager.hpp"
+
+1296770446 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/cam_comManager.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"cam_regionLister.hpp"
+
+1296777369 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/UTCamera.cpp
+	"UTCamera.hpp"
+	"UTCameraFct.hpp"
+	"Fps.hpp"
+
+1296770446 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/UTCameraFct.hpp
+
+1296167712 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/ObjectCamera/Fps.hpp
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+
