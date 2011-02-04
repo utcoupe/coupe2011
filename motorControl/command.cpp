@@ -155,9 +155,9 @@ void cmd(int header, int* args){
 			break;
 		}
 
-		case 'k':
+		case 'k': /* position actuelle */
 		{
-			Serial.print("p,");
+			Serial.print("k,");
 			Serial.print(robot_state.x*ENC_TICKS_TO_MM);
 			Serial.print(" ");
 			Serial.print(robot_state.y*ENC_TICKS_TO_MM);
