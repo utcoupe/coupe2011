@@ -65,9 +65,14 @@ def searchTarget():
 			couleur = getColor(Xt,Yt)
 			print "target on %i %i"%(Xt,Yt)
 			print "color : %s"%couleur
-			if inMap(xt,yt) and couleur == "rouge":
-				print "on la prend !"
-				return target
+			if inMap(xt,yt):
+				if couleur == "rouge":
+					print "on la prend !"
+					return target
+				else
+					print "pas la bonne couleur..."
+			else:
+				print "hors map..."
 			i += 1
 			if i < len(targets):
 				target = targets[i]
@@ -135,7 +140,7 @@ target = searchTarget()
 while not target:
 	event = server.addCmd("a 60", "asserv")
 	event.wait(1)
-	print "Reponse :", server.getReponse("x", "asserv")
+	print "Reponse :", server.getReponse("a", "asserv")
 	time.sleep(1)
 	target = searchTarget()
 
