@@ -161,10 +161,13 @@ class Server():
 			client = ClientSubprocess(process,port,None)
 			id = self._identification(client)
 			print "identification '%s' : %s"%(port,id)
-			self.clients[id] = client
-			self.ports[id] = port
-			self.ports_connection[port] = True
-			return id,client
+			if id:
+				self.clients[id] = client
+				self.ports[id] = port
+				self.ports_connection[port] = True
+				return id,client
+			else:
+				return None,None
 	
 	def _identification(self, client):
 		client.write('I') # demande au programme de s'identifier
@@ -172,7 +175,7 @@ class Server():
 			id_client = client.readline().split(',')[1].strip()
 		except Exception as ex:
 			print "Client('%s')::identifiaction : (ERROR) %s"%(client.origin,ex)
-			id_client = client.origin
+			id_client = None
 		return id_client
 		
 	def addCmd(self, cmd, id_client):
