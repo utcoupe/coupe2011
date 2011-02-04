@@ -2,7 +2,7 @@
 #Script pour Obtenir l'iSerial des cameras avec leurs ports usb correspondant 
 #Format  portUsb iSerial
 
-motDePasse="UTCoupe" #En plein match ça serait con de devoir aller mettre son mon de passe sur le robot
+motDePasse="utcoupe" #En plein match ça serait con de devoir aller mettre son mon de passe sur le robot
 portUsb=$(lsusb | grep 046d:0807 | cut -c 5-7,15-18 | sed -e "s/ /:/g")	
 nbDeCam=$(echo $portUsb | wc -w)
 
