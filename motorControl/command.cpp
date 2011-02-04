@@ -32,13 +32,13 @@ void cmd(int header, int* args){
 			break;
 		}
 
-		case 'P': // Ping
+		case Q_PONG: // Ping
 		{
 			sendMessage(header, "Pong");
 			break;
 		}
 
-		case 'I': // Identification
+		case Q_IDENT: // Identification
 		{
 			sendMessage(header, "asserv");
 			break;
