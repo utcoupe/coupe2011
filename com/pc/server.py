@@ -317,12 +317,13 @@ class Server():
 
 def traiterReponseCamera(msg):
 	if msg != 'r':
+		decalageX = 200; # mm
 		lignes = msg.strip().split(';')
 		listObjets = []
 		for obj in lignes:
 			obj_data = obj.split()
 			if len(obj_data) == 3:
-				obj_data[1],obj_data[2] = float(obj_data[1]),float(obj_data[2])
+				obj_data[1],obj_data[2] = float(obj_data[1])+200.0,float(obj_data[2])
 				listObjets.append(obj_data)
 			else:
 				print "données corrompues : "+obj
