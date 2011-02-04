@@ -19,26 +19,7 @@ import math
 from server import *
 from timer import *
 
-def getColor(x,y):
-	if x < 450:
-		return 'vert'
-	if x > 2550:
-		return 'vert'
-	if y%700 > 350:
-		if (x-450)%700  > 350:
-			return 'rouge'
-		else:
-			return 'bleu'
-	else:
-		if (x-450)%700  > 350:
-			return 'bleu'
-		else:
-			return 'rouge'
-		
-	
 
-print getColor(900,600)
-exit()
 
 scan = scanPorts()
 if not scan:
