@@ -36,7 +36,7 @@ void sendMessage(char cmd, int *tabi, int size)
 void sendMessage(unsigned char cmd, char* str)
 {
 	Serial.print(cmd);
-	Serial.print(",");
+	Serial.print("|");
 	Serial.println(str);
 }
 ///
@@ -107,13 +107,11 @@ void readIncomingData()
 		int data = Serial.read();
 		switch(data){
 			/*separateur*/
-			case ' ': {
+			case ':': {
                 if(argsIndex>0){
                 	currentArg[currentArgIndex] = '\0';
         			args[argsIndex] = atoi(currentArg);
                 }
-                else
-                    args[argsIndex] = currentArg[0];
                 argsIndex++;
         		currentArgIndex = 0;
         		break;
@@ -124,8 +122,6 @@ void readIncomingData()
                 	currentArg[currentArgIndex] = '\0';
         			args[argsIndex] = atoi(currentArg);
                 }
-                else
-                    args[argsIndex] = currentArg[0];
 				argsIndex = 0;
 				currentArgIndex = 0;
 				cmd(args[0], args+1);
