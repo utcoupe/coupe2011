@@ -118,7 +118,7 @@ def inMap(x,y):
 		return False
 	else:
 		return True
-
+"""
 print "recalage et avance..."
 # se recaler
 event = server.addCmd("x", "asserv")
@@ -149,10 +149,10 @@ approchTarget(target)
 
 	
 server.stop()
-
-
-
 """
+
+
+
 # read, send and get output of a command
 while True:
 	cmd = raw_input()
@@ -167,11 +167,7 @@ while True:
 	if cmd_split[0] == 'test':
 		server.testPing(port, cmd_split[1])
 	elif cmd_split[0] == 'track':
-		it = InteruptableThreadedLoop(None, 'tracking')
-		it.start(loopTestTracking)
-		c = raw_input()
-		it.stop()
-		print 'arret du thread tracking en cours...'
+		searchTarget()
 	elif cmd_split[0] == 'exit':
 		server.stop()
 		break
@@ -186,7 +182,7 @@ while True:
 		r = server.getReponse(cmd_split[1], cmd_split[0])
 		print "Reponse :", r
 
-"""
+
 print 'fin thread principal'
 
 
