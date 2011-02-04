@@ -157,30 +157,29 @@ server.stop()
 while True:
 	cmd = raw_input()
 	
-	cmd_split = cmd.split(' ',1) # <carte><cmd>
-	
-	
-	if not cmd:
-		print 'P'
-		cmd = 'P'
-		cmd_split = ['P']
-	if cmd_split[0] == 'test':
-		server.testPing(port, cmd_split[1])
-	elif cmd_split[0] == 'track':
-		searchTarget()
-	elif cmd_split[0] == 'exit':
-		server.stop()
-		break
-	elif cmd_split[0] == 'loop':
-		cmd_split2 = raw_input().split(' ',1)
-		server.makeLoop(cmd_split2[0], cmd_split2[1], cmd_split[1])
-	elif cmd_split[0] == 'stop':
-		server.stopScreen(int(cmd_split[1]))
-	else:
-		event = server.addCmd(cmd_split[1], cmd_split[0])
-		event.wait(1)
-		r = server.getReponse(cmd_split[1], cmd_split[0])
-		print "Reponse :", r
+	if cmd:
+		cmd_split = cmd.split(' ',1) # <carte><cmd>
+
+		try:
+			if cmd_split[0] == 'test':
+				server.testPing(port, cmd_split[1])
+			elif cmd_split[0] == 'track':
+				searchTarget()
+			elif cmd_split[0] == 'exit':
+				server.stop()
+				break
+			elif cmd_split[0] == 'loop':
+				cmd_split2 = raw_input().split(' ',1)
+				server.makeLoop(cmd_split2[0], cmd_split2[1], cmd_split[1])
+			elif cmd_split[0] == 'stop':
+				server.stopScreen(int(cmd_split[1]))
+			else:
+				event = server.addCmd(cmd_split[1], cmd_split[0])
+				event.wait(1)
+				r = server.getReponse(cmd_split[1], cmd_split[0])
+				print "Reponse :", r
+		except IndexError:
+			print "mauvaise commande"
 
 
 print 'fin thread principal'
