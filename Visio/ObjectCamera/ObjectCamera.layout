@@ -8,7 +8,7 @@
 		<Cursor position="1599" topLine="54" />
 	</File>
 	<File name="UTCamera.hpp" open="1" top="0" tabpos="3">
-		<Cursor position="6280" topLine="182" />
+		<Cursor position="6280" topLine="180" />
 	</File>
 	<File name="UTCameraFct.hpp" open="1" top="0" tabpos="8">
 		<Cursor position="6497" topLine="122" />
@@ -17,7 +17,7 @@
 		<Cursor position="327" topLine="11" />
 	</File>
 	<File name="cam_comManager.hpp" open="1" top="0" tabpos="6">
-		<Cursor position="1731" topLine="52" />
+		<Cursor position="1731" topLine="49" />
 	</File>
 	<File name="cam_regionAnalyser.cpp" open="1" top="0" tabpos="4">
 		<Cursor position="1887" topLine="60" />
@@ -38,6 +38,6 @@
 		<Cursor position="963" topLine="34" />
 	</File>
 	<File name="main.cpp" open="1" top="1" tabpos="1">
-		<Cursor position="3924" topLine="0" />
+		<Cursor position="3924" topLine="9" />
 	</File>
 </CodeBlocks_layout_file>
