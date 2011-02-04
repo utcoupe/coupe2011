@@ -69,7 +69,7 @@ def searchTarget():
 				if couleur == "rouge":
 					print "on la prend !"
 					return target
-				else
+				else:
 					print "pas la bonne couleur..."
 			else:
 				print "hors map..."
