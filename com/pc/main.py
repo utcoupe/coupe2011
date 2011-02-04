@@ -51,7 +51,18 @@ def searchTarget():
 	if not targets:
 		print "rien trouvé"
 	else:
-		approchTarget(targets[0])
+		i = 0
+		target = targets[i]
+		while not inMap(target[1],target[2]):
+			i += 1
+			if i < len(targets):
+				target = targets[i]
+			else:
+				break
+		if inMap(target[1],target[2]):
+			approchTarget(target)
+		else:
+			print "pas de cible dans la map"
 	
 
 def approchTarget(t):
@@ -94,7 +105,11 @@ def getColor(x,y):
 		else:
 			return 'rouge'
 		
-	
+def inMap(x,y):
+	if x < 0 or y < 0 or x > 3000 or y > 2100:
+		return False
+	else:
+		return True
 
 print "recalage..."
 # se recaler
@@ -106,7 +121,7 @@ event = server.addCmd("a 1 0", "asserv")
 event.wait(1)
 print "Reponse :", server.getReponse("a 1 0", "asserv")
 print "on attend ~5 secondes"
-for i in range(1):
+for i in range(5):
 	event = server.addCmd("k","asserv")
 	event.wait(1)
 	print "Reponse :", server.getReponse("k", "asserv")
