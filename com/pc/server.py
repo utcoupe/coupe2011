@@ -163,8 +163,8 @@ class Server():
 			print "identification '%s' : %s"%(port,id)
 			if id:
 				self.clients[id] = client
-				self.ports[id] = port
-				self.ports_connection[port] = True
+				self.ports[id] = port[0]
+				self.ports_connection[port[0]] = True
 				return id,client
 			else:
 				return None,None
