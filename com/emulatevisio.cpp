@@ -10,9 +10,12 @@ int main() {
 	while(1) {	
 		cin >> ask;
 		if (ask == "I")
-			cout << "I, cam" << endl;
+			cout << "I,camb" << endl;
 		else
-			int a = 3/0;
+		{
+			cout << ask << ",p 300 300" << endl;
+			//int a = 3/0;
+		}
 	}
 	
 	return 0;

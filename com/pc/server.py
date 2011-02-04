@@ -321,6 +321,7 @@ def traiterReponseCamera(msg):
 		for obj in lignes:
 			obj_data = obj.split()
 			if len(obj_data) == 3:
+				obj_data[1],obj_data[2] = float(obj_data[1]),float(obj_data[2])
 				listObjets.append(obj_data)
 			else:
 				print "données corrompues : "+obj

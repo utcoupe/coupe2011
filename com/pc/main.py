@@ -13,11 +13,32 @@
 
 import threading
 import sys
+import math
+
 
 from server import *
 from timer import *
 
+def getColor(x,y):
+	if x < 450:
+		return 'vert'
+	if x > 2550:
+		return 'vert'
+	if y%700 > 350:
+		if (x-450)%700  > 350:
+			return 'rouge'
+		else:
+			return 'bleu'
+	else:
+		if (x-450)%700  > 350:
+			return 'bleu'
+		else:
+			return 'rouge'
+		
+	
 
+print getColor(900,600)
+exit()
 
 scan = scanPorts()
 if not scan:
@@ -28,8 +49,8 @@ if not scan:
 ports = []
 for s in scan:
 	ports.append((s, 115200))
-#ports.append(("../exe",None))
-ports.append(("../../Visio/ObjectCamera/bin/Debug/ObjectCamera", None))
+ports.append(("../exe",None))
+#ports.append(("../../Visio/ObjectCamera/bin/Debug/ObjectCamera", None))
 
 
 server = Server(ports)
@@ -38,7 +59,62 @@ server = Server(ports)
 #
 # début d'IA
 #
-"""
+
+def searchTarget():
+	print "demande à la camera..."
+	event = server.addCmd("1", "camb")
+	event.wait(1)
+	r = server.getReponse("1", "camb")
+	print "Reponse :", r
+	targets = traiterReponseCamera(r)
+	if not targets:
+		print "rien trouvé"
+	else:
+		approchTarget(targets[0])
+	
+
+def approchTarget(t):
+	print "demande de position à l'asserv"
+	event = server.addCmd("k","asserv")
+	event.wait(1)
+	r = server.getReponse("k", "asserv")
+	print "Reponse :", r
+	xr,yr,ar = [ float(f) for f in r.split() ]
+	type,xt,yt = t
+	xt,yt = absolute(xt,yt,xr,yr,ar)
+	print "target on :",xt,yt
+	print "case : "+getColor(xt,yt)
+	
+def rotate(x,y,a):
+	a = math.radians(a)
+	cosa = math.cos(a)
+	sina = math.sin(a)
+	X = cosa*x - sina*y
+	Y = sina*x + cosa*y
+	return X,Y
+
+def absolute(x,y,dx,dy,a):
+	X,Y = rotate(x,y,a)
+	return X+dx,Y+dy
+
+def getColor(x,y):
+	if x < 450:
+		return 'vert'
+	if x > 2550:
+		return 'vert'
+	if y%700 > 350:
+		if (x-450)%700  > 350:
+			return 'rouge'
+		else:
+			return 'bleu'
+	else:
+		if (x-450)%700  > 350:
+			return 'bleu'
+		else:
+			return 'rouge'
+		
+	
+
 print "recalage..."
 # se recaler
 event = server.addCmd("x", "asserv")
@@ -49,19 +125,21 @@ event = server.addCmd("a 1 0", "asserv")
 event.wait(1)
 print "Reponse :", server.getReponse("a 1 0", "asserv")
 print "on attend ~5 secondes"
-for i in range(5):
-	event = server.addCmd("k")
+for i in range(1):
+	event = server.addCmd("k","asserv")
 	event.wait(1)
-	print "Reponse :", server.getReponse("x", "asserv")
+	print "Reponse :", server.getReponse("k", "asserv")
 	time.sleep(1)
 
 # scan de la carte
+searchTarget()
+
+	
+server.stop()
+
+
 
 """
-
-
-
-
 # read, send and get output of a command
 while True:
 	cmd = raw_input()
@@ -95,8 +173,8 @@ while True:
 		r = server.getReponse(cmd_split[1], cmd_split[0])
 		print "Reponse :", r
 
-
-print 'fin thread pcincipal'
+"""
+print 'fin thread principal'
 
 
 
