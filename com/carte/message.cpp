@@ -129,9 +129,6 @@ void readIncomingData()
 				argsIndex = 0;
 				currentArgIndex = 0;
 				cmd(args[0], args+1);
-				// remise à zéro
-				argsIndex = 0;
-				currentArgIndex = 0;
 				break;
 			}
 			default: {
