@@ -120,8 +120,8 @@ print "Reponse :", server.getReponse("x", "asserv")
 event = server.addCmd("a 1 0", "asserv")
 event.wait(1)
 print "Reponse :", server.getReponse("a 1 0", "asserv")
-print "on attend ~5 secondes"
-for i in range(5):
+print "on attend ~10 secondes"
+for i in range(10):
 	event = server.addCmd("k","asserv")
 	event.wait(1)
 	print "Reponse :", server.getReponse("k", "asserv")
