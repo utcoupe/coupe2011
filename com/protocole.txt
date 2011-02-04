@@ -1,3 +1,9 @@
+-------------------------------------------------------------------------
+|																		|
+|								PROTOCOLE								|
+|																		|
+-------------------------------------------------------------------------
+
 
 
 
@@ -37,7 +43,7 @@ SERVER PYTHON
 			- trois objets : 't x y;t x y; t x y'
 			- etc...
 
-CARTE ASSERV COMMANDES
+CARTE ASSERV, COMMANDES
 	I (identification) 		--> 'asserv'
 	P (Ping)				--> 'Pong'
 	G x y (Goal en Absolu)	--> 
@@ -47,13 +53,15 @@ CARTE ASSERV COMMANDES
 	x (recalage)			-->
 
 
-CARTE AUTRE COMMANDES
+CARTE AUTRE, COMMANDES
 	I (identification) 		--> 'autre'
 	P (Ping)				--> 'Pong'
 	L (allumer led)			--> 'Led On'
 	l (éteindre led)		--> 'Led Off'
 	S n (retour sharp n)	--> 'valeur du sharp n'
 
+CAMERA, COMMANDES
+							--> ' ,r' ou ' ,t x y;t x y'
 
 SERVER PYTHON
 	id_carte commande 		(envoyer à la carte <id_carte> la <commande> ex: asserv G 1500 1000)
