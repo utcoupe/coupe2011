@@ -171,10 +171,11 @@ class Server():
 	
 	def _identification(self, client):
 		client.write('I') # demande au programme de s'identifier
+		r = client.readline()
 		try:
-			id_client = client.readline().split(',')[1].strip()
+			id_client = r.split(',')[1].strip()
 		except Exception as ex:
-			print "Client('%s')::identifiaction : (ERROR) %s"%(client.origin,ex)
+			print "Client('%s')::identifiaction : (ERROR) recu: %s, %s"%(client.origin,r,ex)
 			id_client = None
 		return id_client
 		

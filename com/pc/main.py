@@ -30,8 +30,8 @@ if not scan:
 ports = []
 for s in scan:
 	ports.append((s, 115200))
-ports.append(("../exe",None))
-#ports.append(("../../Visio/ObjectCamera/bin/Debug/ObjectCamera", None))
+#ports.append(("../exe",None))
+ports.append(("../../Visio/ObjectCamera/bin/Debug/ObjectCamera", None))
 
 
 server = Server(ports)
