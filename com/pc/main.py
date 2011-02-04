@@ -60,7 +60,7 @@ for i in range(5):
 
 
 
-"""
+
 # read, send and get output of a command
 while True:
 	cmd = raw_input()
@@ -93,7 +93,7 @@ while True:
 		event.wait(1)
 		r = server.getReponse(cmd_split[1], cmd_split[0])
 		print "Reponse :", r
-"""
+
 
 print 'fin thread pcincipal'
 
