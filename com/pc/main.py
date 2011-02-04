@@ -47,36 +47,38 @@ def searchTarget():
 	event.wait(1)
 	r = server.getReponse("1", "camb")
 	print "Reponse :", r
-	targets = traiterReponseCamera(r)
-	if not targets:
-		print "rien trouvé"
-	else:
-		i = 0
-		target = targets[i]
-		while not inMap(target[1],target[2]):
-			i += 1
-			if i < len(targets):
-				target = targets[i]
-			else:
-				break
-		if inMap(target[1],target[2]):
-			return target
-		else:
-			print "pas de cible dans la map"
-			return None
-	
-
-def approchTarget(t):
 	print "demande de position à l'asserv"
 	event = server.addCmd("k","asserv")
 	event.wait(1)
 	r = server.getReponse("k", "asserv")
 	print "Reponse :", r
 	xr,yr,ar = [ float(f) for f in r.split() ]
-	type,xt,yt = t
-	xt,yt = absolute(xt,yt,xr,yr,ar)
-	print "target on :",xt,yt
-	print "case : "+getColor(xt,yt)
+	targets = traiterReponseCamera(r)
+	if not targets:
+		print "rien trouvé"
+	else:
+		i = 0
+		target = targets[i]
+		while True:
+			type,xt,yt = target
+			Xt,Yt = absolute(xt,yt,xr,yr,ar)
+			couleur = getColor(Xt,Yt)
+			print "target on %i %i"%(Xt,Yt)
+			print "color : %s"%couleur
+			if inMap(xt,yt) and couleur == "rouge":
+				print "on la prend !"
+				return target
+			i += 1
+			if i < len(targets):
+				target = targets[i]
+			else:
+				print "pas de cible potable"
+				return None
+		
+	
+
+def approchTarget(t):
+	pass
 	
 def rotate(x,y,a):
 	a = math.radians(a)
