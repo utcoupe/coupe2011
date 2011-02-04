@@ -171,7 +171,7 @@ class Server():
 		try:
 			id_client = client.readline().split(',')[1].strip()
 		except Exception as ex:
-			print "Client('%s')::identifiaction : (ERROR) %s"%(client.port,ex)
+			print "Client(%s)::identifiaction : (ERROR) %s"%(client,ex)
 			id_client = client.port
 		return id_client
 		
