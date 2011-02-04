@@ -108,10 +108,12 @@ void readIncomingData()
 		switch(data){
 			/*separateur*/
 			case ':': {
-                if(argsIndex>0){
+                if(argsIndex!=1){
                 	currentArg[currentArgIndex] = '\0';
         			args[argsIndex] = atoi(currentArg);
                 }
+                else
+                	args[argsIndex] = currentArg;
                 argsIndex++;
         		currentArgIndex = 0;
         		break;
@@ -122,6 +124,8 @@ void readIncomingData()
                 	currentArg[currentArgIndex] = '\0';
         			args[argsIndex] = atoi(currentArg);
                 }
+                else
+                	args[argsIndex] = currentArg;
 				argsIndex = 0;
 				currentArgIndex = 0;
 				cmd(args[0], args+1);
