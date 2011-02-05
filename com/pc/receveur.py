@@ -3,6 +3,7 @@
 
 import threading
 import serial
+from protocole import *
 
 
 class Receveur(threading.Thread):
@@ -18,22 +19,21 @@ class Receveur(threading.Thread):
 		threading.Thread.__init__(self, None, None, "Receveur(%s)"%str(id_client))
 		self._kill_event = threading.Event()
 		self._client = client
+		self._id_cmd_actuel = 0
 		self.reponses = dict()
-		self._reception_events = dict()
 		self._disconnect_event = disconnect_event
 		self._reconnect_event = reconnect_event
 	
-	def addIdCmd(self, cmd):
-		""" previens qu'on attend une répons epour la commande <id_cmd>
+	def addCmd(self, cmd):
+		"""
 		par default la réponse est à None
 		
 		@return:
 			event qui previendra de la reception de la réponse
 		"""
-		id_cmd = cmd[0]
-		self.reponses[id_cmd] = None
-		self._reception_events[id_cmd] = threading.Event()
-		return self._reception_events[id_cmd]
+		self._id_cmd_actuel += 1
+		self.reponses[self._id_cmd_actuel] = Reponse()
+		return self._id_cmd_actuel, self.reponses[self._id_cmd_actuel]
 		
 	def run(self):
 		while not self._kill_event.isSet():
@@ -76,9 +76,39 @@ class Receveur(threading.Thread):
 		if r:
 			#print r
 			try:
-				id_cmd,rep_cmd = r.strip().split(',')
+				id_cmd,rep_cmd = self._parseReponse(r)
 			except Exception as ex:
 				print "%s : (ERROR) données reçues corrompues, %s"%(self.name,ex)
-			self.reponses[id_cmd] = rep_cmd
-			self._reception_events[id_cmd].set()
+			id_cmd = int(id_cmd)
+			self.reponses[id_cmd].add(rep_cmd)
 
+	def _parseReponse(self, msg):
+		msg = msg.strip()
+		id_cmd,reponse = msg.split(C_SEP1)
+		return id_cmd,reponse
+			
+
+class Reponse():
+	def __init__(self):
+		self._event = threading.Event()
+		self.reponses = []
+		self._verrou = threading.Lock()
+
+	def wait(self,timeout=None):
+		self._event.wait(timeout)
+
+	def add(self,val):
+		self._verrou.acquire()
+		self.reponses.append(val)
+		self._event.set()
+		self._verrou.release()
+
+	def read(self):
+		self._verrou.acquire()
+		if len (self.reponses) > 0:
+			r = self.reponses[-1]
+		else:
+			r = None
+		self._event.clear()
+		self._verrou.release()
+		return r

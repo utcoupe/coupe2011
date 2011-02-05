@@ -22,17 +22,18 @@ from timer import *
 
 
 scan = scanPorts()
-if not scan:
-	print "aucun port connecté..."
-	exit()
-	
 	
 ports = []
 for s in scan:
 	ports.append((s, 115200))
 #ports.append(("../exe",None))
-ports.append((["./ObjectCamera","-b","-m","n"], None))
+#ports.append((["./ObjectCamera","-b","-m","n"], None))
+ports.append((["python","emulation.py","asserv"],None))
 
+if not ports:
+	print "rien à connecter..."
+	exit()
+	
 
 server = Server(ports)
 
@@ -40,7 +41,7 @@ server = Server(ports)
 #
 # début d'IA
 #
-
+"""
 def searchTarget():
 	print "demande à la camera..."
 	event = server.addCmd("1", "camb")
@@ -117,7 +118,7 @@ def inMap(x,y):
 	if x < 0 or y < 0 or x > 3000 or y > 2100:
 		return False
 	else:
-		return True
+		return True"""
 """
 print "recalage et avance..."
 # se recaler
@@ -161,7 +162,11 @@ while True:
 		cmd_split = cmd.split(' ',1) # <carte><cmd>
 
 		try:
-			if cmd_split[0] == 'test':
+			if cmd_split[0] == 'wait':
+				reponse.wait(1)
+				r = reponse.read()
+				print "Reponse :", r
+			elif cmd_split[0] == 'test':
 				server.testPing(port, cmd_split[1])
 			elif cmd_split[0] == 'track':
 				searchTarget()
@@ -174,12 +179,14 @@ while True:
 			elif cmd_split[0] == 'stop':
 				server.stopScreen(int(cmd_split[1]))
 			else:
-				event = server.addCmd(cmd_split[1], cmd_split[0])
-				event.wait(1)
-				r = server.getReponse(cmd_split[1], cmd_split[0])
+				reponse = server.addCmd(cmd_split[1], cmd_split[0])
+				reponse.wait(1)
+				r = reponse.read()
 				print "Reponse :", r
-		except IndexError:
-			print "mauvaise commande"
+		except IndexError as ex:
+			print "mauvaise commande, IndexError : %s"%ex
+		except KeyError as ex:
+			print "mauvaise commande, KeyError : %s"%ex
 
 
 print 'fin thread principal'

@@ -4,6 +4,8 @@
 import threading
 from Queue import *
 import serial
+from protocole import *
+
 
 
 class Envoyeur(threading.Thread):
@@ -26,7 +28,7 @@ class Envoyeur(threading.Thread):
 	
 	def addCmd(self, cmd):
 		""" ajoute une commande en fin de queue """
-		self._queue.put(cmd)		
+		self._queue.put(cmd)
 		
 	def run(self):
 		while not self._kill_event.isSet():

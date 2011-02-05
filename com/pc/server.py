@@ -15,7 +15,7 @@ from receveur import *
 from envoyeur import *
 from gestionnaireerreur import *
 from client import *
-
+from protocole import *
 
 
 class Server():
@@ -151,7 +151,7 @@ class Server():
 		
 	def _connectSubprocess(self, port):
 		try:
-			process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+			process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 		except OSError as ex:
 			print "%s not found"%port
 			print ex
@@ -170,10 +170,10 @@ class Server():
 				return None,None
 	
 	def _identification(self, client):
-		client.write('I') # demande au programme de s'identifier
+		client.write('1'+C_SEP_SEND+str(IDENTIFICATION)) # demande au programme de s'identifier
 		r = client.readline()
 		try:
-			id_client = r.split(',')[1].strip()
+			id_client = r.split(C_SEP1)[1].strip()
 		except Exception as ex:
 			print "Client('%s')::identifiaction : (ERROR) recu: %s, %s"%(client.origin,r,ex)
 			id_client = None
@@ -188,29 +188,9 @@ class Server():
 		
 		@return: event prevenant de la reception
 		"""
-		self.envoyeurs[id_client].addCmd(cmd)
-		return self.receveurs[id_client].addIdCmd(cmd)
-	
-	def getReponse(self, cmd, id_client):
-		id_cmd = cmd[0]
-		return self.receveurs[id_client].reponses[id_cmd]
-		
-	def sendToCam(self, cmd):
-		""" envoyer une commande à la camera """
-		try:
-			self.camera.stdin.write(str(cmd)+"\n") # envoie au child
-			self.camera.stdin.flush()
-		except:
-			print ("Unexpected error:", sys.exc_info())
-	
-	def listenCam(self):
-		""" récupérer le retour de la caméra """
-		output = -1
-		try:
-			output = self.camera.stdout.readline() # recupération du msg du child
-		except:
-			print ("Unexpected error:", sys.exc_info())
-		return output
+		id_cmd,reponse = self.receveurs[id_client].addCmd(cmd)
+		self.envoyeurs[id_client].addCmd(str(id_cmd)+C_SEP_SEND+str(cmd))
+		return reponse
 	
 	def testPing(self, id_client, cmd):
 		""" test la reactivitée de la cmd en envoyant et recevant 
@@ -227,9 +207,9 @@ class Server():
 			print 'test du port', id_client, 'avec la commande :', cmd
 			for i in xrange(nb_iter):
 				t = time.time()
-				e = self.addCmd(cmd, id_client)
-				e.wait()
-				self.write(self.getReponse(cmd, id_client), n)
+				r = self.addCmd(cmd, id_client)
+				r.wait()
+				self.write(r.reponse(), n)
 				tEllapsed = time.time() - t
 				tot += tEllapsed
 				self.write(""+str(i)+" "+str(tEllapsed), n)
@@ -267,7 +247,7 @@ class Server():
 			except:
 				print ("Unexpected error:", sys.exc_info())
 	
-	def makeLoop(self, id_client, cmd, speed=0.3):
+	def makeLoop(self, id_client, cmd, speed):
 		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
 		
 		@param
@@ -276,9 +256,9 @@ class Server():
 			speed: l'interval entre chaque envoi
 		"""
 		def loop():
-			e = self.addCmd(cmd, id_client)
-			e.wait(1)
-			self.write(self.getReponse(cmd, id_client),n)
+			r = self.addCmd(cmd, id_client)
+			r.wait(1)
+			self.write(r.reponse(),n)
 		timer = MyTimer(float(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()
@@ -336,7 +316,7 @@ def scanPorts():
 	pathname = '/dev/ttyACM*'
 	if sys.platform == 'darwin':
 		pathname = '/dev/tty.ACM*'
-	else:
+	elif sys.platform != 'linux2':
 		print "systeme non reconnu, par default on cherche les ports en %s"%pathname
 
 	return glob.glob(pathname)
