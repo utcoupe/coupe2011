@@ -15,15 +15,12 @@ class EventListener(threading.Thread):
 		threading.Thread.__init__(self, None, None, "EventListener(%s)"%str(name))
 		self._event = event
 		self._kill_event = threading.Event()
-		self._verrou = verrou
 	
 	def run(self):
 		while not self._kill_event.isSet():
 			self._event.wait(2)
 			if self._event.isSet():
-				self._verrou.acquire()
 				self.action()
-				self._verrou.release()	
 		print "%s arreté"%self.name
 	
 	def action(self):
@@ -46,8 +43,10 @@ class DisconnectListener(EventListener):
 		self._server = server
 		self._id_client = id_client
 		self._client = server.clients[id_client]
+		self._verrou = verrou
 		
 	def action(self):
+		self._verrou.acquire()
 		print "%s : '%s' on port %s deconnected..."%(self.name, str(self._id_client), self._server.ports[self._id_client])
 		port_actuel = self._server.ports[self._id_client]
 		self._server.ports_connection[port_actuel] = False
@@ -69,6 +68,7 @@ class DisconnectListener(EventListener):
 		# si on a pas réussi à reconnecter notre port on fait une pause
 		if self._event.isSet():
 			time.sleep(1)
+		self._verrou.release()
 
 	def _postConnection(self, port, id_client, client):
 		""" met à jour Envoyeur et Receveur

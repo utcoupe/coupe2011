@@ -19,7 +19,7 @@ def identification(args):
 def ping(args):
 	return "Pong"
 def goalAbsolu(args):
-	t = threading.Timer(2,send,(args[0],"ok2"))
+	t = threading.Timer(5,send,(args[0],"ok2"))
 	t.start()
 	return "ok"	
 cmd = dict()

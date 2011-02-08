@@ -67,7 +67,7 @@ class Server():
 		for listener in self.disconnectListener.values():
 			listener.kill()
 	
-	def connectClients(self,clients, verbose=True):
+	def connectClients(self, clients, verbose=True):
 		""" tente de connecter tous les clients de la liste
 		
 		@params:
@@ -88,6 +88,7 @@ class Server():
 			t.join()
 	
 	def connect(self, port, baudrate=None, verbose=True):
+		""" connecte un client """
 		if baudrate:
 			id_client, client = self._connectSerial(port, baudrate, verbose)
 		else:
@@ -95,6 +96,7 @@ class Server():
 		return id_client, client
 	
 	def connectToThreads(self, id_client, client):
+		""" connecte les threads d'écoute, d'écriture et de gestion des deconnection au client """
 		disconnectEvent = threading.Event()
 		reconnectEvent = threading.Event()
 		reconnectEvent.set()
@@ -150,6 +152,7 @@ class Server():
 			return id,client
 		
 	def _connectSubprocess(self, port):
+		""" cré un subprocess et ouvre un pipe pour communiquer avec lui """
 		try:
 			process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 		except OSError as ex:
@@ -170,6 +173,7 @@ class Server():
 				return None,None
 	
 	def _identification(self, client):
+		""" fait une demande d'identification a un client """
 		client.write('1'+C_SEP_SEND+str(IDENTIFICATION)) # demande au programme de s'identifier
 		r = client.readline()
 		try:
@@ -186,7 +190,7 @@ class Server():
 			cmd: commande à envoyer
 			id_client: le client qui doit recevoir
 		
-		@return: event prevenant de la reception
+		@return: objet de type Reponse, voir le fichier receveur.py
 		"""
 		id_cmd,reponse = self.receveurs[id_client].addCmd(cmd)
 		self.envoyeurs[id_client].addCmd(str(id_cmd)+C_SEP_SEND+str(cmd))

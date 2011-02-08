@@ -2,6 +2,8 @@
 
 
 class ClientSerial():
+	""" client connecté via un port série
+	"""
 	def __init__(self, serial, origin, baudrate):
 		self._serial = serial
 		self.origin = origin
@@ -21,6 +23,8 @@ class ClientSerial():
 
 
 class ClientSubprocess():
+	""" client connecté via un pipe
+	"""
 	def __init__(self, subprocess, origin, baudrate):
 		self._subprocess = subprocess
 		self.origin = origin

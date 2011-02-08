@@ -19,6 +19,7 @@ GOAL_R			=	3
 ANGLE_A			=	4
 ANGLE_R			=	5
 POSITION		= 	6
+RECALAGE		=	7
 
 
 CMD = {	'I': IDENTIFICATION,

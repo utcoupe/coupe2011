@@ -122,7 +122,7 @@ def inMap(x,y):
 """
 print "recalage et avance..."
 # se recaler
-event = server.addCmd("x", "asserv")
+reponse = server.addCmd("x", "asserv")
 event.wait(1)
 print "Reponse :", server.getReponse("x", "asserv")
 # avancer d'1m
@@ -163,7 +163,7 @@ while True:
 
 		try:
 			if cmd_split[0] == 'wait':
-				r = reponse.read(int(cmd_split[1]))
+				r = reponse.read(int(cmd_split[1]), 1)
 				print "Reponse :", r
 			elif cmd_split[0] == 'test':
 				id_client,cmd = cmd_split[1].split(' ',1)

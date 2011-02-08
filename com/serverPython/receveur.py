@@ -90,7 +90,7 @@ class Receveur(threading.Thread):
 
 class Reponse():
 	def __init__(self):
-		self._events = []
+		self._events = {}
 		self._reponses = []
 		self._verrou = threading.Lock()
 
@@ -113,6 +113,6 @@ class Reponse():
 			return None
 
 	def _addEvent(self,n):
-		if len(self._events) <= n:
-			self._events.append(threading.Event())
+		if n not in self._events:
+			self._events[n] = threading.Event()
 		
