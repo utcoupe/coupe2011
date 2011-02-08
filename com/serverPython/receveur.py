@@ -90,25 +90,29 @@ class Receveur(threading.Thread):
 
 class Reponse():
 	def __init__(self):
-		self._event = threading.Event()
-		self.reponses = []
+		self._events = []
+		self._reponses = []
 		self._verrou = threading.Lock()
-
-	def wait(self,timeout=None):
-		self._event.wait(timeout)
 
 	def add(self,val):
 		self._verrou.acquire()
-		self.reponses.append(val)
-		self._event.set()
+		n = len(self._reponses) # le numéro de la réponse
+		self._reponses.append(val)
+		self._addEvent(n)
+		self._events[n].set()
 		self._verrou.release()
 
-	def read(self):
+	def read(self,n,timeout=None):
 		self._verrou.acquire()
-		if len (self.reponses) > 0:
-			r = self.reponses[-1]
-		else:
-			r = None
-		self._event.clear()
+		self._addEvent(n)
 		self._verrou.release()
-		return r
+		self._events[n].wait(timeout)
+		if self._events[n].isSet():
+			return self._reponses[n]
+		else:
+			return None
+
+	def _addEvent(self,n):
+		if len(self._events) <= n:
+			self._events.append(threading.Event())
+		

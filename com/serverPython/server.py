@@ -197,7 +197,7 @@ class Server():
 		la sortie est écrite sur un autre écran
 		
 		@param
-			port: sur quel port balancer la commande
+			id_client: à quel client balancer la commande
 			cmd: commande
 		"""
 		n = self.addScreen()
@@ -208,8 +208,7 @@ class Server():
 			for i in xrange(nb_iter):
 				t = time.time()
 				r = self.addCmd(cmd, id_client)
-				r.wait()
-				self.write(r.reponse(), n)
+				self.write(r.read(0,1), n)
 				tEllapsed = time.time() - t
 				tot += tEllapsed
 				self.write(""+str(i)+" "+str(tEllapsed), n)
@@ -257,8 +256,7 @@ class Server():
 		"""
 		def loop():
 			r = self.addCmd(cmd, id_client)
-			r.wait(1)
-			self.write(r.reponse(),n)
+			self.write(r.read(0,1),n)
 		timer = MyTimer(float(speed),loop)
 		n = self.addScreen(timer)
 		timer.start()

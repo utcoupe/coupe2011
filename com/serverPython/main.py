@@ -163,11 +163,11 @@ while True:
 
 		try:
 			if cmd_split[0] == 'wait':
-				reponse.wait(1)
-				r = reponse.read()
+				r = reponse.read(int(cmd_split[1]))
 				print "Reponse :", r
 			elif cmd_split[0] == 'test':
-				server.testPing(port, cmd_split[1])
+				id_client,cmd = cmd_split[1].split(' ',1)
+				server.testPing(id_client, cmd)
 			elif cmd_split[0] == 'track':
 				searchTarget()
 			elif cmd_split[0] == 'exit':
@@ -180,8 +180,7 @@ while True:
 				server.stopScreen(int(cmd_split[1]))
 			else:
 				reponse = server.addCmd(cmd_split[1], cmd_split[0])
-				reponse.wait(1)
-				r = reponse.read()
+				r = reponse.read(0,1)
 				print "Reponse :", r
 		except IndexError as ex:
 			print "mauvaise commande, IndexError : %s"%ex
