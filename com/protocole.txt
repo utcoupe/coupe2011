@@ -9,59 +9,59 @@
 
 SERVER PYTHON
 	- message envoyé
-		Le premier caractère est la commande ensuite suivent les éventuels
-		paramètres séparés par des espaces
+		Le message est composé d'un id, d'une commande et de ses éventuels
+		paramètres, séparés par le caractère ":".
 		ex :
-			I
-			G 1500 1000
-			P
+			42:0
+			58:1
+			67:2:500:678
 
 	- message reçu
-		Le programme s'attend à recevoir un message contenant la commande
-		qui a ammennée à cette réponse et la réponse elle meme, séparés par
-		une virgule.
-		Si la réponse doit contenir des retour à la ligne,
-		il faudra utiliser la caractère '$' et non la caractère de retour à
-		la ligne classique.
+		Le message est composé de d'un id et de la réponse séparés par le
+		caractère "|".
+		Si la réponse contient plusieurs sous infos, elles seront séparées
+		par le caractère "/", si il y a besoin de sous infos, "_".
+		Si la réponse doit contenir des retour à la ligne, il faudra
+		utiliser la caractère '$' et non la caractère de retour à la ligne
+		classique.
 		ex :
-			I,asserv
-			I,camb
-			P,Pong
-
-	- formatage spécial
-		- réponse camera
-			La réponse de la caméra, en plus de devoir répondre au formatage
-			classique, à savoir renvoyer la commande et la réponse séparés
-			par une virgule, doit formater sa réponse de la manière suivante :
-			- rien trouvé : 'r'
-			- un objet trouvé : 't x y' où t est lun caractère représentant
-			le type de l'objet, x et y les coordonnées relatives de cette
-			objet. (A noter que x est la distance éstimée entre la caméra
-			et l'objet, et y le décalage horizontal en prenant l'axe des
-			ordonnées pour former un repère orthonormé.
-			- deux objets : 't x y;t x y' la séparation se fait avec un ';'
-			- trois objets : 't x y;t x y; t x y'
-			- etc...
-
-CARTE ASSERV, COMMANDES
-	I (identification) 		--> 'asserv'
-	P (Ping)				--> 'Pong'
-	G x y (Goal en Absolu)	--> 
-	g x y (Goal en relatif)	-->
-	A v (Angle en Absolu)	-->
-	a v (Angle en relatif)	-->
-	x (recalage)			-->
+			42|asserv
+			58|Pong
+			67|1
+			444|350/700/90 (parsage -> [350,700,90])
+			567|1_456_567/0_42_42 (parsage -> [[1,456,567], [0,42,42]])
 
 
-CARTE AUTRE, COMMANDES
-	I (identification) 		--> 'autre'
-	P (Ping)				--> 'Pong'
-	L (allumer led)			--> 'Led On'
-	l (éteindre led)		--> 'Led Off'
-	S n (retour sharp n)	--> 'valeur du sharp n'
 
-CAMERA, COMMANDES
-							--> ' ,r' ou ' ,t x y;t x y'
+
+
+COMMANDES : CARTE ASSERV
+	0 (identification) 		--> 'asserv'
+	1 (Ping)				--> 'Pong'
+	2 x y (Goal en Absolu)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	3 x y (Goal en relatif)	-->	'1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	4 a (Angle en Absolu)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	5 a (Angle en relatif)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	6 (position)			--> 'x y a'
+	7 (recalage)			--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+
+
+COMMANDES : CARTE AUTRE,
+	0 (identification) 		--> 'autre'
+	1 (Ping)				--> 'Pong'
+	2 n (retour sharp n)	--> 'valeur du sharp n'
+	3 n s (surveiller que
+		le sharp n ne dépasse
+		le seuil s)			--> '1'		--> '1' ou '0' (1: seuil dépassé, 0: surveillance arretée)
+
+
+COMMANDES : CAMERA
+	0 (identification) 		--> 'autre'
+	1 (Ping)				--> 'Pong'
+	2 (back cam)			--> ' ,r' ou ' ,t x y;t x y'
+	3 (front cam)			--> ' ,r' ou ' ,t x y;t x y'
+	4 (both cam)			--> ' ,r' ou ' ,t x y;t x y'
+
 
 SERVER PYTHON
 	id_carte commande 		(envoyer à la carte <id_carte> la <commande> ex: asserv G 1500 1000)
