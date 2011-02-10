@@ -11,7 +11,8 @@
 /* Parametres mecanique du robot */
 #define DIST_MOTOR_AXIS_TO_BACK_MM 120.0 // Distance entre le l'axe des moteurs et l'arriere du robot
 
-#define ENC_CENTER_DIST (2*160.0) // Distance entre chaque roue codeuse et le centre du robot en mm
+#define ENC_CENTER_DIST_MM (2*160.0) // Distance entre chaque roue codeuse et le centre du robot en mm
+#define ENC_CENTER_DIST_TICKS (2*160.0*ENC_MM_TO_TICKS) // Distance entre chaque roue codeuse et le centre du robot en mm
 #define ENC_RESOLUTION 500 // Nombre de points par tour d'encodeur
 #define ENC_RADIUS 18 // Rayon de la roue codeuse
 
@@ -47,9 +48,9 @@
 #define INTERRUPT_RIGHT_B 3
 
 /* Parametre de la table en mm*/
-#define TABLE_WIDTH_MM 2100
-#define TABLE_HEIGHT_MM 3000
-#define TABLE_DISTANCE_MAX_MM 3662
+#define TABLE_WIDTH_MM 2100.0
+#define TABLE_HEIGHT_MM 3000.0
+#define TABLE_DISTANCE_MAX_MM 3661.96
 
 /*Parametre de l'asservissement*/
 #define K_DIST 0.5

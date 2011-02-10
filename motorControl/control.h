@@ -20,6 +20,7 @@
 
 typedef struct CurrentGoal {
 	int type;
+	int id;
 	double speed;
 	double period;
 	double x;

@@ -265,38 +265,58 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	/*calcul de l'angle alpha a combler avant d'etre aligne avec le point cible
 	 * borne = [-PI PI] */
 	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
-	currentAlpha = angularCoeff - robot_state.angle;
+	currentAlpha = moduloPI(angularCoeff - robot_state.angle); /* il faut un modulo ici, c'est sur !
+	//avec -
+	//3.00 + 3.12 => 6.12
+	//3.00 - 3.12 => -0.12
+
+	//avec +
+	//3.00 + 3.12 => 6.12 => -0.16
+	//3.00 -
 
 
 	/* En fait, le sens est donne par l'ecart entre le coeff angulaire et l'angle courant du robot.
 	 * Si cet angle est inferieur a PI/2 en valeur absolue, le robot avance en marche avant (il avance quoi)
 	 * Si cet angle est superieur a PI/2 en valeur absolue, le robot recule en marche arriere (= il recule)
 	 */
-
 	int sens = 1;
 	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
 		sens = -1;
-		currentAlpha = M_PI - abs(angularCoeff) - robot_state.angle;
+		currentAlpha = moduloPI(M_PI - abs(angularCoeff) - robot_state.angle);
 	}
 	
 	currentAlpha = -currentAlpha;
 
-	/*
+
+
+
+
+ 	double dx = current_goal.x-robot_state.x;
+	double dy = current_goal.y-robot_state.y;
+	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que l'ecart doit etre negatif pour partir en avant
+
+/*
 	Serial.print("coeff:");
 	Serial.print(angularCoeff);
 	Serial.print("  angle:");
 	Serial.print(robot_state.angle);
 	Serial.print("  alpha:");
-	Serial.println(currentAlpha);
-	*/
+	Serial.print(currentAlpha);
+	Serial.print("  delta:");
+	Serial.print(currentDelta);
+	Serial.print("  x:");
+	Serial.print(current_goal.x);
+	Serial.print("  y:");
+	Serial.println(current_goal.y);
+*/
 
- 	double dx = current_goal.x-robot_state.x;
-	double dy = current_goal.y-robot_state.y;
-	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que le robot part a l'envers
-
+	if(abs(currentDelta)<2000){
+		pid4DeltaControl.SetOutputLimits(-80,80); /*composante liee a la vitesse lineaire*/
+		pid4AlphaControl.SetOutputLimits(-150,150); /*composante liee a la vitesse de rotation*/
+	}
 
 	if(abs(currentDelta) < 72) /*si l'ecart n'est plus que de 72 ticks (environ 2mm), on considere la consigne comme atteinte*/
-		current_goal.phase = PHASE_2;
+		current_goal.phase = PHASE_2; //PHASE_2
 	else
 		current_goal.phase = PHASE_1;
 
@@ -522,28 +542,28 @@ void computeRobotState(){
 	prev_value_right_enc = value_right_enc;
 
 	/*ce deplacement a ete realise en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
-	double speed_left = (double)dl/(double)DUREE_CYCLE;
-	double speed_right = (double)dr/(double)DUREE_CYCLE;
-	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
+	//double speed_left = (double)dl/(double)DUREE_CYCLE;
+	//double speed_right = (double)dr/(double)DUREE_CYCLE;
+	//double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
 
 	/* mise a jour de l'orientation en rad */
-	double delta_angle = (double)(dr-dl)*(double)ENC_TICKS_TO_MM/(double)ENC_CENTER_DIST;
-
-	// Angle du robot par rapport a l'axe X
-	double angle = moduloPI(robot_state.angle + delta_angle); /*Attention au modulo PI (oui ca change tous les jours)*/
+	double delta_angle = (double)(dr-dl)/(double)ENC_CENTER_DIST_TICKS;
 
 	/* mise a jour de la position en ticks
 	 * on utilise des cos et des sin et c'est pas tres opti.
 	 * A voir si l'approximation par un dev limite d'ordre 2 est plus efficace
 	 */
-	double dx = speed*DUREE_CYCLE*cos(angle);
-	double dy = speed*DUREE_CYCLE*sin(angle);
+	double delta_dist = (double)(dr+dl)/2.0;
+
+	double dx = delta_dist*cos(robot_state.angle+delta_angle);
+	double dy = delta_dist*sin(robot_state.angle+delta_angle);
 
 	/*mise a jour de l'etat du robot  */
-	robot_state.speed = speed;
-	robot_state.speed_left = speed_left;
-	robot_state.speed_right = speed_right;
-	robot_state.angle = angle;
+	//robot_state.speed = speed;
+	//robot_state.speed_left = speed_left;
+	//robot_state.speed_right = speed_right;
+	robot_state.angle =  moduloPI(robot_state.angle + delta_angle);
+	robot_state.delta +=  delta_dist;
 	robot_state.x += dx;
 	robot_state.y += dy;
 }

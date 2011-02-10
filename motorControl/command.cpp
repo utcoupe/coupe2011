@@ -9,63 +9,38 @@
 #include "encoder.h"
 #include "message.h"
 
-/* Analyse le message parse auparavant et effectue les actions associees
- * 	<> c : l'entete du message (indique le type de message)
- * 	<> message : le tableau d'entier contenant les arguments
+/* Analyse le message et effectue les actions associees
+ * 	<> id : l'identifiant associe au message
+ * 	<> header : le type de message (en-tete)
+ * 	<> args : le tableau d'entier contenant les arguments
  * */
-void cmd(int header, int* args){
+void cmd(int id, int header, int* args){
                         
 	/* On analyse le message en fonction de son type */
 	switch(header){
-		case 'i' :
-		{
-			pushGoalManualCalibration(TYPE_CALIB_X, 0);
-			pushGoalManualCalibration(TYPE_CALIB_Y, 0);
-			pushGoalManualCalibration(TYPE_CALIB_ANGLE, 0);
-			break;
-		}
 
-		case 'x' :
+		case Q_POSITION:
 		{
-			pushGoalAutoCalibration();
-			sendMessage(header, "Calibration de l'odometrie en cours...");
-			break;
-		}
-
-		case 'P': // Ping
-		{
-			sendMessage(header, "Pong");
-			break;
-		}
-
-		case 'I': // Identification
-		{
-			sendMessage(header, "asserv");
-			break;
-		}
-
-		case T_QUERY:
-		{
-	        Serial.print(SOF);
-			Serial.print(robot_state.x, DEC);
-			Serial.print(robot_state.y, DEC);
-			Serial.print(robot_state.angle, DEC);
-	        Serial.print(EOF);
+			int x_mm = robot_state.x*ENC_TICKS_TO_MM;
+			int y_mm = robot_state.y*ENC_TICKS_TO_MM;
+			int a_deg = robot_state.angle*180.0 / M_PI;
+			int tab[] = {x_mm,y_mm,a_deg};
+			sendMessage(id,3,tab);
 	        break;
 		}
 
-		case 'M':
+		case Q_MODIF_GOAL_ABS:
 		{
 			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
 			current_goal.x = args[0]*18;
 			current_goal.y = args[1]*18;
 			current_goal.speed = args[2];
-			sendMessage(header, "Modification absolue...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'm':
+		case Q_MODIF_GOAL_REL:
 		{
 			double co = cos(robot_state.angle);
 			double si = sin(robot_state.angle);
@@ -75,99 +50,114 @@ void cmd(int header, int* args){
 			current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
 			current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
 			current_goal.speed = args[2];
-			sendMessage(header, "Modification relative...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'G':
+		case Q_GOAL_ABS:
 		{
-			pushGoalPosition(args[0]*18, args[1]*18, args[2]);
-			sendMessage(header, "Asserv en position absolue...");
+			pushGoalPosition((double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'g':
+		case Q_GOAL_REL:
 		{
 			double co = cos(robot_state.angle);
 			double si = sin(robot_state.angle);
 
-			pushGoalPosition((args[0]*co-args[1]*si)*18+robot_state.x, (args[0]*si+args[1]*co)*18+robot_state.y, args[2]);
-			sendMessage(header, "Asserv en position relative...");
+			pushGoalPosition(((double)args[0]*co-(double)args[1]*si)*18+robot_state.x, ((double)args[0]*si+(double)args[1]*co)*18+robot_state.y, (double)args[2]);
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'v':
-		{
-			pushGoalSpeed(args[0],args[1]); /* TODO un doute sur l'ordre d'envoi des arguments */
-			sendMessage(header, "Asserv en vitesse...");
-			break;
-		}
-
-		case 'A':
+		case Q_ANGLE_ABS:
 		{
 			double angle = args[0]/180.0 * M_PI;
 			pushGoalOrientation(angle,args[1]);
-			sendMessage(header, "Asserv en orientation absolue...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'a':
+		case Q_ANGLE_REL:
 		{
 			double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
 			pushGoalOrientation(angle,args[1]);
-			sendMessage(header, "Asserv en orientation relative...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'd':
+		case Q_DELAY:
 		{
 			pushGoalDelay(args[0]);
-			sendMessage(header, "En attente");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'w':
+		case Q_PWM:
 		{
 			pushGoalPwm(args[0],args[1]);
-			sendMessage(header, "Application de la pwm...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'p': /* comme pause */
+		case Q_PAUSE: /* comme pause */
 		{
 			current_goal.isPaused = true;
-			sendMessage(header, "En pause...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'r': /* comme resume */
+		case Q_RESUME: /* comme resume */
 		{
 			current_goal.isPaused = false;
-			sendMessage(header, "C'est reparti...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 's': /* comme stop */
+		case Q_STOP: /* comme stop */
 		{
 			clearGoals();
 			current_goal.isCanceled = true;
-			sendMessage(header, "Arret d'urgence...");
+			sendMessage(id, 1);
 			break;
 		}
 
-		case 'k': /* position actuelle */
+		case Q_MANUAL_CALIB : //TODO a eclater en calibration manuel de l'angle ,de x et de y
 		{
-			Serial.print("k,");
-			Serial.print(robot_state.x*ENC_TICKS_TO_MM);
-			Serial.print(" ");
-			Serial.print(robot_state.y*ENC_TICKS_TO_MM);
-			Serial.print(" ");
-			Serial.print(robot_state.angle*180/M_PI);
-			Serial.println();
+			pushGoalManualCalibration(TYPE_CALIB_X, args[0]);
+			pushGoalManualCalibration(TYPE_CALIB_Y, args[1]);
+			pushGoalManualCalibration(TYPE_CALIB_ANGLE, args[2]);
+			sendMessage(id, 1);
 			break;
 		}
 
-		case '?':
+		case Q_AUTO_CALIB :
+		{
+			if(args[0] == 0){
+				pushGoalAutoCalibration(true);
+			}
+			else{
+				pushGoalAutoCalibration(false);
+			}
+
+			sendMessage(id, 1);
+			break;
+		}
+
+		case Q_PING:
+		{
+			sendMessage(id, "Pong");
+			break;
+		}
+
+		case Q_IDENT: /* Identification */
+		{
+			sendMessage(id, "asserv");
+			break;
+		}
+
+		case Q_DEBUG :
 		{
 			Serial.print("?,_________________§");
 			Serial.print("uptime: ");Serial.print(millis());
@@ -186,7 +176,7 @@ void cmd(int header, int* args){
 
 		default:
 		{
-			sendMessage(header,"Command not found");
+			sendMessage(id,0);
 			break;
 		}
 	}

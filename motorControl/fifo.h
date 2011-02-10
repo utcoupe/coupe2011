@@ -17,6 +17,7 @@ typedef struct {
 	double data_1; /*speed (pour but en vitesse) ou x ou angle*/
 	double data_2; /* y ou speed (pour but en angle) ou period*/
 	double data_3; /* speed (pour but en position)*/
+	int id;
 } Goal;
 
 typedef struct {
@@ -31,7 +32,7 @@ void initGoals();
 void pushGoalPosition(double,double,double);
 void pushGoalOrientation(double,double);
 void pushGoalSpeed(double,double);
-void pushGoalAutoCalibration();
+void pushGoalAutoCalibration(bool);
 void pushGoalManualCalibration(int,double);
 void pushGoalDelay(double);
 void pushGoalPwm(double,double);

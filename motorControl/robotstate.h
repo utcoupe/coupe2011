@@ -12,6 +12,7 @@ typedef struct RobotState {
   double speed_right;
   double speed;
   double angle;
+  double delta;
 } RobotState;
 
 extern RobotState robot_state;

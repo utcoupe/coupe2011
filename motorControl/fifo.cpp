@@ -27,6 +27,7 @@ void initGoals(){
 	pushGoalOrientation(3*3.14/2,255);
 	pushGoalDelay(1000);
 	pushGoalOrientation(0,255);*/
+	//pushGoalOrientation(1.414,200);
 
 
 }
@@ -90,30 +91,57 @@ void pushGoalDelay(double value){
 	}
 }
 
-void pushGoalAutoCalibration(){
-	/* phase 0 : on fixe les valeurs de l'etat */
-	pushGoalManualCalibration(TYPE_CALIB_X,0);
-	pushGoalManualCalibration(TYPE_CALIB_Y,0);
-	pushGoalManualCalibration(TYPE_CALIB_ANGLE,0);
-	/* phase 1 : tourner d'un angle PI/2 */
-	pushGoalOrientation(M_PI/2,80);
-	/* phase 2 : reculer pendant 2s */
-	pushGoalPwm(-50,2000);
-	/* phase 3 : fixer X et angle */
-	pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
-	pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
-	/* phase 4 : avancer un peu pour pouvoir tourner */
-	pushGoalPosition(0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
-	/* phase 5 : tourner d'un angle -PI/2 */
-	pushGoalOrientation(0,80);
-	/* phase 6 : reculer pendant 2s */
-	pushGoalPwm(-50,2000);
-	/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
-	pushGoalManualCalibration(TYPE_CALIB_X,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
-	/* phase 8 : avancer de quelques cm */
-	pushGoalPosition(DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
-	/* phase 9 : reorientation exact */
-	pushGoalOrientation(0,150);
+void pushGoalAutoCalibration(bool color){ /* true -> blue / false -> red */
+	if(color){
+		/* phase 0 : on fixe les valeurs de l'etat */
+		pushGoalManualCalibration(TYPE_CALIB_X,0);
+		pushGoalManualCalibration(TYPE_CALIB_Y,0);
+		pushGoalManualCalibration(TYPE_CALIB_ANGLE,0);
+		/* phase 1 : tourner d'un angle PI/2 */
+		pushGoalOrientation(M_PI/2,80);
+		/* phase 2 : reculer pendant 2s */
+		pushGoalPwm(-50,2000);
+		/* phase 3 : fixer X et angle */
+		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
+		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
+		/* phase 4 : avancer un peu pour pouvoir tourner */
+		pushGoalPosition(0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
+		/* phase 5 : tourner d'un angle -PI/2 */
+		pushGoalOrientation(0,80);
+		/* phase 6 : reculer pendant 2s */
+		pushGoalPwm(-50,2000);
+		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
+		pushGoalManualCalibration(TYPE_CALIB_X,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
+		/* phase 8 : avancer de quelques cm */
+		pushGoalPosition(DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
+		/* phase 9 : reorientation exact */
+		pushGoalOrientation(0,150);
+	}
+	else{
+		/* phase 0 : on fixe les valeurs de l'etat */
+		pushGoalManualCalibration(TYPE_CALIB_X,0);
+		pushGoalManualCalibration(TYPE_CALIB_Y,0);
+		pushGoalManualCalibration(TYPE_CALIB_ANGLE,-M_PI);
+		/* phase 1 : tourner d'un angle PI/2 */
+		pushGoalOrientation(M_PI/2,80);
+		/* phase 2 : reculer pendant 2s */
+		pushGoalPwm(-50,2000);
+		/* phase 3 : fixer X et angle */
+		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
+		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
+		/* phase 4 : avancer un peu pour pouvoir tourner */
+		pushGoalPosition(0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
+		/* phase 5 : tourner d'un angle -PI/2 */
+		pushGoalOrientation(-M_PI,80);
+		/* phase 6 : reculer pendant 2s */
+		pushGoalPwm(-50,2000);
+		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
+		pushGoalManualCalibration(TYPE_CALIB_X,TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
+		/* phase 8 : avancer de quelques cm */
+		pushGoalPosition((TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS)-2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
+		/* phase 9 : reorientation exact */
+		pushGoalOrientation(-M_PI,150);
+	}
 }
 
 
