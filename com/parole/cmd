@@ -1,5 +1,5 @@
-$ espeak -q -v mb/mb-fr4 "Salut truc, tu pu" | mbrola -e -C "n n2" /usr/share/mbrola/voices/fr4 - -.au | paplay
-
+espeak -q -v mb/mb-fr4 "Salut truc, tu pu" | mbrola -e -C "n n2" /usr/share/mbrola/voices/fr4 - -.au | paplay
+espeak -q -v mb/mb-fr4 "J'adore le code parfait" | mbrola -e -C "n n2" /usr/share/mbrola/voices/fr4 - temp.wav
 
 Il y a pas mal d'option dans mbrola pour changer le volume, le pitch ou la vitesse de la voix. Voici quelques exemples d'option à essayer de rajouter à la commande mbrolla :
 -v 0.2 : volume de la voix (plus ou moins forte)
