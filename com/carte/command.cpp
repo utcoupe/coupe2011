@@ -9,14 +9,14 @@ void cmd(int c, int* message)
 	int i;
 	// On analyse le message en fonction de son type
 	switch(c){
-		case 'P': // Ping (renvoit time : pong)
+		case PING: // Ping (renvoit time : pong)
 			sendMessage(c, (char*)"Pong");
 		break;
 
-		case 'I': // Identification
+		case IDENTIFICATION: // Identification
 			sendMessage(c, (char*)"autre");
 		break;
-		case 'S':
+		case SHARP:
 			int v;
 			v = getSharp(message[0]);
 			if (v < 0)
@@ -24,7 +24,7 @@ void cmd(int c, int* message)
 			else
 				sendMessage(c, v);
 		break;
-		case 'L':
+		/*case 'L':
 			ledOn();
 			sendMessage(c, (char*)"Led ON");
 		break;
@@ -34,7 +34,7 @@ void cmd(int c, int* message)
 		break;
 		case 't':
 			sendMessage(c, millis());
-		break;
+		break;*/
 		default:
 			error(c);
 		break;
