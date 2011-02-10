@@ -97,7 +97,7 @@ void readIncomingData()
 
 	/*
 	A propos du protocole :
-	- un message commence par < et se termine par >
+	- un message se termine par \n
 	*/
 
 	/*s'il y a des donnees a lire*/
