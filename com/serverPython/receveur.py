@@ -29,7 +29,7 @@ class Receveur(threading.Thread):
 		par default la réponse est à None
 		
 		@return:
-			event qui previendra de la reception de la réponse
+			(int) id_msg, (Reponse) reponse
 		"""
 		self._id_cmd_actuel += 1
 		self.reponses[self._id_cmd_actuel] = Reponse()
@@ -89,12 +89,18 @@ class Receveur(threading.Thread):
 			
 
 class Reponse():
+	""" Objet permettant d'attendre la réponse à une commande
+	particulière sur un port.
+	Pour lire une réponse il suffit de faire reponse.read(..) (voir la méthode read)
+	"""
 	def __init__(self):
 		self._events = {}
 		self._reponses = []
 		self._verrou = threading.Lock()
 
 	def add(self,val):
+		""" fonction appellée pas le (Receveur) receveur lors de la réception d'un message
+		"""
 		self._verrou.acquire()
 		n = len(self._reponses) # le numéro de la réponse
 		self._reponses.append(val)
@@ -103,6 +109,14 @@ class Reponse():
 		self._verrou.release()
 
 	def read(self,n,timeout=None):
+		"""
+		@params:
+			n: le numéro de la réponse attendue, dans le cas où l'on attend plusieurs réponses
+			timeout: si None la fonction read attend la réponse indéfiniment
+		@return:
+			None si timeout
+			(String) sinon
+		"""
 		self._verrou.acquire()
 		self._addEvent(n)
 		self._verrou.release()
