@@ -3,10 +3,10 @@
 
 #define SERIAL_BAUD 115200
 
-#define C_SEP1	"|"
-#define C_SEP2	"/"
-#define C_SEP3	"_"
-#define C_SEND	":"
+#define C_SEP1	'|'
+#define C_SEP2	'/'
+#define C_SEP3	'_'
+#define C_SEND	':'
 
 
 

@@ -25,7 +25,7 @@ void cmd(int id, int header, int* args){
 			int y_mm = robot_state.y*ENC_TICKS_TO_MM;
 			int a_deg = robot_state.angle*180.0 / M_PI;
 			int tab[] = {x_mm,y_mm,a_deg};
-			sendMessage(id,3,tab);
+			sendMessage(id,tab,3);
 	        break;
 		}
 
@@ -157,7 +157,7 @@ void cmd(int id, int header, int* args){
 			break;
 		}
 
-		case Q_DEBUG :
+		case Q_DEBUG : //TODO a degager quand tout marche
 		{
 			Serial.print("?,_________________§");
 			Serial.print("uptime: ");Serial.print(millis());

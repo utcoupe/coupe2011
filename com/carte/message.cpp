@@ -24,8 +24,8 @@ void sendMessage(int id_msg, char cmd, int i)
 ///
 void sendMessage(int id_msg, int i)
 {
-	Serial.print(id);
-	Serial.print('|');
+	Serial.print(id_msg);
+	Serial.print(C_SEP1);
 	Serial.println(i);
 }
 
