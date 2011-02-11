@@ -8,7 +8,7 @@ void initSerialLink(){
 
 
 ///
-/// Envoie un int
+/// Envoie un int //TODO elle sert a rien celle ci, si ?
 ///
 void sendMessage(int id_msg, char cmd, int i)
 {
@@ -18,6 +18,18 @@ void sendMessage(int id_msg, char cmd, int i)
 	Serial.print(C_SEP2);
 	Serial.println(i);
 }
+
+///
+/// Envoie un int
+///
+void sendMessage(int id_msg, int i)
+{
+	Serial.print(id);
+	Serial.print('|');
+	Serial.println(i);
+}
+
+
 ///
 /// Envoie un tableau d'int
 ///
@@ -32,6 +44,7 @@ void sendMessage(int id_msg, int *tabi, int size)
 	}
 	Serial.println(tabi[size-1]);
 }
+
 ///
 /// Envoie un string
 ///
@@ -41,6 +54,7 @@ void sendMessage(int id_msg, char* str)
 	Serial.print(C_SEP1);
 	Serial.println(str);
 }
+
 ///
 /// Envoie des strings et des int
 /// aucune protection, il faut au moins envoyer une chaine et un int
@@ -63,6 +77,7 @@ void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt)
 	}
 	Serial.println(tabi[nbInt-1]);
 }
+
 ///
 /// Envoie des int et des strings
 /// aucune protection, il faut au moins envoyer une chaine et un int
@@ -91,7 +106,7 @@ void sendMessage(int id_msg, unsigned char cmd, int* tabi, int nbInt, char** tab
 ///
 void readIncomingData()
 {
-	static char currentArg[20];
+	static char currentArg[10]; //<= cedric : je reduis ici pour menager la memoire des arduino (vu qu'on les cast en entier avec atoi, le max c'est 6 normalement (-32000 -> +32000)
 	static int args[10];
 	static int argsIndex = 0;
 	static int currentArgIndex = 0;
@@ -121,7 +136,7 @@ void readIncomingData()
         		args[argsIndex] = atoi(currentArg);
   				argsIndex = 0;
 				currentArgIndex = 0;
-				cmd(args[0],args[1],args+2); // appelle de la commande
+				cmd(args[0],args[1],args+2); // appel de la commande
 				break;
 			}
 			default: {
