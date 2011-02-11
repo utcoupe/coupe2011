@@ -109,27 +109,19 @@ void readIncomingData()
 		switch(data){
 			// separateur
 			case C_SEND: {
-                if(argsIndex>0){
-                	currentArg[currentArgIndex] = '\0';
-        			args[argsIndex] = atoi(currentArg);
-                }
-                else
-                    args[argsIndex] = currentArg[0];
+               	currentArg[currentArgIndex] = '\0';
+       			args[argsIndex] = atoi(currentArg);
                 argsIndex++;
         		currentArgIndex = 0;
         		break;
 			}
 			// fin de trame
 			case '\n': {
-                if(argsIndex>0){
-                	currentArg[currentArgIndex] = '\0';
-        			args[argsIndex] = atoi(currentArg);
-                }
-                else
-                    args[argsIndex] = currentArg[0];
-				argsIndex = 0;
+                currentArg[currentArgIndex] = '\0';
+        		args[argsIndex] = atoi(currentArg);
+  				argsIndex = 0;
 				currentArgIndex = 0;
-				cmd(args[0], args+1); // appelle de la commande
+				cmd(args[0],args[1],args+2); // appelle de la commande
 				break;
 			}
 			default: {
