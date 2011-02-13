@@ -16,6 +16,5 @@ void initRobotState(){
 	robot_state.speed_right = 0;
 	robot_state.speed = 0;
 	robot_state.angle = 0;
-	robot_state.delta = 0;
 }
 
