@@ -533,6 +533,8 @@ void computeRobotState(){
 	static long prev_value_left_enc = 0;
 	static long prev_value_right_enc = 0;
 
+	static unsigned long prevTime = 0;
+
 	/*calcul du deplacement depuis la derniere fois en ticks */
 	long dl = value_left_enc - prev_value_left_enc;
 	long dr = value_right_enc - prev_value_right_enc;
@@ -543,9 +545,12 @@ void computeRobotState(){
 
 	//FIXME EN COMMENTAIRE PARCE QUE CA SERT JAMAIS POUR L'INSTANT
 	/*ce deplacement a ete realise en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
-	/*double speed_left = (double)dl/(double)DUREE_CYCLE;
-	double speed_right = (double)dr/(double)DUREE_CYCLE;
+
+	unsigned long duree = micros() - prevTime;
+	double speed_left = ((double)dl/(double)duree)*1000000.0;
+	double speed_right = ((double)dr/(double)duree)*1000000.0;;
 	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
+	prevTime = micros();
 
 	/* calcul du changement d'orientation en rad */
 	double delta_angle = (double)(dr-dl)/(double)ENC_CENTER_DIST_TICKS;
@@ -561,9 +566,9 @@ void computeRobotState(){
 	double dy = delta_dist*sin(robot_state.angle+delta_angle);
 
 	/*mise a jour de l'etat du robot  */
-	//robot_state.speed = speed;
-	//robot_state.speed_left = speed_left;
-	//robot_state.speed_right = speed_right;
+	robot_state.speed = speed;
+	robot_state.speed_left = speed_left;
+	robot_state.speed_right = speed_right;
 	robot_state.angle =  moduloPI(robot_state.angle + delta_angle);
 	robot_state.x += dx;
 	robot_state.y += dy;

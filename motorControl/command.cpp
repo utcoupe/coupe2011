@@ -163,12 +163,11 @@ void cmd(int id, int header, int* args){
 			Serial.print("uptime: ");Serial.print(millis());
 			Serial.print("§angle: ");Serial.print(robot_state.angle, DEC);
 			Serial.print("§speed: ");Serial.print(robot_state.speed*ENC_TICKS_TO_MM, DEC);
+			Serial.print("§speedt: ");Serial.print(robot_state.speed, DEC);
 			Serial.print("§x: ");Serial.print(robot_state.x*ENC_TICKS_TO_MM, DEC);
 			Serial.print("§xt: ");Serial.print(robot_state.x, DEC);
-
 			Serial.print("§y: ");Serial.print(robot_state.y*ENC_TICKS_TO_MM, DEC);
 			Serial.print("§yt: ");Serial.print(robot_state.y, DEC);
-
 			Serial.print("§encL: ");Serial.print(value_left_enc);
 			Serial.print("§encR: ");Serial.println(value_right_enc);
 			break;

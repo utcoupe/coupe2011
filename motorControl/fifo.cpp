@@ -150,6 +150,7 @@ void pushGoalAutoCalibration(bool color){ /* true -> blue / false -> red */
 void popGoal(){
 	if(goals.in!=goals.out){
 		current_goal.isReached = false;
+		current_goal.isCanceled = false;
 		current_goal.phase = PHASE_1;
 		Goal* outGoal = goals.goal+goals.out;
 		current_goal.type = outGoal->type;
