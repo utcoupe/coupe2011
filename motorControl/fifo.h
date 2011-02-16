@@ -14,10 +14,10 @@
 
 typedef struct {
 	int type; /*1,2,3 selon le type d'asserv*/
+	int id; /* identifiant de la demande, utile pour envoyer une confirmation a la strategie, -1 si pas besoin de message */
 	double data_1; /*speed (pour but en vitesse) ou x ou angle*/
 	double data_2; /* y ou speed (pour but en angle) ou period*/
 	double data_3; /* speed (pour but en position)*/
-	int id;
 } Goal;
 
 typedef struct {
@@ -29,10 +29,10 @@ typedef struct {
 
 void initGoals();
 
-void pushGoalPosition(double,double,double);
-void pushGoalOrientation(double,double);
-void pushGoalSpeed(double,double);
-void pushGoalAutoCalibration(bool);
+void pushGoalPosition(int,double,double,double);
+void pushGoalOrientation(int,double,double);
+void pushGoalSpeed(int,double,double);
+void pushGoalAutoCalibration(int,bool);
 void pushGoalManualCalibration(int,double);
 void pushGoalDelay(double);
 void pushGoalPwm(double,double);

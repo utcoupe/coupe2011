@@ -29,6 +29,7 @@ typedef struct CurrentGoal {
 	bool isReached;
 	bool isCanceled;
 	bool isPaused;
+	bool isMessageSent;
 	int phase;
 } CurrentGoal;
 

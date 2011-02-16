@@ -15,6 +15,7 @@
  */
 
 
+
 #define Q_PING 				0
 #define Q_IDENT 			1
 #define Q_GOAL_ABS 			2

@@ -56,7 +56,7 @@ void cmd(int id, int header, int* args){
 
 		case Q_GOAL_ABS:
 		{
-			pushGoalPosition((double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
+			pushGoalPosition(id,(double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
 			sendMessage(id, 1);
 			break;
 		}
@@ -66,7 +66,7 @@ void cmd(int id, int header, int* args){
 			double co = cos(robot_state.angle);
 			double si = sin(robot_state.angle);
 
-			pushGoalPosition(((double)args[0]*co-(double)args[1]*si)*18+robot_state.x, ((double)args[0]*si+(double)args[1]*co)*18+robot_state.y, (double)args[2]);
+			pushGoalPosition(id,((double)args[0]*co-(double)args[1]*si)*18+robot_state.x, ((double)args[0]*si+(double)args[1]*co)*18+robot_state.y, (double)args[2]);
 			sendMessage(id, 1);
 			break;
 		}
@@ -74,7 +74,7 @@ void cmd(int id, int header, int* args){
 		case Q_ANGLE_ABS:
 		{
 			double angle = args[0]/180.0 * M_PI;
-			pushGoalOrientation(angle,args[1]);
+			pushGoalOrientation(id,angle,args[1]);
 			sendMessage(id, 1);
 			break;
 		}
@@ -82,7 +82,7 @@ void cmd(int id, int header, int* args){
 		case Q_ANGLE_REL:
 		{
 			double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
-			pushGoalOrientation(angle,args[1]);
+			pushGoalOrientation(id,angle,args[1]);
 			sendMessage(id, 1);
 			break;
 		}
@@ -135,10 +135,10 @@ void cmd(int id, int header, int* args){
 		case Q_AUTO_CALIB :
 		{
 			if(args[0] == 0){
-				pushGoalAutoCalibration(true);
+				pushGoalAutoCalibration(id,true);
 			}
 			else{
-				pushGoalAutoCalibration(false);
+				pushGoalAutoCalibration(id,false);
 			}
 
 			sendMessage(id, 1);

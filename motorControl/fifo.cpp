@@ -32,10 +32,11 @@ void initGoals(){
 
 }
 
-void pushGoalPosition(double x, double y, double speed){
+void pushGoalPosition(int id, double x, double y, double speed){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = TYPE_POSITION;
+		incGoal->id = id;
 		incGoal->data_1 = x;
 		incGoal->data_2 = y;
 		incGoal->data_3 = speed;
@@ -43,20 +44,22 @@ void pushGoalPosition(double x, double y, double speed){
 	}
 }
 
-void pushGoalOrientation(double angle, double speed){
+void pushGoalOrientation(int id, double angle, double speed){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = TYPE_ANGLE;
+		incGoal->id = id;
 		incGoal->data_1 = angle;
 		incGoal->data_2 = speed;
 		goals.in = (goals.in+1)%SIZE;
 	}
 }
 
-void pushGoalSpeed(double speed, double period){
+void pushGoalSpeed(int id, double speed, double period){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = TYPE_SPEED;
+		incGoal->id = id;
 		incGoal->data_1 = speed;
 		incGoal->data_2 = period;
 		goals.in = (goals.in+1)%SIZE;
@@ -67,6 +70,7 @@ void pushGoalPwm(double speed, double period){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = TYPE_PWM;
+		incGoal->id = NO_ID;
 		incGoal->data_1 = speed;
 		incGoal->data_2 = period;
 		goals.in = (goals.in+1)%SIZE;
@@ -78,6 +82,7 @@ void pushGoalManualCalibration(int type,double value){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = type;
 		incGoal->data_1 = value;
+		incGoal->id = NO_ID;
 		goals.in = (goals.in+1)%SIZE;
 	}
 }
@@ -87,35 +92,36 @@ void pushGoalDelay(double value){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = TYPE_DELAY;
 		incGoal->data_1 = value;
+		incGoal->id = NO_ID;
 		goals.in = (goals.in+1)%SIZE;
 	}
 }
 
-void pushGoalAutoCalibration(bool color){ /* true -> blue / false -> red */
+void pushGoalAutoCalibration(int id, bool color){ /* true -> blue / false -> red */
 	if(color){
 		/* phase 0 : on fixe les valeurs de l'etat */
 		pushGoalManualCalibration(TYPE_CALIB_X,0);
 		pushGoalManualCalibration(TYPE_CALIB_Y,0);
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,0);
 		/* phase 1 : tourner d'un angle PI/2 */
-		pushGoalOrientation(M_PI/2,80);
+		pushGoalOrientation(NO_ID,M_PI/2,80);
 		/* phase 2 : reculer pendant 2s */
 		pushGoalPwm(-50,2000);
 		/* phase 3 : fixer X et angle */
 		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
 		/* phase 4 : avancer un peu pour pouvoir tourner */
-		pushGoalPosition(0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
+		pushGoalPosition(NO_ID,0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
 		/* phase 5 : tourner d'un angle -PI/2 */
-		pushGoalOrientation(0,80);
+		pushGoalOrientation(NO_ID,0,80);
 		/* phase 6 : reculer pendant 2s */
 		pushGoalPwm(-50,2000);
 		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 		pushGoalManualCalibration(TYPE_CALIB_X,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 		/* phase 8 : avancer de quelques cm */
-		pushGoalPosition(DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
+		pushGoalPosition(NO_ID,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
 		/* phase 9 : reorientation exact */
-		pushGoalOrientation(0,150);
+		pushGoalOrientation(id,0,150);
 	}
 	else{
 		/* phase 0 : on fixe les valeurs de l'etat */
@@ -123,24 +129,24 @@ void pushGoalAutoCalibration(bool color){ /* true -> blue / false -> red */
 		pushGoalManualCalibration(TYPE_CALIB_Y,0);
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,-M_PI);
 		/* phase 1 : tourner d'un angle PI/2 */
-		pushGoalOrientation(M_PI/2,80);
+		pushGoalOrientation(NO_ID,M_PI/2,80);
 		/* phase 2 : reculer pendant 2s */
 		pushGoalPwm(-50,2000);
 		/* phase 3 : fixer X et angle */
 		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
 		/* phase 4 : avancer un peu pour pouvoir tourner */
-		pushGoalPosition(0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
+		pushGoalPosition(NO_ID,0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,50);
 		/* phase 5 : tourner d'un angle -PI/2 */
-		pushGoalOrientation(-M_PI,80);
+		pushGoalOrientation(NO_ID,-M_PI,80);
 		/* phase 6 : reculer pendant 2s */
 		pushGoalPwm(-50,2000);
 		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 		pushGoalManualCalibration(TYPE_CALIB_X,TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
 		/* phase 8 : avancer de quelques cm */
-		pushGoalPosition((TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS)-2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
+		pushGoalPosition(NO_ID,(TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS)-2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
 		/* phase 9 : reorientation exact */
-		pushGoalOrientation(-M_PI,150);
+		pushGoalOrientation(id,-M_PI,150);
 	}
 }
 
@@ -151,9 +157,11 @@ void popGoal(){
 	if(goals.in!=goals.out){
 		current_goal.isReached = false;
 		current_goal.isCanceled = false;
+		current_goal.isMessageSent = false;
 		current_goal.phase = PHASE_1;
 		Goal* outGoal = goals.goal+goals.out;
 		current_goal.type = outGoal->type;
+		current_goal.id = outGoal->id;
 		switch (outGoal->type) {
 		case TYPE_SPEED:
 			current_goal.speed = outGoal->data_1;

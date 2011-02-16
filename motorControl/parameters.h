@@ -70,8 +70,6 @@
 #define KD_ALPHA 550.0
 
 /*Parametre de liaison serie*/
-#define SOF '<'
-#define EOF '>'
 #define T_QUERY 0
 #define T_POSITION 1
 #define T_SPEED 2
@@ -81,6 +79,8 @@
 #define T_ALIGN 7
 #define T_SETX 9
 #define T_SETY 10
+
+#define NO_ID -1
 
 
 /*Parametre de la file des taches a effectuer*/

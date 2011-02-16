@@ -25,6 +25,7 @@
 #include "robotstate.h"
 #include "PID_Beta6.h"
 #include "fifo.h"
+#include "message.h"
 
 
 CurrentGoal current_goal;
@@ -32,6 +33,7 @@ CurrentGoal current_goal;
 void initController(){
 	current_goal.isReached = true;
 	current_goal.isCanceled = false;
+	current_goal.isMessageSent = false;
 	current_goal.isPaused = false;
 }
 
@@ -194,9 +196,18 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 		(*value_pwm_left) = -pwm;
 	}
 
-	if(current_goal.phase == PHASE_2 && !fifoIsEmpty()){
-		current_goal.isReached = true;
-		initDone = false;
+	if(current_goal.phase == PHASE_2){
+		if(current_goal.id != -1 && !current_goal.isMessageSent){
+			//le message d'arrivee n'a pas encore ete envoye a l'intelligence
+			//envoi du message
+			sendMessage(current_goal.id,2);
+			current_goal.isMessageSent = true;
+		}
+		if(!fifoIsEmpty()){ //on passe a la tache suivante
+			/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
+			current_goal.isReached = true;
+			initDone = false;
+		}
 	}
 }
 
@@ -266,13 +277,6 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	 * borne = [-PI PI] */
 	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
 	currentAlpha = moduloPI(angularCoeff - robot_state.angle); /* il faut un modulo ici, c'est sur !
-	//avec -
-	//3.00 + 3.12 => 6.12
-	//3.00 - 3.12 => -0.12
-
-	//avec +
-	//3.00 + 3.12 => 6.12 => -0.16
-	//3.00 -
 
 
 	/* En fait, le sens est donne par l'ecart entre le coeff angulaire et l'angle courant du robot.
@@ -286,9 +290,6 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	}
 	
 	currentAlpha = -currentAlpha;
-
-
-
 
 
  	double dx = current_goal.x-robot_state.x;
@@ -310,6 +311,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	Serial.println(current_goal.y);
 */
 
+	/* on limite la vitesse lineaire quand on s'approche du but */
 	if(abs(currentDelta)<2000){
 		pid4DeltaControl.SetOutputLimits(-80,80); /*composante liee a la vitesse lineaire*/
 		pid4AlphaControl.SetOutputLimits(-150,150); /*composante liee a la vitesse de rotation*/
@@ -332,10 +334,18 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		(*value_pwm_left) = output4Delta-output4Alpha;
 	}
 
-	/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
-	if(current_goal.phase == PHASE_2 && !fifoIsEmpty()){
-		current_goal.isReached = true;
-		initDone = false;
+	if(current_goal.phase == PHASE_2){
+		if(current_goal.id != -1 && !current_goal.isMessageSent){
+			//le message d'arrivee n'a pas encore ete envoye a l'intelligence
+			//envoi du message
+			sendMessage(current_goal.id,2);
+			current_goal.isMessageSent = true;
+		}
+		/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
+		if(!fifoIsEmpty()){ //on passe a la tache suivante
+			current_goal.isReached = true;
+			initDone = false;
+		}
 	}
 
 }
