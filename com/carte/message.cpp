@@ -8,18 +8,6 @@ void initSerialLink(){
 
 
 ///
-/// Envoie un int //TODO elle sert a rien celle ci, si ?
-///
-void sendMessage(int id_msg, char cmd, int i)
-{
-	Serial.print(id_msg);
-	Serial.print(C_SEP1);
-	Serial.print(cmd);
-	Serial.print(C_SEP2);
-	Serial.println(i);
-}
-
-///
 /// Envoie un int
 ///
 void sendMessage(int id_msg, int i)
