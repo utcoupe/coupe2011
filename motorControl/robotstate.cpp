@@ -12,8 +12,6 @@ RobotState robot_state;
 void initRobotState(){
 	robot_state.x = 0;
 	robot_state.y = 0;
-	robot_state.speed_left = 0;
-	robot_state.speed_right = 0;
 	robot_state.speed = 0;
 	robot_state.angle = 0;
 }

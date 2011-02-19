@@ -8,8 +8,6 @@
 typedef struct RobotState {
   double x;
   double y;
-  double speed_left;
-  double speed_right;
   double speed;
   double angle;
 } RobotState;

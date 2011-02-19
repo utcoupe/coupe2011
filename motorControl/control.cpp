@@ -62,7 +62,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 		currentSpeed = 0;
 		consigne = 0;
 		pid4SpeedControl.Reset();
-		pid4SpeedControl.SetInputLimits(-10,10);
+		pid4SpeedControl.SetInputLimits(-20000,20000);
 		pid4SpeedControl.SetOutputLimits(-255,255);
 		pid4SpeedControl.SetSampleTime(DUREE_CYCLE);
 		pid4SpeedControl.SetMode(AUTO);
@@ -90,7 +90,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 	if(current_goal.phase == PHASE_1){ //phase d'acceleration
 		consigne = current_goal.speed;
 		currentSpeed = robot_state.speed;
-		if(abs(consigne-currentSpeed) < 1){ /*si l'erreur est inf�rieur a 1, on concidere la consigne atteinte*/
+		if(abs(consigne-currentSpeed) < 1000){ /*si l'erreur est inferieur a 1, on concidere la consigne atteinte*/
 			current_goal.phase = PHASE_2;
 			start_time = millis();
 		}
@@ -105,7 +105,7 @@ void speedControl(int* value_pwm_left, int* value_pwm_right){
 	else if(current_goal.phase == PHASE_3){ //phase de decceleration
 		consigne = 0;
 		currentSpeed = robot_state.speed;
-		if(abs(robot_state.speed)<1){
+		if(abs(robot_state.speed)<1000){
 			current_goal.phase = PHASE_4;
 		}
 	}
@@ -242,7 +242,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		consigneDelta = .0;
 		consigneAlpha = .0;
 		pid4DeltaControl.Reset();
-		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM,TABLE_DISTANCE_MAX_MM/ENC_TICKS_TO_MM);
+		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM*ENC_MM_TO_TICKS,TABLE_DISTANCE_MAX_MM*ENC_MM_TO_TICKS);
 		pid4DeltaControl.SetSampleTime(DUREE_CYCLE);
 		pid4DeltaControl.SetOutputLimits(-current_goal.speed,current_goal.speed); /*composante liee a la vitesse lineaire*/
 		pid4DeltaControl.SetMode(AUTO);
@@ -350,111 +350,6 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
 }
 
-/* Calcule les pwm a appliquer pour un asservissement en position non curviligne : 2 etapes, reduction de l'angle alpha et reduction de la distance delta
- * <> value_pwm_left : la pwm a appliquer sur la roue gauche [-255,255]
- * <> value_pwm_right : la pwm a appliquer sur la roue droite [-255,255]
- * */
-void positionControlCurviligne(int* value_pwm_left, int* value_pwm_right){
-
-	static bool initDone = false;
-
-	if(!initDone){
-		output4Delta = 0;
-		output4Alpha = 0;
-		currentDelta = .0;
-		currentAlpha = .0;
-		consigneDelta = .0;
-		consigneAlpha = .0;
-		pid4DeltaControl.Reset();
-		pid4DeltaControl.SetInputLimits(-TABLE_DISTANCE_MAX_MM*ENC_MM_TO_TICKS,TABLE_DISTANCE_MAX_MM*ENC_MM_TO_TICKS);
-		pid4DeltaControl.SetSampleTime(DUREE_CYCLE);
-		pid4DeltaControl.SetOutputLimits(-200,200);
-		pid4DeltaControl.SetMode(AUTO);
-		pid4AlphaControl.Reset();
-		pid4AlphaControl.SetSampleTime(DUREE_CYCLE);
-		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetMode(AUTO);
-		initDone = true;
-	}
-
-	/* Gestion de l'arret d'urgence */
-	if(current_goal.isCanceled){
-		initDone = false;
-		current_goal.isReached = true;
-		current_goal.isCanceled = false;
-		/* et juste pour etre sur */
-		(*value_pwm_right) = 0;
-		(*value_pwm_left) = 0;
-		return;
-	}
-
-	/* Gestion de la pause */
-	if(current_goal.isPaused){
-		(*value_pwm_right) = 0;
-		(*value_pwm_left) = 0;
-		return;
-	}
-
-	/*calcul de l'angle alpha a combler avant d'etre aligne avec le point cible
-	 * borne = [-PI PI] */
-	double angularCoeff = atan2(current_goal.y-robot_state.y,current_goal.x-robot_state.x); /*arctan(y/x) -> [-PI,PI]*/
-	currentAlpha = angularCoeff - robot_state.angle;
-
-	currentAlpha = -currentAlpha;
-
- 	double dx = current_goal.x-robot_state.x;
-	double dy = current_goal.y-robot_state.y;
-	currentDelta = sqrt(dx*dx+dy*dy); // - parce que le robot part a l'envers
-
-
-	/*dans le cas non curviligne, on va d'abord corriger l'angle alpha*/
-
-	if(abs(currentAlpha)>M_PI/18){
-		/* dans le cas ou l'angle alpha est superieur a 10 deg, toute la pwm est allouee a la rotation */
-		pid4AlphaControl.SetOutputLimits(-200,200);
-		pid4AlphaControl.Compute();
-		output4Delta = 0;
-	}
-
-	else if(abs(currentDelta) > 500){
-		/* l'angle alpha est relativement petit = il peut etre corrige en avancant*/
-		pid4AlphaControl.SetOutputLimits(-55,55);
-		pid4AlphaControl.Compute();
-		pid4DeltaControl.SetOutputLimits(-100,100);
-		pid4DeltaControl.Compute();
-	}
-	else{
-		/* l'angle alpha est relativement petit et on est plutot pres du but*/
-		pid4AlphaControl.SetOutputLimits(-100,100);
-		pid4AlphaControl.Compute();
-		pid4DeltaControl.SetOutputLimits(-100,100);
-		pid4DeltaControl.Compute();
-	}
-
-
-	if(abs(currentDelta) < 72) /*si l'ecart n'est plus que de 72 ticks (environ 2mm), on considere la consigne comme atteinte*/
-		current_goal.phase = PHASE_2;
-	else
-		current_goal.phase = PHASE_1;
-
-
-	if(current_goal.phase == PHASE_2){
-		(*value_pwm_right) = 0;
-		(*value_pwm_left) = 0;
-	}
-	else{
-		(*value_pwm_right) = output4Delta+output4Alpha;
-		(*value_pwm_left) = output4Delta-output4Alpha;
-	}
-
-	/*condition d'arret = si on a atteint le but et qu'un nouveau but attends dans la fifo*/
-	if(current_goal.phase == PHASE_2 && !fifoIsEmpty()){
-		current_goal.isReached = true;
-		initDone = false;
-	}
-
-}
-
 /*
  * Permet l'attente non bloquante sur une periode donnee (suite a un pushGoalDelay)
  */
@@ -553,12 +448,10 @@ void computeRobotState(){
 	prev_value_left_enc = value_left_enc;
 	prev_value_right_enc = value_right_enc;
 
-	//FIXME EN COMMENTAIRE PARCE QUE CA SERT JAMAIS POUR L'INSTANT
-	/*ce deplacement a ete realise en un temps DUREE_CYCLE -> calcul de la vitesse en ticks/ms */
-
+	/*calcul de la vitesse en mm/s */
 	unsigned long duree = micros() - prevTime;
 	double speed_left = ((double)dl/(double)duree)*1000000.0;
-	double speed_right = ((double)dr/(double)duree)*1000000.0;;
+	double speed_right = ((double)dr/(double)duree)*1000000.0;
 	double speed = (speed_left+speed_right)/2.0; /*estimation : simple moyenne*/
 	prevTime = micros();
 
@@ -577,8 +470,6 @@ void computeRobotState(){
 
 	/*mise a jour de l'etat du robot  */
 	robot_state.speed = speed;
-	robot_state.speed_left = speed_left;
-	robot_state.speed_right = speed_right;
 	robot_state.angle =  moduloPI(robot_state.angle + delta_angle);
 	robot_state.x += dx;
 	robot_state.y += dy;
