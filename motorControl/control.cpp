@@ -477,7 +477,7 @@ void computeRobotState(){
 
 
 
-/* Fonction de calcul du modulo PI
+/* Fonction de calcul du modulo PI ]-PI,PI]
  * moduloPi( 3*PI/2 )= - PI/2
  * moduloPi( PI ) = PI
  * moduloPi( 0 ) = 0

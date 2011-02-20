@@ -53,8 +53,12 @@ class Server():
 		print 'fin init'
 	
 	
+	def __del__(self):
+		""" destructeur """
+		self.stop()
 		
 	def stop(self):
+		""" couper toutes les connections """
 		print 'stop server'
 		for t in threading.enumerate():
 			print t
@@ -166,8 +170,8 @@ class Server():
 			print "identification '%s' : %s"%(port,id)
 			if id:
 				self.clients[id] = client
-				self.ports[id] = port[0]
-				self.ports_connection[port[0]] = True
+				self.ports[id] = str(port)
+				self.ports_connection[str(port)] = True
 				return id,client
 			else:
 				return None,None

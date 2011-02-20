@@ -61,8 +61,8 @@ class DisconnectListener(EventListener):
 					self._postConnection(port,id_client,client)
 		# pour la cam
 		else:
-			id_client, client = self._server.connect("../exe", None)
-			self._postConnection("../exe",id_client,client)
+			id_client, client = self._server.connect(self._client.origin, None)
+			self._postConnection(self._client.origin,id_client,client)
 		
 		
 		# si on a pas réussi à reconnecter notre port on fait une pause
@@ -77,7 +77,8 @@ class DisconnectListener(EventListener):
 		if id_client:
 			self._server.envoyeurs[id_client]._client = client
 			self._server.receveurs[id_client]._client = client
-			if port == self._server.ports[self._id_client]:
+			#print port, self._server.ports[self._id_client]
+			if str(port) == self._server.ports[self._id_client]:
 				self._event.clear() # plus deconnecté
 				self._reconnect_event.set() # prevenir que l'on a reconnecté
 		

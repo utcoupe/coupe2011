@@ -1,7 +1,16 @@
 # -*- coding: utf-8 -*-
 
+import sys
+import os
+import re
+
+BASIC_PATH = re.search('(.+utcoupe-mega).+',sys.path[0]).group(1)
+
+sys.path.append(os.path.join(BASIC_PATH,'com/serverPython'))
+
 
 from protocole import *
+
 import sys
 import threading
 
