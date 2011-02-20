@@ -52,7 +52,9 @@ COMMANDES : CARTE AUTRE,
 	2 n (retour sharp n)	--> 'valeur du sharp n'
 	3 n s (surveiller que
 		le sharp n ne dépasse
-		le seuil s)			--> '1'		--> '1' ou '0' (1: seuil dépassé, 0: surveillance arretée)
+		le seuil s)			--> '1' (recu)	--> '1' ou '0' (1: seuil dépassé, 0: surveillance arretée)
+	4 n p (pince n
+			position p)		--> '1' (recu)	--> '1' ou '0' (fini ou échouer)
 
 
 COMMANDES : CAMERA
