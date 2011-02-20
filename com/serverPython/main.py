@@ -28,7 +28,7 @@ for s in scan:
 	ports.append((s, 115200))
 #ports.append(("../exe",None))
 #ports.append((["./ObjectCamera","-b","-m","n"], None))
-ports.append((["python","emulation.py","asserv"],None))
+ports.append((["python","../../emulation/emulation.py","asserv"],None))
 
 if not ports:
 	print "rien à connecter..."
