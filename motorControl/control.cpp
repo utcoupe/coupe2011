@@ -331,8 +331,9 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	}
 	else{
 		int _pwm = 0;
+		//FIXME probleme de debordemment
 		if(output4Delta+output4Alpha>255) output4Delta = 255-output4Alpha;
-		if(output4Delta-output4Alpha>-255) output4Delta = -255+output4Alpha;
+		//if(output4Delta-output4Alpha>-255) output4Delta = -255+output4Alpha;
 		(*value_pwm_right) = output4Delta+output4Alpha;
 		(*value_pwm_left) = output4Delta-output4Alpha;
 	}
