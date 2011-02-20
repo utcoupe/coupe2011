@@ -321,9 +321,9 @@ def traiterReponseCamera(msg):
 def scanPorts():
 	pathname = '/dev/ttyACM*'
 	if sys.platform == 'darwin':
-		pathname = '/dev/tty.ACM*'
+		pathname = '/dev/tty.usbmodemf*'
 	elif sys.platform != 'linux2':
-		print "systeme non reconnu, par default on cherche les ports en %s"%pathname
+		print "systeme non reconnu : % , par default on cherche les ports en %s"%(sys.platform,pathname)
 
 	return glob.glob(pathname)
 
