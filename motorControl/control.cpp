@@ -313,12 +313,12 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 
 	/* on limite la vitesse lineaire quand on s'approche du but */
 	if(abs(currentDelta)<2000){
-		pid4DeltaControl.SetOutputLimits(-80,80); /*composante liee a la vitesse lineaire*/
+		pid4DeltaControl.SetOutputLimits(-min(80,current_goal.speed),min(80,current_goal.speed)); /*composante liee a la vitesse lineaire*/
 		pid4AlphaControl.SetOutputLimits(-150,150); /*composante liee a la vitesse de rotation*/
 	}
 
-	if(abs(currentDelta) < 72) /*si l'ecart n'est plus que de 72 ticks (environ 2mm), on considere la consigne comme atteinte*/
-		current_goal.phase = PHASE_2; //PHASE_2
+	if(abs(currentDelta) < 5*ENC_MM_TO_TICKS) /*si l'ecart n'est plus que de 6 mm, on considere la consigne comme atteinte*/
+		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
 
@@ -330,12 +330,22 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		(*value_pwm_left) = 0;
 	}
 	else{
-		int _pwm = 0;
+		int pwm4Delta = 0;
+
 		//FIXME probleme de debordemment
-		if(output4Delta+output4Alpha>255) output4Delta = 255-output4Alpha;
-		//if(output4Delta-output4Alpha>-255) output4Delta = -255+output4Alpha;
-		(*value_pwm_right) = output4Delta+output4Alpha;
-		(*value_pwm_left) = output4Delta-output4Alpha;
+		//alpha 200 delta 255 / delta+alpha = 455 / delta-alpha = 55 / => alpha 200 delta 55
+		//alpha 200 delta -255 / delta+alpha = -55 / delta-alpha = -455 / => alpha 200 delta -55
+		//alpha -200 delta 255 / delta+alpha = 55 / delta-alpha = 455 / => alpha -200 delta 55
+		//alpha -200 delta -255 / delta+alpha = -455 / delta-alpha = -55 / => alpha -200 delta -55
+		if(output4Delta+output4Alpha>255 || output4Delta-output4Alpha>255)
+			pwm4Delta = 255-output4Alpha;
+		else if(output4Delta+output4Alpha<-255 || output4Delta-output4Alpha<-255)
+			pwm4Delta = -255+output4Alpha;
+		else
+			pwm4Delta = output4Delta;
+
+		(*value_pwm_right) = pwm4Delta+output4Alpha;
+		(*value_pwm_left) = pwm4Delta-output4Alpha;
 	}
 
 	if(current_goal.phase == PHASE_2){

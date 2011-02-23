@@ -11,6 +11,18 @@
 #include "parameters.h"
 #include "control.h"
 
+/*Constantes pour la liste des taches*/
+#define NO_ID -1
+
+#define TYPE_SPEED 0
+#define TYPE_ANGLE 1
+#define TYPE_POSITION 2
+#define TYPE_CALIB_X 3
+#define TYPE_CALIB_Y 4
+#define TYPE_CALIB_ANGLE 5
+#define TYPE_DELAY 6
+#define TYPE_PWM 7
+
 
 typedef struct {
 	int type; /*1,2,3 selon le type d'asserv*/

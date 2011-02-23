@@ -53,51 +53,21 @@
 #define TABLE_DISTANCE_MAX_MM 3661.96
 
 /*Parametre de l'asservissement*/
-#define K_DIST 0.5
-#define K_ANGLE 700
-
 #define KP_SPEED 2.0
 #define KI_SPEED 5.0
 #define KD_SPEED 1.0
 #define KP_ANGLE 11.0
 #define KI_ANGLE 1.0
 #define KD_ANGLE 0.0
-#define KP_DELTA .65
-#define KI_DELTA 0.0
-#define KD_DELTA 1800
-#define KP_ALPHA 3
-#define KI_ALPHA 0.0
-#define KD_ALPHA 550.0
-
-/*Parametre de liaison serie*/
-#define T_QUERY 0
-#define T_POSITION 1
-#define T_SPEED 2
-#define T_ANGLE 3
-#define T_PAUSE 4
-#define T_RESET 6
-#define T_ALIGN 7
-#define T_SETX 9
-#define T_SETY 10
-
-#define NO_ID -1
-
+#define KP_DELTA 0.65
+#define KI_DELTA 0.5
+#define KD_DELTA 0
+#define KP_ALPHA 6
+#define KI_ALPHA 1.0
+#define KD_ALPHA 0.0
 
 /*Parametre de la file des taches a effectuer*/
 #define SIZE 15
-
-/*Constantes pour la liste des taches*/
-#define TYPE_SPEED 0
-#define TYPE_ANGLE 1
-#define TYPE_POSITION 2
-#define TYPE_CALIB_X 3
-#define TYPE_CALIB_Y 4
-#define TYPE_CALIB_ANGLE 5
-#define TYPE_DELAY 6
-#define TYPE_PWM 7
-
-
-
 
 
 #endif /* PARAMETERS_H_ */
