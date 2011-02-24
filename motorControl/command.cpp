@@ -33,8 +33,8 @@ void cmd(int id, int header, int* args){
 		{
 			current_goal.type = TYPE_POSITION;
 			current_goal.isReached = false;
-			current_goal.x = args[0]*18;
-			current_goal.y = args[1]*18;
+			current_goal.x = (double)args[0]*ENC_MM_TO_TICKS;
+			current_goal.y = (double)args[1]*ENC_MM_TO_TICKS;
 			current_goal.speed = args[2];
 			sendMessage(id, 1);
 			break;

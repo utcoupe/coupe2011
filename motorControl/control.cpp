@@ -296,7 +296,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	double dy = current_goal.y-robot_state.y;
 	currentDelta = -sens * sqrt(dx*dx+dy*dy); // - parce que l'ecart doit etre negatif pour partir en avant
 
-/*
+	/*
 	Serial.print("coeff:");
 	Serial.print(angularCoeff);
 	Serial.print("  angle:");
@@ -309,7 +309,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	Serial.print(current_goal.x);
 	Serial.print("  y:");
 	Serial.println(current_goal.y);
-*/
+	*/
 
 	/* on limite la vitesse lineaire quand on s'approche du but */
 	if(abs(currentDelta)<2000){
@@ -330,7 +330,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		(*value_pwm_left) = 0;
 	}
 	else{
-		int pwm4Delta = 0;
+		double pwm4Delta = 0.0;
 
 		//FIXME probleme de debordemment
 		//alpha 200 delta 255 / delta+alpha = 455 / delta-alpha = 55 / => alpha 200 delta 55
@@ -344,8 +344,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		else
 			pwm4Delta = output4Delta;
 
-		(*value_pwm_right) = pwm4Delta+output4Alpha;
-		(*value_pwm_left) = pwm4Delta-output4Alpha;
+		(*value_pwm_right) = output4Delta+output4Alpha;
+		(*value_pwm_left) = output4Delta-output4Alpha;
 	}
 
 	if(current_goal.phase == PHASE_2){
