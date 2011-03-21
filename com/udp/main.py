@@ -14,12 +14,13 @@ interfaces = dict()
 for bloc in result:
 	r = re.search('^(\S+)\s', bloc)
 	name = r.group(1)
-	r = re.search('inet adr:(\S+) ', bloc)
+	r = re.search('inet add?r:(\S+) ', bloc)
 	ip = r.group(1) if r else ""
 	r = re.search('(\d+.\d+) [MG]?B', bloc)
 	debit = float(r.group(1))
 	interfaces[name] = [ip,debit]
 for name,(ip,debit) in interfaces.items():
+	print name, ip, debit
 	if name != 'lo' and ip and debit > 0.0:
 		print "found :",name, ip
 		host = ip
