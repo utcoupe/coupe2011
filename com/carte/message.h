@@ -22,7 +22,7 @@ void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 #define PING			1
 
 // autre
-#define SHARP			2
+#define SHARP			52
 
 // asserv
 #define GOAL_A			2

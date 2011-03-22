@@ -49,13 +49,13 @@ COMMANDES : CARTE ASSERV
 COMMANDES : CARTE AUTRE,
 	0 (identification) 		--> 'autre'
 	1 (Ping)				--> 'Pong'
-	12 n (retour sharp n)	--> 'valeur du sharp n'
-	13 n s (surveiller que
+	52 n (retour sharp n)	--> 'valeur du sharp n'
+	53 n s (surveiller que
 		le sharp n ne dépasse
 		le seuil s)			--> '1' (recu)	--> '1' ou '0' (1: seuil dépassé, 0: surveillance arretée)
-	14 n p (pince n
+	54 n p (pince n
 			position p)		--> '1' (recu)	--> '1' ou '0' (fini ou échouer)
-	15 n p (moteur pas à pas
+	55 n p (moteur pas à pas
 			n numéro
 			p nb de pas)	--> '1' (recu)	--> '1'
 
