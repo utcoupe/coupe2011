@@ -4,6 +4,7 @@ import serial
 from socket import *
 import subprocess
 import re
+import sys
 
 host = "";
 
@@ -32,7 +33,7 @@ if not host:
 usbdev = "/dev/ttyACM0"
 #ser = serial.Serial(usbdev, 115200)
 
-port = 5555
+port = int(sys.argv[1]) if len(sys.argv)>1 else 5555
 bufsize = 1024
 addr = (host,port)
 
