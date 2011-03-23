@@ -3,10 +3,13 @@
 
 #define SERIAL_BAUD 115200
 
-#define C_SEP1	'|'
-#define C_SEP2	'/'
-#define C_SEP3	'_'
-#define C_SEND	':'
+// cf. protocole
+// concernant l'envoie
+#define C_SEP1	'|' // séparation id|message
+#define C_SEP2	'/' // séparation infos
+#define C_SEP3	'_' // séparations sous-infos
+// concernant la reception
+#define C_SEND	':' // tout est séparé par ça. Ex : 5:0:300:45 (id:cmd:parametre1:parametre2)
 
 
 
