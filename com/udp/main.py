@@ -18,7 +18,7 @@ for bloc in result:
 	r = re.search('inet add?r:(\S+) ', bloc)
 	ip = r.group(1) if r else ""
 	r = re.search('(\d+.\d+) [MG]?B', bloc)
-	debit = float(r.group(1))
+	debit = float(r.group(1)) if r else 0.0
 	interfaces[name] = [ip,debit]
 for name,(ip,debit) in interfaces.items():
 	print name, ip, debit
