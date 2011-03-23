@@ -178,7 +178,7 @@ class Server():
 	
 	def _identification(self, client):
 		""" fait une demande d'identification a un client """
-		client.write('1'+C_SEP_SEND+str(IDENTIFICATION)) # demande au programme de s'identifier
+		client.write('0'+C_SEP_SEND+str(IDENTIFICATION)) # demande au programme de s'identifier
 		r = client.readline()
 		try:
 			id_client = r.split(C_SEP1)[1].strip()
