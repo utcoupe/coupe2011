@@ -74,3 +74,12 @@ SERVER PYTHON
 	test commande 			(lancer 300 fois de suite la <commande>, puis afficher le temps moyen)
 	stop n 					(ferme le nième écran)
 	exit 					(quitter l'application)
+
+
+CODES ERREURS
+	-1	INVALID_CMD
+	-2	INVALID_PARAMETERS_NUMBERS
+	-3	INVALID_PARAMETERS_TYPE
+	-4	INVALID_ANALOGPIN
+	-5	INVALID_DIGITALPIN
+	<<	UNKNOWN_ERROR
