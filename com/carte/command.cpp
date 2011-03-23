@@ -6,7 +6,6 @@
 // m est le message
 void cmd(int id_msg, int cmd, int *parameters)
 {
-	int i;
 	// On analyse le message en fonction de son type
 	switch(cmd){
 		case PING: // Ping (renvoit time : pong)
