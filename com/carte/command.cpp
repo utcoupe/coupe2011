@@ -4,11 +4,11 @@
 
 // Message est le tableau de message
 // m est le message
-void cmd(int id_msg, int* message)
+void cmd(int id_msg, int cmd, int *parameters)
 {
 	int i;
 	// On analyse le message en fonction de son type
-	switch(c){
+	switch(cmd){
 		case PING: // Ping (renvoit time : pong)
 			sendMessage(id_msg, (char*)"Pong");
 		break;
@@ -18,11 +18,15 @@ void cmd(int id_msg, int* message)
 		break;
 		case SHARP:
 			int v;
-			v = getSharp(message[0]);
+			v = getSharp(parameters[0]);
 			if (v < 0)
 				error(id_msg);
 			else
 				sendMessage(id_msg, v);
+		break;
+		case CHECK_SHARP:
+			surveiller(id_msg, parameters[0]);
+			sendMessage(id_msg, "1");
 		break;
 		/*case 'L':
 			ledOn();
@@ -93,7 +97,7 @@ typedef struct Sharp
 	int seuil;
 	int id_msg;
 }Sharp;
-const NB_SHARPS = 15;
+const int NB_SHARPS = 15;
 Sharp sharps[NB_SHARPS];
 
 /**
@@ -129,11 +133,11 @@ void check_sharps()
 {
 	for (unsigned int i=0; i< NB_SHARPS; ++i)
 		// si il est à observer
-		if (sharps[i].to.check)
+		if (sharps[i].to_check)
 			// si la valeur dépasse le seuil
-			if (analogRead(analogInPin) > sharps[i].seuil)
+			if (analogRead(sharps[i].pin) > sharps[i].seuil)
 			{
-				sendMessage(sharps[i].id, 1); // envoie que le seuil a été dépassé
+				sendMessage(sharps[i].id_msg, 1); // envoie que le seuil a été dépassé
 				break;
 			}
 }

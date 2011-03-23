@@ -1,5 +1,5 @@
 
-void cmd(int c, int* message);
+void cmd(int id_msg, int cmd, int* parameters);
 void error(int id);
 int getSharp(int id);			// 1
 void ledOn();			// 2

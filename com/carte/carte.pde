@@ -3,7 +3,7 @@
  */
 
 #include "message.h"
-
+#include "command.h"
 
 
 

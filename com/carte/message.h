@@ -26,6 +26,7 @@ void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 
 // autre
 #define SHARP			52
+#define CHECK_SHARP		53
 
 // asserv
 #define GOAL_A			2
