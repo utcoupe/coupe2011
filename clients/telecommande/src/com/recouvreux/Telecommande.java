@@ -17,6 +17,7 @@ import android.widget.TextView;
 public class Telecommande extends Activity
 {
 	float WIDTH, HEIGHT;
+	static int REALWIDTH=3000, REALHEIGHT=2100;
 	String SERVERIP;
 	int SERVERPORT;
 	float xscale, yscale;
@@ -31,8 +32,8 @@ public class Telecommande extends Activity
 	    Display display = getWindowManager().getDefaultDisplay(); 
 	    WIDTH = display.getWidth();
 	    HEIGHT = display.getHeight();
-	    xscale = (float) (3000.0 / WIDTH);
-	    yscale = (float) (2100.0 / HEIGHT);
+	    xscale = (float) ((float)REALWIDTH / WIDTH);
+	    yscale = (float) ((float)REALHEIGHT / HEIGHT);
 	    Log.d("UDP", ""+WIDTH+" "+HEIGHT);
 
 		Dialog dialog = new Dialog(this);
@@ -42,17 +43,6 @@ public class Telecommande extends Activity
         buttonOK.setOnClickListener(new OKListener(dialog));
         dialog.show();
         
-	    /*
-	    // Kickoff the Server, it will
-		// be 'listening' for one client packet
-		new Thread(new Server()).start();
-		// Give the Server some time for startup
-		try {
-		                Thread.sleep(500);
-		        } catch (InterruptedException e) { }
-		*/
-		// Kickoff the Client
-	    // new Thread(new Client("Hello from client")).start();
 	}
 	
 	public boolean onTouchEvent(MotionEvent event)
@@ -63,7 +53,7 @@ public class Telecommande extends Activity
 			float x = event.getX();
 			float y = event.getY();
 			Log.d("UDP", "touch !"+x+" "+y);
-		    new Thread(new UDPClient(SERVERIP, SERVERPORT, ""+(int) (x*xscale) +" "+ (int) (y*yscale))).start();
+		    new Thread(new UDPClient(SERVERIP, SERVERPORT, ""+(int) (x*xscale) +" "+ (REALHEIGHT - (int) (y*yscale)))).start();
 		}
 		return true;
 	}
