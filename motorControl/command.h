@@ -16,8 +16,8 @@
 
 
 
-#define Q_PING 				0
-#define Q_IDENT 			1
+#define Q_IDENT 			0
+#define Q_PING 				1
 #define Q_GOAL_ABS 			2
 #define Q_GOAL_REL 			3
 #define Q_ANGLE_ABS 		4
