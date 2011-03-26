@@ -78,7 +78,7 @@ class Receveur(threading.Thread):
 			try:
 				id_cmd,rep_cmd = self._parseReponse(r)
 			except Exception as ex:
-				print "%s : (ERROR) données reçues corrompues, %s"%(self.name,ex)
+				print "%s : (ERROR) données reçues corrompues : %s, %s"%(self.name,r,ex)
 			id_cmd = int(id_cmd)
 			self.reponses[id_cmd].add(rep_cmd)
 

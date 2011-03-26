@@ -13,7 +13,7 @@
 
 import threading
 import sys
-import math
+import socket
 
 
 from server import *
@@ -38,6 +38,54 @@ if not ports:
 server = Server(ports)
 
 
+HOST = ''		# Symbolic name meaning all available interfaces
+PORT = 50006	# Arbitrary non-privileged port
+s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.bind((HOST, PORT))
+s.listen(1)
+while 1:
+	conn, addr = s.accept()
+	print 'Connected by', addr
+	while 1:
+		cmd = conn.recv(1024) # en octets/chars
+		if not cmd: break
+		else:
+			cmd_split = cmd.split(' ',1) # <carte><cmd>
+			try:
+				socket_rep = []
+				if cmd_split[0] == 'wait':
+					r = reponse.read(int(cmd_split[1]), 1)
+					print "Reponse :", r
+					socket_rep.append("Reponse : %s"%r)
+				elif cmd_split[0] == 'test':
+					id_client,cmd = cmd_split[1].split(' ',1)
+					server.testPing(id_client, cmd)
+				elif cmd_split[0] == 'track':
+					searchTarget()
+				elif cmd_split[0] == 'exit':
+					server.stop()
+					break
+				elif cmd_split[0] == 'loop':
+					cmd_split2 = raw_input().split(' ',1)
+					server.makeLoop(cmd_split2[0], cmd_split2[1], cmd_split[1])
+				elif cmd_split[0] == 'stop':
+					server.stopScreen(int(cmd_split[1]))
+				else:
+					reponse = server.addCmd(cmd_split[1], cmd_split[0])
+					r = reponse.read(0,1)
+					socket_rep.append("Reponse : %s"%r)
+					print "Reponse :", r
+			except IndexError as ex:
+				print "mauvaise commande, IndexError : %s"%ex
+				socket_rep.append("mauvaise commande, IndexError : %s"%ex)
+			except KeyError as ex:
+				print "mauvaise commande, KeyError : %s"%ex
+			
+			for r in socket_rep:
+				conn.send(r)
+	conn.close()
+
+
 #
 # début d'IA
 #
@@ -46,6 +94,36 @@ def searchTarget():
 	print "demande à la camera..."
 	event = server.addCmd("1", "camb")
 	event.wait(1)
+	cmd = raw_input()
+	
+	if cmd:
+		cmd_split = cmd.split(' ',1) # <carte><cmd>
+
+		try:
+			if cmd_split[0] == 'wait':
+				r = reponse.read(int(cmd_split[1]), 1)
+				print "Reponse :", r
+			elif cmd_split[0] == 'test':
+				id_client,cmd = cmd_split[1].split(' ',1)
+				server.testPing(id_client, cmd)
+			elif cmd_split[0] == 'track':
+				searchTarget()
+			elif cmd_split[0] == 'exit':
+				server.stop()
+				break
+			elif cmd_split[0] == 'loop':
+				cmd_split2 = raw_input().split(' ',1)
+				server.makeLoop(cmd_split2[0], cmd_split2[1], cmd_split[1])
+			elif cmd_split[0] == 'stop':
+				server.stopScreen(int(cmd_split[1]))
+			else:
+				reponse = server.addCmd(cmd_split[1], cmd_split[0])
+				r = reponse.read(0,1)
+				print "Reponse :", r
+		except IndexError as ex:
+			print "mauvaise commande, IndexError : %s"%ex
+		except KeyError as ex:
+			print "mauvaise commande, KeyError : %s"%ex
 	r = server.getReponse("1", "camb")
 	print "Reponse :", r
 	print "demande de position à l'asserv"
@@ -151,7 +229,7 @@ approchTarget(target)
 	
 server.stop()
 """
-
+"""
 
 
 # read, send and get output of a command
@@ -186,7 +264,7 @@ while True:
 			print "mauvaise commande, IndexError : %s"%ex
 		except KeyError as ex:
 			print "mauvaise commande, KeyError : %s"%ex
-
+"""
 
 print 'fin thread principal'
 
