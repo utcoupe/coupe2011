@@ -42,7 +42,7 @@ bool testSharp(int valeur){
 
 void recherche(){
   bool find=false;
-  int resolution=10;
+  int resolution=20;
   int right=position+resolution;
   int left=position-resolution;
 
@@ -99,17 +99,20 @@ void tourelleRun()
     oldMillis=millis();
     //boucle
     // lire les capteurs
-    int sharpLeft = analogRead(ANALOG_SHARP_L);
-    int sharpRight = analogRead(ANALOG_SHARP_R);
-    if(testSharp(sharpLeft)==true && testSharp(sharpRight)==true){
-      distance=(sharpLeft+sharpRight)/2;
-    }else if(testSharp(sharpLeft)==true){
+    int sensorLeft = getDistance(LEFT_SENSOR_PIN);
+    int sensorRight = getDistance(RIGHT_SENSOR_PIN);
+    if(sensorTest(sensorLeft)==true && sensorTest(sensorRight)==true){
+		if(sensorLeft>sensorRight)
+			distance=sensorRight;
+		else
+			distance=sensorLeft;
+    }else if(testSharp(sensorLeft)==true){
       turn(LEFT);
-      distance=sharpLeft;
-    }else if(testSharp(sharpRight)==true){
+      distance=sensorLeft;
+    }else if(testSharp(sensorRight)==true){
       turn(RIGHT); // peut etre blocant attention
-      distance=sharpRight;
-    }else if (testSharp(sharpLeft)==false && testSharp(sharpRight)==false){
+      distance=sensorRight;
+    }else if (testSharp(sensorLeft)==false && testSharp(sensorRight)==false){
       recherche(); //blocant a modifier
     }
   }

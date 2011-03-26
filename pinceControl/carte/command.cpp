@@ -13,7 +13,7 @@ void cmd(int id, int header, int* args){
 			break;
 		}
 		case Q_IDENT:{
-			sendMessage(id, (char*)"autre");
+			sendMessage(id, (char*)"sm");
 			break;
 		}
 		case Q_SHARP:{
@@ -32,8 +32,8 @@ void cmd(int id, int header, int* args){
 			sendMessage(id, setTriggerMS(id, args[0],args[1]));
 			break;
 		}
-		case Q_STEPPER:{
-			sendMessage(id, setStepper(id, args[0],args[1]));
+		case Q_POSITION:{
+			sendMessage(id, setPincePosition(id, args[0],args[1]));
 			break;
 		}
 		case Q_PINCE:{

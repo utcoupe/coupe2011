@@ -556,3 +556,104 @@ uint8_t AF_Stepper::onestep(uint8_t dir, uint8_t style) {
   return currentstep;
 }
 
+
+
+/******************************************
+               STEPPERS R
+******************************************/
+
+AF_StepperR::AF_StepperR(uint16_t steps, uint8_t num) {
+  MC.enable();
+
+  revsteps = steps;
+  steppernum = num;
+  currentstep = 0;
+
+  if (steppernum == 1) {
+    latch_state &= ~_BV(MOTOR1_A) & ~_BV(MOTOR1_B) &
+      ~_BV(MOTOR2_A) & ~_BV(MOTOR2_B); // all motor pins to 0
+    MC.latch_tx();
+    
+    // enable both H bridges
+    pinMode(11, OUTPUT);
+    pinMode(3, OUTPUT);
+    digitalWrite(11, HIGH);
+    digitalWrite(3, HIGH);
+
+    // use PWM for microstepping support
+    initPWM1(MOTOR12_64KHZ);
+    initPWM2(MOTOR12_64KHZ);
+    setPWM1(255);
+    setPWM2(255);
+
+  } else if (steppernum == 2) {
+    latch_state &= ~_BV(MOTOR3_A) & ~_BV(MOTOR3_B) &
+      ~_BV(MOTOR4_A) & ~_BV(MOTOR4_B); // all motor pins to 0
+    MC.latch_tx();
+
+    // enable both H bridges
+    pinMode(5, OUTPUT);
+    pinMode(6, OUTPUT);
+    digitalWrite(5, HIGH);
+    digitalWrite(6, HIGH);
+
+    // use PWM for microstepping support
+    // use PWM for microstepping support
+    initPWM3(1);
+    initPWM4(1);
+    setPWM3(255);
+    setPWM4(255);
+  }
+}
+
+uint8_t AF_StepperR::onestep(uint8_t dir, uint8_t style) {
+  uint8_t a, b, c, d;
+
+  if (steppernum == 1) {
+    a = _BV(MOTOR1_A);
+    b = _BV(MOTOR2_A);
+    c = _BV(MOTOR1_B);
+    d = _BV(MOTOR2_B);
+  } else if (steppernum == 2) {
+    a = _BV(MOTOR3_A);
+    b = _BV(MOTOR4_A);
+    c = _BV(MOTOR3_B);
+    d = _BV(MOTOR4_B);
+  } else {
+    return 0;
+  }
+
+  // next determine what sort of stepping procedure we're up to
+  if (dir == FORWARD) {
+	currentstep ++;
+  }
+  else {
+	currentstep --;
+  }
+
+  // release all
+  //latch_state &= ~a & ~b & ~c & ~d; // all motor pins to 0
+  if(currentstep<0)
+	currentstep=3;
+  else if (currentstep>4)
+	currentstep=0;
+
+    switch (currentstep) {
+    case 0:
+      //latch_state |= a; // energize coil 1 only
+      latch_state = a; // energize coil 1
+      break;
+    case 1:
+      latch_state = b; // energize coil 2
+      break;
+    case 2:
+      latch_state = c; // energize coil 3
+      break;
+    case 3:
+      latch_state = d; // energize coil 4
+      break;
+    }
+
+  MC.latch_tx();
+  return currentstep;
+}

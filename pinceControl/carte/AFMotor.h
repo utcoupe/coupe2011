@@ -99,6 +99,18 @@ class AF_Stepper {
 
 };
 
+class AF_StepperR {
+ public:
+ 
+  AF_StepperR(uint16_t, uint8_t);
+  uint8_t onestep(uint8_t dir, uint8_t style);
+  
+  uint16_t revsteps; // # steps per revolution
+  uint8_t steppernum;
+  uint8_t currentstep;
+
+};
+
 uint8_t getlatchstate(void);
 
 #endif

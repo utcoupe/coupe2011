@@ -4,21 +4,12 @@
 #include "Ax12.h"
 #include "AFMotor.h"
 #include "message.h"
+#include "pwm.h"
 
-//stepper
-#define STEPPER_AV 1
-#define STTEPER_AR 2
-#define NB_PAS 200
-#define STYLE DOUBLE
-#define SPEED 20000
-/* info :
-#define FORWARD 1
-#define BACKWARD 2
-* */
-#define HAUT 1
-#define BAS 2
 
 //Pinces
+#define HAUT FORWARD
+#define BAS BACKWARD
 #define IDAVG		1	//avant gauche
 #define IDAVD		2	//avant droit
 #define IDARG		3	//arriere gauche
@@ -36,36 +27,18 @@
 #define PINCE_F	 	0
 #define PINCE_S	 	1
 #define PINCE_O	 	2
-
-class Stepper : public AF_Stepper{
-	public:
-	int step,dir,style;
-	unsigned int messageId;
-	Stepper(int ID) : AF_Stepper(NB_PAS, ID) {
-		setSpeed(SPEED);
-		step=0;dir=FORWARD;style=STYLE;
-		messageId=0;
-		release();
-	}
-	void run(){
-		if(step > 0){
-		onestep(dir,style);
-		step--;
-		if(step == 0)
-			sendMessage(messageId,1);
-		}	
-		delay(10);
-	}
-
-};
+#define POSITION_MAX 15000
+#define PWM_VALUE 	90
+#define MARGE 		1000
 
 static Ax12Class Ax12;
-static Stepper motor1(STEPPER_AV);
-static Stepper motor2(STTEPER_AR);
+static long goal_position_AV,goal_position_AR;
+static unsigned int msg_position_AV,msg_position_AR;
+
+#include "encoder.h"
 
 void initPinceControl();
 int setPinceState(unsigned char index,unsigned char etat);
-int setStepper(unsigned int id,unsigned char index,int step);
-void pinceContolRun();
+int setPincePosition(unsigned int id,unsigned char,unsigned int pos);
 
 #endif
