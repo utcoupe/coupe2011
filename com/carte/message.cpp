@@ -122,9 +122,9 @@ void readIncomingData()
 			case '\n': {
                 currentArg[currentArgIndex] = '\0';
         		args[argsIndex] = atoi(currentArg);
+				cmd(args[0],args[1],args+2,argsIndex-1); // appel de la commande
   				argsIndex = 0;
 				currentArgIndex = 0;
-				cmd(args[0],args[1],args+2); // appel de la commande
 				break;
 			}
 			default: {

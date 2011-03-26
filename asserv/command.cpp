@@ -16,7 +16,7 @@
  * @param header : le type de message (en-tete)
  * @param args : le tableau d'entier contenant les arguments
  * */
-void cmd(int id, int header, int* args){
+void cmd(int id, int header, int* args, int size){
                         
 	/* On analyse le message en fonction de son type */
 	switch(header){
