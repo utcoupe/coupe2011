@@ -3,18 +3,19 @@
 
 #include <Servo.h>
 #include <WProgram.h>
+#include "ping.h"
 
 //params
-#define LEFT  5
-#define RIGHT 175
+#define LEFT  0
+#define RIGHT 1
 #define INCREMENT  1
-#define ANALOG_SHARP_R  9
-#define ANALOG_SHARP_L  8
+#define RIGHT_SENSOR_PIN  9
+#define LEFT_SENSOR_PIN  8
 #define SERVO_PIN  9
 #define TEMPS_LATENCE 50
 
 //variables
-static long position = LEFT;
+static long position = 0;
 static int sens = RIGHT;
 static long distance = 0;
 static long long oldMillis=millis();
@@ -22,7 +23,7 @@ static Servo serv;
 
 void initTourelle();
 void turn(int direction);
-bool testSharp(int valeur);
+bool sensorTest(int valeur);
 void recherche();
 void tourelleRun();
 

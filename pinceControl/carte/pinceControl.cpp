@@ -2,6 +2,12 @@
 
 void initPinceControl(){
 	Ax12.begin(&Serial1 , BAUDRATE, CONTROLPIN);
+	goal_position_AV=-1;
+	goal_position_AR=-1;
+	initPWM();
+	setARPWM(0x00);
+	setAVPWM(0x00);
+	initEncoders();
 }
 
 int setPinceState(unsigned char index,unsigned char etat){
@@ -28,25 +34,19 @@ int setPinceState(unsigned char index,unsigned char etat){
 	return 1;
 }
 
-int setStepper(unsigned int id,unsigned char index,int step){
-	Stepper * tmp;
+int setPincePosition(unsigned int id,unsigned char index,unsigned int pos){
 	switch(index){
-		case 0 : tmp=&motor1; break;
-		case 1 : tmp=&motor2; break;
+		case 0 : 
+		setAVPWM(PWM_VALUE);
+		goal_position_AV=pos;
+		msg_position_AV=id;
+		break;
+		case 1 : 
+		setARPWM(PWM_VALUE);
+		goal_position_AR=pos;
+		msg_position_AR=id;
+		break;
 		default : return 0;
 	}
-	if(step>0){
-		tmp->step=step;
-		tmp->dir=HAUT;
-		tmp->messageId=id;
-	}else if(step<0){
-		tmp->step=-step;
-		tmp->messageId=id;
-	}
-	return 1;
 }
 
-void pinceContolRun(){
-	motor1.run();
-	motor2.run();
-}

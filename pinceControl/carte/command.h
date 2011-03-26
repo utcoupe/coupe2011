@@ -11,7 +11,7 @@
 	erreur = requette non prise en compte
 	
     COMMANDES : CARTE SM,
-	0 (identification) 		--> 'autre'
+	0 (identification) 		--> 'SM'
 	1 (Ping)				--> 'Pong'
 	12 n (Q_SHARP : retour sharp n)	
 							--> 'valeur du sharp n'
@@ -23,18 +23,18 @@
 							--> '1' (recu) ou '0' (recu mais erreur) --> '1' (seuil atteint + arret seuil)
 	16 n p (pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
 							--> '1' (recu) '0' (recu mais erreur)
-	17 n p (moteur pas à pas numéro n nb de pas p (positif : monter / negatif : descendre)	
+	17 n p (moteur numero n va a la position p
 	 						--> '1' (recu) '0' (recu mais erreur)	--> '1'(atteint)
  */ 
 
-#define Q_PING 				0
-#define Q_IDENT 			1
+#define Q_PING 				1
+#define Q_IDENT 			0
 #define Q_SHARP 			12
 #define Q_TRIGGERSHARP 		13
 #define Q_MS	 			14
 #define Q_TRIGGERMS	 		15
 #define Q_PINCE 			16
-#define Q_STEPPER 			17
+#define Q_POSITION 			17
 
 
 void cmd(int,int,int*);

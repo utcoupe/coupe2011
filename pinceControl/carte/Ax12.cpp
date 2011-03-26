@@ -185,6 +185,116 @@ int Ax12Class::ledStatus(unsigned char ID, bool Status)
   return (read_error());              // Return the read error
 }
 
+int Ax12Class::setRange(unsigned char ID,long min ,long max)
+{    
+
+  //min
+  unsigned char min_H,min_L;
+  min_H = min >> 8;           // 16 bits - 2 x 8 bits variables
+  min_L = min;
+  
+  Checksum = ~(ID + 5 + AX_WRITE_DATA + AX_CW_ANGLE_LIMIT_L + min_L + min_H);
+
+  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+  SerialX->write(AX_START);                 // Send Instructions over Serial
+  SerialX->write(AX_START);
+  SerialX->write(ID);
+  SerialX->write(5);
+  SerialX->write(AX_WRITE_DATA);
+  SerialX->write(AX_CW_ANGLE_LIMIT_L);
+  SerialX->write(min_L);
+  SerialX->write(min_H);
+  SerialX->write(Checksum);
+  delayMicroseconds(TX_DELAY_TIME);
+  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+
+  read_error();
+  delayMicroseconds(TX_DELAY_TIME);
+
+  //max
+  unsigned char max_H,max_L;
+  max_H = max >> 8;           // 16 bits - 2 x 8 bits variables
+  max_L = max;
+  
+  Checksum = ~(ID + 5 + AX_WRITE_DATA + AX_CCW_ANGLE_LIMIT_L + max_L + max_H);
+    
+  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+  SerialX->write(AX_START);                 // Send Instructions over Serial
+  SerialX->write(AX_START);
+  SerialX->write(ID);
+  SerialX->write(5);
+  SerialX->write(AX_WRITE_DATA);
+  SerialX->write(AX_CCW_ANGLE_LIMIT_L);
+  SerialX->write(max_L);
+  SerialX->write(max_H);
+  SerialX->write(Checksum);
+  delayMicroseconds(TX_DELAY_TIME);
+  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+	
+  return (read_error());                 // Return the read error
+}
+
+int Ax12Class::reset(unsigned char ID){ 
+  Checksum = ~(ID + 2 + AX_RESET);
+    
+  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+  SerialX->write(AX_START);                 // Send Instructions over Serial
+  SerialX->write(AX_START);
+  SerialX->write(ID);
+  SerialX->write(2);
+  SerialX->write(AX_RESET);
+  SerialX->write(Checksum);
+  delayMicroseconds(TX_DELAY_TIME);
+  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+
+}
+
+/*
+Bit	Function
+Bit 7	0
+Bit 6	If set to 1, torque off when an Instruction Error occurs
+Bit 5	If set to 1, torque off when an Overload Error occurs
+Bit 4	If set to 1, torque off when a Checksum Error occurs
+Bit 3	If set to 1, torque off when a Range Error occurs
+Bit 2	If set to 1, torque off when an Overheating Error occurs
+Bit 1	If set to 1, torque off when an Angle Limit Error occurs
+Bit 0	If set to 1, torque off when an Input Voltage Error occurs
+*/
+int Ax12Class::alarmShutdown(unsigned char ID,unsigned char data){
+  
+  Checksum = ~(ID + 4 + AX_WRITE_DATA + AX_ALARM_SHUTDOWN + data);
+    
+  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+  SerialX->write(AX_START);                 // Send Instructions over Serial
+  SerialX->write(AX_START);
+  SerialX->write(ID);
+  SerialX->write(4);
+  SerialX->write(AX_WRITE_DATA);
+  SerialX->write(AX_ALARM_SHUTDOWN);
+  SerialX->write(data);
+  SerialX->write(Checksum);
+  delayMicroseconds(TX_DELAY_TIME);
+  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+}
+
+int Ax12Class::alarmLed(unsigned char ID,unsigned char data){
+  
+  Checksum = ~(ID + 4 + AX_WRITE_DATA + AX_ALARM_LED + data);
+    
+  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+  SerialX->write(AX_START);                 // Send Instructions over Serial
+  SerialX->write(AX_START);
+  SerialX->write(ID);
+  SerialX->write(4);
+  SerialX->write(AX_WRITE_DATA);
+  SerialX->write(AX_ALARM_LED);
+  SerialX->write(data);
+  SerialX->write(Checksum);
+  delayMicroseconds(TX_DELAY_TIME);
+  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+}
+
+
 int Ax12Class::readTemperature(unsigned char ID)
 {	
   Checksum = ~(ID + AX_TEM_LENGTH  + AX_READ_DATA + AX_PRESENT_TEMPERATURE + AX_BYTE_READ);
@@ -329,115 +439,5 @@ int Ax12Class::readVoltage(unsigned char ID)
   }
   return (Voltage_Byte);               // Returns the read Voltage
 }
-
-int Ax12Class::setRange(unsigned char ID,long min ,long max)
-{    
-
-  //min
-  unsigned char min_H,min_L;
-  min_H = min >> 8;           // 16 bits - 2 x 8 bits variables
-  min_L = min;
-  
-  Checksum = ~(ID + 5 + AX_WRITE_DATA + AX_CW_ANGLE_LIMIT_L + min_L + min_H);
-
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  SerialX->write(AX_START);                 // Send Instructions over Serial
-  SerialX->write(AX_START);
-  SerialX->write(ID);
-  SerialX->write(5);
-  SerialX->write(AX_WRITE_DATA);
-  SerialX->write(AX_CW_ANGLE_LIMIT_L);
-  SerialX->write(min_L);
-  SerialX->write(min_H);
-  SerialX->write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
-
-  read_error();
-  delayMicroseconds(TX_DELAY_TIME);
-
-  //max
-  unsigned char max_H,max_L;
-  max_H = max >> 8;           // 16 bits - 2 x 8 bits variables
-  max_L = max;
-  
-  Checksum = ~(ID + 5 + AX_WRITE_DATA + AX_CCW_ANGLE_LIMIT_L + max_L + max_H);
-    
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  SerialX->write(AX_START);                 // Send Instructions over Serial
-  SerialX->write(AX_START);
-  SerialX->write(ID);
-  SerialX->write(5);
-  SerialX->write(AX_WRITE_DATA);
-  SerialX->write(AX_CCW_ANGLE_LIMIT_L);
-  SerialX->write(max_L);
-  SerialX->write(max_H);
-  SerialX->write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
-	
-  return (read_error());                 // Return the read error
-}
-
-int Ax12Class::reset(unsigned char ID){ 
-  Checksum = ~(ID + 2 + AX_RESET);
-    
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  SerialX->write(AX_START);                 // Send Instructions over Serial
-  SerialX->write(AX_START);
-  SerialX->write(ID);
-  SerialX->write(2);
-  SerialX->write(AX_RESET);
-  SerialX->write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
-
-}
-
-/*
-Bit	Function
-Bit 7	0
-Bit 6	If set to 1, torque off when an Instruction Error occurs
-Bit 5	If set to 1, torque off when an Overload Error occurs
-Bit 4	If set to 1, torque off when a Checksum Error occurs
-Bit 3	If set to 1, torque off when a Range Error occurs
-Bit 2	If set to 1, torque off when an Overheating Error occurs
-Bit 1	If set to 1, torque off when an Angle Limit Error occurs
-Bit 0	If set to 1, torque off when an Input Voltage Error occurs
-*/
-int Ax12Class::alarmShutdown(unsigned char ID,unsigned char data){
-  
-  Checksum = ~(ID + 4 + AX_WRITE_DATA + AX_ALARM_SHUTDOWN + data);
-    
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  SerialX->write(AX_START);                 // Send Instructions over Serial
-  SerialX->write(AX_START);
-  SerialX->write(ID);
-  SerialX->write(4);
-  SerialX->write(AX_WRITE_DATA);
-  SerialX->write(AX_ALARM_SHUTDOWN);
-  SerialX->write(data);
-  SerialX->write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
-}
-
-int Ax12Class::alarmLed(unsigned char ID,unsigned char data){
-  
-  Checksum = ~(ID + 4 + AX_WRITE_DATA + AX_ALARM_LED + data);
-    
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  SerialX->write(AX_START);                 // Send Instructions over Serial
-  SerialX->write(AX_START);
-  SerialX->write(ID);
-  SerialX->write(4);
-  SerialX->write(AX_WRITE_DATA);
-  SerialX->write(AX_ALARM_LED);
-  SerialX->write(data);
-  SerialX->write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
-}
-
 
 

@@ -4,21 +4,31 @@
 #include "WProgram.h"
 #include "message.h"
 
+//define microswitch
 #define PIN_MS_AV 42
 #define PIN_MS_AR 43
-#define NB_SHARP 10
 #define NB_MS 2
+//define jack
+#define PIN_JACK_BLEU 44
+#define PIN_JACK_ROUGE 45
+#define BLEU 1
+#define ROUGE 2
+//define sharp
+#define NB_SHARP 10
+//define protocole
+#define SEND_COLOR 20
+#define SEND_JACK 21
 
 
 struct TriggerSharp{
 	unsigned int messageId;
-	unsigned char pin;
+	int pin;
 	unsigned int value;
 };
 
 struct TriggerMS{
 	unsigned int messageId;
-	unsigned char pin;
+	int pin;
 	bool value;
 };
 
@@ -27,6 +37,7 @@ static TriggerSharp trigerSharp[NB_SHARP];
 static TriggerMS trigerMS[NB_MS];
 
 void initSensor();
+int waitJack();
 int getSharp(unsigned char pin);
 int setTriggerSharp(unsigned int id, unsigned char pin,unsigned int ref);
 void removeTriggerSharp(unsigned char index);

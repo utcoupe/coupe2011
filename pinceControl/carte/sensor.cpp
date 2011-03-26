@@ -6,9 +6,38 @@ void initSensor(){
 	for(int i=0;i<NB_SHARP;i++){
 		trigerSharp[i].pin=-1;
 	}
-	/*for(int i=0;i<NB_MS;i++){
-		trigerMS=-1;
-	}*/
+	for(int i=0;i<NB_MS;i++){
+		trigerMS[i].pin=-1;
+	}
+	//waitJack();
+}
+
+int waitJack(){
+	//attend le branchement d'un jack
+	int msg[2];
+	while(digitalRead(PIN_JACK_BLEU)!=HIGH || digitalRead(PIN_JACK_BLEU)!=HIGH){
+		if(digitalRead(PIN_JACK_BLEU)==HIGH){
+			msg[0]=SEND_COLOR;
+			msg[1]=BLEU;
+			sendMessage(0,msg,2);
+		}
+		else if(digitalRead(PIN_JACK_ROUGE)==HIGH){
+			msg[0]=SEND_COLOR;
+			msg[1]=ROUGE;
+			sendMessage(0,msg,2);
+		}
+	}
+	//attend le debranchement du jack
+	if(msg[1]==BLEU){
+		while(digitalRead(PIN_JACK_BLEU)!=LOW){}
+		sendMessage(1,SEND_JACK);
+		return 1;
+	}else if(msg[1]==ROUGE){
+		while(digitalRead(PIN_JACK_ROUGE)!=LOW){}
+		sendMessage(1,SEND_JACK);
+		return 1;
+	}
+	return 0;
 }
 
 int getSharp(unsigned char pin)
@@ -57,6 +86,7 @@ int setTriggerSharp(unsigned int id, unsigned char pin,unsigned int ref){
 			trigerSharp[i].messageId=id;
 			return 1;
 		}
+			return trigerSharp[i].pin;
 	}
 	return 0;
 }
@@ -81,9 +111,9 @@ int getMicroSwitch(unsigned char pin){
 	switch (pin)
   	{
 		case 0:
-			return digitalRead(PIN_MS_AV);
+			if(digitalRead(PIN_MS_AV)==HIGH) return 1; else return 0;
 		case 1:
-			return digitalRead(PIN_MS_AR);
+			if(digitalRead(PIN_MS_AR)==HIGH) return 1; else return 0;
 		default:
 			return -1;
 	}
