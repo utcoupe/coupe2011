@@ -35,34 +35,54 @@ void cmd(int id, int header, int* args, int size){
 
 		case Q_GOAL_ABS:
 		{
-			pushGoalPosition(id,(double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
-			sendMessage(id, 1);
+			if (size < 3)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				pushGoalPosition(id,(double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_GOAL_REL:
 		{
-			double co = cos(robot_state.angle);
-			double si = sin(robot_state.angle);
+			if (size < 3)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				double co = cos(robot_state.angle);
+				double si = sin(robot_state.angle);
 
-			pushGoalPosition(id,((double)args[0]*co-(double)args[1]*si)*18+robot_state.x, ((double)args[0]*si+(double)args[1]*co)*18+robot_state.y, (double)args[2]);
-			sendMessage(id, 1);
+				pushGoalPosition(id,((double)args[0]*co-(double)args[1]*si)*18+robot_state.x, ((double)args[0]*si+(double)args[1]*co)*18+robot_state.y, (double)args[2]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_ANGLE_ABS:
 		{
-			double angle = args[0]/180.0 * M_PI;
-			pushGoalOrientation(id,angle,args[1]);
-			sendMessage(id, 1);
+			if (size < 2)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				double angle = args[0]/180.0 * M_PI;
+				pushGoalOrientation(id,angle,args[1]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_ANGLE_REL:
 		{
-			double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
-			pushGoalOrientation(id,angle,args[1]);
-			sendMessage(id, 1);
+			if (size < 2)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
+				pushGoalOrientation(id,angle,args[1]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
@@ -78,62 +98,92 @@ void cmd(int id, int header, int* args, int size){
 
 		case Q_MANUAL_CALIB : //TODO a eclater en calibration manuel de l'angle ,de x et de y
 		{
-			pushGoalManualCalibration(TYPE_CALIB_X, args[0]);
-			pushGoalManualCalibration(TYPE_CALIB_Y, args[1]);
-			pushGoalManualCalibration(TYPE_CALIB_ANGLE, args[2]);
-			sendMessage(id, 1);
+			if (size < 3)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				pushGoalManualCalibration(TYPE_CALIB_X, args[0]);
+				pushGoalManualCalibration(TYPE_CALIB_Y, args[1]);
+				pushGoalManualCalibration(TYPE_CALIB_ANGLE, args[2]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_AUTO_CALIB :
 		{
-			if(args[0] == 0){
-				pushGoalAutoCalibration(id,true);
-			}
-			else{
-				pushGoalAutoCalibration(id,false);
-			}
+			if (size < 1)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				if(args[0] == 0){
+					pushGoalAutoCalibration(id,true);
+				}
+				else{
+					pushGoalAutoCalibration(id,false);
+				}
 
-			sendMessage(id, 1);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_DELAY:
 		{
-			pushGoalDelay(args[0]);
-			sendMessage(id, 1);
+			if (size < 1)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				pushGoalDelay(args[0]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_PWM:
 		{
-			pushGoalPwm(args[0],args[1]);
-			sendMessage(id, 1);
+			if (size < 2)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				pushGoalPwm(args[0],args[1]);
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_MODIF_GOAL_ABS:
 		{
-			current_goal.type = TYPE_POSITION;
-			current_goal.isReached = false;
-			current_goal.x = (double)args[0]*ENC_MM_TO_TICKS;
-			current_goal.y = (double)args[1]*ENC_MM_TO_TICKS;
-			current_goal.speed = args[2];
-			sendMessage(id, 1);
+			if (size < 3)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				current_goal.type = TYPE_POSITION;
+				current_goal.isReached = false;
+				current_goal.x = (double)args[0]*ENC_MM_TO_TICKS;
+				current_goal.y = (double)args[1]*ENC_MM_TO_TICKS;
+				current_goal.speed = args[2];
+				sendMessage(id, 1);
+			}
 			break;
 		}
 
 		case Q_MODIF_GOAL_REL:
 		{
-			double co = cos(robot_state.angle);
-			double si = sin(robot_state.angle);
+			if (size < 3)
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+			else
+			{
+				double co = cos(robot_state.angle);
+				double si = sin(robot_state.angle);
 
-			current_goal.type = TYPE_POSITION;
-			current_goal.isReached = false;
-			current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
-			current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
-			current_goal.speed = args[2];
-			sendMessage(id, 1);
+				current_goal.type = TYPE_POSITION;
+				current_goal.isReached = false;
+				current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
+				current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
+				current_goal.speed = args[2];
+				sendMessage(id, 1);
+			}
 			break;
 		}
 

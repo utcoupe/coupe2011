@@ -3,9 +3,8 @@
 
 
 
-
-
-
 void cmd(int id, int cmd, int * args, int size);
+
+
 
 #endif /* COMMAND_H_ */

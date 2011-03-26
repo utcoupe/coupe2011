@@ -47,4 +47,11 @@ void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_RESUME			15
 #define Q_DEBUG				99
 
+// erreurs
+#define	INVALID_CMD						-1
+#define	INVALID_PARAMETERS_NUMBERS		-2
+#define	INVALID_PARAMETERS_TYPE			-3
+#define	INVALID_ANALOGPIN				-4
+#define	INVALID_DIGITALPIN				-5
+
 #endif /* MESSAGE_H_ */
