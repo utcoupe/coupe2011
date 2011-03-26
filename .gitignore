@@ -3,5 +3,9 @@
 *.o
 *.dblite
 *.pyc
+.metadata/
 *build/
 exe
+bin/
+apk/
+doc/
