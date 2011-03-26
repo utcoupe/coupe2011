@@ -39,8 +39,9 @@ server = Server(ports)
 
 
 HOST = ''		# Symbolic name meaning all available interfaces
-PORT = 50006	# Arbitrary non-privileged port
+PORT = 50000	# Arbitrary non-privileged port
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 s.bind((HOST, PORT))
 s.listen(1)
 while 1:
@@ -48,7 +49,9 @@ while 1:
 	print 'Connected by', addr
 	while 1:
 		cmd = conn.recv(1024) # en octets/chars
-		if not cmd: break
+		if not cmd:
+			print "not cmd"
+			break
 		else:
 			cmd_split = cmd.split(' ',1) # <carte><cmd>
 			try:
@@ -62,9 +65,11 @@ while 1:
 					server.testPing(id_client, cmd)
 				elif cmd_split[0] == 'track':
 					searchTarget()
-				elif cmd_split[0] == 'exit':
+				elif cmd_split[0] == 'shutdown':
 					server.stop()
-					break
+					socket_rep.append('close')
+				elif cmd_split[0] == 'close':
+					socket_rep.append('close')
 				elif cmd_split[0] == 'loop':
 					cmd_split2 = raw_input().split(' ',1)
 					server.makeLoop(cmd_split2[0], cmd_split2[1], cmd_split[1])
@@ -83,7 +88,9 @@ while 1:
 			
 			for r in socket_rep:
 				conn.send(r)
+			if cmd_split[0] == 'shutdown': break
 	conn.close()
+	if cmd_split[0] == 'shutdown': break
 
 
 #
