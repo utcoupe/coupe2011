@@ -9,48 +9,27 @@
 #include "encoder.h"
 #include "message.h"
 
-/* Analyse le message et effectue les actions associees
- * 	<> id : l'identifiant associe au message
- * 	<> header : le type de message (en-tete)
- * 	<> args : le tableau d'entier contenant les arguments
+/**
+ * Analyse le message et effectue les actions associees
+ *
+ * @param id : l'identifiant associe au message
+ * @param header : le type de message (en-tete)
+ * @param args : le tableau d'entier contenant les arguments
  * */
 void cmd(int id, int header, int* args){
                         
 	/* On analyse le message en fonction de son type */
 	switch(header){
 
-		case Q_POSITION:
+		case Q_IDENT: /* Identification */
 		{
-			int x_mm = robot_state.x*ENC_TICKS_TO_MM;
-			int y_mm = robot_state.y*ENC_TICKS_TO_MM;
-			int a_deg = robot_state.angle*180.0 / M_PI;
-			int tab[] = {x_mm,y_mm,a_deg};
-			sendMessage(id,tab,3);
-	        break;
-		}
-
-		case Q_MODIF_GOAL_ABS:
-		{
-			current_goal.type = TYPE_POSITION;
-			current_goal.isReached = false;
-			current_goal.x = (double)args[0]*ENC_MM_TO_TICKS;
-			current_goal.y = (double)args[1]*ENC_MM_TO_TICKS;
-			current_goal.speed = args[2];
-			sendMessage(id, 1);
+			sendMessage(id, "asserv");
 			break;
 		}
 
-		case Q_MODIF_GOAL_REL:
+		case Q_PING:
 		{
-			double co = cos(robot_state.angle);
-			double si = sin(robot_state.angle);
-
-			current_goal.type = TYPE_POSITION;
-			current_goal.isReached = false;
-			current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
-			current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
-			current_goal.speed = args[2];
-			sendMessage(id, 1);
+			sendMessage(id, "Pong");
 			break;
 		}
 
@@ -87,40 +66,14 @@ void cmd(int id, int header, int* args){
 			break;
 		}
 
-		case Q_DELAY:
+		case Q_POSITION:
 		{
-			pushGoalDelay(args[0]);
-			sendMessage(id, 1);
-			break;
-		}
-
-		case Q_PWM:
-		{
-			pushGoalPwm(args[0],args[1]);
-			sendMessage(id, 1);
-			break;
-		}
-
-		case Q_PAUSE: /* comme pause */
-		{
-			current_goal.isPaused = true;
-			sendMessage(id, 1);
-			break;
-		}
-
-		case Q_RESUME: /* comme resume */
-		{
-			current_goal.isPaused = false;
-			sendMessage(id, 1);
-			break;
-		}
-
-		case Q_STOP: /* comme stop */
-		{
-			clearGoals();
-			current_goal.isCanceled = true;
-			sendMessage(id, 1);
-			break;
+			int x_mm = robot_state.x*ENC_TICKS_TO_MM;
+			int y_mm = robot_state.y*ENC_TICKS_TO_MM;
+			int a_deg = robot_state.angle*180.0 / M_PI;
+			int tab[] = {x_mm,y_mm,a_deg};
+			sendMessage(id,tab,3);
+	        break;
 		}
 
 		case Q_MANUAL_CALIB : //TODO a eclater en calibration manuel de l'angle ,de x et de y
@@ -145,15 +98,64 @@ void cmd(int id, int header, int* args){
 			break;
 		}
 
-		case Q_PING:
+		case Q_DELAY:
 		{
-			sendMessage(id, "Pong");
+			pushGoalDelay(args[0]);
+			sendMessage(id, 1);
 			break;
 		}
 
-		case Q_IDENT: /* Identification */
+		case Q_PWM:
 		{
-			sendMessage(id, "asserv");
+			pushGoalPwm(args[0],args[1]);
+			sendMessage(id, 1);
+			break;
+		}
+
+		case Q_MODIF_GOAL_ABS:
+		{
+			current_goal.type = TYPE_POSITION;
+			current_goal.isReached = false;
+			current_goal.x = (double)args[0]*ENC_MM_TO_TICKS;
+			current_goal.y = (double)args[1]*ENC_MM_TO_TICKS;
+			current_goal.speed = args[2];
+			sendMessage(id, 1);
+			break;
+		}
+
+		case Q_MODIF_GOAL_REL:
+		{
+			double co = cos(robot_state.angle);
+			double si = sin(robot_state.angle);
+
+			current_goal.type = TYPE_POSITION;
+			current_goal.isReached = false;
+			current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
+			current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
+			current_goal.speed = args[2];
+			sendMessage(id, 1);
+			break;
+		}
+
+		case Q_STOP: /* comme stop */
+		{
+			clearGoals();
+			current_goal.isCanceled = true;
+			sendMessage(id, 1);
+			break;
+		}
+
+		case Q_PAUSE: /* comme pause */
+		{
+			current_goal.isPaused = true;
+			sendMessage(id, 1);
+			break;
+		}
+
+		case Q_RESUME: /* comme resume */
+		{
+			current_goal.isPaused = false;
+			sendMessage(id, 1);
 			break;
 		}
 
