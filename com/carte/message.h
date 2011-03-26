@@ -29,11 +29,22 @@ void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 #define CHECK_SHARP		53
 
 // asserv
-#define GOAL_A			2
-#define GOAL_R			3
-#define ANGLE_A			4
-#define ANGLE_R			5
-#define POSITION		6
-#define RECALAGE		7
+#define Q_IDENT 			0
+#define Q_PING 				1
+#define Q_GOAL_ABS 			2
+#define Q_GOAL_REL 			3
+#define Q_ANGLE_ABS 		4
+#define Q_ANGLE_REL 		5
+#define Q_POSITION 			6
+#define Q_AUTO_CALIB		7
+#define Q_MANUAL_CALIB		8
+#define Q_DELAY 			9
+#define Q_PWM 				10
+#define Q_MODIF_GOAL_ABS 	11
+#define Q_MODIF_GOAL_REL 	12
+#define Q_STOP 				13
+#define Q_PAUSE				14
+#define Q_RESUME			15
+#define Q_DEBUG				99
 
 #endif /* MESSAGE_H_ */
