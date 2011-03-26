@@ -99,7 +99,7 @@ class Reponse():
 		self._verrou = threading.Lock()
 
 	def add(self,val):
-		""" fonction appellée pas le (Receveur) receveur lors de la réception d'un message
+		""" fonction appellée par le (Receveur) receveur lors de la réception d'un message
 		"""
 		self._verrou.acquire()
 		n = len(self._reponses) # le numéro de la réponse
