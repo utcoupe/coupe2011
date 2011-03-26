@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, UDPConnection!</string>
+    <string name="app_name">UDPConnection</string>
+    <string name="default_port">5555</string>
+    <string name="default_ip">172.25.11.118</string>
+</resources>
