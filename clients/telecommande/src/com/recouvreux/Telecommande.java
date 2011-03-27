@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class Telecommande extends Activity
 {
 	float WIDTH, HEIGHT;
-	static int REALWIDTH=3000, REALHEIGHT=2100;
+	static int REALWIDTH=3000, REALHEIGHT=2100, VITESSE=150;
 	String SERVERIP;
 	int SERVERPORT;
 	float xscale, yscale;
@@ -53,7 +53,11 @@ public class Telecommande extends Activity
 			float x = event.getX();
 			float y = event.getY();
 			Log.d("UDP", "touch !"+x+" "+y);
-		    new Thread(new UDPClient(SERVERIP, SERVERPORT, ""+(int) (x*xscale) +" "+ (REALHEIGHT - (int) (y*yscale)))).start();
+			String msg = "asserv 2:"+
+						(int) (x*xscale) +":"+
+						(REALHEIGHT - (int) (y*yscale))+":"+
+						VITESSE;
+		    new Thread(new UDPClient(SERVERIP, SERVERPORT, msg)).start();
 		}
 		return true;
 	}
