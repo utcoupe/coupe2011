@@ -11,13 +11,15 @@ class Receveur(threading.Thread):
 	"""
 	def __init__(self, id_device, device, disconnect_event, reconnect_event, clients):
 		"""
-		@param:
-			id_device: l'identifiant du device (récupérer après une demande d'identification '<I>')
-			device: le serial ou subprocess associé
-			disconnect_event: desactivé en temps normal, activé pendant une deconnection
+		@param id_device l'identifiant du device (récupérer après une demande d'identification '<I>')
+		@param device le serial ou subprocess associé
+		@param disconnect_event desactivé en temps normal, activé pendant une deconnection
+		@param reconnect_event activé quand la reconnection a réussie
+		@param clients la liste qui contient les clients du serveur
 		"""
 		threading.Thread.__init__(self, None, None, "Receveur(%s)"%str(id_device))
 		self._kill_event = threading.Event()
+		self._id_device = id_device
 		self._device = device
 		self._id_cmd_actuel = 0
 		self.reponses = dict()
@@ -29,8 +31,7 @@ class Receveur(threading.Thread):
 		"""
 		par default la réponse est à None
 		
-		@return:
-			(int) id_msg, (Reponse) reponse
+		@return (int) id_msg, (Reponse) reponse
 		"""
 		self._id_cmd_actuel += 1
 		self.reponses[self._id_cmd_actuel] = Reponse()
@@ -48,7 +49,7 @@ class Receveur(threading.Thread):
 	
 	def _readLine(self):
 		"""
-		@return:
+		@return
 			None si rien, timeout ou deconnection
 			(string) si on a réussi à lire
 		"""
@@ -76,7 +77,7 @@ class Receveur(threading.Thread):
 		r = self._readLine()
 		if r:
 			for c in self._clients:
-				if c: c.send(r)
+				if c: c.send("%s %s"%(self._id_device,r))
 			#print r
 			try:
 				id_cmd,rep_cmd = self._parseReponse(r)
