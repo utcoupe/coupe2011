@@ -14,10 +14,9 @@ class Envoyeur(threading.Thread):
 	"""
 	def __init__(self, id_client, client, disconnect_event, reconnect_event):
 		"""
-		@param:
-			id_client: l'identifiant du client (récupérer après une demande d'identification '<I>')
-			client: le serial ou subprocess associé
-			disconnect_event: desactivé en temps normal, activé pendant une deconnection
+		@param id_client l'identifiant du client (récupérer après une demande d'identification '<I>')
+		@param client le serial ou subprocess associé
+		@param disconnect_event desactivé en temps normal, activé pendant une deconnection
 		"""
 		threading.Thread.__init__(self, None, None, "Envoyeur(%s)"%str(id_client))
 		self._kill_event = threading.Event()

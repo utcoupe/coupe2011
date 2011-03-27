@@ -110,9 +110,9 @@ class Reponse():
 
 	def read(self,n,timeout=None):
 		"""
-		@params:
-			n: le numéro de la réponse attendue, dans le cas où l'on attend plusieurs réponses
-			timeout: si None la fonction read attend la réponse indéfiniment
+		@params n le numéro de la réponse attendue, dans le cas où l'on attend plusieurs réponses
+		@param timeout si None la fonction read attend la réponse indéfiniment
+		
 		@return:
 			None si timeout
 			(String) sinon

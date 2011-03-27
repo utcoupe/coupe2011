@@ -27,8 +27,7 @@ class Server():
 	def __init__(self, ports=None):
 		""" Constructeur
 		
-		@param
-			ports: tableau de paire (nom du port, vitesse de rafraichissement)
+		@param ports tableau de paire (nom du port, vitesse de rafraichissement)
 		"""
 		self.clients			= 	dict()
 		self.ports				=	dict()	# pour retrouver le port en cas de deconnection
@@ -74,10 +73,9 @@ class Server():
 	def connectClients(self, clients, verbose=True):
 		""" tente de connecter tous les clients de la liste
 		
-		@params:
-			clients: (list)[(port, baudrate)...]
+		@params clients: (list)[(port, baudrate)...]
 		
-		@return: None
+		@return None
 		"""
 		# lancement des tentatives de connection
 		threads = []
@@ -120,11 +118,10 @@ class Server():
 	def _connectSerial(self, port, refresh, verbose=True):
 		""" Connection à un port
 		
-		@param
-			port: numéro du port
-			refresh: vitesse de rafraichissement
+		@param port numéro du port
+		@param refresh vitesse de rafraichissement
 		
-		@return:
+		@return
 			echec: None,None
 			success: id_client, client
 		"""
@@ -190,11 +187,10 @@ class Server():
 	def addCmd(self, cmd, id_client):
 		""" ajoute une commande à envoyer
 		
-		@param:
-			cmd: commande à envoyer
-			id_client: le client qui doit recevoir
+		@param cmd commande à envoyer
+		@param id_client le client qui doit recevoir
 		
-		@return: objet de type Reponse, voir le fichier receveur.py
+		@return objet de type Reponse, voir le fichier receveur.py
 		"""
 		id_cmd,reponse = self.receveurs[id_client].addCmd(cmd)
 		self.envoyeurs[id_client].addCmd(str(id_cmd)+C_SEP_SEND+str(cmd))
@@ -204,9 +200,8 @@ class Server():
 		""" test la reactivitée de la cmd en envoyant et recevant 
 		la sortie est écrite sur un autre écran
 		
-		@param
-			id_client: à quel client balancer la commande
-			cmd: commande
+		@param id_client à quel client balancer la commande
+		@param cmd commande
 		"""
 		n = self.addScreen()
 		def loop():
@@ -229,8 +224,7 @@ class Server():
 	
 	def addScreen(self, live=None):
 		""" 
-		@param
-			live: timer de la loop
+		@param live timer de la loop
 		
 		@return numero de l'écran créé
 		"""
@@ -243,9 +237,8 @@ class Server():
 	def write(self, msg, n=0):
 		""" écrit sur un écran 
 		
-		@param
-			msg: le message
-			n: l'écran sur lequel écrire
+		@param msg le message
+		@param n l'écran sur lequel écrire
 		"""
 		if self.screens[n][0]:
 			try:
@@ -257,10 +250,9 @@ class Server():
 	def makeLoop(self, id_client, cmd, speed):
 		""" Lance en boucle infinie une commande et l'affiche sur un nouvel écran
 		
-		@param
-			port: le port sur lequel envoyer la commande
-			cmd: la commande
-			speed: l'interval entre chaque envoi
+		@param port le port sur lequel envoyer la commande
+		@param cmd la commande
+		@param speed l'interval entre chaque envoi
 		"""
 		def loop():
 			r = self.addCmd(cmd, id_client)
@@ -272,8 +264,7 @@ class Server():
 	def _stopLoop(self, n):
 		""" arreter une loop
 		
-		@param
-			n: numéro du live à stopper
+		@param n numéro du live à stopper
 		"""
 		if self.screens[n][1]:
 			self.screens[n][1].stop()
@@ -282,8 +273,7 @@ class Server():
 	def _stopProcess(self, n):
 		""" arrete le process faisant tourner un écran
 		
-		@param
-			n: numéro de l'écran
+		@param n numéro de l'écran
 		"""
 		if self.screens[n][0]:
 			self.screens[n][0].terminate()
@@ -292,8 +282,7 @@ class Server():
 	def stopScreen(self, n):
 		""" arreter un écran (et la boucle derrière)
 		
-		@param
-			n: numéro de l'écran
+		@param n numéro de l'écran
 		"""
 		if self.screens[n][1]:
 			self._stopLoop(n)
