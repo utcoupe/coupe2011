@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*
 
-
 import socket
 import subprocess
 import re
 import sys
-import threading
+
+sys.path.append('../../com/clients/pyClient')
+import pyClient
 
 
 host = "";
@@ -52,51 +53,29 @@ if not host:
     host = raw_input("host : ")
 
 
-
-
-bufsize = 1024
-addr = (host,port)
+print (host, port)
 
 
 UDPSock = socket.socket(socket.AF_INET,socket.SOCK_DGRAM)
-UDPSock.bind(addr)
+UDPSock.bind((host, port))
 
 
+def fn_input():
+    data, a = UDPSock.recvfrom(1024)
+    return str(data)
+
+def fn_on_close():
+    UDPSock.close()
 
 
-if len(sys.argv) > 1:
-    HOST = sys.argv[1]
-else:
-    HOST = raw_input("host? : ")    # The remote host
+HOST = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
+PORT = sys.argv[2] if len(sys.argv) > 2 else 50000            # The same port as used by the server
 
-PORT = 50000            # The same port as used by the server
-s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-s.connect((HOST, PORT))
+client = pyClient.pyClient(HOST, PORT, fn_input, fn_on_close)
+client.start()
 
 print "Standby ready !"
 
-def fn_send():
-    while True:
-        data,addr = UDPSock.recvfrom(bufsize)
-        msg = str(data)
-        print msg
-        s.send(msg)
-        if msg == 'close' or msg == 'shutdown':
-            print "break send"
-            break
-
-def fn_recv():
-    while True:
-        data = s.recv(1024) # en octets/chars
-        if not data or str(data) == 'close':
-            UDPSock.close()
-            s.close()
-            print "break recv"
-            break
-        print 'Received', repr(data)
 
 
-t_send = threading.Thread(None, fn_send, None)
-t_recv = threading.Thread(None, fn_recv, None)
-t_send.start()
-t_recv.start()
+
