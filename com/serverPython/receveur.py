@@ -9,16 +9,16 @@ from protocole import *
 class Receveur(threading.Thread):
 	""" Thread qui va lire en permanence sur la sortie de la carte
 	"""
-	def __init__(self, id_client, client, disconnect_event, reconnect_event):
+	def __init__(self, id_device, device, disconnect_event, reconnect_event):
 		"""
 		@param:
-			id_client: l'identifiant du client (récupérer après une demande d'identification '<I>')
-			client: le serial ou subprocess associé
+			id_device: l'identifiant du device (récupérer après une demande d'identification '<I>')
+			device: le serial ou subprocess associé
 			disconnect_event: desactivé en temps normal, activé pendant une deconnection
 		"""
-		threading.Thread.__init__(self, None, None, "Receveur(%s)"%str(id_client))
+		threading.Thread.__init__(self, None, None, "Receveur(%s)"%str(id_device))
 		self._kill_event = threading.Event()
-		self._client = client
+		self._device = device
 		self._id_cmd_actuel = 0
 		self.reponses = dict()
 		self._disconnect_event = disconnect_event
@@ -43,7 +43,7 @@ class Receveur(threading.Thread):
 			
 	def kill(self):
 		self._kill_event.set()
-		self._client.close()
+		self._device.close()
 	
 	def _readLine(self):
 		"""
@@ -52,7 +52,7 @@ class Receveur(threading.Thread):
 			(string) si on a réussi à lire
 		"""
 		try:
-			val = self._client.readline()
+			val = self._device.readline()
 		except serial.SerialException as ex:
 			print ex
 		except OSError as ex:

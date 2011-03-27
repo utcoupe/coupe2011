@@ -1,6 +1,6 @@
-#Fri Feb 11 13:02:51 CET 2011
+#Sun Mar 27 17:24:35 CEST 2011
 eclipse.preferences.version=1
-encoding/client.py=utf-8
+encoding/device.py=utf-8
 encoding/envoyeur.py=utf-8
 encoding/gestionnaireerreur.py=utf-8
 encoding/main.py=utf-8

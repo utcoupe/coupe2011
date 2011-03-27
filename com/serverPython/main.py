@@ -62,8 +62,8 @@ while 1:
 					print "Reponse :", r
 					socket_rep.append("Reponse : %s"%r)
 				elif cmd_split[0] == 'test':
-					id_client,cmd = cmd_split[1].split(' ',1)
-					server.testPing(id_client, cmd)
+					id_device,cmd = cmd_split[1].split(' ',1)
+					server.testPing(id_device, cmd)
 				elif cmd_split[0] == 'track':
 					searchTarget()
 				elif cmd_split[0] == 'shutdown':
@@ -113,8 +113,8 @@ def searchTarget():
 				r = reponse.read(int(cmd_split[1]), 1)
 				print "Reponse :", r
 			elif cmd_split[0] == 'test':
-				id_client,cmd = cmd_split[1].split(' ',1)
-				server.testPing(id_client, cmd)
+				id_device,cmd = cmd_split[1].split(' ',1)
+				server.testPing(id_device, cmd)
 			elif cmd_split[0] == 'track':
 				searchTarget()
 			elif cmd_split[0] == 'exit':
@@ -253,8 +253,8 @@ while True:
 				r = reponse.read(int(cmd_split[1]), 1)
 				print "Reponse :", r
 			elif cmd_split[0] == 'test':
-				id_client,cmd = cmd_split[1].split(' ',1)
-				server.testPing(id_client, cmd)
+				id_device,cmd = cmd_split[1].split(' ',1)
+				server.testPing(id_device, cmd)
 			elif cmd_split[0] == 'track':
 				searchTarget()
 			elif cmd_split[0] == 'exit':
