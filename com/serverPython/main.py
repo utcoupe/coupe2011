@@ -37,7 +37,7 @@ if not ports:
 
 server = Server(ports)
 
-
+shutdown = False
 HOST = ''		# Symbolic name meaning all available interfaces
 PORT = 50000	# Arbitrary non-privileged port
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -66,6 +66,7 @@ while 1:
 				elif cmd_split[0] == 'track':
 					searchTarget()
 				elif cmd_split[0] == 'shutdown':
+					shutdown = True
 					server.stop()
 					socket_rep.append('close')
 				elif cmd_split[0] == 'close':
@@ -88,9 +89,9 @@ while 1:
 			
 			for r in socket_rep:
 				conn.send(r)
-			if cmd_split[0] == 'shutdown': break
+			if shutdown: break
 	conn.close()
-	if cmd_split[0] == 'shutdown': break
+	if shutdown: break
 
 
 #
