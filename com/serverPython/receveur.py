@@ -9,7 +9,7 @@ from protocole import *
 class Receveur(threading.Thread):
 	""" Thread qui va lire en permanence sur la sortie de la carte
 	"""
-	def __init__(self, id_device, device, disconnect_event, reconnect_event):
+	def __init__(self, id_device, device, disconnect_event, reconnect_event, clients):
 		"""
 		@param:
 			id_device: l'identifiant du device (récupérer après une demande d'identification '<I>')
@@ -23,6 +23,7 @@ class Receveur(threading.Thread):
 		self.reponses = dict()
 		self._disconnect_event = disconnect_event
 		self._reconnect_event = reconnect_event
+		self._clients = clients
 	
 	def addCmd(self, cmd):
 		"""
@@ -74,6 +75,8 @@ class Receveur(threading.Thread):
 		self._reconnect_event.wait()
 		r = self._readLine()
 		if r:
+			for c in self._clients:
+				if c: c.send(r)
 			#print r
 			try:
 				id_cmd,rep_cmd = self._parseReponse(r)

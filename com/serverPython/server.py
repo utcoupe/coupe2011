@@ -1,22 +1,23 @@
 # -*- coding: utf-8 -*-
 
 
+from timer import *
 import serial
 import threading
 import time
 import subprocess
 import sys
 import glob
+import socket
 #from struct import *
 #import binascii
 
-from timer import *
 from receveur import *
 from envoyeur import *
 from gestionnaireerreur import *
 from device import *
 from protocole import *
-
+from client import *
 
 class Server():
 	"""
@@ -29,16 +30,17 @@ class Server():
 		
 		@param ports tableau de paire (nom du port, vitesse de rafraichissement)
 		"""
-		self.devices			= 	dict()
+		self.devices			= 	dict()	# les cartes arduinos, la cam
 		self.ports				=	dict()	# pour retrouver le port en cas de deconnection
 		self.ports_connection	=	dict()
 		self.screens			= 	[]
 		self.envoyeurs			=	dict()  # threads
 		self.receveurs			=	dict()  # threads
 		self.disconnectListener	=	dict()
+		self.clients			=	[]		# les interfaces utilisateurs
 		
 		self._verrou_connectDevices = threading.Lock() # sert à ce que les disconnectListener ne tente pas tous une reconnection en m^eme temps
-		
+		self.e_shutdown				= threading.Event()
 		
 		self.connectDevices(ports)
 		
@@ -55,10 +57,29 @@ class Server():
 	def __del__(self):
 		""" destructeur """
 		self.stop()
+	
+	def start(self):
+		HOST = ''		# Symbolic name meaning all available interfaces
+		PORT = 50000	# Arbitrary non-privileged port
+		self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		self.s.settimeout(1.0)
+		self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+		self.s.bind((HOST, PORT))
+		self.s.listen(1)
+		while not self.e_shutdown.isSet():
+			try:
+				conn, addr = self.s.accept()
+			except socket.timeout:
+				pass
+			else:
+				client = Client(len(self.clients), conn, self)
+				client.start()
+				self.clients.append(client)
 		
 	def stop(self):
 		""" couper toutes les connections """
 		print 'stop server'
+		self.e_shutdown.set()
 		for t in threading.enumerate():
 			print t
 		for n,screen in enumerate(self.screens):
@@ -69,6 +90,8 @@ class Server():
 			it.kill()
 		for listener in self.disconnectListener.values():
 			listener.kill()
+		#time.sleep(5)
+		#raise KeyboardInterrupt("shutdown")
 	
 	def connectDevices(self, devices, verbose=True):
 		""" tente de connecter tous les devices de la liste
@@ -110,7 +133,7 @@ class Server():
 		envoyeur.start()
 		self.envoyeurs[id_device] = envoyeur
 		# le thread permettant la reception
-		receveur = Receveur(id_device, device, disconnectEvent, reconnectEvent)
+		receveur = Receveur(id_device, device, disconnectEvent, reconnectEvent, self.clients)
 		receveur.start()
 		self.receveurs[id_device] = receveur
 		
@@ -183,6 +206,9 @@ class Server():
 			print "Device('%s')::identifiaction : (ERROR) recu: %s, %s"%(device.origin,r,ex)
 			id_device = None
 		return id_device
+	
+	def closeClient(self, id):
+		self.clients[id] = None
 		
 	def addCmd(self, cmd, id_device):
 		""" ajoute une commande à envoyer
