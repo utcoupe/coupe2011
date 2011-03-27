@@ -49,6 +49,7 @@ while 1:
 	print 'Connected by', addr
 	while 1:
 		cmd = conn.recv(1024) # en octets/chars
+		print "Cmd received :", cmd
 		if not cmd:
 			print "not cmd"
 			break
