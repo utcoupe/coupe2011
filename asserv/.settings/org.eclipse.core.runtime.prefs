@@ -1,0 +1,7 @@
+#Mon Mar 28 22:09:08 CEST 2011
+content-types/enabled=true
+content-types/org.eclipse.cdt.core.cHeader/file-extensions=h
+content-types/org.eclipse.cdt.core.cSource/file-extensions=c
+content-types/org.eclipse.cdt.core.cxxHeader/file-extensions=hpp
+content-types/org.eclipse.cdt.core.cxxSource/file-extensions=cpp,pde
+eclipse.preferences.version=1

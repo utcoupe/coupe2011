@@ -32,7 +32,7 @@
 </tool>
 <tool id="cdt.managedbuild.tool.gnu.c.linker.exe.debug.653523224" name="GCC C Linker" superClass="cdt.managedbuild.tool.gnu.c.linker.exe.debug"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug.1083581766" name="GCC C++ Linker" superClass="cdt.managedbuild.tool.gnu.cpp.linker.exe.debug">
-<option id="gnu.cpp.link.option.paths.1267726981" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths" valueType="libPaths"/>
+<option id="gnu.cpp.link.option.paths.1267726981" name="Library search path (-L)" superClass="gnu.cpp.link.option.paths"/>
 <inputType id="cdt.managedbuild.tool.gnu.cpp.linker.input.185559869" superClass="cdt.managedbuild.tool.gnu.cpp.linker.input">
 <additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 <additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -566,7 +566,7 @@
 <folderInfo id="cdt.managedbuild.config.gnu.exe.release.1646441811." name="/" resourcePath="">
 <toolChain id="cdt.managedbuild.toolchain.gnu.exe.release.1544260792" name="Linux GCC" resourceTypeBasedDiscovery="true" superClass="cdt.managedbuild.toolchain.gnu.exe.release">
 <targetPlatform binaryParser="" id="cdt.managedbuild.target.gnu.platform.exe.release.716336767" name="Debug Platform" superClass="cdt.managedbuild.target.gnu.platform.exe.release"/>
-<builder arguments="" autoBuildTarget="" buildPath="${workspace_loc:/build/}" command="scons" enableAutoBuild="true" id="cdt.managedbuild.target.gnu.builder.exe.release.1889701904" incrementalBuildTarget="" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
+<builder arguments="" autoBuildTarget="" buildPath="${workspace_loc:/build/}" cleanBuildTarget="rm *.o *.elf *.hex" command="scons" enableAutoBuild="true" enabledIncrementalBuild="true" id="cdt.managedbuild.target.gnu.builder.exe.release.1889701904" incrementalBuildTarget="" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Gnu Make Builder" superClass="cdt.managedbuild.target.gnu.builder.exe.release"/>
 <tool id="cdt.managedbuild.tool.gnu.archiver.base.816570945" name="GCC Archiver" superClass="cdt.managedbuild.tool.gnu.archiver.base"/>
 <tool id="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release.1664201079" name="GCC C++ Compiler" superClass="cdt.managedbuild.tool.gnu.cpp.compiler.exe.release">
 <option id="gnu.cpp.compiler.exe.release.option.optimization.level.780863414" name="Optimization Level" superClass="gnu.cpp.compiler.exe.release.option.optimization.level" value="gnu.cpp.compiler.optimization.level.most" valueType="enumerated"/>
