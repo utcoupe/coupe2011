@@ -18,6 +18,8 @@ from gestionnaireerreur import *
 from device import *
 from protocole import *
 from client import *
+from tcpLoop import *
+
 
 class Server():
 	"""
@@ -59,22 +61,28 @@ class Server():
 		self.stop()
 	
 	def start(self):
-		HOST = ''		# Symbolic name meaning all available interfaces
-		PORT = 50000	# Arbitrary non-privileged port
-		self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+		host = ''		# Symbolic name meaning all available interfaces
+		port = 50000	# Arbitrary non-privileged port
+		TCPLoop(self, '', 50000, ).start()
+		"""self.s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 		self.s.settimeout(1.0)
 		self.s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
 		self.s.bind((HOST, PORT))
 		self.s.listen(1)
 		while not self.e_shutdown.isSet():
 			try:
-				conn, addr = self.s.accept()
+				conn, addr = self.TCPSock.accept()
 			except socket.timeout:
 				pass
 			else:
 				client = Client(len(self.clients), conn, self)
 				client.start()
-				self.clients.append(client)
+				self.clients.append(client)"""
+	
+	def addClient(self, conn):
+		client = Client(len(self.clients), conn, self)
+		client.start()
+		self.clients.append(client)
 		
 	def stop(self):
 		""" couper toutes les connections """
@@ -207,6 +215,34 @@ class Server():
 			id_device = None
 		return id_device
 	
+	def parseMsg(self, msg):
+		if msg:
+			msg_split = msg.strip().split(" ",1)
+			try:
+			    if 'test' == msg_split[0]:
+			        id_device,cmd = msg_split[1].split(' ',1)
+			        self.testPing(id_device, cmd)
+			    elif 'close' == msg_split[0]:
+			        self.closeClient(self.id)
+			        self.send('close')
+			        self._running = False
+			    elif 'loop' == msg_split[0]:
+			        msg_split2 = raw_input().split(' ',1)
+			        self.makeLoop(msg_split2[0], msg_split2[1], msg_split[1])
+			    elif 'stop' == msg_split[0]:
+			        self.stopScreen(int(msg_split[1]))
+			    else:
+			        print msg_split
+			        self.addCmd(msg_split[1], msg_split[0])
+			except IndexError as ex:
+			    print "mauvaise commande, IndexError : %s"%ex
+			    traceback.print_exc()
+			    self.send("mauvaise commande, IndexError : %s"%ex)
+			except KeyError as ex:
+			    print "mauvaise commande, KeyError : %s"%ex
+			    traceback.print_exc()
+			    self.send("mauvaise commande, KeyError : %s"%ex)
+		
 	def closeClient(self, id):
 		self.clients[id] = None
 		
