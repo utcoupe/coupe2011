@@ -31,6 +31,7 @@ class Client(threading.Thread):
         """
         Point d'entrée, envoie au client son id puis lance self._loop() en boucle
         """
+        print "Client(%s) start"%self.id
         self.send(str(self.id))
         while not self._server.e_shutdown.isSet():
             self._loop()
@@ -51,10 +52,6 @@ class Client(threading.Thread):
                 if 'test' == msg_split[0]:
                     id_device,cmd = msg_split[1].split(' ',1)
                     self._server.testPing(id_device, cmd)
-                elif 'shutdown' == msg_split[0]:
-                    self._server.e_shutdown.set()
-                    self._server.stop()
-                    self.send('close')
                 elif 'close' == msg_split[0]:
                     self._server.closeClient(self.id)
                     self.send('close')

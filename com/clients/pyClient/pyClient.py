@@ -17,8 +17,10 @@ class pyClient:
         """
         self._fn_input = fn_input
         self._fn_on_close = fn_on_close
-        self._server = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._server.connect((host, port))
+        self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        self._socket.settimeout(1.0)
+        self._socket.connect((host, port))
+        self._e_close = threading.Event()
     
     def start(self):
         self.t_send = threading.Thread(None, self._fn_send, None)
@@ -30,24 +32,28 @@ class pyClient:
         """ 
         Envoie le message récupéré par self._fn_input() au serveur
         """
-        while True:
+        while not self._e_close.isSet():
             msg = self._fn_input()
             print "Send :",msg
-            self._server.send(msg)
-            if msg == 'close' or msg == 'shutdown':
+            self._socket.send(msg)
+            if msg == 'close':
+                self._e_close.set()
                 print "break send"
-                break
     
     def _fn_recv(self):
         """ 
         Récupère ce qu'envoie le serveur
         """
-        while True:
-            data = self._server.recv(1024) # en octets/chars
-            if not data or str(data) == 'close':
-                self._server.close()
-                if self._fn_on_close : self._fn_on_close()
-                print "break recv"
-                break
-            print 'Received :', repr(data)
+        while not self._e_close.isSet():
+            try:
+                data = self._socket.recv(1024) # en octets/chars
+            except socket.timeout:
+                pass
+            else:
+                if not data or str(data) == 'close':
+                    self._socket.close()
+                    if self._fn_on_close : self._fn_on_close()
+                    self._e_close.set()
+                    print "break recv"
+                print 'Received :', repr(data)
 
