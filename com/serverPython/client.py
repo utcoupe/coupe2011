@@ -33,7 +33,10 @@ class Client(threading.Thread):
     def __del__(self):
         self.s.close()
         print "Client(%s) destroy"%self.id
-        
+    
+    def stop(self):
+        self._running.set()
+    
     def run(self):
         """
         Point d'entrée, envoie au client son id puis lance self._loop() en boucle
@@ -56,5 +59,5 @@ class Client(threading.Thread):
         else:
             if msg:
                 print "Received from", self.id,":",msg
-                self._server.parseMsg(msg)
+                self._server.parseMsg(self.id, msg)
             

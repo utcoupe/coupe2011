@@ -3,6 +3,7 @@
 	<name>pyClient</name>
 	<comment></comment>
 	<projects>
+		<project>pyClients</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

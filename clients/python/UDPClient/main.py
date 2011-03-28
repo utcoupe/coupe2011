@@ -5,7 +5,7 @@ import subprocess
 import re
 import sys
 
-sys.path.append('../../com/clients/pyClient')
+sys.path.append('../../../com/clients/pyClient')
 import pyClient
 
 
@@ -27,8 +27,8 @@ for bloc in result:
 
 # les wifi en premier
 def fn_cmp(x,y):
-    namex, ipx, debitx = x
-    namey, ipy, debity = y
+    namex = x[0]
+    namey = y[0]
     if 'wlan' in namex:
         poidsx = 0
     else:
@@ -61,7 +61,7 @@ UDPSock.bind((host, port))
 
 
 def fn_input():
-    data, a = UDPSock.recvfrom(1024)
+    data = UDPSock.recvfrom(1024)[0]
     return str(data)
 
 def fn_on_close():
@@ -74,7 +74,6 @@ PORT = sys.argv[2] if len(sys.argv) > 2 else 50000            # The same port as
 client = pyClient.pyClient(HOST, PORT, fn_input, fn_on_close)
 client.start()
 
-print "Standby ready !"
 
 
 

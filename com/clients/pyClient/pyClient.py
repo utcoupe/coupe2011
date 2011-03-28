@@ -2,6 +2,7 @@
 
 import socket
 import threading
+import sys
 
 class pyClient:
     """ @author Thomas
@@ -21,12 +22,14 @@ class pyClient:
         self._socket.settimeout(1.0)
         self._socket.connect((host, port))
         self._e_close = threading.Event()
+        self._lock_write = threading.Lock()
     
     def start(self):
         self.t_send = threading.Thread(None, self._fn_send, None)
         self.t_recv = threading.Thread(None, self._fn_recv, None)
         self.t_send.start()
         self.t_recv.start()
+        self._write("Standby ready !")
 
     def _fn_send(self):
         """ 
@@ -34,11 +37,11 @@ class pyClient:
         """
         while not self._e_close.isSet():
             msg = self._fn_input()
-            print "Send :",msg
+            self._write("Send : %s"%msg)
             self._socket.send(msg)
             if msg == 'close':
                 self._e_close.set()
-                print "break send"
+                self._write("break send")
     
     def _fn_recv(self):
         """ 
@@ -54,6 +57,11 @@ class pyClient:
                     self._socket.close()
                     if self._fn_on_close : self._fn_on_close()
                     self._e_close.set()
-                    print "break recv"
-                print 'Received :', repr(data)
+                    self._write("break recv")
+                self._write("Received : %s"%data)
 
+    def _write(self, msg):
+        self._lock_write.acquire()
+        sys.stdout.write(msg.strip()+"\n")
+        self._lock_write.release()
+        

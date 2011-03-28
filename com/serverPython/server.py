@@ -215,7 +215,7 @@ class Server():
 			id_device = None
 		return id_device
 	
-	def parseMsg(self, msg):
+	def parseMsg(self, id_client, msg):
 		if msg:
 			msg_split = msg.strip().split(" ",1)
 			try:
@@ -223,9 +223,7 @@ class Server():
 			        id_device,cmd = msg_split[1].split(' ',1)
 			        self.testPing(id_device, cmd)
 			    elif 'close' == msg_split[0]:
-			        self.closeClient(self.id)
-			        self.send('close')
-			        self._running = False
+			        self.closeClient(id_client)
 			    elif 'loop' == msg_split[0]:
 			        msg_split2 = raw_input().split(' ',1)
 			        self.makeLoop(msg_split2[0], msg_split2[1], msg_split[1])
@@ -237,13 +235,14 @@ class Server():
 			except IndexError as ex:
 			    print "mauvaise commande, IndexError : %s"%ex
 			    traceback.print_exc()
-			    self.send("mauvaise commande, IndexError : %s"%ex)
+			    return "mauvaise commande, IndexError : %s"%ex
 			except KeyError as ex:
 			    print "mauvaise commande, KeyError : %s"%ex
 			    traceback.print_exc()
-			    self.send("mauvaise commande, KeyError : %s"%ex)
+			    return "mauvaise commande, KeyError : %s"%ex
 		
 	def closeClient(self, id):
+		self.clients[id]._running = False
 		self.clients[id] = None
 		
 	def addCmd(self, cmd, id_device):
