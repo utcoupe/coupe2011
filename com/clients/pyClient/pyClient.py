@@ -10,12 +10,13 @@ class pyClient:
     classe python de base pour communiquer avec le serveur
     """
     
-    def __init__(self, host, port, fn_input, fn_on_close=None):
+    def __init__(self, host, port, fn_output, fn_input=None, fn_on_close=None):
         """
         @param host ip dus erveur
         @param port port sur lequel écouter
         @param fn_input fonction qui doit renvoyer les données à envoyer
         """
+        self._fn_output = fn_output
         self._fn_input = fn_input
         self._fn_on_close = fn_on_close
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -36,12 +37,15 @@ class pyClient:
         Envoie le message récupéré par self._fn_input() au serveur
         """
         while not self._e_close.isSet():
-            msg = self._fn_input()
-            self._write("Send : %s"%msg)
-            self._socket.send(msg)
-            if msg == 'close':
-                self._e_close.set()
-                self._write("break send")
+            if self._fn_input:
+                msg = self._fn_input()
+                self._write("Send : %s"%msg)
+                self._socket.send(msg)
+                if msg == 'close':
+                    self._e_close.set()
+                    self._write("break send")
+            else:
+                self._e_close.wait(1)
     
     def _fn_recv(self):
         """ 
@@ -62,6 +66,6 @@ class pyClient:
 
     def _write(self, msg):
         self._lock_write.acquire()
-        sys.stdout.write(msg.strip()+"\n")
+        self._fn_output(msg.strip()+"\n")
         self._lock_write.release()
         
