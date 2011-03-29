@@ -216,6 +216,7 @@ class Server():
 		return id_device
 	
 	def parseMsg(self, id_client, msg):
+		""" parse le message d'un client """
 		if msg:
 			msg_split = msg.strip().split(" ",1)
 			try:
@@ -251,11 +252,8 @@ class Server():
 		@param cmd commande à envoyer
 		@param id_device le device qui doit recevoir
 		
-		@return objet de type Reponse, voir le fichier receveur.py
 		"""
-		id_cmd,reponse = self.receveurs[id_device].addCmd(cmd)
-		self.envoyeurs[id_device].addCmd(str(id_cmd)+C_SEP_SEND+str(cmd))
-		return reponse
+		self.envoyeurs[id_device].addCmd(str(0)+C_SEP_SEND+str(cmd))
 	
 	def testPing(self, id_device, cmd):
 		""" test la reactivitée de la cmd en envoyant et recevant 

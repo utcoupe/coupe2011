@@ -23,7 +23,7 @@ class Client(threading.Thread):
         self.id = id
         self._server = server
         self._running = True
-        
+            
     def send(self, msg):
         """
         @param msg message à envoyer
