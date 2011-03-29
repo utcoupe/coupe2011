@@ -1,11 +1,6 @@
 # -*- coding: utf-8 -*-
 
-VIDE            = 0
-PION_1          = 1 # pion simple
-PION_2          = 2 # double pion
-PION_1_T        = 3 # pion simple + tour
-PION_2_T        = 4 # pion double + tour
-TOUR            = 5 # tour simple
+import pion
 
 ACCEPT = {}
 ACCEPT[VIDE]        = (PION_2_T, TOUR, PION_1_T, PION_2, PION_1)

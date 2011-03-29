@@ -10,6 +10,7 @@ class Robot:
     def __init__(self):
         self.pinces = (Pince, Pince)
         self.listener = Listener()
+        self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
     
     def start(self):
         """ démarage du robot """
@@ -41,12 +42,13 @@ class Robot:
     
     def onDetectEnemy(self):
         """ quand l'adversaire est trop proche """
-        # demarche d'esquive
+        # déterminer qui est en tord
+        # si c'est nous, alors demarche d'esquive
         pass
     
     def onLostEnemy(self):
         """ lorsque la detection de l'adversaire est perdue """
-        # ralentir la vitesse
+        # ralentir la vitesse pour etre sur de ne pas lui foncer dedans
         pass
     
     def onReconnectEnnemy(self):
@@ -59,6 +61,10 @@ class Robot:
         (arrive lorsque l'on est suffisament proche pour le prendre) """
         # il faut voir ici à quoi on a à faire,
         # pion, double pion, tour, pion+tour, ...
+        # ensuite il faut appeller la fonction canAccept des pinces
+        # pour voir si on peut prendre ce pion
+        # si on peut le prendre, alors on lance la fonction de ramassage
+        # sinon on repart sur une demande à la camera
         pass
     
     def onReponseCam(self):
