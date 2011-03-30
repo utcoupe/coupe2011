@@ -39,7 +39,6 @@ class pyClient:
         while not self._e_close.isSet():
             if self._fn_input:
                 msg = self._fn_input()
-                self._write("Send : %s"%msg)
                 self._socket.send(msg)
                 if msg == 'close':
                     self._e_close.set()

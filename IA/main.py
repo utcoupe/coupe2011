@@ -67,7 +67,7 @@ class Robot:
         # sinon on repart sur une demande à la camera
         pass
     
-    def onReponseCam(self):
+    def onRepCam(self):
         """ quand la réponse de la camera arrive """
         # il faudra traiter la réponse, voir les pions detectés,
         # leur distance,
@@ -75,6 +75,11 @@ class Robot:
         # pour finir aller au but
         pass
     
+    def onRepAsserv(self):
+        """ quand l'asserv a répondu sur sa position actuelle """
+        # il faut vérifier que l'asserv suit le chemin prévu
+        pass
+        
     def onGoToPos(self):
         """ c'est bon on a une position à atteindre """
         pass
