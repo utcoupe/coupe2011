@@ -35,7 +35,7 @@ void turn(int direction)
   serv.write(position); 
 }
 
-bool testSharp(int valeur){
+bool sensorTest(int valeur){
   if(valeur>=150 && valeur <=450) return true;
   return false;
 }
@@ -82,11 +82,11 @@ void recherche(){
       // envoyer la nouvelle consigne au servo
       serv.write(position);
       // lire les capteurs
-      int sharpLeft = analogRead(ANALOG_SHARP_L);
-      int sharpRight = analogRead(ANALOG_SHARP_R);
+      int sharpLeft = analogRead(LEFT_SENSOR_PIN);
+      int sharpRight = analogRead(RIGHT_SENSOR_PIN);
 			
-      if(testSharp(sharpLeft)==true || testSharp(sharpRight)==true){
-	find=true;
+      if(sensorTest(sharpLeft)==true || sensorTest(sharpRight)==true){
+		find=true;
       }
     }
   }
@@ -106,13 +106,13 @@ void tourelleRun()
 			distance=sensorRight;
 		else
 			distance=sensorLeft;
-    }else if(testSharp(sensorLeft)==true){
+    }else if(sensorTest(sensorLeft)==true){
       turn(LEFT);
       distance=sensorLeft;
-    }else if(testSharp(sensorRight)==true){
+    }else if(sensorTest(sensorRight)==true){
       turn(RIGHT); // peut etre blocant attention
       distance=sensorRight;
-    }else if (testSharp(sensorLeft)==false && testSharp(sensorRight)==false){
+    }else if (sensorTest(sensorLeft)==false && sensorTest(sensorRight)==false){
       recherche(); //blocant a modifier
     }
   }
