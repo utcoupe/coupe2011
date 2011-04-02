@@ -30,6 +30,7 @@
 #define POSITION_MAX 15000
 #define PWM_VALUE 	90
 #define MARGE 		1000
+#define SEUIL_LOAD	0x50
 
 static Ax12Class Ax12;
 static long goal_position_AV,goal_position_AR;
@@ -40,5 +41,6 @@ static unsigned int msg_position_AV,msg_position_AR;
 void initPinceControl();
 int setPinceState(unsigned char index,unsigned char etat);
 int setPincePosition(unsigned int id,unsigned char,unsigned int pos);
+int presentLoad(unsigned char idPince);
 
 #endif

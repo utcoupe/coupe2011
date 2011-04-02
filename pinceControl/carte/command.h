@@ -25,6 +25,10 @@
 							--> '1' (recu) '0' (recu mais erreur)
 	17 n p (moteur numero n va a la position p
 	 						--> '1' (recu) '0' (recu mais erreur)	--> '1'(atteint)
+	18 n (renvoie la charge de la pince n (0 : AV / 1 : AR)
+	 						--> '2' (sert) '1' (sert pas) '0' (erreur)
+	19 (renvoie un mesage quand le jack est retiré)
+	* 						--> '1' (recu) --> '2' ROUGE ou '3' BLEU
  */ 
 
 #define Q_PING 				1
@@ -35,6 +39,8 @@
 #define Q_TRIGGERMS	 		15
 #define Q_PINCE 			16
 #define Q_POSITION 			17
+#define Q_PRESENT_LOAD 		18
+#define Q_JACK		 		19
 
 
 void cmd(int,int,int*);
