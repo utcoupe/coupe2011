@@ -31,7 +31,7 @@ def ping(id):
 
 @route('/api/recalage/:id')
 def recalage(id):
-	s.send('asserv 7')
+	s.send('asserv 7:0')
 	data = s.recv(1024)
 	return '{recalage:"done"}' % id
 
