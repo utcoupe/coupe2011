@@ -54,7 +54,7 @@ class Receveur(threading.Thread):
 			print "%s : (ERROR) %s"%(self.name,ex)
 			self._disconnect_event.set()
 			self._reconnect_event.clear()
-			return -1
+			return None
 		else:
 			val = val.replace("§","\n")
 			if val:
