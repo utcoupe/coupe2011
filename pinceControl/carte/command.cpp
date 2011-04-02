@@ -40,6 +40,14 @@ void cmd(int id, int header, int* args){
 			sendMessage(id, setPinceState(args[0],args[1]));
 			break;
 		}
+		case Q_PRESENT_LOAD:{
+			sendMessage(id, presentLoad(args[0]));
+			break;
+		}
+		case Q_JACK:{
+			sendMessage(id, jack(id));
+			break;
+		}
 		default:{
 			sendMessage(id,-1);
 			break;

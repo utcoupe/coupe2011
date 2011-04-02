@@ -35,7 +35,9 @@ struct TriggerMS{
 
 static TriggerSharp trigerSharp[NB_SHARP];
 static TriggerMS trigerMS[NB_MS];
+static int JackMessageID=0;
 
+int jack(int id);
 void initSensor();
 int waitJack();
 int getSharp(unsigned char pin);
