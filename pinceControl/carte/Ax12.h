@@ -1,7 +1,7 @@
 #ifndef AX12_H
 #define AX12_H
 
-	// EEPROM AREA  ///////////////////////////////////////////////////////////
+// EEPROM AREA  ///////////////////////////////////////////////////////////
 #define AX_MODEL_NUMBER_L           0
 #define AX_MODEL_NUMBER_H           1
 #define AX_VERSION                  2
@@ -27,7 +27,7 @@
 #define AX_UP_CALIBRATION_L         22
 #define AX_UP_CALIBRATION_H         23
 
-	// RAM AREA  //////////////////////////////////////////////////////////////
+// RAM AREA  //////////////////////////////////////////////////////////////
 #define AX_TORQUE_ENABLE            24
 #define AX_LED                      25
 #define AX_CW_COMPLIANCE_MARGIN     26
@@ -55,12 +55,12 @@
 #define AX_PUNCH_L                  48
 #define AX_PUNCH_H                  49
 
-    // Status Return Levels ///////////////////////////////////////////////////////////////
+// Status Return Levels ///////////////////////////////////////////////////////////////
 #define AX_RETURN_NONE              0
 #define AX_RETURN_READ              1
 #define AX_RETURN_ALL               2
 
-    // Instruction Set ///////////////////////////////////////////////////////////////
+// Instruction Set ///////////////////////////////////////////////////////////////
 #define AX_PING                     1
 #define AX_READ_DATA                2
 #define AX_WRITE_DATA               3
@@ -69,13 +69,19 @@
 #define AX_RESET                    6
 #define AX_SYNC_WRITE               131
 
-	// Specials ///////////////////////////////////////////////////////////////
+// Specials ///////////////////////////////////////////////////////////////
 #define OFF                         0
 #define ON                          1
 #define AX_BYTE_READ                1
-#define AX_BYTE_READ_POS            2
+#define AX_2BYTE_READ	            2
+#define BROADCAST_ID                254
+#define AX_START                    255
+#define BUFFER_SIZE		    		64
+#define TIME_OUT                    1000 //microsec
+#define TX_DELAY_TIME		    	2000 //microsec
+
 #define AX_ID_LENGTH                4
-#define AX_BD_LENGTH                4
+#define AX_BR_LENGTH                4
 #define AX_TEM_LENGTH               4
 #define AX_VOLT_LENGTH              4
 #define AX_LED_LENGTH               4
@@ -83,11 +89,6 @@
 #define AX_POS_LENGTH               4
 #define AX_GOAL_LENGTH              5
 #define AX_GOAL_SP_LENGTH           7
-#define BROADCAST_ID                254
-#define AX_START                    255
-#define BUFFER_SIZE		    64
-#define TIME_OUT                    1000
-#define TX_DELAY_TIME		    2000 //microsec
 
 #define RX_BUFFER_SIZE 128
 
@@ -99,44 +100,54 @@
 #include <HardwareSerial.h>
 
 class Ax12Class {
-public:	
-	~Ax12Class(){SerialX->end();}
+private:	
 	HardwareSerial * SerialX;
 	unsigned char Checksum; 
 	unsigned char Time_Counter;
-	unsigned char Direction_Pin;
-	unsigned char Incoming_Byte;               
-	unsigned char Temperature_Byte;
-	unsigned char Position_High_Byte;
-	unsigned char Position_Low_Byte;
-	unsigned char Voltage_Byte;
-			               
-	unsigned int Position_Long_Byte;
+	unsigned char Incoming_Byte;    
 		                                       
 	int Error_Byte;   
 	int read_error();
 	
-	void begin(HardwareSerial *, long,unsigned char);
+public:
+	unsigned char Direction_Pin;
 	
-	int ping(unsigned char); 
+	~Ax12Class(){SerialX->end();}
+	inline void begin(HardwareSerial * s , long baud, unsigned char D_Pin)
+	{
+	  SerialX = s;
+	  SerialX->begin(baud);	
+	  pinMode(D_Pin,OUTPUT);
+	  Direction_Pin = D_Pin;
+	}	
+	int ping(unsigned char); //ok
+	inline unsigned char read(){return SerialX->read();}
+	inline unsigned char peek(){return SerialX->peek();}
+	inline void write(unsigned char c){SerialX->write(c);}
+	inline unsigned int available(){return SerialX->available();}
 	
-	int setID(unsigned char, unsigned char);
-	int setBD(unsigned char, unsigned char);
-	int reset(unsigned char);
+	//set
+	int setID(unsigned char, unsigned char);//ok
+	int setBR(unsigned char, unsigned char);//ok
+	int reset(unsigned char);//ok
+	int move(unsigned char, long);//ok
+	int setRange(unsigned char ID,long min ,long max);//ok
+	int setAlarmShutdown(unsigned char,unsigned char);//ok
+	int setAlarmLed(unsigned char,unsigned char); //ok
+	int setMoveSpeed(unsigned char, long, long);
+	int setTorqueStatus(unsigned char, bool);
+	int setLedStatus(unsigned char, bool);
 	
-	int move(unsigned char, long);
-	int moveSpeed(unsigned char, long, long);
+	int write(unsigned char ID, unsigned char variable , unsigned int value);
+	int write(unsigned char ID, unsigned char variable , unsigned char value);
 	
-	int readTemperature(unsigned char);
-	int readVoltage(unsigned char);
+	//read
+	unsigned int read(unsigned char ID,unsigned char value,unsigned char type);
+	unsigned char readTemperature(unsigned char);
+	unsigned char readVoltage(unsigned char);
 	unsigned int readPosition(unsigned char);
-	unsigned int readBD(unsigned char);
-	
-	int torqueStatus(unsigned char, bool);
-	int ledStatus(unsigned char, bool);
-	int setRange(unsigned char ID,long min ,long max);
-	int alarmShutdown(unsigned char,unsigned char);
-	int alarmLed(unsigned char,unsigned char);
+	unsigned int readPresentLoad(unsigned char ID);
+	unsigned char readBR(unsigned char); 
 };
 
 #endif

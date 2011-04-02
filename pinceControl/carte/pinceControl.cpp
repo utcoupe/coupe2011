@@ -10,6 +10,20 @@ void initPinceControl(){
 	initEncoders();
 }
 
+int presentLoad(unsigned char idPince){
+	if(idPince==PINCEAV){
+		if((Ax12.readPresentLoad(IDAVG)>SEUIL_LOAD) && (Ax12.readPresentLoad(IDAVD)>SEUIL_LOAD))
+			return 2;
+		return 1;
+	}else if(idPince==PINCEAR){
+		if((Ax12.readPresentLoad(IDARG)>SEUIL_LOAD) && (Ax12.readPresentLoad(IDARD)>SEUIL_LOAD))
+			return 2;
+		return 1;
+	}else{
+		return 0;//erreur
+	}
+}
+
 int setPinceState(unsigned char index,unsigned char etat){
 	char droite,gauche;
 	if(PINCEAV==index){

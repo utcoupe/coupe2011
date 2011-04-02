@@ -12,7 +12,15 @@ void initSensor(){
 	//waitJack();
 }
 
+int jack(int id){
+	JackMessageID=id;
+	sendMessage(id,1);
+}
+
 int waitJack(){
+	while(JackMessageID==0){
+		readIncomingData();
+	}
 	//attend le branchement d'un jack
 	int msg[2];
 	while(digitalRead(PIN_JACK_BLEU)!=HIGH || digitalRead(PIN_JACK_BLEU)!=HIGH){

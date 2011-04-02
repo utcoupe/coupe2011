@@ -1,0 +1,16 @@
+#table {
+	position:relative;
+	width: 734px;
+	height: 234px;
+}
+
+.table {
+	position: absolute;
+	width: 734px;
+}
+
+.robot {
+	position: absolute;
+	top: 0px;
+	left: 0;
+}
