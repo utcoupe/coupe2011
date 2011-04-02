@@ -71,9 +71,7 @@ COMMANDES : CARTE AUTRE,
 COMMANDES : CAMERA
 	0 (identification) 		--> 'autre'
 	1 (Ping)				--> 'Pong'
-	2 (back cam)			--> ' ,r' ou ' ,t x y;t x y'
-	3 (front cam)			--> ' ,r' ou ' ,t x y;t x y'
-	4 (both cam)			--> ' ,r' ou ' ,t x y;t x y'
+	2 (scan)				--> ' ,r' ou ' ,t x y;t x y'
 
 
 SERVER PYTHON
