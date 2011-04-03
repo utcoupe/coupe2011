@@ -12,43 +12,35 @@
 /**
  * Analyse le message et effectue les actions associees
  *
- * @param id_from : l'identifiant associe au message
+ * @param id : l'identifiant associe au message
  * @param header : le type de message (en-tete)
  * @param args : le tableau d'entier contenant les arguments
  * */
-void cmd(int id_from, int id_cmd, int* args, int size){
+void cmd(int id, int id_cmd, int* args, int size){
                         
 	/* On analyse le message en fonction de son type */
 	switch(id_cmd){
 
 		case Q_IDENT: /* Identification */
 		{
-			sendMessage(id_from, id_cmd, "asserv");
+			sendMessage(id, "asserv");
 			break;
 		}
 
 		case Q_PING:
 		{
-			sendMessage(id_from, id_cmd, "Pong");
+			sendMessage(id, "Pong");
 			break;
 		}
 
 		case Q_GOAL_ABS:
 		{
 			if (size < 3)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				x = args[0];
-				y = args[1];
-				v = args[2];
-				pushGoalPosition(id,(double)x*ENC_MM_TO_TICKS, (double)y*ENC_MM_TO_TICKS, (double)v);
-				int tab[4];
-				tab[0] = 0;
-				tab[1] = x;
-				tab[2] = y;
-				tab[3] = v;
-				sendMessage(id_from, id_cmd, tab);
+				pushGoalPosition(id,(double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -56,14 +48,14 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_GOAL_REL:
 		{
 			if (size < 3)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double co = cos(robot_state.angle);
 				double si = sin(robot_state.angle);
 
 				pushGoalPosition(id,((double)args[0]*co-(double)args[1]*si)*18+robot_state.x, ((double)args[0]*si+(double)args[1]*co)*18+robot_state.y, (double)args[2]);
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -76,7 +68,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 			{
 				double angle = args[0]/180.0 * M_PI;
 				pushGoalOrientation(id,angle,args[1]);
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -84,12 +76,12 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_ANGLE_REL:
 		{
 			if (size < 2)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
 				pushGoalOrientation(id,angle,args[1]);
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -100,20 +92,20 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 			int y_mm = robot_state.y*ENC_TICKS_TO_MM;
 			int a_deg = robot_state.angle*180.0 / M_PI;
 			int tab[] = {x_mm,y_mm,a_deg};
-			sendMessage(id_from,tab,3);
+			sendMessage(id,tab,3);
 	        break;
 		}
 
 		case Q_MANUAL_CALIB : //TODO a eclater en calibration manuel de l'angle ,de x et de y
 		{
 			if (size < 3)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalManualCalibration(TYPE_CALIB_X, args[0]);
 				pushGoalManualCalibration(TYPE_CALIB_Y, args[1]);
 				pushGoalManualCalibration(TYPE_CALIB_ANGLE, args[2]);
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -121,7 +113,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_AUTO_CALIB :
 		{
 			if (size < 1)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				if(args[0] == 0){
@@ -131,7 +123,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 					pushGoalAutoCalibration(id,false);
 				}
 
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -139,11 +131,11 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_DELAY:
 		{
 			if (size < 1)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalDelay(args[0]);
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -151,11 +143,11 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_PWM:
 		{
 			if (size < 2)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalPwm(args[0],args[1]);
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -163,7 +155,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_MODIF_GOAL_ABS:
 		{
 			if (size < 3)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				current_goal.type = TYPE_POSITION;
@@ -171,7 +163,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 				current_goal.x = (double)args[0]*ENC_MM_TO_TICKS;
 				current_goal.y = (double)args[1]*ENC_MM_TO_TICKS;
 				current_goal.speed = args[2];
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -179,7 +171,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		case Q_MODIF_GOAL_REL:
 		{
 			if (size < 3)
-				sendMessage(id_from, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double co = cos(robot_state.angle);
@@ -190,7 +182,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 				current_goal.x = (args[0]*co-args[1]*si)*18+robot_state.x;
 				current_goal.y = (args[0]*si+args[1]*co)*18+robot_state.y;
 				current_goal.speed = args[2];
-				sendMessage(id_from, 1);
+				sendMessage(id, 1);
 			}
 			break;
 		}
@@ -199,21 +191,21 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 		{
 			clearGoals();
 			current_goal.isCanceled = true;
-			sendMessage(id_from, 1);
+			sendMessage(id, 1);
 			break;
 		}
 
 		case Q_PAUSE: /* comme pause */
 		{
 			current_goal.isPaused = true;
-			sendMessage(id_from, 1);
+			sendMessage(id, 1);
 			break;
 		}
 
 		case Q_RESUME: /* comme resume */
 		{
 			current_goal.isPaused = false;
-			sendMessage(id_from, 1);
+			sendMessage(id, 1);
 			break;
 		}
 
@@ -235,7 +227,7 @@ void cmd(int id_from, int id_cmd, int* args, int size){
 
 		default:
 		{
-			sendMessage(id_from,0);
+			sendMessage(id,0);
 			break;
 		}
 	}

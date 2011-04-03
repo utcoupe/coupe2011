@@ -11,7 +11,7 @@ class Client(threading.Thread):
         self._server = server # la socket pour envoyer recevoir
         self.id = id # id du client sur le serveur
         self._running = False # le client tourne
-        self.mask_recv_from = -1 # ALL
+        self.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme 
     
     def __del__(self):
         self.s.close()

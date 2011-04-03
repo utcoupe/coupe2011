@@ -3,7 +3,7 @@
 
 
 
-void cmd(int id_from, int id_cmd, int * args, int size, char *cmd);
+void cmd(int id, int id_cmd, int * args, int size);
 
 
 

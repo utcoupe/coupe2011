@@ -10,11 +10,11 @@
 
 void initSerialLink();
 void readIncomingData();
-void sendMessage(int id_from, int id_cmd, char* str);
-void sendMessage(int id_from, int id_cmd, int i);
-void sendMessage(int id_from, int id_cmd, int *tabi, int size);
-void sendMessage(int id_from, int id_cmd, char** tabs, int nbStr, int *tabi, int nbInt);
-void sendMessage(int id_from, int id_cmd, int* tabi, int nbInt, char** tabs, int nbStr);
+void sendMessage(int id, char* str);
+void sendMessage(int id, int i);
+void sendMessage(int id, int *tabi, int size);
+void sendMessage(int id, char** tabs, int nbStr, int *tabi, int nbInt);
+void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 
 // all
 #define Q_IDENT 			0

@@ -2,38 +2,34 @@
 #include "message.h"
 #include "command.h"
 
+
 void initSerialLink()
 {
 	Serial.begin(SERIAL_BAUD);
-}
-
-///
-/// Envoie le header
-///
-void sendHeader(int id_from, int id_cmd)
-{
-	Serial.print(id_from);
-	Serial.print(C_SEP_SEND);
-	Serial.print(id_cmd);
-	Serial.print(C_SEP_SEND);
 }
 
 
 ///
 /// Envoie un int
 ///
-void sendMessage(int id_from, int id_cmd, int i)
+void sendMessage(int id, int i)
 {
-	sendHeader(id_from, id_cmd);
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
 	Serial.println(i);
 }
 
 ///
 /// Envoie un tableau d'int
 ///
-void sendMessage(int id_from, int id_cmd, int *tabi, int size)
+void sendMessage(int id, int *tabi, int size)
 {
-	sendHeader(id_from, id_cmd);
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
 	for (int i=0; i<size-1; ++i)
 	{
 		Serial.print(tabi[i]);
@@ -45,9 +41,12 @@ void sendMessage(int id_from, int id_cmd, int *tabi, int size)
 ///
 /// Envoie un string
 ///
-void sendMessage(int id_from, int id_cmd, char* str)
+void sendMessage(int id, char* str)
 {
-	sendHeader(id_from, id_cmd);
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
 	Serial.println(str);
 }
 
@@ -55,9 +54,12 @@ void sendMessage(int id_from, int id_cmd, char* str)
 /// Envoie des strings et des int
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id_from, int id_cmd, char** tabs, int nbStr, int *tabi, int nbInt)
+void sendMessage(int id, char** tabs, int nbStr, int *tabi, int nbInt)
 {
-	sendHeader(id_from, id_cmd);
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
 	
 	for (int i=0; i<nbStr; ++i)
 	{
@@ -77,9 +79,12 @@ void sendMessage(int id_from, int id_cmd, char** tabs, int nbStr, int *tabi, int
 /// Envoie des int et des strings
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id_from, int id_cmd, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
+void sendMessage(int id, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
 {
-	sendHeader(id_from, id_cmd);
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
 	
 	for (int i=0; i<nbInt; ++i)
 	{
@@ -106,9 +111,10 @@ void readIncomingData()
 	static int currentArgIndex = 0;
 
 	/*
-	A propos du protocole :
-	- un message se termine par \n
-	*/
+	 * A propos du protocole :
+	 * id_from:id:id_cmd:arg1:arg2:...
+	 * - un message se termine par \n
+	 */
 
 	// s'il y a des donnees a lire
 	int available = Serial.available();
@@ -130,7 +136,7 @@ void readIncomingData()
 			{
                 currentArg[currentArgIndex] = '\0';
         		args[argsIndex] = atoi(currentArg);
-				cmd(args[0],args[1],args+2,argsIndex-1); // from, id_cmd, *args, sizeArgs
+				cmd(args[1],args[2],args+3,argsIndex-2); // from, id_cmd, *args, sizeArgs
   				argsIndex = 0;
 				currentArgIndex = 0;
 				break;
