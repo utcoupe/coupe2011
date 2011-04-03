@@ -10,11 +10,11 @@
 
 void initSerialLink();
 void readIncomingData();
-void sendMessage(int id_msg, char* str);
-void sendMessage(int id_msg, int i);
-void sendMessage(int id_msg, int *tabi, int size);
-void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt);
-void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
+void sendMessage(int id_from, int id_cmd, char* str);
+void sendMessage(int id_from, int id_cmd, int i);
+void sendMessage(int id_from, int id_cmd, int *tabi, int size);
+void sendMessage(int id_from, int id_cmd, char** tabs, int nbStr, int *tabi, int nbInt);
+void sendMessage(int id_from, int id_cmd, int* tabi, int nbInt, char** tabs, int nbStr);
 
 // all
 #define Q_IDENT 			0
@@ -47,5 +47,6 @@ void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 #define	INVALID_PARAMETERS_TYPE			-3
 #define	INVALID_ANALOGPIN				-4
 #define	INVALID_DIGITALPIN				-5
+#define ANNULATION						-6 // asserv
 
 #endif /* MESSAGE_H_ */

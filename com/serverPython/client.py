@@ -78,7 +78,8 @@ class LocalClient(Client):
         Client.__init__(self, server, id, "LocalClient(%s)"%id)
     
     def _fn_send(self, msg):
-        self._server.write("Received : %s"%(msg))
+        #self._server.write(msg)
+        pass
     
     def _loopRecv(self):
         msg = raw_input()

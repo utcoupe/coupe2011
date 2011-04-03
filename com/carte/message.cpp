@@ -2,29 +2,38 @@
 #include "message.h"
 #include "command.h"
 
-void initSerialLink(){
+void initSerialLink()
+{
 	Serial.begin(SERIAL_BAUD);
+}
+
+///
+/// Envoie le header
+///
+void sendHeader(int id_from, int id_cmd)
+{
+	Serial.print(id_from);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id_cmd);
+	Serial.print(C_SEP_SEND);
 }
 
 
 ///
 /// Envoie un int
 ///
-void sendMessage(int id_from, int i)
+void sendMessage(int id_from, int id_cmd, int i)
 {
-	Serial.print(id_from);
-	Serial.print(C_SEP_SEND);
+	sendHeader(id_from, id_cmd);
 	Serial.println(i);
 }
-
 
 ///
 /// Envoie un tableau d'int
 ///
-void sendMessage(int id_from, int *tabi, int size)
+void sendMessage(int id_from, int id_cmd, int *tabi, int size)
 {
-	Serial.print(id_from);
-	Serial.print(C_SEP_SEND);
+	sendHeader(id_from, id_cmd);
 	for (int i=0; i<size-1; ++i)
 	{
 		Serial.print(tabi[i]);
@@ -36,10 +45,9 @@ void sendMessage(int id_from, int *tabi, int size)
 ///
 /// Envoie un string
 ///
-void sendMessage(int id_from, char* str)
+void sendMessage(int id_from, int id_cmd, char* str)
 {
-	Serial.print(id_from);
-	Serial.print(C_SEP_SEND);
+	sendHeader(id_from, id_cmd);
 	Serial.println(str);
 }
 
@@ -47,10 +55,9 @@ void sendMessage(int id_from, char* str)
 /// Envoie des strings et des int
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id_from, char** tabs, int nbStr, int *tabi, int nbInt)
+void sendMessage(int id_from, int id_cmd, char** tabs, int nbStr, int *tabi, int nbInt)
 {
-	Serial.print(id_from);
-	Serial.print(C_SEP_SEND);
+	sendHeader(id_from, id_cmd);
 	
 	for (int i=0; i<nbStr; ++i)
 	{
@@ -70,10 +77,9 @@ void sendMessage(int id_from, char** tabs, int nbStr, int *tabi, int nbInt)
 /// Envoie des int et des strings
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id_from, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
+void sendMessage(int id_from, int id_cmd, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
 {
-	Serial.print(id_from);
-	Serial.print(C_SEP_SEND);
+	sendHeader(id_from, id_cmd);
 	
 	for (int i=0; i<nbInt; ++i)
 	{

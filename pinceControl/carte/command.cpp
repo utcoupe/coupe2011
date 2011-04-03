@@ -8,15 +8,15 @@
 void cmd(int id, int header, int* args){              
 	/* On analyse le message en fonction de son type */
 	switch(header){
-		case Q_PING:{
+		case Q_PING:{//ok
 			sendMessage(id, (char*)"Pong");
 			break;
 		}
-		case Q_IDENT:{
-			sendMessage(id, (char*)"sm");
+		case Q_IDENT:{//ok
+			sendMessage(id, (char*)"PINCE");
 			break;
 		}
-		case Q_SHARP:{
+		case Q_SHARP:{//ok
 			sendMessage(id, getSharp(args[0]));
 			break;
 		}
@@ -24,7 +24,7 @@ void cmd(int id, int header, int* args){
 			sendMessage(id, setTriggerSharp(id, args[0],args[1]));
 			break;
 		}
-		case Q_MS:{
+		case Q_MS:{//ok
 			sendMessage(id, getMicroSwitch(args[0]));
 			break;
 		}
