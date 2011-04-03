@@ -39,17 +39,17 @@ var api = {
 	},
 	recalageRouge: function(){
 		$.get('/api/recalageRouge/1', function(data){
-			Ext.Msg.alert('Requête recalage rouge', "Réponse: "+data);
+			//Ext.Msg.alert('Requête recalage rouge', "Réponse: "+data);
 		});
 	},
 	recalageBleu: function(){
 		$.get('/api/recalageBleu/1', function(data){
-			Ext.Msg.alert('Requête recalage bleu', "Réponse: "+data);
+			//Ext.Msg.alert('Requête recalage bleu', "Réponse: "+data);
 		});
 	},
 	stop: function(){
 		$.get('/api/stop/1', function(data){
-			Ext.Msg.alert('Requête stop', "Réponse: "+data);
+			//Ext.Msg.alert('Requête stop', "Réponse: "+data);
 		});
 	}
 };
