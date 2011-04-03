@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 
-import pion
+from pion import *
+
+
 
 ACCEPT = {}
 ACCEPT[VIDE]        = (PION_2_T, TOUR, PION_1_T, PION_2, PION_1)

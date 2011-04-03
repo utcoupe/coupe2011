@@ -1,27 +1,25 @@
 # -*- coding: utf-8 -*-
 
+import threading
+import socket
 import sys
 sys.path.append('../com/serverPython/')
-import protocol
+from protocole import *
 
 
         
-class RobotClient:
+class RobotClient(threading.Thread):
     def __init__(self, robot):
+        threading.Thread.__init__(self,None,None,"RobotClient")
         self.robot = robot
         self._lock_write = threading.Lock()
         self._e_close = threading.Event()
         
         host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
-        port = sys.argv[2] if len(sys.argv) > 2 else 50000            # The same port as used by the server
+        port = int(sys.argv[2]) if len(sys.argv) > 2 else 50000            # The same port as used by the server
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.settimeout(1.0)
         self._socket.connect((host, port))
-        
-    def start(self):
-        self.t_recv = threading.Thread(None, self._fn_recv, None)
-        self.t_recv.start()
-        self.write("Standby ready !")
 
     def send(self, msg):
         """ 
@@ -34,7 +32,7 @@ class RobotClient:
                 self._e_close.set()
                 self.write("break send")
     
-    def _fn_recv(self):
+    def run(self):
         """ 
         Récupère ce qu'envoie le serveur
         """
@@ -53,17 +51,19 @@ class RobotClient:
     def _treat(self, msg):
         """ fonction appellée quand un message est reçu """
         # formatage de la réponse et appelle d'un robot.on<Event>()
-        self.write("Received : %s"%data)
+        self.write("Received : %s"%msg)
         msg = str(msg)
-        device, cmd, rep = 0,int(0),0
-        if device == "asserv":
-            self.robot.onRepAsserv(cmd, rep)
-        elif device == "cam":
-            self.robot.onRepCam(cmd, rep)
+        id_from, id_msg, msg = msg.split(C_SEP_SEND,2)
+        id_from = int(id_from)
+        id_msg = int(id_msg)
+        if id_from == ID_SERVER:
+            self.robot.onRepServer(id_msg, msg)
+        elif id_from == ID_ASSERV:
+            self.robot.onRepAsserv(id_msg, msg)
 
     def write(self, msg):
         """ pour écrire sans se marcher sur les doigts """
         self._lock_write.acquire()
-        print msg.strip()
+        print str(msg).strip()
         self._lock_write.release()
     

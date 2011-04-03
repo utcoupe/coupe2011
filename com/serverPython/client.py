@@ -34,7 +34,7 @@ class Client(threading.Thread):
         """
         print "%s start"%self.name
         self._running = True
-        self.send(-1,str(self.id))
+        self.send(0,str(Q_IDENT)+C_SEP_SEND+str(self.id))
         while self._running and not self._server.e_shutdown.isSet():
             self._loopRecv()
         print "%s arreté"%self.name
@@ -55,7 +55,7 @@ class TCPClient(Client):
         self.s.settimeout(1.0) # timeout
     
     def _fn_send(self, msg):
-        self.s.send(msg)
+        self.s.send(str(msg))
         
     def _loopRecv(self):
         try:
@@ -63,11 +63,12 @@ class TCPClient(Client):
         except socket.timeout:
             pass
         else:
-            self._server.write("Received from %s : %s"%(self.name,msg))
+            msg = msg.strip()
+            self._server.write("Received from %s : '%s'"%(self.name,msg))
             if msg:
                 self._server.parseMsg(self.id, msg)
             else:
-                self._server.parseMsg(self.id, "close")
+                self.stop()
 
 
 class LocalClient(Client):
@@ -76,17 +77,15 @@ class LocalClient(Client):
     """
     def __init__(self, server, id):
         Client.__init__(self, server, id, "LocalClient(%s)"%id)
+        self.mask_recv_from = -1
     
     def _fn_send(self, msg):
-        #self._server.write(msg)
-        pass
+        self._server.write("Received on server : '%s'"%msg)
     
     def _loopRecv(self):
         msg = raw_input()
         if msg:
             self._server.parseMsg(self.id, msg)
-        else:
-            self._server.parseMsg(self.id, "close")
         
 class SerialClient(Client):
     """
@@ -104,7 +103,8 @@ class SerialClient(Client):
     def _loopRecv(self):
         msg = self.serial.readline()
         if msg:
-            self._server.write("Received from %s : %s"%(self.name,msg))
+            msg = msg.strip()
+            self._server.write("Received from %s : '%s'"%(self.name,msg))
             self._server.parseMsg(self.id, msg)
 
     def stop(self):

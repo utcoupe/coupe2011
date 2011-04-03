@@ -1,35 +1,38 @@
 # -*- coding: utf-8 -*-
 
 
-import pince
-import robotClient
-import eventsWaiter
-import loopCmd
+from pince import *
+from robotClient import *
+from eventsWaiter import *
+from loopCmd import *
 
-## STATES ##
-WANT_2_FILL     = 0 # le robot veut se remplir
-WANT_2_DUMP     = 1 # le robot veut se vider
-FILLING         = 2 # le robot prend un objet
-DUMP            = 3 # le robot lache un objet
-MOVING          = 4 # le robot est en mouvement
-ROTATING        = 5 # le robot tourne
-IDENT_OBJ       = 6 # identifier le type d'un pion
+
+
+MAX_MSG         = 50
 
 
 class Robot:
     def __init__(self):
         self.pinces = (Pince, Pince)
-        self.client = RobotClient()
+        self.client = RobotClient(self)
         self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
         self.pos = (0,0)
         self.target_pos = (-1,-1) # la position du pion visé
-        self.events = [] # les events des réponses
-        self.reponses = [] # les réponses aux events
+        self.events = [ [ threading.Event() for __ in xrange(20) ] for _ in xrange(5) ] # les events des réponses
+        self.reponses = [ [0]*20 for _ in xrange(5) ]
         self._e_stop = threading.Event()
+        self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
+        self.id_msg = 0
     
-    def addCmd(self, device, cmd, args=[""]):
-        msg = str(device)+C_SEP_SEND+str(cmd)+reduce(lambda (x,y): str(x)+C_SEP_SEND+str(y), params)
-        self.events[device][cmd].clear()
+    def addCmd(self, device, id_cmd, args=[""]):
+        msg = str(device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
+        for a in args: msg += C_SEP_SEND+str(a)
+        self.cmd[self.id_msg] = id_cmd
+        self.reponses[device][id_cmd] = None
+        self.events[device][id_cmd].clear()
+        self.id_msg += 1
+        if self.id_msg >= MAX_MSG:
+            self.id_msg = 0
         self.client.send(msg)
     
     def write(self, msg):
@@ -37,7 +40,15 @@ class Robot:
     
     def start(self):
         """ démarage du robot """
-        pass
+        self.client.start()
+        self.addCmd(ID_ASSERV, Q_POSITION)
+        self.events[ID_ASSERV][Q_POSITION].wait()
+        self.write(self.reponses[ID_ASSERV][Q_POSITION])
+        self.write(self.pos)
+        self.addCmd(ID_ASSERV, Q_AUTO_RECAL, (1,))
+        self.events[ID_ASSERV][Q_AUTO_RECAL].wait()
+        self.write(self.reponses[ID_ASSERV][Q_AUTO_RECAL])
+        
     
     def stop(self, msg=None):
         """ arret du robot """
@@ -54,6 +65,7 @@ class Robot:
         for events in self.events:
             for e in events:
                 e.clear()
+        self.id_msg = 0
         # clear des pions
         self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
         self._e_stop.clear()
@@ -74,13 +86,13 @@ class Robot:
         """
         goals = []
         for cmd,args in path:
-            self.addCmd(ASSERV, cmd, args)
+            self.addCmd(ID_ASSERV, cmd, args)
             goals.append(args)
         
         
-        loopCmd = LoopCmd(self, 1.0, ASSERV, Q_POS)
+        loopCmd = LoopCmd(self, 1.0, ID_ASSERV, Q_POS)
         
-        eventsWaiter = EventsWaiter(("goal", self.events[ASSERV][GOAL_A]), ("pos", self.events[ASSERV][Q_POS]), ("warning", self.events[OTHERS][Q_WARNING]))
+        eventsWaiter = EventsWaiter(("goal", self.events[ID_ASSERV][GOAL_A]), ("pos", self.events[ID_ASSERV][Q_POS]), ("warning", self.events[OTHERS][Q_WARNING]))
         
         while True:
             r = eventsWaiter.wait(1.5)
@@ -93,7 +105,7 @@ class Robot:
                 if self.checkWarning(): # danger pour de vrai
                     self.stop("l'asservissement n'est pas là ou il devrait être")
             elif r == "goal": # un but atteind
-                goal_reach = self.reponses[ASSERV][GOAL_A]
+                goal_reach = self.reponses[ID_ASSERV][GOAL_A]
                 if goal_reach in goals: 
                     while True:
                         if goals.pop(0) == goal_reach:
@@ -122,48 +134,6 @@ class Robot:
         # aller poser sur des cases
         pass
     
-    def waitFor(self, device, cmd, timeout=None):
-        e = self.events[device][cmd]
-        e.stop_loop = threading.Event()
-        if timeout:
-            threading.Timer(timeout, lambda: e.stop_loop.set())
-        while not self._e_stop.isset() and not e.stop_loop.isset():
-            e.wait(1)
-            
-    def fill(self):
-        """ remplir le robot """
-        # recherche de la cible
-        while True:
-            self.addCmd(CAM, Q_SCAN)
-            self.waitFor(CAM, Q_SCAN, 1)
-            target, path = treatScan()
-            if target and path: break
-        # envoie du chemin à l'asserv
-        for p in path:
-            self.send(ASSERV, Q_GOAL_A, p)
-        end = path[-1]
-        # 
-        for p in path:
-            self.waitFor(ASSERV, Q_GOAL_A)
-            if self.pos == end: break
-        
-        
-    def onDetectEnemy(self):
-        """ quand l'adversaire est trop proche """
-        # déterminer qui est en tord
-        # si c'est nous, alors demarche d'esquive
-        pass
-    
-    def onLostEnemy(self):
-        """ lorsque la detection de l'adversaire est perdue """
-        # ralentir la vitesse pour etre sur de ne pas lui foncer dedans
-        pass
-    
-    def onReconnectEnnemy(self):
-        """ lorsque l'on redetect l'adversaire """
-        # accellerer la vitesse
-        pass
-    
     def onRepCam(self, cmd, msg):
         """ quand la réponse de la camera arrive """
         # il faudra traiter la réponse, voir les pions detectés,
@@ -178,12 +148,21 @@ class Robot:
         """ quand la carte 'others' envoie un message """
         self.events[OTHERS][cmd].set()
         
-    def onRepAsserv(self, cmd, msg):
+    def onRepAsserv(self, id_msg, msg):
         """ quand l'asserv envoie un message """
-        if Q_POS == cmd:
-            self.pos = msg.split(C_SEP2)
-        self.events[ASSERV][cmd].set()
+        id_cmd = self.cmd[id_msg]
+        if Q_POSITION == id_cmd:
+            self.pos = msg.split(C_SEP_SEND)
+        self.reponses[ID_ASSERV][id_cmd] = msg
+        self.events[ID_ASSERV][id_cmd].set()
     
+    def onRepServer(self, id_msg, msg):
+        """ quand le server envoie un message """
+        id_cmd = self.cmd[id_msg]
+        self.reponses[ID_SERVER][id_cmd] = msg
+        self.events[ID_SERVER][id_cmd].set()
+        
+        
     def dumpObj(self):
         """ ouvrir la pince """
         self.addCmd(OTHERS,Q_OPEN_PINCE) # ouvre la pince
