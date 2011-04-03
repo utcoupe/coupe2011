@@ -4,42 +4,20 @@
 
 // Message est le tableau de message
 // m est le message
-void cmd(int id_msg, int cmd, int *parameters)
+void cmd(int id_from, int id_cmd, int *args, int sizeArgs)
 {
 	// On analyse le message en fonction de son type
-	switch(cmd){
-		case PING: // Ping (renvoit time : pong)
-			sendMessage(id_msg, (char*)"Pong");
+	switch(id_cmd)
+	{
+		case Q_PING: // Ping (renvoit time : pong)
+			sendMessage(id_from, (char*)"Pong");
 		break;
 
-		case IDENTIFICATION: // Identification
-			sendMessage(id_msg, (char*)"autre");
+		case Q_IDENT: // Identification
+			sendMessage(id_from, (char*)"autre");
 		break;
-		case SHARP:
-			int v;
-			v = getSharp(parameters[0]);
-			if (v < 0)
-				error(id_msg);
-			else
-				sendMessage(id_msg, v);
-		break;
-		case CHECK_SHARP:
-			surveiller(id_msg, parameters[0]);
-			sendMessage(id_msg, "1");
-		break;
-		/*case 'L':
-			ledOn();
-			sendMessage(c, (char*)"Led ON");
-		break;
-		case 'l':
-			ledOff();
-			sendMessage(c, (char*)"Led OFF");
-		break;
-		case 't':
-			sendMessage(c, millis());
-		break;*/
 		default:
-			error(id_msg);
+			error(id_from);
 		break;
 	}
 }

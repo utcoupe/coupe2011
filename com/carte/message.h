@@ -4,12 +4,7 @@
 #define SERIAL_BAUD 115200
 
 // cf. protocole
-// concernant l'envoie
-#define C_SEP1	'|' // séparation id|message
-#define C_SEP2	'/' // séparation infos
-#define C_SEP3	'_' // séparations sous-infos
-// concernant la reception
-#define C_SEND	':' // tout est séparé par ça. Ex : 5:0:300:45 (id:cmd:parametre1:parametre2)
+#define C_SEP_SEND	':' // tout est séparé par ça. Ex : 5:0:300:45
 
 
 
@@ -21,16 +16,16 @@ void sendMessage(int id_msg, int *tabi, int size);
 void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt);
 void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 
-#define IDENTIFICATION	0
-#define PING			1
+// all
+#define Q_IDENT 			0
+#define Q_PING 				1
+#define Q_DEBUG				99
 
 // autre
 #define SHARP			52
 #define CHECK_SHARP		53
 
 // asserv
-#define Q_IDENT 			0
-#define Q_PING 				1
 #define Q_GOAL_ABS 			2
 #define Q_GOAL_REL 			3
 #define Q_ANGLE_ABS 		4
@@ -45,7 +40,6 @@ void sendMessage(int id_msg, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_STOP 				13
 #define Q_PAUSE				14
 #define Q_RESUME			15
-#define Q_DEBUG				99
 
 // erreurs
 #define	INVALID_CMD						-1

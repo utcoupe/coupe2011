@@ -13,7 +13,7 @@ void initSerialLink(){
 void sendMessage(int id_msg, int i)
 {
 	Serial.print(id_msg);
-	Serial.print(C_SEP1);
+	Serial.print(C_SEP_SEND);
 	Serial.println(i);
 }
 
@@ -24,11 +24,11 @@ void sendMessage(int id_msg, int i)
 void sendMessage(int id_msg, int *tabi, int size)
 {
 	Serial.print(id_msg);
-	Serial.print(C_SEP1);
+	Serial.print(C_SEP_SEND);
 	for (int i=0; i<size-1; ++i)
 	{
 		Serial.print(tabi[i]);
-		Serial.print(C_SEP2);
+		Serial.print(C_SEP_SEND);
 	}
 	Serial.println(tabi[size-1]);
 }
@@ -39,7 +39,7 @@ void sendMessage(int id_msg, int *tabi, int size)
 void sendMessage(int id_msg, char* str)
 {
 	Serial.print(id_msg);
-	Serial.print(C_SEP1);
+	Serial.print(C_SEP_SEND);
 	Serial.println(str);
 }
 
@@ -50,18 +50,18 @@ void sendMessage(int id_msg, char* str)
 void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt)
 {
 	Serial.print(id_msg);
-	Serial.print(C_SEP1);
+	Serial.print(C_SEP_SEND);
 	
 	for (int i=0; i<nbStr; ++i)
 	{
 		Serial.print(tabs[i]);
-		Serial.print(C_SEP2);
+		Serial.print(C_SEP_SEND);
 	}
 	
 	for (int i=0; i<nbInt-1; ++i)
 	{
 		Serial.print(tabi[i]);
-		Serial.print(C_SEP2);
+		Serial.print(C_SEP_SEND);
 	}
 	Serial.println(tabi[nbInt-1]);
 }
@@ -73,18 +73,18 @@ void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt)
 void sendMessage(int id_msg, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
 {
 	Serial.print(id_msg);
-	Serial.print(C_SEP1);
+	Serial.print(C_SEP_SEND);
 	
 	for (int i=0; i<nbInt; ++i)
 	{
 		Serial.print(tabi[i]);
-		Serial.print(C_SEP2);
+		Serial.print(C_SEP_SEND);
 	}
 	
 	for (int i=0; i<nbStr-1; ++i)
 	{
 		Serial.print(tabs[i]);
-		Serial.print(C_SEP2);
+		Serial.print(C_SEP_SEND);
 	}
 	Serial.println(tabs[nbStr-1]);
 }
@@ -111,7 +111,8 @@ void readIncomingData()
 		int data = Serial.read();
 		switch(data){
 			// separateur
-			case C_SEND: {
+			case C_SEP_SEND:
+			{
                	currentArg[currentArgIndex] = '\0';
        			args[argsIndex] = atoi(currentArg);
                 argsIndex++;
@@ -119,15 +120,17 @@ void readIncomingData()
         		break;
 			}
 			// fin de trame
-			case '\n': {
+			case '\n':
+			{
                 currentArg[currentArgIndex] = '\0';
         		args[argsIndex] = atoi(currentArg);
-				cmd(args[0],args[1],args+2,argsIndex-1); // appel de la commande
+				cmd(args[0],args[1],args+2,argsIndex-1); // from, id_cmd, *args, sizeArgs
   				argsIndex = 0;
 				currentArgIndex = 0;
 				break;
 			}
-			default: {
+			default:
+			{
 				currentArg[currentArgIndex] = data;    
 				currentArgIndex++;
 			    break;
