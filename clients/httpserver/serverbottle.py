@@ -49,6 +49,12 @@ def recalage(id):
 	data = s.recv(1024)
 	return '{recalage:"done"}'
 
+@route('/api/right/:id')
+def right(id):
+	s.send('asserv 3:200:0:100')
+	data = s.recv(1024)
+	return '{recalage:"done"}'
+
 # -----------------------------
 # fichiers statiques
 # -----------------------------

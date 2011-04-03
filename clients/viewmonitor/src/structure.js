@@ -51,6 +51,11 @@ var api = {
 		$.get('/api/stop/1', function(data){
 			//Ext.Msg.alert('Requête stop', "Réponse: "+data);
 		});
+	},
+	right: function(){
+		$.get('/api/right/1', function(data){
+
+		});
 	}
 };
 
@@ -115,7 +120,7 @@ var panelControls = new Ext.Panel({
 		    },
             items: [
                 {iconCls: 'refresh', handler: function(){ updateRobot(0, 0, +90); }},
-                {iconCls: 'arrow_left', handler: function(){ updateRobot(-20, 0); }},
+                {iconCls: 'arrow_left', handler: function(){ updateRobot(-20, 0); api.right(); }},
                 {iconCls: 'arrow_up', handler: function(){ updateRobot(0, -20); }},
                 {iconCls: 'arrow_down', handler: function(){ updateRobot(0, 20); }},
                 {iconCls: 'arrow_right', handler: function(){ updateRobot(20, 0); }},
