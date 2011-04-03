@@ -92,6 +92,7 @@ var panelControls = new Ext.Panel({
                 
                 {
                     text: 'Stop',
+                    handler: api.stop,
                     ui: 'decline'
                 },
                 {
