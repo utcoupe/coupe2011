@@ -9,41 +9,25 @@
 
 SERVER PYTHON
 	- message envoyé
-		Le message est composé d'un id, d'une commande et de ses éventuels
+		Le message est composé de l'id du client qui a envoyé le message, d'une commande et de ses éventuels
 		paramètres, séparés par le caractère ":".
+		id_mandataire:id_cmd:arg1:arg2
 		ex :
-			42:0
-			58:1
-			67:2:500:678
-
-	- message reçu
-		Le message est composé de d'un id et de la réponse séparés par le
-		caractère "|".
-		Si la réponse contient plusieurs sous infos, elles seront séparées
-		par le caractère "/", si il y a besoin de sous infos, "_".
-		Si la réponse doit contenir des retour à la ligne, il faudra
-		utiliser la caractère '$' et non la caractère de retour à la ligne
-		classique.
-		ex :
-			42|asserv
-			58|Pong
-			67|1
-			444|350/700/90 (parsage -> [350,700,90])
-			567|1_456_567/0_42_42 (parsage -> [[1,456,567], [0,42,42]])
-
-
+			1:0
+			2:1
+			1:2:500:678
 
 
 
 COMMANDES : CARTE ASSERV
 	0 (identification) 		--> 'asserv'
 	1 (Ping)				--> 'Pong'
-	2 x y (Goal en Absolu)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
-	3 x y (Goal en relatif)	-->	'1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
-	4 a (Angle en Absolu)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
-	5 a (Angle en relatif)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	2 x y (Goal en Absolu)	--> 'x y 0'	--> 'x y:1' ou 'x y -6'
+	3 x y (Goal en relatif)	-->	'x y 0'	--> 'x y:1' ou 'x y -6'
+	4 a (Angle en Absolu)	--> 'a 0'	--> 'a 1' ou 'a -6'
+	5 a (Angle en relatif)	--> 'a 0'	--> 'a 1' ou 'a -6'
 	6 (position)			--> 'x y a'
-	7 c (auto recalage)		--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a; c = 0 (bleu) ou 1 (rouge)
+	7 c (auto recalage)		--> '0'		--> '1' ou '-6' ; c = 0 (bleu) ou 1 (rouge)
 	8 (manual recalage)
 	9 (delay)
 	10 (pwm)
@@ -57,32 +41,21 @@ COMMANDES : CARTE ASSERV
 COMMANDES : CARTE PINCE
 	0 (identification) 		--> 'PINCE'
 	1 (Ping)				--> 'Pong'
-<<<<<<< HEAD
-	52 n (retour sharp n)	--> 'valeur du sharp n'
-	53 n s (surveiller que
-		le sharp n ne dépasse
-		le seuil s)			--> '1' (recu)	--> '1' ou '0' (1: seuil dépassé, 0: surveillance arretée)
-	54 n p (pince n
-			position p)		--> '1' (recu)	--> '1' ou '0' (fini ou échouer)
-	55 n p (moteur pas à pas
-			n numéro
-			p nb de pas)	--> '1' (recu)	--> '1'
-=======
-	12 n (retourne la valeur du sharp n)	
+	52 n (retourne la valeur du sharp n)	
 							--> 'N' (valeur du sharp n)
-	13 n s (renvoie une valeur quand le sharp n ne dépasse le seuil s)			
+	53 n s (renvoie une valeur quand le sharp n ne dépasse le seuil s)			
 							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil dépassé + arret seuil)
-	14 n (retourne la valeur du MS avant (0) ou arriere(1) )	
+	54 n (retourne la valeur du MS avant (0) ou arriere(1) )	
 	 						--> '1' MS fermé ou '0' MS ouvert
-	15 n s (renvoie message quand le microswitch n à atteint la valeur s)	
+	55 n s (renvoie message quand le microswitch n à atteint la valeur s)	
 							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil atteint + arret seuil)
-	16 n p (pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
+	56 n p (pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
 							--> '1' (recu) '0' (erreur)
-	17 n p (moteur numero n va a la position p
+	57 n p (moteur numero n va a la position p
 	 						--> '1' (recu) '0' (erreur)		--> '1'(atteint)
-	18 n (renvoie la charge de la pince n (0 : AV / 1 : AR)
+	58 n (renvoie la charge de la pince n (0 : AV / 1 : AR)
 	 						--> '2' (sert) '1' (sert pas) '0' (erreur)
-	19 (renvoie un mesage quand le jack est retiré)
+	59 (renvoie un mesage quand le jack est retiré)
 							--> '1' (recu) 					--> '2' ROUGE ou '3' BLEU
 
 >>>>>>> 7066cf92d61aa40a5717631cf638c26522adcf9f
@@ -108,6 +81,7 @@ CODES ERREURS
 	-3	INVALID_PARAMETERS_TYPE
 	-4	INVALID_ANALOGPIN
 	-5	INVALID_DIGITALPIN
+	-6	ANNULATION (asserv)
 	<<	UNKNOWN_ERROR
 
 ID CARTES
