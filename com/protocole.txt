@@ -43,7 +43,7 @@ COMMANDES : CARTE ASSERV
 	4 a (Angle en Absolu)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
 	5 a (Angle en relatif)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
 	6 (position)			--> 'x y a'
-	7 (auto recalage)		--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	7 c (auto recalage)		--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a; c = 0 (bleu) ou 1 (rouge)
 	8 (manual recalage)
 	9 (delay)
 	10 (pwm)
