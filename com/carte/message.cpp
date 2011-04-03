@@ -10,9 +10,9 @@ void initSerialLink(){
 ///
 /// Envoie un int
 ///
-void sendMessage(int id_msg, int i)
+void sendMessage(int id_from, int i)
 {
-	Serial.print(id_msg);
+	Serial.print(id_from);
 	Serial.print(C_SEP_SEND);
 	Serial.println(i);
 }
@@ -21,9 +21,9 @@ void sendMessage(int id_msg, int i)
 ///
 /// Envoie un tableau d'int
 ///
-void sendMessage(int id_msg, int *tabi, int size)
+void sendMessage(int id_from, int *tabi, int size)
 {
-	Serial.print(id_msg);
+	Serial.print(id_from);
 	Serial.print(C_SEP_SEND);
 	for (int i=0; i<size-1; ++i)
 	{
@@ -36,9 +36,9 @@ void sendMessage(int id_msg, int *tabi, int size)
 ///
 /// Envoie un string
 ///
-void sendMessage(int id_msg, char* str)
+void sendMessage(int id_from, char* str)
 {
-	Serial.print(id_msg);
+	Serial.print(id_from);
 	Serial.print(C_SEP_SEND);
 	Serial.println(str);
 }
@@ -47,9 +47,9 @@ void sendMessage(int id_msg, char* str)
 /// Envoie des strings et des int
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt)
+void sendMessage(int id_from, char** tabs, int nbStr, int *tabi, int nbInt)
 {
-	Serial.print(id_msg);
+	Serial.print(id_from);
 	Serial.print(C_SEP_SEND);
 	
 	for (int i=0; i<nbStr; ++i)
@@ -70,9 +70,9 @@ void sendMessage(int id_msg, char** tabs, int nbStr, int *tabi, int nbInt)
 /// Envoie des int et des strings
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id_msg, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
+void sendMessage(int id_from, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
 {
-	Serial.print(id_msg);
+	Serial.print(id_from);
 	Serial.print(C_SEP_SEND);
 	
 	for (int i=0; i<nbInt; ++i)
