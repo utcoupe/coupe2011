@@ -7,30 +7,6 @@
 #include "sensor.h"
 #include "tourelle.h"
 
-/*
-	erreur = requette non prise en compte
-	
-    COMMANDES : CARTE SM,
-	0 (identification) 		--> 'SM'
-	1 (Ping)				--> 'Pong'
-	12 n (Q_SHARP : retour sharp n)	
-							--> 'valeur du sharp n'
-	13 n s (Q_TRIGGERSHARP : surveiller que le sharp n ne dépasse le seuil s)			
-							--> '1' (recu) ou '0' (recu mais erreur) --> '1' (seuil dépassé + arret seuil)
-	14 n (Q_MS : retourne la valeur du MS avant (0) ou arriere(1) )	
-	 						--> 'valeur du MS
-	15 n s (Q_TRIGGERMS : message quand le microswitch n à atteint la valeur s)	
-							--> '1' (recu) ou '0' (recu mais erreur) --> '1' (seuil atteint + arret seuil)
-	16 n p (pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
-							--> '1' (recu) '0' (recu mais erreur)
-	17 n p (moteur numero n va a la position p
-	 						--> '1' (recu) '0' (recu mais erreur)	--> '1'(atteint)
-	18 n (renvoie la charge de la pince n (0 : AV / 1 : AR)
-	 						--> '2' (sert) '1' (sert pas) '0' (erreur)
-	19 (renvoie un mesage quand le jack est retiré)
-	* 						--> '1' (recu) --> '2' ROUGE ou '3' BLEU
- */ 
-
 #define Q_PING 				1
 #define Q_IDENT 			0
 #define Q_SHARP 			12
@@ -41,6 +17,7 @@
 #define Q_POSITION 			17
 #define Q_PRESENT_LOAD 		18
 #define Q_JACK		 		19
+#define Q_JACK		 		20
 
 
 void cmd(int,int,int*);

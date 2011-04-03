@@ -46,18 +46,28 @@ COMMANDES : CARTE ASSERV
 	7 (recalage)			--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
 
 
-COMMANDES : CARTE AUTRE,
-	0 (identification) 		--> 'autre'
+COMMANDES : CARTE PINCE
+	0 (identification) 		--> 'PINCE'
 	1 (Ping)				--> 'Pong'
-	12 n (retour sharp n)	--> 'valeur du sharp n'
-	13 n s (surveiller que
-		le sharp n ne dépasse
-		le seuil s)			--> '1' (recu)	--> '1' ou '0' (1: seuil dépassé, 0: surveillance arretée)
-	14 n p (pince n
-			position p)		--> '1' (recu)	--> '1' ou '0' (fini ou échouer)
-	15 n p (moteur pas à pas
-			n numéro
-			p nb de pas)	--> '1' (recu)	--> '1'
+	12 n (retourne la valeur du sharp n (de 0 à 11)	
+							--> 'N' (valeur du sharp n)
+	13 n s (renvoie une valeur quand le sharp n ne dépasse le seuil s)			
+							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil dépassé + arret seuil)
+	14 n (retourne la valeur du MS avant (0) ou arriere(1) )	
+	 						--> '1' MS (fermé) ou '0' (MS ouvert) ou '-1' (erreur)
+	15 n s (renvoie message quand le microswitch n à atteint la valeur s)	
+							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil atteint + arret seuil)
+	16 n p (pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
+							--> '1' (recu) '0' (erreur)
+	17 n p (moteur numero n va a la position p
+	 						--> '1' (recu) '0' (erreur)		--> '1'(atteint)
+	18 n (renvoie la charge de la pince n (0 : AV / 1 : AR)
+	 						--> '2' (sert) '1' (sert pas) '0' (erreur)
+	19 (renvoie un mesage quand le jack est retiré)
+							--> '1' (recu) 					--> '2' (jack retiré)
+	20 n (affiche la couleur rouge ('0') ou bleu ('1'))
+							--> '1' (recu)
+
 
 
 COMMANDES : CAMERA

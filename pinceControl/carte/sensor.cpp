@@ -74,6 +74,8 @@ int getSharp(unsigned char pin)
 			return analogRead(A9);
 		case 10:
 			return analogRead(A10);
+		case 11:
+			return analogRead(A11);
 		default:
 			return -1;
 	}
