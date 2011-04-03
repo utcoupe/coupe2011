@@ -60,4 +60,4 @@ def send_static(filename='index.html'):
 # on lance le serveur
 # -----------------------------
 
-run(host='localhost', port=8080)
+run(host='', port=8080)
