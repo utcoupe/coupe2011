@@ -37,15 +37,17 @@ def recalage(id):
 
 @route('/api/recalageBleu/:id')
 def recalage(id):
+	print "recalage bleu"
 	s.send('asserv 7:0')
-	#data = s.recv(1024)
-	return '{recalage:"done"}' % id
+	print "cmd sent"
+	data = s.recv(1024)
+	return '{recalage:"done"}'
 
 @route('/api/stop/:id')
 def recalage(id):
 	s.send('asserv 13')
-	#data = s.recv(1024)
-	return '{recalage:"done"}' % id
+	data = s.recv(1024)
+	return '{recalage:"done"}'
 
 # -----------------------------
 # fichiers statiques
