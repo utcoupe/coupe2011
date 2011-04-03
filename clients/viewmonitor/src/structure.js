@@ -39,21 +39,38 @@ var api = {
 	},
 	recalageRouge: function(){
 		$.get('/api/recalageRouge/1', function(data){
-			Ext.Msg.alert('Requête recalage rouge', "Réponse: "+data);
+			//Ext.Msg.alert('Requête recalage rouge', "Réponse: "+data);
 		});
 	},
 	recalageBleu: function(){
 		$.get('/api/recalageBleu/1', function(data){
-			Ext.Msg.alert('Requête recalage bleu', "Réponse: "+data);
+			//Ext.Msg.alert('Requête recalage bleu', "Réponse: "+data);
 		});
 	},
 	stop: function(){
 		$.get('/api/stop/1', function(data){
-			Ext.Msg.alert('Requête stop', "Réponse: "+data);
+			//Ext.Msg.alert('Requête stop', "Réponse: "+data);
 		});
+	},
+	left: function(){
+		var x=-100, y=0;
+		$.get('/api/gorelative/'+x+'/'+y);
+	},
+	right: function(){
+		var x=100, y=0;
+		$.get('/api/gorelative/'+x+'/'+y);
+	},
+	down: function(){
+		var x=0, y=-100;
+		$.get('/api/gorelative/'+x+'/'+y);
+	},
+	up: function(){
+		var x=0, y=100;
+		$.get('/api/gorelative/'+x+'/'+y);
 	}
 };
 
+                
 // Controls
 $(function(){
 	$('#table').empty();
@@ -92,6 +109,7 @@ var panelControls = new Ext.Panel({
                 
                 {
                     text: 'Stop',
+                    handler: api.stop,
                     ui: 'decline'
                 },
                 {
@@ -114,10 +132,10 @@ var panelControls = new Ext.Panel({
 		    },
             items: [
                 {iconCls: 'refresh', handler: function(){ updateRobot(0, 0, +90); }},
-                {iconCls: 'arrow_left', handler: function(){ updateRobot(-20, 0); }},
-                {iconCls: 'arrow_up', handler: function(){ updateRobot(0, -20); }},
-                {iconCls: 'arrow_down', handler: function(){ updateRobot(0, 20); }},
-                {iconCls: 'arrow_right', handler: function(){ updateRobot(20, 0); }},
+                {iconCls: 'arrow_left', handler: function(){ updateRobot(-20, 0); api.left(); }},
+                {iconCls: 'arrow_up', handler: function(){ updateRobot(0, -20); api.up(); }},
+                {iconCls: 'arrow_down', handler: function(){ updateRobot(0, 20); api.down(); }},
+                {iconCls: 'arrow_right', handler: function(){ updateRobot(20, 0); api.right(); }},
                 {iconCls: 'refresh', handler: function(){ updateRobot(0, 0, -90); }}
             ]
         }
