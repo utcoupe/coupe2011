@@ -27,7 +27,7 @@ COMMANDES : CARTE ASSERV
 	4 a (Angle en Absolu)	--> 'a 0'	--> 'a 1' ou 'a -6'
 	5 a (Angle en relatif)	--> 'a 0'	--> 'a 1' ou 'a -6'
 	6 (position)			--> 'x y a'
-	7 c (auto recalage)		--> '0'		--> '1' ou '-6' ; c = 0 (bleu) ou 1 (rouge)
+	7 c (auto recalage)		--> '0'		--> '1' ou '-6' ; c = 1 (bleu) ou 0 (rouge)
 	8 (manual recalage)
 	9 (delay)
 	10 (pwm)

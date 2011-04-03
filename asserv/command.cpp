@@ -116,7 +116,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				if(args[0] == 0){
+				if(args[0] == 1){
 					pushGoalAutoCalibration(id,true);
 				}
 				else{
