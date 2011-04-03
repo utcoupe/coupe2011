@@ -36,33 +36,33 @@ class EventListener(threading.Thread):
 
 class DisconnectListener(EventListener):
 	""" Catch les event de deconection et tente une reconnection """
-	def __init__(self, disconnect_event, reconnect_event, server, id_client, verrou):
-		EventListener.__init__(self, disconnect_event, id_client, verrou)
+	def __init__(self, disconnect_event, reconnect_event, server, id_device, verrou):
+		EventListener.__init__(self, disconnect_event, id_device, verrou)
 		self._disconnect_event = disconnect_event
 		self._reconnect_event = reconnect_event
 		self._server = server
-		self._id_client = id_client
-		self._client = server.clients[id_client]
+		self._id_device = id_device
+		self._device = server.devices[id_device]
 		self._verrou = verrou
 		
 	def action(self):
 		self._verrou.acquire()
-		print "%s : '%s' on port %s deconnected..."%(self.name, str(self._id_client), self._server.ports[self._id_client])
-		port_actuel = self._server.ports[self._id_client]
+		print "%s : '%s' on port %s deconnected..."%(self.name, str(self._id_device), self._server.ports[self._id_device])
+		port_actuel = self._server.ports[self._id_device]
 		self._server.ports_connection[port_actuel] = False
 		# pour les ports série
-		if self._client.baudrate:
+		if self._device.baudrate:
 			scan = server.scanPorts()
 			for port in scan:
 				# si le port n'est pas enregistré dans le serveur ou qu'il est indiqué inactif
 				if port not in self._server.ports_connection or not self._server.ports_connection[port]:
 					# alors on tente une connection
-					id_client, client = self._server.connect(port, 115200, False)
-					self._postConnection(port,id_client,client)
+					id_device, device = self._server.connect(port, 115200, False)
+					self._postConnection(port,id_device,device)
 		# pour la cam
 		else:
-			id_client, client = self._server.connect(self._client.origin, None)
-			self._postConnection(self._client.origin,id_client,client)
+			id_device, device = self._server.connect(self._device.origin, None)
+			self._postConnection(self._device.origin,id_device,device)
 		
 		
 		# si on a pas réussi à reconnecter notre port on fait une pause
@@ -70,15 +70,15 @@ class DisconnectListener(EventListener):
 			time.sleep(1)
 		self._verrou.release()
 
-	def _postConnection(self, port, id_client, client):
+	def _postConnection(self, port, id_device, device):
 		""" met à jour Envoyeur et Receveur
 		met à jour les event deconnect et reconnect
 		"""
-		if id_client:
-			self._server.envoyeurs[id_client]._client = client
-			self._server.receveurs[id_client]._client = client
-			#print port, self._server.ports[self._id_client]
-			if str(port) == self._server.ports[self._id_client]:
+		if id_device:
+			self._server.envoyeurs[id_device]._device = device
+			self._server.receveurs[id_device]._device = device
+			#print port, self._server.ports[self._id_device]
+			if str(port) == self._server.ports[self._id_device]:
 				self._event.clear() # plus deconnecté
 				self._reconnect_event.set() # prevenir que l'on a reconnecté
 		

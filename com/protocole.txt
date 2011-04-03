@@ -43,7 +43,7 @@ COMMANDES : CARTE ASSERV
 	4 a (Angle en Absolu)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
 	5 a (Angle en relatif)	--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
 	6 (position)			--> 'x y a'
-	7 (auto recalage)		--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a
+	7 c (auto recalage)		--> '1'		--> '1' ou '0' (1: but atteind, 0: annulation) suivi de x y a; c = 0 (bleu) ou 1 (rouge)
 	8 (manual recalage)
 	9 (delay)
 	10 (pwm)
@@ -71,9 +71,7 @@ COMMANDES : CARTE AUTRE,
 COMMANDES : CAMERA
 	0 (identification) 		--> 'autre'
 	1 (Ping)				--> 'Pong'
-	2 (back cam)			--> ' ,r' ou ' ,t x y;t x y'
-	3 (front cam)			--> ' ,r' ou ' ,t x y;t x y'
-	4 (both cam)			--> ' ,r' ou ' ,t x y;t x y'
+	2 (scan)				--> ' ,r' ou ' ,t x y;t x y'
 
 
 SERVER PYTHON
@@ -91,3 +89,9 @@ CODES ERREURS
 	-4	INVALID_ANALOGPIN
 	-5	INVALID_DIGITALPIN
 	<<	UNKNOWN_ERROR
+
+ID CARTES
+	0	asserv
+	1	autres
+
+

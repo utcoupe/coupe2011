@@ -29,10 +29,22 @@ def ping(id):
 	return '{pong:"%s"}' % data
 
 
-@route('/api/recalage/:id')
+@route('/api/recalageRouge/:id')
 def recalage(id):
-	s.send('asserv 7')
-	data = s.recv(1024)
+	s.send('asserv 7:1')
+	#data = s.recv(1024)
+	return '{recalage:"done"}' % id
+
+@route('/api/recalageBleu/:id')
+def recalage(id):
+	s.send('asserv 7:0')
+	#data = s.recv(1024)
+	return '{recalage:"done"}' % id
+
+@route('/api/stop/:id')
+def recalage(id):
+	s.send('asserv 13')
+	#data = s.recv(1024)
 	return '{recalage:"done"}' % id
 
 # -----------------------------

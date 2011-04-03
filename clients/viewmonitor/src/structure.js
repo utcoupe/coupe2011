@@ -37,9 +37,19 @@ var api = {
 			Ext.Msg.alert('Requête ping', "Réponse: "+data);
 		});
 	},
-	recalage: function(){
-		$.get('/api/recalage/1', function(data){
-			Ext.Msg.alert('Requête recalage', "Réponse: "+data);
+	recalageRouge: function(){
+		$.get('/api/recalageRouge/1', function(data){
+			Ext.Msg.alert('Requête recalage rouge', "Réponse: "+data);
+		});
+	},
+	recalageBleu: function(){
+		$.get('/api/recalageBleu/1', function(data){
+			Ext.Msg.alert('Requête recalage bleu', "Réponse: "+data);
+		});
+	},
+	stop: function(){
+		$.get('/api/stop/1', function(data){
+			Ext.Msg.alert('Requête stop', "Réponse: "+data);
 		});
 	}
 };
@@ -71,8 +81,12 @@ var panelControls = new Ext.Panel({
                     handler: api.ping
                 },
                 {
-                    text: 'Recalage',
-                    handler: api.recalage
+                    text: 'InitRouge',
+                    handler: api.recalageRouge
+                },
+                {
+                    text: 'InitBleu',
+                    handler: api.recalageBleu
                 },
                 {xtype: 'spacer'},
                 

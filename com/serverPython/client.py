@@ -1,44 +1,63 @@
 # -*- coding: utf-8 -*-
 
+import threading
+import traceback
+import socket
 
-class ClientSerial():
-	""" client connecté via un port série
-	"""
-	def __init__(self, serial, origin, baudrate):
-		self._serial = serial
-		self.origin = origin
-		self.baudrate = baudrate
-		
-	def write(self, msg):
-		self._serial.write(str(msg)+"\n")
-		
-	def readline(self):
-		return self._serial.readline()
-	
-	def __str__(self):
-		return "ClientSerial(%s)"%self.origin
-	
-	def close(self):
-		self._serial.close()
+from protocole import *
 
 
-class ClientSubprocess():
-	""" client connecté via un pipe
-	"""
-	def __init__(self, subprocess, origin, baudrate):
-		self._subprocess = subprocess
-		self.origin = origin
-		self.baudrate = baudrate
-	
-	def write(self, msg):
-		self._subprocess.stdin.write(str(msg)+"\n") # envoie au child
-		self._subprocess.stdin.flush()
-	
-	def readline(self):
-		return self._subprocess.stdout.readline()
-	
-	def __str__(self):
-		return "ClientSubprocess(%s)"%self.origin
-	
-	def close(self):
-		self._subprocess.kill()
+class Client(threading.Thread):
+    """
+    Client
+    """
+    def __init__(self, id, s, server):
+        """
+        @param id id du client
+        @param s socket pour écouter envoyer
+        @param server le server
+        """
+        threading.Thread.__init__(self, None, None, "Client(%s)"%str(id))
+        self.s = s
+        self.s.settimeout(1.0)
+        self.id = id
+        self._server = server
+        self._running = True
+            
+    def send(self, msg):
+        """
+        @param msg message à envoyer
+        """
+        self.s.send(msg)
+    
+    def __del__(self):
+        self.s.close()
+        print "Client(%s) destroy"%self.id
+    
+    def stop(self):
+        self._running.set()
+    
+    def run(self):
+        """
+        Point d'entrée, envoie au client son id puis lance self._loop() en boucle
+        """
+        print "Client(%s) start"%self.id
+        self.send(str(self.id))
+        while self._running and not self._server.e_shutdown.isSet():
+            self._loop()
+        print "Client(%s) arreté"%self.id
+        
+    def _loop(self):
+        """
+        Fonction appellée en boucle
+        récupère le message et le traite
+        """
+        try:
+            msg = self.s.recv(1024)
+        except socket.timeout:
+            pass
+        else:
+            if msg:
+                print "Received from", self.id,":",msg
+                self._server.parseMsg(self.id, msg)
+            
