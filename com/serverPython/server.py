@@ -53,6 +53,7 @@ class Server():
 		"""
 		parse un message avant de l'envoyer
 		"""
+		msg = msg.strip()
 		id_to, msg = msg.split(C_SEP_SEND,1)
 		id_to = int(id_to)
 		mask_from = (1 << id_client)

@@ -38,6 +38,23 @@ class Client(threading.Thread):
         while self._running and not self._server.e_shutdown.isSet():
             self._loopRecv()
         print "%s arreté"%self.name
+
+    def combineWithPartial(self, msg):
+        """
+        @return [] si le message ne peut pas etre exploité (pas de \n à la fin)
+        @return [m1,m2,m3, ...] sinon
+        """
+        print (self._partialMsg,msg)
+        msg = self._partialMsg + msg
+        index = msg.rfind('\n')
+        if index < 0:
+            self._partialMsg = msg
+            print self._partialMsg,[]
+            return []
+        else:
+            self._partialMsg = msg[index+1:]
+            print self._partialMsg,[ m for m in msg[:index].split('\n') ]
+            return [ m for m in msg[:index].split('\n') ]
     
     
 class TCPClient(Client):
@@ -63,12 +80,12 @@ class TCPClient(Client):
         except socket.timeout:
             pass
         else:
-            msg = msg.strip()
-            self._server.write("Received from %s : '%s'"%(self.name,msg))
-            if msg:
-                self._server.parseMsg(self.id, msg)
-            else:
-                self.stop()
+            for msg in self.combineWithPartial(msg):
+                self._server.write("Received from %s : '%s'"%(self.name,msg))
+                if msg:
+                    self._server.parseMsg(self.id, msg)
+                else:
+                    self.stop()
 
 
 class LocalClient(Client):
@@ -83,8 +100,8 @@ class LocalClient(Client):
         self._server.write("Received on server : '%s'"%msg)
     
     def _loopRecv(self):
-        msg = raw_input()
-        if msg:
+        for msg in self.combineWithPartial(msg):
+            msg = msg.strip()
             self._server.parseMsg(self.id, msg)
         
 class SerialClient(Client):
