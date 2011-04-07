@@ -45,7 +45,7 @@ class Robot:
         self.events[ID_ASSERV][Q_POSITION].wait()
         self.write(self.reponses[ID_ASSERV][Q_POSITION])
         self.write(self.pos)
-        self.addCmd(ID_ASSERV, Q_AUTO_RECAL, (1,))
+        self.addCmd(ID_ASSERV, Q_AUTO_RECAL, (0,))
         self.events[ID_ASSERV][Q_AUTO_RECAL].wait()
         self.write(self.reponses[ID_ASSERV][Q_AUTO_RECAL])
         
