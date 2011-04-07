@@ -1,12 +1,7 @@
-#include "WProgram.h"
 #include "command.h"
 #include "parameters.h"
 #include "robotstate.h"
-#include "control.h"
 #include "fifo.h"
-#include "pwm.h"
-#include "control.h"
-#include "encoder.h"
 #include "message.h"
 
 /**
@@ -23,20 +18,20 @@ void cmd(int id, int id_cmd, int* args, int size){
 
 		case Q_IDENT: /* Identification */
 		{
-			sendMessage(id, "asserv");
+			sendMessage(id, (char*)"asserv");
 			break;
 		}
 
 		case Q_PING:
 		{
-			sendMessage(id, "Pong");
+			sendMessage(id, (char*)"Pong");
 			break;
 		}
 
 		case Q_GOAL_ABS:
 		{
 			if (size < 3)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalPosition(id,(double)args[0]*ENC_MM_TO_TICKS, (double)args[1]*ENC_MM_TO_TICKS, (double)args[2]);
@@ -48,7 +43,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_GOAL_REL:
 		{
 			if (size < 3)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double co = cos(robot_state.angle);
@@ -63,7 +58,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_ANGLE_ABS:
 		{
 			if (size < 2)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double angle = args[0]/180.0 * M_PI;
@@ -76,7 +71,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_ANGLE_REL:
 		{
 			if (size < 2)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double angle = moduloPI(args[0]/180.0 * M_PI + robot_state.angle);
@@ -99,7 +94,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_MANUAL_CALIB : //TODO a eclater en calibration manuel de l'angle ,de x et de y
 		{
 			if (size < 3)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalManualCalibration(TYPE_CALIB_X, args[0]);
@@ -113,7 +108,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_AUTO_CALIB :
 		{
 			if (size < 1)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				if(args[0] == 1){
@@ -131,7 +126,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_DELAY:
 		{
 			if (size < 1)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalDelay(args[0]);
@@ -143,7 +138,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_PWM:
 		{
 			if (size < 2)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				pushGoalPwm(args[0],args[1]);
@@ -151,11 +146,11 @@ void cmd(int id, int id_cmd, int* args, int size){
 			}
 			break;
 		}
-
+		/*
 		case Q_MODIF_GOAL_ABS:
 		{
 			if (size < 3)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				current_goal.type = TYPE_POSITION;
@@ -171,7 +166,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case Q_MODIF_GOAL_REL:
 		{
 			if (size < 3)
-				sendMessage(id, INVALID_PARAMETERS_NUMBERS);
+				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
 				double co = cos(robot_state.angle);
@@ -186,7 +181,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 			}
 			break;
 		}
-
+		 */
 		case Q_STOP: /* comme stop */
 		{
 			clearGoals();
@@ -211,7 +206,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 
 		case Q_DEBUG : //TODO a degager quand tout marche
 		{
-			Serial.print("?,_________________§");
+			/*Serial.print("?,_________________§");
 			Serial.print("uptime: ");Serial.print(millis());
 			Serial.print("§angle: ");Serial.print(robot_state.angle, DEC);
 			Serial.print("§speed: ");Serial.print(robot_state.speed*ENC_TICKS_TO_MM, DEC);
@@ -221,13 +216,13 @@ void cmd(int id, int id_cmd, int* args, int size){
 			Serial.print("§y: ");Serial.print(robot_state.y*ENC_TICKS_TO_MM, DEC);
 			Serial.print("§yt: ");Serial.print(robot_state.y, DEC);
 			Serial.print("§encL: ");Serial.print(value_left_enc);
-			Serial.print("§encR: ");Serial.println(value_right_enc);
+			Serial.print("§encR: ");Serial.println(value_right_enc);*/
 			break;
 		}
 
 		default:
 		{
-			sendMessage(id,0);
+			sendMessage(id,E_INVALID_CMD);
 			break;
 		}
 	}

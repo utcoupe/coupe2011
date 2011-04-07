@@ -10,7 +10,6 @@
 
 #include <math.h>
 #include "parameters.h"
-#include "wiring.h"
 
 #define PHASE_1 1
 #define PHASE_2 2

@@ -20,7 +20,8 @@ class Server():
 	def __init__(self):
 		self.clients = []
 		self.sender = Sender(self.clients)
-		self.tcpLoop = TCPLoop(self,'', random.randint(40000,60000))
+		#self.tcpLoop = TCPLoop(self,'', random.randint(40000,60000))
+		self.tcpLoop = TCPLoop(self,'', 50000)
 		self.e_shutdown = threading.Event()
 		self._lock_write = threading.Lock()
 		
