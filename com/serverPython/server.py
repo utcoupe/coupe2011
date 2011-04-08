@@ -33,7 +33,7 @@ class Server():
 		self.tcpLoop.start()
 	
 	def stop(self):
-		self._e_shutdown.set()
+		self.e_shutdown.set()
 	
 	def addTCPClient(self, conn):
 		client = TCPClient(self,len(self.clients),conn)
