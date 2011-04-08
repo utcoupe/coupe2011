@@ -6,8 +6,9 @@ import socket
 from protocole import *
 
 class Client(threading.Thread):
-    def __init__(self, server, id, name):
+    def __init__(self, server, id, name=None):
         threading.Thread.__init__(self, None, None, name)
+        self.name = name
         self._server = server # la socket pour envoyer recevoir
         self.id = id # id du client sur le serveur
         self._running = False # le client tourne
@@ -67,7 +68,8 @@ class TCPClient(Client):
         @param id id du client
         @param s socket pour écouter envoyer
         """
-        Client.__init__(self, server, id, "TCPClient(%s)"%id)
+        Client.__init__(self, server, id)
+        self.name = "TCPClient(%s)"%id
         self.s = s
         self.s.settimeout(1.0) # timeout
     
@@ -93,7 +95,8 @@ class LocalClient(Client):
     Le client qui est dans le terminal lancé par main.py
     """
     def __init__(self, server, id):
-        Client.__init__(self, server, id, "LocalClient(%s)"%id)
+        Client.__init__(self, server, id)
+        self.name = "LocalClient(%s)"%id
         self.mask_recv_from = -1
     
     def _fn_send(self, msg):
@@ -110,6 +113,7 @@ class SerialClient(Client):
     """
     def __init__(self, server, id, serial, port, baudrate):
         Client.__init__(self, server, id, "SerialClient(%s)"%id)
+        self.name = "SerialClient(%s)"%id
         self.serial = serial
         self.port = port
         self.baudrate = baudrate
@@ -130,7 +134,8 @@ class SerialClient(Client):
 
 class SubprocessClient(Client):
     def __init__(self, server, id, process, exec_name):
-        Client.__init__(self, server, id, "SubprocessClient(%s)"%s)
+        Client.__init__(self, server, id, "SubprocessClient(%s)"%id)
+        self.name = "SubprocessClient(%s)"%id
         self.process = process
         self.exec_name = exec_name
         
