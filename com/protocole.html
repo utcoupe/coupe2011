@@ -110,7 +110,7 @@ De 2 à 30.
 	<li><a href="#angle_rel">5 a v (Angle en relatif)</a></li>
 	<li><a href="#position">6 (position)</a></li>
 	<li><a href="#recal_auto">7 c (auto recalage)</a></li>
-	<li><a href="#recal_manu">8 (manual recalage)</a></li>
+	<li><a href="#recal_manu">8 type value(manual recalage)</a></li>
 	<li><a href="#delay">9 (delay)</a></li>
 	<li><a href="#pwm">10 (pwm)</a></li>
 	<li><a href="#modif_g_abs">11 (modif goal abs)</a></li>
@@ -128,6 +128,10 @@ De 2 à 30.
 
 <p>
 De 31 à 60.
+<ul>
+	<li><a href="#identification">0 (identification)</a></li>
+	<li><a href="#ping">1 (Ping)</a></li>
+</ul>
 </p>
 
 
@@ -181,7 +185,7 @@ De 61 à 70.
 <h3 id="goal_abs">2 Goal absolu [x,y,v] (ASSERV)</h3>
 
 <p>
-	Aller à un point (x,y) de la carte à une vitesse (v)
+	Aller à un point (x,y) de la carte à une vitesse (v).
 </p>
 <p>
 	<b>Params :</b><br />
@@ -202,7 +206,7 @@ De 61 à 70.
 <h3 id="goal_rel">3 Goal relatif [x,y,v] (ASSERV)</h3>
 
 <p>
-	Aller à un point (x,y) de la carte dans le repère Robot à une vitesse (v)
+	Aller à un point (x,y) de la carte dans le repère Robot à une vitesse (v).
 </p>
 <p>
 	<b>Params :</b><br />
@@ -283,6 +287,35 @@ Lance le recalage automatique pour la couleur (c). A ne faire que sur l'une des 
 <p>
 	<b>Params :</b><br />
 	c : 1 pour bleu, 0 pour rouge.
+</p>
+<p>
+	<b>Retour :</b><br />
+	<ul>
+		<li>'1' lors de la reception</li>
+		<li>'2' quand but atteind</li>
+	</ul>
+</p>
+</div>
+
+
+<div>
+<h3 id="recal_manu">7 Recalage manuel [type,value] (ASSERV)</h3>
+
+<p>
+	Recalage manuel de type (type), cad que c'est nous qui disons au robot quelle valeur (value) mettre.<br />
+	<b>TODO</b> : changer la place des #define.
+</p>
+<p>
+	<b>Params :</b><br />
+	<ul>
+		<li>type (valeur définies dans fifo.h):
+			<ul>
+				<li>3 : pour x (#define TYPE_CALIB_X)</li>
+				<li>4 : pour y (#define TYPE_CALIB_Y)</li>
+				<li>5 : pour l'angle (#define TYPE_CALIB_ANGLE)</li>
+			</ul>
+		<li>value : la valeur à mettre, (x,y : mm; angle : degrès).</li>
+	</ul>
 </p>
 <p>
 	<b>Retour :</b><br />
