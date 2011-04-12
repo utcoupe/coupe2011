@@ -111,7 +111,7 @@ class Tangente(Line):
         else:
             t2 = asin(frac)
             
-        teta = t1-t2 if type else t1+t2
+        teta = t1+type*t2
         
         if cos(teta) != 0:
             self.m = sin(teta)/cos(teta)

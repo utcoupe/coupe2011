@@ -38,19 +38,19 @@ class Circle:
         @param type (O ou 1) (dessous/dessus)
         @return (Line) tangente aux deux cercle (self et other)
         """
-        if self.O.x > other.O.x:
-            type = 0 if type else 1
+        if self.O.x < other.O.x:
+            type = -type
         T = Line(self.O, other.O)
         if T.m == None: # vertical
-            dx = self.R * (1 if type else -1)
+            dx = self.R * type
             T.translate(Vec2(dx,0))
             return T
         if T.m == 0: # horizontal
-            dy = self.R * (1 if type else -1)
+            dy = self.R * type
             T.translate(Vec2(0,dy))
             return T
         else:
-            T.add2K((float(self.R) / T.cosT()) * (1 if type else -1))
+            T.add2K((float(self.R) / T.cosT()) * type)
             Ax = float(2*(self.O.x - (T.k-self.O.y)*T.m)) / float(2*(1.0+T.m**2))
             Ay = T.y(Ax)
             A = Vec2(Ax,Ay)
@@ -86,6 +86,11 @@ class Circle:
             R = self.R
             O = self.O
             if other.m:
+				# OI.AB = 0
+				# => (Ix-Oy)*ABy+(Iy-Oy)*ABy = 0
+				# or I sur (AB) donc Iy = m*Ix+k
+				# => Ix*ABy-m*Ix*ABy = ABx*Ox-ABy*(Oy-k)
+				# d'où Ix = la formule suivante :
                 Ix = float(O.x*other.AB.x+other.AB.y*(O.y-other.k)) / float(other.AB.x+other.m*other.AB.y)
                 Iy = other.y(Ix)
                 #print Ix, Iy

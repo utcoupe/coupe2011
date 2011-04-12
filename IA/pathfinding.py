@@ -23,6 +23,8 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
         D = Line(A,B)
     #print "rec_find_path(%s) on %s"%(maxi,D)
     if not IN_MOTION:
+        print A
+        print B
         l = D.tracer(canevas)
         c = raw_input()
     if maxi > 200:
@@ -36,27 +38,28 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
             #print p
             circle = Circle(p, R)
             if D & circle:
-                if type==None or type: # type==None or type==0
+                if type==-1 or type==None:
                     # par dessous
-                    T1 = circle.tangente(A, 0)
-                    T2 = circle.tangente(B, 1)
+                    T1 = A.tangente(circle, -1)
+                    T2 = circle.tangente(B, -1)
                     I = T1 & T2
                     if I and I in rect:
-                        d1, path1 = rec_find_path(A,circle,pions,done+[p],T1,0,I)
-                        d2, path2 = rec_find_path(circle,B,pions,done+[p],T2,1,I)
+                        d1, path1 = rec_find_path(A,circle,pions,done+[p],T1,-1,I)
+                        d2, path2 = rec_find_path(circle,B,pions,done+[p],T2,-1,I)
                         D1,P1 = d1+d2, path1+path2
                     else:
                         D1,P1 =  999999999,[]
                 else:
                     D1,P1 =  999999999,[]
                 
-                if not type:
-                    T1 = circle.tangente(A, 1)
-                    T2 = circle.tangente(B, 0)
+                if type==1 or type==None:
+                    # par dessus
+                    T1 = A.tangente(circle, 1)
+                    T2 = circle.tangente(B, 1)
                     I = T1 & T2
                     if I and I in rect:
                         d1, path1 = rec_find_path(A,circle,pions,done+[p],T1,1,I)
-                        d2, path2 = rec_find_path(circle,B,pions,done+[p],T2,0,I)
+                        d2, path2 = rec_find_path(circle,B,pions,done+[p],T2,1,I)
                         D2,P2 = d1+d2, path1+path2
                     else:
                         D2,P2 =  999999999,[]

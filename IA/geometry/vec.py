@@ -10,6 +10,9 @@ class Vec2:
     def tracer(self, canevas, color="black"):
         return canevas.create_oval(self.x-3,self.y-3,self.x+3,self.y+3, fill=color, width=3)
     
+    def tangente(self, other, type):
+        return other.tangente(self, -type)
+            
     def __repr__(self):
         return "Vec2"+str((int(self.x),int(self.y)))
     
