@@ -1,0 +1,381 @@
+
+
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr">
+<head>
+	<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+	<title>
+		Protocole
+	</title>
+</head>
+<body>
+<h1>Protocole</h1>
+
+<span style="color:red;"><b>Si je comporte une erreur/imprécision, corrigez moi !</b></span>
+
+
+<h2>Principe global</h2>
+
+<p>
+Le centre de la communication est le server python. Il énère une sorte de chat room
+où les différents clients peuvent se connecter et envoyer des messages à tout le monde ou persos.
+</p>
+
+<h3>Envoyer un message</h3>
+
+<p>
+Pour envoyer un message, la structure doit etre la suivante :<br />
+	<ul>
+		<li>Un id pour le client visé</li>
+		<li>Un séparateur</li>
+		<li>Un message</li>
+	</ul>
+Ce qui donnera : (id)(sep)(msg), le séparateur actuellement retanu est ':' <br />
+Exemple : '0:salut' envoie 'salut' au client #0, le client #0 est le serveur lui même.
+</p>
+
+<h3>Recevoir un message</h3>
+
+<p>
+Lors de la reception d'un message il y a deux informations :
+	<ul>
+		<li>l'id de l'envoyeur</li>
+		<li>le massage en lui même</li>
+	</ul>
+</p>
+
+
+<h3>Quand l'IA envoit un message</h3>
+
+<p>
+L'IA envoi ses ordres sous la forme suivante :<br />
+<ul>
+	<li>id du message</li>
+	<li>id de la commande</li>
+	<li>éventuels paramètres</li>
+</ul>
+Séparés par le séparateur.
+Elle attend en retour :<br />
+<ul>
+	<li>id du message</li>
+	<li>réponse</li>
+</ul>
+C'est très important l'IA doit récupérer l'id qu'elle à envoyé pour savoir à quelle commande correspond la réponse.
+Pour les cartes arduinos tout ça est géré dans message.cpp/h, il suffit d'appeller sendMessage(id,mixed) avec l'id récupéré 
+par cmd(int id, int id_cmd, int* args, int size). 
+Pour la caméra c'est à venir.
+</p>
+
+
+<h3>Quand l'arduino répond</h3>
+<p>
+Pour les cartes arduinos, le protocole de reception d'un message est stocké dans message.cpp/h,
+il faut faire un lien symbolique vers ces fichiers pour pouvoir utiliser les fonctions de base :
+sendMessage(id, mixed variable).
+</p>
+<p>
+Il faut ensuite créer un fichier cmd.cpp pour avec une fonction cmd(int id, int id_cmd, int* args, int size)
+qui sera appellée par la methode readIncomingData de message.cpp/h . Cette fonction doit contenir un switch
+sur id_cmd.
+</p>
+
+
+<h3>Programme en C</h3>
+<p>
+Pareil que pour les arduinos il faut un lien symbolique vers message.cpp/h.
+Ensuite dans la boucle principale du programme lors de la reception d'un message il faut parser ce message
+le traiter puis appeller sendMessage(..) pour répondre.
+</p>
+<p>
+(Thomas à Xavier) Je te ferais une fonction de signature void readIncomingData(string data) qui sera dans message.cpp/h
+et qui appellera toute seule cmd(..). Comme ça tu pourras suivre le meme principe que pour les cartes arduinos
+(créer un fichier cmd.cpp avec une fonction cmd(int id, int id_cmd, int* args, int size) qui contient un switch).
+</p>
+
+
+
+<h2>Carte Asservissement</h2>
+
+<p>
+De 2 à 30.
+<ul>
+	<li><a href="#identification">0 (identification)</a></li>
+	<li><a href="#ping">1 (Ping)</a></li>
+	<li><a href="#goal_abs">2 x y v (Goal en Absolu)</a></li>
+	<li><a href="#goal_rel">3 x y v (Goal en relatif)</a></li>
+	<li><a href="#angle_abs">4 a v (Angle en Absolu)</a></li>
+	<li><a href="#angle_rel">5 a v (Angle en relatif)</a></li>
+	<li><a href="#position">6 (position)</a></li>
+	<li><a href="#recal_auto">7 c (auto recalage)</a></li>
+	<li><a href="#recal_manu">8 (manual recalage)</a></li>
+	<li><a href="#delay">9 (delay)</a></li>
+	<li><a href="#pwm">10 (pwm)</a></li>
+	<li><a href="#modif_g_abs">11 (modif goal abs)</a></li>
+	<li><a href="#modif_g_rel">12 (modif goal rel)</a></li>
+	<li><a href="#stop">13 (stop)</a></li>
+	<li><a href="#pause">14 (pause)</a></li>
+	<li><a href="#resume">15 (resume)</a></li>
+	<li><a href="#debug">99 (debug)</a></li>
+</ul>
+</p>
+
+
+
+<h2>Carte other</h2>
+
+<p>
+De 31 à 60.
+</p>
+
+
+<h2>Caméra</h2>
+
+<p>
+De 61 à 70.
+<ul>
+	<li><a href="#identification">0 (identification)</a></li>
+	<li><a href="#ping">1 (Ping)</a></li>
+	<li><a href="#scan">61 (scan)</a></li>
+	<li><a href="#scan_av">62 (scan avant)</a></li>
+	<li><a href="#scan_ar">63 (scan arrière)</a></li>
+</ul>
+</p>
+
+
+
+
+
+
+<h2>Detail des commandes</h2>
+
+<div>
+<h3 id="identification">0 Identification [] (ALL)</h3>
+
+<p>
+	Demande d'identification. <br />
+</p>
+<p>
+	<b>Retour :</b><br />
+	Le nom du client ('asserv', 'other', 'cam')
+</p>
+</div>
+
+
+<div>
+<h3 id="ping">1 Ping [] (ALL)</h3>
+
+<p>
+	Demande de ping, en fait c'est juste un test de réponse.
+</p>
+<p>
+	<b>Retour : </b><br />
+	'Pong'
+</p>
+</div>
+
+
+<div>
+<h3 id="goal_abs">2 Goal absolu [x,y,v] (ASSERV)</h3>
+
+<p>
+	Aller à un point (x,y) de la carte à une vitesse (v)
+</p>
+<p>
+	<b>Params :</b><br />
+	x,y : mm<br />
+	v : [0,255]<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	<ul>
+		<li>'1' lors de la reception</li>
+		<li>'2' quand but atteind</li>
+	</ul>
+</p>
+</div>
+
+
+<div>
+<h3 id="goal_rel">3 Goal relatif [x,y,v] (ASSERV)</h3>
+
+<p>
+	Aller à un point (x,y) de la carte dans le repère Robot à une vitesse (v)
+</p>
+<p>
+	<b>Params :</b><br />
+	x,y : mm<br />
+	v : [0,255]<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	<ul>
+		<li>'1' lors de la reception</li>
+		<li>'2' quand but atteind</li>
+	</ul>
+</p>
+</div>
+
+
+<div>
+<h3 id="angle_abs">4 Angle absolu [a,v] (ASSERV)</h3>
+
+<p>
+Faire tourner le robot d'un angle (a) à une vitesse (v).
+</p>
+<p>
+	<b>Params :</b><br />
+	a : degrès<br />
+	v : [0,255]<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	<ul>
+		<li>'1' lors de la reception</li>
+		<li>'2' quand but atteind</li>
+	</ul>
+</p>
+</div>
+
+
+<div>
+<h3 id="angle_rel">5 Angle relatif [a,v] (ASSERV)</h3>
+
+<p>
+	Faire tourner le robot d'un angle (a) dans le repère Robot à une vitesse (v).
+</p>
+<p>
+	<b>Params :</b><br />
+	a : en degrès<br />
+	v : [0,255]<br />
+	</p>
+<p>
+	<b>Retour : </b><br />
+	<ul>
+		<li>'1' lors de la reception</li>
+		<li>'2' quand but atteind</li>
+	</ul>
+</p>
+</div>
+
+
+<div>
+<h3 id="position">6 Position [] (ASSERV)</h3>
+
+<p>
+	Récupérer la position actuelle du robot.
+</p>
+<p>
+	<b>Retour : </b><br />
+	La position sous la forme 'x:y:a', avec x et y en mm et a en degrès.
+</p>
+</div>
+
+
+<div>
+<h3 id="recal_auto">7 Recalage automatique [c] (ASSERV)</h3>
+
+<p>
+Lance le recalage automatique pour la couleur (c). A ne faire que sur l'une des deux zones de départ.
+</p>
+<p>
+	<b>Params :</b><br />
+	c : 1 pour bleu, 0 pour rouge.
+</p>
+<p>
+	<b>Retour :</b><br />
+	<ul>
+		<li>'1' lors de la reception</li>
+		<li>'2' quand but atteind</li>
+	</ul>
+</p>
+</div>
+
+
+<div>
+<h3 id="pwm">8 Pwm [v,t] (ASSERV)</h3>
+
+<p>
+	Avancer à la vitesse (v) pendant une durée de (t) milliseconds.
+</p>
+<p>
+	<b>Params :</b><br />
+	v : [0,255]<br />
+	t : milliseconds
+</p>
+<p>
+	<b>Retour : </b><br />
+	Inconnu
+</p>
+</div>
+
+
+<div>
+<h3 id="stop">13 Stop [] (ASSERV)</h3>
+
+<p>
+	Arrete tout, vide la fifo.
+</p>
+<p>
+	<b>Retour : </b><br />
+	'1'
+</p>
+</div>
+
+
+<div>
+<h3 id="scan">61 Scan [] (CAM)</h3>
+
+<p>
+	Effectue un scan avant et arrière.
+</p>
+<p>
+	<b>Retour : </b><br />
+	Tableau des pions trouvés, de la forme 'type_x_y'.<br />
+	<ul>
+		<li>type : chiffre, valeurs à déterminer.</li>
+		<li>x,y : en mm, repère Robot, le programme de la caméra devra
+		faire une petite translation en fonction de la position de la caméra
+		sur le robot.</li>
+	</ul>
+	Les différents pion seront séparés par ':'. <br />
+	Exemple : '0_300_400:2_567_67' => pion de type 0 détecté en 300,400, et
+	pion de type 2 détécté en 567,67.<br />
+	Si le programme n'a rien trouvé alors il renverra '' (chaîne vide).<br />
+	L'écartement de certaines valeurs si abérantes sera géré par l'IA.
+</p>
+</div>
+
+
+<div>
+<h3 id="scan_av">62 Scan avant [] (CAM)</h3>
+
+<p>
+	Effectue un scan avec la cam avant.
+</p>
+<p>
+	<b>Retour : </b><br />
+	Voir <a href="#scan">61 Scan</a>.
+</p>
+</div>
+
+
+<div>
+<h3 id="scan_av">62 Scan arrière [] (CAM)</h3>
+
+<p>
+	Effectue un scan avec la cam arrière.
+</p>
+<p>
+	<b>Retour : </b><br />
+	Voir <a href="#scan">61 Scan</a>.
+</p>
+</div>
+
+
+
+
+
+</body>
