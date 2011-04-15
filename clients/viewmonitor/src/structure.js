@@ -1,9 +1,10 @@
-
+// -------------------------------
 // Logs
+// -------------------------------
+
 bigHtml = '';
 for (var i=0; i<50; i++) bigHtml += (new Date)+': '+i+' go position '+(Math.random()*10)+', '+(Math.random()*10)+'<br>';
 var panelLogs = new Ext.Panel({
-	cls: 'lalalala',
 	styleHtmlContent: true,
 	html: '<div id="logs">'+bigHtml+'</div>',
 	scroll: 'vertical',
@@ -23,7 +24,11 @@ var panelLogs = new Ext.Panel({
     ]
 });
 
+
+// -------------------------------
 // API
+// -------------------------------
+
 $(function(){
 	$.ajaxSetup({
 		error: function(jqXHR, textStatus, errorThrown){
@@ -70,8 +75,11 @@ var api = {
 	}
 };
 
-                
+      
+// -------------------------------          
 // Controls
+// -------------------------------
+
 $(function(){
 	$('#table').empty();
 });
@@ -84,7 +92,6 @@ function updateRobot(x, y, a)
 	$('.robot').animate({'left':rx+'px', 'top': ry+'px', 'rotate': ra+'deg'});
 }
 var panelControls = new Ext.Panel({
-	cls: 'lalalala',
 	styleHtmlContent: true,
 	html: '<div id="controls"><center><div id="table"><img class="table" src="resources/img/tabletmp.png" /><img class="robot" src="resources/img/robotmini.png" /></div></center></div>',
 	scroll: 'vertical',
@@ -142,8 +149,285 @@ var panelControls = new Ext.Panel({
     ]
 });
 
+// -------------------------------
+// Visio
+// -------------------------------
 
+var cam1 = new Ext.Panel({
+	scroll: 'vertical',
+	title: 'Webcam 1',
+	items: [
+	{
+        title: 'Sliders',
+        xtype: 'form',
+        items: [{
+		    xtype: 'fieldset',
+		    title: 'Aperçu',
+		    items: {
+				styleHtmlContent: true,
+				html: '<center><img class="radius" src="resources/img/cam_test.jpg" height="150" />  <img class="radius" src="resources/img/cam_test_handled.jpg" height="150" />  <img src="resources/img/cam_test_handled_traced.jpg" class="radius" height="150" /></center>'
+			}
+		}, {
+            xtype: 'fieldset',
+            title: 'Configuration',
+            items: [{
+                xtype: 'selectfield',
+                name: 'options',
+                label: 'Couleur',
+                options: [
+                    {text: 'jaune (1)',  value: '1'},
+                    {text: 'blanc (2)', value: '2'},
+                    {text: 'noir (3)', value: '3'}
+                ]
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune H',
+                minValue: 0,
+				maxValue: 255,
+				value: 0
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune V',
+                minValue: 0,
+				maxValue: 255,
+				value: 50
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune tolérance H',
+                minValue: 0,
+				maxValue: 255,
+				value: 100
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune tolérance V',
+                minValue: 0,
+				maxValue: 255,
+				value: 255
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc V'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc tolérance H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc tolérance V'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir V'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir tolérance H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir tolérance V'
+            }]
+        }]
+    }]
+});
+var cam2 = new Ext.Panel({
+	scroll: 'vertical',
+	title: 'Webcam 2',
+	items: [
+	{
+        title: 'Sliders',
+        xtype: 'form',
+        items: [{
+		    xtype: 'fieldset',
+		    title: 'Aperçu',
+		    items: {
+				styleHtmlContent: true,
+				html: '<center><img class="radius" src="resources/img/cam_test.jpg" height="150" />  <img class="radius" src="resources/img/cam_test_handled.jpg" height="150" />  <img src="resources/img/cam_test_handled_traced.jpg" class="radius" height="150" /></center>'
+			}
+		}, {
+            xtype: 'fieldset',
+            title: 'Configuration',
+            items: [{
+                xtype: 'selectfield',
+                name: 'options',
+                label: 'Couleur',
+                options: [
+                    {text: 'jaune (1)',  value: '1'},
+                    {text: 'blanc (2)', value: '2'},
+                    {text: 'noir (3)', value: '3'}
+                ]
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune H',
+                minValue: 0,
+				maxValue: 255,
+				value: 0
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune V',
+                minValue: 0,
+				maxValue: 255,
+				value: 50
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune tolérance H',
+                minValue: 0,
+				maxValue: 255,
+				value: 100
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Jaune tolérance V',
+                minValue: 0,
+				maxValue: 255,
+				value: 255
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc V'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc tolérance H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Blanc tolérance V'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir V'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir tolérance H'
+            }, {
+                xtype: 'sliderfield',
+                name: 'value',
+                label: 'Noir tolérance V'
+            }]
+        }]
+    }]
+});
+var panelVisio = new Ext.TabPanel ({items: [cam1, cam2],
+    dockedItems: [
+        {
+            dock: 'bottom',
+            xtype: 'toolbar',
+            items: [
+                {
+                    text: 'Sauver la config',
+                    ui: 'confirm'
+                }
+            ]
+        }
+	]
+});
+
+// -------------------------------
+// Balises
+// -------------------------------
+
+var fields = [
+	{
+		xtype: 'fieldset',
+		title: 'Balise 1',
+		items: [
+			{xtype: 'textfield', label: 'IP', value: '192.168.1.31'},
+			{xtype: 'checkboxfield', label: '<img class="radius" src="resources/img/cam_test.jpg" height="100" />', checked: true, name: 'a'}
+		]
+	},{
+		xtype: 'fieldset',
+		title: 'Balise 2',
+		items: [
+			{xtype: 'textfield', label: 'IP', value: '192.168.1.32'},
+			{xtype: 'checkboxfield', label: '<img class="radius" src="resources/img/cam_test.jpg" height="100" />', checked: true, name: 'a'}
+		]
+	},{
+		xtype: 'fieldset',
+		title: 'Balise 3',
+		items: [
+			{xtype: 'textfield', label: 'IP', value: '192.168.1.33'},
+			{xtype: 'checkboxfield', label: 'Pas d\'image', checked: false, name: 'a'}
+		]
+	}
+];
+
+var panelBalises = new Ext.Panel({
+    dockedItems: [
+        {
+            dock: 'bottom',
+            xtype: 'toolbar',
+            items: [
+                {
+                    text: 'Tester ping + image'
+                },
+                {
+                    text: 'Sauver la config',
+                    ui: 'confirm'
+                }
+            ]
+        }
+	],
+	scroll: 'vertical',
+    items:
+    {
+    	xtype: 'form',
+    	items: fields
+    }
+});
+
+/*
+ [{
+    	xtype: 'panel',
+    	items: [{
+				width: '33%',
+				items: {
+					xtype: 'fieldset',
+					items: [
+						{xtype: 'textfield', label: 'IP'},
+						{xtype: 'togglefield', label: 'Activé'}
+					]
+				}
+			},{
+				width: '33%',
+				html: 'Second'
+			},{
+				width: '33%',
+				html: 'Third'
+			}
+		]
+    }]
+*/
+
+// -------------------------------
 // Structure
+// -------------------------------
+
 sink.Structure = [
 	{
 		text: 'Logs',
@@ -157,6 +441,24 @@ sink.Structure = [
 	{
 		text: 'Controls',
 		card: panelControls,
+		preventHide: true,
+		cardSwitchAnimation: {
+		    type: 'slide'
+		},
+		leaf: true
+	},
+	{
+		text: 'Visio',
+		card: panelVisio,
+		preventHide: true,
+		cardSwitchAnimation: {
+		    type: 'slide'
+		},
+		leaf: true
+	},
+	{
+		text: 'Balises',
+		card: panelBalises,
 		preventHide: true,
 		cardSwitchAnimation: {
 		    type: 'slide'
