@@ -10,16 +10,17 @@ C_SEP3	=	'_'		# séparation de niveau supérieur pour renvoyer des tableaux 2D
 Q_IDENT			=	0
 PING			=	1
 
-# autre
-SHARP			=	2
+# others
+Q_WARNING           =   3
+
 
 # asserv
-GOAL_A			=	2
-GOAL_R			=	3
-ANGLE_A			=	4
-ANGLE_R			=	5
-Q_POSITION		= 	6
-Q_AUTO_RECAL	=	7
+Q_GOAL_ABS			=	2
+Q_GOAL_REL			=	3
+Q_ANGLE_ABS			=	4
+Q_ANGLE_REL         =   5
+Q_POSITION		    = 	6
+Q_AUTO_CALIB        =	7
 
 # server python
 ID_SERVER		= 0
