@@ -3,6 +3,7 @@
 #include "robotstate.h"
 #include "fifo.h"
 #include "message.h"
+#include "encoder.h"
 
 /**
  * Analyse le message et effectue les actions associees
@@ -207,7 +208,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		case 42:
 		{
 			int tab[2] = {value_left_enc,value_right_enc};
-			sendMessage(id, tab);
+			sendMessage(id, tab, 2);
 		}
 
 		case Q_DEBUG : //TODO a degager quand tout marche
