@@ -14,7 +14,7 @@
 #define ENC_CENTER_DIST_MM (2*160.0) // Distance entre chaque roue codeuse et le centre du robot en mm
 #define ENC_CENTER_DIST_TICKS (2*160.0*ENC_MM_TO_TICKS) // Distance entre chaque roue codeuse et le centre du robot en mm
 #define ENC_RESOLUTION 500 // Nombre de points par tour d'encodeur
-#define ENC_RADIUS 18 // Rayon de la roue codeuse
+#define ENC_RADIUS 70 // Rayon de la roue codeuse
 
 #define ENC_TICKS_TO_MM (2*M_PI*ENC_RADIUS)/(ENC_RESOLUTION*4) // en mm.tick^-1 (opti: a calculer apres) environ : 0.0565
 #define ENC_MM_TO_TICKS (ENC_RESOLUTION*4)/(2*M_PI*ENC_RADIUS) // environ : 17.6839
