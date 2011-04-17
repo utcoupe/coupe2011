@@ -16,7 +16,6 @@ def scanSerials():
 from server import *
 
 server = Server()
-server.start()
 
 for serial in scanSerials():
     server.addSerialClient(serial,115200)
@@ -28,6 +27,7 @@ for client in server.clients:
         client.setMaskRecvFrom(ID_IA) # et de l'IA
         
 
+server.start()
 
 print 'fin thread principal'
 
