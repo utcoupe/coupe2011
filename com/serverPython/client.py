@@ -2,6 +2,7 @@
 
 import threading
 import socket
+import time
 
 from protocole import *
 
@@ -36,7 +37,7 @@ class Client(threading.Thread):
         """
         print "%s start"%self.name
         self._running = True
-        self.send(0,str(Q_IDENT)+C_SEP_SEND+str(self.id)+"\n")
+        self.send(1,str(ID_SERVER)+C_SEP_SEND+str(Q_IDENT)+C_SEP_SEND+str(self.id)+"\n")
         while self._running and not self._server.e_shutdown.isSet():
             self._loopRecv()
         print "%s arreté"%self.name
@@ -96,18 +97,17 @@ class TCPClient(Client):
         
     def _loopRecv(self):
         msg = ""
-        
         try:
             msg = self.s.recv(1024)
         except socket.timeout:
             pass
+        except socket.error as er:
+            self._server.write(self.name+" "+str(er))
         else:
             for msg in self.combineWithPartial(msg):
                 self._server.write("Received from %s : '%s'"%(self.name,msg))
                 if msg:
                     self._server.parseMsg(self.id, msg)
-                else:
-                    self.stop()
                     
 
 class LocalClient(Client):

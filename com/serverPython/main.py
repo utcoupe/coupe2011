@@ -27,6 +27,7 @@ for client in server.clients:
         client.setMaskRecvFrom(ID_IA) # et de l'IA
         
 
+# le serveur ne démarre qu'après avoir connecté les serials
 server.start()
 
 print 'fin thread principal'
