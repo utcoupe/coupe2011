@@ -14,10 +14,10 @@ void cmd(int id, int id_cmd, int *args, int sizeArgs)
 		break;
 
 		case Q_IDENT: // Identification
-			sendMessage(id, (char*)"autre");
+			sendMessage(id, (char*)"test");
 		break;
 		default:
-			sendMessage(id, INVALID_CMD);
+			sendMessage(id, E_INVALID_CMD);
 		break;
 	}
 }
