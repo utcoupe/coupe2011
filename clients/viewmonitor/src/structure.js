@@ -32,14 +32,14 @@ var panelLogs = new Ext.Panel({
 $(function(){
 	$.ajaxSetup({
 		error: function(jqXHR, textStatus, errorThrown){
-			Ext.Msg.alert('Erreur liaison', "Le serveur web a retourné: "+errorThrown);
+			//Ext.Msg.alert('Erreur liaison', "Le serveur web a retourné: "+errorThrown);
 		}
 	});
 });
 var api = {
 	ping: function(){
 		$.get('/api/ping/1', function(data){
-			Ext.Msg.alert('Requête ping', "Réponse: "+data);
+			//Ext.Msg.alert('Requête ping', "Réponse: "+data);
 		});
 	},
 	recalageRouge: function(){
@@ -80,9 +80,6 @@ var api = {
 // Controls
 // -------------------------------
 
-$(function(){
-	$('#table').empty();
-});
 var rx = ry = ra = 0;
 function updateRobot(x, y, a)
 {
@@ -91,6 +88,23 @@ function updateRobot(x, y, a)
 	ra += a || 0;
 	$('.robot').animate({'left':rx+'px', 'top': ry+'px', 'rotate': ra+'deg'});
 }
+function updateAbsoluteRobot(x, y, a)
+{
+	rx = x;
+	ry = y;
+	ra = a || 0;
+	$('.robot').animate({'left':rx+'px', 'top': ry+'px', 'rotate': ra+'deg'});
+}
+
+function iaalacon()
+{
+	function posAleatoire()
+	{
+		updateAbsoluteRobot(Math.random()*666, Math.random()*478);
+	}
+	setInterval(posAleatoire, 250);
+}
+
 var panelControls = new Ext.Panel({
 	styleHtmlContent: true,
 	html: '<div id="controls"><center><div id="table"><img class="table" src="resources/img/tabletmp.png" /><img class="robot" src="resources/img/robotmini.png" /></div></center></div>',
@@ -111,6 +125,10 @@ var panelControls = new Ext.Panel({
                 {
                     text: 'InitBleu',
                     handler: api.recalageBleu
+                },
+                {
+                    text: 'IAalacon',
+                    handler: iaalacon
                 },
                 {xtype: 'spacer'},
                 
@@ -147,6 +165,15 @@ var panelControls = new Ext.Panel({
             ]
         }
     ]
+});
+
+panelControls.on('show', function(){
+	$('#table').bind('touch click', function(event){
+		var offset = $(this).offset();
+		var x = event.pageX - offset.left;
+		var y = event.pageY - offset.top;
+		updateAbsoluteRobot(x, y);
+	});
 });
 
 // -------------------------------
@@ -357,26 +384,29 @@ var fields = [
 		xtype: 'fieldset',
 		title: 'Balise 1',
 		items: [
-			{xtype: 'textfield', label: 'IP', value: '192.168.1.31'},
-			{xtype: 'checkboxfield', label: '<img class="radius" src="resources/img/cam_test.jpg" height="100" />', checked: true, name: 'a'}
+			{xtype: 'textfield', label: 'IP', value: '192.168.43.1', name: 'ipbalise1'},
+			{xtype: 'checkboxfield', label: '<img class="radius" id="ipbalise1" src="resources/img/cam_test.jpg" height="100" width="100" title="zz" alt="Pas d\'image" />', disabled: true, checked: true, name: 'a'}
 		]
 	},{
 		xtype: 'fieldset',
 		title: 'Balise 2',
 		items: [
-			{xtype: 'textfield', label: 'IP', value: '192.168.1.32'},
-			{xtype: 'checkboxfield', label: '<img class="radius" src="resources/img/cam_test.jpg" height="100" />', checked: true, name: 'a'}
+			{xtype: 'textfield', label: 'IP', value: '192.168.43.52', name: 'ipbalise2'},
+			{xtype: 'checkboxfield', label: '<img class="radius" id="ipbalise2" src="resources/img/cam_test.jpg" height="100" width="100" title="zz" alt="Pas d\'image" />', disabled: true, checked: true, name: 'a'}
 		]
 	},{
 		xtype: 'fieldset',
 		title: 'Balise 3',
 		items: [
-			{xtype: 'textfield', label: 'IP', value: '192.168.1.33'},
-			{xtype: 'checkboxfield', label: 'Pas d\'image', checked: false, name: 'a'}
+			{xtype: 'textfield', label: 'IP', value: '192.168.43.1', name: 'ipbalise3'},
+			{xtype: 'checkboxfield', label: 'Pas d\'image', checked: false, name: 'a', disabled: true}
 		]
 	}
 ];
 
+var formBalises = new Ext.form.FormPanel({
+	items: fields
+});
 var panelBalises = new Ext.Panel({
     dockedItems: [
         {
@@ -384,8 +414,18 @@ var panelBalises = new Ext.Panel({
             xtype: 'toolbar',
             items: [
                 {
-                    text: 'Tester ping + image'
+                    text: 'Test en boucle (500ms)',
+                    handler: testBoucle
                 },
+                {
+                    text: 'Stop boucle',
+                    handler: killBoucle
+                },
+                {
+                    text: 'Tester une fois',
+                    handler: testPingImage
+                },
+                {xtype: 'spacer'},
                 {
                     text: 'Sauver la config',
                     ui: 'confirm'
@@ -394,35 +434,44 @@ var panelBalises = new Ext.Panel({
         }
 	],
 	scroll: 'vertical',
-    items:
-    {
-    	xtype: 'form',
-    	items: fields
-    }
+    items: formBalises
 });
 
-/*
- [{
-    	xtype: 'panel',
-    	items: [{
-				width: '33%',
-				items: {
-					xtype: 'fieldset',
-					items: [
-						{xtype: 'textfield', label: 'IP'},
-						{xtype: 'togglefield', label: 'Activé'}
-					]
-				}
-			},{
-				width: '33%',
-				html: 'Second'
-			},{
-				width: '33%',
-				html: 'Third'
-			}
-		]
-    }]
-*/
+function testPingImage()
+{
+	var values = formBalises.getValues(true);
+	var ressource = 'photo.jpg';
+	var ressource = 'shot.jpg?'+Math.random();
+	if (values['ipbalise1']) {$('#ipbalise1').attr('src', 'http://'+values['ipbalise1']+':8080/'+ressource);}
+	if (values['ipbalise2']) {$('#ipbalise2').attr('src', 'http://'+values['ipbalise2']+':8080/'+ressource);}
+	//Ext.Msg.alert('Form', JSON.stringify(values['ipbalise1']));
+}
+
+var testBoucleTimer;
+function testBoucle()
+{
+	testBoucleTimer = setInterval(testPingImage, 500);
+}
+function killBoucle()
+{
+	if (testBoucleTimer)
+		clearInterval(testBoucleTimer);
+	testBoucleTimer = null;
+	$('#ipbalise1').attr('src', '');
+	$('#ipbalise2').attr('src', '');
+}
+
+// -------------------------------
+// Structure
+// -------------------------------
+
+var htmlSharps = '<center>ABC</center>';
+
+var panelSharps = new Ext.Panel({
+	styleHtmlContent: true,
+	html: htmlSharps,
+	scroll: 'vertical'
+});
 
 // -------------------------------
 // Structure
@@ -459,6 +508,15 @@ sink.Structure = [
 	{
 		text: 'Balises',
 		card: panelBalises,
+		preventHide: true,
+		cardSwitchAnimation: {
+		    type: 'slide'
+		},
+		leaf: true
+	},
+	{
+		text: 'Sharps',
+		card: panelSharps,
 		preventHide: true,
 		cardSwitchAnimation: {
 		    type: 'slide'
