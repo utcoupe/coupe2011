@@ -113,7 +113,7 @@ void pushGoalAutoCalibration(int id, bool color){ /* true -> blue / false -> red
 		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
 		/* phase 4 : avancer un peu pour pouvoir tourner */
-		pushGoalPosition(NO_ID,0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,70);
+		pushGoalPosition(NO_ID,0,200.0*ENC_MM_TO_TICKS,70);
 		/* phase 5 : tourner en 0 */
 		pushGoalOrientation(NO_ID,0,120);
 		/* phase 6 : reculer pendant 2s */
@@ -121,7 +121,7 @@ void pushGoalAutoCalibration(int id, bool color){ /* true -> blue / false -> red
 		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 		pushGoalManualCalibration(TYPE_CALIB_X,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 		/* phase 8 : avancer de quelques cm */
-		pushGoalPosition(NO_ID,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
+		pushGoalPosition(NO_ID,(400-DIST_MOTOR_AXIS_TO_BACK_MM)*ENC_MM_TO_TICKS,200.0*ENC_MM_TO_TICKS,70);
 		/* phase 9 : reorientation exact */
 		pushGoalOrientation(id,0,150);
 	}
@@ -138,15 +138,15 @@ void pushGoalAutoCalibration(int id, bool color){ /* true -> blue / false -> red
 		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
 		/* phase 4 : avancer un peu pour pouvoir tourner */
-		pushGoalPosition(NO_ID,0,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1300,70);
+		pushGoalPosition(NO_ID,0,200.0*ENC_MM_TO_TICKS,70);
 		/* phase 5 : tourner en PI */
 		pushGoalOrientation(NO_ID,M_PI,120);
 		/* phase 6 : reculer pendant 2s */
 		pushGoalPwm(-80,2000);
 		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
-		pushGoalManualCalibration(TYPE_CALIB_X,TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
+		pushGoalManualCalibration(TYPE_CALIB_X,(TABLE_HEIGHT_MM-DIST_MOTOR_AXIS_TO_BACK_MM)*ENC_MM_TO_TICKS);
 		/* phase 8 : avancer de quelques cm */
-		pushGoalPosition(NO_ID,(TABLE_HEIGHT_MM*ENC_MM_TO_TICKS-DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS)-2550,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS+1450,70);
+		pushGoalPosition(NO_ID,(2600+DIST_MOTOR_AXIS_TO_BACK_MM)*ENC_MM_TO_TICKS,200.0*ENC_MM_TO_TICKS,70);
 		/* phase 9 : reorientation exact */
 		pushGoalOrientation(id,M_PI,150);
 	}
