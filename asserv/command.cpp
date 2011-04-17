@@ -204,6 +204,12 @@ void cmd(int id, int id_cmd, int* args, int size){
 			break;
 		}
 
+		case 42:
+		{
+			int tab[2] = {value_left_enc,value_right_enc};
+			sendMessage(id, tab);
+		}
+
 		case Q_DEBUG : //TODO a degager quand tout marche
 		{
 			/*Serial.print("?,_________________§");
