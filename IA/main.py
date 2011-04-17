@@ -13,27 +13,62 @@ MAX_MSG         = 50
 
 class Robot:
     def __init__(self):
+        """
+        Lorsque le robot envoie un message, il envoi aussi un id_msg compris entre 0 et MAX_MSG
+        Lorsqu'il reçoit un message, il sait de qui il provient grâce au server,
+        il retrouve ensuite à quelle commande il correspond grâce à l'id_msg,
+        il active alors deux events : celui self.events[id_device][id_cmd] et celui
+        self.msg_events[id_msg]
+        """
         self.pinces = (Pince, Pince)
         self.client = RobotClient(self)
+        
         self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
         self.pos = (0,0)
         self.target_pos = (-1,-1) # la position du pion visé
+        
         self.events = [ [ threading.Event() for __ in xrange(20) ] for _ in xrange(5) ] # les events des réponses
         self.reponses = [ [0]*20 for _ in xrange(5) ]
+        
         self._e_stop = threading.Event()
+        
         self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
+        self.msg_events = [ threading.Event() for _ in xrange(MAX_MSG) ]
         self.id_msg = 0
     
+    
     def addCmd(self, device, id_cmd, args=[""]):
+        """
+        Envoyer une commande
+        
+        @param device id du device (asserv, cam,...)
+        @param id_cmd id de la commande
+        @param args les éventuels arguments
+        
+        @return id_msg
+        """
+        # création du message
         msg = str(device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
         for a in args: msg += C_SEP_SEND+str(a)
+        
+        # sauvegarde de la commande
         self.cmd[self.id_msg] = id_cmd
+        
+        # nettoyage des receptacles
         self.reponses[device][id_cmd] = None
         self.events[device][id_cmd].clear()
+        self.msg_events[id_msg].clear()
+        
+        # envoie
+        self.client.send(msg)
+        
+        # increment de id_msg
         self.id_msg += 1
         if self.id_msg >= MAX_MSG:
             self.id_msg = 0
-        self.client.send(msg)
+        
+        # return de id_msg
+        return 0 if id_msg==0 else (id_msg-1)
     
     def write(self, msg):
         self.client.write(msg)

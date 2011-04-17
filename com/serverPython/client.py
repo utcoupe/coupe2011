@@ -13,6 +13,7 @@ class Client(threading.Thread):
         self.id = id # id du client sur le serveur
         self._running = False # le client tourne
         self.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme 
+        self._partialMsg = ""
     
     def __del__(self):
         self.s.close()
@@ -35,7 +36,7 @@ class Client(threading.Thread):
         """
         print "%s start"%self.name
         self._running = True
-        self.send(0,str(Q_IDENT)+C_SEP_SEND+str(self.id))
+        self.send(0,str(Q_IDENT)+C_SEP_SEND+str(self.id)+"\n")
         while self._running and not self._server.e_shutdown.isSet():
             self._loopRecv()
         print "%s arreté"%self.name
@@ -45,17 +46,34 @@ class Client(threading.Thread):
         @return [] si le message ne peut pas etre exploité (pas de \n à la fin)
         @return [m1,m2,m3, ...] sinon
         """
-        print (self._partialMsg,msg)
+        #print (self._partialMsg,msg)
         msg = self._partialMsg + msg
         index = msg.rfind('\n')
         if index < 0:
             self._partialMsg = msg
-            print self._partialMsg,[]
+            #print self._partialMsg,[]
             return []
         else:
             self._partialMsg = msg[index+1:]
-            print self._partialMsg,[ m for m in msg[:index].split('\n') ]
+            #print self._partialMsg,[ m for m in msg[:index].split('\n') ]
             return [ m for m in msg[:index].split('\n') ]
+    
+    def setMaskRecvFrom(self, id_client, b):
+        """
+        set l'état d"coute du client choisit
+        @param id_client le client choisit
+        @param b 1 pour écouter, 0 pour ne pas écouter
+        """
+        if b:
+            self.mask_recv_from |= (1 << id_client)
+        else:
+            self.mask_recv_from &= ~(b << id_client)
+    
+    def blockRecv(self):
+        """
+        Le client ne reçoit plus de messages
+        """
+        self.mask_recv_from = 0
     
     
 class TCPClient(Client):
@@ -74,9 +92,11 @@ class TCPClient(Client):
         self.s.settimeout(1.0) # timeout
     
     def _fn_send(self, msg):
-        self.s.send(str(msg))
+        self.s.send(str(msg).strip()+"\n")
         
     def _loopRecv(self):
+        msg = ""
+        
         try:
             msg = self.s.recv(1024)
         except socket.timeout:
@@ -88,7 +108,7 @@ class TCPClient(Client):
                     self._server.parseMsg(self.id, msg)
                 else:
                     self.stop()
-
+                    
 
 class LocalClient(Client):
     """
@@ -103,6 +123,7 @@ class LocalClient(Client):
         self._server.write("Received on server : '%s'"%msg)
     
     def _loopRecv(self):
+        msg = raw_input()+"\n"
         for msg in self.combineWithPartial(msg):
             msg = msg.strip()
             self._server.parseMsg(self.id, msg)
@@ -119,14 +140,14 @@ class SerialClient(Client):
         self.baudrate = baudrate
     
     def _fn_send(self, msg):
-        self.serial.write(str(msg)+"\n")
+        self.serial.write(str(msg).strip()+"\n")
         
     def _loopRecv(self):
         msg = self.serial.readline()
         if msg:
-            msg = msg.strip()
-            self._server.write("Received from %s : '%s'"%(self.name,msg))
-            self._server.parseMsg(self.id, msg)
+            for msg in self.combineWithPartial(msg):
+                self._server.write("Received from %s : '%s'"%(self.name,msg))
+                self._server.parseMsg(self.id, msg)
 
     def stop(self):
         self.serial.close()
@@ -140,7 +161,7 @@ class SubprocessClient(Client):
         self.exec_name = exec_name
         
     def _fn_send(self, msg):
-        self.process.stdin.write(str(msg)+"\n") # envoie au child
+        self.process.stdin.write(str(msg).strip()+"\n") # envoie au child
         self.process.stdin.flush()
     
     def _loopRecv(self):

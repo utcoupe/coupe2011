@@ -23,4 +23,6 @@ Q_AUTO_RECAL	=	7
 
 # server python
 ID_SERVER		= 0
-ID_ASSERV		= 1
+ID_ASSERV		= 1 # carte asserv
+ID_OTHERS       = 2 # carte avec les pinces et sharps
+ID_IA           = 5 # l'IA

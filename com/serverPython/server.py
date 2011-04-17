@@ -19,7 +19,7 @@ class Server():
 	"""
 	def __init__(self):
 		self.clients = []
-		self.sender = Sender(self.clients)
+		self.sender = Sender(self)
 		#self.tcpLoop = TCPLoop(self,'', random.randint(40000,60000))
 		self.tcpLoop = TCPLoop(self,'', 50000)
 		self.e_shutdown = threading.Event()
@@ -28,9 +28,11 @@ class Server():
 		locClient = LocalClient(self, 0)
 		locClient.start()
 		self.clients.append(locClient)
-	
+		
+		
 	def start(self):
 		self.tcpLoop.start()
+		self.sender.start()
 	
 	def stop(self):
 		self.e_shutdown.set()
@@ -59,7 +61,7 @@ class Server():
 		mask_from = (1 << id_client)
 		mask_to = -1 if id_to == -1 else (1 << id_to)
 		msg = str(id_client)+C_SEP_SEND+msg
-		self.sender.send(mask_from, mask_to, msg)
+		self.sender.addMsg(mask_from, mask_to, msg)
 	
 	def write(self, msg):
 		self._lock_write.acquire()

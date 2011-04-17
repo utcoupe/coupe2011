@@ -39,7 +39,7 @@ class pyClient:
         while not self._e_close.isSet():
             if self._fn_input:
                 msg = self._fn_input()
-                self._socket.send(msg)
+                self._socket.send(msg.strip()+"\n")
                 if msg == 'close':
                     self._e_close.set()
                     self._write("break send")
