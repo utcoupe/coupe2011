@@ -1,0 +1,185 @@
+<img id="img_before" src="http://localhost:8080/resources/img/cam_test.jpg" />
+<canvas id="canvas_before"></canvas>
+
+<script>
+function pixeltoString(a,b,c,d) {
+	return a+'|'+b+'|'+c+'|'+d;
+}
+window.onload = function(){
+	var img_before = document.getElementById('img_before');
+	var canvas_before = document.getElementById('canvas_before');
+
+	canvas_before.width = width = img_before.width;
+	canvas_before.height = height = img_before.height;
+
+	var ctx_before = canvas_before.getContext("2d");
+	ctx_before.clearRect(0, 0, width, height);
+	ctx_before.drawImage(img_before, 0, 0, img_before.width, img_before.height);
+	
+	console.log('getImageData...');
+	var imageData = ctx_before.getImageData(0, 0, width, height);
+	var imageDataData = imageData.data;
+	pixels = {};
+	
+	var sensi = 150;
+	var nbcomut = 0, curcoul, oldcoul;
+	
+	var i = (1300 + 20 * width) * 4;
+	imageDataData[i+0] = 255;
+	imageDataData[i+1] = 255;
+	imageDataData[i+2] = 255;
+	
+	var limites = [];
+	var limitesbords = false;
+	var ylimites = false;
+	var ylimitesbordsDebut = [];
+	var ylimitesbordsFin = [];
+	var ylimitesbordsDebutParCol;
+	for (var x=0; x<width; x++)
+	{
+		nbcomut = 0;
+		curcoul = false;
+		oldcoul = false;
+		lastpix = 3000;
+		ylimitesbordsDebutParCol = [];
+		for (var y=0; y<height; y++) {
+			var i = (x + y * width) * 4;
+			
+			if (imageDataData[i+0] > sensi && imageDataData[i+1] > sensi && imageDataData[i+2] > sensi) {
+				curcoul = true;
+				imageDataData[i+0] = 255;
+				imageDataData[i+1] = 255;
+				imageDataData[i+2] = 255;
+			} else {
+				curcoul = false;
+				imageDataData[i+0] = 0;
+				imageDataData[i+1] = 0;
+				imageDataData[i+2] = 0;
+			}
+			// commutations
+			if (oldcoul != curcoul) {
+				if (y - lastpix < 20)
+				{
+					ylimitesbordsDebutParCol.push(y);
+					ylimites = true;
+					lastpix = y;
+					nbcomut++;
+					oldcoul = curcoul;
+					imageDataData[i+0] = 255;
+					imageDataData[i+1] = 255;
+					imageDataData[i+2] = 255;
+				}
+				else {
+					lastpix = 3000;
+		
+					if (nbcomut > 14) {
+						if (ylimitesbordsDebutParCol.length > 0) console.log(ylimitesbordsDebutParCol);
+						ylimitesbordsDebut = ylimitesbordsDebut.concat(ylimitesbordsDebutParCol);
+		
+						if (!limitesbords)
+						{
+							limites.push(x);
+							limitesbords = true;
+						}
+						imageDataData[i+0] = 255;
+			
+						/*for (var y=0; y<height; y++) {
+							var i = (x + y * width) * 4;
+							if (imageDataData[i+0] > sensi && imageDataData[i+1] > sensi && imageDataData[i+2] > sensi) {
+								imageDataData[i+0] = 255;
+								imageDataData[i+1] = 0;
+								imageDataData[i+2] = 0;
+							}
+						}*/
+			
+						nbcomut = 0;
+					} else {
+						if (limitesbords) {
+							limites.push(x);
+						}
+						limitesbords = false;
+					}
+					
+					nbcomut = 0;
+					if (ylimites) {
+						//ylimitesbordsFin.push(x);
+						ylimites = false;
+					}
+				}
+			}
+		}
+	}
+	
+	// trucs visibles les barres vertes
+	for (var ii=0,imax=limites.length; ii<imax; ii++)
+	{
+		limiteX = limites[ii];
+		for (var y=0; y<height; y++)
+		{
+			var i = (limiteX + y * width) * 4;
+			imageDataData[i+0] = 0;
+			imageDataData[i+1] = 255;
+			imageDataData[i+2] = 0;
+		}
+	}
+	
+	// trucs visibles les barres bleu
+	for (var ii=0,imax=ylimitesbordsDebut.length; ii<imax; ii++)
+	{
+		limiteY = ylimitesbordsDebut[ii];
+		for (var x=0; x<width; x++)
+		{
+			var i = (x + limiteY * width) * 4;
+			imageDataData[i+0] = 0;
+			imageDataData[i+1] = 255;
+			imageDataData[i+2] = 0;
+		}
+	}
+	for (var ii=0,imax=ylimitesbordsFin.length; ii<imax; ii++)
+	{
+		limiteY = ylimitesbordsFin[ii];
+		for (var x=0; x<width; x++)
+		{
+			var i = (x + limiteY * width) * 4;
+			imageDataData[i+0] = 0;
+			imageDataData[i+1] = 0;
+			imageDataData[i+2] = 255;
+		}
+	}
+	
+	
+	
+	for (var i=0, n = imageDataData.length; i<n; i+=4)
+	{
+		/*var col = i/4 % width;
+		
+		var lng = i/4 % width;
+		if (lng != 1) {
+			imageDataData[i+0] = 255;
+			imageDataData[i+1] = 255;
+			imageDataData[i+2] = 255;
+		}*/
+	
+		/*if (imageDataData[i+0] > 150 && imageDataData[i+1] > 150 && imageDataData[i+2] > 150) {
+			imageDataData[i+0] = 255;
+			imageDataData[i+1] = 255;
+			imageDataData[i+2] = 255;
+		} else {
+			imageDataData[i+0] = 0;
+			imageDataData[i+1] = 0;
+			imageDataData[i+2] = 0;
+		}*/
+		//imageDataData[i+1] = 0;
+		//imageDataData[i+2] = 0;
+		//console.log(imageData_before[i+1]);
+		//var pixel = pixeltoString(imageData_before[i], imageData_before[i+1], imageData_before[i+2], imageData_before[i+3]);
+		//pixels[pixel] = pixel;
+	}
+
+	console.log('putImageData...');
+	ctx_before.putImageData(imageData, 0, 0);
+	
+	console.log('toDataURL...');
+	//img_before.src = canvas_before.toDataURL();
+}
+</script>

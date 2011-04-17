@@ -1,12 +1,13 @@
 #table {
 	position:relative;
-	width: 734px;
-	height: 234px;
+	width: 666px;
+	height: 478px;
 }
 
 .table {
 	position: absolute;
-	width: 734px;
+	width: 666px;
+	height: 478px;
 }
 
 .robot {
