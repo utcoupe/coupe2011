@@ -26,7 +26,7 @@ class RobotClient(threading.Thread):
         Envoie le message au serveur
         """
         if not self._e_close.isSet():
-            self._socket.send(msg)
+            self._socket.send(str(msg).strip()+"\n")
             self.write("Send : %s"%msg)
             if msg == 'close':
                 self._e_close.set()
@@ -45,7 +45,7 @@ class RobotClient(threading.Thread):
                 if not data or str(data) == 'close':
                     self._socket.close()
                     self._e_close.set()
-                    self._write("break recv")
+                    self.write("break recv")
                 self._treat(data)
                 
     def _treat(self, msg):

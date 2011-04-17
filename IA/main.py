@@ -57,7 +57,7 @@ class Robot:
         # nettoyage des receptacles
         self.reponses[device][id_cmd] = None
         self.events[device][id_cmd].clear()
-        self.msg_events[id_msg].clear()
+        self.msg_events[self.id_msg].clear()
         
         # envoie
         self.client.send(msg)
@@ -68,7 +68,7 @@ class Robot:
             self.id_msg = 0
         
         # return de id_msg
-        return 0 if id_msg==0 else (id_msg-1)
+        return 0 if self.id_msg==0 else (self.id_msg-1)
     
     def write(self, msg):
         self.client.write(msg)
@@ -76,13 +76,20 @@ class Robot:
     def start(self):
         """ démarage du robot """
         self.client.start()
+        
         self.addCmd(ID_ASSERV, Q_POSITION)
         self.events[ID_ASSERV][Q_POSITION].wait()
         self.write(self.reponses[ID_ASSERV][Q_POSITION])
         self.write(self.pos)
-        self.addCmd(ID_ASSERV, Q_AUTO_RECAL, (0,))
-        self.events[ID_ASSERV][Q_AUTO_RECAL].wait()
-        self.write(self.reponses[ID_ASSERV][Q_AUTO_RECAL])
+        
+        self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (0,))
+        self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
+        self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
+        self.write(self.reponses[ID_ASSERV][Q_AUTO_CALIB])
+        
+        self.do_path((Q_GOAL_ABS, (2300,250,150)),
+                     (Q_GOAL_ABS, (2350,1000,150))
+                    )
         
     
     def stop(self, msg=None):
@@ -111,7 +118,7 @@ class Robot:
     def isFull(self):
         return (self.pinces[0].isFull() and self.pinces[1].isFull())
     
-    def do_path(self, path):
+    def do_path(self, *path):
         """ suit un chemin
         La fonction peut tout couper si elle reçoit un message de danger de la tourelle
         ou si après avoir comparé la position actuelle du robot avec celle éstimée 
@@ -125,28 +132,31 @@ class Robot:
             goals.append(args)
         
         
-        loopCmd = LoopCmd(self, 1.0, ID_ASSERV, Q_POS)
+        loopCmd = LoopCmd(self, 1.0, ID_ASSERV, Q_POSITION)
         
-        eventsWaiter = EventsWaiter(("goal", self.events[ID_ASSERV][GOAL_A]), ("pos", self.events[ID_ASSERV][Q_POS]), ("warning", self.events[OTHERS][Q_WARNING]))
-        
+        eventsWaiter = EventsWaiter(("goal", self.events[ID_ASSERV][Q_GOAL_ABS]), ("pos", self.events[ID_ASSERV][Q_POSITION]), ("warning", self.events[ID_OTHERS][Q_WARNING]))
+        """
+        @todo
         while True:
             r = eventsWaiter.wait(1.5)
             if not r: # timeout
                 pass
             elif r == "pos":
                 if not self.checkAsserv(): # un imprévu est arrivé
-                    self.stop("l'asservissement n'est pas là ou il devrait être") 
+                    self.stop("l'asservissement n'est pas là ou il devrait être")
+                self.write(self.reponses[ID_ASSERV][Q_POSITION])
             elif r == "warning": # danger
                 if self.checkWarning(): # danger pour de vrai
                     self.stop("l'asservissement n'est pas là ou il devrait être")
             elif r == "goal": # un but atteind
-                goal_reach = self.reponses[ID_ASSERV][GOAL_A]
+                self.write(self.reponses[ID_ASSERV][Q_GOAL_ABS])
+                goal_reach = self.reponses[ID_ASSERV][Q_GOAL_ABS]
                 if goal_reach in goals: 
                     while True:
                         if goals.pop(0) == goal_reach:
                             break
                     if not goals: # tous les buts sont atteinds
-                        break
+                        break"""
         
         # arret des threads
         loopCmd.stop()
@@ -181,7 +191,7 @@ class Robot:
     
     def onRepOthers(self, cmd, msg):
         """ quand la carte 'others' envoie un message """
-        self.events[OTHERS][cmd].set()
+        self.events[ID_OTHERS][cmd].set()
         
     def onRepAsserv(self, id_msg, msg):
         """ quand l'asserv envoie un message """
@@ -200,7 +210,7 @@ class Robot:
         
     def dumpObj(self):
         """ ouvrir la pince """
-        self.addCmd(OTHERS,Q_OPEN_PINCE) # ouvre la pince
+        self.addCmd(ID_OTHERS,Q_OPEN_PINCE) # ouvre la pince
         self.addCmd(CAM, Q_SCAN) # demande un scan et c'est raparti !
     
     def takeObj(self):
@@ -225,8 +235,8 @@ class Robot:
         # algo de détermination quel pion proche (probablement le plus proche)
         # pathfinding pour esquiver nos pions
         # retourne la cible choisie et le path
-        # self.client.send("asserv", Q_GOAL_A, <devant le pion>)
-        # self.client.Send("asserv", Q_ANGLE_A, <faceau pion>)
+        # self.client.send("asserv", Q_GOAL_ABS, <devant le pion>)
+        # self.client.Send("asserv", Q_ANGLE_ABS, <faceau pion>)
         pass
     
     def onWarning(self, mag):

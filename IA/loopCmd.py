@@ -5,7 +5,7 @@ import threading
 
 class LoopCmd(threading.Thread):
     def __init__(self, robot, interval, device, cmd, *args):
-        threading.Thread.__init__(None, None, "LoopCmd(%s,%s,%s,%s)"%(interval,device,cmd,args))
+        threading.Thread.__init__(self,None, None, "LoopCmd(%s,%s,%s,%s)"%(interval,device,cmd,args))
         self.robot = robot
         self.interval = interval
         self._device = device

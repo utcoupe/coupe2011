@@ -10,19 +10,20 @@ C_SEP3	=	'_'		# séparation de niveau supérieur pour renvoyer des tableaux 2D
 Q_IDENT			=	0
 PING			=	1
 
-# autre
-SHARP			=	2
+# others
+Q_WARNING           =   3
+
 
 # asserv
-GOAL_A			=	2
-GOAL_R			=	3
-ANGLE_A			=	4
-ANGLE_R			=	5
-Q_POSITION		= 	6
-Q_AUTO_RECAL	=	7
+Q_GOAL_ABS			=	2
+Q_GOAL_REL			=	3
+Q_ANGLE_ABS			=	4
+Q_ANGLE_REL         =   5
+Q_POSITION		    = 	6
+Q_AUTO_CALIB        =	7
 
 # server python
 ID_SERVER		= 0
 ID_ASSERV		= 1 # carte asserv
 ID_OTHERS       = 2 # carte avec les pinces et sharps
-ID_IA           = 5 # l'IA
+ID_IA           = 3 # l'IA
