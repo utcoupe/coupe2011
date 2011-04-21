@@ -39,26 +39,33 @@ COMMANDES : CARTE ASSERV
 	99 (debug)
 
 COMMANDES : CARTE PINCE
-	0 (identification) 		--> 'PINCE'
+	0 (identification) 		--> 'pince'
 	1 (Ping)				--> 'Pong'
-	12 n (retourne la valeur du sharp n (de 0 à 11)	
+	31 n ("SHARP" retourne la valeur du sharp n (de 0 à 11)	
 							--> 'N' (valeur du sharp n)
-	13 n s (renvoie une valeur quand le sharp n ne dépasse le seuil s)			
+	32 n s ("TSHARP" renvoie une valeur quand le sharp n ne dépasse le seuil s)			
 							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil dépassé + arret seuil)
-	14 n (retourne la valeur du MS avant (0) ou arriere(1) )	
-	 						--> '1' MS (fermé) ou '0' (MS ouvert) ou '-1' (erreur)
-	15 n s (renvoie message quand le microswitch n à atteint la valeur s)	
+	33 n ("MS" retourne la valeur du MS avant (0) ou arriere(1) )	
+	 						--> '1' (MS fermé) ou '0' (MS ouvert) ou '-1' (erreur)
+	34 n s ("TMS" renvoie message quand le microswitch n à atteint la valeur s ('1' MS fermé ou '0' MS ouvert))	
 							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil atteint + arret seuil)
-	16 n p (pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
+	35 n p ("PINCE" pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
 							--> '1' (recu) '0' (erreur)
-	17 n p (moteur numero n va a la position p
+	36 n p ("MOTEUR" moteur numero n va a la position p (0 a 1024+)
 	 						--> '1' (recu) '0' (erreur)		--> '1'(atteint)
-	18 n (renvoie la charge de la pince n (0 : AV / 1 : AR)
+	37 n ("LOAD" renvoie la charge de la pince n (0 : AV / 1 : AR)
 	 						--> '2' (sert) '1' (sert pas) '0' (erreur)
-	19 (renvoie un mesage quand le jack est retiré)
+	38 ("JACK" renvoie un mesage quand le jack est retiré)
 							--> '1' (recu) 					--> '2' (jack retiré)
-	20 n (affiche la couleur rouge ('0') ou bleu ('1'))
+	39 n ("LED" affiche la couleur sur les diodes rouge ('0') ou bleu ('1'))
 							--> '1' (recu)
+	40 n (renvoie le type de pion devant la face n (0 : AV / 1 : AR))
+							--> '1' (pas de pion)
+								'2' (1 pion)
+								'3' (2 pion)
+								'4' (3 pion ou tete)
+								'5' (1 pion + tete)
+								'6' (2 pion + tete)
 
 
 
