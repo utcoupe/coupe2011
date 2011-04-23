@@ -16,15 +16,33 @@ long value_left_enc;//AR
 long value_right_enc;//AV
 
 void testAV(){
-	if(value_right_enc==goal_position_AV){
+	if(value_right_enc<(goal_position_AV-MARGE)){
+		setAVPWM(PWM_VALUE);//VERS LE HAUT
+	}
+	else if(value_right_enc>(goal_position_AV+MARGE)){
+		setAVPWM(-PWM_VALUE);//VERS LE BAS
+	}
+	else{//arret
 		setAVPWM(0x00);
-		sendMessage(msg_position_AV,1);
+		if(msg_position_AV!=-1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
+		}
 	}
 }
 void testAR(){
-	if(value_left_enc==goal_position_AR){
+	if(value_right_enc<(goal_position_AV-MARGE)){
+		setARPWM(PWM_VALUE);//VERS LE HAUT
+	}
+	else if(value_right_enc>(goal_position_AV+MARGE)){
+		setARPWM(-PWM_VALUE);//VERS LE BAS
+	}
+	else{//arret
 		setARPWM(0x00);
-		sendMessage(msg_position_AR,1);
+		if(msg_position_AV!=-1){
+			sendMessage(msg_position_AR,2);
+			msg_position_AV=-1;
+		}
 	}
 }
 
@@ -89,7 +107,6 @@ void valueChangeOnEncoderLeftPinB(){
 			value_left_enc++;
 
 	state_left_pinB = new_state;
-	testAR();
 }
 
 void valueChangeOnEncoderRightPinA(){
@@ -127,6 +144,5 @@ void valueChangeOnEncoderRightPinB(){
 			value_right_enc++;
 
 	state_right_pinB = new_state;
-	testAV();
 }
 

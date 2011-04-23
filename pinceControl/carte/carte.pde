@@ -2,15 +2,15 @@
 
 void setup(){	
 	initSerialLink();
-	initSensor();
 	initPinceControl();
-	initTourelle();
+	//initTourelle();
+	initSensor();//en dernier a cause du jack
 }
 
 void loop(){
 	readIncomingData();
 	sensorTrigger();
-	tourelleRun();
+	//tourelleRun();
 	
 }
 

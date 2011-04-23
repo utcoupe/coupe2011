@@ -9,17 +9,26 @@
 
 #define Q_PING 				1
 #define Q_IDENT 			0
-#define Q_SHARP 			12
-#define Q_TRIGGERSHARP 		13
-#define Q_MS	 			14
-#define Q_TRIGGERMS	 		15
-#define Q_PINCE 			16
-#define Q_POSITION 			17
-#define Q_PRESENT_LOAD 		18
-#define Q_JACK		 		19
-#define Q_JACK		 		20
+#define Q_SHARP 			31
+#define Q_TSHARP 			32 //TRIGGERSHARP
+#define Q_MS	 			33
+#define Q_TMS	 			34 //TRIGGERMS
+#define Q_PINCE 			35
+#define Q_PPOSITION 		36 //PINCE POSITION
+#define Q_LOAD 				37 //PRESENT_LOAD
+#define Q_JACK		 		38
+#define Q_LED		 		39
+#define Q_PION		 		40
+/*debug*/
+#define Q_MOTOR		 		41
+
+struct Id{
+	int from;
+	int id;
+	Id(int from=-1,int id=-1) : from(from),id(id) {}
+};
 
 
-void cmd(int,int,int*);
+void cmd(int,int,int*,int); // from, id_cmd, *args, sizeArgs
 
 #endif /* COMMAND_H_ */

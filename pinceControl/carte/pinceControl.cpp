@@ -5,9 +5,25 @@ void initPinceControl(){
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	initPWM();
-	setARPWM(0x00);
-	setAVPWM(0x00);
 	initEncoders();
+}
+
+
+int setPWM(unsigned char face,int pwm,int tempo){
+	if(pwm > 255 || pwm < -255) return 0;
+	if(face==PINCEAV){
+		setAVPWM(pwm);
+		delay(tempo);
+		setAVPWM(0x00);
+		return 2;
+	}
+	if(face==PINCEAR){
+		setARPWM(pwm);
+		delay(tempo);
+		setARPWM(0x00);
+		return 2;
+	}
+	return 0;
 }
 
 int presentLoad(unsigned char idPince){
@@ -49,18 +65,20 @@ int setPinceState(unsigned char index,unsigned char etat){
 }
 
 int setPincePosition(unsigned int id,unsigned char index,unsigned int pos){
+	if(pos > POSITION_MAX) return 0; //erreur
 	switch(index){
 		case 0 : 
-		setAVPWM(PWM_VALUE);
+		//setAVPWM(PWM_VALUE);
 		goal_position_AV=pos;
 		msg_position_AV=id;
-		break;
+		return 1;
 		case 1 : 
-		setARPWM(PWM_VALUE);
+		//setARPWM(PWM_VALUE);
 		goal_position_AR=pos;
 		msg_position_AR=id;
-		break;
-		default : return 0;
+		return 1;
+		default : 
+		return 0;//erreur
 	}
 }
 
