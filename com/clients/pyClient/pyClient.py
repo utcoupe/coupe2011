@@ -65,6 +65,8 @@ class pyClient:
 
     def _write(self, msg):
         self._lock_write.acquire()
-        self._fn_output(msg.strip()+"\n")
-        self._lock_write.release()
+        try:
+            self._fn_output(msg.strip()+"\n")
+        finally:
+            self._lock_write.release()
         

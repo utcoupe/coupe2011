@@ -21,6 +21,6 @@ Q_AUTO_CALIB        =	7
 
 # server python
 ID_SERVER		= 0
-ID_ASSERV		= 1 # carte asserv
-ID_OTHERS       = 2 # carte avec les pinces et sharps
+ID_ASSERV		= 2 # carte asserv
+ID_OTHERS       = 1 # carte avec les pinces et sharps
 ID_IA           = 3 # l'IA

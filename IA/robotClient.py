@@ -11,16 +11,40 @@ from protocole import *
 class RobotClient(threading.Thread):
     def __init__(self, robot):
         threading.Thread.__init__(self,None,None,"RobotClient")
+        
+        self._listFifo = list()
         self.robot = robot
         self._lock_write = threading.Lock()
+        self._lock_fifo = threading.Lock()
+        
+        self._partialMsg = ""
+        
         self._e_close = threading.Event()
         
+        # connection
         host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
         port = int(sys.argv[2]) if len(sys.argv) > 2 else 50000            # The same port as used by the server
         self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         self._socket.settimeout(1.0)
         self._socket.connect((host, port))
 
+    def combineWithPartial(self, msg):
+        """
+        @return [] si le message ne peut pas etre exploité (pas de \n à la fin)
+        @return [m1,m2,m3, ...] sinon
+        """
+        #print (self._partialMsg,msg)
+        msg = self._partialMsg + str(msg)
+        index = msg.rfind('\n')
+        if index < 0:
+            self._partialMsg = msg
+            #print self._partialMsg,[]
+            return []
+        else:
+            self._partialMsg = msg[index+1:]
+            #print self._partialMsg,[ m for m in msg[:index].split('\n') ]
+            return [ m for m in msg[:index].split('\n') ]
+        
     def send(self, msg):
         """ 
         Envoie le message au serveur
@@ -46,24 +70,42 @@ class RobotClient(threading.Thread):
                     self._socket.close()
                     self._e_close.set()
                     self.write("break recv")
-                self._treat(data)
+                else:
+                    for msg in self.combineWithPartial(data):
+                        self._treat(msg)
                 
     def _treat(self, msg):
         """ fonction appellée quand un message est reçu """
         # formatage de la réponse et appelle d'un robot.on<Event>()
-        self.write("Received : %s"%msg)
-        msg = str(msg)
-        id_from, id_msg, msg = msg.split(C_SEP_SEND,2)
-        id_from = int(id_from)
-        id_msg = int(id_msg)
-        if id_from == ID_SERVER:
-            self.robot.onRepServer(id_msg, msg)
-        elif id_from == ID_ASSERV:
-            self.robot.onRepAsserv(id_msg, msg)
+        self.write("Received : '%s'"%msg)
+        msg = str(msg).strip()
+        msg_split = msg.split(C_SEP_SEND,3)
+        id_from = int(msg_split[0])
+        id_cmd = self.robot.cmd[int(msg_split[1])]
+        id_msg = int(msg_split[2])
+        msg = msg_split[3].strip() if len(msg_split) > 3 else None
+            
+        for fifo in self._listFifo:
+            fifo.addMsg(id_from, id_msg, id_cmd, msg)
+        
 
     def write(self, msg):
         """ pour écrire sans se marcher sur les doigts """
         self._lock_write.acquire()
-        print str(msg).strip()
-        self._lock_write.release()
+        try:
+            print str(msg).strip()
+        finally:
+            self._lock_write.release()
     
+    def addFifo(self, msgFifo):
+        self._listFifo.append(msgFifo)
+        return msgFifo
+    
+    def removeFifo(self, msgFifo):
+        self._lock_fifo.acquire()
+        try:
+            self._listFifo.remove(msgFifo)
+        finally:
+            self._lock_fifo.release()
+    
+        

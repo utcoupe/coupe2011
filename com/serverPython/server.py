@@ -67,6 +67,8 @@ class Server():
 	
 	def write(self, msg):
 		self._lock_write.acquire()
-		print str(msg).strip()
-		self._lock_write.release()
+		try:
+			print str(msg).strip()
+		finally:
+			self._lock_write.release()
 

@@ -3,7 +3,7 @@
 
 from pince import *
 from robotClient import *
-from eventsWaiter import *
+from msgFifo import *
 from loopCmd import *
 
 
@@ -27,37 +27,28 @@ class Robot:
         self.pos = (0,0)
         self.target_pos = (-1,-1) # la position du pion visé
         
-        self.events = [ [ threading.Event() for __ in xrange(20) ] for _ in xrange(5) ] # les events des réponses
-        self.reponses = [ [0]*20 for _ in xrange(5) ]
-        
         self._e_stop = threading.Event()
         
         self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
-        self.msg_events = [ threading.Event() for _ in xrange(MAX_MSG) ]
         self.id_msg = 0
     
     
-    def addCmd(self, device, id_cmd, args=[""]):
+    def addCmd(self, id_device, id_cmd, args=[""]):
         """
         Envoyer une commande
         
-        @param device id du device (asserv, cam,...)
+        @param id_device id du device (asserv, cam,...)
         @param id_cmd id de la commande
         @param args les éventuels arguments
         
         @return id_msg
         """
         # création du message
-        msg = str(device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
+        msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
         for a in args: msg += C_SEP_SEND+str(a)
         
         # sauvegarde de la commande
         self.cmd[self.id_msg] = id_cmd
-        
-        # nettoyage des receptacles
-        self.reponses[device][id_cmd] = None
-        self.events[device][id_cmd].clear()
-        self.msg_events[self.id_msg].clear()
         
         # envoie
         self.client.send(msg)
@@ -77,24 +68,30 @@ class Robot:
         """ démarage du robot """
         self.client.start()
         
+        fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
+        
         self.addCmd(ID_ASSERV, Q_POSITION)
-        self.events[ID_ASSERV][Q_POSITION].wait()
-        self.write(self.reponses[ID_ASSERV][Q_POSITION])
-        self.write(self.pos)
+        r = fifo.getMsg()
+        self.write(r)
+        self.pos = r
         
         """self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (0,))
         self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
         self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
         self.write(self.reponses[ID_ASSERV][Q_AUTO_CALIB])
         """
-        vitesse = 100
+        vitesse = 180
         self.do_path((Q_GOAL_ABS, (1000,0,vitesse)),
+                     (Q_ANGLE_ABS, (90,vitesse-80)),
                      (Q_GOAL_ABS, (1000,1000,vitesse)),
+                     (Q_ANGLE_ABS, (180,vitesse-80)),
                      (Q_GOAL_ABS, (0,1000,vitesse)),
+                     (Q_ANGLE_ABS, (-90,vitesse-80)),
                      (Q_GOAL_ABS, (0,0,vitesse)),
-                     (Q_ANGLE_ABS, (0,vitesse)),
+                     (Q_ANGLE_ABS, (0,vitesse-80)),
                     )
         
+        self.client.removeFifo(fifo)
     
     def stop(self, msg=None):
         """ arret du robot """
@@ -138,7 +135,7 @@ class Robot:
         
         loopCmd = LoopCmd(self, 1.0, ID_ASSERV, Q_POSITION)
         
-        eventsWaiter = EventsWaiter(("goal", self.events[ID_ASSERV][Q_GOAL_ABS]), ("pos", self.events[ID_ASSERV][Q_POSITION]), ("warning", self.events[ID_OTHERS][Q_WARNING]))
+        #eventsWaiter = EventsWaiter(("goal", self.events[ID_ASSERV][Q_GOAL_ABS]), ("pos", self.events[ID_ASSERV][Q_POSITION]), ("warning", self.events[ID_OTHERS][Q_WARNING]))
         """
         @todo
         while True:
@@ -183,35 +180,6 @@ class Robot:
         # aller poser sur des cases
         pass
     
-    def onRepCam(self, cmd, msg):
-        """ quand la réponse de la camera arrive """
-        # il faudra traiter la réponse, voir les pions detectés,
-        # leur distance,
-        # determiner leur couleur, etc...
-        # pour finir aller au but
-        if Q_SCAN == cmd:
-            self.scan = [ p.split(C_SEP_3) for p in msg.split(C_SEP_2) ]
-        self.events[CAM][cmd].set()
-    
-    def onRepOthers(self, cmd, msg):
-        """ quand la carte 'others' envoie un message """
-        self.events[ID_OTHERS][cmd].set()
-        
-    def onRepAsserv(self, id_msg, msg):
-        """ quand l'asserv envoie un message """
-        id_cmd = self.cmd[id_msg]
-        if Q_POSITION == id_cmd:
-            self.pos = msg.split(C_SEP_SEND)
-        self.reponses[ID_ASSERV][id_cmd] = msg
-        self.events[ID_ASSERV][id_cmd].set()
-    
-    def onRepServer(self, id_msg, msg):
-        """ quand le server envoie un message """
-        id_cmd = self.cmd[id_msg]
-        self.reponses[ID_SERVER][id_cmd] = msg
-        self.events[ID_SERVER][id_cmd].set()
-        
-        
     def dumpObj(self):
         """ ouvrir la pince """
         self.addCmd(ID_OTHERS,Q_OPEN_PINCE) # ouvre la pince
