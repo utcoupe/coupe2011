@@ -51,7 +51,7 @@ COMMANDES : CARTE PINCE
 							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil atteint + arret seuil) ou '0' (annulation)
 	35 n p ("PINCE" pince n (0 : AV / 1 : AR) etat p (fermé : 0 / sérré : 1 / ouvert : 2))
 							--> '1' (recu) '0' (erreur)
-	36 n p ("POSITION" moteur numero n (0 : AV / 1 : AR) va a la position p (0 a 1024+)
+	36 n p ("POSITION" moteur numero n (0 : AV / 1 : AR) va a la position p (0 a 10000)
 	 						--> '1' (recu) '0' (erreur)		--> '2'(atteint)
 	37 n ("LOAD" renvoie la charge de la pince n (0 : AV / 1 : AR)
 	 						--> '2' (sert) '1' (sert pas) '0' (erreur)

@@ -5,7 +5,6 @@
  *      Author: HoHen
  */
 #include "encoder.h"
-#include "wiring.h"
 
 int state_left_pinA;
 int state_left_pinB;
@@ -14,34 +13,39 @@ int state_right_pinB;
 
 long value_left_enc;//AR
 long value_right_enc;//AV
+long goal_position_AV,goal_position_AR;
 
 void testAV(){
-	if(value_right_enc<(goal_position_AV-MARGE)){
-		setAVPWM(PWM_VALUE);//VERS LE HAUT
-	}
-	else if(value_right_enc>(goal_position_AV+MARGE)){
-		setAVPWM(-PWM_VALUE);//VERS LE BAS
-	}
-	else{//arret
-		setAVPWM(0x00);
-		if(msg_position_AV!=-1){
-			sendMessage(msg_position_AV,2);
-			msg_position_AV=-1;
+	if(goal_position_AV>=0){
+		if(value_right_enc<(goal_position_AV-MARGE)){
+			setAVPWM(PWM_VALUE);//VERS LE HAUT
+		}
+		else if(value_right_enc>(goal_position_AV+MARGE)){
+			setAVPWM(-PWM_VALUE);//VERS LE BAS
+		}
+		else{//arret
+			setAVPWM(0x00);
+			if(msg_position_AV!=-1){
+				sendMessage(msg_position_AV,2);
+				msg_position_AV=-1;
+			}
 		}
 	}
 }
 void testAR(){
-	if(value_right_enc<(goal_position_AV-MARGE)){
-		setARPWM(PWM_VALUE);//VERS LE HAUT
-	}
-	else if(value_right_enc>(goal_position_AV+MARGE)){
-		setARPWM(-PWM_VALUE);//VERS LE BAS
-	}
-	else{//arret
-		setARPWM(0x00);
-		if(msg_position_AV!=-1){
-			sendMessage(msg_position_AR,2);
-			msg_position_AV=-1;
+	if(goal_position_AR>=0){
+		if(value_left_enc<(goal_position_AR-MARGE)){
+			setARPWM(PWM_VALUE);//VERS LE HAUT
+		}
+		else if(value_left_enc>(goal_position_AR+MARGE)){
+			setARPWM(-PWM_VALUE);//VERS LE BAS
+		}
+		else{//arret
+			setARPWM(0x00);
+			if(msg_position_AR!=-1){
+				sendMessage(msg_position_AR,2);
+				msg_position_AR=-1;
+			}
 		}
 	}
 }

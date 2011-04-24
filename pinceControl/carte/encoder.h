@@ -8,7 +8,17 @@
 #ifndef ENCODER_H_
 #define ENCODER_H_
 
+#define PIN_LEFT_A 18 //bleu //arriere
+#define PIN_LEFT_B 19 //blanc //arriere
+#define PIN_RIGHT_A 20 //bleu //avant
+#define PIN_RIGHT_B 21 //blanc //avant
+#define INTERRUPT_LEFT_A 5
+#define INTERRUPT_LEFT_B 4
+#define INTERRUPT_RIGHT_A 2
+#define INTERRUPT_RIGHT_B 3
+
 #include "pinceControl.h"
+#include "wiring.h"
 
 
 void initEncoders();
@@ -26,8 +36,10 @@ void valueChangeOnEncoderLeftPinB();
 void valueChangeOnEncoderRightPinA();
 void valueChangeOnEncoderRightPinB();
 
-extern long value_left_enc;
-extern long value_right_enc;
+extern long value_left_enc;//AR
+extern long value_right_enc;//AV
+extern long goal_position_AV;
+extern long goal_position_AR;
 
 
 #endif /* ENCODER_H_ */

@@ -7,8 +7,8 @@
 #include "sensor.h"
 #include "tourelle.h"
 
-#define Q_PING 				1
 #define Q_IDENT 			0
+#define Q_PING 				1
 #define Q_SHARP 			31
 #define Q_TSHARP 			32 //TRIGGERSHARP
 #define Q_MS	 			33
@@ -21,13 +21,11 @@
 #define Q_PION		 		40
 /*debug*/
 #define Q_MOTOR		 		41
-
-struct Id{
-	int from;
-	int id;
-	Id(int from=-1,int id=-1) : from(from),id(id) {}
-};
-
+#define Q_TXAX12	 		42 //write
+#define Q_RXAX12	 		43 //read
+#define Q_CODEUR	 		44 
+#define Q_RESET		 		45
+#define Q_RECALAGE	 		46
 
 void cmd(int,int,int*,int); // from, id_cmd, *args, sizeArgs
 

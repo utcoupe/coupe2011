@@ -8,8 +8,8 @@
 #include "pwm.h"
 #include "AFMotor.h"
 
-AF_DCMotor MoteurG(1, MOTOR12_64KHZ);
-AF_DCMotor MoteurD(2, MOTOR12_64KHZ);
+AF_DCMotor MoteurG(1, MOTOR12_64KHZ); //A
+AF_DCMotor MoteurD(2, MOTOR12_64KHZ); //B
 
 void initPWM(){
 	MoteurG = AF_DCMotor(1, MOTOR12_64KHZ);
@@ -21,17 +21,17 @@ void initPWM(){
 }
 
 void setAVPWM(int value){
-	MoteurG.setSpeed(abs(value));
-	if(value>0)
+	if(value<0)
 		MoteurG.run(FORWARD);
 	else
 		MoteurG.run(BACKWARD);
+	MoteurG.setSpeed(abs(value));
 }
 
 void setARPWM(int value){
-	MoteurD.setSpeed(abs(value));
-	if(value>0)
+	if(value<0)
 		MoteurD.run(FORWARD);
 	else
 		MoteurD.run(BACKWARD);
+	MoteurD.setSpeed(abs(value));
 }

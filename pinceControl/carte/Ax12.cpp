@@ -291,45 +291,86 @@ int Ax12Class::setAlarmLed(unsigned char ID,unsigned char data){
 
 int Ax12Class::write(unsigned char ID, unsigned char variable , unsigned int value)
 {
-  unsigned char value_H,value_L;
-  value_H = value >> 8;           // 16 bits - 2 x 8 bits variables
-  value_L = value;
-
-  Checksum = ~(ID + 5 + AX_WRITE_DATA + variable + value_L + value_H);
-
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  write(AX_START);                 // Send Instructions over Serial
-  write(AX_START);
-  write(ID);
-  write(5);
-  write(AX_WRITE_DATA);
-  write(variable);
-  write(value_L);
-  write(value_H);
-  write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
-
-  return (read_error());                 // Return the read error
+	unsigned char type = 0xFF;
+	switch (value) {
+		case AX_CW_ANGLE_LIMIT_L :
+		case AX_CCW_ANGLE_LIMIT_L :
+		case AX_MAX_TORQUE_L :
+		case AX_GOAL_POSITION_L :
+		case AX_GOAL_SPEED_L :
+		case AX_TORQUE_LIMIT_L :
+		case AX_PUNCH_L :
+		type = AX_2BYTE_WRITE;
+		break;
+		case AX_ID :
+		case AX_BAUD_RATE :
+		case AX_RETURN_DELAY_TIME :
+		case AX_LIMIT_TEMPERATURE :
+		case AX_DOWN_LIMIT_VOLTAGE :
+		case AX_UP_LIMIT_VOLTAGE :
+		case AX_RETURN_LEVEL :
+		case AX_ALARM_LED :
+		case AX_ALARM_SHUTDOWN :
+		case AX_OPERATING_MODE :
+		case AX_TORQUE_ENABLE :
+		case AX_LED :
+		case AX_CW_COMPLIANCE_MARGIN :
+		case AX_CCW_COMPLIANCE_MARGIN :
+		case AX_CW_COMPLIANCE_SLOPE :
+		case AX_CCW_COMPLIANCE_SLOPE :
+		case AX_REGISTERED_INSTRUCTION :
+		case AX_LOCK :
+		type = AX_BYTE_WRITE;
+		break;
+	}
+	if((type == AX_BYTE_WRITE) || (type == AX_2BYTE_WRITE)){
+		return write(ID,variable,value,type);
+	}
+	return -1;//erreur
 }
 
-int Ax12Class::write(unsigned char ID, unsigned char variable , unsigned char value)
+int Ax12Class::write(unsigned char ID, unsigned char variable , unsigned int value ,unsigned char type)
 {
-  Checksum = ~(ID + 4 + AX_WRITE_DATA + variable + value);
+  if(type==AX_BYTE_WRITE){
+	  Checksum = ~(ID + 4 + AX_WRITE_DATA + variable + value);
 
-  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
-  write(AX_START);                 // Send Instructions over Serial
-  write(AX_START);
-  write(ID);
-  write(4);
-  write(AX_WRITE_DATA);
-  write(variable);
-  write(value);
-  write(Checksum);
-  delayMicroseconds(TX_DELAY_TIME);
-  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+	  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+	  write(AX_START);                 // Send Instructions over Serial
+	  write(AX_START);
+	  write(ID);
+	  write(4);
+	  write(AX_WRITE_DATA);
+	  write(variable);
+	  write(value);
+	  write(Checksum);
+	  delayMicroseconds(TX_DELAY_TIME);
+	  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
 
-  return (read_error());                 // Return the read error
+	  return (read_error());                 // Return the read error
+  }
+  if(type==AX_2BYTE_WRITE){
+	  unsigned char value_H,value_L;
+	  value_H = value >> 8;           // 16 bits - 2 x 8 bits variables
+	  value_L = value;
+
+	  Checksum = ~(ID + 5 + AX_WRITE_DATA + variable + value_L + value_H);
+
+	  digitalWrite(Direction_Pin,HIGH);      // Set Tx Mode
+	  write(AX_START);                 // Send Instructions over Serial
+	  write(AX_START);
+	  write(ID);
+	  write(5);
+	  write(AX_WRITE_DATA);
+	  write(variable);
+	  write(value_L);
+	  write(value_H);
+	  write(Checksum);
+	  delayMicroseconds(TX_DELAY_TIME);
+	  digitalWrite(Direction_Pin,LOW);       // Set Rx Mode
+
+	  return (read_error());                 // Return the read error
+  }
+  return -1; //erreur
 }
 
 
@@ -404,40 +445,24 @@ unsigned int Ax12Class::readPosition(unsigned char ID)
   delayMicroseconds(TX_DELAY_TIME);
   for (int i = 0 ; i<8 && available() > 0;i++){
     read();
-    //Serial.println(read(),HEX);
   }
-
-  /*while (available() > 0){
-    Serial.println(read(),HEX);
-    }*/
   unsigned int Position_Long_Byte=0;
-  //delayMicroseconds(2*TX_DELAY_TIME);
   while (available() > 0){
     Incoming_Byte = read();
-    //Serial.print(Incoming_Byte,HEX);Serial.print(",");
     if ( Incoming_Byte == 0xFF && peek() == 0xFF ){
       read();read();read();
-      //Serial.print(read(),HEX);Serial.print(",");              // Start Bytes
-      //Serial.print(read(),HEX);Serial.print(",");                             // Ax-12 ID
-      //Serial.print(read(),HEX);Serial.print(",");                             // Length
       if( peek() != 0 ) {  // Error
 	Error_Byte=read();
- 	//Serial.print(Error_Byte,HEX);Serial.print(",");
       }
       else{read();
-	//Serial.print(read(),HEX);Serial.print(",");
       }
 
       unsigned char Position_Low_Byte = read();            // Position Bytes
       unsigned char Position_High_Byte = read();
-      //Serial.print(Position_Low_Byte,HEX);Serial.print(",");
-      //Serial.print(Position_High_Byte,HEX);Serial.print(",");
       Position_Long_Byte = Position_High_Byte << 8;
       Position_Long_Byte = Position_Long_Byte + Position_Low_Byte;
-      //Serial.print(read(),HEX);Serial.println("."); //cheksum
     }
   }
-  //Serial.println("fin");
   return (Position_Long_Byte);     // Returns the read position
 }
 
@@ -460,28 +485,16 @@ unsigned char Ax12Class::readVoltage(unsigned char ID)
 
   for (int i = 0 ; i<8 && available() > 0;i++){
     read();
-    //Serial.println(read(),HEX);
   }
-
-  /*while (available() > 0){
-    Serial.println(read(),HEX);
-    }*/
   unsigned char Voltage_Byte=0;
-  //delayMicroseconds(2*TX_DELAY_TIME);
   while (available() > 0){
     Incoming_Byte = read();
-    //Serial.print(Incoming_Byte,HEX);Serial.print(",");
     if ( Incoming_Byte == 0xFF && peek() == 0xFF ){
       read();read();read();
-      //Serial.print(read(),HEX);Serial.print(",");              // Start Bytes
-      //Serial.print(read(),HEX);Serial.print(",");                             // Ax-12 ID
-      //Serial.print(read(),HEX);Serial.print(",");                             // Length
       if( peek() != 0 ) {  // Error
 	Error_Byte=read();
- 	//Serial.print(Error_Byte,HEX);Serial.print(",");
       }
       else{read();
-	//Serial.print(read(),HEX);Serial.print(",");
       }
       Voltage_Byte = read();            // Position Bytes
     }
@@ -531,6 +544,55 @@ unsigned int Ax12Class::readPresentLoad(unsigned char ID){
 	unsigned int res = read(ID,AX_PRESENT_LOAD_L,AX_2BYTE_READ);
 	res = res && 0x3FF;
 	return res;
+}
+
+unsigned int Ax12Class::read(unsigned char ID,unsigned char value){
+	unsigned char type = 0xFF;
+	switch (value) {
+		case AX_MODEL_NUMBER_L :
+		case AX_CW_ANGLE_LIMIT_L :
+		case AX_CCW_ANGLE_LIMIT_L :
+		case AX_MAX_TORQUE_L :
+		case AX_DOWN_CALIBRATION_L :
+		case AX_UP_CALIBRATION_L :
+		case AX_GOAL_POSITION_L :
+		case AX_GOAL_SPEED_L :
+		case AX_TORQUE_LIMIT_L :
+		case AX_PRESENT_POSITION_L :
+		case AX_PRESENT_SPEED_L :
+		case AX_PRESENT_LOAD_L :
+		case AX_PUNCH_L :
+		type = AX_2BYTE_READ;
+		break;
+		case AX_VERSION :
+		case AX_ID :
+		case AX_BAUD_RATE :
+		case AX_RETURN_DELAY_TIME :
+		case AX_LIMIT_TEMPERATURE :
+		case AX_DOWN_LIMIT_VOLTAGE :
+		case AX_UP_LIMIT_VOLTAGE :
+		case AX_RETURN_LEVEL :
+		case AX_ALARM_LED :
+		case AX_ALARM_SHUTDOWN :
+		case AX_OPERATING_MODE :
+		case AX_TORQUE_ENABLE :
+		case AX_LED :
+		case AX_CW_COMPLIANCE_MARGIN :
+		case AX_CCW_COMPLIANCE_MARGIN :
+		case AX_CW_COMPLIANCE_SLOPE :
+		case AX_CCW_COMPLIANCE_SLOPE :
+		case AX_PRESENT_VOLTAGE :
+		case AX_PRESENT_TEMPERATURE :
+		case AX_REGISTERED_INSTRUCTION :
+		case AX_MOVING :
+		case AX_LOCK :
+		type = AX_BYTE_READ;
+		break;
+	}
+	if((type == AX_BYTE_READ) || (type == AX_2BYTE_READ)){
+		return read(ID,value,type);
+	}
+	return 0xFFFFFFFF;//erreur ==> plein de f
 }
 
 unsigned int Ax12Class::read(unsigned char ID,unsigned char value,unsigned char type){
