@@ -8,8 +8,8 @@ import time
 from protocole import *
 
 class Client(threading.Thread):
-    def __init__(self, server, id):
-        threading.Thread.__init__(self, None, None)
+    def __init__(self, server, id, name):
+        threading.Thread.__init__(self, None, None, name)
         self.name = name
         self._server = server # la socket pour envoyer recevoir
         self.id = id # id du client sur le serveur
@@ -116,8 +116,7 @@ class LocalClient(Client):
     Le client qui est dans le terminal lancé par main.py
     """
     def __init__(self, server, id):
-        Client.__init__(self, server, id)
-        self.name = "LocalClient(%s)"%id
+        Client.__init__(self, server, id, "LocalClient(%s)"%id)
         self.mask_recv_from = -1
     
     def _fn_send(self, msg):
@@ -136,8 +135,7 @@ class SerialClient(Client):
     connection aux cartes arduinos
     """
     def __init__(self, server, id, serial, port, baudrate):
-        Client.__init__(self, server, id)
-        self.name = "SerialClient(%s,port=%s,baudrate=%s)"%(id,port,baudrate)
+        Client.__init__(self, server, id, "SerialClient(%s,port=%s,baudrate=%s)"%(id,port,baudrate))
         self.serial = serial
         self.port = port
         self.baudrate = baudrate
@@ -158,8 +156,7 @@ class SerialClient(Client):
 
 class SubprocessClient(Client):
     def __init__(self, server, id, process, exec_name):
-        Client.__init__(self, server, id)
-        self.name = "SubprocessClient(%s,exc_name=%s)"%(id,exec_name)
+        Client.__init__(self, server, id, "SubprocessClient(%s,exc_name=%s)"%(id,exec_name))
         self.process = process
         self.exec_name = exec_name
         
