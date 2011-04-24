@@ -10,7 +10,7 @@
 SERVER PYTHON
 	- message envoyé
 		Le message est composé de l'id du client qui a envoyé le message, d'une commande et de ses éventuels
-		paramètres, séparés par le caractère ":".
+		paramètres, séparés par le caractère ".".
 		id_mandataire:id_cmd:arg1:arg2
 		ex :
 			1:0

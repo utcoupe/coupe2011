@@ -4,7 +4,7 @@
 #define SERIAL_BAUD 115200
 
 // cf. protocole
-#define C_SEP_SEND	':' // tout est séparé par ça. Ex : 5:0:300:45
+#define C_SEP_SEND	'.' // tout est séparé par ça. Ex : 5:0:300:45
 
 
 
@@ -22,8 +22,23 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_DEBUG				99
 
 // autre
-#define SHARP			52
-#define CHECK_SHARP		53
+#define Q_SHARP 			31
+#define Q_TSHARP 			32 // TRIGGERSHARP
+#define Q_MS	 			33
+#define Q_TMS	 			34 // TRIGGERMS
+#define Q_PINCE 			35
+#define Q_PPOSITION 		36 // PINCE POSITION
+#define Q_LOAD 				37 // PRESENT_LOAD
+#define Q_JACK		 		38
+#define Q_LED		 		39
+#define Q_PION		 		40
+// autre debug
+#define Q_MOTOR		 		41
+#define Q_TXAX12	 		42 // write
+#define Q_RXAX12	 		43 // read
+#define Q_CODEUR	 		44 
+#define Q_RESET		 		45
+#define Q_RECALAGE	 		46
 
 // asserv
 #define Q_GOAL_ABS 			2
