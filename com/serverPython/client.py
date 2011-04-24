@@ -82,14 +82,13 @@ class TCPClient(Client):
     """
     Client TCP
     """
-    def __init__(self, server, id, s):
+    def __init__(self, server, id, s, addr):
         """
         @param server le server
         @param id id du client
         @param s socket pour écouter envoyer
         """
-        Client.__init__(self, server, id)
-        self.name = "TCPClient(%s)"%id
+        Client.__init__(self, server, id, "TCPClient(%s,addr=%s)"%(id,addr))
         self.s = s
         self.s.settimeout(1.0) # timeout
     

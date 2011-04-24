@@ -39,7 +39,7 @@ class TCPLoop(threading.Thread):
         except socket.timeout:
             pass
         else:
-            self._server.addTCPClient(conn)
+            self._server.addTCPClient(conn, addr)
     
     
     

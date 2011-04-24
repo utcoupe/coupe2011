@@ -37,8 +37,8 @@ class Server():
 	def shutdown(self):
 		self.e_shutdown.set()
 	
-	def addTCPClient(self, conn):
-		client = TCPClient(self,len(self.clients),conn)
+	def addTCPClient(self, conn, addr):
+		client = TCPClient(self,len(self.clients), conn, addr)
 		client.start()
 		self.clients.append(client)
 	

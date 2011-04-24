@@ -82,13 +82,17 @@ class Robot:
         self.write(self.reponses[ID_ASSERV][Q_POSITION])
         self.write(self.pos)
         
-        self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (0,))
+        """self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (0,))
         self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
         self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
         self.write(self.reponses[ID_ASSERV][Q_AUTO_CALIB])
-        
-        self.do_path((Q_GOAL_ABS, (2300,250,150)),
-                     (Q_GOAL_ABS, (2350,1000,150))
+        """
+        vitesse = 100
+        self.do_path((Q_GOAL_ABS, (1000,0,vitesse)),
+                     (Q_GOAL_ABS, (1000,1000,vitesse)),
+                     (Q_GOAL_ABS, (0,1000,vitesse)),
+                     (Q_GOAL_ABS, (0,0,vitesse)),
+                     (Q_ANGLE_ABS, (0,vitesse)),
                     )
         
     
