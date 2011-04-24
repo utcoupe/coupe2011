@@ -7,7 +7,7 @@
  * */
 
 // from, id_cmd, *args, sizeArgs
-void cmd(int id, int header, int *args, int nb){              
+void cmd(int id, int header, int *args, int nb){
 	/* On analyse le message en fonction de son type */
 	switch(header){
 		case Q_IDENT:{//ok

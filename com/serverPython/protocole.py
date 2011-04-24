@@ -1,11 +1,8 @@
 # -*- coding: utf-8 -*-
 
 
-C_SEP_SEND = ':'	# séparation entre les données de la commande à envoyer aux cartes
+C_SEP_SEND = '.'	# séparation entre les données de la commande à envoyer aux cartes
 
-C_SEP1	=	'|'		# séparation entre l'id de la commande et la commande
-C_SEP2	=	'/'		# séparation entre les différentes données renvoyées par la 
-C_SEP3	=	'_'		# séparation de niveau supérieur pour renvoyer des tableaux 2D
 
 Q_IDENT			=	0
 PING			=	1
