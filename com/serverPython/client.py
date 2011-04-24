@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+import sys
 import threading
 import socket
 import time
@@ -35,12 +36,12 @@ class Client(threading.Thread):
         """
         Point d'entrée, envoie au client son id puis lance self._loop() en boucle
         """
-        print "%s start"%self.name
+        self._server.write("%s start"%self.name)
         self._running = True
         self.send(1,str(ID_SERVER)+C_SEP_SEND+str(Q_IDENT)+C_SEP_SEND+str(self.id)+"\n")
         while self._running and not self._server.e_shutdown.isSet():
             self._loopRecv()
-        print "%s arreté"%self.name
+        self._server.write("%s arreté"%self.name)
 
     def combineWithPartial(self, msg):
         """
@@ -121,6 +122,8 @@ class LocalClient(Client):
     
     def _fn_send(self, msg):
         self._server.write("Received on server : '%s'"%msg)
+        if "sd" in msg:
+            self._server.shutdown()
     
     def _loopRecv(self):
         msg = raw_input()+"\n"

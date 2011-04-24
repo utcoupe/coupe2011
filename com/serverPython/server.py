@@ -34,7 +34,7 @@ class Server():
 		self.tcpLoop.start()
 		self.sender.start()
 	
-	def stop(self):
+	def shutdown(self):
 		self.e_shutdown.set()
 	
 	def addTCPClient(self, conn):
@@ -69,3 +69,4 @@ class Server():
 		self._lock_write.acquire()
 		print str(msg).strip()
 		self._lock_write.release()
+

@@ -13,6 +13,7 @@ class Sender(threading.Thread):
         self._queue.put((mask_from,to,msg))
     
     def run(self):
+        self._server.write("Sender loop start")
         while not self._server.e_shutdown.is_set():
             try:
                 mask_from, to, msg = self._queue.get(True, 2)
@@ -21,6 +22,7 @@ class Sender(threading.Thread):
             else:
                 self._send(mask_from, to, msg)
                 self._queue.task_done()
+        self._server.write("Sender loop stop")
     
     def _send(self, mask_from, to, msg):
         for c in self._server.clients:
