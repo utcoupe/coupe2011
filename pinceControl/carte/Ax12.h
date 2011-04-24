@@ -74,6 +74,8 @@
 #define ON                          1
 #define AX_BYTE_READ                1
 #define AX_2BYTE_READ	            2
+#define AX_BYTE_WRITE               1
+#define AX_2BYTE_WRITE	            2
 #define BROADCAST_ID                254
 #define AX_START                    255
 #define BUFFER_SIZE		    		64
@@ -139,15 +141,17 @@ public:
 	int setLedStatus(unsigned char, bool);
 	
 	int write(unsigned char ID, unsigned char variable , unsigned int value);
-	int write(unsigned char ID, unsigned char variable , unsigned char value);
+	int write(unsigned char ID, unsigned char variable , unsigned int value ,unsigned char type);
 	
 	//read
-	unsigned int read(unsigned char ID,unsigned char value,unsigned char type);
 	unsigned char readTemperature(unsigned char);
 	unsigned char readVoltage(unsigned char);
 	unsigned int readPosition(unsigned char);
 	unsigned int readPresentLoad(unsigned char ID);
 	unsigned char readBR(unsigned char); 
+	
+	unsigned int read(unsigned char ID,unsigned char value);
+	unsigned int read(unsigned char ID,unsigned char value,unsigned char type);
 };
 
 #endif

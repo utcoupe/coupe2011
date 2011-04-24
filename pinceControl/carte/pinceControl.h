@@ -30,13 +30,14 @@
 #define PINCE_O	 	2
 
 //deplacement verticale
-#define POSITION_MAX 15000
-#define PWM_VALUE 	90
-#define MARGE 		1000 //Tolerance de maintient en position pour la pince
+#define POSITION_MAX 10000
+#define PWM_VALUE 	90 //90
+#define MARGE 		50 //Tolerance de maintient en position pour la pince
 #define SEUIL_LOAD	0x50
+#define PIN_MS_AV   32 //microswitch pour recalage
+#define PIN_MS_AR	37
 
 static Ax12Class Ax12;
-static long goal_position_AV,goal_position_AR;
 static int msg_position_AV,msg_position_AR;
 
 #include "encoder.h"
@@ -45,6 +46,7 @@ void initPinceControl();
 int setPinceState(unsigned char index,unsigned char etat);
 int setPincePosition(unsigned int id,unsigned char,unsigned int pos);
 int presentLoad(unsigned char idPince);
-int setPWM(unsigned char face,int pwm,int tempo = 1);
+int setPincePWM(unsigned char face,int pwm,int tempo = 1);
+int pinceRecal(unsigned char face);
 
 #endif
