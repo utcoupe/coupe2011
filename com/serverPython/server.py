@@ -55,13 +55,15 @@ class Server():
 		"""
 		parse un message avant de l'envoyer
 		"""
-		msg = msg.strip()
-		id_to, msg = msg.split(C_SEP_SEND,1)
-		id_to = int(id_to)
-		mask_from = (1 << id_client)
-		mask_to = -1 if id_to == -1 else (1 << id_to)
-		msg = str(id_client)+C_SEP_SEND+msg
-		self.sender.addMsg(mask_from, mask_to, msg)
+		try:
+			id_to, msg = msg.strip().split(C_SEP_SEND,1)
+			id_to = int(id_to)
+			mask_from = (1 << id_client)
+			mask_to = -1 if id_to == -1 else (1 << id_to)
+			msg = str(id_client)+C_SEP_SEND+msg
+			self.sender.addMsg(mask_from, mask_to, msg)
+		except ValueError as ex:
+			self.write("ERROR : Server.parseMsg : %s"%msg);
 	
 	def write(self, msg):
 		self._lock_write.acquire()
