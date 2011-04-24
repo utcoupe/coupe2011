@@ -22,7 +22,7 @@ void initPWM(){
 
 void setLeftPWM(int value){
 	MoteurG.setSpeed(abs(value));
-	if(value>0)
+	if(value<0)
 		MoteurG.run(FORWARD);
 	else
 		MoteurG.run(BACKWARD);
