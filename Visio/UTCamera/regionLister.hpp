@@ -18,17 +18,8 @@
 ****************************************************/
 #include <iostream>
 #include <cv.h>
-/****************************************************
-*****           MACRO-DEFINITION                *****
-****************************************************/
-// Valeurs identifiants les positions des maximum des regions
-#define HAUT 	                    0
-#define BAS 	                    1
-#define DROITE 	                    2
-#define GAUCHE 	                    3
 
-// Type des zones
-#define TYPE_PIONT                  'p'
+#include "constantes.hpp"
 
 /****************************************************
 *****           STRUCTURE                       *****

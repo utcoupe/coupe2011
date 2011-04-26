@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="UTCamera" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Release">
+				<Option output="bin/UTCamera" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-Os" />
+					<Add option="-O3" />
+					<Add option="-std=c++98" />
+					<Add option="`pkg-config --cflags opencv`" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+					<Add option="`pkg-config --libs opencv`" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="Fps.hpp" />
+		<Unit filename="UTCamera.cpp" />
+		<Unit filename="UTCamera.hpp" />
+		<Unit filename="camCalibre.cpp" />
+		<Unit filename="camCalibre.hpp" />
+		<Unit filename="cam_utility.cpp" />
+		<Unit filename="cam_utility.hpp" />
+		<Unit filename="colorConvertion.cpp" />
+		<Unit filename="colorConvertion.hpp" />
+		<Unit filename="comManager.hpp" />
+		<Unit filename="comManger.cpp" />
+		<Unit filename="constantes.hpp" />
+		<Unit filename="loadCamera.cpp" />
+		<Unit filename="loadCamera.hpp" />
+		<Unit filename="regionLister.cpp" />
+		<Unit filename="regionLister.hpp" />
+		<Unit filename="zonesAnalyser.cpp" />
+		<Unit filename="zonesAnalyser.hpp" />
+		<Extensions>
+			<code_completion />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

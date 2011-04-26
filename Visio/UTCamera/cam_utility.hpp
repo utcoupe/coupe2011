@@ -10,7 +10,8 @@
 *   Ensemble de fonctions simples mais pratiques
 *****************************************************
  **/
-
+#ifndef _UTILCAM
+#define _UTILCAM
 /****************************************************
 *****           INCLUDES                        *****
 ****************************************************/
@@ -28,21 +29,6 @@ using namespace cv;
 
 // Extern
 #include <sstream>
-/****************************************************
-*****           MACRO-DEFINITION                *****
-****************************************************/
-// Macro de calcul
-#define CARRE(x)       ((x)*(x))
-#define ABS(x)         ( ((x)<0)  ?   ((-1)*(x)): (x)       )
-#define DIVSUP(n,d)    ( (n%d)==0 ?   ((n)/d) : (((n)+1)/n) )
-#define DIVSUP(n,d)    ( (n%d)==0 ?   ((n)/d) : (((n)-1)/n) )
-
-// Pour créer une police standart local à la fonction
-#define STD_POLICE      CvFont font;\
-                        double hScale=0.5;\
-                        double vScale=0.5;\
-                        int    lineWidth=1;\
-                        cvInitFont(&font,CV_FONT_HERSHEY_SIMPLEX|CV_FONT_ITALIC, hScale,vScale,0,lineWidth);
 
 
 /****************************************************
@@ -50,3 +36,6 @@ using namespace cv;
 ****************************************************/
 string intToString(int entier);
 int chareToInt(char* car);
+
+
+#endif
