@@ -67,7 +67,7 @@ void modeStationnaire()
             break;}
 
             // --- ScanAvant ---
-            case 61:{
+            case 62:{
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraF);
                     pthread_mutex_unlock (& mu);
@@ -84,7 +84,7 @@ void modeStationnaire()
             break;}
 
             // --- ScanArriére ---
-            case 62:{
+            case 63:{
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraB);
                     pthread_mutex_unlock (& mu);
