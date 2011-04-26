@@ -898,3 +898,119 @@
 
 1303778162 /home/xavier/Bureau/UTCamera/constantes.hpp
 
+1303858420 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
+	"UTCamera.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<list>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"regionLister.hpp"
+	"loadCamera.hpp"
+	"comManager.hpp"
+	"camCalibre.hpp"
+	"zonesAnalyser.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/constantes.hpp
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/regionLister.hpp
+	<iostream>
+	<cv.h>
+	"constantes.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/comManager.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"Fps.hpp"
+	"regionLister.hpp"
+	"colorConvertion.hpp"
+	"zonesAnalyser.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/Fps.hpp
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/colorConvertion.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/zonesAnalyser.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"regionLister.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/camCalibre.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"colorConvertion.hpp"
+	"Fps.hpp"
+
+1303858231 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/camCalibre.cpp
+	"camCalibre.hpp"
+	"zonesAnalyser.hpp"
+
+1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/cam_utility.cpp
+	"cam_utility.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/cam_utility.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	<sstream>
+
+1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/colorConvertion.cpp
+	"colorConvertion.hpp"
+
+1303858401 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/comManger.cpp
+	"comManager.hpp"
+
+1303858053 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.cpp
+	"loadCamera.hpp"
+
+1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/regionLister.cpp
+	"regionLister.hpp"
+
+1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/zonesAnalyser.cpp
+	"zonesAnalyser.hpp"
+	"cam_utility.hpp"
+	"regionLister.hpp"
+
