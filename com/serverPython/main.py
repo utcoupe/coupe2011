@@ -11,7 +11,7 @@ from server import *
 
 server = Server()
 
-server.addSubprocessClient("./test.py");
+server.addSubprocessClient("./UTCamera");
 
 import glob
 
