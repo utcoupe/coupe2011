@@ -82,7 +82,16 @@
 	"windows.h"
 	<limits>
 
-1291520124 
+1303853399 
+	<list>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"regionLister.hpp"
+	"loadCamera.hpp"
+	"comManager.hpp"
+	"camCalibre.hpp"
+	"zonesAnalyser.hpp"
 
 1291520124 /usr/local/include/opencv2/core/mat.hpp
 	<limits.h>
@@ -898,43 +907,64 @@
 
 1303778162 /home/xavier/Bureau/UTCamera/constantes.hpp
 
-<<<<<<< HEAD
-1303853399 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/camCalibre.cpp
-	"camCalibre.hpp"
-	"zonesAnalyser.hpp"
-
-1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/camCalibre.hpp
-=======
-1303858420 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
-	"UTCamera.hpp"
-
-1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.hpp
->>>>>>> a2f2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-	<pthread.h>
-<<<<<<< HEAD
+1303856030 D
 	<cv.h>
 	<highgui.h>
 	"constantes.hpp"
 	"colorConvertion.hpp"
 	"Fps.hpp"
+	"regionLister.hpp"
+	"Fps.hpp"
+	"regionLister.hpp"
+	"colorConvertion.hpp"
+	"zonesAnalyser.hpp"
+
+1303941642 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/camCalibre.cpp
+	"camCalibre.hpp"
+	"zonesAnalyser.hpp"
+
+1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/camCalibre.hpp
+
+1303858420 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
+	"UTCamera.hpp"
+
+1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.hpp
+
+1303856030 2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/constantes.hpp
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/colorConvertion.hpp
 	<iostream>
-=======
-	<list>
-	<cv.h>
-	<highgui.h>
-	"constantes.hpp"
-	"regionLister.hpp"
-	"loadCamera.hpp"
-	"comManager.hpp"
-	"camCalibre.hpp"
-	"zonesAnalyser.hpp"
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/constantes.hpp
 
@@ -944,17 +974,9 @@
 	"constantes.hpp"
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
->>>>>>> a2f2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
-	<stdio.h>
-	<stdlib.h>
-	<pthread.h>
-	<cv.h>
-	<highgui.h>
-	"constantes.hpp"
 
-<<<<<<< HEAD
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/Fps.hpp
-=======
+
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/comManager.hpp
 	<iostream>
 	<stdio.h>
@@ -968,28 +990,10 @@
 	"zonesAnalyser.hpp"
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/Fps.hpp
->>>>>>> a2f2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
-	<time.h>
-	<sys/time.h>
-	<windows.h>
-	<time.h>
-	<sys/time.h>
-	<windows.h>
 
-<<<<<<< HEAD
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/zonesAnalyser.hpp
-=======
+
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/colorConvertion.hpp
->>>>>>> a2f2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-	<pthread.h>
-	<cv.h>
-	<highgui.h>
-	"constantes.hpp"
-<<<<<<< HEAD
-	"regionLister.hpp"
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/regionLister.hpp
 	<iostream>
@@ -1011,11 +1015,10 @@
 1303853399 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/colorConvertion.cpp
 	"colorConvertion.hpp"
 
-1303854962 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/comManger.cpp
+1303947390 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/comManger.cpp
 	"comManager.hpp"
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/comManager.hpp
-=======
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/zonesAnalyser.hpp
 	<iostream>
@@ -1028,26 +1031,15 @@
 	"regionLister.hpp"
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/camCalibre.hpp
->>>>>>> a2f2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
-	<iostream>
-	<stdio.h>
-	<stdlib.h>
-	<pthread.h>
-	<cv.h>
-	<highgui.h>
-<<<<<<< HEAD
-	"Fps.hpp"
-	"regionLister.hpp"
-	"colorConvertion.hpp"
-	"zonesAnalyser.hpp"
 
-1303853849 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/loadCamera.cpp
+1303946441 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/loadCamera.cpp
 	"loadCamera.hpp"
 
-1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
+1303946420 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
 	<stdio.h>
 	<stdlib.h>
 	<pthread.h>
+	<iostream>
 	<cv.h>
 	<highgui.h>
 	"constantes.hpp"
@@ -1060,7 +1052,7 @@
 	"cam_utility.hpp"
 	"regionLister.hpp"
 
-1303854229 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
+1303948037 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
 	"UTCamera.hpp"
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/UTCamera.hpp
@@ -1077,7 +1069,8 @@
 	"comManager.hpp"
 	"camCalibre.hpp"
 	"zonesAnalyser.hpp"
-=======
+
+1303853399 yser.hpp"
 	"constantes.hpp"
 	"colorConvertion.hpp"
 	"Fps.hpp"
@@ -1114,5 +1107,4 @@
 	"zonesAnalyser.hpp"
 	"cam_utility.hpp"
 	"regionLister.hpp"
->>>>>>> a2f2b3e4dc6d4d2ceb1a4a15633c59eed6b50bce
 

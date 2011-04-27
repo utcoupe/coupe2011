@@ -22,6 +22,7 @@ def scanSerials():
 
 for serial in scanSerials():
 	server.addSerialClient(serial,115200)
+
 	
 for client in server.clients:
 	if client.id != 0:

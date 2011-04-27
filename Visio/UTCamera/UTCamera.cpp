@@ -22,8 +22,8 @@ int main(int argc, char* argv[])
     initGlobalVariable();
     /*
     */
-    calibrationManuel();
-    //modeStationnaire();
+    //calibrationManuel();
+    modeStationnaire();
 
     return 0;
 }

@@ -31,19 +31,19 @@ void identificationCamera()
     if(usb1==-1){printf("Pas de cameras Logitech connectées\n");exit(EXIT_FAILURE);}
 
 
-    printf("index 1 : %d  --- index 2 : %d \n",index1,index2);
-    printf("Serial 1, %s usb %d  --- Serial 2, %s usb %d \n",serial1,usb1,serial2,usb2);
+    std::cerr << "index 1 : "<< index1 << "--- index 2 : " << index2 << std::endl;
+    std::cerr << "Serial 1, "<< serial1 <<" usb " << usb1 << "--- Serial 2, " << serial2 <<" usb " << usb2 << std::endl;
 
 // --------------
 
     if(nb==1){
-        printf("Une Camera : ");
+        std::cerr << "Une Camera : ";
         if(!strcmp(serial1,SERIAL_CAM_F)){
-            printf("Camera Avant - index %d",index1);
+            std::cerr << "Camera Avant - index "<< index1;
             captureCameraF = cvCaptureFromCAM( index1 );
         }
         else{
-            printf("Camera Arriere - index %d",index1);
+            std::cerr << "Camera Arriere - index " << index1;
             captureCameraB = cvCaptureFromCAM( index1 );
         }
     }

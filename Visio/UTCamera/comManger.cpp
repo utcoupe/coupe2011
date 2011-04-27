@@ -23,7 +23,7 @@ void sendData(regionLister* liste)
         liste->ptrSuiv();
     }
 
-    printf("]");
+    printf("]\n");
 }
 
 /**
@@ -37,9 +37,9 @@ void modeStationnaire()
     pthread_t grabF;
     pthread_t grabB;
 	int id_from, id_msg, ordre = 100;
-	
+
     cvNamedWindow("T",CV_WINDOW_AUTOSIZE);
-    printf("\n\n");
+    std::cerr << std::endl << std::endl;
 
         // Lancement des threads
     if(captureCameraF!=NULL){
@@ -49,22 +49,26 @@ void modeStationnaire()
         pthread_create ( &grabB, NULL, grabCamB, NULL );
     }
 
+
         // Boucle principale
     while(on){
+
         scanf("%d.%d.%d",&id_from, &id_msg, &ordre);
         fflush(stdin);
-        // *****
 
+        printf("-1.");
+
+        // *****
         switch(ordre){
 
             // --- Identification ---
             case 0:{
-                    printf("cam");
+                    printf("cam\n");
             break;}
 
             // --- Ping ---
             case 1:{
-                    printf("%s","Pong");
+                    printf("%s","Pong\n");
             break;}
 
             // --- ScanAvant ---
@@ -109,6 +113,7 @@ void modeStationnaire()
 
         // *****
 
+        fflush(stdout);
     }
 }
 
