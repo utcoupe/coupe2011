@@ -5,6 +5,7 @@ IplImage* src;
 pthread_mutex_t mu  = PTHREAD_MUTEX_INITIALIZER;
 
 
+
 /**
  *
  */
@@ -32,11 +33,11 @@ void modeStationnaire()
 {
         // Declaration
     Fps timeCounter;
-    int ordre = 100;
     int  on = 1;
     pthread_t grabF;
     pthread_t grabB;
-
+	int id_from, id_msg, ordre = 100;
+	
     cvNamedWindow("T",CV_WINDOW_AUTOSIZE);
     printf("\n\n");
 
@@ -50,7 +51,7 @@ void modeStationnaire()
 
         // Boucle principale
     while(on){
-        scanf("%d",&ordre);
+        scanf("%d.%d.%d",&id_from, &id_msg, &ordre);
         fflush(stdin);
         // *****
 
