@@ -7,15 +7,18 @@ mise sur écoute de seulement eux même
 identification et réarrangement
 """
 
+from server import *
+
+server = Server()
+
+server.addSubprocessClient("./test.py");
+
 import glob
 
 def scanSerials():
     pathname = '/dev/ttyACM*'
     return glob.iglob(pathname)
 
-from server import *
-
-server = Server()
 
 for serial in scanSerials():
     server.addSerialClient(serial,115200)
