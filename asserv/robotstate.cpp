@@ -2,7 +2,7 @@
  * robotstate.cpp
  *
  *  Created on: 13 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 
 #include "robotstate.h"

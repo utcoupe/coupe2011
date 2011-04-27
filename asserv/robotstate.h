@@ -2,7 +2,7 @@
  * robotstate.h
  *
  *  Created on: 13 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 
 typedef struct RobotState {

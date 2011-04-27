@@ -2,7 +2,7 @@
  * fifo.h
  *
  *  Created on: 16 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 
 #ifndef FIFO_H_

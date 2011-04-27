@@ -2,7 +2,7 @@
  * encoder.h
  *
  *  Created on: 13 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 
 #ifndef ENCODER_H_

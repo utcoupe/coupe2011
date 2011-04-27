@@ -8,19 +8,19 @@ Q_IDENT			=	0
 PING			=	1
 
 # others
-Q_WARNING           =   3
+Q_WARNING		   =   3
 
 
 # asserv
 Q_GOAL_ABS			=	2
 Q_GOAL_REL			=	3
 Q_ANGLE_ABS			=	4
-Q_ANGLE_REL         =   5
-Q_POSITION		    = 	6
-Q_AUTO_CALIB        =	7
+Q_ANGLE_REL		 =   5
+Q_POSITION			= 	6
+Q_AUTO_CALIB		=	7
 
 # server python
 ID_SERVER		= 0
 ID_ASSERV		= 2 # carte asserv
-ID_OTHERS       = 1 # carte avec les pinces et sharps
-ID_IA           = 3 # l'IA
+ID_OTHERS	   = 1 # carte avec les pinces et sharps
+ID_IA		   = 3 # l'IA

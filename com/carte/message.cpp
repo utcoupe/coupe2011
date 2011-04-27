@@ -125,17 +125,17 @@ void readIncomingData()
 			// separateur
 			case C_SEP_SEND:
 			{
-               	currentArg[currentArgIndex] = '\0';
-       			args[argsIndex] = atoi(currentArg);
-                argsIndex++;
-        		currentArgIndex = 0;
-        		break;
+			   	currentArg[currentArgIndex] = '\0';
+	   			args[argsIndex] = atoi(currentArg);
+				argsIndex++;
+				currentArgIndex = 0;
+				break;
 			}
 			// fin de trame
 			case '\n':
 			{
-                currentArg[currentArgIndex] = '\0';
-        		args[argsIndex] = atoi(currentArg);
+				currentArg[currentArgIndex] = '\0';
+				args[argsIndex] = atoi(currentArg);
 				cmd(args[1],args[2],args+3,argsIndex-2); // from, id_cmd, *args, sizeArgs
   				argsIndex = 0;
 				currentArgIndex = 0;
@@ -143,9 +143,9 @@ void readIncomingData()
 			}
 			default:
 			{
-				currentArg[currentArgIndex] = data;    
+				currentArg[currentArgIndex] = data;	
 				currentArgIndex++;
-			    break;
+				break;
 			}
 		}
 	}

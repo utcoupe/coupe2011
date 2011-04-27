@@ -2,7 +2,7 @@
  * encoder.cpp
  *
  *  Created on: 13 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 #include "encoder.h"
 #include "wiring.h"

@@ -2,7 +2,7 @@
  * control.h
  *
  *  Created on: 13 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 
 #ifndef CONTROL_H_

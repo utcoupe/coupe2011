@@ -2,7 +2,7 @@
  * control.cpp
  *
  *  Created on: 13 janv. 2011
- *      Author: HoHen
+ *	  Author: HoHen
  */
 
 
@@ -370,8 +370,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
  */
 void delayControl(int* value_pwm_left, int* value_pwm_right){
 	static bool initDone = false;
-    static unsigned long start = 0;
-        
+	static unsigned long start = 0;
+		
 	if(!initDone){
 		start = millis();
 		initDone = true;
@@ -409,8 +409,8 @@ void delayControl(int* value_pwm_left, int* value_pwm_right){
  */
 void pwmControl(int* value_pwm_left, int* value_pwm_right){
 	static bool initDone = false;
-    static unsigned long start = 0;
-        
+	static unsigned long start = 0;
+		
 	if(!initDone){
 		start = millis();
 		initDone = true;

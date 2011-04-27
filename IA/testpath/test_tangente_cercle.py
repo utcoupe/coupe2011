@@ -26,18 +26,18 @@ circle = Circle(pion,50)
 type = 1
 
 def clic(event):
-    global type,line
-    type = -type
-    motion(event)
+	global type,line
+	type = -type
+	motion(event)
 
 def motion(event):
-    global line, other_pion
-    if line: canevas.delete(line)
-    if other_pion: canevas.delete(other_pion)
-    C2 = Circle(Vec2(event.x,event.y),50)
-    other_pion = C2.tracer(canevas)
-    T = C2.tangente(circle,type)
-    line = T.tracer(canevas,"black")
+	global line, other_pion
+	if line: canevas.delete(line)
+	if other_pion: canevas.delete(other_pion)
+	C2 = Circle(Vec2(event.x,event.y),50)
+	other_pion = C2.tracer(canevas)
+	T = C2.tangente(circle,type)
+	line = T.tracer(canevas,"black")
 
 canevas.bind('<ButtonPress-1>', clic)
 canevas.bind('<Motion>', motion)
