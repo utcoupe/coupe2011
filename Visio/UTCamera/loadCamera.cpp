@@ -55,7 +55,7 @@ void identificationCamera()
         printf("Deux Cameras : ");
         if(!strcmp(serial1,SERIAL_CAM_F)){
 
-            if(usb1>usb2){
+            if(usb1<usb2){
                 printf("Camera Avant - index %d "  ,index1 );
                 captureCameraF = cvCaptureFromCAM(  index1 );
                 printf("Camera Arriere - index %d ",index2 );
