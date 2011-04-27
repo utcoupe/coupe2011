@@ -151,7 +151,7 @@ class SerialClient(Client):
 
     def stop(self):
         self.serial.close()
-        Client.stop(self)
+        Client.stop()
 
 class SubprocessClient(Client):
     def __init__(self, server, id, process, exec_name):
@@ -160,14 +160,18 @@ class SubprocessClient(Client):
         self.exec_name = exec_name
         
     def _fn_send(self, msg):
-        self.process.stdin.write(str(msg).strip()+"\n") # envoie au child
-        self.process.stdin.flush()
+		self.process.stdin.write(str(msg).strip()+"\n") # envoie au child
+		self.process.stdin.flush()
     
     def _loopRecv(self):
         msg = self.process.stdout.readline()
+        if msg:
+            for msg in self.combineWithPartial(msg):
+                self._server.write("Received from %s : '%s'"%(self.name,msg))
+                self._server.parseMsg(self.id, msg)
     
     def stop(self):
         self.process.kill()
-        Client.stop(self)
+        Client.stop()
 
 

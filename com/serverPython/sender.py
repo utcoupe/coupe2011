@@ -27,7 +27,7 @@ class Sender(threading.Thread):
     def _send(self, mask_from, to, msg):
         for c in self._server.clients:
             if to & (1 << c.id):
-                c.send(mask_from, msg)
+				c.send(mask_from, msg)
         
         
         

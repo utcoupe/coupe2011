@@ -44,7 +44,10 @@ class Robot:
         @return id_msg
         """
         # création du message
-        msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
+        msg = str(id_device)
+        if id_device != ID_CAM:
+			msg += C_SEP_SEND+str(self.id_msg)
+        msg = C_SEP_SEND+str(id_cmd)
         for a in args: msg += C_SEP_SEND+str(a)
         
         # sauvegarde de la commande
@@ -163,6 +166,13 @@ class Robot:
         loopCmd.stop()
         eventsWaiter.stop()
         
+    def scan(self):
+        """
+        demande un scan à la camera
+        """
+        addCmd(ID_CAM, Q_SCAN_AV)
+    
+    
     
     def takeObject(self, target):
         """

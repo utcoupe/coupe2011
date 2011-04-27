@@ -17,7 +17,7 @@ void identificationCamera()
         // Déclaration et initialisation
     int index1=-1, index2=-1, nb;
     int usb1=-1, usb2=-1;
-    char serial1[20], serial2[20];
+    char serial1[20]={"vide"}, serial2[20]={"vide"};
 
     captureCameraF = NULL;
     captureCameraB = NULL;
@@ -123,9 +123,9 @@ void checkIndexValide(int *index1, int *index2, int *nb)
  */
 void loadUsbVision(int* usb1, char* serial1, int* usb2, char* serial2)
 {
-    system(MAIN_DIR"searchCameraOnUsb");
+    system("./searchCameraOnUsb");
     FILE* f;
-    f = fopen(MAIN_DIR"usbVision","r");
+    f = fopen("usbVision","r");
     if(!f){return;}
 
     fscanf(f,"%d", usb1);

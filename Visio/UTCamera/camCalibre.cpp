@@ -106,7 +106,7 @@ void loadConfig()
 {
     FILE* fichierConfig;
 
-    fichierConfig = fopen(MAIN_DIR"UTConfig.txt","r");
+    fichierConfig = fopen("UTConfig.txt","r");
     if(fichierConfig==NULL){return;}
 
     //    --- VALEUR DE H ---
@@ -143,7 +143,7 @@ void saveConfig()
 {
     FILE* fichierConfig;
 
-    fichierConfig = fopen(MAIN_DIR"UTConfig.txt","w+");
+    fichierConfig = fopen("UTConfig.txt","w+");
     if(fichierConfig==NULL){return;}
 
     for(int i=0; i<NB_COLOR; i++){fprintf(fichierConfig,"%d   ",_H[i]);}

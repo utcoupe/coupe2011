@@ -140,9 +140,9 @@ De 61 à 70.
 <ul>
 	<li><a href="#identification">0 (identification)</a></li>
 	<li><a href="#ping">1 (Ping)</a></li>
-	<li><a href="#scan">61 (scan)</a></li>
 	<li><a href="#scan_av">62 (scan avant)</a></li>
 	<li><a href="#scan_ar">63 (scan arrière)</a></li>
+	<li><a href="#stop_prog">69 (Arret du programme ^^)</a></li>
 </ul>
 </p>
 
@@ -357,10 +357,10 @@ Lance le recalage automatique pour la couleur (c). A ne faire que sur l'une des 
 
 
 <div>
-<h3 id="scan">61 Scan [] (CAM)</h3>
+<h3 id="scan_av">62 Scan avant [] (CAM)</h3>
 
 <p>
-	Effectue un scan avant et arrière.
+	Effectue un scan avec la cam avant.
 </p>
 <p>
 	<b>Retour : </b><br />
@@ -371,40 +371,33 @@ Lance le recalage automatique pour la couleur (c). A ne faire que sur l'une des 
 		faire une petite translation en fonction de la position de la caméra
 		sur le robot.</li>
 	</ul>
-	Les différents pion seront séparés par ':'. <br />
-	Exemple : '0_300_400:2_567_67' => pion de type 0 détecté en 300,400, et
-	pion de type 2 détécté en 567,67.<br />
-	Si le programme n'a rien trouvé alors il renverra '' (chaîne vide).<br />
+	Le liste est formaté pour pouvoir subir un "eval()" pythonique : 
+	[ [y,x,y], [t,x,y], [t,x,y], ...].<br />
+	Si le programme n'a rien trouvé alors il renverra '[]' (liste vide).<br />
 	L'écartement de certaines valeurs si abérantes sera géré par l'IA.
 </p>
 </div>
 
 
 <div>
-<h3 id="scan_av">62 Scan avant [] (CAM)</h3>
-
-<p>
-	Effectue un scan avec la cam avant.
-</p>
-<p>
-	<b>Retour : </b><br />
-	Voir <a href="#scan">61 Scan</a>.
-</p>
-</div>
-
-
-<div>
-<h3 id="scan_av">62 Scan arrière [] (CAM)</h3>
+<h3 id="scan_av">63 Scan arrière [] (CAM)</h3>
 
 <p>
 	Effectue un scan avec la cam arrière.
 </p>
 <p>
 	<b>Retour : </b><br />
-	Voir <a href="#scan">61 Scan</a>.
+	Voir <a href="#scan_av">61 Scan</a>.
 </p>
 </div>
 
+<div>
+<h3 id="#stop_prog">69 Arret du programme des webCams</h3>
+
+<p>
+	Arréte le programme
+</p>
+</div>
 
 
 

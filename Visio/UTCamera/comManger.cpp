@@ -5,22 +5,25 @@ IplImage* src;
 pthread_mutex_t mu  = PTHREAD_MUTEX_INITIALIZER;
 
 
+
 /**
  *
  */
 void sendData(regionLister* liste)
 {
+    printf("[");
     int nb = 0;
     liste->iniPtr();
     while(liste->getEle()!=NULL){
-        printf(",p %ld %ld",(int)liste->getEle()->Yprime,(int)liste->getEle()->Xprime);
+        if(nb){
+            printf(",");
+        }
+        printf("[p,%ld,%ld]",(int)liste->getEle()->Yprime,(int)liste->getEle()->Xprime);
         nb++;
         liste->ptrSuiv();
     }
 
-    if(!nb){
-        printf(",r");
-    }
+    printf("]");
 }
 
 /**
@@ -30,11 +33,11 @@ void modeStationnaire()
 {
         // Declaration
     Fps timeCounter;
-    char ordre;
     int  on = 1;
     pthread_t grabF;
     pthread_t grabB;
-
+	int id_from, id_msg, ordre = 100;
+	
     cvNamedWindow("T",CV_WINDOW_AUTOSIZE);
     printf("\n\n");
 
@@ -48,24 +51,24 @@ void modeStationnaire()
 
         // Boucle principale
     while(on){
-        scanf("%c",&ordre);
+        scanf("%d.%d.%d",&id_from, &id_msg, &ordre);
         fflush(stdin);
         // *****
 
         switch(ordre){
 
             // --- Identification ---
-            case '0':{
+            case 0:{
                     printf("cam");
             break;}
 
             // --- Ping ---
-            case '1':{
+            case 1:{
                     printf("%s","Pong");
             break;}
 
             // --- ScanAvant ---
-            case '2':{
+            case 62:{
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraF);
                     pthread_mutex_unlock (& mu);
@@ -82,7 +85,7 @@ void modeStationnaire()
             break;}
 
             // --- ScanArriére ---
-            case '3':{
+            case 63:{
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraB);
                     pthread_mutex_unlock (& mu);
@@ -99,10 +102,11 @@ void modeStationnaire()
             break;}
 
             // --- Arrét du programme ---
-            case '9':{
+            case 69:{
                 on = 0;
             break;}
         }
+
         // *****
 
     }

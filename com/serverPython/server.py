@@ -3,7 +3,7 @@
 import random
 import threading
 import serial
-
+import subprocess
 
 from sender import *
 from protocole import *
@@ -49,7 +49,10 @@ class Server():
 		self.clients.append(client)
 	
 	def addSubprocessClient(self, exec_name):
-		process = subprocess.Popen(port, shell=False, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+		process = subprocess.Popen(exec_name, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+		client = SubprocessClient(self, len(self.clients), process, exec_name)
+		client.start()
+		self.clients.append(client)
 		
 	def parseMsg(self, id_client, msg):
 		"""
