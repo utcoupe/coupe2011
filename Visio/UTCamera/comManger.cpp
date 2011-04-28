@@ -56,7 +56,7 @@ void modeStationnaire()
         scanf("%d.%d.%d",&id_from, &id_msg, &ordre);
         fflush(stdin);
 
-        printf("-1.");
+        printf("-1.%d.",id_msg);
 
         // *****
         switch(ordre){
