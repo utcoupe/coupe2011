@@ -70,6 +70,9 @@ class Robot:
 		
 		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
 		
+		# les pinces en haut
+		self.addCmd(ID_OTHERS, Q_ASCENSEUR, (0,1000))
+		
 		# demande de position
 		self.addCmd(ID_ASSERV, Q_POSITION)
 		r = fifo.getMsg()
@@ -82,19 +85,21 @@ class Robot:
 		self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (RED,))
 		r = fifo.getMsg()
 		self.write(r)
+		self.client.removeFifo(fifo)
 		
 		# sortie
-		vitesse = 180
+		vitesse = 250
 		
 		self.do_path((Q_GOAL_ABS, (1000,300,vitesse)),
 					 (Q_ANGLE_ABS, (90,vitesse-60)),
-					 (Q_GOAL_ABS, (1000,350,vitesse)),
+					 (Q_GOAL_ABS, (1000,500,vitesse)),
 					 (Q_ANGLE_ABS, (45,vitesse-60)),
 					)
 		
 		# scan
+		self.scan()
 		
-		self.client.removeFifo(fifo)
+		
 	
 	def stop(self, msg=None):
 		""" arret du robot """
@@ -135,36 +140,6 @@ class Robot:
 			self.addCmd(ID_ASSERV, cmd, args)
 			goals.append(args)
 		
-		
-		loopCmd = LoopCmd(self, 1.0, ID_ASSERV, Q_POSITION)
-		
-		#eventsWaiter = EventsWaiter(("goal", self.events[ID_ASSERV][Q_GOAL_ABS]), ("pos", self.events[ID_ASSERV][Q_POSITION]), ("warning", self.events[ID_OTHERS][Q_WARNING]))
-		"""
-		@todo
-		while True:
-			r = eventsWaiter.wait(1.5)
-			if not r: # timeout
-				pass
-			elif r == "pos":
-				if not self.checkAsserv(): # un imprévu est arrivé
-					self.stop("l'asservissement n'est pas là ou il devrait être")
-				self.write(self.reponses[ID_ASSERV][Q_POSITION])
-			elif r == "warning": # danger
-				if self.checkWarning(): # danger pour de vrai
-					self.stop("l'asservissement n'est pas là ou il devrait être")
-			elif r == "goal": # un but atteind
-				self.write(self.reponses[ID_ASSERV][Q_GOAL_ABS])
-				goal_reach = self.reponses[ID_ASSERV][Q_GOAL_ABS]
-				if goal_reach in goals: 
-					while True:
-						if goals.pop(0) == goal_reach:
-							break
-					if not goals: # tous les buts sont atteinds
-						break"""
-		
-		# arret des threads
-		loopCmd.stop()
-		eventsWaiter.stop()
 		
 	def scan(self):
 		"""

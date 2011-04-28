@@ -8,14 +8,14 @@ Q_IDENT			=	0
 PING			=	1
 
 # others
-Q_WARNING		   =   3
-
+Q_WARNING			= 3
+Q_ASCENSEUR			= 36
 
 # asserv
 Q_GOAL_ABS			=	2
 Q_GOAL_REL			=	3
 Q_ANGLE_ABS			=	4
-Q_ANGLE_REL		 =   5
+Q_ANGLE_REL			=   5
 Q_POSITION			= 	6
 Q_AUTO_CALIB		=	7
 
