@@ -87,11 +87,6 @@ Pareil que pour les arduinos il faut un lien symbolique vers message.cpp/h.
 Ensuite dans la boucle principale du programme lors de la reception d'un message il faut parser ce message
 le traiter puis appeller sendMessage(..) pour répondre.
 </p>
-<p>
-(Thomas à Xavier) Je te ferais une fonction de signature void readIncomingData(string data) qui sera dans message.cpp/h
-et qui appellera toute seule cmd(..). Comme ça tu pourras suivre le meme principe que pour les cartes arduinos
-(créer un fichier cmd.cpp avec une fonction cmd(int id, int id_cmd, int* args, int size) qui contient un switch).
-</p>
 
 
 

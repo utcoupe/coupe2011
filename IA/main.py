@@ -44,10 +44,7 @@ class Robot:
 		@return id_msg
 		"""
 		# création du message
-		msg = str(id_device)
-		if id_device != ID_CAM:
-			msg += C_SEP_SEND+str(self.id_msg)
-		msg = C_SEP_SEND+str(id_cmd)
+		msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
 		for a in args: msg += C_SEP_SEND+str(a)
 		
 		# sauvegarde de la commande
@@ -73,26 +70,29 @@ class Robot:
 		
 		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
 		
+		# demande de position
 		self.addCmd(ID_ASSERV, Q_POSITION)
 		r = fifo.getMsg()
 		self.write(r)
 		self.pos = r
+		self.client.removeFifo(fifo)
 		
-		"""self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (0,))
-		self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
-		self.events[ID_ASSERV][Q_AUTO_CALIB].wait()
-		self.write(self.reponses[ID_ASSERV][Q_AUTO_CALIB])
-		"""
+		# calibrage
+		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_AUTO_CALIB),)) )
+		self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (RED,))
+		r = fifo.getMsg()
+		self.write(r)
+		
+		# sortie
 		vitesse = 180
-		self.do_path((Q_GOAL_ABS, (1000,0,vitesse)),
-					 (Q_ANGLE_ABS, (90,vitesse-80)),
-					 (Q_GOAL_ABS, (1000,1000,vitesse)),
-					 (Q_ANGLE_ABS, (180,vitesse-80)),
-					 (Q_GOAL_ABS, (0,1000,vitesse)),
-					 (Q_ANGLE_ABS, (-90,vitesse-80)),
-					 (Q_GOAL_ABS, (0,0,vitesse)),
-					 (Q_ANGLE_ABS, (0,vitesse-80)),
+		
+		self.do_path((Q_GOAL_ABS, (1000,300,vitesse)),
+					 (Q_ANGLE_ABS, (90,vitesse-60)),
+					 (Q_GOAL_ABS, (1000,350,vitesse)),
+					 (Q_ANGLE_ABS, (45,vitesse-60)),
 					)
+		
+		# scan
 		
 		self.client.removeFifo(fifo)
 	
@@ -170,7 +170,10 @@ class Robot:
 		"""
 		demande un scan à la camera
 		"""
-		addCmd(ID_CAM, Q_SCAN_AV)
+		fifo = self.client.addFifo( MsgFifo(((ID_CAM, Q_SCAN_AV),)) )
+		self.addCmd(ID_CAM, Q_SCAN_AV)
+		r = fifo.getMsg()
+		self.write(str(r))
 	
 	
 	

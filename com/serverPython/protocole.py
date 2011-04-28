@@ -25,3 +25,8 @@ ID_CAM			= 1
 ID_ASSERV		= 3 # carte asserv
 ID_OTHERS	   = 2 # carte avec les pinces et sharps
 ID_IA		   = 4 # l'IA
+
+
+
+RED		= 1
+BLUE	= 2
