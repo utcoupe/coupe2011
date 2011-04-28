@@ -25,7 +25,7 @@ for serial in scanSerials():
 
 	
 for client in server.clients:
-	if client.id != 0:
+	if client.id != ID_SERVER:
 		client.blockRecv()
 		client.setMaskRecvFrom(ID_SERVER,1) # les cartes ne peuvent recevoir des messages que du serveur
 		client.setMaskRecvFrom(ID_IA,1) # et de l'IA

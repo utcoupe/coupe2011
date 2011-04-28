@@ -79,11 +79,11 @@ class RobotClient(threading.Thread):
 		# formatage de la réponse et appelle d'un robot.on<Event>()
 		self.write("Received : '%s'"%msg)
 		msg = str(msg).strip()
-		msg_split = msg.split(C_SEP_SEND,3)
+		msg_split = msg.split(C_SEP_SEND,2)
 		id_from = int(msg_split[0])
-		id_cmd = self.robot.cmd[int(msg_split[1])]
-		id_msg = int(msg_split[2])
-		msg = msg_split[3].strip() if len(msg_split) > 3 else None
+		id_msg = int(msg_split[1])
+		id_cmd = self.robot.cmd[id_msg]
+		msg = msg_split[2].strip() if len(msg_split) > 2 else None
 			
 		for fifo in self._listFifo:
 			fifo.addMsg(id_from, id_msg, id_cmd, msg)

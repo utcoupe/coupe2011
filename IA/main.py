@@ -5,8 +5,8 @@ from pince import *
 from robotClient import *
 from msgFifo import *
 from loopCmd import *
-
-
+from time import sleep
+import math
 
 MAX_MSG		 = 50
 
@@ -68,33 +68,38 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 		
-		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
 		
 		# les pinces en haut
 		self.addCmd(ID_OTHERS, Q_ASCENSEUR, (0,1000))
 		
 		# demande de position
-		self.addCmd(ID_ASSERV, Q_POSITION)
-		r = fifo.getMsg()
-		self.write(r)
-		self.pos = r
-		self.client.removeFifo(fifo)
+		self.update_pos()
 		
 		# calibrage
 		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_AUTO_CALIB),)) )
 		self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (RED,))
+		r = fifo.getMsg() # accusé de reception
 		r = fifo.getMsg()
 		self.write(r)
 		self.client.removeFifo(fifo)
 		
 		# sortie
-		vitesse = 250
+		vitesse = 160
 		
+		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_GOAL_ABS),)) )
 		self.do_path((Q_GOAL_ABS, (1000,300,vitesse)),
 					 (Q_ANGLE_ABS, (90,vitesse-60)),
 					 (Q_GOAL_ABS, (1000,500,vitesse)),
 					 (Q_ANGLE_ABS, (45,vitesse-60)),
 					)
+		
+		r = fifo.getMsg()
+		r = fifo.getMsg()
+		r = fifo.getMsg()
+		r = fifo.getMsg()
+		self.client.removeFifo(fifo)
+		
+		sleep(1)
 		
 		# scan
 		self.scan()
@@ -127,6 +132,14 @@ class Robot:
 	def isFull(self):
 		return (self.pinces[0].isFull() and self.pinces[1].isFull())
 	
+	def update_pos(self):
+		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
+		self.addCmd(ID_ASSERV, Q_POSITION)
+		r = fifo.getMsg()
+		self.write(r)
+		self.pos = r
+		self.client.removeFifo(fifo)
+		
 	def do_path(self, *path):
 		""" suit un chemin
 		La fonction peut tout couper si elle reçoit un message de danger de la tourelle
@@ -147,10 +160,28 @@ class Robot:
 		"""
 		fifo = self.client.addFifo( MsgFifo(((ID_CAM, Q_SCAN_AV),)) )
 		self.addCmd(ID_CAM, Q_SCAN_AV)
-		r = fifo.getMsg()
-		self.write(str(r))
-	
-	
+		#r = fifo.getMsg()
+		l = eval(str(fifo.getMsg()))
+		
+		self.update_pos()
+		Cx = 120
+		Cy = -110
+		
+		if l:
+			l = self.changeRepere(self.pos[0],self.pos[1],self.pos[2],Cx,Cy,l)
+			
+		self.write(str(l))
+		
+	def changeRepere(self, Rx, Ry, Ra, Cx, Cy, l):
+		result = []
+		cosa = math.cos(math.radians(float(Ra)))
+		sina = math.sin(math.radians(float(Ra)))
+		for t,x,y in l:
+			nx = cosa * x - sina * y + Rx + Cx
+			ny = sina * x + cosa * y + Ry + Cy
+			result.append([t,nx,ny])
+		return result
+			
 	
 	def takeObject(self, target):
 		"""
