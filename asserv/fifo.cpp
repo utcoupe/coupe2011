@@ -100,7 +100,7 @@ void pushGoalDelay(double value){
 }
 
 void pushGoalAutoCalibration(int id, bool color){ /* true -> blue / false -> red */
-	const int SPEED=200, PWM=-150;
+	const int SPEED=150, PWM=-100;
 	if(color){
 		/* phase 0 : on fixe les valeurs de l'etat */
 		pushGoalManualCalibration(TYPE_CALIB_X,0);
