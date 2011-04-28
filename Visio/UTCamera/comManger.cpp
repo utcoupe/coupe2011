@@ -1,9 +1,31 @@
     /*** INCLUDE ***/
 #include "comManager.hpp"
+#include <sstream>
 
 IplImage* src;
 pthread_mutex_t mu  = PTHREAD_MUTEX_INITIALIZER;
 
+
+int s2i(const string & s)
+{
+	int a;
+	istringstream iss(s);
+	iss >> a;
+	return a;
+}
+
+void parse(const string & s, int *id_from, int *id_msg, int *id_cmd)
+{
+	size_t index1 = s.find_first_not_of("0123456789",0);
+
+	*id_from = s2i(s.substr(0,index1));
+
+	size_t index2 = s.find_first_not_of("0123456789",index1+1);
+
+	*id_msg = s2i(s.substr(index1+1,index2));
+
+	*id_cmd = s2i(s.substr(index2+1));
+}
 
 
 /**
@@ -18,12 +40,12 @@ void sendData(regionLister* liste)
         if(nb){
             printf(",");
         }
-        printf("[p,%ld,%ld]",(int)liste->getEle()->Yprime,(int)liste->getEle()->Xprime);
+        printf("[p,%ld,%ld]",(int)liste->getEle()->Yprime,(-1)*(int)liste->getEle()->Xprime);
         nb++;
         liste->ptrSuiv();
     }
 
-    printf("]\n");
+    printf("]");
 }
 
 /**
@@ -49,26 +71,29 @@ void modeStationnaire()
         pthread_create ( &grabB, NULL, grabCamB, NULL );
     }
 
-
+    string s;
         // Boucle principale
     while(on){
+        cin >> s;
+        parse(s,&id_from, &id_msg, &ordre);
+        cout << -1 << '.' << id_msg << '.';
+        //cout << id_from << id_msg << ordre;
+        //scanf("%d.%d.%d",&id_from, &id_msg, &ordre);
+        //fflush(stdin);
 
-        scanf("%d.%d.%d",&id_from, &id_msg, &ordre);
-        fflush(stdin);
-
-        printf("-1.%d.",id_msg);
+        //printf("-1.%d.[]",id_msg);
 
         // *****
         switch(ordre){
 
             // --- Identification ---
             case 0:{
-                    printf("cam\n");
+                    printf("cam");
             break;}
 
             // --- Ping ---
             case 1:{
-                    printf("%s","Pong\n");
+                    printf("%s","Pong");
             break;}
 
             // --- ScanAvant ---
@@ -112,7 +137,7 @@ void modeStationnaire()
         }
 
         // *****
-
+        cout << endl;
         fflush(stdout);
     }
 }

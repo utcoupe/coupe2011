@@ -25,6 +25,7 @@ class Sender(threading.Thread):
 		self._server.write("Sender loop stop")
 	
 	def _send(self, mask_from, to, msg):
+		self._server.write("send : '%s'"%msg)
 		for c in self._server.clients:
 			if to & (1 << c.id):
 				c.send(mask_from, msg)

@@ -160,6 +160,7 @@ class SubprocessClient(Client):
 		self.exec_name = exec_name
 		
 	def _fn_send(self, msg):
+		self._server.write("send to cam '%s'"%(str(msg).strip()+"\n"))
 		self.process.stdin.write(str(msg).strip()+"\n") # envoie au child
 		self.process.stdin.flush()
 	
