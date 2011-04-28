@@ -22,8 +22,12 @@ int main(int argc, char* argv[])
     initGlobalVariable();
     /*
     */
-    //calibrationManuel();
-    modeStationnaire();
+    if (argc > 1)
+    {
+        calibrationManuel();
+    }
+    else
+        modeStationnaire();
 
     return 0;
 }
