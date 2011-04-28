@@ -5,10 +5,11 @@ from pince import *
 from robotClient import *
 from msgFifo import *
 from loopCmd import *
-
-
+from time import sleep
+import math
 
 MAX_MSG		 = 50
+vitesse = 160
 
 
 class Robot:
@@ -68,38 +69,65 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 		
-		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
 		
 		# les pinces en haut
 		self.addCmd(ID_OTHERS, Q_ASCENSEUR, (0,1000))
 		
 		# demande de position
-		self.addCmd(ID_ASSERV, Q_POSITION)
-		r = fifo.getMsg()
-		self.write(r)
-		self.pos = r
-		self.client.removeFifo(fifo)
+		self.update_pos()
 		
 		# calibrage
 		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_AUTO_CALIB),)) )
 		self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (RED,))
+		r = fifo.getMsg() # accusé de reception
 		r = fifo.getMsg()
 		self.write(r)
 		self.client.removeFifo(fifo)
 		
 		# sortie
-		vitesse = 250
+		self.write("c'est parti")
 		
+		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_GOAL_ABS),(ID_ASSERV, Q_ANGLE_ABS),)) )
 		self.do_path((Q_GOAL_ABS, (1000,300,vitesse)),
-					 (Q_ANGLE_ABS, (90,vitesse-60)),
-					 (Q_GOAL_ABS, (1000,500,vitesse)),
-					 (Q_ANGLE_ABS, (45,vitesse-60)),
+					 (Q_ANGLE_ABS, (0,vitesse-60)),
 					)
 		
+		r = fifo.getMsg(1)
+		r = fifo.getMsg(1)
+		r = fifo.getMsg(5)
+		r = fifo.getMsg(5)
+		self.client.removeFifo(fifo)
+		
+		self.write("scan know !")
+		sleep(1)
+		
 		# scan
-		self.scan()
+		pions = self.scan()
 		
+		if pions:
+			def cmp(p1,p2):
+				x1,y1 = p1[1],p1[1]
+				x2,y2 = p2[1],p2[1]
+				
+				v1 = abs(x1-self.pos[0])**2+abs(y1-self.pos[1])**2
+				v2 = abs(x2-self.pos[0])**2+abs(y2-self.pos[1])**2
+				
+				return v1 - v2
+				
+			pions.sort(cmp=lambda p1,p2: cmp(p1,p2))
 		
+			pt, px, py = pions[0]
+			
+			self.write("cible : %s"%(pions[0]))
+			
+			px = 400 + 175+((px-450)/350)*350
+			py = 175+(py/350)*350
+			self.write("épurée : %s,%s"%(px,py))
+			self.do_path((Q_GOAL_ABS, (px,py,vitesse)),
+						 (Q_ANGLE_ABS, (10,vitesse-60)),
+						 (Q_GOAL_ABS, (px+350,py,vitesse)),
+						)
+			
 	
 	def stop(self, msg=None):
 		""" arret du robot """
@@ -127,6 +155,17 @@ class Robot:
 	def isFull(self):
 		return (self.pinces[0].isFull() and self.pinces[1].isFull())
 	
+	def update_pos(self):
+		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
+		self.addCmd(ID_ASSERV, Q_POSITION)
+		r = fifo.getMsg()
+		self.pos = r[2].split(C_SEP_SEND)
+		self.pos[0] = int(self.pos[0])
+		self.pos[1] = int(self.pos[1])
+		self.pos[2] = int(self.pos[2])
+		self.write(self.pos)
+		self.client.removeFifo(fifo)
+		
 	def do_path(self, *path):
 		""" suit un chemin
 		La fonction peut tout couper si elle reçoit un message de danger de la tourelle
@@ -145,13 +184,57 @@ class Robot:
 		"""
 		demande un scan à la camera
 		"""
-		fifo = self.client.addFifo( MsgFifo(((ID_CAM, Q_SCAN_AV),)) )
-		self.addCmd(ID_CAM, Q_SCAN_AV)
-		r = fifo.getMsg()
-		self.write(str(r))
-	
-	
-	
+		l = []
+		
+		while True:
+			fifo = self.client.addFifo( MsgFifo(((ID_CAM, Q_SCAN_AV),)) )
+			
+			# première tentative
+			self.addCmd(ID_CAM, Q_SCAN_AV)
+			l = eval(str(fifo.getMsg()[2]))
+			self.write(l)
+			
+			# deuxième tentative
+			if not l:
+				self.addCmd(ID_CAM, Q_SCAN_AV)
+				l = eval(str(fifo.getMsg()[2]))
+				self.write(l)
+				
+			self.client.removeFifo(fifo)
+				
+			self.update_pos()
+			if l:
+				break
+			
+			fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_ANGLE_ABS),)) )
+			self.do_path((Q_ANGLE_ABS, (self.pos[2]+20,vitesse-60)),)
+			fifo.getMsg()
+			fifo.getMsg()
+			self.client.removeFifo(fifo)
+			
+			
+		Cx = 120
+		Cy = -110
+		l = self.changeRepere(self.pos[0],self.pos[1],self.pos[2],Cx,Cy,l)
+		l = self.filtreInMap(l)
+		
+		self.write(str(l))
+		
+		return l
+		
+	def changeRepere(self, Rx, Ry, Ra, Cx, Cy, l):
+		result = []
+		cosa = math.cos(math.radians(float(Ra)))
+		sina = math.sin(math.radians(float(Ra)))
+		for t,x,y in l:
+			nx = int(cosa * float(x) - sina * y) + Rx + Cx
+			ny = int(sina * float(x) + cosa * y) + Ry + Cy
+			result.append([t,nx,ny])
+		return result
+			
+	def filtreInMap(self, l):
+		return filter(lambda p: (0 < p[1] < 3000) and (0 < p[2] < 2100), l)
+		
 	def takeObject(self, target):
 		"""
 		

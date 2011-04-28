@@ -21,7 +21,8 @@ class MsgFifo:
 		ajouter un message à la queue
 		"""
 		if (id_from, id_cmd) in self._filter:
-			self._queue.put((id_msg, id_cmd, msg))
+			r = (id_msg, id_cmd, msg)
+			self._queue.put(r)
 	
 	def getMsg(self, time=None):
 		try:
