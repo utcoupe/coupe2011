@@ -21,6 +21,7 @@ Q_ASCENSEUR			= 36
 
 #cam
 Q_SCAN_AV		= 62
+Q_SCAN_AR		= 63
 
 
 # server python

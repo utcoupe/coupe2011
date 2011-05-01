@@ -80,14 +80,22 @@ class RobotClient(threading.Thread):
 		self.write("Received : '%s'"%msg)
 		msg = str(msg).strip()
 		msg_split = msg.split(C_SEP_SEND,2)
-		id_from = int(msg_split[0])
-		id_msg = int(msg_split[1])
-		id_cmd = self.robot.cmd[id_msg]
-		msg = msg_split[2].strip() if len(msg_split) > 2 else None
+		id_from = int(msg_split[0]) # l'id du client qui a envoyé le message
+		if id_from != ID_SERVER: # si ce n'est pas le serveur
+			id_msg = int(msg_split[1])
+			id_cmd = self.robot.cmd[id_msg]
+			msg = msg_split[2].strip() if len(msg_split) > 2 else None
+
+			# remplissage des fifo qui attendent
+			for fifo in self._listFifo:
+				fifo.addMsg(id_from, id_msg, id_cmd, msg)
+				
+		else: # si c'est le serveur qui a envoyé la commande
+			id_cmd = msg_split[1]
+			if id_cmd == "scan":
+				self.robot.scan()
+
 			
-		for fifo in self._listFifo:
-			fifo.addMsg(id_from, id_msg, id_cmd, msg)
-		
 
 	def write(self, msg):
 		""" pour écrire sans se marcher sur les doigts """

@@ -3,6 +3,7 @@
 	<name>pyClients</name>
 	<comment></comment>
 	<projects>
+		<project>IA</project>
 		<project>pyClient</project>
 		<project>UDPClient</project>
 	</projects>

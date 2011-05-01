@@ -7,6 +7,7 @@
 <pydev_pathproperty name="org.python.pydev.PROJECT_SOURCE_PATH">
 <path>/pyClients/PyTerminal</path>
 <path>/pyClients/UDPClient</path>
+<path>/pyClients/debugia</path>
 </pydev_pathproperty>
 <pydev_pathproperty name="org.python.pydev.PROJECT_EXTERNAL_SOURCE_PATH">
 <path>/home/thomas/utcoupe/utcoupe-mega/com/clients/pyClient</path>

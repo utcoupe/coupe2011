@@ -11,12 +11,7 @@ from geometry.circle import *
 from geometry.line import *
 from pathfinding import *
 
-"""
-"""
 
-
-"""
-"""
 #pions = [(250,250), (400,400), (100,100)]
 
 
