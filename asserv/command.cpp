@@ -99,9 +99,9 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				pushGoalManualCalibration(TYPE_CALIB_X, args[0]*ENC_MM_TO_TICKS);
-				pushGoalManualCalibration(TYPE_CALIB_Y, args[1]*ENC_MM_TO_TICKS);
-				pushGoalManualCalibration(TYPE_CALIB_ANGLE, args[2]*DEG_TO_RAD);
+				pushGoalManualCalibration(TYPE_CALIB_X, (float)args[0]*ENC_MM_TO_TICKS);
+				pushGoalManualCalibration(TYPE_CALIB_Y, (float)args[1]*ENC_MM_TO_TICKS);
+				pushGoalManualCalibration(TYPE_CALIB_ANGLE, (float)args[2]*DEG_TO_RAD);
 				sendMessage(id, 1);
 			}
 			break;
