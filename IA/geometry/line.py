@@ -29,8 +29,8 @@ class Line:
 		if self.m!=None: self.k = A.y - self.m*A.x # y=m*x+k
 		else: self.k = self.A.x # x=K
 	
-	def tracer(self,canevas, color="black"):
-		return canevas.create_line(self.A.x,self.A.y,self.B.x,self.B.y,fill=color)
+	def tracer(self,canevas, **options):
+		return canevas.create_line(self.A.x,self.A.y,self.B.x,self.B.y,options)
 		#return canevas.create_line(0,self.y(0),500,self.y(500),fill=color)
 	
 	def y(self,x):

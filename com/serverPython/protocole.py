@@ -14,6 +14,7 @@ Q_ANGLE_ABS			=	4
 Q_ANGLE_REL			=   5
 Q_POSITION			= 	6
 Q_AUTO_CALIB		=	7
+Q_MANUAL_CALIB		=	8
 
 # others
 Q_WARNING			= 3
@@ -27,8 +28,8 @@ Q_SCAN_AR		= 63
 # server python
 ID_SERVER		= 0
 ID_CAM			= 1
-ID_ASSERV		= 3 # carte asserv
-ID_OTHERS	   = 2 # carte avec les pinces et sharps
+ID_ASSERV		= 2 # carte asserv
+ID_OTHERS	   = 3 # carte avec les pinces et sharps
 ID_IA		   = 4 # l'IA
 
 
