@@ -102,7 +102,6 @@ class Robot:
 		# sortie
 		self.write("c'est parti")
 		
-		self.do_path((1000,300),(0,VITESSE-60))
 		"""
 		
 		self.write("scan know !")
