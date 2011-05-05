@@ -47,7 +47,7 @@
     #define STOP_REC            10000
 
 // Analyse des pions
-    #define     RAYON_PIONT     200
+    #define     RAYON_PIONT     100
 
 // Gestion des Couleurs.
     #define     NB_COLOR        1

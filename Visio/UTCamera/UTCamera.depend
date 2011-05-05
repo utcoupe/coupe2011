@@ -961,7 +961,7 @@
 	<cv.h>
 	<highgui.h>
 
-1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/constantes.hpp
+1304632829 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/constantes.hpp
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/colorConvertion.hpp
 	<iostream>
@@ -1048,12 +1048,13 @@
 1303853399 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/regionLister.cpp
 	"regionLister.hpp"
 
-1303853399 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/zonesAnalyser.cpp
+1304633320 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/zonesAnalyser.cpp
 	"zonesAnalyser.hpp"
 	"cam_utility.hpp"
 	"regionLister.hpp"
+	<math.h>
 
-1303948037 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
+1303966689 source:/home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
 	"UTCamera.hpp"
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/UTCamera.hpp

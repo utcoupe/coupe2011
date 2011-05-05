@@ -2,7 +2,7 @@
 #include "zonesAnalyser.hpp"
 #include "cam_utility.hpp"
 #include "regionLister.hpp"
-
+#include <math.h>
 
 /**
  * \fn regionLister* analyseListeRegion(regionLister* listeAanalyser, int width, int height)
@@ -34,9 +34,10 @@ regionLister* analyseListeRegion(regionLister* listeAanalyser, int width, int he
         double largeurTheorique = getLargeurTheoriqueDuPiont(reg->max[BAS].y + ((2/3)*(reg->max[BAS].y-reg->max[HAUT].y)) );
         double taillePix = 200.0f / largeurTheorique;
 
-        reg->Xprime = (width/2) - (reg->max[GAUCHE].x + (largeurTheorique/2));
-        reg->Xprime = reg->Xprime * taillePix;
-        reg->Xprime = (-1)*reg->Xprime;
+       // reg->Xprime = (width/2) - (reg->max[GAUCHE].x + (largeurTheorique/2));
+        reg->Xprime = (width/2) - (reg->max[GAUCHE].x + reg->max[DROITE].x)/2;
+        reg->Xprime = reg->Xprime * taillePix ;
+       // reg->Xprime = (-1)*reg->Xprime;
 
         liste->add(reg);
         // ------------
