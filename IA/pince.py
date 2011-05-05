@@ -2,7 +2,12 @@
 
 from pion import *
 
+PINCE_AV		= 0
+PINCE_AR		= 1
 
+PINCE_FERME		= 0
+PINCE_SERRE		= 1
+PINCE_OUVERT	= 2
 
 ACCEPT = {}
 ACCEPT[VIDE]		= (PION_2_T, TOUR, PION_1_T, PION_2, PION_1)
@@ -20,12 +25,12 @@ class Pince:
 		self.objet = VIDE # l'objet que tiens les pinces
 		pass
 	
-	def canAccept(self, object):
+	def canAccept(self, id_object):
 		"""
 		Si on peut encore prendre un objet (flag représentant 
 		les diff configurations de pions)
 		"""
-		return (objet in ACCEPT[self.objet])
+		return (id_object in ACCEPT[self.objet])
 	
 	def listCanAccept(self):
 		""" Retourne la liste des objets (flag) que la pince peut accepter) """

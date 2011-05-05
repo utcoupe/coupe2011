@@ -14,9 +14,9 @@ class MsgFifo:
 	"""
 	FIFO qui récupère les messages
 	"""
-	def __init__(self, msg2wait):
+	def __init__(self, *msg2wait):
 		"""
-		@param msg2wait (list<device,cmd>)
+		@param msg2wait (list<id_cmd>)
 		"""
 		self._queue = Queue()
 		self._filter = msg2wait
@@ -25,7 +25,7 @@ class MsgFifo:
 		"""
 		ajouter un message à la queue
 		"""
-		if (id_from, id_cmd) in self._filter:
+		if id_cmd in self._filter:
 			m = (Message(id_msg, id_msg, id_cmd, msg))
 			self._queue.put(m)
 	
