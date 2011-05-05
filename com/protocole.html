@@ -117,13 +117,17 @@ De 2 à 30.
 
 
 
-<h2>Carte other</h2>
+<h2>Carte PINCE</h2>
 
 <p>
 De 31 à 60.
 <ul>
 	<li><a href="#identification">0 (identification)</a></li>
 	<li><a href="#ping">1 (Ping)</a></li>
+	<li><a href="#sharp">31 n (sharp)</a></li>
+	<li><a href="#tms">34 n s (tms)</a></li>
+	<li><a href="#pince">35 n p (pince)</a></li>
+	<li><a href="#setposition">36 n p (setposition)</a></li>
 </ul>
 </p>
 
@@ -349,6 +353,85 @@ Lance le recalage automatique pour la couleur (c). A ne faire que sur l'une des 
 	'1'
 </p>
 </div>
+
+
+<div>
+<h3 id="sharp">31 Sharp [n] (OTHERS)</h3>
+
+<p>
+	Renvoie la valeur du sharp (n)
+</p>
+<p>
+	<b>Params :</b><br />
+	n : [0,11] numéro du sharp (défini dans sensor.h)<br />
+	<ul>
+		<li>#define SHARP_AV1	0</li>
+		<li>#define SHARP_AV2D	1 //droite</li>
+		<li>#define SHARP_AV2G	2 //gauche</li>
+		<li>#define SHARP_AV3	3</li>
+		<li>#define SHARP_AV4	4</li>
+		<li>#define SHARP_AV5	5</li>
+	</ul>
+</p>
+<p>
+	<b>Retour : </b><br />
+	Valeur du sharp ou -1 si erreur
+</p>
+</div>
+
+
+<div>
+<h3 id="tms">34 TMS [n,s] (OTHERS) (* trigger sur micro switch *)</h3>
+
+<p>
+	"TMS" renvoie message quand le microswitch (n) à atteint la valeur (s) ('1' MS activé ou '0' MS désactivé)
+</p>
+<p>
+	<b>Params :</b><br />
+	n : [0,1] (Av,Ar)<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	'1' (recu) ou '-1' (erreur) --> '2' (seuil atteint + arret seuil) ou '0' (annulation)
+</p>
+</div>
+
+
+<div>
+<h3 id="pince">34 pince [n,p] (OTHERS) (* trigger sur micro switch *)</h3>
+
+<p>
+	Dis à la pince (n) d'atteindre la position (p)
+</p>
+<p>
+	<b>Params :</b><br />
+	n : [0,1] (Av,Ar)<br />
+	p : [0,1,2] (fermé,sérré,ouvert)<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	'1' (recu) '-1' (erreur) --> '2'(atteint)
+</p>
+</div>
+
+
+<div>
+<h3 id="setposition">36 setposition [n,p] (OTHERS) (* trigger sur micro switch *)</h3>
+
+<p>
+	Monte/descend le pince (n) à la position (p)
+</p>
+<p>
+	<b>Params :</b><br />
+	n : [0,1] (Av,Ar)<br />
+	p : [0,10000] (fermé,sérré,ouvert)<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	'1' (recu) '-1' (erreur) --> '2'(atteint)
+</p>
+</div>
+
 
 
 <div>

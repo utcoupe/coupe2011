@@ -28,7 +28,7 @@ class Sender(threading.Thread):
 		self._server.write("send : '%s'"%msg)
 		for c in self._server.clients:
 			if to & (1 << c.id):
-				c.send(mask_from, msg)
+				threading.Thread(None, c.send, "Sender send to %s"%c.id, (mask_from, msg)).start()
 		
 		
 		

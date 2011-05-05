@@ -2,23 +2,24 @@
 
 
 import time
-
+from geometry.vec import *
 
 
 ###################
 # FLAGS DES PIONS #
 ###################
+UNKNOWN			= -1
 VIDE			= 0
-PION_1		  = 1 # pion simple
-PION_2		  = 2 # double pion
+PION_1			= 1 # pion simple
+PION_2			= 2 # double pion
 PION_1_T		= 3 # pion simple + tour
 PION_2_T		= 4 # pion double + tour
 TOUR			= 5 # tour simple
 
 class Pion:
-	def __init__(self, x ,y, type):
-		self.pos = (x,y)
-		self.type = type # flag
+	def __init__(self, x ,y, t):
+		self.pos = Vec(x,y)
+		self.type = t # flag
 		self.time = time.time()
 	
 	def age(self):
@@ -34,5 +35,14 @@ class Pion:
 		if pos:
 			self.pos = pos
 		self.time = time.time()
-	
+
+	def __repr__(self):
+		return "Pion(%s, type=%s)"%(self.pos,self.type)
+		
+class Target(Pion):
+	def __init__(self, x, y, t):
+		Pion.__init__(self, x,y,t)
+
+	def __repr__(self):
+		return "Target(%s, type=%s)"%(self.pos,self.type)
 	

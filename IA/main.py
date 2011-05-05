@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+@todo interupts danger, 90s pour la majorité des fonctions
 
+
+"""
 
 from pince import *
 from robotClient import *
@@ -45,10 +49,10 @@ class Robot:
 		
 		self.debug = Debug()
 	
-	
-	def addCmd(self, id_device, id_cmd, args=[]):
+	def addCmd(self, id_device, id_cmd, *args):
 		"""
 		Envoyer une commande
+		(blockant)
 		
 		@param id_device id du device (asserv, cam,...)
 		@param id_cmd id de la commande
@@ -73,6 +77,32 @@ class Robot:
 		
 		# return de id_msg
 		return 0 if self.id_msg==0 else (self.id_msg-1)
+
+	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
+		"""
+		Envoyer une commande et attendre la réponse
+		(blockant)
+		
+		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
+		@param nb_msg le nombre de messages attendus
+		@param id_device id du device (asserv, cam,...)
+		@param id_cmd id de la commande
+		@param args les éventuels arguments
+
+		@return la réponse ou None si timeout
+		"""
+		fifo = self.client.addFifo( MsgFifo(id_cmd) )
+		self.addCmd(id_device, id_cmd, args)
+		if nb_msg == 1:
+			reponse = []
+			for i in xrange(nb_msg):
+				reponse.append(fifo.getMsg(timeout[i]))
+		elif nb_msg > 1:
+			reponse = fifo.getMsg(timeout)
+		else: reponse = None
+		self.client.removeFifo(fifo)
+		return reponse
+		
 	
 	def write(self, msg):
 		self.client.write(msg)
@@ -81,18 +111,21 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 
+		self.write("* LE ROBOT DÉMARRE *")
+		self.write("* CALIBRATION MANUELLE *")
 		self.addCmd(ID_ASSERV, Q_MANUAL_CALIB, (1500,1050,0))
+		self.write("* UPDATE POS *")
 		self.update_pos()
 		
 		"""
 		# les pinces en haut
-		self.addCmd(ID_OTHERS, Q_ASCENSEUR, (0,1000))
+		self.addCmd(ID_OTHERS, Q_PPOSITION, (0,1000))
 		
 		# demande de position
 		self.update_pos()
 		
 		# calibrage
-		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_AUTO_CALIB),)) )
+		fifo = self.client.addFifo( MsgFifo(Q_AUTO_CALIB) )
 		self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (RED,))
 		r = fifo.getMsg() # accusé de reception
 		r = fifo.getMsg()
@@ -112,7 +145,7 @@ class Robot:
 		
 		
 		if pions:
-			target = self._treatScan(pions)
+			target = self.treatScan(pions)
 			
 			self.write("cible : %s"%target)
 			
@@ -143,7 +176,11 @@ class Robot:
 		return (self.pinces[0].isFull() and self.pinces[1].isFull())
 	
 	def update_pos(self):
-		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_POSITION),)) )
+		"""
+		Récupérer la position actuelle
+		(bloquant)
+		"""
+		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
 		self.addCmd(ID_ASSERV, Q_POSITION)
 		m = fifo.getMsg()
 		self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
@@ -170,7 +207,7 @@ class Robot:
 		self.debug.log(D_DELETE_PATH, goals)
 		self.debug.log(D_SHOW_PATH, goals)
 
-		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_GOAL_ABS), (ID_ASSERV, Q_ANGLE_ABS),)) )
+		fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS) )
 		for i in xrange(len(path)):
 			if not fifo.getMsg(0.5): # timeout de 1 seconde pour les accusés de receptions
 				self.write("ERROR : Robot.do_path : accusé de reception non reçu")
@@ -188,11 +225,13 @@ class Robot:
 		"""
 		@todo gestion si la réponse n'arrive pas assez vite
 		demande un scan à la camera, fait toujours deux tentatives
+
+		@return le liste des pions dans le repère absolue avec les pions hors table enlevés
 		"""
 		l = []
 
 		# pour écouter la réponse de la cam
-		fifo = self.client.addFifo( MsgFifo(((ID_CAM, Q_SCAN_AV),(ID_CAM, Q_SCAN_AR))) )
+		fifo = self.client.addFifo( MsgFifo(Q_SCAN_AV, Q_SCAN_AR) )
 		
 		# première tentative
 		self.addCmd(ID_CAM, Q_SCAN_AR)
@@ -241,26 +280,12 @@ class Robot:
 		Filtre les pions hors carte
 		"""
 		return filter(lambda p: (0 < p[1] < 3000) and (0 < p[2] < 2100), l)
-		
-	def dumpObj(self):
-		""" ouvrir la pince """
-		self.addCmd(ID_OTHERS,Q_OPEN_PINCE) # ouvre la pince
-		self.addCmd(CAM, Q_SCAN) # demande un scan et c'est raparti !
-	
-	def takeObj(self):
-		""" ramasser un objet """
-		# demander une identification de l'objet
-		# checker si on peut le prendre avec la pince avant ou pince arrière
-		# si aucune pince : abandon, demande de scan
-		# si pince arrière : rotation
-		# avancer vers l'objet
-		# fermer la pince
-	
-	def _treatScan(self,pions):
+
+	def treatScan(self,pions):
 		""" traitement du scan de la carte avec notre position actuelle 
 		@return target,path
 		"""
-		# algo de détermination quel pion proche (probablement le plus proche)
+		# algo de détermination quel pion prendre (probablement le plus proche)
 		# pathfinding pour esquiver nos pions
 		# retourne la cible choisie et le path
 		# self.client.send("asserv", Q_GOAL_ABS, <devant le pion>)
@@ -277,7 +302,7 @@ class Robot:
 				
 			pions.sort(cmp=lambda p1,p2: cmp(p1,p2))
 			
-			target = pions[0]
+			target = Target(pions[0][1], pions[0][2], pions[0][0])
 			
 			circles = []
 			
@@ -289,6 +314,70 @@ class Robot:
 			return target, path
 		else:
 			return None,None
+		
+	def dumpObj(self):
+		""" ouvrir la pince """
+		pass
+	
+	def takeObj(self, target):
+		""" ramasser un objet
+		@return True si l'objet a été pris, False sinon
+		"""
+		# récupération de la position
+		self.update_pos()
+
+		# détection du sens des pinces par rapport à l'objet
+		if (target.pos.x-self.pos[0]) == 0:
+			teta = math.pi
+		else:
+			teta = math.atan(float(target.pos.y-self.pos[1]) / float(target.pos.x-self.pos[0]))
+
+		if target.pos.x-self.pos[0] < 0: teta += math.pi
+
+		teta = math.degrees(teta)
+		if abs(self.pos[2] - teta) < 90:
+			id_pince_av, id_pince_ar = PINCE_AV, PINCE_AR
+		else:
+			id_pince_av, id_pince_ar = PINCE_AR,PINCE_AV
+		
+		# demander une identification de l'objet
+		id_objet = self.addBlockingCmd(1, 1, ID_OTHERS, Q_PION, id_pince_av)
+		if not id_objet: # timeout
+			self.write("Robot->takeObj : timeout identification de l'objet")
+			return False
+		
+		# checker si on peut le prendre avec la pince avant ou pince arrière
+		if self.pinces[id_pince_av].canAccept(id_objet):
+			id_pince = id_pince_av
+		elif self.pinces[id_pince_ar].canAccept(id_objet):
+			id_pince = id_pince_ar
+		else:
+			# si aucune pince : abandon
+			self.write("Robot->takeObj : aucune pince libre")
+			return False
+
+		# si pince arrière demi tour
+		if id_pince == id_pince_ar:
+			r = self.addBlockingCmd(2, (0.5,3), ID_ASSERV, Q_ANGLE_REL, 90, VITESSE-50)
+		
+		# avance vers l'objet
+		r = self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_GOAL_ABS, target.pos.x, target.pos.y, VITESSE)
+		if not r[1]: # timeout
+			self.write("Robot->takeObj : timeout de l'asserv")
+			return False
+			
+		# baisse les pinces
+		r = self.addBlockingCmd(2, (0.5,5), ID_OTHERS, Q_PPOSITION, id_pince, 300)
+		if not r[1]: # timeout
+			self.write("Robot->takeObj : timeout des pinces")
+			return False
+			
+		# ouvre la pince
+		r = self.addBlockingCmd(2, (0.5,5), ID_OTHERS, Q_PINCE, id_pince, PINCE_OUVERT)
+
+		# baisse les pinces
+		# fermer la pince
+		return True
 	
 if __name__ == '__main__':
 	robot = Robot()	
