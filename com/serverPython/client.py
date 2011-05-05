@@ -4,6 +4,8 @@ import sys
 import threading
 import socket
 import time
+import re
+
 
 from protocole import *
 
@@ -122,6 +124,21 @@ class LocalClient(Client):
 		self._server.write("Received on server : '%s'"%msg)
 		if "sd" in msg:
 			self._server.shutdown()
+		else:
+			t = re.match('.*loop\(([^\),]+),([^\),]+),([^\),]+)\).*',msg)
+			if t:
+				try:
+					nb_iter = int(t.group(1))
+					interval = int(t.group(2))
+					cmd = t.group(3)
+				except IndexError:
+					self.write("ERROR : manque de paramètres, signature de la fonction : loop(nb_iter,interval,cmd)")
+				else:
+					start = time.time()
+					for i in xrange(nb_iter):
+						self._server.parseMsg(self.id, t.group(1))
+						time.sleep(float(interval)/1000.0)
+					self._server.write("Temps exec loop : %sms"%(time.time()-start))
 	
 	def _loopRecv(self):
 		msg = raw_input()+"\n"
