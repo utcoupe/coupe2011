@@ -15,8 +15,12 @@ from geometry.circle import *
 
 
 MAX_MSG		= 50
-vitesse 	= 160
+VITESSE 	= 130
 
+# constantes de recalage
+RECAL_X		= 3
+RECAL_Y		= 4
+RECAL_A		= 5
 
 class Robot:
 	def __init__(self):
@@ -76,6 +80,9 @@ class Robot:
 	def start(self):
 		""" démarage du robot """
 		self.client.start()
+
+		self.addCmd(ID_ASSERV, Q_MANUAL_CALIB, (1500,1050,0))
+		self.update_pos()
 		
 		"""
 		# les pinces en haut
@@ -95,9 +102,6 @@ class Robot:
 		# sortie
 		self.write("c'est parti")
 		
-		self.do_path((Q_GOAL_ABS, (1000,300,vitesse)),
-					 (Q_ANGLE_ABS, (0,vitesse-60)),
-					)
 		"""
 		
 		self.write("scan know !")
@@ -106,7 +110,6 @@ class Robot:
 		# scan
 		pions = self.scan()
 		
-		self.debug.log(D_PIONS, pions)
 		
 		if pions:
 			target = self._treatScan(pions)
@@ -117,7 +120,6 @@ class Robot:
 	def stop(self, msg=None):
 		""" arret du robot """
 		if msg: self.write(msg)
-		pass
 	
 	def reset(self):
 		""" reset du robot
@@ -147,6 +149,7 @@ class Robot:
 		self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 		self.write(self.pos)
 		self.client.removeFifo(fifo)
+		self.debug.log(D_UPDATE_POS, self.pos)
 		
 	def do_path(self, *path):
 		"""
@@ -158,10 +161,14 @@ class Robot:
 		
 		@param path la liste des commandes à envoyer à l'asserv sous la forme (cmd, args)
 		"""
+
 		goals = []
-		for cmd,args in path:
-			self.addCmd(ID_ASSERV, cmd, args)
-			goals.append(args)
+		for p in path:
+			self.addCmd(ID_ASSERV, Q_GOAL_ABS, (p[0],p[1],VITESSE))
+			goals.append(p)
+
+		self.debug.log(D_DELETE_PATH, goals)
+		self.debug.log(D_SHOW_PATH, goals)
 
 		fifo = self.client.addFifo( MsgFifo(((ID_ASSERV, Q_GOAL_ABS), (ID_ASSERV, Q_ANGLE_ABS),)) )
 		for i in xrange(len(path)):
@@ -213,6 +220,7 @@ class Robot:
 		self.write(l)
 		
 		self.write(str(l))
+		self.debug.log(D_PIONS, l)
 		
 		return l
 		
@@ -233,7 +241,7 @@ class Robot:
 		Filtre les pions hors carte
 		"""
 		return filter(lambda p: (0 < p[1] < 3000) and (0 < p[2] < 2100), l)
-	
+		
 	def dumpObj(self):
 		""" ouvrir la pince """
 		self.addCmd(ID_OTHERS,Q_OPEN_PINCE) # ouvre la pince

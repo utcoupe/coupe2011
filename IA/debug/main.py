@@ -1,5 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+"""
+DEBUG de l'IA
+"""
 
 D_UPDATE_POS	=	0
 D_PIONS			=	1
@@ -53,7 +56,9 @@ if __name__ == "__main__":
 		def update_pos(self, pos):
 			if self.pos: self.canevas.delete(self.pos)
 			x,y,a = pos
-			self.pos = self.canevas.create_oval(x-5,y-5,x+5,y+5,outline='green',fill="green")
+			x = self.X(x)
+			y = self.Y(y)
+			self.pos = self.canevas.create_oval(x-5,y-5,x+5,y+5,outline='black',fill='black')
 
 		def update_pions(self, pions):
 			if self.pions:
@@ -64,25 +69,33 @@ if __name__ == "__main__":
 				if type(pions[0]) == type((1,1)) or type(pions[0]) == type([1,1]):
 					for p in pions:
 						t,x,y = p
-						x = x * 2 / 10
-						y = y * 2 / 10
-						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, "yellow"))
+						x = self.X(x)
+						y = self.Y(y)
+						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="yellow"))
 				else:
 					t,x,y = pions
-					self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, "yellow"))
+					x = self.X(x)
+					y = self.Y(y)
+					self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="yellow"))
 
 		def show_path(self, path):
 			self.delete_path()
 
 			for p1,p2 in zip(path[:-1],path[1:]):
-				self.path.append(Line(Vec2(p1[0],p1[1]),Vec2(p2[0],p2[1])).tracer(self.canevas, "blue"))
+				self.path.append(Line(Vec2(self.X(p1[0]),self.Y(p1[1])),Vec2(self.X(p2[0]),self.Y(p2[1]))).tracer(self.canevas, fill="pink", width=2, arrow=Tk.LAST))
 
 		def delete_path(self, params=None):
 			if self.path:
 				for l in self.path:
 					self.canevas.delete(l)
 			self.path = []
-		
+
+		def X(self, x):
+			return x * 2 / 10
+
+		def Y(self, y):
+			return y * 2 / 10
+			
 	def looper():
 		while True:
 			cmd = raw_input()

@@ -62,7 +62,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				double angle = moduloPI(((float)args[0])/180.0 * M_PI);
+				double angle = moduloPI(((float)args[0]) * DEG_TO_RAD);
 				sendMessage(-1, (int)(angle*100.0));
 				pushGoalOrientation(id,angle,args[1]);
 				sendMessage(id, 1);
@@ -76,7 +76,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				double angle = moduloPI(((float)args[0])/180.0 * M_PI + robot_state.angle);
+				double angle = moduloPI(((float)args[0]) * DEG_TO_RAD + robot_state.angle);
 				pushGoalOrientation(id,angle,args[1]);
 				sendMessage(id, 1);
 			}
@@ -87,7 +87,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 		{
 			int x_mm = robot_state.x*ENC_TICKS_TO_MM;
 			int y_mm = robot_state.y*ENC_TICKS_TO_MM;
-			int a_deg = robot_state.angle*180.0 / M_PI;
+			int a_deg = robot_state.angle*RAD_TO_DEG;
 			int tab[] = {x_mm,y_mm,a_deg};
 			sendMessage(id,tab,3);
 	        break;
@@ -99,9 +99,9 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				pushGoalManualCalibration(TYPE_CALIB_X, args[0]);
-				pushGoalManualCalibration(TYPE_CALIB_Y, args[1]);
-				pushGoalManualCalibration(TYPE_CALIB_ANGLE, args[2]);
+				pushGoalManualCalibration(TYPE_CALIB_X, (float)args[0]*ENC_MM_TO_TICKS);
+				pushGoalManualCalibration(TYPE_CALIB_Y, (float)args[1]*ENC_MM_TO_TICKS);
+				pushGoalManualCalibration(TYPE_CALIB_ANGLE, (float)args[2]*DEG_TO_RAD);
 				sendMessage(id, 1);
 			}
 			break;

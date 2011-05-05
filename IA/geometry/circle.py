@@ -14,9 +14,10 @@ class Circle:
 		self.O = copy.deepcopy(O)
 		self.R = int(round(R))
 	
-	def tracer(self, canevas, color="blue"):
+	def tracer(self, canevas, **options):
 		return canevas.create_oval(self.O.x-self.R,self.O.y-self.R,
-								   self.O.x+self.R,self.O.y+self.R, outline=color)
+								   self.O.x+self.R,self.O.y+self.R,
+								   options)
 		
 	def tangente(self, other, type):
 		"""
