@@ -63,6 +63,9 @@ class Server():
 		"""
 		parse un message avant de l'envoyer
 		"""
+		if msg and msg[0] not in '-0123456789':
+			msg = str(ID_SERVER)+'.' + msg
+		
 		try:
 			id_to, msg = msg.strip().split(C_SEP_SEND,1)
 			id_to = int(id_to)

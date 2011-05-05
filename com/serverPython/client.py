@@ -136,7 +136,7 @@ class LocalClient(Client):
 				else:
 					start = time.time()
 					for i in xrange(nb_iter):
-						self._server.parseMsg(self.id, t.group(1))
+						self._server.parseMsg(self.id, cmd)
 						time.sleep(float(interval)/1000.0)
 					self._server.write("Temps exec loop : %sms"%(time.time()-start))
 	
