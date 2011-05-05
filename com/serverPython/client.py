@@ -153,10 +153,11 @@ class LocalClient(Client):
 					self.write("ERROR : manque de paramètres, signature de la fonction : mac(macro,cmd)")
 				else:
 					self.macros[macro] = cmd
+					self._server.write("macro '%s' is for commande '%s'"%(cmd,macro))
 
 			# macros
 			if msg in self.macros:
-				self._server.parseMsg(macros[msg])
+				self._server.parseMsg(self.id, self.macros[msg])
 					
 					
 	
