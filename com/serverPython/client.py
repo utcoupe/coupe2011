@@ -119,13 +119,16 @@ class LocalClient(Client):
 	def __init__(self, server, id):
 		Client.__init__(self, server, id, "LocalClient(%s)"%id)
 		self.mask_recv_from = -1
+		self.macros = {}
 	
 	def _fn_send(self, msg):
 		self._server.write("Received on server : '%s'"%msg)
-		if "sd" in msg:
+		id_from, msg = msg.strip().split(C_SEP_SEND,1)
+		if "sd" == msg:
 			self._server.shutdown()
 		else:
-			t = re.match('.*loop\(([^\),]+),([^\),]+),([^\),]+)\).*',msg)
+			# loop
+			t = re.match('loop\(([^\),]+),([^\),]+),([^\),]+)\).*',msg)
 			if t:
 				try:
 					nb_iter = int(t.group(1))
@@ -139,6 +142,23 @@ class LocalClient(Client):
 						self._server.parseMsg(self.id, cmd)
 						time.sleep(float(interval)/1000.0)
 					self._server.write("Temps exec loop : %sms"%(time.time()-start))
+					
+			# créer une macro
+			t = re.match('mac\(([^\),]+),([^\),]+)\).*',msg)
+			if t:
+				try:
+					macro = t.group(1)
+					cmd = t.group(2)
+				except IndexError:
+					self.write("ERROR : manque de paramètres, signature de la fonction : mac(macro,cmd)")
+				else:
+					self.macros[macro] = cmd
+
+			# macros
+			if msg in self.macros:
+				self._server.parseMsg(macros[msg])
+					
+					
 	
 	def _loopRecv(self):
 		msg = raw_input()+"\n"
