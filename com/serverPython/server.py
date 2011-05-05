@@ -49,10 +49,15 @@ class Server():
 		self.clients.append(client)
 	
 	def addSubprocessClient(self, exec_name):
-		process = subprocess.Popen(exec_name, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-		client = SubprocessClient(self, len(self.clients), process, exec_name)
-		client.start()
-		self.clients.append(client)
+		try:
+			process = subprocess.Popen(exec_name, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+		except OSError as e:
+			self.write("Server->addSubprocessClient(%s) failed"%exec_name)
+			self.write(e)
+		else:
+			client = SubprocessClient(self, len(self.clients), process, exec_name)
+			client.start()
+			self.clients.append(client)
 		
 	def parseMsg(self, id_client, msg):
 		"""
