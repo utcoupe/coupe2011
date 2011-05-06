@@ -69,7 +69,7 @@ class Circle:
 		"""
 		T = Tangente(A, self, type)
 		if T.m==None: # tangente verticale
-			print "!! x=k !!"
+			#print "!! x=k !!"
 			B = Vec2(A.x,self.O.y)
 		elif T.m == 0: # tangente horizontale
 			B = Vec2(self.O.x, A.y)

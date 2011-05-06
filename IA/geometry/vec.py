@@ -29,6 +29,9 @@ class Vec:
 	def __getitem__(self,i):
 		return self.coords[i]
 
+	def __str__(self):
+		return self.__repr__()
+
 
 	
 
@@ -44,3 +47,4 @@ class Vec2(Vec):
 			
 	def __repr__(self):
 		return "Vec2"+str((int(self.x),int(self.y)))
+

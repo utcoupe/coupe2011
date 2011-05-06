@@ -35,22 +35,22 @@ if __name__ == "__main__":
 			self.canevas=Tk.Canvas(self)
 			self.canevas.configure(width=600,height=420,bg='white')
 			self.canevas.pack()
-			self.canevas.create_rectangle(0,0,80,80,fill="blue")
-			self.canevas.create_rectangle(520,0,600,80,fill="red")
+			self.canevas.create_rectangle(0,0,80,80,fill="red")
+			self.canevas.create_rectangle(520,0,600,80,fill="blue")
 			self.canevas.create_rectangle(0,80,80,420,fill="green")
 			self.canevas.create_rectangle(520,80,600,420,fill="green")
 			for i in xrange(90,500,70):
 				for j in xrange(0,421,70):
 					if (i-90)%140:
 						if (j%140):
-							self.canevas.create_rectangle(i,j,i+70,j+70,fill="red")
-						else:
 							self.canevas.create_rectangle(i,j,i+70,j+70,fill="blue")
+						else:
+							self.canevas.create_rectangle(i,j,i+70,j+70,fill="red")
 					else:
 						if (j%140):
-							self.canevas.create_rectangle(i,j,i+70,j+70,fill="blue")
-						else:
 							self.canevas.create_rectangle(i,j,i+70,j+70,fill="red")
+						else:
+							self.canevas.create_rectangle(i,j,i+70,j+70,fill="blue")
 							
 
 		def update_pos(self, pos):
@@ -80,18 +80,19 @@ if __name__ == "__main__":
 
 		def show_path(self, path):
 			self.delete_path()
-
-			for p1,p2 in zip(path[:-1],path[1:]):
-				self.path.append(Line(Vec2(self.X(p1[0]),self.Y(p1[1])),Vec2(self.X(p2[0]),self.Y(p2[1]))).tracer(self.canevas, fill="pink", width=2, arrow=Tk.LAST))
-
+			new_path = []
+			for i in xrange(0,len(path),2):
+				new_path.append(self.X(path[i]))
+				new_path.append(self.Y(path[i+1]))
+			self.path = self.canevas.create_line(new_path,fill="pink", width=2, arrow=Tk.LAST)
+		
 		def delete_path(self, params=None):
 			if self.path:
-				for l in self.path:
-					self.canevas.delete(l)
+				self.canevas.delete(self.path)
 			self.path = []
 
 		def X(self, x):
-			return x * 2 / 10
+			return 600 - (x * 2 / 10)
 
 		def Y(self, y):
 			return y * 2 / 10
@@ -110,14 +111,17 @@ if __name__ == "__main__":
 			except Exception as ex:
 				print ex
 			else:
-				if id_cmd == D_UPDATE_POS:
-					screen.update_pos(params)
-				elif id_cmd == D_PIONS:
-					screen.update_pions(params)
-				elif id_cmd == D_SHOW_PATH:
-					screen.show_path(params)
-				elif id_cmd == D_DELETE_PATH:
-					screen.delete_path(params)
+				try:
+					if id_cmd == D_UPDATE_POS:
+						screen.update_pos(params)
+					elif id_cmd == D_PIONS:
+						screen.update_pions(params)
+					elif id_cmd == D_SHOW_PATH:
+						screen.show_path(params)
+					elif id_cmd == D_DELETE_PATH:
+						screen.delete_path(params)
+				except Exception as ex:
+					print ex
 
 
 

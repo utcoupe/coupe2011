@@ -112,10 +112,14 @@ class Robot:
 		self.client.start()
 
 		self.write("* LE ROBOT DÉMARRE *")
+		self.write("")
 		self.write("* CALIBRATION MANUELLE *")
-		self.addCmd(ID_ASSERV, Q_MANUAL_CALIB, (1500,1050,0))
+		self.addCmd(ID_ASSERV, Q_MANUAL_CALIB, 1150,700,0)
+		self.write("")
+		time.sleep(1)
 		self.write("* UPDATE POS *")
 		self.update_pos()
+		self.write("")
 		
 		"""
 		# les pinces en haut
@@ -137,17 +141,25 @@ class Robot:
 		
 		"""
 		
-		self.write("scan know !")
 		sleep(0.5)
-		
-		# scan
-		pions = self.scan()
-		
-		
-		if pions:
-			target = self.treatScan(pions)
+
+		while True:
+			# scan
+			self.write("* SCAN *")
+			pions = self.scan()
+			self.write("")
 			
-			self.write("cible : %s"%target)
+			
+			if pions:
+				target,path = self.treatScan(pions)
+				
+				self.write("cible : %s"%target)
+				self.write("path : %s"%path)
+
+				self.write("* MOVE *")
+				self.do_path(zip(path[::2],path[1::2]))
+			
+			time.sleep(0.5)
 			
 	
 	def stop(self, msg=None):
@@ -198,13 +210,14 @@ class Robot:
 		
 		@param path la liste des commandes à envoyer à l'asserv sous la forme (cmd, args)
 		"""
-
+		
 		goals = []
+		if len(path) == 1 and type(path) == type([]) or type(path) == type(()):
+			path = path[0]
 		for p in path:
-			self.addCmd(ID_ASSERV, Q_GOAL_ABS, (p[0],p[1],VITESSE))
+			self.addCmd(ID_ASSERV, Q_GOAL_ABS, p[0],p[1],VITESSE)
 			goals.append(p)
 
-		self.debug.log(D_DELETE_PATH, goals)
 		self.debug.log(D_SHOW_PATH, goals)
 
 		fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS) )
@@ -234,31 +247,29 @@ class Robot:
 		fifo = self.client.addFifo( MsgFifo(Q_SCAN_AV, Q_SCAN_AR) )
 		
 		# première tentative
-		self.addCmd(ID_CAM, Q_SCAN_AR)
+		self.addCmd(ID_CAM, Q_SCAN_AV)
 		l = eval(str(fifo.getMsg().content))
-		self.write(l)
 			
 		# deuxième tentative
 		if not l:
-			self.addCmd(ID_CAM, Q_SCAN_AR)
+			self.addCmd(ID_CAM, Q_SCAN_AV)
 			l = eval(str(fifo.getMsg().content))
-			self.write(l)
+		
+		self.write("Résultat brut scan : %s"%l)
 
 		# arreter d'écouter
 		self.client.removeFifo(fifo)
 
 		# récupération de la position
 		self.update_pos()
-		self.write(l)
 		# transformation des valeurs
 		Cx = 120
 		Cy = -110
 		l = self._changeRepere(self.pos[0],self.pos[1],self.pos[2],Cx,Cy,l)
-		self.write(l)
-		#l = self._filtreInMap(l)
-		self.write(l)
+		self.write("Résultat change repere scan : %s"%l)
+		l = self._filtreInMap(l)
+		self.write("Résultat filtre map scan : %s"%l)
 		
-		self.write(str(l))
 		self.debug.log(D_PIONS, l)
 		
 		return l
@@ -270,8 +281,8 @@ class Robot:
 		cosa = math.cos(math.radians(float(Ra)))
 		sina = math.sin(math.radians(float(Ra)))
 		def f(p):
-			p[1] = int(cosa * float(p[1]) - sina * float(p[2])) + Rx + Cx
-			p[2] = int(sina * float(p[1]) + cosa * float(p[2])) + Ry + Cy
+			p[1] = int(cosa * float(p[1]) - sina * float(-p[2])) + Rx + Cx
+			p[2] = int(sina * float(p[1]) + cosa * float(-p[2])) + Ry + Cy
 			return p
 		return map(lambda p: f(p), l)
 			
@@ -307,9 +318,10 @@ class Robot:
 			circles = []
 			
 			for p in pions:
-				circles.append(Circle(Vec2(p[1],p[2]), 400))
+				circles.append(Vec2(p[1],p[2]))
 			
-			path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target[1],target[2]), circles)
+			path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.x,target.y), circles)
+			self.debug.log(D_SHOW_PATH,path)
 			
 			return target, path
 		else:
@@ -327,12 +339,12 @@ class Robot:
 		self.update_pos()
 
 		# détection du sens des pinces par rapport à l'objet
-		if (target.pos.x-self.pos[0]) == 0:
+		if (target.x-self.pos[0]) == 0:
 			teta = math.pi
 		else:
-			teta = math.atan(float(target.pos.y-self.pos[1]) / float(target.pos.x-self.pos[0]))
+			teta = math.atan(float(target.y-self.pos[1]) / float(target.x-self.pos[0]))
 
-		if target.pos.x-self.pos[0] < 0: teta += math.pi
+		if target.x-self.pos[0] < 0: teta += math.pi
 
 		teta = math.degrees(teta)
 		if abs(self.pos[2] - teta) < 90:
@@ -361,7 +373,7 @@ class Robot:
 			r = self.addBlockingCmd(2, (0.5,3), ID_ASSERV, Q_ANGLE_REL, 90, VITESSE-50)
 		
 		# avance vers l'objet
-		r = self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_GOAL_ABS, target.pos.x, target.pos.y, VITESSE)
+		r = self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_GOAL_ABS, target.x, target.y, VITESSE)
 		if not r[1]: # timeout
 			self.write("Robot->takeObj : timeout de l'asserv")
 			return False

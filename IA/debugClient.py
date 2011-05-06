@@ -14,7 +14,7 @@ class Debug:
 	
 	def log(self, id_cmd, args):
 		msg = str(id_cmd)+C_SEP_SEND+str(args)
-		print msg
+		print "debug log : '%s'"%msg
 		self.p.stdin.write(msg+"\n")
 	
 	def __del__(self):

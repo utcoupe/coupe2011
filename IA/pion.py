@@ -16,9 +16,9 @@ PION_1_T		= 3 # pion simple + tour
 PION_2_T		= 4 # pion double + tour
 TOUR			= 5 # tour simple
 
-class Pion:
+class Pion(Vec):
 	def __init__(self, x ,y, t):
-		self.pos = Vec(x,y)
+		Vec.__init__(self,x,y)
 		self.type = t # flag
 		self.time = time.time()
 	
@@ -44,5 +44,5 @@ class Target(Pion):
 		Pion.__init__(self, x,y,t)
 
 	def __repr__(self):
-		return "Target(%s, type=%s)"%(self.pos,self.type)
+		return "Target(%s,%s, type=%s)"%(self.x,self.y,self.type)
 	

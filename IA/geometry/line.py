@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 
 import sys
-print "line",sys.path
 
 from vec import *
 
@@ -20,10 +19,10 @@ class Line:
 		if self.AB.x != 0: # x=k
 			self.m = float(self.AB.y)/float(self.AB.x)
 			if abs(self.m) > 1e+15:
-				print "! x=k !"
+				#print "! x=k !"
 				self.m = None 
 		else:
-			print "! x=k !"
+			#print "! x=k !"
 			self.m = None
 		
 		if self.m!=None: self.k = A.y - self.m*A.x # y=m*x+k
@@ -98,30 +97,35 @@ class Tangente(Line):
 		R = C.R
 		AO = Vec2(O.x-A.x, O.y-A.y)
 		d2AO = AO.x**2+AO.y**2
-		dAO = sqrt(d2AO)
-		#print A,C
-		t1 = asin(float(AO.y)/(dAO))
-		if (O.x < A.x): t1 = pi - t1
-		#print "t1",degrees(t1)
-		frac = float(R)/(dAO)
-		if frac < -1.0:
-			t2 = pi/2.0
-		elif 1.0 < frac:
-			t2 = -pi/2.0
-		else:
-			t2 = asin(frac)
+		if d2AO != 0:
+			dAO = sqrt(d2AO)
+			#print A,C
+			t1 = asin(float(AO.y)/(dAO))
 			
-		teta = t1+type*t2
-		
-		if cos(teta) != 0:
-			self.m = sin(teta)/cos(teta)
-			self.k = A.y - self.m*A.x
-		else: # x=k
-			self.m = None
-			self.k = 0
-		
-		B = Vec2(500,self.y(500))
-		Line.__init__(self, A, B)
+			if (O.x < A.x): t1 = pi - t1
+			#print "t1",degrees(t1)
+			frac = float(R)/(dAO)
+			if frac < -1.0:
+				t2 = pi/2.0
+			elif 1.0 < frac:
+				t2 = -pi/2.0
+			else:
+				t2 = asin(frac)
+				
+			teta = t1+type*t2
+			
+			if cos(teta) != 0:
+				self.m = sin(teta)/cos(teta)
+				self.k = A.y - self.m*A.x
+			else: # x=k
+				self.m = None
+				self.k = 0
+			
+			B = Vec2(500,self.y(500))
+			Line.__init__(self, A, B)
+		else:
+			print "ERROR : Tangente.__init__(%s,%s,%s) distance entre le point et le centre null"%(A,C,type)
+			Line.__init__(self,A,A)
 		
 	def __repr__(self):
 		return "Tangente"+str((self.A,self.B,self.AB))
