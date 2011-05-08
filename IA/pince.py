@@ -15,7 +15,7 @@ ACCEPT[PION_1]		= (PION_1)
 ACCEPT[PION_2]		= ()
 ACCEPT[PION_1_T]	= (PION_1)
 ACCEPT[PION_2_T]	= ()
-ACCEPT[TOUR]		= (PION_2, PION_1)
+ACCEPT[TOUR]		= (PION_1)
 
 
 
@@ -31,7 +31,7 @@ class Pince:
 		les diff configurations de pions)
 		"""
 		return (id_object in ACCEPT[self.objet])
-	
+		
 	def listCanAccept(self):
 		""" Retourne la liste des objets (flag) que la pince peut accepter) """
 		return ACCEPT[self.objet]
