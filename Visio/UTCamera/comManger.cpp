@@ -111,7 +111,7 @@ void modeStationnaire()
             break;}
 
             // --- ScanAvant ---
-            case 62:{
+            case 64:{
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraF);
                     pthread_mutex_unlock (& mu);
@@ -134,7 +134,7 @@ void modeStationnaire()
             break;}
 
             // --- ScanArriére ---
-            case 63:{
+            case 65:{
 
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraB);
@@ -159,7 +159,7 @@ void modeStationnaire()
             break;}
 
 #define SXL 20
-            case 64:{
+            case 62:{
 
                 for(int tmp=0; tmp<5; tmp++)
                 {
@@ -205,7 +205,7 @@ void modeStationnaire()
 
             break;}
 
-            case 65:{
+            case 63:{
 
                 for(int tmp=0; tmp<5; tmp++)
                 {
