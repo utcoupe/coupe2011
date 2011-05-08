@@ -25,16 +25,23 @@ class Pion:
 		self.pos = Vec(x,y)
 		self.type = t # flag
 		self.time = time.time()
-		if ((450+x)%700) < 350:
-			if (y%700) < 350:
-				self.color = RED
+		if (450 <= x <= 2550) and (0 <= y <= 2100):
+			if ((450+x)%700) < 350:
+				if (y%700) < 350:
+					self.color = RED
+				else:
+					self.color = BLUE
 			else:
-				self.color = BLUE
+				if (y%700) < 350:
+					self.color = BLUE
+				else:
+					self.color = RED
+		elif (0 <= x <= 400) and (0 <= y <= 400):
+			self.color = BLUE
+		elif (2600 <= x <= 3000) and (0 <= y <= 400):
+			self.color = RED
 		else:
-			if (y%700) < 350:
-				self.color = BLUE
-			else:
-				self.color = RED
+			self.color = UNKNOWN
 
 	def __iter__(self):
 		return iter((self.pos.x,self.pos.y,self.type))
