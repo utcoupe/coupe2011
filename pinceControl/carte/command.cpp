@@ -7,7 +7,7 @@
  * */
 
 // from, id_cmd, *args, sizeArgs
-void cmd(int id, int header, int *args, int nb){
+void cmd(int id, int header, int *args, int nb){              
 	/* On analyse le message en fonction de son type */
 	switch(header){
 		case Q_IDENT:{//ok
@@ -22,10 +22,10 @@ void cmd(int id, int header, int *args, int nb){
 			sendMessage(id, getSharp(args[0]));
 			break;
 		}
-		case Q_TSHARP:{
+		/*case Q_TSHARP:{
 			sendMessage(id, setTriggerSharp(id, args[0],args[1]));
 			break;
-		}
+		}*/
 		case Q_MS:{//ok
 			sendMessage(id, getMicroSwitch(args[0]));
 			break;

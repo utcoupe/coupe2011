@@ -1,1 +1,1 @@
-../../com/protocole.txt
+/home/pierre/Bureau/UTCoupe/GIT/utcoupe-mega/com/protocole.txt
