@@ -3,7 +3,7 @@
 
 class Vec:
 	def __init__(self, *coords):
-		self.coords = [ int(round(_)) for _ in coords ]
+		self.__dict__["coords"] = [ int(round(_)) for _ in coords ]
 
 	def __repr__(self):
 		return "Vec"+str(tuple(self.coords))
@@ -28,13 +28,13 @@ class Vec:
 
 	def __setattr__(self,name,value):
 		if name == "x":
-			self.coords[0] = value
+			self.__dict__["coords"][0] = value
 		elif name == "y":
-			self.coords[1] = value
+			self.__dict__["coords"][1] = value
 		elif name == "z":
-			self.coords[2] = value
+			self.__dict__["coords"][2] = value
 		elif name == "t":
-			self.coords[3] = value
+			self.__dict__["coords"][3] = value
 		else:
 			raise AttributeError("Vec n'a pas d'atribut: '%s'"%name)
 		
