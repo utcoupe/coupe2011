@@ -7,7 +7,7 @@
  * */
 
 // from, id_cmd, *args, sizeArgs
-void cmd(int id, int header, int *args, int nb){              
+void cmd(int id, int header, int *args, int size){
 	/* On analyse le message en fonction de son type */
 	switch(header){
 		case Q_IDENT:{//ok
@@ -19,7 +19,11 @@ void cmd(int id, int header, int *args, int nb){
 			break;
 		}
 		case Q_SHARP:{//ok
-			sendMessage(id, getSharp(args[0]));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+            else
+                sendMessage(id, getSharp(args[0]));
+
 			break;
 		}
 		/*case Q_TSHARP:{
@@ -27,23 +31,48 @@ void cmd(int id, int header, int *args, int nb){
 			break;
 		}*/
 		case Q_MS:{//ok
-			sendMessage(id, getMicroSwitch(args[0]));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, getMicroSwitch(args[0]));
+
 			break;
 		}
 		case Q_TMS:{
-			sendMessage(id, setTriggerMS(id, args[0],args[1]));
+		    if(size<2)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, setTriggerMS(id, args[0],args[1]));
+
 			break;
 		}
 		case Q_PINCE:{ //ok
-			sendMessage(id, setPinceState(args[0],args[1]));
+		    if(size<2)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, setPinceState(args[0],args[1]));
+
 			break;
 		}
 		case Q_PPOSITION:{//ok
-			sendMessage(id, setPincePosition(id, args[0],args[1]));
+		    if(size<2)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, setPincePosition(id, args[0],args[1]));
+
 			break;
 		}
 		case Q_LOAD:{
-			sendMessage(id, presentLoad(args[0]));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, presentLoad(args[0]));
+
 			break;
 		}
 		case Q_JACK:{
@@ -51,36 +80,67 @@ void cmd(int id, int header, int *args, int nb){
 			break;
 		}
 		case Q_LED:{
-			sendMessage(id, setLED(args[0]));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, setLED(args[0]));
+
 			break;
 		}
 		case Q_PION:{
-			sendMessage(id, getPion(args[0]));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, getPion(args[0]));
+
 			break;
 		}
 		case Q_MOTOR:{
-			sendMessage(id, setPincePWM(1,args[0],1000));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, setPincePWM(1,args[0],1000));
+
 			break;
 		}
 		case Q_TXAX12:{
 			//id ax12_read_cmd value
-			sendMessage(id, Ax12.write(args[0],args[1],args[2]));
+			if(size<3)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, Ax12.write(args[0],args[1],args[2]));
+
 			break;
 		}
 		case Q_RXAX12:{
 			//id ax12_read_cmd
-			sendMessage(id, Ax12.read(args[0],args[1]));
+			if(size<2)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, Ax12.read(args[0],args[1]));
+
 			break;
 		}
 		case Q_CODEUR:{//ok
 			//face
-			if(args[0]==PINCEAV){
-				sendMessage(id, value_right_enc);
-			}else if(args[0]==PINCEAR){
-				sendMessage(id, value_left_enc);
-			}else{
-				sendMessage(id, -1);
-			}
+			if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+		    {
+                if(args[0]==PINCEAV){
+                    sendMessage(id, value_right_enc);
+                }else if(args[0]==PINCEAR){
+                    sendMessage(id, value_left_enc);
+                }else{
+                    sendMessage(id, -1);
+                }
+		    }
 			break;
 		}
 		case Q_RESET:{ //ok
@@ -91,7 +151,12 @@ void cmd(int id, int header, int *args, int nb){
 			break;
 		}
 		case Q_RECALAGE:{
-			sendMessage(id, pinceRecal(args[0]));
+		    if(size<1)
+		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+
+		    else
+                sendMessage(id, pinceRecal(args[0]));
+
 			break;
 		}
 		default:{
