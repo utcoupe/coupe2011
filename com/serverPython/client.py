@@ -34,7 +34,7 @@ class Client(threading.Thread):
 		if self.mask_recv_from & mask_from:
 			self._fn_send(msg)
 		else:
-			self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id)
+			self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id))
 	
 	def run(self):
 		"""
