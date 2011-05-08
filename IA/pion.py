@@ -1,9 +1,13 @@
 # -*- coding: utf-8 -*-
 
 
+import sys
+sys.path.append('../com/serverPython/')
+from protocole import *
+
+
 import time
 from geometry.vec import *
-
 
 ###################
 # FLAGS DES PIONS #
@@ -21,6 +25,16 @@ class Pion(Vec):
 		Vec.__init__(self,x,y)
 		self.type = t # flag
 		self.time = time.time()
+		if ((450+x)%700) < 350:
+			if (y%700) < 350:
+				self.color = RED
+			else:
+				self.color = BLUE
+		else:
+			if (y%700) < 350:
+				self.color = BLUE
+			else:
+				self.color = RED
 	
 	def age(self):
 		""" depuis combien de temps avons nous vu ce pion ? """
@@ -38,11 +52,5 @@ class Pion(Vec):
 
 	def __repr__(self):
 		return "Pion(%s, type=%s)"%(self.pos,self.type)
-		
-class Target(Pion):
-	def __init__(self, x, y, t):
-		Pion.__init__(self, x,y,t)
 
-	def __repr__(self):
-		return "Target(%s,%s, type=%s)"%(self.x,self.y,self.type)
 	

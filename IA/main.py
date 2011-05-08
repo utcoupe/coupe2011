@@ -156,10 +156,10 @@ class Robot:
 				self.write("cible : %s"%target)
 				self.write("path : %s"%path)
 
-				self.write("* MOVE *")
-				self.do_path(zip(path[::2],path[1::2]))
+				#self.write("* MOVE *")
+				#self.do_path(zip(path[::2],path[1::2]))
 			
-			time.sleep(0.5)
+			time.sleep(0.2)
 			
 	
 	def stop(self, msg=None):
@@ -239,7 +239,7 @@ class Robot:
 		@todo gestion si la réponse n'arrive pas assez vite
 		demande un scan à la camera, fait toujours deux tentatives
 
-		@return le liste des pions dans le repère absolue avec les pions hors table enlevés
+		@return list<Pion> la liste des pions dans le repère absolue avec les pions hors table enlevés
 		"""
 		l = []
 
@@ -256,44 +256,55 @@ class Robot:
 			l = eval(str(fifo.getMsg().content))
 		
 		self.write("Résultat brut scan : %s"%l)
-
+		
 		# arreter d'écouter
 		self.client.removeFifo(fifo)
-
+		
+		# transformation en objet
+		map(lambda p: Pion(p[1], p[2], p[0]), l)
+		
 		# récupération de la position
 		self.update_pos()
 		# transformation des valeurs
 		Cx = 120
 		Cy = -110
-		l = self._changeRepere(self.pos[0],self.pos[1],self.pos[2],Cx,Cy,l)
+		l = self._changeRepere(Cx,Cy,l)
 		self.write("Résultat change repere scan : %s"%l)
 		l = self._filtreInMap(l)
 		self.write("Résultat filtre map scan : %s"%l)
 		
 		self.debug.log(D_PIONS, l)
+
+		return 
 		
-		return l
-		
-	def _changeRepere(self, Rx, Ry, Ra, Cx, Cy, l):
+	def _changeRepere(self, Cx, Cy, l):
 		"""
 		Effectue le changement de repère pour la réponse de la caméra
+
+		@param Cx, Cy décalage de la caméra dans le repère robot
+		@param l liste<Pion> liste des pions trouvés par la caméra
 		"""
-		cosa = math.cos(math.radians(float(Ra)))
+		cosa = math.cos(math.radians(float(self.pos[3])))
 		sina = math.sin(math.radians(float(Ra)))
-		def f(p):
-			p[1] = int(cosa * float(p[1]) - sina * float(-p[2])) + Rx + Cx
-			p[2] = int(sina * float(p[1]) + cosa * float(-p[2])) + Ry + Cy
-			return p
+		def f(pion):
+			pion.pos.x = int(cosa * float(pion.pos.x) - sina * float(-p.pos.y)) + self.pos[0] + Cx
+			pion.pos.y = int(sina * float(pion.pos.x) + cosa * float(-pion.pos.y)) + self.pos[1] + Cy
+			return pion
 		return map(lambda p: f(p), l)
 			
 	def _filtreInMap(self, l):
 		"""
 		Filtre les pions hors carte
+
+		@param l liste<Pion>
 		"""
-		return filter(lambda p: (0 < p[1] < 3000) and (0 < p[2] < 2100), l)
+		return filter(lambda p: (0 < p.pos.x < 3000) and (0 < p.pos.y < 2100), l)
 
 	def treatScan(self,pions):
-		""" traitement du scan de la carte avec notre position actuelle 
+		""" traitement du scan de la carte avec notre position actuelle
+
+		@param pions liste<Pion>
+		
 		@return target,path
 		"""
 		# algo de détermination quel pion prendre (probablement le plus proche)
@@ -303,8 +314,8 @@ class Robot:
 		# self.client.Send("asserv", Q_ANGLE_ABS, <faceau pion>)
 		if pions:
 			def cmp(p1,p2):
-				x1,y1 = p1[1],p1[1]
-				x2,y2 = p2[1],p2[1]
+				x1,y1 = p1.pos.x,p1.pos.y
+				x2,y2 = p2.pos.x,p2.pos.y
 				
 				v1 = abs(x1-self.pos[0])**2+abs(y1-self.pos[1])**2
 				v2 = abs(x2-self.pos[0])**2+abs(y2-self.pos[1])**2
@@ -313,14 +324,14 @@ class Robot:
 				
 			pions.sort(cmp=lambda p1,p2: cmp(p1,p2))
 			
-			target = Target(pions[0][1], pions[0][2], pions[0][0])
+			target = pions[0]
 			
 			circles = []
 			
 			for p in pions:
-				circles.append(Vec2(p[1],p[2]))
+				circles.append((p.pos.x,p.pos.y))
 			
-			path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.x,target.y), circles)
+			path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.pos.x,target.pos.y), circles)
 			self.debug.log(D_SHOW_PATH,path)
 			
 			return target, path
@@ -339,12 +350,12 @@ class Robot:
 		self.update_pos()
 
 		# détection du sens des pinces par rapport à l'objet
-		if (target.x-self.pos[0]) == 0:
+		if (target.pos.x-self.pos[0]) == 0:
 			teta = math.pi
 		else:
-			teta = math.atan(float(target.y-self.pos[1]) / float(target.x-self.pos[0]))
+			teta = math.atan(float(target.pos.y-self.pos[1]) / float(target.pos.x-self.pos[0]))
 
-		if target.x-self.pos[0] < 0: teta += math.pi
+		if target.pos.x-self.pos[0] < 0: teta += math.pi
 
 		teta = math.degrees(teta)
 		if abs(self.pos[2] - teta) < 90:
@@ -373,7 +384,7 @@ class Robot:
 			r = self.addBlockingCmd(2, (0.5,3), ID_ASSERV, Q_ANGLE_REL, 90, VITESSE-50)
 		
 		# avance vers l'objet
-		r = self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_GOAL_ABS, target.x, target.y, VITESSE)
+		r = self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_GOAL_ABS, target.pos.x, target.pos.y, VITESSE)
 		if not r[1]: # timeout
 			self.write("Robot->takeObj : timeout de l'asserv")
 			return False
