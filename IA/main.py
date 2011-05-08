@@ -9,7 +9,7 @@ from pince import *
 from robotClient import *
 from msgFifo import *
 from loopCmd import *
-from time import sleep
+import time
 import math
 from debugClient import *
 from pathfinding import *
@@ -52,7 +52,7 @@ class Robot:
 	def addCmd(self, id_device, id_cmd, *args):
 		"""
 		Envoyer une commande
-		(blockant)
+		(non blockant)
 		
 		@param id_device id du device (asserv, cam,...)
 		@param id_cmd id de la commande
@@ -80,8 +80,8 @@ class Robot:
 
 	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
 		"""
-		Envoyer une commande et attendre la réponse
 		(blockant)
+		Envoyer une commande et attendre la réponse
 		
 		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
 		@param nb_msg le nombre de messages attendus
@@ -92,12 +92,12 @@ class Robot:
 		@return la réponse ou None si timeout
 		"""
 		fifo = self.client.addFifo( MsgFifo(id_cmd) )
-		self.addCmd(id_device, id_cmd, args)
-		if nb_msg == 1:
+		self.addCmd(id_device, id_cmd, *args)
+		if nb_msg > 1:
 			reponse = []
 			for i in xrange(nb_msg):
 				reponse.append(fifo.getMsg(timeout[i]))
-		elif nb_msg > 1:
+		elif nb_msg == 1:
 			reponse = fifo.getMsg(timeout)
 		else: reponse = None
 		self.client.removeFifo(fifo)
@@ -113,6 +113,9 @@ class Robot:
 
 		self.write("* LE ROBOT DÉMARRE *")
 		self.write("")
+		#self.write("* RECALAGE DES PINCES *")
+		#self.addBlockingCmd(1, 10, ID_OTHERS, Q_PRECAL)
+		#self.write("")
 		self.write("* CALIBRATION MANUELLE *")
 		self.addCmd(ID_ASSERV, Q_MANUAL_CALIB, 1150,700,0)
 		self.write("")
@@ -141,9 +144,10 @@ class Robot:
 		
 		"""
 		
-		sleep(0.5)
-
+		time.sleep(0.5)
+		delay = 0.5
 		while True:
+			start = time.time()
 			# scan
 			self.write("* SCAN *")
 			pions = self.scan()
@@ -158,8 +162,10 @@ class Robot:
 
 				#self.write("* MOVE *")
 				#self.do_path(zip(path[::2],path[1::2]))
-			
-			time.sleep(0.2)
+
+			ellapse = time.time() - start
+			if delay - ellapse > 0:
+				time.sleep(delay)
 			
 	
 	def stop(self, msg=None):
@@ -189,8 +195,8 @@ class Robot:
 	
 	def update_pos(self):
 		"""
-		Récupérer la position actuelle
 		(bloquant)
+		Récupérer la position actuelle
 		"""
 		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
 		self.addCmd(ID_ASSERV, Q_POSITION)
@@ -202,6 +208,7 @@ class Robot:
 		
 	def do_path(self, *path):
 		"""
+		(blockant)
 		@todo interuption danger, interuption 90s, interuption si erreur parceque la position n'est pas la bonne
 		suit un chemin
 		La fonction peut tout couper si elle reçoit un message de danger de la tourelle
@@ -236,6 +243,7 @@ class Robot:
 		
 	def scan(self):
 		"""
+		(blockant)
 		@todo gestion si la réponse n'arrive pas assez vite
 		demande un scan à la camera, fait toujours deux tentatives
 
@@ -301,7 +309,9 @@ class Robot:
 		return filter(lambda p: (0 < p.pos.x < 3000) and (0 < p.pos.y < 2100), l)
 
 	def treatScan(self,pions):
-		""" traitement du scan de la carte avec notre position actuelle
+		"""
+		(blockant)
+		traitement du scan de la carte avec notre position actuelle
 
 		@param pions liste<Pion>
 		
@@ -332,18 +342,32 @@ class Robot:
 				circles.append((p.pos.x,p.pos.y))
 			
 			path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.pos.x,target.pos.y), circles)
+
+			# décalage du point d'arrivée (à 120mm du pion)
+			Ax,Ay, Bx,By = path[-4], path[-3], path[-2], path[-1]
+			dAB = int(math.sqrt((Bx-Ax)**2 + (By-Ay)**2))
+			path[-2] = 120 * (Bx-Ax) / dAB
+			path[-1] = 120 * (bY-Ay) / dAB
+			
 			self.debug.log(D_SHOW_PATH,path)
 			
 			return target, path
 		else:
 			return None,None
 		
-	def dumpObj(self):
-		""" ouvrir la pince """
-		pass
+	def dumpObj(self, id_pince):
+		"""
+		(blockant)
+		ouvrir la pince
+		"""
+		r = self.addBlockingCmd(1, 1, ID_OTHERS, Q_PINCE, id_pince)
+		if not r: # timeout
+			self.write("Robot->dumpObj : timeout ouvrir les pinces")
 	
 	def takeObj(self, target):
-		""" ramasser un objet
+		"""
+		(blockant)
+		ramasser un objet
 		@return True si l'objet a été pris, False sinon
 		"""
 		# récupération de la position

@@ -18,10 +18,11 @@ Q_MANUAL_CALIB		=	8
 
 # others
 Q_WARNING			= 3
-Q_SHARP				= 31
 Q_PINCE				= 35
-Q_PPOSITION			= 36
+Q_SETPOSITION		= 36
 Q_PION				= 40
+Q_GETPOSITION		= 45
+Q_PRECAL			= 46
 
 #cam
 Q_SCAN_AV		= 62
