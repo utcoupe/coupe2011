@@ -20,9 +20,9 @@ PION_1_T		= 3 # pion simple + tour
 PION_2_T		= 4 # pion double + tour
 TOUR			= 5 # tour simple
 
-class Pion(Vec):
+class Pion:
 	def __init__(self, x ,y, t):
-		Vec.__init__(self,x,y)
+		self.pos = Vec(x,y)
 		self.type = t # flag
 		self.time = time.time()
 		if ((450+x)%700) < 350:
@@ -35,7 +35,10 @@ class Pion(Vec):
 				self.color = BLUE
 			else:
 				self.color = RED
-	
+
+	def __iter__(self):
+		return iter((self.pos.x,self.pos.y,self.type))
+		
 	def age(self):
 		""" depuis combien de temps avons nous vu ce pion ? """
 		return time.time() - self.time

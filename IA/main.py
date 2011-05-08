@@ -261,19 +261,19 @@ class Robot:
 		self.client.removeFifo(fifo)
 		
 		# transformation en objet
-		map(lambda p: Pion(p[1], p[2], p[0]), l)
+		l = map(lambda p: Pion(p[1], p[2], p[0]), l)
 		
 		# récupération de la position
 		self.update_pos()
 		# transformation des valeurs
 		Cx = 120
-		Cy = -110
+		Cy = -125
 		l = self._changeRepere(Cx,Cy,l)
 		self.write("Résultat change repere scan : %s"%l)
 		l = self._filtreInMap(l)
 		self.write("Résultat filtre map scan : %s"%l)
 		
-		self.debug.log(D_PIONS, l)
+		self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
 		return 
 		
@@ -284,10 +284,10 @@ class Robot:
 		@param Cx, Cy décalage de la caméra dans le repère robot
 		@param l liste<Pion> liste des pions trouvés par la caméra
 		"""
-		cosa = math.cos(math.radians(float(self.pos[3])))
-		sina = math.sin(math.radians(float(Ra)))
+		cosa = math.cos(math.radians(float(self.pos[2])))
+		sina = math.sin(math.radians(float(self.pos[2])))
 		def f(pion):
-			pion.pos.x = int(cosa * float(pion.pos.x) - sina * float(-p.pos.y)) + self.pos[0] + Cx
+			pion.pos.x = int(cosa * float(pion.pos.x) - sina * float(-pion.pos.y)) + self.pos[0] + Cx
 			pion.pos.y = int(sina * float(pion.pos.x) + cosa * float(-pion.pos.y)) + self.pos[1] + Cy
 			return pion
 		return map(lambda p: f(p), l)
@@ -349,7 +349,7 @@ class Robot:
 		# récupération de la position
 		self.update_pos()
 
-		# détection du sens des pinces par rapport à l'objet
+		# détection du sens des pinces par rapport à l'objet (on calcul l'angle dans le repère objet)
 		if (target.pos.x-self.pos[0]) == 0:
 			teta = math.pi
 		else:

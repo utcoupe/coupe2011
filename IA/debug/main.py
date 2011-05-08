@@ -4,6 +4,10 @@
 DEBUG de l'IA
 """
 
+import sys
+import traceback
+
+
 D_UPDATE_POS	=	0
 D_PIONS			=	1
 D_SHOW_PATH		=	2
@@ -68,7 +72,7 @@ if __name__ == "__main__":
 			if pions:
 				if type(pions[0]) == type((1,1)) or type(pions[0]) == type([1,1]):
 					for p in pions:
-						t,x,y = p
+						x,y,t = p
 						x = self.X(x)
 						y = self.Y(y)
 						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="yellow"))
@@ -121,7 +125,8 @@ if __name__ == "__main__":
 					elif id_cmd == D_DELETE_PATH:
 						screen.delete_path(params)
 				except Exception as ex:
-					print ex
+					print "ERROR :",ex
+					print traceback.print_tb(sys.exc_info()[2])
 
 
 
