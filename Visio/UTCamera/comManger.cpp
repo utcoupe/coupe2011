@@ -5,6 +5,8 @@
 IplImage* src;
 pthread_mutex_t mu  = PTHREAD_MUTEX_INITIALIZER;
 
+regionLister*   listTmp;
+
 
 int s2i(const string & s)
 {
@@ -37,16 +39,28 @@ void sendData(regionLister* liste)
     int nb = 0;
     liste->iniPtr();
     while(liste->getEle()!=NULL){
-        if(nb){
-            printf(",");
+        if(liste->getEle()->color>=3){
+            if(nb){
+                printf(",");
+            }
+            printf("[1,%ld,%ld]",(int)liste->getEle()->Yprime,(-1)*(int)liste->getEle()->Xprime);
+            nb++;
+            liste->ptrSuiv();
         }
-        printf("[1,%ld,%ld]",(int)liste->getEle()->Yprime,(-1)*(int)liste->getEle()->Xprime);
-        nb++;
-        liste->ptrSuiv();
     }
 
     printf("]");
 }
+
+/**
+ *
+ */
+void moyenneArriere()
+{
+
+
+}
+
 
 /**
     Fonction principale de traitement
@@ -102,12 +116,18 @@ void modeStationnaire()
                     imgBas=cvQueryFrame(captureCameraF);
                     pthread_mutex_unlock (& mu);
 
+                    listFinal->iniPtr();
+                    while(listFinal->getEle()!=NULL){
+                        listFinal->getEle()->color=5;
+                        listFinal->ptrSuiv();
+                    }
+
                     binarisation();
                     regionGrowing();
                     listFinal = analyseListeRegion(listBeforeTrait, IMG_WIDTH, IMG_HEIGHT);
                     sendData(listFinal);
 
-                    afficheListeRegion(listFinal, imgBas);
+                    //afficheListeRegion(listFinal, imgBas);
                     //cvShowImage("T",imgBas);
 
                     cvWaitKey(10);
@@ -115,19 +135,120 @@ void modeStationnaire()
 
             // --- ScanArriére ---
             case 63:{
+
                     pthread_mutex_lock (& mu);
                     imgBas=cvQueryFrame(captureCameraB);
                     pthread_mutex_unlock (& mu);
+
+                    listFinal->iniPtr();
+                    while(listFinal->getEle()!=NULL){
+                        listFinal->getEle()->color=5;
+                        listFinal->ptrSuiv();
+                    }
 
                     binarisation();
                     regionGrowing();
                     listFinal = analyseListeRegion(listBeforeTrait, IMG_WIDTH, IMG_HEIGHT);
                     sendData(listFinal);
 
-                    afficheListeRegion(listFinal, imgBas);
+
+                    //afficheListeRegion(listFinal, imgBas);
                     //cvShowImage("T",imgBas);
 
                     cvWaitKey(10);
+            break;}
+
+#define SXL 20
+            case 64:{
+
+                for(int tmp=0; tmp<5; tmp++)
+                {
+                    pthread_mutex_lock (& mu);
+                    imgBas=cvQueryFrame(captureCameraF);
+                    pthread_mutex_unlock (& mu);
+
+                    binarisation();
+                    regionGrowing();
+
+                    if(tmp==0){
+                        listFinal = analyseListeRegion(listBeforeTrait, IMG_WIDTH, IMG_HEIGHT);
+                        listFinal->iniPtr();
+                        while(listFinal->getEle()!=NULL){
+                            listFinal->getEle()->color=0;
+                            listFinal->ptrSuiv();
+                        }
+                    }else{
+                        listTmp = analyseListeRegion(listBeforeTrait, IMG_WIDTH, IMG_HEIGHT);
+                        listFinal->iniPtr();
+                        while(listFinal->getEle()!=NULL){
+                            listTmp->iniPtr();
+                            while(listTmp->getEle()!=NULL){
+
+                                if
+                                (
+                                    listTmp->getEle()->Xprime - SXL < listFinal->getEle()->Xprime &&
+                                    listTmp->getEle()->Xprime + SXL > listFinal->getEle()->Xprime &&
+                                    listTmp->getEle()->Yprime - SXL < listFinal->getEle()->Yprime &&
+                                    listTmp->getEle()->Yprime + SXL > listFinal->getEle()->Yprime
+                                )
+                                {
+                                    listFinal->getEle()->color++;
+                                }
+                                listTmp->ptrSuiv();
+                            }
+                            listFinal->ptrSuiv();
+                        }
+                    }
+                }
+
+                sendData(listFinal);
+
+            break;}
+
+            case 65:{
+
+                for(int tmp=0; tmp<5; tmp++)
+                {
+                    pthread_mutex_lock (& mu);
+                    imgBas=cvQueryFrame(captureCameraB);
+                    pthread_mutex_unlock (& mu);
+
+                    binarisation();
+                    regionGrowing();
+
+                    if(tmp==0){
+                        listFinal = analyseListeRegion(listBeforeTrait, IMG_WIDTH, IMG_HEIGHT);
+                        listFinal->iniPtr();
+                        while(listFinal->getEle()!=NULL){
+                            listFinal->getEle()->color=0;
+                            listFinal->ptrSuiv();
+                        }
+                    }else{
+                        listTmp = analyseListeRegion(listBeforeTrait, IMG_WIDTH, IMG_HEIGHT);
+                        listFinal->iniPtr();
+                        while(listFinal->getEle()!=NULL){
+                            listTmp->iniPtr();
+                            while(listTmp->getEle()!=NULL){
+
+                                if
+                                (
+                                    listTmp->getEle()->Xprime - SXL < listFinal->getEle()->Xprime &&
+                                    listTmp->getEle()->Xprime + SXL > listFinal->getEle()->Xprime &&
+                                    listTmp->getEle()->Yprime - SXL < listFinal->getEle()->Yprime &&
+                                    listTmp->getEle()->Yprime + SXL > listFinal->getEle()->Yprime
+                                )
+                                {
+                                    listFinal->getEle()->color++;
+                                }
+                                listTmp->ptrSuiv();
+                            }
+                            listFinal->ptrSuiv();
+                        }
+                    }
+                }
+
+                sendData(listFinal);
+
             break;}
 
             // --- Arrét du programme ---

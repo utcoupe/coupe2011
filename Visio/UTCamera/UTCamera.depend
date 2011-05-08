@@ -925,7 +925,7 @@
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/camCalibre.hpp
 
-1303858420 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
+1304859475 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
 	"UTCamera.hpp"
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/UTCamera.hpp
@@ -966,14 +966,21 @@
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/colorConvertion.hpp
 	<iostream>
 
-1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/constantes.hpp
+1304859475 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/constantes.hpp
 
 1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/regionLister.hpp
 	<iostream>
 	<cv.h>
 	"constantes.hpp"
 
-1303856030 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
+1304859475 /home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<iostream>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
 
 1303853399 /home/utcoupe/Bureau/2011/arduino/utcoupe-mega/Visio/UTCamera/Fps.hpp
 
@@ -1096,19 +1103,21 @@
 1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/colorConvertion.cpp
 	"colorConvertion.hpp"
 
-1303858401 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/comManger.cpp
+1304868095 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/comManger.cpp
 	"comManager.hpp"
+	<sstream>
 
-1303858053 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.cpp
+1304859475 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/loadCamera.cpp
 	"loadCamera.hpp"
 
 1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/regionLister.cpp
 	"regionLister.hpp"
 
-1303856030 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/zonesAnalyser.cpp
+1304859475 source:/home/xavier/Bureau/GIT/utcoupe-mega/Visio/UTCamera/zonesAnalyser.cpp
 	"zonesAnalyser.hpp"
 	"cam_utility.hpp"
 	"regionLister.hpp"
+	<math.h>
 
 1303859243 source:/home/thomas/utcoupe/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
 	"UTCamera.hpp"
