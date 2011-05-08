@@ -14,12 +14,12 @@
 #define IDAVD		3	//avant droit
 #define IDARG		1	//arriere gauche
 #define IDARD		2	//arriere droit
-#define POSITIONFG	800	//fermé Gauche
-#define POSITIONSG	600	//serré
-#define POSITIONOG	400	//ouvert
-#define POSITIONFD	200	//fermé Droit
-#define POSITIONSD	400	//serré
-#define POSITIONOD	600	//ouvert
+#define POSITIONFG	1024-200	//fermé Gauche
+#define POSITIONSG	1024-400	//serré
+#define POSITIONOG	1024-600	//ouvert
+#define POSITIONFD	1024-800	//fermé Droit
+#define POSITIONSD	1024-600	//serré
+#define POSITIONOD	1024-400	//ouvert
 #define CONTROLPIN 	40
 #define BAUDRATE 	115200
 /*cf protocole*/
