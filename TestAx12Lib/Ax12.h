@@ -78,7 +78,7 @@
 #define AX_START                    255
 #define BUFFER_SIZE		    		64
 #define TIME_OUT                    1000 //microsec
-#define TX_DELAY_TIME		    	2000 //microsec
+#define TX_DELAY_TIME		    	4000 //microsec
 
 #define AX_ID_LENGTH                4
 #define AX_BR_LENGTH                4

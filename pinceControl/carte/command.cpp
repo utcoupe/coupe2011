@@ -54,6 +54,7 @@ void cmd(int id, int header, int *args, int size){
 
 		    else
                 sendMessage(id, setPinceState(args[0],args[1]));
+                setPinceState(args[0],args[1])
 
 			break;
 		}
