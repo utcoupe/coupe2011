@@ -26,6 +26,18 @@ class Vec:
 		else:
 			raise AttributeError("Vec n'a pas d'atribut: '%s'"%name)
 
+	def __setattr__(self,name,value):
+		if name == "x":
+			self.coords[0] = value
+		elif name == "y":
+			self.coords[1] = value
+		elif name == "z":
+			self.coords[2] = value
+		elif name == "t":
+			self.coords[3] = value
+		else:
+			raise AttributeError("Vec n'a pas d'atribut: '%s'"%name)
+		
 	def __getitem__(self,i):
 		return self.coords[i]
 

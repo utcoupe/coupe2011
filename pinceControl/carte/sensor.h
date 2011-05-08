@@ -12,10 +12,14 @@
 
 //define jack et couleur
 #define PIN_JACK 	44
-#define LED_BLEU 	45
-#define LED_ROUGE 	46
+#define LED_BLEU 	51
+#define LED_ROUGE 	47
 #define BLEU 		0
 #define ROUGE 		1
+
+//interupteur bleu 33
+//interupteur rouge 41
+
 
 //define sharp
 #define FACEAV 		0

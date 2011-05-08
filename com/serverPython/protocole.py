@@ -32,11 +32,11 @@ Q_SCAN_AR		= 63
 ID_SERVER		= 0
 ID_CAM			= 1
 ID_ASSERV		= 2 # carte asserv
-ID_OTHERS	   = 3 # carte avec les pinces et sharps
-ID_IA		   = 4 # l'IA
+ID_OTHERS		= 3 # carte avec les pinces et sharps
+ID_IA			= 3 # l'IA
 
 
 
 
+BLUE	= 0
 RED		= 1
-BLUE	= 2

@@ -59,9 +59,5 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
-#define	E_INVALID_PARAMETERS_TYPE			-3
-#define	E_INVALID_ANALOGPIN				-4
-#define	E_INVALID_DIGITALPIN				-5
-#define E_ANNULATION						-6 // asserv
 
 #endif /* MESSAGE_H_ */
