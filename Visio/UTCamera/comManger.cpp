@@ -45,8 +45,8 @@ void sendData(regionLister* liste)
             }
             printf("[1,%ld,%ld]",(int)liste->getEle()->Yprime,(-1)*(int)liste->getEle()->Xprime);
             nb++;
-            liste->ptrSuiv();
         }
+        liste->ptrSuiv();
     }
 
     printf("]");
