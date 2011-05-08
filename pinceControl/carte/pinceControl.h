@@ -10,10 +10,10 @@
 //Pinces
 #define HAUT FORWARD
 #define BAS BACKWARD
-#define IDAVG		1	//avant gauche
-#define IDAVD		2	//avant droit
-#define IDARG		3	//arriere gauche
-#define IDARD		4	//arriere droit
+#define IDAVG		7	//avant gauche
+#define IDAVD		3	//avant droit
+#define IDARG		1	//arriere gauche
+#define IDARD		2	//arriere droit
 #define POSITIONFG	800	//fermé Gauche
 #define POSITIONSG	600	//serré
 #define POSITIONOG	400	//ouvert

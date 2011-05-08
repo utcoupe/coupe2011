@@ -6,7 +6,7 @@ void initPinceControl(){
 	goal_position_AR=-1;
 	initPWM();
 	//initEncoders();
-	pinceRecal(PINCEAV);
+	//pinceRecal(PINCEAV);
 	//pinceRecal(PINCEAR);
 }
 

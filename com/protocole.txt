@@ -43,8 +43,6 @@ COMMANDES : CARTE PINCE
 	1 (Ping)				--> 'Pong'
 	31 n ("SHARP" retourne la valeur du sharp n (de 0 à 11)	
 							--> 'N' (valeur du sharp n valeur / -1 ==> erreur mauvais numero de sharp)
-	32 n s ("TSHARP" renvoie une valeur quand le sharp n (de 0 à 11) dépasse le seuil s (s > 0)			
-							--> '1' (recu) ou '0' (erreur) 	--> '2' (seuil dépassé + arret seuil) ou '0' (annulation)
 	33 n ("MS" retourne la valeur du MS avant (0) ou arriere(1) )	
 	 						--> '1' (MS fermé) ou '0' (MS ouvert) ou '2' (erreur)
 	34 n s ("TMS" renvoie message quand le microswitch n à atteint la valeur s ('1' MS fermé ou '0' MS ouvert))	
