@@ -33,7 +33,7 @@ ID_SERVER		= 0
 ID_CAM			= 1
 ID_ASSERV		= 2 # carte asserv
 ID_OTHERS		= 3 # carte avec les pinces et sharps
-ID_IA			= 4 # l'IA
+ID_IA			= 3 # l'IA
 
 
 
