@@ -10,16 +10,16 @@
 //Pinces
 #define HAUT FORWARD
 #define BAS BACKWARD
-#define IDAVG		7	//avant gauche
+#define IDAVG		2	//avant gauche
 #define IDAVD		3	//avant droit
-#define IDARG		1	//arriere gauche
-#define IDARD		2	//arriere droit
-#define POSITIONFG	1024-200	//fermé Gauche
-#define POSITIONSG	1024-400	//serré
-#define POSITIONOG	1024-600	//ouvert
-#define POSITIONFD	1024-800	//fermé Droit
-#define POSITIONSD	1024-600	//serré
-#define POSITIONOD	1024-400	//ouvert
+#define IDARG		7	//arriere gauche
+#define IDARD		1	//arriere droit
+#define POSITIONFG	1024-700	//fermé Gauche
+#define POSITIONSG	1024-600	//serré
+#define POSITIONOG	1024-400	//ouvert
+#define POSITIONFD	1024-300	//fermé Droit
+#define POSITIONSD	1024-400	//serré
+#define POSITIONOD	1024-600	//ouvert
 #define CONTROLPIN 	40
 #define BAUDRATE 	115200
 /*cf protocole*/
@@ -34,11 +34,11 @@
 #define PWM_VALUE 	90 //90
 #define MARGE 		50 //Tolerance de maintient en position pour la pince
 #define SEUIL_LOAD	0x50
-#define PIN_MS_AV   32 //microswitch pour recalage
+#define PIN_MS_AV   30 //microswitch pour recalage
 #define PIN_MS_AR	37
 
-static Ax12Class Ax12;
-static int msg_position_AV,msg_position_AR;
+extern Ax12Class Ax12;
+extern int msg_position_AV,msg_position_AR;
 
 #include "encoder.h"
 

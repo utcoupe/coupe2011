@@ -51,10 +51,11 @@ void cmd(int id, int header, int *args, int size){
 		case Q_PINCE:{ //ok
 		    if(size<2)
 		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
-
 		    else
+		    {
                 sendMessage(id, setPinceState(args[0],args[1]));
-                setPinceState(args[0],args[1])
+                setPinceState(args[0],args[1]);
+			}
 
 			break;
 		}
@@ -134,13 +135,13 @@ void cmd(int id, int header, int *args, int size){
 
 		    else
 		    {
-                if(args[0]==PINCEAV){
+                if(args[0]==PINCEAV)
                     sendMessage(id, value_right_enc);
-                }else if(args[0]==PINCEAR){
+                else if(args[0]==PINCEAR)
                     sendMessage(id, value_left_enc);
-                }else{
+                else
                     sendMessage(id, -1);
-                }
+                
 		    }
 			break;
 		}
@@ -156,7 +157,10 @@ void cmd(int id, int header, int *args, int size){
 		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 
 		    else
+		    {
+                sendMessage(id, 1);
                 sendMessage(id, pinceRecal(args[0]));
+			}
 
 			break;
 		}

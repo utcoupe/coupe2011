@@ -24,18 +24,18 @@ void loop(){
 	int val=Serial.read();
 		if(val=='a'){
 			 Ax12.move(1,734-100 );
-			 Ax12.move(2,290+100 );
-			 Ax12.move(3,734-100 );
+			 Ax12.move(2,1024-600 );
+			 Ax12.move(3,1024-400);
 			 Ax12.move(4,290+100 );
 			 Ax12.move(7,290+100 );
 		}else if (val=='q'){
 			 Ax12.move(1,734);
-			 Ax12.move(2,290);
-			 Ax12.move(3,734);
+			 Ax12.move(2,1024-400);
+			 Ax12.move(3,1024-600);
 			 Ax12.move(4,290 );
 			 Ax12.move(7,290 );
 		}else if(val=='c'){
-			int id=7;
+			int id=2;
 			Serial.println("c");
 			Serial.print("position : ");
 			Serial.println(Ax12.read(id,AX_PRESENT_POSITION_L,AX_2BYTE_READ) ,DEC);
@@ -47,6 +47,10 @@ void loop(){
 			Serial.println(Ax12.read(id,AX_PRESENT_VOLTAGE,AX_BYTE_READ),DEC);
 			Serial.print("load : ");
 			Serial.println(Ax12.read(id,AX_PRESENT_LOAD_L,AX_2BYTE_READ),DEC);
+		}
+		else if (val == 'z')
+		{
+			Ax12.setAlarmShutdown(2,0);
 		}
 	}
 }
