@@ -164,6 +164,11 @@ void cmd(int id, int header, int *args, int size){
 
 			break;
 		}
+		case Q_COLOR:
+		{
+			sendMessage(id, getColor());
+			break;
+		}
 		default:{
 			sendMessage(id,-1);
 			break;

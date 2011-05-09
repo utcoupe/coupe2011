@@ -19,13 +19,14 @@
 #define Q_JACK		 		38
 #define Q_LED		 		39
 #define Q_PION		 		40
+#define Q_RESET		 		45
+#define Q_RECALAGE	 		46
+#define Q_COLOR				50
 /*debug*/
 #define Q_MOTOR		 		41
 #define Q_TXAX12	 		42 //write
 #define Q_RXAX12	 		43 //read
 #define Q_CODEUR	 		44 
-#define Q_RESET		 		45
-#define Q_RECALAGE	 		46
 
 void cmd(int,int,int*,int); // from, id_cmd, *args, sizeArgs
 

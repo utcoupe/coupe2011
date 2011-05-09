@@ -11,7 +11,7 @@
 #define NB_MS 		2
 
 //define jack et couleur
-#define PIN_JACK 	44
+#define PIN_JACK 	50
 #define LED_BLEU 	51
 #define LED_ROUGE 	47
 #define BLEU 		0
@@ -20,7 +20,10 @@
 //interupteur bleu 33
 //interupteur rouge 41
 
-
+// pin couleur
+#define PIN_COLOR	50
+#define BLUE		0
+#define RED			1
 //define sharp
 #define FACEAV 		0
 #define FACEAR 		1
@@ -79,5 +82,6 @@ int getMicroSwitch(unsigned char pin);
 int setTriggerMS(unsigned int id, unsigned char pin,bool ref);
 void removeTriggerMS(unsigned int index);
 void sensorTrigger();
+int getColor();
 
 #endif

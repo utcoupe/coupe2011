@@ -61,16 +61,16 @@ int getPion(unsigned char face){
 void initSensor(){
 	pinMode(PIN_MS_AV, INPUT);  
 	pinMode(PIN_MS_AR, INPUT);
-	pinMode(LED_BLEU, OUTPUT);  
+	pinMode(PIN_COLOR, INPUT);
+	pinMode(PIN_JACK, INPUT);
+	pinMode(LED_BLEU, OUTPUT);
 	pinMode(LED_ROUGE, OUTPUT);
 	digitalWrite(LED_BLEU,LOW);
 	digitalWrite(LED_ROUGE,LOW);
-	for(int i=0;i<NB_SHARP;i++){
+	for(int i=0;i<NB_SHARP;i++)
 		trigerSharp[i].pin=-1;
-	}
-	for(int i=0;i<NB_MS;i++){
+	for(int i=0;i<NB_MS;i++)
 		trigerMS[i].pin=-1;
-	}
 	//waitJack();
 }
 
@@ -103,9 +103,11 @@ int waitJack(){
 		readIncomingData();
 	}
 	//attend le branchement d'un jack (il peut etre deja branché)
-	while(digitalRead(PIN_JACK)!=HIGH){	}
+	while(digitalRead(PIN_JACK)!=HIGH)
+		delay(40);
 	//attend le debranchement du jack
-	while(digitalRead(PIN_JACK)!=LOW){}
+	while(digitalRead(PIN_JACK)!=LOW)
+		delay(40);
 	sendMessage(JackMessageID,2);
 	return 1;
 }
@@ -266,6 +268,17 @@ void sensorTrigger(){
 		}
 	}
 }
+
+
+int getCouleur()
+{
+	int c = digitalRead(PIN_COLOR);
+	if (c == LOW)
+		return BLUE;
+	else
+		return RED;
+}
+
 
 
 
