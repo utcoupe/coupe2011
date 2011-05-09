@@ -44,7 +44,7 @@
     #define     NB_THREAD       4
 
     // Reccursivité extend region
-    #define STOP_REC            10000
+    #define STOP_REC            50000
 
 // Analyse des pions
     #define     RAYON_PIONT     100

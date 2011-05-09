@@ -98,7 +98,7 @@ void extendRegion(region* z, int width, int height, IplImage* binFrame, int x, i
 		if( x > z->max[DROITE   ].x ) { z->max[DROITE   ] = cvPoint(x,y); }
 		if( x < z->max[GAUCHE   ].x ) { z->max[GAUCHE   ] = cvPoint(x,y); }
 
-		if( (x+1<height) ) {
+		if( (x+1<width) ) {
             if( CV_IMAGE_ELEM( binFrame, uchar, y, (x+1) ) == JAUNE_ ){
                 extendRegion(z, width, height, binFrame, x+1, y, stop+1);
 			}
@@ -108,15 +108,25 @@ void extendRegion(region* z, int width, int height, IplImage* binFrame, int x, i
                 extendRegion(z, width, height, binFrame, x-1, y, stop+1);
             }
 		}
-		if( (y+1<width) ) {
+		if( (y+1<height) ) {
 		    if( CV_IMAGE_ELEM( binFrame, uchar, (y+1), x ) == JAUNE_ ){
                 extendRegion(z, width, height, binFrame, x, y+1, stop+1);
             }
+            //*
+            else if(y+4<height && CV_IMAGE_ELEM( binFrame, uchar, (y+4), x ) == JAUNE_){
+                extendRegion(z, width, height, binFrame, x, y+4, stop+1);
+            }
+            //*/
 		}
 		if( (y-1>=0) ) {
             if( CV_IMAGE_ELEM( binFrame, uchar, (y-1), x ) == JAUNE_ ){
                 extendRegion(z, width, height, binFrame, x, y-1, stop+1);
             }
+            //*
+            else if(y-4>=0 && CV_IMAGE_ELEM( binFrame, uchar, (y-4), x ) == JAUNE_){
+                extendRegion(z, width, height, binFrame, x, y-4, stop+1);
+            }
+            //*/
 		}
 
     }
