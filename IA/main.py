@@ -117,13 +117,32 @@ class Robot:
 	def start(self):
 		""" démarage du robot """
 		self.client.start()
-		self.color = BLUE
 
-		self.write("* CALIBRATION MANUELLE *")
-		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
+		while 1:
+			start = time.time()
+			self.write("* RÉCUPÉRATION COULEUR *")
+			self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
+			if self.color == RED:
+				self.write("COULEUR ROUGE !")
+			else:
+				self.write("COULEUR BLEU !")
+			print time.time() - start
+			self.write("")
+		
+		self.write("* RECALAGE *")
+		r = self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 		self.write("")
+		
+		#self.write("* CALIBRATION MANUELLE *")
+		#self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
+		#self.write("")
 		#self.calibCam()
 		#self.testCam(False)
+
+		self.write("* ATTENTE DU JACK *")
+		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
+		self.write("ON Y VAS !")
+		self.write("")
 		
 		while 1:
 			self.debug.log(D_UPDATE_POS,self.pos)
@@ -147,73 +166,7 @@ class Robot:
 			self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 45, VITESSE - 30)
 
 
-			
-		"""self.write("* LE ROBOT DÉMARRE *")
-		self.write("")
-		self.write("* RECALAGE DES PINCES *")
-		self.addBlockingCmd(1, 10, ID_OTHERS, Q_PRECAL)
-		self.write("")
-		self.write("* CALIBRATION MANUELLE *")
-		self.addCmd(ID_ASSERV, Q_MANUAL_CALIB, 1150,700,0)
-		self.write("")
-		time.sleep(1)
-		self.write("* UPDATE POS *")
-		self.update_pos()
-		self.write("")"""
 		
-		"""
-		# les pinces en haut
-		self.addCmd(ID_OTHERS, Q_PPOSITION, (0,1000))
-		
-		# demande de position
-		self.update_pos()
-		
-		# calibrage
-		fifo = self.client.addFifo( MsgFifo(Q_AUTO_CALIB) )
-		self.addCmd(ID_ASSERV, Q_AUTO_CALIB, (RED,))
-		r = fifo.getMsg() # accusé de reception
-		r = fifo.getMsg()
-		self.write(r)
-		self.client.removeFifo(fifo)
-		
-		# sortie
-		self.write("c'est parti")
-		
-		"""
-		
-		"""time.sleep(0.5)
-		delay = 0.5
-		while True:
-			self.update_pos()
-			self.write("* TAKE OBJECT *")
-			self.takeObj(Pion(self.pos[0]-170,self.pos[1],1))
-			self.write("")
-			time.sleep(2)
-			self.write("* DUMP OBJECT *")
-			self.dumpObj(self.id_pince)
-			self.write("")
-			time.sleep(1)
-			continue
-			start = time.time()
-			# scan
-			self.write("* SCAN *")
-			pions = self.scan()
-			self.write("")
-			
-			
-			if pions:
-				target,path = self.treatScan(pions)
-				
-				self.write("cible : %s"%target)
-				self.write("path : %s"%path)
-
-				self.write("* MOVE *")
-				self.do_path(zip(path[::2],path[1::2]))
-
-			ellapse = time.time() - start
-			self.write("time : %s"%ellapse)
-			if delay - ellapse > 0:
-				time.sleep(delay)"""
 			
 	
 	def stop(self, msg=None):
@@ -386,8 +339,8 @@ class Robot:
 		# récupération de la position
 		self.update_pos()
 		# transformation des valeurs
-		Cx = -16 #120
-		Cy = 4 #-125
+		Cx = 122
+		Cy = -107
 		l = self._changeRepere(Cx,Cy,l)
 		self.write("Résultat change repere scan : %s"%l)
 		l = self._filtreInMap(l)
