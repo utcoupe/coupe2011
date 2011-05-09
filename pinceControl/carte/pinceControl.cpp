@@ -1,5 +1,8 @@
 #include "pinceControl.h"
 
+Ax12Class Ax12;
+int msg_position_AV,msg_position_AR;
+
 void initPinceControl(){
 	Ax12.begin(&Serial2 , BAUDRATE, CONTROLPIN);
 	goal_position_AV=-1;
@@ -26,7 +29,7 @@ int pinceRecal(unsigned char face){
 		}
 		setAVPWM(0x00);
 		initEncoders();
-		return 1;
+		return 2;
 	}
 	if(face==PINCEAR){
 		setARPWM(-PWM_VALUE);
@@ -35,9 +38,9 @@ int pinceRecal(unsigned char face){
 		}
 		setARPWM(0x00);
 		initEncoders();
-		return 1;
+		return 2;
 	}
-	return 0;
+	return -42;
 }
 
 int setPincePWM(unsigned char face,int pwm,int tempo){
@@ -97,21 +100,21 @@ int setPinceState(unsigned char index,unsigned char etat){
 	return 1;
 }
 
-int setPincePosition(unsigned int id,unsigned char index,unsigned int pos){
+int setPincePosition(unsigned int id, unsigned char index,unsigned int pos){
 	if(pos >= POSITION_MAX) return 0; //erreur
 	switch(index){
-		case 0 : 
-		setAVPWM(PWM_VALUE);
-		goal_position_AV=pos;
-		msg_position_AV=id;
-		return 1;
+		case 0 :
+			setAVPWM(PWM_VALUE);
+			goal_position_AV=pos;
+			msg_position_AV=id;
+			return 1;
 		case 1 : 
-		setARPWM(PWM_VALUE);
-		goal_position_AR=pos;
-		msg_position_AR=id;
-		return 1;
+			setARPWM(PWM_VALUE);
+			goal_position_AR=pos;
+			msg_position_AR=id;
+			return 1;
 		default : 
-		return 0;//erreur
+			return 0;//erreur
 	}
 }
 

@@ -90,6 +90,7 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 	
 def find_path(A,B, pions):
 	global maxi
+	print "test",pions
 	maxi = 0
 	d, droites = rec_find_path(A, B, pions)
 	#print "droites :",droites
