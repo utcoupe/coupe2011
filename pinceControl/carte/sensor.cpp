@@ -71,7 +71,6 @@ void initSensor(){
 		trigerSharp[i].pin=-1;
 	for(int i=0;i<NB_MS;i++)
 		trigerMS[i].pin=-1;
-	//waitJack();
 }
 
 int setLED(unsigned char color){
@@ -92,24 +91,14 @@ int setLED(unsigned char color){
 	return 0;
 }
 
-int jack(int id){
-	JackMessageID=id;
-	return 1;
-}
-
 int waitJack(){
-	//en attente de l'IA
-	while(JackMessageID==-42){
-		readIncomingData();
-	}
 	//attend le branchement d'un jack (il peut etre deja branché)
 	while(digitalRead(PIN_JACK)!=HIGH)
 		delay(40);
 	//attend le debranchement du jack
 	while(digitalRead(PIN_JACK)!=LOW)
 		delay(40);
-	sendMessage(JackMessageID,2);
-	return 1;
+	return 2;
 }
 
 int getSharp(unsigned char pin)

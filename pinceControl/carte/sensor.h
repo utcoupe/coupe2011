@@ -21,7 +21,7 @@
 //interupteur rouge 41
 
 // pin couleur
-#define PIN_COLOR	50
+#define PIN_COLOR	51
 #define BLUE		0
 #define RED			1
 //define sharp

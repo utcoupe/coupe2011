@@ -59,7 +59,7 @@ void cmd(int id, int header, int *args, int size){
 
 			break;
 		}
-		case Q_PPOSITION:{//ok
+		case Q_SETPOSITION:{//ok
 		    if(size<2)
 		        sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 
@@ -78,7 +78,8 @@ void cmd(int id, int header, int *args, int size){
 			break;
 		}
 		case Q_JACK:{
-			sendMessage(id, jack(id));
+			sendMessage(id, 1);
+			sendMessage(id, waitJack());
 			break;
 		}
 		case Q_LED:{

@@ -62,8 +62,11 @@ void calibrationManuel()
             cvCreateTrackbar("JAUNE : tolerance H" , "Parametres", (_Htol+JAUNE), 255, NULL);
             cvCreateTrackbar("JAUNE : tolerance V" , "Parametres", (_Stol+JAUNE), 255, NULL);
 
+            cvLine(imgBas, cvPoint(IMG_WIDTH/2,IMG_HEIGHT), cvPoint(IMG_WIDTH/2, 0), cvScalar(0,0,0), 1);
+            cvLine(imgBas, cvPoint(0,148), cvPoint(IMG_WIDTH, 148), cvScalar(0,0,0), 1);
+
             cvShowImage("CalibrationManuel",imgBas);
-            cvShowImage("HSV"              ,imgHsv);
+            //cvShowImage("HSV"              ,imgHsv);
             cvShowImage("VisionBinariser"  ,imgBin2);
 
         //*****
