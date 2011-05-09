@@ -34,8 +34,8 @@
 #define PWM_VALUE 	90 //90
 #define MARGE 		50 //Tolerance de maintient en position pour la pince
 #define SEUIL_LOAD	0x50
-#define PIN_MS_AV   30 //microswitch pour recalage
-#define PIN_MS_AR	37
+#define PIN_MS_RECAL_AV		30 //microswitch pour recalage
+#define PIN_MS_RECAL_AR		37
 
 extern Ax12Class Ax12;
 extern int msg_position_AV,msg_position_AR;

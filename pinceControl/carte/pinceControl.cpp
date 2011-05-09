@@ -14,17 +14,17 @@ void initPinceControl(){
 }
 
 int pinceRecal(unsigned char face){
-	pinMode(PIN_MS_AV, OUTPUT);
-	digitalWrite(PIN_MS_AV, LOW);
-	pinMode(PIN_MS_AR, OUTPUT);
-	digitalWrite(PIN_MS_AR, LOW);
-	pinMode(PIN_MS_AV,INPUT);
-	pinMode(PIN_MS_AR,INPUT);
+	pinMode(PIN_MS_RECAL_AV, OUTPUT);
+	digitalWrite(PIN_MS_RECAL_AV, LOW);
+	pinMode(PIN_MS_RECAL_AR, OUTPUT);
+	digitalWrite(PIN_MS_RECAL_AR, LOW);
+	pinMode(PIN_MS_RECAL_AV,INPUT);
+	pinMode(PIN_MS_RECAL_AR,INPUT);
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	if(face==PINCEAV){
 		setAVPWM(-PWM_VALUE);
-		while(digitalRead(PIN_MS_AV)!=HIGH){
+		while(digitalRead(PIN_MS_RECAL_AV)!=HIGH){
 			delay(40);
 		}
 		setAVPWM(0x00);
@@ -33,7 +33,7 @@ int pinceRecal(unsigned char face){
 	}
 	if(face==PINCEAR){
 		setARPWM(-PWM_VALUE);
-		while(digitalRead(PIN_MS_AR)!=HIGH){
+		while(digitalRead(PIN_MS_RECAL_AR)!=HIGH){
 			delay(40);
 		}
 		setARPWM(0x00);
@@ -42,6 +42,7 @@ int pinceRecal(unsigned char face){
 	}
 	return -42;
 }
+
 
 int setPincePWM(unsigned char face,int pwm,int tempo){
 	if(pwm > 255 || pwm < -255) return 0;

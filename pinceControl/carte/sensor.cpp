@@ -270,7 +270,7 @@ void sensorTrigger(){
 }
 
 
-int getCouleur()
+int getColor()
 {
 	int c = digitalRead(PIN_COLOR);
 	if (c == LOW)
