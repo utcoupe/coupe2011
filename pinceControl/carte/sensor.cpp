@@ -263,9 +263,9 @@ int getColor()
 {
 	int c = digitalRead(PIN_COLOR);
 	if (c == LOW)
-		return BLUE;
+		return BLEU;
 	else
-		return RED;
+		return ROUGE;
 }
 
 

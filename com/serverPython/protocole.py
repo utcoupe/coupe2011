@@ -17,12 +17,13 @@ Q_AUTO_CALIB		=	7
 Q_MANUAL_CALIB		=	8
 
 # others
-Q_WARNING			= 3
 Q_PINCE				= 35
 Q_SETPOSITION		= 36
+Q_JACK				= 38
 Q_PION				= 40
 Q_GETPOSITION		= 45
 Q_PRECAL			= 46
+Q_COLOR				= 50
 
 #cam
 Q_SCAN_AV		= 62

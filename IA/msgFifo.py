@@ -30,6 +30,9 @@ class MsgFifo:
 			self._queue.put(m)
 	
 	def getMsg(self, time=None):
+		"""
+		@return (Message)
+		"""
 		try:
 			r = self._queue.get(True, time)
 		except Empty:

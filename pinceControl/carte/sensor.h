@@ -22,8 +22,7 @@
 
 // pin couleur
 #define PIN_COLOR	51
-#define BLUE		0
-#define RED			1
+
 //define sharp
 #define FACEAV 		0
 #define FACEAR 		1
