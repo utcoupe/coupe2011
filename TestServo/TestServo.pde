@@ -32,4 +32,5 @@ void loop()
 	delay(1000);
 	myservo.write(70);
 	myservo2.write(120);
+	delay(1000);
 }
