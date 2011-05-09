@@ -14,7 +14,6 @@ class RobotClient(threading.Thread):
 		
 		self._listFifo = list()
 		self.robot = robot
-		self._lock_write = threading.Lock()
 		self._lock_fifo = threading.Lock()
 		
 		self._partialMsg = ""
@@ -99,11 +98,7 @@ class RobotClient(threading.Thread):
 
 	def write(self, msg):
 		""" pour écrire sans se marcher sur les doigts """
-		self._lock_write.acquire()
-		try:
-			print str(msg).strip()
-		finally:
-			self._lock_write.release()
+		self.robot.write(msg)
 	
 	def addFifo(self, msgFifo):
 		self._listFifo.append(msgFifo)

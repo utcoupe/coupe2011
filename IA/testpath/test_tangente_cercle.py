@@ -37,7 +37,7 @@ def motion(event):
 	C2 = Circle(Vec2(event.x,event.y),50)
 	other_pion = C2.tracer(canevas)
 	T = C2.tangente(circle,type)
-	line = T.tracer(canevas,"black")
+	line = T.tracer(canevas,fill="black")
 
 canevas.bind('<ButtonPress-1>', clic)
 canevas.bind('<Motion>', motion)

@@ -36,13 +36,13 @@ def clic_B(event):
 	l = Line(A,B)
 	if l & circle and circle & l:
 		print "intersection"
-		line = l.tracer(canevas,"red")
+		line = l.tracer(canevas,fill="red")
 	elif l & circle or circle & l:
 		print "probleme"
-		line = l.tracer(canevas,"blue")
+		line = l.tracer(canevas,fill="blue")
 	else:
 		print "pas intersection"
-		line = l.tracer(canevas,"green")
+		line = l.tracer(canevas,fill="green")
 	A=None
 	
 def motion(event):
@@ -53,13 +53,13 @@ def motion(event):
 		l = Line(A,B)
 		if l & circle and circle & l:
 			print "intersection"
-			line = l.tracer(canevas,"red")
+			line = l.tracer(canevas,fill="red")
 		elif l & circle or circle & l:
 			print "probleme"
-			line = l.tracer(canevas,"blue")
+			line = l.tracer(canevas,fill="blue")
 		else:
 			print "pas intersection"
-			line = l.tracer(canevas,"green")
+			line = l.tracer(canevas,fill="green")
 		
 
 canevas.bind('<ButtonPress-1>', clic_A)

@@ -35,6 +35,8 @@ class Robot:
 		il active alors deux events : celui self.events[id_device][id_cmd] et celui
 		self.msg_events[id_msg]
 		"""
+		self._lock_write = threading.Lock()
+		
 		self.pinces = (Pince(), Pince())
 		self.client = RobotClient(self)
 		
@@ -105,13 +107,48 @@ class Robot:
 		
 	
 	def write(self, msg):
-		self.client.write(msg)
+		""" pour écrire sans se marcher sur les doigts """
+		self._lock_write.acquire()
+		try:
+			print str(msg).strip()
+		finally:
+			self._lock_write.release()
 	
 	def start(self):
 		""" démarage du robot """
 		self.client.start()
+		self.color = BLUE
 
-		self.write("* LE ROBOT DÉMARRE *")
+		self.write("* CALIBRATION MANUELLE *")
+		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
+		self.write("")
+		#self.calibCam()
+		#self.testCam(False)
+		
+		while 1:
+			self.debug.log(D_UPDATE_POS,self.pos)
+			self.write("* SCAN *")
+			pions = self.scan()
+			self.write("")
+			
+			self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
+
+			if pions:
+				target,path = self.treatScan(pions)
+				
+				self.write("cible : %s"%target)
+				self.write("path : %s"%path)
+
+				if target:
+					self.write("* MOVE *")
+					self.do_path(zip(path[::2],path[1::2]))
+					self.write("")
+
+			self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 45, VITESSE - 30)
+
+
+			
+		"""self.write("* LE ROBOT DÉMARRE *")
 		self.write("")
 		self.write("* RECALAGE DES PINCES *")
 		self.addBlockingCmd(1, 10, ID_OTHERS, Q_PRECAL)
@@ -122,7 +159,7 @@ class Robot:
 		time.sleep(1)
 		self.write("* UPDATE POS *")
 		self.update_pos()
-		self.write("")
+		self.write("")"""
 		
 		"""
 		# les pinces en haut
@@ -144,7 +181,7 @@ class Robot:
 		
 		"""
 		
-		time.sleep(0.5)
+		"""time.sleep(0.5)
 		delay = 0.5
 		while True:
 			self.update_pos()
@@ -176,7 +213,7 @@ class Robot:
 			ellapse = time.time() - start
 			self.write("time : %s"%ellapse)
 			if delay - ellapse > 0:
-				time.sleep(delay)
+				time.sleep(delay)"""
 			
 	
 	def stop(self, msg=None):
@@ -203,7 +240,65 @@ class Robot:
 	
 	def isFull(self):
 		return (self.pinces[0].isFull() and self.pinces[1].isFull())
+
+	def testCam(self, fast=True):
+		""" boucle sur un scan """
+		delay = 0.0
+		while True:
+			start = time.time()
+			# scan
+			self.write("* SCAN *")
+			pions = self.scan(fast)
+			self.write("")
+			
+			if pions:
+				target,path = self.treatScan(pions)
+				
+				self.write("cible : %s"%target)
+				self.write("path : %s"%path)
+
+			ellapse = time.time() - start
+			self.write("time : %s"%ellapse)
+			if delay - ellapse > 0:
+				time.sleep(delay)
 	
+	def calibCam(self):
+		while 1:
+			self.pos = (1150,700,0)
+			self.debug.log(D_UPDATE_POS, self.pos)
+			# pour écouter la réponse de la cam
+			fifo = self.client.addFifo( MsgFifo(64, 65) )
+			
+			# première tentative
+			self.addCmd(ID_CAM, 64)
+			l = eval(str(fifo.getMsg().content))
+
+			# arreter d'écouter
+			self.client.removeFifo(fifo)
+			
+			# transformation en objet
+			l = map(lambda p: Pion(p[1], p[2], p[0]), l)
+
+			if l:
+				x = l[0].pos.x
+				y = l[0].pos.y
+				
+				Cx,Cy = 1850 - x - self.pos[0], y
+				print "calib",Cx,Cy
+				l = self._changeRepere(Cx,Cy,l)
+				self.write("Résultat change repere scan : %s"%l)
+				l = self._filtreInMap(l)
+				self.write("Résultat filtre map scan : %s"%l)
+				# recalculer les couleurs et la case
+				for p in l:
+					p.calculColor()
+					p.calculCase()
+				self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
+
+		
+		
+		
+		
 	def update_pos(self):
 		"""
 		(bloquant)
@@ -213,7 +308,7 @@ class Robot:
 		self.addCmd(ID_ASSERV, Q_POSITION)
 		m = fifo.getMsg()
 		self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
-		self.write(self.pos)
+		self.write("NEW POS : "+str(self.pos))
 		self.client.removeFifo(fifo)
 		self.debug.log(D_UPDATE_POS, self.pos)
 		
@@ -228,6 +323,7 @@ class Robot:
 		
 		@param path la liste des commandes à envoyer à l'asserv sous la forme (cmd, args)
 		"""
+		self.update_pos()
 		
 		goals = []
 		if len(path) == 1 and type(path) == type([]) or type(path) == type(()):
@@ -245,12 +341,13 @@ class Robot:
 			self.write("Tous les accusés de receptions reçus")
 		
 		for i in xrange(len(path)):
+			self.update_pos()
 			fifo.getMsg()
 			
 		self.client.removeFifo(fifo)
 		
 		
-	def scan(self):
+	def scan(self, fast=False):
 		"""
 		(blockant)
 		@todo gestion si la réponse n'arrive pas assez vite
@@ -261,15 +358,21 @@ class Robot:
 		l = []
 
 		# pour écouter la réponse de la cam
-		fifo = self.client.addFifo( MsgFifo(Q_SCAN_AV, Q_SCAN_AR) )
+		fifo = self.client.addFifo( MsgFifo(Q_SCAN_AV, Q_SCAN_AR, 64, 65) )
 		
 		# première tentative
-		self.addCmd(ID_CAM, Q_SCAN_AV)
+		if not fast:
+			self.addCmd(ID_CAM, Q_SCAN_AV)
+		else:
+			self.addCmd(ID_CAM, 64)
 		l = eval(str(fifo.getMsg().content))
 			
 		# deuxième tentative
 		if not l:
-			self.addCmd(ID_CAM, Q_SCAN_AV)
+			if not fast:
+				self.addCmd(ID_CAM, Q_SCAN_AV)
+			else:
+				self.addCmd(ID_CAM, 64)
 			l = eval(str(fifo.getMsg().content))
 		
 		self.write("Résultat brut scan : %s"%l)
@@ -283,12 +386,16 @@ class Robot:
 		# récupération de la position
 		self.update_pos()
 		# transformation des valeurs
-		Cx = 120
-		Cy = -125
+		Cx = -16 #120
+		Cy = 4 #-125
 		l = self._changeRepere(Cx,Cy,l)
 		self.write("Résultat change repere scan : %s"%l)
 		l = self._filtreInMap(l)
 		self.write("Résultat filtre map scan : %s"%l)
+		# recalculer les couleurs et la case
+		for p in l:
+			p.calculColor()
+			p.calculCase()
 		
 		self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
@@ -300,6 +407,8 @@ class Robot:
 
 		@param Cx, Cy décalage de la caméra dans le repère robot
 		@param l liste<Pion> liste des pions trouvés par la caméra
+
+		@return (liste<Pion>) liste des pions dans le nouveau repère
 		"""
 		cosa = math.cos(math.radians(float(self.pos[2])))
 		sina = math.sin(math.radians(float(self.pos[2])))
@@ -314,8 +423,12 @@ class Robot:
 		Filtre les pions hors carte
 
 		@param l liste<Pion>
+
+		@return (liste<Pion>) liste filtrée
 		"""
 		return filter(lambda p: (0 < p.pos.x < 3000) and (0 < p.pos.y < 2100), l)
+
+
 
 	def treatScan(self,pions):
 		"""
@@ -331,37 +444,84 @@ class Robot:
 		# retourne la cible choisie et le path
 		# self.client.send("asserv", Q_GOAL_ABS, <devant le pion>)
 		# self.client.Send("asserv", Q_ANGLE_ABS, <faceau pion>)
-		if pions:
-			def cmp(p1,p2):
-				x1,y1 = p1.pos.x,p1.pos.y
-				x2,y2 = p2.pos.x,p2.pos.y
-				
-				v1 = abs(x1-self.pos[0])**2+abs(y1-self.pos[1])**2
-				v2 = abs(x2-self.pos[0])**2+abs(y2-self.pos[1])**2
-				
-				return v1 - v2
-				
-			pions.sort(cmp=lambda p1,p2: cmp(p1,p2))
+		self.debug.log(D_DELETE_PATH)
+		if not pions:
+			return None, None
 			
-			target = pions[0]
+		def plusProche(p1,p2):
+			x1,y1 = p1.pos.x,p1.pos.y
+			x2,y2 = p2.pos.x,p2.pos.y
 			
-			circles = []
-			for p in pions:
-				circles.append(Vec2(p.pos.x,p.pos.y))
+			v1 = abs(x1-self.pos[0])**2+abs(y1-self.pos[1])**2
+			v2 = abs(x2-self.pos[0])**2+abs(y2-self.pos[1])**2
 			
-			path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.pos.x,target.pos.y), circles)
+			return v1 - v2
 
-			# décalage du point d'arrivée (à 120mm du pion)
-			Ax,Ay, Bx,By = path[-4], path[-3], path[-2], path[-1]
-			dAB = int(math.sqrt((Bx-Ax)**2 + (By-Ay)**2))
-			path[-2] -= 120 * (Bx-Ax) / dAB
-			path[-1] -= 120 * (By-Ay) / dAB
-			
-			self.debug.log(D_SHOW_PATH,path)
-			
-			return target, path
-		else:
-			return None,None
+		# tri pour avoir les pions par proximité
+		pions.sort(cmp=lambda p1,p2: plusProche(p1,p2))
+
+		# on prend le pion le plus proche pas de notre couleur
+		for p in pions:
+			if p.color != self.color and p.color != UNKNOWN:
+				target = p
+				# on va essayer de pousser cette cible par selon l'axe 0x
+				case = Vec(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x-350, target.case.y)
+				print "case",case
+				# position devant le pion
+				pos_pousse = self._position_pousse(target,case)
+				# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
+				case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
+				if case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
+					break
+				else: # tentative selon l'axe Oy
+					case = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
+					# position de pousse
+					pos_pousse = self._position_pousse(target,case)
+					# vérif pour nos pions
+					case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
+					if case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
+						break
+		else: # aucune cible ne convient
+			return None, None
+
+		# on va maintenant chercher le path
+		# comme obstacles on ne prend que nos pions
+		circles = filter(lambda p: p.color == self.color, pions)
+		# on remplace ces Pion par des cercles pour la fonction find_path
+		circles = map(lambda p: Circle(p.pos, 200), circles)
+		self.write(circles)
+		# appelle de la fonction
+		#path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.pos.x,target.pos.y), circles)
+		path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+
+		case = Line(case, target.pos).pointFrom(case,160)
+		path += [target.pos.x,target.pos.y, case.x, case.y, target.pos.x,target.pos.y]
+
+		
+		"""# décalage du point d'arrivée (à 120mm du pion)
+		Ax,Ay, Bx,By = path[-4], path[-3], path[-2], path[-1]
+		dAB = math.sqrt((Bx-Ax)**2 + (By-Ay)**2)
+		path[-2] -= int(120 * (Bx-Ax) / dAB)
+		path[-1] -= int(120 * (By-Ay) / dAB)"""
+		
+		self.debug.log(D_SHOW_PATH,path)
+		
+		return target, path
+
+
+	def _position_pousse(self, target, case):
+		"""
+		Renvoie la position qui permettra de pousser la target sur la case en avançant droit
+
+		@param target (Pion)
+		@param case (Vec)
+
+		@return (Vec) la position de pousse
+		"""
+		l = Line(case, target.pos)
+		return l.pointFrom(target.pos,200)
+	
+		
 		
 	def dumpObj(self, id_pince):
 		"""
@@ -371,6 +531,7 @@ class Robot:
 		r = self.addBlockingCmd(1, 1, ID_OTHERS, Q_PINCE, id_pince, PINCE_OUVERT)
 		if not r: # timeout
 			self.write("Robot->dumpObj : timeout ouvrir les pinces")
+
 	
 	def takeObj(self, target):
 		"""

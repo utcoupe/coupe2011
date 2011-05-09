@@ -21,12 +21,35 @@ PION_2_T		= 4 # pion double + tour
 TOUR			= 5 # tour simple
 
 class Pion:
-	def __init__(self, x ,y, t):
+	def __init__(self, x ,y, t=PION_1):
 		self.pos = Vec(x,y)
 		self.type = t # flag
 		self.time = time.time()
+
+		self.calculColor()
+		self.calculCase()
+
+	def __iter__(self):
+		return iter((self.pos.x,self.pos.y,self.type, self.color))
+		
+	def age(self):
+		""" depuis combien de temps avons nous vu ce pion ? """
+		return time.time() - self.time
+	
+	def update(self, pos=None):
+		"""
+		le time updaté, et eventuellement la pos aussi
+		
+		@param pos la nouvelle position, None pour garder l'ancienne
+		"""
+		if pos:
+			self.pos = pos
+		self.time = time.time()
+
+	def calculColor(self):
+		x,y = self.pos.x, self.pos.y
 		if (450 <= x <= 2550) and (0 <= y <= 2100):
-			if ((450+x)%700) < 350:
+			if ((x-450)%700) < 350:
 				if (y%700) < 350:
 					self.color = RED
 				else:
@@ -43,23 +66,12 @@ class Pion:
 		else:
 			self.color = UNKNOWN
 
-	def __iter__(self):
-		return iter((self.pos.x,self.pos.y,self.type))
+	def calculCase(self):
+		x,y = self.pos.x, self.pos.y
+		# la position du centre de la case sur laquelle est le pion
+		self.case = Vec((x-450)/350*350+175+450, y/350*350+175)
 		
-	def age(self):
-		""" depuis combien de temps avons nous vu ce pion ? """
-		return time.time() - self.time
-	
-	def update(self, pos=None):
-		"""
-		le time updaté, et eventuellement la pos aussi
 		
-		@param pos la nouvelle position, None pour garder l'ancienne
-		"""
-		if pos:
-			self.pos = pos
-		self.time = time.time()
-
 	def __repr__(self):
 		return "Pion(%s, type=%s)"%(self.pos,self.type)
 

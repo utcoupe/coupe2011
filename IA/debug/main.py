@@ -8,11 +8,11 @@ import sys
 import traceback
 
 
-D_UPDATE_POS	=	   0
-D_PIONS		 =	   1
-D_SHOW_PATH		 =	   2
-D_DELETE_PATH   =	   3
-D_STATUS_PINCE = 4
+D_UPDATE_POS	=	0
+D_PIONS			=	1
+D_SHOW_PATH		=	2
+D_DELETE_PATH   =	3
+D_STATUS_PINCE	=	4
 
 if __name__ == "__main__":
 	import Tkinter as Tk
@@ -138,17 +138,17 @@ if __name__ == "__main__":
 					self.canevas.delete(p)
 			self.pions = []
 			if pions:
-				if type(pions[0]) == type((1,1)) or type(pions[0]) == type([1,1]):
+				if isinstance(pions[0],tuple) or isinstance(pions[0],list):
 					for p in pions:
-						x,y,t = p
+						x,y,t,c = p
 						x = self.X(x)
 						y = self.Y(y)
-						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="yellow"))
+						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="#FFAA00" if c else "#BBFF00"))
 				else:
 					t,x,y = pions
 					x = self.X(x)
 					y = self.Y(y)
-					self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="yellow"))
+					self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="#FFAA00" if c else "#BBFF00"))
 
 		def show_path(self, path):
 			self.delete_path()

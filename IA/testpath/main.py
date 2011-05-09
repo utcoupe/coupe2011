@@ -11,7 +11,6 @@ from geometry.circle import *
 from geometry.line import *
 from pathfinding import *
 
-
 #pions = [(250,250), (400,400), (100,100)]
 
 
@@ -24,6 +23,8 @@ fenetre.title('dessin')
 canevas=Canvas(fenetre)
 canevas.configure(width=500,height=500,bg='white')
 canevas.pack()
+#envoie du canevas à pathfinding pour le debug
+setCanevas(canevas)
 
 DEPART = None
 ARRIVE = None
@@ -34,6 +35,7 @@ right_press = False
 pion = None
 pions = [Vec2(250,250)]
 def clic_A(event):
+	""" press clic gauche """
 	global DEPART, line, left_press
 	left_press = True
 	DEPART = Vec2(event.x, event.y)
@@ -41,6 +43,7 @@ def clic_A(event):
 	line = canevas.create_line(DEPART.x,DEPART.y,DEPART.x,DEPART.y,fill="red")
 	
 def clic_B(event):
+	""" release clic gauche """
 	global DEPART, B, line, lines, left_press
 	left_press = False
 	if line: canevas.delete(line)
@@ -50,17 +53,19 @@ def clic_B(event):
 	#print DEPART,ARRIVE
 	
 	t = time.time()
-	path = find_path(DEPART,ARRIVE,pions)
+	path = find_path(DEPART,ARRIVE,map(lambda p: Circle(p, 50), pions))
 	print (time.time() - t)*100,"ms"
 	lines = canevas.create_line(path,fill="green",width=1)
 	DEPART = None
 	B = None
 
 def press_right(event):
+	""" press clic droit """
 	global right_press
 	right_press = True
 
 def addPion(event):
+	""" release clic droit """
 	global right_press, pions
 	right_press = False
 	canevas.create_oval(event.x-50, event.y-50,event.x+50, event.y+50, fill="yellow")
@@ -78,7 +83,7 @@ def motion(event):
 			if IN_MOTION:
 				ARRIVE = Vec2(event.x, event.y)
 				t = time.time()
-				path = find_path(DEPART,ARRIVE,pions)
+				path = find_path(DEPART,ARRIVE,map(lambda p: Circle(p, 50), pions))
 				print (time.time() - t)*100,"ms"
 				lines = canevas.create_line(path,fill="green",width=1)
 	elif right_press:

@@ -12,7 +12,10 @@ class Line:
 	def __init__(self,A,B):
 		A = copy.deepcopy(A)
 		B = copy.deepcopy(B)
-		if A.x > B.x: A,B = B,A
+		self.invers = 1 # pour la fonction pointFrom(..)
+		if A.x > B.x:
+			A,B = B,A
+			self.invers = -1
 		self.A = A
 		self.B = B
 		self.AB = Vec2(B.x-A.x,B.y-A.y)
@@ -45,7 +48,7 @@ class Line:
 		self.__init__(A, B)
 		
 	def lenght(self):
-		""" return lenght AB """
+		""" return (float) distance AB """
 		return sqrt(self.AB.x**2+self.AB.y**2)
 	
 	def cosT(self):
@@ -63,6 +66,7 @@ class Line:
 		self.AB = Vec2(self.B.x-self.A.x,self.B.y-self.A.y)
 		
 	def __len__(self):
+		""" @return (int) distance AB² """
 		return int(self.AB.x)**2+int(self.AB.y)**2
 		
 	def __and__(self, other):
@@ -85,6 +89,20 @@ class Line:
 	
 	def __repr__(self):
 		return "Line"+str((self.A,self.B,self.AB))
+
+	def pointFrom(self, M, d):
+		"""
+		Calcul la position du point de la droite situé à une distance d de M
+		@param M (Vec) point de depart sur la droite
+		@param d (int) distance
+
+		@return (Vec) le point
+		"""
+		dAB = self.lenght()
+		x = self.invers * int(d * (self.B.x-self.A.x) / dAB)
+		y = self.invers * int(d * (self.B.y-self.A.y) / dAB)
+		return M + (x,y)
+		
 
 class Tangente(Line):
 	def __init__(self, A, C, type):

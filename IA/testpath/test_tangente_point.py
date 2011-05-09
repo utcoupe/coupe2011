@@ -34,7 +34,7 @@ def motion(event):
 	if line: canevas.delete(line)
 	T = Vec2(event.x,event.y).tangente(circle,type)
 	#T = circle.tangente(Vec2(event.x,event.y),type)
-	line = T.tracer(canevas,"black")
+	line = T.tracer(canevas,fill="black")
 
 canevas.bind('<ButtonPress-1>', clic)
 canevas.bind('<Motion>', motion)

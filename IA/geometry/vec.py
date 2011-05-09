@@ -9,11 +9,24 @@ class Vec:
 		return "Vec"+str(tuple(self.coords))
 
 	def __add__(self,other):
-		return Vec(map(lambda a: a[0]+a[1], zip(self.coords,other.coords)))
+		if isinstance(other, Vec):
+			return Vec(*map(lambda a: a[0]+a[1], zip(self.coords,other.coords)))
+		else:
+			return Vec(*map(lambda a: a[0]+a[1], zip(self.coords,other)))
 
 	def __iadd__(self,other):
-		self.coords = map(lambda a: a[0]+a[1], zip(self.coords,other.coords))
+		if isinstance(other, Vec):
+			self.coords = map(lambda a: a[0]+a[1], zip(self.coords,other.coords))
+		else:
+			self.coords = map(lambda a: a[0]+a[1], zip(self.coords,other))
 
+	def __eq__(self, other):
+		if len(self.coords) != len(other.coords):
+			return False
+		for c1,c2 in zip(self.coords,other.coords):
+			if c1 != c2: return False
+		return True
+		
 	def __getattr__(self,name):
 		if name == "x":
 			return self.coords[0]

@@ -10,16 +10,29 @@ from geometry.rectangle import *
 
 IN_MOTION = True # tracer le chemin meme pendant le mouvement de la souris
 
-
+canevas=None
+def setCanevas(c):
+	""" sert à passer n canevas pour que le debug puisse tracer des lignes """
+	global canevas
+	canevas = c
 
 
 
 maxi = 0
 def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
-	global maxi
-	R = 50
+	"""
+	Fonction réccursive pour trouver le plus petit chemin entre 2 points ne passant pas par un obstacle
+
+	@param A,B (Vec2) départ/arrivée
+	@param pions (list<Circle>) les obstacles
+	@param done (list<Circle>) les obstacles déja évité dans le chemin courant
+	@param D (Ligne) la droite A,B
+	@param type (-1/1) dessous/dessus
+	@param intersect je sais plus
+	"""
+	global maxi,canevas
 	if D==None:
-		print "D(%s) A(%s) B(%s)"%(D,A,B)
+		#print "D(%s) A(%s) B(%s)"%(D,A,B)
 		D = Line(A,B)
 	#print "rec_find_path(%s) on %s"%(maxi,D)
 	if not IN_MOTION:
@@ -32,11 +45,10 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 		maxi = 0
 		return D.lenght(), [D]
 	maxi += 1
-	rect = Rectangle(Vec2(0,0),Vec2(500,500))
-	for p in pions:
-		if p not in done:
-			#print p
-			circle = Circle(p, R)
+	rect = Rectangle(Vec2(0,0),Vec2(3000,2100))
+	for circle in pions:
+		if circle not in done:
+			#print circle
 			if D & circle:
 				if type==-1 or type==None:
 					# par dessous
@@ -44,8 +56,8 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 					T2 = circle.tangente(B, -1)
 					I = T1 & T2
 					if I and I in rect:
-						d1, path1 = rec_find_path(A,circle,pions,done+[p],T1,-1,I)
-						d2, path2 = rec_find_path(circle,B,pions,done+[p],T2,-1,I)
+						d1, path1 = rec_find_path(A,circle,pions,done+[circle],T1,-1,I)
+						d2, path2 = rec_find_path(circle,B,pions,done+[circle],T2,-1,I)
 						D1,P1 = d1+d2, path1+path2
 					else:
 						D1,P1 =  999999999,[]
@@ -58,24 +70,25 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 					T2 = circle.tangente(B, 1)
 					I = T1 & T2
 					if I and I in rect:
-						d1, path1 = rec_find_path(A,circle,pions,done+[p],T1,1,I)
-						d2, path2 = rec_find_path(circle,B,pions,done+[p],T2,1,I)
+						d1, path1 = rec_find_path(A,circle,pions,done+[circle],T1,1,I)
+						d2, path2 = rec_find_path(circle,B,pions,done+[circle],T2,1,I)
 						D2,P2 = d1+d2, path1+path2
 					else:
 						D2,P2 =  999999999,[]
 				else:
 					D2,P2 =  999999999,[]
-				
+
 				if not IN_MOTION: canevas.delete(l)
-				if D2 < D1:
-					print D2,P2
-					return D2,P2
-				elif D1 < D2:
-					print D1,P1
-					return D1,P1
+				if D1 != 999999999 and D2 != 999999999:
+					if D2 < D1:
+						#print D2,P2
+						return D2,P2
+					else:
+						#print D1,P1
+						return D1,P1
 				else:
-					print "Point mort %s,%s"%(str(A),str(B))
-					print 999999999
+					#print "Point mort %s,%s"%(str(A),str(B))
+					#print 999999999
 					return 999999999,[]
 	else:
 		if not IN_MOTION: canevas.delete(l)
@@ -84,13 +97,20 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 				D = Line(A,intersect)
 			elif isinstance(B,Vec2):
 				D = Line(intersect,B)
-		print D.lenght(), [D]
+		#print D.lenght(), [D]
 		return D.lenght(), [D]
 			
 	
 def find_path(A,B, pions):
+	"""
+	Trouve le plus court chemin entre A et B en évitant les obstacles
+
+	@param A,B (Vec2) depart/arrivé
+	@param pions (liste<Circle>) les obstacles
+
+	@return liste<int> le chemin sous forme [Ax,Ay, x1,y1, x2,y2, ... , Bx, By]
+	"""
 	global maxi
-	print "test",pions
 	maxi = 0
 	d, droites = rec_find_path(A, B, pions)
 	#print "droites :",droites

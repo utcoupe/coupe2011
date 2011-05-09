@@ -28,10 +28,12 @@ class Circle:
 		#print self,other
 		if isinstance(other,Circle):
 			return self.tangente_circle(other, type)
+		elif isinstance(other,Vec):
+			return self.tangente_point(other, type)
 		elif isinstance(other,Vec2):
 			return self.tangente_point(other, type)
 		else:
-			raise Exception("type non géré : %s"%A.__class__.__name__)
+			raise Exception("type non géré : %s"%other.__class__.__name__)
 		
 	def tangente_circle(self, other, type):
 		"""
@@ -86,7 +88,7 @@ class Circle:
 			#print "line & circle"
 			R = self.R
 			O = self.O
-			if other.m:
+			if other.m != None:
 				# OI.AB = 0
 				# => (Ix-Oy)*ABy+(Iy-Oy)*ABy = 0
 				# or I sur (AB) donc Iy = m*Ix+k

@@ -12,7 +12,7 @@ class Debug:
 	def __init__(self):
 		self.p = subprocess.Popen("debug/main.py", stdout=subprocess.PIPE, stdin=subprocess.PIPE)
 	
-	def log(self, id_cmd, args):
+	def log(self, id_cmd, args=None):
 		msg = str(id_cmd)+C_SEP_SEND+str(args)
 		print "debug log : '%s'"%msg
 		self.p.stdin.write(msg+"\n")
