@@ -22,23 +22,26 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_DEBUG				99
 
 // autre
+#define Q_IDENT 			0
+#define Q_PING 				1
 #define Q_SHARP 			31
-#define Q_TSHARP 			32 // TRIGGERSHARP
+//#define Q_TSHARP 			32 //TRIGGERSHARP //obselete
 #define Q_MS	 			33
-#define Q_TMS	 			34 // TRIGGERMS
+#define Q_TMS	 			34 //TRIGGERMS
 #define Q_PINCE 			35
-#define Q_PPOSITION 		36 // PINCE POSITION
-#define Q_LOAD 				37 // PRESENT_LOAD
+#define Q_PPOSITION 		36 //PINCE POSITION
+#define Q_LOAD 				37 //PRESENT_LOAD
 #define Q_JACK		 		38
 #define Q_LED		 		39
 #define Q_PION		 		40
-// autre debug
-#define Q_MOTOR		 		41
-#define Q_TXAX12	 		42 // write
-#define Q_RXAX12	 		43 // read
-#define Q_CODEUR	 		44 
 #define Q_RESET		 		45
 #define Q_RECALAGE	 		46
+#define Q_COLOR				50
+/*debug*/
+#define Q_MOTOR		 		41
+#define Q_TXAX12	 		42 //write
+#define Q_RXAX12	 		43 //read
+#define Q_CODEUR	 		44 
 
 // asserv
 #define Q_GOAL_ABS 			2
