@@ -128,6 +128,7 @@ De 31 à 60.
 	<li><a href="#tms">34 n s (tms)</a></li>
 	<li><a href="#pince">35 n p (pince)</a></li>
 	<li><a href="#setposition">36 n p (setposition)</a></li>
+	<li><a href="#led">39 c (setposition)</a></li>
 </ul>
 </p>
 
@@ -431,6 +432,23 @@ Lance le recalage automatique pour la couleur (c). A ne faire que sur l'une des 
 <p>
 	<b>Retour : </b><br />
 	'1' (recu) '-1' (erreur) --> '2'(atteint)
+</p>
+</div>
+
+
+<div>
+<h3 id="led">39 led [c] (OTHERS) (* trigger sur micro switch *)</h3>
+
+<p>
+	Monte/descend le pince (n) à la position (p)
+</p>
+<p>
+	<b>Params :</b><br />
+	c : [0,1] (bleu/rouge)<br />
+</p>
+<p>
+	<b>Retour : </b><br />
+	'1' (recu)
 </p>
 </div>
 

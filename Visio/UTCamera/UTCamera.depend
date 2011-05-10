@@ -1233,3 +1233,122 @@
 	"cam_utility.hpp"
 	"regionLister.hpp"
 
+1296222612 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/cam_utility.cpp
+	"cam_utility.hpp"
+
+1301753930 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/cam_utility.hpp
+	<iostream>
+	<stdlib.h>
+	<stdio.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	<sstream>
+
+1303769792 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/colorConvertion.cpp
+	"colorConvertion.hpp"
+
+1301759230 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/colorConvertion.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+
+1304970238 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/constantes.hpp
+
+1303948307 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/loadCamera.cpp
+	"loadCamera.hpp"
+
+1303948307 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/loadCamera.hpp
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<iostream>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+
+1301257870 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/regionLister.cpp
+	"regionLister.hpp"
+
+1303780054 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/regionLister.hpp
+	<iostream>
+	<cv.h>
+	"constantes.hpp"
+
+1303968197 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/UTCamera.cpp
+	"UTCamera.hpp"
+
+1303777694 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/UTCamera.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<list>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"regionLister.hpp"
+	"loadCamera.hpp"
+	"comManager.hpp"
+	"camCalibre.hpp"
+	"zonesAnalyser.hpp"
+
+1303836480 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/comManager.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"Fps.hpp"
+	"regionLister.hpp"
+	"colorConvertion.hpp"
+	"zonesAnalyser.hpp"
+
+1295368748 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/Fps.hpp
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+	<time.h>
+	<sys/time.h>
+	<windows.h>
+
+1303780026 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/zonesAnalyser.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"regionLister.hpp"
+
+1301756022 /home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/camCalibre.hpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	<pthread.h>
+	<cv.h>
+	<highgui.h>
+	"constantes.hpp"
+	"colorConvertion.hpp"
+	"Fps.hpp"
+
+1304979629 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/camCalibre.cpp
+	"camCalibre.hpp"
+	"zonesAnalyser.hpp"
+
+1304871173 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/comManger.cpp
+	"comManager.hpp"
+	<sstream>
+
+1304970238 source:/home/thomas/Programmation/utcoupe/2011/utcoupe-mega/Visio/UTCamera/zonesAnalyser.cpp
+	"zonesAnalyser.hpp"
+	"cam_utility.hpp"
+	"regionLister.hpp"
+	<math.h>
+

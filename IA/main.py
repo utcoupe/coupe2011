@@ -118,16 +118,15 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 
-		while 1:
-			start = time.time()
-			self.write("* RÉCUPÉRATION COULEUR *")
-			self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
-			if self.color == RED:
-				self.write("COULEUR ROUGE !")
-			else:
-				self.write("COULEUR BLEU !")
-			print time.time() - start
-			self.write("")
+		
+		self.write("* RÉCUPÉRATION COULEUR *")
+		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
+		if self.color == RED:
+			self.write("COULEUR ROUGE !")
+		else:
+			self.write("COULEUR BLEU !")
+		self.addBlockingCmd(1, 1, ID_OTHERS, Q_LED, self.color).content)
+		self.write("")
 		
 		self.write("* RECALAGE *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
@@ -139,6 +138,8 @@ class Robot:
 		#self.calibCam()
 		#self.testCam(False)
 
+		self.update_pos()
+		
 		self.write("* ATTENTE DU JACK *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
 		self.write("ON Y VAS !")

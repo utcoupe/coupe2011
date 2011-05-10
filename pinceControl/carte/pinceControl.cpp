@@ -1,4 +1,5 @@
 #include "pinceControl.h"
+#include "servoControl.h"
 
 Ax12Class Ax12;
 int msg_position_AV,msg_position_AR;
@@ -11,6 +12,7 @@ void initPinceControl(){
 	//initEncoders();
 	//pinceRecal(PINCEAV);
 	//pinceRecal(PINCEAR);
+	initServo();
 }
 
 int pinceRecal(unsigned char face){
@@ -78,6 +80,8 @@ int presentLoad(unsigned char idPince){
 }
 
 int setPinceState(unsigned char index,unsigned char etat){
+	return setServoState(index, etat);
+	
 	char droite,gauche;
 	if(PINCEAV==index){
 		droite=IDAVD;
