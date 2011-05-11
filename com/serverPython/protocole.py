@@ -6,6 +6,7 @@ C_SEP_SEND = '.'	# séparation entre les données de la commande à envoyer aux 
 
 Q_IDENT			=	0
 PING			=	1
+Q_KILL			=	-1
 
 # asserv
 Q_GOAL_ABS			=	2
@@ -15,6 +16,7 @@ Q_ANGLE_REL			=   5
 Q_POSITION			= 	6
 Q_AUTO_CALIB		=	7
 Q_MANUAL_CALIB		=	8
+Q_STOP				=	13
 
 # others
 Q_PINCE				= 35
@@ -43,3 +45,8 @@ ID_IA			= 4 # l'IA
 
 BLUE	= 0
 RED		= 1
+
+
+E_INVALID_CMD						= -1
+E_INVALID_PARAMETERS_NUMBERS		= -2
+W_STOP								= -42

@@ -34,7 +34,6 @@ for client in server.clients:
 # le serveur ne démarre qu'après avoir connecté les serials
 server.start()
 
-
 print 'fin thread principal'
 
 

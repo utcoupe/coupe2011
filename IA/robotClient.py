@@ -82,7 +82,10 @@ class RobotClient(threading.Thread):
 		id_from = int(msg_split[0]) # l'id du client qui a envoyé le message
 		if id_from != ID_SERVER: # si ce n'est pas le serveur
 			id_msg = int(msg_split[1])
-			id_cmd = self.robot.cmd[id_msg]
+			if id_msg >= 0: # les erreurs sont en negatif
+				id_cmd = self.robot.cmd[id_msg]
+			else:
+				id_cmd = id_msg
 			msg = msg_split[2].strip() if len(msg_split) > 2 else None
 
 			# remplissage des fifo qui attendent

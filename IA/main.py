@@ -11,6 +11,7 @@ from msgFifo import *
 from loopCmd import *
 import time
 import math
+import threading
 from debugClient import *
 from pathfinding import *
 from geometry.vec import *
@@ -25,6 +26,10 @@ VITESSE 	= 130
 RECAL_X		= 3
 RECAL_Y		= 4
 RECAL_A		= 5
+
+M_NORMAL	= 0
+M_WARNING	= 1
+M_ERREUR	= 2
 
 class Robot:
 	def __init__(self):
@@ -50,6 +55,8 @@ class Robot:
 		self.id_msg = 0
 		
 		self.debug = Debug()
+
+		self.color = BLUE
 	
 	def addCmd(self, id_device, id_cmd, *args):
 		"""
@@ -106,7 +113,7 @@ class Robot:
 		return reponse
 		
 	
-	def write(self, msg):
+	def write(self, msg, color=None):
 		""" pour écrire sans se marcher sur les doigts """
 		self._lock_write.acquire()
 		try:
@@ -119,33 +126,39 @@ class Robot:
 		self.client.start()
 
 		
+		#"""
+		self.write("* CALIBRATION MANUELLE *")
+		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
+		self.write("")
+		#self.calibCam()
+		#self.testCam()
+		#"""
+
+		"""
 		self.write("* RÉCUPÉRATION COULEUR *")
 		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
 		if self.color == RED:
 			self.write("COULEUR ROUGE !")
 		else:
 			self.write("COULEUR BLEU !")
-		self.addBlockingCmd(1, 1, ID_OTHERS, Q_LED, self.color).content)
+		self.addCmd(ID_OTHERS, Q_LED, self.color)
 		self.write("")
 		
 		self.write("* RECALAGE *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 		self.write("")
-		
-		#self.write("* CALIBRATION MANUELLE *")
-		#self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
-		#self.write("")
-		#self.calibCam()
-		#self.testCam(False)
 
 		self.update_pos()
-		
+
 		self.write("* ATTENTE DU JACK *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
 		self.write("ON Y VAS !")
 		self.write("")
+		threading.Timer(88, self.stop, "90s !")
+		#"""
 		
-		while 1:
+		while not self._e_stop.isSet():
+			self.update_pos()
 			self.debug.log(D_UPDATE_POS,self.pos)
 			self.write("* SCAN *")
 			pions = self.scan()
@@ -163,16 +176,20 @@ class Robot:
 					self.write("* MOVE *")
 					self.do_path(zip(path[::2],path[1::2]))
 					self.write("")
-
-			self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 45, VITESSE - 30)
+				else:
+					self.write("* TOURNE *")
+					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
+					self.write("")
 
 
 		
-			
-	
 	def stop(self, msg=None):
 		""" arret du robot """
 		if msg: self.write(msg)
+		self.addCmd(-1, Q_KILL)
+		self.addCmd(ID_ASSERV,Q_STOP)
+		self._e_stop.set()
+		self.client._treat("%s.%s.%s"%(ID_IA,W_STOP,Q_KILL))
 	
 	def reset(self):
 		""" reset du robot
@@ -197,7 +214,6 @@ class Robot:
 
 	def testCam(self, fast=True):
 		""" boucle sur un scan """
-		delay = 0.0
 		while True:
 			start = time.time()
 			# scan
@@ -213,12 +229,10 @@ class Robot:
 
 			ellapse = time.time() - start
 			self.write("time : %s"%ellapse)
-			if delay - ellapse > 0:
-				time.sleep(delay)
 	
 	def calibCam(self):
 		while 1:
-			self.pos = (1150,700,0)
+			self.pos = (1850,700,180)
 			self.debug.log(D_UPDATE_POS, self.pos)
 			# pour écouter la réponse de la cam
 			fifo = self.client.addFifo( MsgFifo(64, 65) )
@@ -237,7 +251,7 @@ class Robot:
 				x = l[0].pos.x
 				y = l[0].pos.y
 				
-				Cx,Cy = 1850 - x - self.pos[0], y
+				Cx,Cy = 1150 - x - self.pos[0], y
 				print "calib",Cx,Cy
 				l = self._changeRepere(Cx,Cy,l)
 				self.write("Résultat change repere scan : %s"%l)
@@ -249,9 +263,8 @@ class Robot:
 					p.calculCase()
 				self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
-		
-		
-		
+			if '1' == raw_input():
+				break
 		
 	def update_pos(self):
 		"""
@@ -275,30 +288,44 @@ class Robot:
 		ou si après avoir comparé la position actuelle du robot avec celle éstimée 
 		il y a une anomalie
 		
-		@param path la liste des commandes à envoyer à l'asserv sous la forme (cmd, args)
+		@param path<(x,y)> la liste des points
 		"""
-		self.update_pos()
-		
-		goals = []
-		if len(path) == 1 and type(path) == type([]) or type(path) == type(()):
-			path = path[0]
-		for p in path:
-			self.addCmd(ID_ASSERV, Q_GOAL_ABS, p[0],p[1],VITESSE)
-			goals.append(p)
-
-		fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS) )
-		for i in xrange(len(path)):
-			if not fifo.getMsg(0.5): # timeout de 1 seconde pour les accusés de receptions
-				self.write("ERROR : Robot.do_path : accusé de reception non reçu")
-				return
-		else: # si on arrive à la fin
-			self.write("Tous les accusés de receptions reçus")
-		
-		for i in xrange(len(path)):
+		if not self._e_stop.isSet():
 			self.update_pos()
-			fifo.getMsg()
 			
-		self.client.removeFifo(fifo)
+			goals = []
+			if len(path) == 1 and type(path) == type([]) or type(path) == type(()): # au cas où on a envoyé un tableau
+				path = path[0]
+			for p in path:
+				self.addCmd(ID_ASSERV, Q_GOAL_ABS, p[0],p[1],VITESSE)
+				goals.append(p)
+
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_KILL) )
+			nb_accuse_recep = 0
+			while nb_accuse_recep<len(path):
+				m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
+				if not m:
+					self.write("ERROR : Robot.do_path : accusé de reception non reçu")
+					return
+				if m.id_cmd == Q_GOAL_ABS:
+					nb_accuse_recep += 1
+				elif m.id_cmd == Q_KILL: # arret
+					self.write("WARINING : Robot.do_path : arret du robot")
+					return
+					
+			self.write("Tous les accusés de receptions reçus")
+
+			nb_point_reach = 0
+			while nb_point_reach<len(path):
+				m = fifo.getMsg()
+				if m:
+					if m.id_cmd == Q_GOAL_ABS:
+						nb_point_reach += 1
+				elif m.id_cmd == Q_KILL: # arret
+					self.write("WARINING : Robot.do_path : arret du robot")
+					return
+				
+			self.client.removeFifo(fifo)
 		
 		
 	def scan(self, fast=False):
@@ -340,16 +367,17 @@ class Robot:
 		# récupération de la position
 		self.update_pos()
 		# transformation des valeurs
-		Cx = 122
-		Cy = -107
+		Cx = 130
+		Cy = -150
 		l = self._changeRepere(Cx,Cy,l)
 		self.write("Résultat change repere scan : %s"%l)
-		l = self._filtreInMap(l)
-		self.write("Résultat filtre map scan : %s"%l)
 		# recalculer les couleurs et la case
 		for p in l:
 			p.calculColor()
 			p.calculCase()
+		l = self._filtreInMap(l)
+		self.write("Résultat filtre map scan : %s"%l)
+		
 		
 		self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
@@ -367,8 +395,8 @@ class Robot:
 		cosa = math.cos(math.radians(float(self.pos[2])))
 		sina = math.sin(math.radians(float(self.pos[2])))
 		def f(pion):
-			pion.pos.x = int(cosa * float(pion.pos.x) - sina * float(-pion.pos.y)) + self.pos[0] + Cx
-			pion.pos.y = int(sina * float(pion.pos.x) + cosa * float(-pion.pos.y)) + self.pos[1] + Cy
+			pion.pos.x = int(cosa * float(pion.pos.x + Cx) - sina * float(pion.pos.y + Cy)) + self.pos[0]
+			pion.pos.y = int(sina * float(pion.pos.x + Cx) + cosa * float(pion.pos.y + Cy)) + self.pos[1]
 			return pion
 		return map(lambda p: f(p), l)
 			
@@ -425,7 +453,7 @@ class Robot:
 				pos_pousse = self._position_pousse(target,case)
 				# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
 				case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
-				if case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
+				if self._pathValid(path) and case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
 					break
 				else: # tentative selon l'axe Oy
 					case = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
@@ -433,7 +461,7 @@ class Robot:
 					pos_pousse = self._position_pousse(target,case)
 					# vérif pour nos pions
 					case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
-					if case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
+					if self._pathValid(path) and case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
 						break
 		else: # aucune cible ne convient
 			return None, None
@@ -463,6 +491,16 @@ class Robot:
 		return target, path
 
 
+	def _pathValid(self, path):
+		for x in path[::2]:
+			if not (250 < x < 2750):
+				return False
+		for y in path[1::2]:
+			if not (250 < y < 1850):
+				return False
+		return True
+
+		
 	def _position_pousse(self, target, case):
 		"""
 		Renvoie la position qui permettra de pousser la target sur la case en avançant droit

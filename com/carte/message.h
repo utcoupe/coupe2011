@@ -20,6 +20,7 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_IDENT 			0
 #define Q_PING 				1
 #define Q_DEBUG				99
+#define Q_STOP 				13
 
 // autre
 #define Q_IDENT 			0
@@ -55,12 +56,12 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_PWM 				10
 #define Q_MODIF_GOAL_ABS 	11
 #define Q_MODIF_GOAL_REL 	12
-#define Q_STOP 				13
 #define Q_PAUSE				14
 #define Q_RESUME			15
 
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
+#define W_STOP								-42
 
 #endif /* MESSAGE_H_ */

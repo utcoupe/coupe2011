@@ -13,7 +13,7 @@
 //define jack et couleur
 #define PIN_JACK 	50
 #define LED_BLEU 	47
-#define LED_ROUGE 	48
+#define LED_ROUGE 	44
 #define BLEU 		0
 #define ROUGE 		1
 
