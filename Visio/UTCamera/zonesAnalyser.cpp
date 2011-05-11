@@ -184,8 +184,8 @@ void regionGrowing()
  * \param   ordonnée basse de la zone en pixel
  * \return  largeurThéorique          en pixel
  */
-#define COEF_A1 0.6273
-#define COEF_B1 90.36
+#define COEF_A1 ((double)0.247532467532467)
+#define COEF_B1 ((double)5.40519480519481)
 double getLargeurTheoriqueDuPiont(int yDuBasDuPiont)
 {
     return (COEF_A1*yDuBasDuPiont) + COEF_B1;
@@ -200,11 +200,13 @@ double getLargeurTheoriqueDuPiont(int yDuBasDuPiont)
  * \param  ordonnée basse de la zone en pixel
  * \return distance robot region     en mm
  */
-#define COEF_A2 -406
-#define COEF_B2 2709
-double getLengthRobotToRegion(int yDuBasDuPiont)
+#define CST1 (double)501390.14466286
+#define CST2 (double)-1.20931312452872
+double getLengthRobotToRegion(double yDuBasDuPiont)
 {
-    return (COEF_A2*log(yDuBasDuPiont)) + COEF_B2 + RAYON_PIONT;
+    double res;
+    res = CST1*pow(yDuBasDuPiont,CST2)+100;
+    return res;
 }
 
 
