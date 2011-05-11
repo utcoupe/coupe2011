@@ -123,7 +123,8 @@ void checkIndexValide(int *index1, int *index2, int *nb)
  */
 void loadUsbVision(int* usb1, char* serial1, int* usb2, char* serial2)
 {
-    system("./searchCameraOnUsb");
+    int e;
+    e = system("./searchCameraOnUsb");
     FILE* f;
     f = fopen("usbVision","r");
     if(!f){return;}

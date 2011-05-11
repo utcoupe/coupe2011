@@ -1423,7 +1423,7 @@
 	<highgui.h>
 	"constantes.hpp"
 
-1305132422 /home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/zonesAnalyser.hpp
+1305134316 /home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/zonesAnalyser.hpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
@@ -1444,7 +1444,7 @@
 	"colorConvertion.hpp"
 	"Fps.hpp"
 
-1305132422 source:/home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/camCalibre.cpp
+1305134316 source:/home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/camCalibre.cpp
 	"camCalibre.hpp"
 	"zonesAnalyser.hpp"
 
@@ -1460,10 +1460,10 @@
 	<highgui.h>
 	<sstream>
 
-1305132422 source:/home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/colorConvertion.cpp
+1305134482 source:/home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/colorConvertion.cpp
 	"colorConvertion.hpp"
 
-1305132422 source:/home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/comManger.cpp
+1305134613 source:/home/xavier/Bureau/git2/utcoupe-mega/Visio/UTCamera/comManger.cpp
 	"comManager.hpp"
 	<sstream>
 

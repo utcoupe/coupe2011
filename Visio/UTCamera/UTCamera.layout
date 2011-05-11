@@ -19,8 +19,8 @@
 	<File name="cam_utility.hpp" open="0" top="0" tabpos="8">
 		<Cursor position="0" topLine="7" />
 	</File>
-	<File name="colorConvertion.cpp" open="0" top="0" tabpos="9">
-		<Cursor position="2912" topLine="30" />
+	<File name="colorConvertion.cpp" open="1" top="0" tabpos="10">
+		<Cursor position="2469" topLine="94" />
 	</File>
 	<File name="colorConvertion.hpp" open="0" top="0" tabpos="7">
 		<Cursor position="709" topLine="23" />
@@ -29,13 +29,13 @@
 		<Cursor position="435" topLine="0" />
 	</File>
 	<File name="comManger.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="748" topLine="33" />
+		<Cursor position="8210" topLine="274" />
 	</File>
-	<File name="constantes.hpp" open="1" top="1" tabpos="7">
-		<Cursor position="1195" topLine="37" />
+	<File name="constantes.hpp" open="1" top="0" tabpos="7">
+		<Cursor position="1195" topLine="46" />
 	</File>
-	<File name="loadCamera.cpp" open="1" top="0" tabpos="9">
-		<Cursor position="278" topLine="71" />
+	<File name="loadCamera.cpp" open="1" top="1" tabpos="9">
+		<Cursor position="3702" topLine="116" />
 	</File>
 	<File name="loadCamera.hpp" open="0" top="0" tabpos="13">
 		<Cursor position="280" topLine="5" />
