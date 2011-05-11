@@ -31,13 +31,13 @@ regionLister* analyseListeRegion(regionLister* listeAanalyser, int width, int he
         reg->Type = TYPE_PIONT;
         reg->Yprime = getLengthRobotToRegion(reg->max[BAS].y);
 
-        double largeurTheorique = getLargeurTheoriqueDuPiont(reg->max[BAS].y + ((2/3)*(reg->max[BAS].y-reg->max[HAUT].y)) );
+        double largeurTheorique = getLargeurTheoriqueDuPiont(reg->max[BAS].y);
         double taillePix = 200.0f / largeurTheorique;
 
-       // reg->Xprime = (width/2) - (reg->max[GAUCHE].x + (largeurTheorique/2));
+        // reg->Xprime = (width/2) - (reg->max[GAUCHE].x + (largeurTheorique/2));
         reg->Xprime = (width/2) - (reg->max[GAUCHE].x + reg->max[DROITE].x)/2;
         reg->Xprime = reg->Xprime * taillePix ;
-       // reg->Xprime = (-1)*reg->Xprime;
+        // reg->Xprime = (-1)*reg->Xprime;
 
         liste->add(reg);
         // ------------
@@ -184,8 +184,8 @@ void regionGrowing()
  * \param   ordonnée basse de la zone en pixel
  * \return  largeurThéorique          en pixel
  */
-#define COEF_A1 ((double)0.247532467532467)
-#define COEF_B1 ((double)5.40519480519481)
+#define COEF_A1 ((double)0.495064935064935)
+#define COEF_B1 ((double)10.8103896103896)
 double getLargeurTheoriqueDuPiont(int yDuBasDuPiont)
 {
     return (COEF_A1*yDuBasDuPiont) + COEF_B1;

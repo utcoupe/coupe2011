@@ -19,7 +19,7 @@
 	<File name="cam_utility.hpp" open="0" top="0" tabpos="8">
 		<Cursor position="0" topLine="7" />
 	</File>
-	<File name="colorConvertion.cpp" open="1" top="0" tabpos="10">
+	<File name="colorConvertion.cpp" open="0" top="0" tabpos="10">
 		<Cursor position="2469" topLine="94" />
 	</File>
 	<File name="colorConvertion.hpp" open="0" top="0" tabpos="7">
@@ -34,7 +34,7 @@
 	<File name="constantes.hpp" open="1" top="0" tabpos="7">
 		<Cursor position="1195" topLine="46" />
 	</File>
-	<File name="loadCamera.cpp" open="1" top="1" tabpos="9">
+	<File name="loadCamera.cpp" open="0" top="0" tabpos="9">
 		<Cursor position="3702" topLine="116" />
 	</File>
 	<File name="loadCamera.hpp" open="0" top="0" tabpos="13">
@@ -46,8 +46,8 @@
 	<File name="regionLister.hpp" open="1" top="0" tabpos="5">
 		<Cursor position="1057" topLine="24" />
 	</File>
-	<File name="zonesAnalyser.cpp" open="1" top="0" tabpos="8">
-		<Cursor position="4237" topLine="194" />
+	<File name="zonesAnalyser.cpp" open="1" top="1" tabpos="8">
+		<Cursor position="1499" topLine="21" />
 	</File>
 	<File name="zonesAnalyser.hpp" open="1" top="0" tabpos="6">
 		<Cursor position="346" topLine="5" />
