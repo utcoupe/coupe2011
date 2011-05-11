@@ -4,7 +4,7 @@ void setup(){
 	initSerialLink();
 	initPinceControl();
 	//initTourelle();
-	initSensor();//en dernier a cause du jack
+	initSensor();
 }
 
 void loop(){

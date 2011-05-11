@@ -88,7 +88,7 @@ int setLED(unsigned char color){
 	//erreur donc on allume les 2
 	digitalWrite(LED_BLEU,HIGH);
 	digitalWrite(LED_ROUGE,HIGH);
-	return 0;
+	return -42;
 }
 
 int waitJack(){
