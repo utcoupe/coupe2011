@@ -42,7 +42,7 @@ void binarisation()
 void* binThread(void* pData)
 {
     // Récupération des données
-    int h,s,v,ymax,val;
+    int h,s,ymax,val;
     threaddata* data = (threaddata*)pData;
     ymax = data->firstRow + data->nbRowTotrait;
 
@@ -101,7 +101,7 @@ void binarisation2()
 void* binThread2(void* pData)
 {
     // Récupération des données
-    int h,s,v,ymax,val;
+    int h,s,ymax,val;
     threaddata* data = (threaddata*)pData;
     ymax = data->firstRow + data->nbRowTotrait;
 

@@ -43,7 +43,7 @@ void sendData(regionLister* liste)
             if(nb){
                 printf(",");
             }
-            printf("[1,%ld,%ld]",(int)liste->getEle()->Yprime,(-1)*(int)liste->getEle()->Xprime);
+            printf("[1,%d,%d]",(int)liste->getEle()->Yprime,(int)liste->getEle()->Xprime);
             nb++;
         }
         liste->ptrSuiv();
@@ -68,7 +68,7 @@ void moyenneArriere()
 void modeStationnaire()
 {
         // Declaration
-    Fps timeCounter;
+    //Fps timeCounter;
     int  on = 1;
     pthread_t grabF;
     pthread_t grabB;
@@ -276,6 +276,7 @@ void* grabCamF(void* data)
         pthread_mutex_unlock (& mu);
         cvWaitKey(10);
     }
+    return data;
 }
 
 /**
@@ -289,4 +290,5 @@ void* grabCamB(void* data)
         pthread_mutex_unlock (& mu);
         cvWaitKey(10);
     }
+    return data;
 }

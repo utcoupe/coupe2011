@@ -128,10 +128,11 @@ void loadUsbVision(int* usb1, char* serial1, int* usb2, char* serial2)
     f = fopen("usbVision","r");
     if(!f){return;}
 
-    fscanf(f,"%d", usb1);
-    fscanf(f,"%s", serial1);
-    fscanf(f,"%d", usb2);
-    fscanf(f,"%s", serial2);
+    int p;
+    p = fscanf(f,"%d", usb1);
+    p = fscanf(f,"%s", serial1);
+    p = fscanf(f,"%d", usb2);
+    p = fscanf(f,"%s", serial2);
 
     fclose(f);
 }
