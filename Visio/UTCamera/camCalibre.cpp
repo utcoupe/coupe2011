@@ -40,7 +40,6 @@ void calibrationManuel()
     if(captureCameraF!=NULL){tmpCapture=captureCameraF;}
     else                    {tmpCapture=captureCameraB;}
 
-    int r,g,b;
 
     while(1){
 
@@ -113,25 +112,41 @@ void loadConfig()
     if(fichierConfig==NULL){return;}
 
     //    --- VALEUR DE H ---
-    for(int i=0; i<NB_COLOR; i++){fscanf(fichierConfig,"%d   ",(_H+i));}
+    for(int i=0; i<NB_COLOR; i++)
+    {
+        if (!fscanf(fichierConfig,"%d   ",(_H+i)))
+            cout << "impossible d'écrire dans le fichier de conf" << endl;
+    }
     fprintf(fichierConfig,"\n");
 
     if(_H[JAUNE]==0){_H[JAUNE]=30;}
 
     //    --- TOLERANCE DE H ---
-    for(int i=0; i<NB_COLOR; i++){fscanf(fichierConfig,"%d   ",(_Htol+i));}
+    for(int i=0; i<NB_COLOR; i++)
+    {
+        if (!fscanf(fichierConfig,"%d   ",(_Htol+i)))
+            cout << "impossible d'écrire dans le fichier de conf" << endl;
+    }
     fprintf(fichierConfig,"\n");
 
     if(_Htol[JAUNE]==0){_Htol[JAUNE]=10;}
 
     //    --- VALEUR DE S ---
-    for(int i=0; i<NB_COLOR; i++){fscanf(fichierConfig,"%d   ",(_S+i));}
+    for(int i=0; i<NB_COLOR; i++)
+    {
+        if (!fscanf(fichierConfig,"%d   ",(_S+i)))
+            cout << "impossible d'écrire dans le fichier de conf" << endl;
+    }
     fprintf(fichierConfig,"\n");
 
     if(_S[JAUNE]==0){_S[JAUNE]=10;}
 
     //    --- TOLERANCE DE S ---
-    for(int i=0; i<NB_COLOR; i++){fscanf(fichierConfig,"%d   ",(_Stol+i));}
+    for(int i=0; i<NB_COLOR; i++)
+    {
+        if (!fscanf(fichierConfig,"%d   ",(_Stol+i)))
+            cout << "impossible d'écrire dans le fichier de conf" << endl;
+    }
     fprintf(fichierConfig,"\n");
 
     if(_Stol[JAUNE]==0){_Stol[JAUNE]=60;}

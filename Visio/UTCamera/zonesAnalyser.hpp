@@ -32,6 +32,6 @@ void afficheListeRegion(regionLister* rl, IplImage* imgPtr);
 regionLister* analyseListeRegion(regionLister* listeAanalyser, int width, int height);
 
 double getLargeurTheoriqueDuPiont(int yDuBasDuPiont);
-double getLengthRobotToRegion(int yDuBasDuPiont);
+double getLengthRobotToRegion(double yDuBasDuPiont);
 
 #endif
