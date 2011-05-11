@@ -252,6 +252,9 @@ void modeStationnaire()
             break;}
 
             // --- Arrét du programme ---
+            case 13:{
+                on = 0;
+            break;}
             case 69:{
                 on = 0;
             break;}

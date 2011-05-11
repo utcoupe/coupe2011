@@ -28,8 +28,8 @@
 	<File name="comManager.hpp" open="1" top="0" tabpos="1">
 		<Cursor position="435" topLine="0" />
 	</File>
-	<File name="comManger.cpp" open="1" top="0" tabpos="2">
-		<Cursor position="8210" topLine="274" />
+	<File name="comManger.cpp" open="1" top="1" tabpos="2">
+		<Cursor position="7592" topLine="249" />
 	</File>
 	<File name="constantes.hpp" open="1" top="0" tabpos="7">
 		<Cursor position="1195" topLine="46" />
@@ -46,7 +46,7 @@
 	<File name="regionLister.hpp" open="1" top="0" tabpos="5">
 		<Cursor position="1057" topLine="24" />
 	</File>
-	<File name="zonesAnalyser.cpp" open="1" top="1" tabpos="8">
+	<File name="zonesAnalyser.cpp" open="1" top="0" tabpos="8">
 		<Cursor position="1499" topLine="21" />
 	</File>
 	<File name="zonesAnalyser.hpp" open="1" top="0" tabpos="6">
