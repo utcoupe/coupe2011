@@ -287,7 +287,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	int sens = 1;
 	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
 		sens = -1;
-		currentAlpha = moduloPI(M_PI - abs(angularCoeff) - robot_state.angle);
+		//currentAlpha = moduloPI(M_PI - abs(angularCoeff) - robot_state.angle);
+		currentAlpha = moduloPI(M_PI + angularCoeff - robot_state.angle);
 	}
 	
 	currentAlpha = -currentAlpha;
@@ -501,16 +502,11 @@ void computeRobotState(){
  * trunc et int c'est pareil au final, j'ai choisi trunc juste pour que ce soit plus complique !
  * */
 double moduloPI(double Nb){
-	while (Nb < -PI)
-		Nb += PI;
-	while (Nb > PI)
-		Nb -= PI;
-	return Nb
-	/*double result;
+	double result;
 	if (Nb > M_PI)
 		result = Nb - (2*M_PI)*trunc((Nb + M_PI) / (2*M_PI));
 	else  if (Nb <= -M_PI)
 		result = Nb - (2*M_PI)*trunc((Nb - M_PI) / (2*M_PI));
 	else result = Nb;
-	return(result);//*/
+	return(result);
 }
