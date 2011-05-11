@@ -31,19 +31,24 @@ class Pion:
 
 	def __iter__(self):
 		return iter((self.pos.x,self.pos.y,self.type, self.color))
+
+	def __eq__(self, other):
+		""" si les pions sont à peu près au même endroit """
+		return (abs(self.pos.x - other.pos.x) < 100 and abs(self.pos.y - other.pos.y) < 100)
 		
 	def age(self):
 		""" depuis combien de temps avons nous vu ce pion ? """
 		return time.time() - self.time
 	
-	def update(self, pos=None):
+	def update(self, pion):
 		"""
 		le time updaté, et eventuellement la pos aussi
 		
-		@param pos la nouvelle position, None pour garder l'ancienne
+		@param pion (Pion) le pion vu
 		"""
-		if pos:
-			self.pos = pos
+		self.pos = ((self.pos.x+pion.pos.x)/2, (self.pos.y+pion.pos.y)/2)
+		self.calculColor()
+		self.calculCase()
 		self.time = time.time()
 
 	def calculColor(self):

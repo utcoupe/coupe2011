@@ -147,7 +147,7 @@ class Robot:
 		self.write("* RECALAGE *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 		self.write("")
-
+		
 		self.update_pos()
 
 		self.write("* ATTENTE DU JACK *")
@@ -156,30 +156,51 @@ class Robot:
 		self.write("")
 		threading.Timer(88, self.stop, "90s !")
 		#"""
+
 		
 		while not self._e_stop.isSet():
 			self.update_pos()
 			self.debug.log(D_UPDATE_POS,self.pos)
 			self.write("* SCAN *")
-			pions = self.scan()
+			l = self.scan()
 			self.write("")
-			
-			self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
 
-			if pions:
-				target,path = self.treatScan(pions)
+			# update des pions
+			pions_to_add = []
+			for new_p in l:
+				for p in self.pions:
+					if new_p == p:
+						new_p.update(p)
+						break
+				else:
+					pions_to_add.append(new_p)
+			self.pions += pions_to_add
+			
+			self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+
+			if self.pions:
+				target, objectif, path = self.findTarget(self.pions)
 				
 				self.write("cible : %s"%target)
+				self.write("objectif : %s"%objectif)
 				self.write("path : %s"%path)
 
 				if target:
 					self.write("* MOVE *")
-					self.do_path(zip(path[::2],path[1::2]))
+					if self.do_path(zip(path[2::2],path[3::2])):
+						# on update la pos actuelle de la target
+						target.pos = objectif
+						target.calculCase()
+						target.calculColor()
+						self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 					self.write("")
-				else:
-					self.write("* TOURNE *")
-					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
-					self.write("")
+					
+				raw_input()
+				continue
+				
+			self.write("* TOURNE *")
+			self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
+			self.write("")
 
 
 		
@@ -222,9 +243,10 @@ class Robot:
 			self.write("")
 			
 			if pions:
-				target,path = self.treatScan(pions)
+				target, objectif, path = self.findTarget(pions)
 				
 				self.write("cible : %s"%target)
+				self.write("objectif : %s"%objectif)
 				self.write("path : %s"%path)
 
 			ellapse = time.time() - start
@@ -326,6 +348,8 @@ class Robot:
 					return
 				
 			self.client.removeFifo(fifo)
+
+			return True
 		
 		
 	def scan(self, fast=False):
@@ -333,8 +357,8 @@ class Robot:
 		(blockant)
 		@todo gestion si la réponse n'arrive pas assez vite
 		demande un scan à la camera, fait toujours deux tentatives
+		Met à jourla liste des pions actuelle
 
-		@return list<Pion> la liste des pions dans le repère absolue avec les pions hors table enlevés
 		"""
 		l = []
 
@@ -347,14 +371,6 @@ class Robot:
 		else:
 			self.addCmd(ID_CAM, 64)
 		l = eval(str(fifo.getMsg().content))
-			
-		# deuxième tentative
-		if not l:
-			if not fast:
-				self.addCmd(ID_CAM, Q_SCAN_AV)
-			else:
-				self.addCmd(ID_CAM, 64)
-			l = eval(str(fifo.getMsg().content))
 		
 		self.write("Résultat brut scan : %s"%l)
 		
@@ -377,9 +393,6 @@ class Robot:
 			p.calculCase()
 		l = self._filtreInMap(l)
 		self.write("Résultat filtre map scan : %s"%l)
-		
-		
-		self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
 		return l
 		
@@ -412,14 +425,14 @@ class Robot:
 
 
 
-	def treatScan(self,pions):
+	def findTarget(self,pions):
 		"""
 		(blockant)
 		traitement du scan de la carte avec notre position actuelle
 
 		@param pions liste<Pion>
 		
-		@return target,path
+		@return target(Pion),objectif(Vec),path([x1,y1,x2,y2,...])
 		"""
 		# algo de détermination quel pion prendre (probablement le plus proche)
 		# pathfinding pour esquiver nos pions
@@ -442,42 +455,46 @@ class Robot:
 		# tri pour avoir les pions par proximité
 		pions.sort(cmp=lambda p1,p2: plusProche(p1,p2))
 
-		# on prend le pion le plus proche pas de notre couleur
-		for p in pions:
-			if p.color != self.color and p.color != UNKNOWN:
-				target = p
-				# on va essayer de pousser cette cible par selon l'axe 0x
-				case = Vec(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x-350, target.case.y)
-				print "case",case
-				# position devant le pion
-				pos_pousse = self._position_pousse(target,case)
-				# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
-				case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
-				if self._pathValid(path) and case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
-					break
-				else: # tentative selon l'axe Oy
-					case = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
-					# position de pousse
-					pos_pousse = self._position_pousse(target,case)
-					# vérif pour nos pions
-					case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
-					if self._pathValid(path) and case_p_pousse not in map(lambda p: p.case, pions) and case not in map(lambda p: p.case, pions):
-						break
-		else: # aucune cible ne convient
-			return None, None
-
 		# on va maintenant chercher le path
 		# comme obstacles on ne prend que nos pions
 		circles = filter(lambda p: p.color == self.color, pions)
 		# on remplace ces Pion par des cercles pour la fonction find_path
 		circles = map(lambda p: Circle(p.pos, 200), circles)
 		self.write(circles)
-		# appelle de la fonction
-		#path = find_path(Vec2(self.pos[0],self.pos[1]), Vec2(target.pos.x,target.pos.y), circles)
-		path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+		
+		# on cherche une cible
+		for p in pions:
+			if p.color != self.color and p.color != UNKNOWN:
+				target = p
+				# on va essayer de pousser cette cible par selon l'axe 0x
+				case_direction_pousse = Vec(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x-350, target.case.y)
+				print "case_direction_pousse",case_direction_pousse
+				# position devant le pion
+				pos_pousse = self._position_pousse(target,case_direction_pousse)
+				# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
+				case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
+				if  case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
+					# appelle de la fonction
+					path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+					if self._pathValid(path):
+						break
+				else: # tentative selon l'axe Oy
+					case_direction_pousse = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
+					# position de pousse
+					pos_pousse = self._position_pousse(target,case_direction_pousse)
+					# vérif pour nos pions
+					case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
+					if case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
+						# appelle de la fonction
+						path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+						if self._pathValid(path):
+							break
+		else: # aucune cible ne convient
+			return None, None, None
 
-		case = Line(case, target.pos).pointFrom(case,160)
-		path += [target.pos.x,target.pos.y, case.x, case.y, target.pos.x,target.pos.y]
+
+		case_stop = Line(case_direction_pousse, target.pos).pointFrom(case_direction_pousse,160)
+		path += [target.pos.x,target.pos.y, case_stop.x, case_stop.y, pos_pousse.x,pos_pousse.y]
 
 		
 		"""# décalage du point d'arrivée (à 120mm du pion)
@@ -488,7 +505,7 @@ class Robot:
 		
 		self.debug.log(D_SHOW_PATH,path)
 		
-		return target, path
+		return target, case_direction_pousse, path
 
 
 	def _pathValid(self, path):
