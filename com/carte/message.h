@@ -39,6 +39,7 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_RECALAGE	 		46
 #define Q_COLOR				50
 #define Q_ULTRAPING			51
+#define Q_GETULTRAPING		52
 
 /*debug*/
 #define Q_MOTOR		 		41

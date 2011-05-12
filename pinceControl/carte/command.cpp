@@ -175,10 +175,20 @@ void cmd(int id, int header, int *args, int size){
 			if(args[0]==FACEAV){
 				pingAvMessageID=id;
 				sendMessage(id, 1);
-			}
-			if(args[0]==FACEAR){
+			}else if(args[0]==FACEAR){
 				pingArMessageID=id;
 				sendMessage(id, 1);
+			}else{
+				sendMessage(id, E_INVALID_TYPE_PARAMETERS);
+			}
+			break;
+		}
+		case Q_GETULTRAPING:
+		{
+			if(args[0]==FACEAV){
+				sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AV)));
+			}else if(args[0]==FACEAR){
+				sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
 			}else{
 				sendMessage(id, E_INVALID_TYPE_PARAMETERS);
 			}
