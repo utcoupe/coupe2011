@@ -127,7 +127,7 @@ class Robot:
 		self.client.start()
 
 		while 1:
-		self.do_path(((400,0),(0,0)))
+			self.do_path(((400,0),(0,0)))
 		
 		"""
 		self.write("* CALIBRATION MANUELLE *")
@@ -386,6 +386,8 @@ class Robot:
 						self.addCmd(ID_ASSERV, Q_GETSENS)
 						nb_point_reach += 1
 					elif m.id_cmd == Q_GETSENS:
+						self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+						self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
 						self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
 					elif m.id_cmd == Q_KILL: # arret
 						self.write("WARINING : Robot.do_path : arret du robot")
