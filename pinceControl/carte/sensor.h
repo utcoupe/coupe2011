@@ -3,6 +3,7 @@
 
 #include "WProgram.h"
 #include "message.h"
+#include "ping.h"
 
 
 //define microswitch
@@ -50,6 +51,10 @@
 #define SHARP_AR3	9
 #define SHARP_AR4	10
 #define SHARP_AR5	11
+//PING
+#define PIN_PING_AV 22
+#define PIN_PING_AR 24
+#define DISTANCE_DETECT 30//cm
 
 
 struct TriggerSharp{
@@ -68,6 +73,8 @@ struct TriggerMS{
 static TriggerSharp trigerSharp[NB_SHARP];
 static TriggerMS trigerMS[NB_MS];
 static int JackMessageID=-42;
+static int pingAvMessageID=-42;
+static int pingArMessageID=-42;
 
 void initSensor();
 int jack(int id);

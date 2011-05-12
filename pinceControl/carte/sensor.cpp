@@ -241,13 +241,13 @@ void removeTriggerMS(unsigned int index){
 
 void sensorTrigger(){
 	//sharp
-	for(int i=0;i<NB_SHARP;i++){
+	/*for(int i=0;i<NB_SHARP;i++){
 		if(trigerSharp[i].pin==-1)break;//fin des trigger
 		if(getSharp(trigerSharp[i].pin)<=trigerSharp[i].value){
 			sendMessage(trigerSharp[i].messageId,2);
 			removeTriggerSharp(i);
 		}
-	}
+	}*/
 	//microswitch
 	for(int i=0;i<NB_MS;i++){
 		if(trigerSharp[i].pin==-1)break;
@@ -255,6 +255,17 @@ void sensorTrigger(){
 			sendMessage(trigerMS[i].messageId,2);
 			removeTriggerMS(i);
 		}
+	}
+	
+	int i=0;
+	if(pingAvMessageID>=0)
+		if(i = microsecondsToCentimeters(getDistance(PIN_PING_AV)) <= DISTANCE_DETECT){
+				sendMessage(pingAvMessageID,i);
+		}
+		
+	if(pingArMessageID>=0)
+	if(i = microsecondsToCentimeters(getDistance(PIN_PING_AR)) <= DISTANCE_DETECT){
+			sendMessage(pingArMessageID,i);
 	}
 }
 

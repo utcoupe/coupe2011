@@ -62,6 +62,7 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
+#define	E_INVALID_TYPE_PARAMETERS			-3
 #define W_STOP								-42
 
 #endif /* MESSAGE_H_ */
