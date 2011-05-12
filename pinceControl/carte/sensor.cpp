@@ -258,14 +258,14 @@ void sensorTrigger(){
 	}
 	
 	int i=0;
-	if(pingAvMessageID>=0)
-		if(i = microsecondsToCentimeters(getDistance(PIN_PING_AV)) <= DISTANCE_DETECT){
-				sendMessage(pingAvMessageID,i);
-		}
+	//if(pingAvMessageID>=0)
+	if(i = microsecondsToCentimeters(getDistance(PIN_PING_AV)) <= DISTANCE_DETECT){
+			sendMessage(-30,i);
+	}
 		
-	if(pingArMessageID>=0)
+	//if(pingArMessageID>=0)
 	if(i = microsecondsToCentimeters(getDistance(PIN_PING_AR)) <= DISTANCE_DETECT){
-			sendMessage(pingArMessageID,i);
+			sendMessage(-31,i);
 	}
 }
 
