@@ -4,3 +4,6 @@ test
 DOXYFILE
 	- install graphviz	(http://doc.ubuntu-fr.org/graphviz)	# pour des jolis diagrammes
 	- install doxypy	(http://code.foosel.org/doxypy)		# pour la doc python
+
+
+test2
