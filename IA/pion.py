@@ -24,6 +24,7 @@ class Pion:
 		self.pos = Vec(x,y)
 		self.type = t # flag
 		self.time = time.time()
+		self.color = UNKNOWN
 
 	def __iter__(self):
 		return iter((self.pos.x,self.pos.y,self.type, self.color))
