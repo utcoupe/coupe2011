@@ -71,8 +71,8 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define W_STOP								-42
 
 
-#define AVANT	= 0
-#define ARRIERE	= 1
-#define ARRET	= 2
+#define AVANT		0
+#define ARRIERE		1
+#define ARRET		2
 
 #endif /* MESSAGE_H_ */

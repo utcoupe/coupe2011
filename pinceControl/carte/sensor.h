@@ -72,12 +72,11 @@ struct TriggerMS{
 
 extern TriggerSharp trigerSharp[NB_SHARP];
 extern TriggerMS trigerMS[NB_MS];
-extern int JackMessageID=-42;
-extern int pingAvMessageID=-42;
-extern int pingArMessageID=-42;
+extern int JackMessageID;
+extern int pingAvMessageID;
+extern int pingArMessageID;
 
 void initSensor();
-int jack(int id);
 int waitJack();
 int setLED(unsigned char color);
 int getPion(unsigned char face);

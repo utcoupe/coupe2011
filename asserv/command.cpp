@@ -214,12 +214,14 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, ARRIERE);
 			else
 				sendMessage(id, ARRET);
+			break;
 		}
 
 		case Q_GETENC:
 		{
 			int tab[2] = {value_left_enc,value_right_enc};
 			sendMessage(id, tab, 2);
+			break;
 		}
 
 		case Q_DEBUG : //TODO a degager quand tout marche
