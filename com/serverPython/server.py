@@ -80,9 +80,8 @@ class Server():
 	def write(self, msg, color=None):
 		self._lock_write.acquire()
 		try:
-			if color: print color
-			print str(msg).strip()
-			if color: print colorConsol.ENDC
+			if color: print color+str(msg).strip()+colorConsol.ENDC
+			else: str(msg).strip()
 		finally:
 			self._lock_write.release()
 
