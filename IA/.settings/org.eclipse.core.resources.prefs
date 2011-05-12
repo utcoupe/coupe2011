@@ -1,9 +1,8 @@
-#Sun May 01 20:53:25 CEST 2011
+#Thu May 12 17:48:19 CEST 2011
 eclipse.preferences.version=1
 encoding//debug/main.py=utf-8
 encoding//geometry/circle.py=utf-8
 encoding//geometry/line.py=utf-8
-encoding//geometry/pathfinding.py=utf-8
 encoding//geometry/rectangle.py=utf-8
 encoding//geometry/vec.py=utf-8
 encoding//testpath/main.py=utf-8

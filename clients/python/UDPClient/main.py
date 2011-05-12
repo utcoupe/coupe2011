@@ -1,12 +1,17 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*
+
+
 
 import socket
 import subprocess
 import re
 import sys
 
-sys.path.append('../../../com/clients/pyClient')
+sys.path.append('com/clients/pyClient/')
+sys.path.append('com/serverPython/')
 import pyClient
+from protocole import *
 
 
 host = "";
@@ -62,7 +67,9 @@ UDPSock.bind((host, port))
 
 def fn_input():
 	data = UDPSock.recvfrom(1024)[0]
-	return str(data)
+	data = data.split()[1]
+	data = data.split(':')
+	return "%s.42.%s.%s.%s.%s"%(ID_ASSERV,Q_GOAL_ABS,data[1],data[2],data[3])
 
 def fn_on_close():
 	UDPSock.close()
