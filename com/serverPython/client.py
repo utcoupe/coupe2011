@@ -6,7 +6,7 @@ import socket
 import time
 import re
 
-
+import colorConsol
 from protocole import *
 
 class Client(threading.Thread):
@@ -34,18 +34,18 @@ class Client(threading.Thread):
 		if self.mask_recv_from & mask_from:
 			self._fn_send(msg)
 		else:
-			self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id))
+			self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id), colorConsol.WARNING)
 	
 	def run(self):
 		"""
 		Point d'entrée, envoie au client son id puis lance self._loop() en boucle
 		"""
-		self._server.write("%s start"%self.name)
+		self._server.write("%s start"%self.name, colorConsol.OKGREEN)
 		self._running = True
 		self.send(1,str(ID_SERVER)+C_SEP_SEND+str(Q_IDENT)+C_SEP_SEND+str(self.id)+"\n")
 		while self._running and not self._server.e_shutdown.isSet():
 			self._loopRecv()
-		self._server.write("%s arreté"%self.name)
+		self._server.write("%s arreté"%self.name, colorConsol.WARNING)
 
 	def combineWithPartial(self, msg):
 		"""
@@ -106,7 +106,7 @@ class TCPClient(Client):
 		except socket.timeout:
 			pass
 		except socket.error as er:
-			self._server.write(self.name+" "+str(er))
+			self._server.write(self.name+" "+str(er), colorConsol.FAIL)
 		else:
 			for msg in self.combineWithPartial(msg):
 				self._server.write("Received from %s : '%s'"%(self.name,msg))
@@ -137,13 +137,13 @@ class LocalClient(Client):
 					interval = int(t.group(2))
 					cmd = t.group(3)
 				except IndexError:
-					self.write("ERROR : manque de paramètres, signature de la fonction : loop(nb_iter,interval,cmd)")
+					self.write("ERROR : manque de paramètres, signature de la fonction : loop(nb_iter,interval,cmd)", colorConsol.FAIL)
 				else:
 					start = time.time()
 					for i in xrange(nb_iter):
 						self._server.parseMsg(self.id, cmd)
 						time.sleep(float(interval)/1000.0)
-					self._server.write("Temps exec loop : %sms"%(time.time()-start))
+					self._server.write("Temps exec loop : %sms"%(time.time()-start), colorConsol.OKBLUE)
 					
 			# créer une macro
 			t = re.match('mac\(([^\),]+),([^\),]+)\).*',msg)
@@ -152,10 +152,10 @@ class LocalClient(Client):
 					macro = t.group(1)
 					cmd = t.group(2)
 				except IndexError:
-					self.write("ERROR : manque de paramètres, signature de la fonction : mac(macro,cmd)")
+					self.write("ERROR : manque de paramètres, signature de la fonction : mac(macro,cmd)", colorConsol.FAIL)
 				else:
 					self.macros[macro] = cmd
-					self._server.write("macro '%s' is for commande '%s'"%(cmd,macro))
+					self._server.write("macro '%s' is for commande '%s'"%(cmd,macro), colorConsol.OKGREEN)
 
 			# macros
 			if msg in self.macros:

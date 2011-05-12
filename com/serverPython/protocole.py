@@ -45,6 +45,7 @@ ID_IA			= 4 # l'IA
 
 BLUE	= 0
 RED		= 1
+VERT	= 2
 
 
 E_INVALID_CMD						= -1

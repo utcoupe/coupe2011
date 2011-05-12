@@ -68,6 +68,7 @@ class Pion:
 			self.color = BLUE
 		elif (2600 <= x <= 3000) and (0 <= y <= 400):
 			self.color = RED
+		elif 
 		else:
 			self.color = UNKNOWN
 

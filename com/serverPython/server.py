@@ -9,6 +9,7 @@ from sender import *
 from protocole import *
 from client import *
 from tcpLoop import *
+import colorConsol
 
 
 class Server():
@@ -52,8 +53,8 @@ class Server():
 		try:
 			process = subprocess.Popen(exec_name, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
 		except OSError as e:
-			self.write("Server->addSubprocessClient(%s) failed"%exec_name)
-			self.write(e)
+			self.write("Server->addSubprocessClient(%s) failed"%exec_name, colorConsol.FAIL)
+			self.write(e, colorConsol.FAIL)
 		else:
 			client = SubprocessClient(self, len(self.clients), process, exec_name)
 			client.start()
@@ -74,12 +75,14 @@ class Server():
 			msg = str(id_client)+C_SEP_SEND+msg
 			self.sender.addMsg(mask_from, mask_to, msg)
 		except ValueError as ex:
-			self.write("ERROR : Server.parseMsg : %s"%msg);
+			self.write("ERROR : Server.parseMsg : %s"%msg, colorConsol.FAIL);
 	
-	def write(self, msg):
+	def write(self, msg, color=None):
 		self._lock_write.acquire()
 		try:
+			if color: print color
 			print str(msg).strip()
+			if color: print colorConsol.ENDC
 		finally:
 			self._lock_write.release()
 
