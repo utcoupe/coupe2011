@@ -126,7 +126,8 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 
-		self.do_path(((1500,0),))
+		while 1:
+		self.do_path(((400,0),(0,0)))
 		
 		"""
 		self.write("* CALIBRATION MANUELLE *")
@@ -339,18 +340,14 @@ class Robot:
 		"""
 		if not self._e_stop.isSet():
 			self.update_pos()
-
-			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, AVANT)
-			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, ARRIERE)
-
-			#sens = self.determine_sen(self.pos[0],self.pos[1])
+			
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_KILL, W_PING_AV, W_PING_AR) )
 			
 			goals = []
 			for p in path:
 				self.addCmd(ID_ASSERV, Q_GOAL_ABS, p[0],p[1],VITESSE)
 				goals.append(p)
 
-			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_KILL, W_PING_AV, W_PING_AR) )
 			nb_accuse_recep = 0
 			timeLastPing = 0
 			inPause = False
@@ -376,6 +373,8 @@ class Robot:
 				
 			self.write("Tous les accusés de receptions reçus")
 
+			self.addCmd(ID_ASSERV, Q_GETSENS)
+			
 			nb_point_reach = 0
 			while nb_point_reach<len(path):
 				m = fifo.getMsg(0.5)
@@ -384,7 +383,10 @@ class Robot:
 					inPause = False
 				if m:
 					if m.id_cmd == Q_GOAL_ABS:
+						self.addCmd(ID_ASSERV, Q_GETSENS)
 						nb_point_reach += 1
+					elif m.id_cmd == Q_GETSENS:
+						self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
 					elif m.id_cmd == Q_KILL: # arret
 						self.write("WARINING : Robot.do_path : arret du robot")
 						return
@@ -401,13 +403,8 @@ class Robot:
 			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
 
 			return True
-		
-	def determine_sens(self, next_pos):
-		"""
-		@todo finir fonction
-		"""
-		self.update_pos()
-		angle = atan2(next_pos.x-self.pos[0], next_pos.y-self.pos[1])
+
+			
 	
 	def scan(self, fast=False):
 		"""

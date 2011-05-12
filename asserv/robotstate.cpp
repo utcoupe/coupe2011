@@ -7,6 +7,8 @@
 
 #include "robotstate.h"
 
+int value_pwm_left;
+int value_pwm_right;
 RobotState robot_state;
 
 void initRobotState(){

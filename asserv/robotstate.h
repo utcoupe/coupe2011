@@ -14,4 +14,7 @@ typedef struct RobotState {
 
 extern RobotState robot_state;
 
+extern int value_pwm_left;
+extern int value_pwm_right;
+
 void initRobotState();

@@ -19,6 +19,7 @@ Q_MANUAL_CALIB		=	8
 Q_STOP				=	13
 Q_PAUSE				=	14
 Q_RESUME			=	15
+Q_GETSENS			=	16
 
 # others
 Q_SHARP				= 31

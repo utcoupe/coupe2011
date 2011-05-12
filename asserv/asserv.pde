@@ -11,10 +11,10 @@
 
 unsigned long index = 0;
 unsigned long timeStart = 0;
-int value_pwm_left = 0;
-int value_pwm_right = 0;
 
 void setup(){
+	value_pwm_left = 0;
+	value_pwm_right = 0;
 	/*Initialise la file des buts a atteindre*/
 	initGoals();
 	/*Active les pwm*/
