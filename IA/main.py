@@ -127,7 +127,7 @@ class Robot:
 		self.client.start()
 
 		
-		#"""
+		"""
 		self.write("* CALIBRATION MANUELLE *")
 		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
 		self.write("")
@@ -135,10 +135,10 @@ class Robot:
 		#self.testCam()
 		#"""
 
-		while 1:
-			self.do_path(((1150,800),(1850,700)))
+		#while 1:
+		#	self.do_path(((1150,800),(1850,700)))
 
-		"""
+		#"""
 		self.write("* RÉCUPÉRATION COULEUR *")
 		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
 		if self.color == RED:
@@ -160,7 +160,7 @@ class Robot:
 		self.write("")
 		threading.Timer(88, self.stop, "90s !")
 		self.do_path(((1500,350),))
-		raw_input("press")
+		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90)
 		#"""
 
 		
@@ -332,6 +332,8 @@ class Robot:
 		"""
 		if not self._e_stop.isSet():
 			self.update_pos()
+
+			sens = self.determine_sen(self.pos[0],self.pos[1]))
 			
 			goals = []
 			for p in path:
@@ -377,7 +379,7 @@ class Robot:
 						self.write("WARINING : Robot.do_path : arret du robot")
 						return
 					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-						if not inPause :
+						if not inPause:
 							self.addCmd(ID_ASSERV, Q_PAUSE)
 							self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
 							inPause = True
@@ -387,7 +389,10 @@ class Robot:
 
 			return True
 		
-		
+	def self.determine_sens(self, next_pos):
+		self.update_pos()
+		angle = atan2(next_pos.x-self.pos[0], next_pos.y-self.pos[1])
+	
 	def scan(self, fast=False):
 		"""
 		(blockant)
