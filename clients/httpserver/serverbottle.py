@@ -51,7 +51,7 @@ def recalage(id):
 
 @route('/api/gorelative/:x/:y')
 def gorelative(x, y):
-	s.send('asserv 3:'+x+':'+y+':100')
+	s.send('3.42.2.'+x+'.'+y+'.100')
 	data = s.recv(1024)
 	return '{gorelative:"done"}'
 
