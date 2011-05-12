@@ -6,8 +6,8 @@
 
 
 //define microswitch
-#define PIN_MS_AV 	24
-#define PIN_MS_AR 	25
+#define PIN_MS_AV 	48
+#define PIN_MS_AR 	50
 #define NB_MS 		2
 
 //define jack et couleur
