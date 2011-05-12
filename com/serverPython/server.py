@@ -81,7 +81,7 @@ class Server():
 		self._lock_write.acquire()
 		try:
 			if color: print color+str(msg).strip()+colorConsol.ENDC
-			else: str(msg).strip()
+			else: print str(msg).strip()
 		finally:
 			self._lock_write.release()
 
