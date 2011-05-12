@@ -43,7 +43,7 @@ class Robot:
 		self._lock_write = threading.Lock()
 		
 		self.pinces = (Pince(), Pince())
-		#self.client = RobotClient(self)
+		self.client = RobotClient(self)
 		
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
 		self.pos = (0,0,0)
@@ -124,7 +124,9 @@ class Robot:
 	
 	def start(self):
 		""" démarage du robot """
-		#self.client.start()
+
+		"""
+		self.client.start()
 		self.color = BLUE
 		pions = [Pion(2300,600),Pion(2300,200)]
 		for p in pions:
@@ -136,6 +138,7 @@ class Robot:
 		target, objectif, path = self.findTarget(pions)
 		raw_input()
 		return
+		#"""
 		"""
 		self.write("* CALIBRATION MANUELLE *")
 		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
@@ -143,9 +146,6 @@ class Robot:
 		#self.calibCam()
 		#self.testCam()
 		#"""
-
-		#while 1:
-		#	self.do_path(((1150,800),(1850,700)))
 
 		#"""
 		self.write("* RÉCUPÉRATION COULEUR *")
