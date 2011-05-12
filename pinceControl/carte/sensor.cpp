@@ -270,16 +270,20 @@ void sensorTrigger(){
 	if (millis() - temps > 200)
 	{
 		temps = millis();
-		//if(pingAvMessageID>=0)
-		int d = microsecondsToCentimeters(getDistance(PIN_PING_AV));
-		if(d <= DISTANCE_DETECT){
-				sendMessage(-30,d);
+		int d = 0;
+		
+		if(pingAvMessageID>=0){
+			d = microsecondsToCentimeters(getDistance(PIN_PING_AV));
+			if(d <= DISTANCE_DETECT){
+					sendMessage(-30,d);
+			}
 		}
 			
-		//if(pingArMessageID>=0)
-		d = microsecondsToCentimeters(getDistance(PIN_PING_AR));
-		if(d <= DISTANCE_DETECT){
-				sendMessage(-31,d);
+		if(pingArMessageID>=0){
+			d = microsecondsToCentimeters(getDistance(PIN_PING_AR));
+			if(d <= DISTANCE_DETECT){
+					sendMessage(-31,d);
+			}
 		}
 	}
 }

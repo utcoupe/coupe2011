@@ -178,6 +178,12 @@ void cmd(int id, int header, int *args, int size){
 			}else if(args[0]==FACEAR){
 				pingArMessageID=id;
 				sendMessage(id, 1);
+			}else if(args[0]==-1){
+				pingAvMessageID=-42;
+				sendMessage(id, 1);
+			}else if(args[0]==-2){
+				pingArMessageID=-42;
+				sendMessage(id, 1);
 			}else{
 				sendMessage(id, E_INVALID_TYPE_PARAMETERS);
 			}
