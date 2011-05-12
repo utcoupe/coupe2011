@@ -390,6 +390,9 @@ class Robot:
 			return True
 		
 	def self.determine_sens(self, next_pos):
+		"""
+		@todo finir fonction
+		"""
 		self.update_pos()
 		angle = atan2(next_pos.x-self.pos[0], next_pos.y-self.pos[1])
 	

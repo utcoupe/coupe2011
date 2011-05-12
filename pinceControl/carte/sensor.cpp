@@ -1,5 +1,14 @@
 #include "sensor.h"
 
+
+TriggerSharp trigerSharp[NB_SHARP];
+TriggerMS trigerMS[NB_MS];
+int JackMessageID=-42;
+int pingAvMessageID=-42;
+int pingArMessageID=-42;
+
+
+
 int getPion(unsigned char face){
 	int value,value2;
 	//test des sharp du bas vers le haut
