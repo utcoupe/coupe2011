@@ -240,6 +240,7 @@ void removeTriggerMS(unsigned int index){
 }
 
 void sensorTrigger(){
+	static int temps = 0;
 	//sharp
 	/*for(int i=0;i<NB_SHARP;i++){
 		if(trigerSharp[i].pin==-1)break;//fin des trigger
@@ -257,15 +258,20 @@ void sensorTrigger(){
 		}
 	}
 	
-	int i=0;
-	//if(pingAvMessageID>=0)
-	if(i = microsecondsToCentimeters(getDistance(PIN_PING_AV)) <= DISTANCE_DETECT){
-			sendMessage(-30,i);
-	}
-		
-	//if(pingArMessageID>=0)
-	if(i = microsecondsToCentimeters(getDistance(PIN_PING_AR)) <= DISTANCE_DETECT){
-			sendMessage(-31,i);
+	if (millis() - temps > 200)
+	{
+		temps = millis();
+		//if(pingAvMessageID>=0)
+		int d = microsecondsToCentimeters(getDistance(PIN_PING_AV));
+		if(d <= DISTANCE_DETECT){
+				sendMessage(-30,d);
+		}
+			
+		//if(pingArMessageID>=0)
+		d = microsecondsToCentimeters(getDistance(PIN_PING_AR));
+		if(d <= DISTANCE_DETECT){
+				sendMessage(-31,d);
+		}
 	}
 }
 
