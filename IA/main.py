@@ -126,6 +126,7 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 
+		self.do_path(((1500,0),))
 		
 		"""
 		self.write("* CALIBRATION MANUELLE *")
@@ -138,7 +139,7 @@ class Robot:
 		#while 1:
 		#	self.do_path(((1150,800),(1850,700)))
 
-		#"""
+		"""
 		self.write("* RÉCUPÉRATION COULEUR *")
 		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
 		if self.color == RED:
@@ -147,7 +148,10 @@ class Robot:
 			self.write("COULEUR BLEU !")
 		self.addCmd(ID_OTHERS, Q_LED, self.color)
 		self.write("")
+
 		
+		self.write("* JACK POUR RECALAGE *")
+		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
 		self.write("* RECALAGE *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 		self.write("")
@@ -155,14 +159,15 @@ class Robot:
 		self.update_pos()
 		
 		self.write("* ATTENTE DU JACK *")
+		self.addCmd(ID_OTHERS, Q_LED, -1)
 		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
+		self.addCmd(ID_OTHERS, Q_LED, self.color)
 		self.write("ON Y VAS !")
 		self.write("")
-		threading.Timer(88, self.stop, "90s !")
+		threading.Timer(88, self.stop, ("90s !",)).start()
 		self.do_path(((1500,350),))
 		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90)
 		#"""
-
 		
 		while not self._e_stop.isSet():
 			self.update_pos()
@@ -223,6 +228,8 @@ class Robot:
 		if msg: self.write(msg, colorConsol.FAIL)
 		self.addCmd(-1, Q_KILL)
 		self.addCmd(ID_ASSERV,Q_STOP)
+		self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
+		self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
 		self._e_stop.set()
 		self.client._treat("%s.%s.%s"%(ID_IA,W_STOP,Q_KILL))
 	
@@ -333,7 +340,10 @@ class Robot:
 		if not self._e_stop.isSet():
 			self.update_pos()
 
-			sens = self.determine_sen(self.pos[0],self.pos[1]))
+			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, AVANT)
+			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, ARRIERE)
+
+			#sens = self.determine_sen(self.pos[0],self.pos[1])
 			
 			goals = []
 			for p in path:
@@ -386,10 +396,13 @@ class Robot:
 						timeLastPing = time.time()
 				
 			self.client.removeFifo(fifo)
+			# arret de l'écoute des pings
+			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
+			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
 
 			return True
 		
-	def self.determine_sens(self, next_pos):
+	def determine_sens(self, next_pos):
 		"""
 		@todo finir fonction
 		"""

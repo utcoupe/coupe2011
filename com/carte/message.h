@@ -61,11 +61,18 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_MODIF_GOAL_REL 	12
 #define Q_PAUSE				14
 #define Q_RESUME			15
+#define Q_GETSENS			16
+#define Q_GETENC			17
 
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
 #define	E_INVALID_TYPE_PARAMETERS			-3
 #define W_STOP								-42
+
+
+#define AVANT	= 0
+#define ARRIERE	= 1
+#define ARRET	= 2
 
 #endif /* MESSAGE_H_ */

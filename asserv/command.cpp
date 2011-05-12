@@ -206,7 +206,17 @@ void cmd(int id, int id_cmd, int* args, int size){
 			break;
 		}
 
-		case 42:
+		case Q_GETSENS:
+		{
+			if (value_pwm_right > 0)
+				sendMessage(id, AVANT);
+			else if (value_pwm_right < 0)
+				sendMessage(id, ARRIERE);
+			else
+				sendMessage(id, ARRET);
+		}
+
+		case Q_GETENC:
 		{
 			int tab[2] = {value_left_enc,value_right_enc};
 			sendMessage(id, tab, 2);
