@@ -3,9 +3,9 @@
 
 TriggerSharp trigerSharp[NB_SHARP];
 TriggerMS trigerMS[NB_MS];
-int JackMessageID=-42;
-int pingAvMessageID=-42;
-int pingArMessageID=-42;
+int JackMessageID;
+int pingAvMessageID;
+int pingArMessageID;
 
 
 
@@ -80,6 +80,10 @@ void initSensor(){
 		trigerSharp[i].pin=-1;
 	for(int i=0;i<NB_MS;i++)
 		trigerMS[i].pin=-1;
+		
+	JackMessageID=-42;
+	pingAvMessageID=-42;
+	pingArMessageID=-42;
 }
 
 int setLED(unsigned char color){
@@ -249,7 +253,7 @@ void removeTriggerMS(unsigned int index){
 }
 
 void sensorTrigger(){
-	static int temps = 0;
+	static long long temps = 0;
 	//sharp
 	/*for(int i=0;i<NB_SHARP;i++){
 		if(trigerSharp[i].pin==-1)break;//fin des trigger
