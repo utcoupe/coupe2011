@@ -11,9 +11,9 @@
 #define NB_MS 		2
 
 //define jack et couleur
-#define PIN_JACK 	50
-#define LED_BLEU 	47
-#define LED_ROUGE 	44
+#define PIN_JACK 	35
+#define LED_BLEU 	29
+#define LED_ROUGE 	33
 #define BLEU 		0
 #define ROUGE 		1
 
@@ -21,7 +21,7 @@
 //interupteur rouge 41
 
 // pin couleur
-#define PIN_COLOR	51
+#define PIN_COLOR	31
 
 //define sharp
 #define FACEAV 		0
