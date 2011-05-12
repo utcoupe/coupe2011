@@ -6,13 +6,17 @@ DEBUG de l'IA
 
 import sys
 import traceback
-
+sys.path.append('../com/serverPython/')
+from protocole import *
+import colorConsol
 
 D_UPDATE_POS	=	0
 D_PIONS			=	1
 D_SHOW_PATH		=	2
 D_DELETE_PATH   =	3
 D_STATUS_PINCE	=	4
+
+colors = {BLUE: "#BBFF00", RED: "#FFAA00",  GREEN: "#22FF00", UNKNOWN: "#000000"}
 
 if __name__ == "__main__":
 	import Tkinter as Tk
@@ -143,12 +147,12 @@ if __name__ == "__main__":
 						x,y,t,c = p
 						x = self.X(x)
 						y = self.Y(y)
-						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="#FFAA00" if c else "#BBFF00"))
+						self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill=colors[int(c)]))
 				else:
 					t,x,y = pions
 					x = self.X(x)
 					y = self.Y(y)
-					self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill="#FFAA00" if c else "#BBFF00"))
+					self.pions.append(Circle(Vec2(x,y),20).tracer(self.canevas, fill=colors[int(c)]))
 
 		def show_path(self, path):
 			self.delete_path()

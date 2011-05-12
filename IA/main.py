@@ -56,7 +56,7 @@ class Robot:
 		
 		self.debug = Debug()
 
-		self.color = BLUE
+		self.color = RED
 	
 	def addCmd(self, id_device, id_cmd, *args):
 		"""
@@ -117,7 +117,8 @@ class Robot:
 		""" pour écrire sans se marcher sur les doigts """
 		self._lock_write.acquire()
 		try:
-			print str(msg).strip()
+			if color: print color+str(msg).strip()+colorConsol.ENDC
+			else: print str(msg).strip()
 		finally:
 			self._lock_write.release()
 	
@@ -134,6 +135,9 @@ class Robot:
 		#self.testCam()
 		#"""
 
+		while 1:
+			self.do_path(((1150,800),(1850,700)))
+
 		"""
 		self.write("* RÉCUPÉRATION COULEUR *")
 		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
@@ -149,12 +153,14 @@ class Robot:
 		self.write("")
 		
 		self.update_pos()
-
+		
 		self.write("* ATTENTE DU JACK *")
 		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
 		self.write("ON Y VAS !")
 		self.write("")
 		threading.Timer(88, self.stop, "90s !")
+		self.do_path(((1500,350),))
+		raw_input("press")
 		#"""
 
 		
@@ -165,16 +171,7 @@ class Robot:
 			l = self.scan()
 			self.write("")
 
-			# update des pions
-			pions_to_add = []
-			for new_p in l:
-				for p in self.pions:
-					if new_p == p:
-						new_p.update(p)
-						break
-				else:
-					pions_to_add.append(new_p)
-			self.pions += pions_to_add
+			self.updatePions(l)
 			
 			self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 
@@ -193,22 +190,37 @@ class Robot:
 						self.write("objectif : %s"%objectif)
 						self.write("target.pos : %s"%target.pos)
 						target.calculCase()
-						target.calculColor()
+						target.calculColor(self.color)
 						self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 					self.write("")
+					raw_input("press")
+					continue
 					
-				raw_input()
-				continue
 				
 			self.write("* TOURNE *")
 			self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
 			self.write("")
 
+	def updatePions(self, l):
+		# update des pions
+		pions_to_add = []
+		for new_p in l:
+			for p in self.pions:
+				if new_p == p:
+					new_p.update(p,self.color)
+					break
+			else:
+				pions_to_add.append(new_p)
+		self.pions += pions_to_add
 
+		self.pions = filter(lambda p: p.age() < 2, self.pions)
+		
+		self.debug.log(D_DELETE_PATH)
+		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 		
 	def stop(self, msg=None):
 		""" arret du robot """
-		if msg: self.write(msg)
+		if msg: self.write(msg, colorConsol.FAIL)
 		self.addCmd(-1, Q_KILL)
 		self.addCmd(ID_ASSERV,Q_STOP)
 		self._e_stop.set()
@@ -241,11 +253,13 @@ class Robot:
 			start = time.time()
 			# scan
 			self.write("* SCAN *")
-			pions = self.scan(fast)
+			l = self.scan(fast)
 			self.write("")
+
+			self.updatePions(l)
 			
-			if pions:
-				target, objectif, path = self.findTarget(pions)
+			if self.pions:
+				target, objectif, path = self.findTarget(self.pions)
 				
 				self.write("cible : %s"%target)
 				self.write("objectif : %s"%objectif)
@@ -283,7 +297,7 @@ class Robot:
 				self.write("Résultat filtre map scan : %s"%l)
 				# recalculer les couleurs et la case
 				for p in l:
-					p.calculColor()
+					p.calculColor(self.color)
 					p.calculCase()
 				self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
@@ -295,6 +309,7 @@ class Robot:
 		(bloquant)
 		Récupérer la position actuelle
 		"""
+		#start = time.time()
 		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
 		self.addCmd(ID_ASSERV, Q_POSITION)
 		m = fifo.getMsg()
@@ -302,8 +317,9 @@ class Robot:
 		self.write("NEW POS : "+str(self.pos))
 		self.client.removeFifo(fifo)
 		self.debug.log(D_UPDATE_POS, self.pos)
+		#self.write("time update pos %s"%(time.time() - start))
 		
-	def do_path(self, *path):
+	def do_path(self, path):
 		"""
 		(blockant)
 		@todo interuption danger, interuption 90s, interuption si erreur parceque la position n'est pas la bonne
@@ -318,36 +334,54 @@ class Robot:
 			self.update_pos()
 			
 			goals = []
-			if len(path) == 1 and type(path) == type([]) or type(path) == type(()): # au cas où on a envoyé un tableau
-				path = path[0]
 			for p in path:
 				self.addCmd(ID_ASSERV, Q_GOAL_ABS, p[0],p[1],VITESSE)
 				goals.append(p)
 
-			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_KILL) )
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_KILL, W_PING_AV, W_PING_AR) )
 			nb_accuse_recep = 0
+			timeLastPing = 0
+			inPause = False
 			while nb_accuse_recep<len(path):
+				if time.time() - timeLastPing > 0.5:
+					self.addCmd(ID_ASSERV, Q_RESUME)
+					inPause = False
 				m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
 				if not m:
-					self.write("ERROR : Robot.do_path : accusé de reception non reçu")
+					self.write("ERROR : Robot.do_path : accusé de reception non reçu", colorConsol.FAIL)
 					return
 				if m.id_cmd == Q_GOAL_ABS:
 					nb_accuse_recep += 1
 				elif m.id_cmd == Q_KILL: # arret
-					self.write("WARINING : Robot.do_path : arret du robot")
+					self.write("WARNING : Robot.do_path : arret du robot", colorConsol.WARNING)
 					return
-					
+				elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+					if not inPause :
+						self.addCmd(ID_ASSERV, Q_PAUSE)
+						self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+						inPause = True
+					timeLastPing = time.time()
+				
 			self.write("Tous les accusés de receptions reçus")
 
 			nb_point_reach = 0
 			while nb_point_reach<len(path):
-				m = fifo.getMsg()
+				m = fifo.getMsg(0.5)
+				if time.time() - timeLastPing > 0.5:
+					self.addCmd(ID_ASSERV, Q_RESUME)
+					inPause = False
 				if m:
 					if m.id_cmd == Q_GOAL_ABS:
 						nb_point_reach += 1
-				elif m.id_cmd == Q_KILL: # arret
-					self.write("WARINING : Robot.do_path : arret du robot")
-					return
+					elif m.id_cmd == Q_KILL: # arret
+						self.write("WARINING : Robot.do_path : arret du robot")
+						return
+					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+						if not inPause :
+							self.addCmd(ID_ASSERV, Q_PAUSE)
+							self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+							inPause = True
+						timeLastPing = time.time()
 				
 			self.client.removeFifo(fifo)
 
@@ -391,7 +425,7 @@ class Robot:
 		self.write("Résultat change repere scan : %s"%l)
 		# recalculer les couleurs et la case
 		for p in l:
-			p.calculColor()
+			p.calculColor(self.color)
 			p.calculCase()
 		l = self._filtreInMap(l)
 		self.write("Résultat filtre map scan : %s"%l)
@@ -466,7 +500,7 @@ class Robot:
 		
 		# on cherche une cible
 		for p in pions:
-			if p.color != self.color and p.color != UNKNOWN:
+			if (self.color == BLUE and p.color == RED) or (self.color == RED and p.color == BLUE):
 				target = p
 				# on va essayer de pousser cette cible par selon l'axe 0x
 				case_direction_pousse = Vec(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x-350, target.case.y)
