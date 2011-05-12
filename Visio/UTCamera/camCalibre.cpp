@@ -115,7 +115,7 @@ void loadConfig()
     for(int i=0; i<NB_COLOR; i++)
     {
         if (!fscanf(fichierConfig,"%d   ",(_H+i)))
-            cout << "impossible d'écrire dans le fichier de conf" << endl;
+            cerr << "impossible d'écrire dans le fichier de conf" << endl;
     }
     fprintf(fichierConfig,"\n");
 
@@ -125,7 +125,7 @@ void loadConfig()
     for(int i=0; i<NB_COLOR; i++)
     {
         if (!fscanf(fichierConfig,"%d   ",(_Htol+i)))
-            cout << "impossible d'écrire dans le fichier de conf" << endl;
+            cerr << "impossible d'écrire dans le fichier de conf" << endl;
     }
     fprintf(fichierConfig,"\n");
 
@@ -135,7 +135,7 @@ void loadConfig()
     for(int i=0; i<NB_COLOR; i++)
     {
         if (!fscanf(fichierConfig,"%d   ",(_S+i)))
-            cout << "impossible d'écrire dans le fichier de conf" << endl;
+            cerr << "impossible d'écrire dans le fichier de conf" << endl;
     }
     fprintf(fichierConfig,"\n");
 
@@ -145,7 +145,7 @@ void loadConfig()
     for(int i=0; i<NB_COLOR; i++)
     {
         if (!fscanf(fichierConfig,"%d   ",(_Stol+i)))
-            cout << "impossible d'écrire dans le fichier de conf" << endl;
+            cerr << "impossible d'écrire dans le fichier de conf" << endl;
     }
     fprintf(fichierConfig,"\n");
 

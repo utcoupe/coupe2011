@@ -190,6 +190,8 @@ class Robot:
 					if self.do_path(zip(path[2::2],path[3::2])):
 						# on update la pos actuelle de la target
 						target.pos = objectif
+						self.write("objectif : %s"%objectif)
+						self.write("target.pos : %s"%target.pos)
 						target.calculCase()
 						target.calculColor()
 						self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
@@ -459,7 +461,7 @@ class Robot:
 		# comme obstacles on ne prend que nos pions
 		circles = filter(lambda p: p.color == self.color, pions)
 		# on remplace ces Pion par des cercles pour la fonction find_path
-		circles = map(lambda p: Circle(p.pos, 200), circles)
+		circles = map(lambda p: Circle(p.pos, 300), circles)
 		self.write(circles)
 		
 		# on cherche une cible
@@ -494,7 +496,7 @@ class Robot:
 
 
 		case_stop = Line(case_direction_pousse, target.pos).pointFrom(case_direction_pousse,160)
-		path += [target.pos.x,target.pos.y, case_stop.x, case_stop.y, pos_pousse.x,pos_pousse.y]
+		path += [target.pos.x,target.pos.y, case_stop.x, case_stop.y, target.pos.x,target.pos.y]
 
 		
 		"""# décalage du point d'arrivée (à 120mm du pion)
@@ -528,7 +530,7 @@ class Robot:
 		@return (Vec) la position de pousse
 		"""
 		l = Line(case, target.pos)
-		return l.pointFrom(target.pos,200)
+		return l.pointFrom(target.pos,300)
 	
 		
 		
