@@ -184,7 +184,8 @@ class Robot:
 
 		# strategie anti belge
 		self.belge()
-			
+		return
+		
 		while not self._e_stop.isSet():
 			self.update_pos()
 			self.debug.log(D_UPDATE_POS,self.pos)
