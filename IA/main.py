@@ -212,7 +212,7 @@ class Robot:
 						target.calculColor(self.color)
 						self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 					self.write("")
-					raw_input("press")
+					#raw_input("press")
 					continue
 					
 				
@@ -707,11 +707,39 @@ class Robot:
 		
 		return True
 
-"""
-	def belge(self):
-		self.do_path(
-"""
 
+	def belge(self):
+		if self.color == RED:
+			self.do_path(((2375,175), (2300,250)))
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, 45, VITESSE - 30)
+			time.sleep(4)
+			start = time.time()
+			while time.time() - start < 20:
+				r = addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
+				if r and r.content < 100:
+					time.sleep(15)
+
+			self.do_path(((2375,175), (2375,525), (1825,525), (2375,525), (2375, 1225), (1825, 1225)))
+			
+					
+		else:
+			self.do_path(((self.sym(2375),175), (self.sym(2300),250)))
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.syma(45), VITESSE - 30)
+			time.sleep(4)
+			start = time.time()
+			while time.time() - start < 20:
+				r = addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
+				if r and r.content < 100:
+					time.sleep(15)
+
+			self.do_path(((self.sym(2375),175), (self.sym(2375),525), (self.sym(1825),525), (self.sym(2375),525), (self.sym(2375), 1225), (self.sym(1825), 1225)))
+			
+
+	def sym(self,x):
+		return 3000 - x
+
+	def syma(self,a):
+		return 180 - a
 
 
 		
