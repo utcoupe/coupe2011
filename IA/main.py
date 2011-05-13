@@ -363,7 +363,7 @@ class Robot:
 			timeLastPing = 0
 			inPause = False
 			while nb_accuse_recep<len(path):
-				if time.time() - timeLastPing > 0.5:
+				if inPause and time.time() - timeLastPing > 0.5:
 					self.addCmd(ID_ASSERV, Q_RESUME)
 					inPause = False
 				m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
