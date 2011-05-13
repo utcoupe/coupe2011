@@ -5,7 +5,8 @@ DEBUG de l'IA
 """
 
 import sys
-import traceback
+sys.path.append('./')
+sys.path.append('../')
 from protocole import *
 import colorConsol
 
@@ -22,8 +23,7 @@ if __name__ == "__main__":
 	import threading
 
 	import sys
-	sys.path.append("../")
-	sys.path.append("./")
+	import traceback
 	from geometry.vec import *
 	from geometry.circle import *
 	from geometry.line import *

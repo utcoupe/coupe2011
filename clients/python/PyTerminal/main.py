@@ -2,7 +2,6 @@
 
 import time
 import sys
-sys.path.append('../../../com/clients/pyClient')
 import pyClient
 
 

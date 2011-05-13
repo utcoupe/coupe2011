@@ -8,8 +8,6 @@ import subprocess
 import re
 import sys
 
-sys.path.append('com/clients/pyClient/')
-sys.path.append('com/serverPython/')
 import pyClient
 from protocole import *
 
