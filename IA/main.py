@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
 @todo interupts danger, 90s pour la majorité des fonctions
