@@ -20,7 +20,7 @@ from geometry.circle import *
 
 
 
-MAX_MSG		= 50
+MAX_MSG		= 1000
 VITESSE 	= 130
 
 # constantes de recalage
