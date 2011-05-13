@@ -127,9 +127,6 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 		
-		while 1:
-			self.do_path(((1000,0),))
-			self.do_path(((0,0),))
 		
 		"""
 		self.color = BLUE
@@ -709,7 +706,15 @@ class Robot:
 		self.pinces[id_pince].objet = PION_2_T
 		
 		return True
-	
+
+"""
+	def belge(self):
+		self.do_path(
+"""
+
+
+
+		
 if __name__ == '__main__':
 	robot = Robot()	
 	robot.start()
