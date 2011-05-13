@@ -181,7 +181,9 @@ class Robot:
 			self.do_path(((2000,300),))
 		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
 		#"""
-		
+
+		# strategie anti belge
+		self.belge()
 			
 		while not self._e_stop.isSet():
 			self.update_pos()
