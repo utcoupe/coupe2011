@@ -173,7 +173,7 @@ class Robot:
 		self.addCmd(ID_OTHERS, Q_LED, self.color)
 		self.write("ON Y VAS !")
 		self.write("")
-		threading.Timer(40, self.stop, ("90s !",)).start()
+		threading.Timer(88, self.stop, ("90s !",)).start()
 		if self.color == BLUE:
 			self.do_path(((1000,300),))
 		else:
