@@ -173,8 +173,11 @@ class Robot:
 		self.write("ON Y VAS !")
 		self.write("")
 		threading.Timer(88, self.stop, ("90s !",)).start()
-		self.do_path(((1500,350),))
-		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 45)
+		if self.color == BLUE:
+			self.do_path(((1000,300),))
+		else:
+			self.do_path(((2000,300),))
+		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
 		#"""
 		
 		while not self._e_stop.isSet():
