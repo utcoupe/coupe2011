@@ -715,7 +715,7 @@ class Robot:
 		if self.color == RED:
 			self.do_path(((2375,175), (2300,250)))
 			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, 45, VITESSE - 30)
-			time.sleep(4)
+			time.sleep(40)
 			start = time.time()
 			while time.time() - start < 20:
 				r = self.addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
@@ -728,7 +728,7 @@ class Robot:
 		else:
 			self.do_path(((self.sym(2375),175), (self.sym(2300),250)))
 			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.syma(45), VITESSE - 30)
-			time.sleep(4)
+			time.sleep(40)
 			start = time.time()
 			while time.time() - start < 20:
 				r = self.addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
