@@ -717,7 +717,7 @@ class Robot:
 			time.sleep(4)
 			start = time.time()
 			while time.time() - start < 20:
-				r = addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
+				r = self.addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
 				if r and r.content < 100:
 					time.sleep(15)
 
@@ -730,7 +730,7 @@ class Robot:
 			time.sleep(4)
 			start = time.time()
 			while time.time() - start < 20:
-				r = addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
+				r = self.addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
 				if r and r.content < 100:
 					time.sleep(15)
 
