@@ -11,7 +11,7 @@ from server import *
 
 server = Server()
 
-server.addSubprocessClient("clients/python/UDPClient/main.py")
+#server.addSubprocessClient("clients/python/UDPClient/main.py")
 server.addSubprocessClient("./UTCamera");
 
 import glob

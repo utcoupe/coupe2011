@@ -124,9 +124,9 @@ class Robot:
 	
 	def start(self):
 		""" démarage du robot """
+		self.client.start()
 
 		"""
-		self.client.start()
 		self.color = BLUE
 		pions = [Pion(2300,600),Pion(2300,200)]
 		for p in pions:
