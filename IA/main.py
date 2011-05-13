@@ -125,11 +125,21 @@ class Robot:
 	
 	def start(self):
 		""" démarage du robot """
-		self.client.start()
 
-		while 1:
-			self.do_path(((400,0),(0,0)))
-		
+		"""
+		self.client.start()
+		self.color = BLUE
+		pions = [Pion(2300,600),Pion(2300,200)]
+		for p in pions:
+			p.calculCase()
+			p.calculColor(self.color)
+		self.pos = (1500,1000,90)
+		self.debug.log(D_UPDATE_POS, self.pos)
+		self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
+		target, objectif, path = self.findTarget(pions)
+		raw_input()
+		return
+		#"""
 		"""
 		self.write("* CALIBRATION MANUELLE *")
 		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
@@ -138,10 +148,7 @@ class Robot:
 		#self.testCam()
 		#"""
 
-		#while 1:
-		#	self.do_path(((1150,800),(1850,700)))
-
-		"""
+		#"""
 		self.write("* RÉCUPÉRATION COULEUR *")
 		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
 		if self.color == RED:
@@ -167,8 +174,11 @@ class Robot:
 		self.write("ON Y VAS !")
 		self.write("")
 		threading.Timer(88, self.stop, ("90s !",)).start()
-		self.do_path(((1500,350),))
-		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90)
+		if self.color == BLUE:
+			self.do_path(((1000,300),))
+		else:
+			self.do_path(((2000,300),))
+		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
 		#"""
 		
 		while not self._e_stop.isSet():
@@ -525,27 +535,34 @@ class Robot:
 				target = p
 				# on va essayer de pousser cette cible par selon l'axe 0x
 				case_direction_pousse = Vec(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x-350, target.case.y)
-				print "case_direction_pousse",case_direction_pousse
-				# position devant le pion
-				pos_pousse = self._position_pousse(target,case_direction_pousse)
-				# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
-				case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
-				if  case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
-					# appelle de la fonction
-					path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
-					if self._pathValid(path):
-						break
-				else: # tentative selon l'axe Oy
-					case_direction_pousse = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
-					# position de pousse
-					pos_pousse = self._position_pousse(target,case_direction_pousse)
-					# vérif pour nos pions
-					case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
-					if case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
-						# appelle de la fonction
-						path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
-						if self._pathValid(path):
-							break
+				if case_direction_pousse.y < 1750 or (1150 < case_direction_pousse < 1850):
+					p = Pion(*case_direction_pousse)
+					p.calculColor(self.color)
+					if p.color == RED or p.color == BLUE:
+						# position devant le pion
+						pos_pousse = self._position_pousse(target,case_direction_pousse)
+						# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
+						case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
+						if  case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
+							# appelle de la fonction
+							path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+							if self._pathValid(path):
+								break
+				# tentative selon l'axe Oy
+				case_direction_pousse = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
+				if case_direction_pousse.y < 1750 or (1150 < case_direction_pousse < 1850):
+					p = Pion(*case_direction_pousse)
+					p.calculColor(self.color)
+					if p.color == RED or p.color == BLUE:
+						# position de pousse
+						pos_pousse = self._position_pousse(target,case_direction_pousse)
+						# vérif pour nos pions
+						case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
+						if case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
+							# appelle de la fonction
+							path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+							if self._pathValid(path):
+								break
 		else: # aucune cible ne convient
 			return None, None, None
 
@@ -567,10 +584,10 @@ class Robot:
 
 	def _pathValid(self, path):
 		for x in path[::2]:
-			if not (250 < x < 2750):
+			if not (400 < x < 2600):
 				return False
 		for y in path[1::2]:
-			if not (250 < y < 1850):
+			if not (200 < y < 1500):
 				return False
 		return True
 
