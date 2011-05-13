@@ -6,14 +6,16 @@ import sys
 from protocole import *
 import colorConsol
 
-
+MOD_TCP = 0
+MOD_CIN = 1
 		
 class RobotClient(threading.Thread):
-	def __init__(self, robot):
+	def __init__(self, robot, mod):
 		threading.Thread.__init__(self,None,None,"RobotClient")
-		
-		self._listFifo = list()
+
 		self.robot = robot
+		self.mod = mod
+		self._listFifo = list()
 		self._lock_fifo = threading.Lock()
 		
 		self._partialMsg = ""
@@ -21,11 +23,13 @@ class RobotClient(threading.Thread):
 		self._e_close = threading.Event()
 		
 		# connection
-		host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
-		port = int(sys.argv[2]) if len(sys.argv) > 2 else 50000			# The same port as used by the server
-		self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self._socket.settimeout(1.0)
-		self._socket.connect((host, port))
+		if self.mod == MOD_TCP:
+			host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
+			port = int(sys.argv[2]) if len(sys.argv) > 2 else 50000			# The same port as used by the server
+			self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			self._socket.settimeout(1.0)
+			self._socket.connect((host, port))
+		
 
 	def combineWithPartial(self, msg):
 		"""
@@ -49,11 +53,12 @@ class RobotClient(threading.Thread):
 		Envoie le message au serveur
 		"""
 		if not self._e_close.isSet():
-			self._socket.send(str(msg).strip()+"\n")
+			msg = str(msg).strip()
+			if self.mod == MOD_TCP:
+				self._socket.send(msg+"\n")
+			else:
+				print msg
 			self.write("Send : %s"%msg)
-			if msg == 'close':
-				self._e_close.set()
-				self.write("break send")
 	
 	def run(self):
 		""" 
@@ -61,13 +66,17 @@ class RobotClient(threading.Thread):
 		"""
 		while not self._e_close.isSet():
 			try:
-				data = self._socket.recv(1024) # en octets/chars
+				if self.mod == MOD_TCP:
+					data = self._socket.recv(1024) # en octets/chars
+				else:
+					data = raw_input()+"\n"
 			except socket.timeout:
 				pass
 			else:
 				if not data or str(data) == 'close':
-					self._socket.close()
-					self._e_close.set()
+					if self.mod == MOD_TCP:
+						self._socket.close()
+						self._e_close.set()
 					self.write("break recv")
 				else:
 					for msg in self.combineWithPartial(data):

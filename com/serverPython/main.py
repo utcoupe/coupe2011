@@ -13,6 +13,7 @@ server = Server()
 
 #server.addSubprocessClient("clients/python/UDPClient/main.py")
 server.addSubprocessClient("./UTCamera");
+#server.addSubprocessClient(["../../../IA/main.py","1","0"])
 
 import glob
 

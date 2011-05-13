@@ -13,6 +13,7 @@ from loopCmd import *
 import time
 import math
 import threading
+import sys
 from debugClient import *
 from pathfinding import *
 from geometry.vec import *
@@ -22,6 +23,9 @@ from geometry.circle import *
 
 MAX_MSG		= 10000
 VITESSE 	= 130
+DEFAULT_MOD = MOD_TCP
+DEFAULT_DEBUG	= 1
+
 
 # constantes de recalage
 RECAL_X		= 3
@@ -42,9 +46,18 @@ class Robot:
 		self.msg_events[id_msg]
 		"""
 		self._lock_write = threading.Lock()
+
+		mod = DEFAULT_MOD
+		debug_lvl = DEFAULT_DEBUG
+		
+		if len(sys.argv) > 1:
+			mod = int(sys.argv[1])
+		if len(sys.argv) > 2:
+			debug_lvl = int(sys.argv[2])
+
 		
 		self.pinces = (Pince(), Pince())
-		self.client = RobotClient(self)
+		self.client = RobotClient(self,mod)
 		
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
 		self.pos = (0,0,0)
@@ -55,7 +68,7 @@ class Robot:
 		self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
 		self.id_msg = 0
 		
-		self.debug = Debug()
+		self.debug = Debug(debug_lvl)
 
 		self.color = RED
 	
@@ -119,7 +132,7 @@ class Robot:
 		self._lock_write.acquire()
 		try:
 			if color: print color+str(msg).strip()+colorConsol.ENDC
-			else: print str(msg).strip()
+			else: sys.stderr.write(str(msg).strip()+"\n")
 		finally:
 			self._lock_write.release()
 	
