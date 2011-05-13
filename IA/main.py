@@ -126,7 +126,7 @@ class Robot:
 	def start(self):
 		""" démarage du robot """
 		self.client.start()
-
+		
 		"""
 		self.color = BLUE
 		pions = [Pion(2300,600),Pion(2300,200)]
@@ -181,6 +181,10 @@ class Robot:
 		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
 		#"""
 		
+		while 1:
+			self.do_path(((1500,0),))
+			self.do_path(((0,0),))
+			
 		while not self._e_stop.isSet():
 			self.update_pos()
 			self.debug.log(D_UPDATE_POS,self.pos)
