@@ -3,8 +3,6 @@ import subprocess
 
 
 from debug.main import *
-import sys
-sys.path.append('../../com/serverPython/')
 from protocole import *
 
 

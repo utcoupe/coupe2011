@@ -6,7 +6,6 @@ DEBUG de l'IA
 
 import sys
 import traceback
-sys.path.append('../com/serverPython/')
 from protocole import *
 import colorConsol
 

@@ -3,7 +3,6 @@
 import threading
 import socket
 import sys
-sys.path.append('../com/serverPython/')
 from protocole import *
 import colorConsol
 
