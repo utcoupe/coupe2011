@@ -20,7 +20,7 @@ from geometry.circle import *
 
 
 
-MAX_MSG		= 1000
+MAX_MSG		= 10000
 VITESSE 	= 130
 
 # constantes de recalage
@@ -127,6 +127,10 @@ class Robot:
 		""" démarage du robot """
 		self.client.start()
 		
+		while 1:
+			self.do_path(((1000,0),))
+			self.do_path(((0,0),))
+		
 		"""
 		self.color = BLUE
 		pions = [Pion(2300,600),Pion(2300,200)]
@@ -181,9 +185,6 @@ class Robot:
 		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
 		#"""
 		
-		while 1:
-			self.do_path(((1500,0),))
-			self.do_path(((0,0),))
 			
 		while not self._e_stop.isSet():
 			self.update_pos()
@@ -393,7 +394,7 @@ class Robot:
 			nb_point_reach = 0
 			while nb_point_reach<len(path):
 				m = fifo.getMsg(0.5)
-				if time.time() - timeLastPing > 0.5:
+				if inPause and time.time() - timeLastPing > 0.5:
 					self.addCmd(ID_ASSERV, Q_RESUME)
 					inPause = False
 				if m:
