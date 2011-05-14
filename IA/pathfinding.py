@@ -9,6 +9,8 @@ from geometry.line import *
 from geometry.rectangle import *
 
 IN_MOTION = True # tracer le chemin meme pendant le mouvement de la souris
+DEBUG_FIND_PATH = False
+
 
 canevas=None
 def setCanevas(c):
@@ -16,8 +18,12 @@ def setCanevas(c):
 	global canevas
 	canevas = c
 
+def dpr(*o):
+	""" debug print """
+	if DEBUG_FIND_PATH:
+		print o
 
-
+INVALID = 999999999
 maxi = 0
 def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 	"""
@@ -60,9 +66,9 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 						d2, path2 = rec_find_path(circle,B,pions,done+[circle],T2,-1,I)
 						D1,P1 = d1+d2, path1+path2
 					else:
-						D1,P1 =  999999999,[]
+						D1,P1 =  INVALID,[]
 				else:
-					D1,P1 =  999999999,[]
+					D1,P1 =  INVALID,[]
 				
 				if type==1 or type==None:
 					# par dessus
@@ -74,22 +80,22 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 						d2, path2 = rec_find_path(circle,B,pions,done+[circle],T2,1,I)
 						D2,P2 = d1+d2, path1+path2
 					else:
-						D2,P2 =  999999999,[]
+						D2,P2 =  INVALID,[]
 				else:
-					D2,P2 =  999999999,[]
+					D2,P2 =  INVALID,[]
 
 				if not IN_MOTION: canevas.delete(l)
-				if D1 != 999999999 and D2 != 999999999:
+				if D1 != INVALID or D2 != INVALID:
 					if D2 < D1:
-						#print D2,P2
+						dpr(D2,P2)
 						return D2,P2
 					else:
-						#print D1,P1
+						dpr(D1,P1)
 						return D1,P1
 				else:
-					#print "Point mort %s,%s"%(str(A),str(B))
-					#print 999999999
-					return 999999999,[]
+					dpr("Point mort %s,%s"%(str(A),str(B)))
+					dpr(INVALID)
+					return INVALID,[]
 	else:
 		if not IN_MOTION: canevas.delete(l)
 		if intersect!=None:
@@ -97,7 +103,7 @@ def rec_find_path(A,B, pions, done=[], D=None, type=None, intersect=None):
 				D = Line(A,intersect)
 			elif isinstance(B,Vec2):
 				D = Line(intersect,B)
-		#print D.lenght(), [D]
+		dpr(D.lenght(), [D])
 		return D.lenght(), [D]
 			
 	
@@ -110,20 +116,22 @@ def find_path(A,B, pions):
 
 	@return liste<int> le chemin sous forme [Ax,Ay, x1,y1, x2,y2, ... , Bx, By]
 	"""
+	for p in pions:
+		if A in p or B in p:
+			return None
 	global maxi
 	maxi = 0
 	d, droites = rec_find_path(A, B, pions)
-	#print "droites :",droites
-	for d in droites:
-		d.tracer
-	path = [A.x, A.y]
-	for d1,d2 in zip(droites[:-1],droites[1:]):
-		print d1,d2
-		I = d1 & d2
-		path.append(I.x)
-		path.append(I.y)
-	path.append(B.x)
-	path.append(B.y)
+	dpr("droites :",droites)
+	path = []
+	if droites:
+		path += [A.x, A.y]
+		for d1,d2 in zip(droites[:-1],droites[1:]):
+			dpr(d1,d2)
+			I = d1 & d2
+			path.append(I.x)
+			path.append(I.y)
+		path += [B.x,B.y]
 		
-	#print "path :",path
+	dpr("path :",path)
 	return path

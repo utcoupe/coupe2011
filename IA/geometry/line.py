@@ -9,7 +9,12 @@ import copy
 
 
 class Line:
-	def __init__(self,A,B):
+	def __init__(self,A, B):
+		self.A = copy.deepcopy(A)
+		self.B = copy.deepcopy(B)
+		self.AB = Vec2(B.x - A.x, B.y - A.y)
+		self.teta = atan2(self.AB.y, self.AB.x)
+		"""$
 		A = copy.deepcopy(A)
 		B = copy.deepcopy(B)
 		self.invers = 1 # pour la fonction pointFrom(..)
@@ -30,10 +35,11 @@ class Line:
 		
 		if self.m!=None: self.k = A.y - self.m*A.x # y=m*x+k
 		else: self.k = self.A.x # x=K
+		"""
 	
 	def tracer(self,canevas, **options):
 		return canevas.create_line(self.A.x,self.A.y,self.B.x,self.B.y,options)
-		#return canevas.create_line(0,self.y(0),500,self.y(500),fill=color)
+		
 	
 	def y(self,x):
 		return self.m*x+self.k
@@ -53,11 +59,13 @@ class Line:
 	
 	def cosT(self):
 		""" @return cos teta """
-		return float(self.AB.x) / float(self.lenght())
+		return cos(self.teta)
+		#return float(self.AB.x) / float(self.lenght())
 	
 	def sinT(self):
 		""" @return sin teta """
-		return float(self.AB.y) / float(self.lenght())
+		return sin(self.teta)
+		#return float(self.AB.y) / float(self.lenght())
 	
 	def add2K(self, K):
 		self.k += K
@@ -71,6 +79,14 @@ class Line:
 		
 	def __and__(self, other):
 		if isinstance(other, Line):
+			if other.teta != self.teta:
+				tanTb = tan(other.teta)
+				r1 = ((other.A.y - self.A.y) + ((self.A.x - other.A.x) * tanTb)) / (self.sinT() - self.cosT()*tanTb)
+				return self.A + Vec2(r1 * self.cosT(), r1 * self.sinT())
+			else:
+				return None
+			
+			"""$
 			if self.m and other.m:
 				if (self.m-other.m != 0):
 					x = float(other.k-self.k)/float(self.m-other.m)
@@ -81,14 +97,16 @@ class Line:
 				if self.m: # other.x=k
 					return Vec2(other.k, self.y(other.k))
 				elif other.m: # self.x=k
-					return Vec2(self.k, other.y(self.k))
-		elif isinstance(other,Vec2):
-			return other
+					return Vec2(self.k, other.y(self.k))"""
+		elif isinstance(other,Vec):
+			raise Exception("not implemented yet")
+		elif not other:
+			return None
 		else:
 			return other & self
 	
 	def __repr__(self):
-		return "Line"+str((self.A,self.B,self.AB))
+		return "Line"+str((self.A,self.B,self.teta,self.lenght()))
 
 	def pointFrom(self, M, d):
 		"""
@@ -104,6 +122,7 @@ class Line:
 		return M + (x,y)
 		
 
+'''$
 class Tangente(Line):
 	def __init__(self, A, C, type):
 		"""
@@ -111,6 +130,8 @@ class Tangente(Line):
 		@param C (Circle) le cercle
 		@param type (0 ou 1) le type (dessous/dessus)
 		"""
+
+		
 		O = C.O
 		R = C.R
 		AO = Vec2(O.x-A.x, O.y-A.y)
@@ -144,6 +165,8 @@ class Tangente(Line):
 		else:
 			print "ERROR : Tangente.__init__(%s,%s,%s) distance entre le point et le centre null"%(A,C,type)
 			Line.__init__(self,A,A)
+		"""
 		
 	def __repr__(self):
 		return "Tangente"+str((self.A,self.B,self.AB))
+'''

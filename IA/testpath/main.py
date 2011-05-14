@@ -54,8 +54,8 @@ def clic_B(event):
 	
 	t = time.time()
 	path = find_path(DEPART,ARRIVE,map(lambda p: Circle(p, 50), pions))
-	print (time.time() - t)*100,"ms"
-	lines = canevas.create_line(path,fill="green",width=1)
+	print (time.time() - t)*1000,"ms"
+	if path: lines = canevas.create_line(path,fill="green",width=1)
 	DEPART = None
 	B = None
 
@@ -84,8 +84,8 @@ def motion(event):
 				ARRIVE = Vec2(event.x, event.y)
 				t = time.time()
 				path = find_path(DEPART,ARRIVE,map(lambda p: Circle(p, 50), pions))
-				print (time.time() - t)*100,"ms"
-				lines = canevas.create_line(path,fill="green",width=1)
+				print (time.time() - t)*1000,"ms"
+				if path: lines = canevas.create_line(path,fill="green",width=1)
 	elif right_press:
 		pion = canevas.create_oval(event.x-50, event.y-50,event.x+50, event.y+50, fill="red")
 	
