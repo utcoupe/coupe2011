@@ -118,7 +118,7 @@ def find_path(A,B, pions):
 	"""
 	for p in pions:
 		if A in p or B in p:
-			return None
+			return []
 	global maxi
 	maxi = 0
 	d, droites = rec_find_path(A, B, pions)
