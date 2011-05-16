@@ -22,8 +22,8 @@ void initSensor(){
 	digitalWrite(PIN_JACK, HIGH);
 	digitalRead(PIN_COLOR);
 	digitalRead(PIN_JACK);
-	attachInterrupt(PIN_COLOR,valueChangeOnSwitchColor,CHANGE);
-	attachInterrupt(PIN_JACK,valueChangeOnJack,CHANGE);
+	attachInterrupt(INTERRUPT_COLOR,valueChangeOnSwitchColor,CHANGE);
+	attachInterrupt(INTERRUPT_JACK,valueChangeOnJack,CHANGE);
 	// let bleu et rouge
 	pinMode(LED_BLEU, OUTPUT);
 	pinMode(LED_ROUGE, OUTPUT);
