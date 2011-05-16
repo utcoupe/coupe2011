@@ -43,16 +43,26 @@ void initSensor(){
 
 void valueChangeOnSwitchColor()
 {
-	int c = digitalRead(PIN_COLOR);
-	
-	sendMessage(W_SWITCH_COLOR, c);
+	static long long int lastTime = 0;
+
+	if (millis() - lastTime > 500)
+	{
+		int c = digitalRead(PIN_COLOR);
+		sendMessage(W_SWITCH_COLOR, c);
+		lastTime = millis();
+	}
 }
 
 void valueChangeOnJack()
 {
-	int v = digitalRead(PIN_JACK);
-
-	sendMessage(W_JACK, v);
+	static long long int lastTime = 0;
+	
+	if (millis() - lastTime > 500)
+	{
+		int v = digitalRead(PIN_JACK);
+		sendMessage(W_JACK, v);
+		lastTime = millis();
+	}
 }
 
 int setLED(unsigned char color){
