@@ -13,7 +13,7 @@
 #define NB_MS 		2
 
 //define jack et couleur
-#define PIN_JACK 	3 35
+#define PIN_JACK 	3
 #define LED_BLEU 	29
 #define LED_ROUGE 	33
 #define BLEU 		0
@@ -21,7 +21,7 @@
 
 
 // pin couleur
-#define PIN_COLOR	2 31
+#define PIN_COLOR	2
 
 //define sharp
 #define FACEAV 		0

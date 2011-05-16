@@ -42,7 +42,7 @@ void valueChangeOnSwitchColor()
 
 void valueChangeOnJack()
 {
-	int v = digitalRead(PIN_JACK)
+	int v = digitalRead(PIN_JACK);
 
 	sendMessage(W_JACK, v);
 }
