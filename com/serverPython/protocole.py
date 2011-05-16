@@ -61,3 +61,5 @@ E_INVALID_PARAMETERS_NUMBERS		= -2
 W_PING_AV							= -30
 W_PING_AR							= -31
 W_STOP								= -42
+W_SWITCH_COLOR						= -21
+W_JACK								= -22

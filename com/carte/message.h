@@ -68,6 +68,8 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
 #define	E_INVALID_TYPE_PARAMETERS			-3
+#define W_SWITCH_COLOR						-21
+#define W_JACK								-22
 #define W_STOP								-42
 
 

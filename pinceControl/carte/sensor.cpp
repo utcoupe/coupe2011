@@ -9,63 +9,7 @@ int pingArMessageID;
 
 
 
-int getPion(unsigned char face){
-	int value,value2;
-	//test des sharp du bas vers le haut
-	if(face == FACEAV){
-		//test 1
-		value = getSharp(SHARP_AV1);
-		if(value>DIST_MAX1 && value<DIST_MIN1){
-			//au moin 1 pion
-			//test 2 sharp type 2 (value ou value 2)
-			value = getSharp(SHARP_AV2G);
-			value2 = getSharp(SHARP_AV2D);
-			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
-				//test 3 sharp type 1
-				value = getSharp(SHARP_AV3);
-				if(value>DIST_MAX1 && value<DIST_MIN1){
-					//test 4
-					value = getSharp(SHARP_AV4);
-					if(value>DIST_MAX1 && value<DIST_MIN1){
-						//test 5
-						value = getSharp(SHARP_AV5);
-						if(value>DIST_MAX1 && value<DIST_MIN1){
-									return 5; // tete sur 2 pion
-						} else return 4; // tete sur pion
-					} else return 3; // tete
-				}else return 2; // 2 pion
-			}else return 1; // 1 pion seul
-		}else return 0; //pas de pion
-	}
-	
-	if(face == FACEAR){
-		//test 1
-		value = getSharp(SHARP_AR1);
-		if(value>DIST_MAX1 && value<DIST_MIN1){
-			//au moin 1 pion
-			//test 2 sharp type 2 (value ou value 2)
-			value = getSharp(SHARP_AR2G);
-			value2 = getSharp(SHARP_AR2D);
-			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
-				//test 3 sharp type 1
-				value = getSharp(SHARP_AR3);
-				if(value>DIST_MAX1 && value<DIST_MIN1){
-					//test 4
-					value = getSharp(SHARP_AR4);
-					if(value>DIST_MAX1 && value<DIST_MIN1){
-						//test 5
-						value = getSharp(SHARP_AR5);
-						if(value>DIST_MAX1 && value<DIST_MIN1){
-									return 5; // tete sur 2 pion
-						} else return 4; // tete sur pion
-					} else return 3; // tete
-				}else return 2; // 2 pion
-			}else return 1; // 1 pion seul
-		}else return 0; //pas de pion
-	}
-	
-	return 6; //erreur
-}
+
 
 void initSensor(){
 	pinMode(PIN_MS_AV, INPUT);  
@@ -84,6 +28,23 @@ void initSensor(){
 	JackMessageID=-42;
 	pingAvMessageID=-42;
 	pingArMessageID=-42;
+	
+	attachInterrupt(PIN_COLOR,valueChangeOnSwitchColor,CHANGE);
+	attachInterrupt(PIN_JACK,valueChangeOnJack,CHANGE);
+}
+
+void valueChangeOnSwitchColor()
+{
+	int c = digitalRead(PIN_COLOR);
+	
+	sendMessage(W_SWITCH_COLOR, c);
+}
+
+void valueChangeOnJack()
+{
+	int v = digitalRead(PIN_JACK)
+
+	sendMessage(W_JACK, v);
 }
 
 int setLED(unsigned char color){
@@ -104,14 +65,13 @@ int setLED(unsigned char color){
 	return -42;
 }
 
-int waitJack(){
-	//attend le branchement d'un jack (il peut etre deja branché)
-	while(digitalRead(PIN_JACK)!=HIGH)
-		delay(40);
-	//attend le debranchement du jack
-	while(digitalRead(PIN_JACK)!=LOW)
-		delay(40);
-	return 2;
+int getColor()
+{
+	int c = digitalRead(PIN_COLOR);
+	if (c == LOW)
+		return BLEU;
+	else
+		return ROUGE;
 }
 
 int getSharp(unsigned char pin)
@@ -293,15 +253,62 @@ void sensorTrigger(){
 }
 
 
-int getColor()
-{
-	int c = digitalRead(PIN_COLOR);
-	if (c == LOW)
-		return BLEU;
-	else
-		return ROUGE;
+
+int getPion(unsigned char face){
+	int value,value2;
+	//test des sharp du bas vers le haut
+	if(face == FACEAV){
+		//test 1
+		value = getSharp(SHARP_AV1);
+		if(value>DIST_MAX1 && value<DIST_MIN1){
+			//au moin 1 pion
+			//test 2 sharp type 2 (value ou value 2)
+			value = getSharp(SHARP_AV2G);
+			value2 = getSharp(SHARP_AV2D);
+			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
+				//test 3 sharp type 1
+				value = getSharp(SHARP_AV3);
+				if(value>DIST_MAX1 && value<DIST_MIN1){
+					//test 4
+					value = getSharp(SHARP_AV4);
+					if(value>DIST_MAX1 && value<DIST_MIN1){
+						//test 5
+						value = getSharp(SHARP_AV5);
+						if(value>DIST_MAX1 && value<DIST_MIN1){
+									return 5; // tete sur 2 pion
+						} else return 4; // tete sur pion
+					} else return 3; // tete
+				}else return 2; // 2 pion
+			}else return 1; // 1 pion seul
+		}else return 0; //pas de pion
+	}
+	
+	if(face == FACEAR){
+		//test 1
+		value = getSharp(SHARP_AR1);
+		if(value>DIST_MAX1 && value<DIST_MIN1){
+			//au moin 1 pion
+			//test 2 sharp type 2 (value ou value 2)
+			value = getSharp(SHARP_AR2G);
+			value2 = getSharp(SHARP_AR2D);
+			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
+				//test 3 sharp type 1
+				value = getSharp(SHARP_AR3);
+				if(value>DIST_MAX1 && value<DIST_MIN1){
+					//test 4
+					value = getSharp(SHARP_AR4);
+					if(value>DIST_MAX1 && value<DIST_MIN1){
+						//test 5
+						value = getSharp(SHARP_AR5);
+						if(value>DIST_MAX1 && value<DIST_MIN1){
+									return 5; // tete sur 2 pion
+						} else return 4; // tete sur pion
+					} else return 3; // tete
+				}else return 2; // 2 pion
+			}else return 1; // 1 pion seul
+		}else return 0; //pas de pion
+	}
+	
+	return 6; //erreur
 }
-
-
-
 
