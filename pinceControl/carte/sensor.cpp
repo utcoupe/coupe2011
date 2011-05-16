@@ -12,14 +12,24 @@ int pingArMessageID;
 
 
 void initSensor(){
+	// micro switch
 	pinMode(PIN_MS_AV, INPUT);  
 	pinMode(PIN_MS_AR, INPUT);
+	// interrupt jack et couleur
 	pinMode(PIN_COLOR, INPUT);
 	pinMode(PIN_JACK, INPUT);
+	digitalWrite(PIN_COLOR, HIGH);
+	digitalWrite(PIN_JACK, HIGH);
+	digitalRead(PIN_COLOR);
+	digitalRead(PIN_JACK);
+	attachInterrupt(PIN_COLOR,valueChangeOnSwitchColor,CHANGE);
+	attachInterrupt(PIN_JACK,valueChangeOnJack,CHANGE);
+	// let bleu et rouge
 	pinMode(LED_BLEU, OUTPUT);
 	pinMode(LED_ROUGE, OUTPUT);
 	digitalWrite(LED_BLEU,LOW);
 	digitalWrite(LED_ROUGE,LOW);
+	
 	for(int i=0;i<NB_SHARP;i++)
 		trigerSharp[i].pin=-1;
 	for(int i=0;i<NB_MS;i++)
@@ -29,8 +39,6 @@ void initSensor(){
 	pingAvMessageID=-42;
 	pingArMessageID=-42;
 	
-	attachInterrupt(PIN_COLOR,valueChangeOnSwitchColor,CHANGE);
-	attachInterrupt(PIN_JACK,valueChangeOnJack,CHANGE);
 }
 
 void valueChangeOnSwitchColor()
