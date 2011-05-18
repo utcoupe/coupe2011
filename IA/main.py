@@ -1,6 +1,11 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
+Il y a trois type de fonctions:
+- calcul un calcul de l'IA, aucun échange avec le serveur n'est necessaire
+- blockant une fonction communiquant avec le serveur et attendant des réponses
+- non-blockant une fonction communiquant avec le serveur sans attendre de réponse
+
 CheckList
 - Vérifier timer
 - Vérifier la vitesse
@@ -38,10 +43,12 @@ if MOD == RELEASE:
 	VITESSE		= 200
 	CONN_MOD	= MOD_CIN
 	DEBUG_LVL	= 0
+	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX, c'est qu'il ne doit plus être sur la carte
 else:
 	VITESSE 	= 130
 	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 1
+	AGE_MAX		= 10
 
 
 # constantes de recalage
@@ -55,9 +62,7 @@ class Robot:
 		"""
 		Lorsque le robot envoie un message, il envoi aussi un id_msg compris entre 0 et MAX_MSG
 		Lorsqu'il reçoit un message, il sait de qui il provient grâce au server,
-		il retrouve ensuite à quelle commande il correspond grâce à l'id_msg,
-		il active alors deux events : celui self.events[id_device][id_cmd] et celui
-		self.msg_events[id_msg]
+		il retrouve ensuite à quelle commande il correspond grâce à l'id_msg. (opération effectuée dans RobotClient)
 		"""
 		self._lock_write = threading.Lock()
 		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
@@ -80,6 +85,7 @@ class Robot:
 		self.write("VITESSE : %s"%VITESSE, colorConsol.OKBLUE)
 		self.write("CONN_MOD : %s"%CONN_MOD, colorConsol.OKBLUE)
 		self.write("DEBUG_LVL : %s"%DEBUG_LVL, colorConsol.OKBLUE)
+		self.write("AGE_MAX : %s"%AGE_MAX, colorConsol.OKBLUE)
 		
 		self.pinces = (Pince(), Pince())
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
@@ -169,9 +175,11 @@ class Robot:
 		"""
 		while True:
 			if MOD == DEBUG:
-				self.pos = (1000,1000,0)
-				self.color = RED
-				pions = [Pion(1200,600),]
+				#"""
+				self.color = BLUE
+				self.pos = (1500,1000,90)
+				self.debug.log(D_UPDATE_POS, self.pos)
+				pions = [Pion(2300,600),Pion(2300,2000)]
 				for p in pions:
 					p.calculCase()
 					p.calculColor(self.color)
@@ -179,29 +187,16 @@ class Robot:
 				#self.findTakeTarget(pions)
 				self.findPoussTarget(pions)
 				raw_input("press")
-				self.stop()
 				return
+				#"""
+				"""
+				self.write("* CALIBRATION MANUELLE *")
+				self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
+				self.write("")
+				#self.calibCam()
+				#self.testCam()
+				#"""
 
-			"""
-			self.color = BLUE
-			pions = [Pion(2300,600),Pion(2300,200)]
-			for p in pions:
-				p.calculCase()
-				p.calculColor(self.color)
-			self.pos = (1500,1000,90)
-			self.debug.log(D_UPDATE_POS, self.pos)
-			self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
-			target, objectif, path = self.findTarget(pions)
-			raw_input()
-			return
-			#"""
-			"""
-			self.write("* CALIBRATION MANUELLE *")
-			self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
-			self.write("")
-			#self.calibCam()
-			#self.testCam()
-			#"""
 
 			if self.preparation() >= 0:
 			
@@ -309,6 +304,21 @@ class Robot:
 		return retour
 		
 	def updatePions(self, l):
+		"""
+		(calcul)
+		@todo cette focntion est à chier pour l'instant (surtout le filtre avec l'age),
+		il faudrait savoir quels pions ont bougés, par exemple à partir de
+		quel angle du robot a été fait le scan on peut savoir quels pions de
+		l'ancien scan sont affectés, on peut donc savoir que si un pion n'est
+		pas retrouvé dans ce champs c'est qu'il a été déplacé.
+		
+		A partir du résultat du nouveau scan et de l'ancien, l'IA doit
+		faire un "merge", le résultat est stocké dans self.pions
+		
+		@param l (list<Pion>) le résultat du scan
+
+		@return None (le résultat est mis dans self.pions
+		"""
 		# update des pions
 		pions_to_add = []
 		for new_p in l:
@@ -320,7 +330,7 @@ class Robot:
 				pions_to_add.append(new_p)
 		self.pions += pions_to_add
 
-		self.pions = filter(lambda p: p.age() < 2, self.pions)
+		self.pions = filter(lambda p: p.age() < AGE_MAX, self.pions)
 		
 		self.debug.log(D_DELETE_PATH)
 		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
@@ -679,7 +689,7 @@ class Robot:
 		# les position des cases aec un pion dessus
 		cases_with_pion = map(lambda p: p.case, pions)
 		# le périmètre de jeu : là où l'on peut poser les pions
-		game_rectangle = Rectangle((1150,0),(1850,1750))
+		game_rectangle = Rectangle((450,0),(2550,1750))
 		
 		# on cherche une cible
 		for p in pions:
