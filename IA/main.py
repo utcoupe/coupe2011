@@ -823,11 +823,33 @@ class Robot:
 			self.do_path(((self.sym(2375),175), (self.sym(2375),525), (self.sym(1825),525), (self.sym(2375),525), (self.sym(2375), 1225), (self.sym(1825), 1225)))
 			
 
-	def sym(self,x):
-		return 3000 - x
+	def symX(self,x):
+		"""
+		(calcul)
+		Fonction ne s'appliquant que si la couleur est ROUGE
+		Symétrique par rapport au milieu du terrain
+		Fonction à appliquer à tous les points en dur
+		@param x (mm) abscisse
+		@return symétrique si couleur ROUGE
+		"""
+		if self.color == RED:
+			return 3000 - x
+		else:
+			return x
 
-	def syma(self,a):
-		return 180 - a
+	def symA(self,a):
+		"""
+		(calcul)
+		Fonction ne s'appliquant que si la couleur est ROUGE
+		Symétrique par rapport au milieu du terrain
+		Fonction à appliquer à tous les points en dur
+		@param a (degrès) l'angle
+		@return symétrique si couleur ROUGE
+		"""
+		if self.color == RED:
+			return 180 - a
+		else:
+			return a
 
 
 		
