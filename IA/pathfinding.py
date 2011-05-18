@@ -114,7 +114,7 @@ def find_path(A,B, pions):
 	@param A,B (Vec2) depart/arrivé
 	@param pions (liste<Circle>) les obstacles
 
-	@return liste<int> le chemin sous forme [Ax,Ay, x1,y1, x2,y2, ... , Bx, By]
+	@return liste< <x,y> > le chemin
 	"""
 	for p in pions:
 		if A in p or B in p:
@@ -125,13 +125,12 @@ def find_path(A,B, pions):
 	dpr("droites :",droites)
 	path = []
 	if droites:
-		path += [A.x, A.y]
+		path.append((A.x, A.y))
 		for d1,d2 in zip(droites[:-1],droites[1:]):
 			dpr(d1,d2)
 			I = d1 & d2
-			path.append(I.x)
-			path.append(I.y)
-		path += [B.x,B.y]
+			path.append((I.x,I.y))
+		path.append((B.x,B.y))
 		
 	dpr("path :",path)
 	return path

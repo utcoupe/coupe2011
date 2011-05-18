@@ -20,7 +20,7 @@ PION_2_T		= 5 # pion double + tour
 
 class Pion:
 	def __init__(self, x ,y, t=PION_1):
-		self.pos = Vec(x,y)
+		self.pos = Vec2(x,y)
 		self.type = t # flag
 		self.time = time.time()
 		self.color = UNKNOWN
@@ -74,8 +74,10 @@ class Pion:
 	def calculCase(self):
 		x,y = self.pos.x, self.pos.y
 		# la position du centre de la case sur laquelle est le pion
-		self.case = Vec((x-450)/350*350+175+450, y/350*350+175)
+		self.case = Vec2((x-450)/350*350+175+450, y/350*350+175)
 		
+	def isOtherColor(self, otherColor):
+		return (self.color == RED and otherColor == BLUE) or (self.color == BLUE and otherColor == RED)
 		
 	def __repr__(self):
 		return "Pion(%s, type=%s)"%(self.pos,self.type)

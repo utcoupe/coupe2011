@@ -168,9 +168,17 @@ class Robot:
 		Démarage du robot
 		"""
 		while True:
-			while MOD == DEBUG:
-				continue
-				self.do_path(((1000,0),(0,0)))
+			if MOD == DEBUG:
+				self.pos = (1000,1000,0)
+				self.color = RED
+				pions = [Pion(1200,600),]
+				for p in pions:
+					p.calculCase()
+					p.calculColor(self.color)
+				self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
+				self.findTakeTarget(pions)
+				raw_input("press")
+				return
 
 			"""
 			self.color = BLUE
@@ -193,7 +201,7 @@ class Robot:
 			#self.testCam()
 			#"""
 
-			if self.preparation() != Q_KILL:
+			if self.preparation() >= 0:
 			
 				if MOD == RELEASE: threading.Timer(88, self.stop, ("90s !",)).start()
 				if self.color == BLUE:
@@ -201,7 +209,6 @@ class Robot:
 				else:
 					self.do_path(((2000,300),))
 				self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
-				#"""
 
 				
 				while not self._e_stop.isSet():
@@ -591,26 +598,17 @@ class Robot:
 		"""
 		return filter(lambda p: (0 < p.pos.x < 3000) and (0 < p.pos.y < 2100), l)
 
-
-
-	def findTarget(self,pions):
+	def sortPionsByImportance(self, pions):
 		"""
-		(blockant)
-		traitement du scan de la carte avec notre position actuelle
+		(calcul)
+		Tri les pions par ordre d'importance (les pions que l'IA va essayer
+		de récupérer en premier, pour l'instant plus un pion est proche
+		plus il est important.
 
-		@param pions liste<Pion>
-		
-		@return target(Pion),objectif(Vec),path([x1,y1,x2,y2,...])
+		@param pions (list< <x,y> >)
+
+		@return None (la liste est passée en pointeur)
 		"""
-		# algo de détermination quel pion prendre (probablement le plus proche)
-		# pathfinding pour esquiver nos pions
-		# retourne la cible choisie et le path
-		# self.client.send("asserv", Q_GOAL_ABS, <devant le pion>)
-		# self.client.Send("asserv", Q_ANGLE_ABS, <faceau pion>)
-		self.debug.log(D_DELETE_PATH)
-		if not pions:
-			return None, None
-			
 		def plusProche(p1,p2):
 			x1,y1 = p1.pos.x,p1.pos.y
 			x2,y2 = p2.pos.x,p2.pos.y
@@ -622,20 +620,58 @@ class Robot:
 
 		# tri pour avoir les pions par proximité
 		pions.sort(cmp=lambda p1,p2: plusProche(p1,p2))
+	
+	def findTakeTarget(self,pions):
+		"""
+		(calcul)
+		Trouve un pion à prendre,
+		renvoie le pion cible et la path
+
+		@param pions (list<Pion>)
+
+		@return target (Pion), path (list< <x,y> >)
+		"""
+		self.debug.log(D_DELETE_PATH)
+		if not pions:
+			return None, []
+			
+		circles = self._findObstacles(pions)
+		
+		# on cherche une cible
+		for p in pions:
+			if p.isOtherColor(self.color):
+				path = find_path(Vec2(self.pos[0],self.pos[1]), p.pos, circles)
+				if self._pathValid(path):
+					self.debug.log(D_SHOW_PATH,path)
+					return p, path
+		return None,[]
+		
+	def findPoussTarget(self,pions):
+		"""
+		(calcul)
+		Trouve un pion à pousser,
+		renvoie le pion cible, l'objectif(la position de la case sur laquelle
+		on veut pousser le pion) et le path
+
+		@param pions liste<Pion>
+		
+		@return target(Pion),objectif(Vec2), path (list< <x,y> >)
+		"""
+		self.debug.log(D_DELETE_PATH)
+		if not pions:
+			return None, None, []
+			
 
 		# on va maintenant chercher le path
-		# comme obstacles on ne prend que nos pions
-		circles = filter(lambda p: p.color == self.color, pions)
-		# on remplace ces Pion par des cercles pour la fonction find_path
-		circles = map(lambda p: Circle(p.pos, 300), circles)
+		circles = self._findObstacles(pions)
 		self.write(circles)
 		
 		# on cherche une cible
 		for p in pions:
-			if (self.color == BLUE and p.color == RED) or (self.color == RED and p.color == BLUE):
+			if p.isOtherColor(self.color):
 				target = p
 				# on va essayer de pousser cette cible par selon l'axe 0x
-				case_direction_pousse = Vec(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x-350, target.case.y)
+				case_direction_pousse = Vec2(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec2(target.case.x-350, target.case.y)
 				if case_direction_pousse.y < 1750 or (1150 < case_direction_pousse < 1850):
 					p = Pion(*case_direction_pousse)
 					p.calculColor(self.color)
@@ -643,14 +679,14 @@ class Robot:
 						# position devant le pion
 						pos_pousse = self._position_pousse(target,case_direction_pousse)
 						# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
-						case_p_pousse = Vec(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec(target.case.x+350, target.case.y)
+						case_p_pousse = Vec2(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec2(target.case.x+350, target.case.y)
 						if  case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
 							# appelle de la fonction
 							path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
 							if self._pathValid(path):
 								break
 				# tentative selon l'axe Oy
-				case_direction_pousse = Vec(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y-350)
+				case_direction_pousse = Vec2(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec2(target.case.x, target.case.y-350)
 				if case_direction_pousse.y < 1750 or (1150 < case_direction_pousse < 1850):
 					p = Pion(*case_direction_pousse)
 					p.calculColor(self.color)
@@ -658,14 +694,14 @@ class Robot:
 						# position de pousse
 						pos_pousse = self._position_pousse(target,case_direction_pousse)
 						# vérif pour nos pions
-						case_p_pousse = Vec(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec(target.case.x, target.case.y+350)
+						case_p_pousse = Vec2(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec2(target.case.x, target.case.y+350)
 						if case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
 							# appelle de la fonction
 							path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
 							if self._pathValid(path):
 								break
 		else: # aucune cible ne convient
-			return None, None, None
+			return None, None, []
 
 
 		case_stop = Line(case_direction_pousse, target.pos).pointFrom(case_direction_pousse,160)
@@ -682,25 +718,43 @@ class Robot:
 		
 		return target, case_direction_pousse, path
 
+	def _findObstacles(self, pions):
+		"""
+		(calcul)
 
+		@param pions (list< <x,y> >)
+
+		@return (list<Circle>) une liste d'obstacles exploitables par findPath
+		"""
+		# comme obstacles on ne prend que nos pions
+		circles = filter(lambda p: p.color == self.color, pions)
+		# on remplace ces Pion par des cercles pour la fonction find_path
+		circles = map(lambda p: Circle(p.pos, 300), circles)
+		return circles
+		
 	def _pathValid(self, path):
-		for x in path[::2]:
-			if not (400 < x < 2600):
-				return False
-		for y in path[1::2]:
-			if not (200 < y < 1500):
+		"""
+		(calcul)
+		Détermine si un path est umprintable par le robot ou non
+
+		@param path (list< <x,y> >)
+		@return True/False
+		"""
+		for x,y in path[::2]:
+			if not (400 < x < 2600) or not (200 < y < 1500):
 				return False
 		return True
 
 		
 	def _position_pousse(self, target, case):
 		"""
+		(calcul)
 		Renvoie la position qui permettra de pousser la target sur la case en avançant droit
 
 		@param target (Pion)
-		@param case (Vec)
+		@param case (Vec2)
 
-		@return (Vec) la position de pousse
+		@return (Vec2) la position de pousse
 		"""
 		l = Line(case, target.pos)
 		return l.pointFrom(target.pos,300)

@@ -155,11 +155,8 @@ if __name__ == "__main__":
 
 		def show_path(self, path):
 			self.delete_path()
-			new_path = []
-			for i in xrange(0,len(path),2):
-				new_path.append(self.X(path[i]))
-				new_path.append(self.Y(path[i+1]))
-			self.path = self.canevas.create_line(new_path,fill="pink", width=2, arrow=Tk.LAST)
+			if path:
+				self.path = self.canevas.create_line(map(lambda p: (self.X(p[0]),self.Y(p[1])),path),fill="pink", width=2, arrow=Tk.LAST)
 		
 		def delete_path(self, params=None):
 			if self.path:
