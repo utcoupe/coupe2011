@@ -42,7 +42,7 @@ class Pion:
 		
 		@param pion (Pion) le pion vu
 		"""
-		self.pos = Vec((self.pos.x+pion.pos.x)/2, (self.pos.y+pion.pos.y)/2)
+		self.pos = Vec2((self.pos.x+pion.pos.x)/2, (self.pos.y+pion.pos.y)/2)
 		self.calculColor(robot_color)
 		self.calculCase()
 		self.time = time.time()

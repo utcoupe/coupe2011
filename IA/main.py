@@ -176,8 +176,10 @@ class Robot:
 					p.calculCase()
 					p.calculColor(self.color)
 				self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
-				self.findTakeTarget(pions)
+				#self.findTakeTarget(pions)
+				self.findPoussTarget(pions)
 				raw_input("press")
+				self.stop()
 				return
 
 			"""
@@ -672,50 +674,47 @@ class Robot:
 			return None, None, []
 			
 
-		# on va maintenant chercher le path
 		circles = self._findObstacles(pions)
-		self.write(circles)
+		self.write("obstacles : %s"%circles)
+		# les position des cases aec un pion dessus
+		cases_with_pion = map(lambda p: p.case, pions)
+		# le périmètre de jeu : là où l'on peut poser les pions
+		game_rectangle = Rectangle((1150,0),(1850,1750))
 		
 		# on cherche une cible
 		for p in pions:
 			if p.isOtherColor(self.color):
 				target = p
-				# on va essayer de pousser cette cible par selon l'axe 0x
-				case_direction_pousse = Vec2(target.case.x+350, target.case.y) if self.pos[0] < target.pos.x else Vec2(target.case.x-350, target.case.y)
-				if case_direction_pousse.y < 1750 or (1150 < case_direction_pousse < 1850):
-					p = Pion(*case_direction_pousse)
-					p.calculColor(self.color)
-					if p.color == RED or p.color == BLUE:
-						# position devant le pion
-						pos_pousse = self._position_pousse(target,case_direction_pousse)
-						# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
-						case_p_pousse = Vec2(target.case.x-350, target.case.y) if self.pos[0] < target.pos.x else Vec2(target.case.x+350, target.case.y)
-						if  case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
-							# appelle de la fonction
-							path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
-							if self._pathValid(path):
-								break
+				# on va essayer de pousser cette cible selon l'axe 0x
+				case_objectif = target.case + (350,0) if self.pos[0] < target.pos.x else target.case + (-350,0)
+				if case_objectif in game_rectangle:
+					# position devant le pion
+					pos_pousse = self._position_pousse(target,case_objectif)
+					# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
+					case_p_pousse = target.case + (-350,0) if self.pos[0] < target.pos.x else target.case + (350,0)
+					if case_p_pousse not in cases_with_pion and case_objectif not in cases_with_pion:
+						# appelle de la fonction
+						path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+						if self._pathValid(path):
+							break
 				# tentative selon l'axe Oy
-				case_direction_pousse = Vec2(target.case.x, target.case.y+350) if self.pos[1] < target.pos.y else Vec2(target.case.x, target.case.y-350)
-				if case_direction_pousse.y < 1750 or (1150 < case_direction_pousse < 1850):
-					p = Pion(*case_direction_pousse)
-					p.calculColor(self.color)
-					if p.color == RED or p.color == BLUE:
-						# position de pousse
-						pos_pousse = self._position_pousse(target,case_direction_pousse)
-						# vérif pour nos pions
-						case_p_pousse = Vec2(target.case.x, target.case.y-350) if self.pos[1] < target.pos.y else Vec2(target.case.x, target.case.y+350)
-						if case_p_pousse not in map(lambda p: p.case, pions) and case_direction_pousse not in map(lambda p: p.case, pions):
-							# appelle de la fonction
-							path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
-							if self._pathValid(path):
-								break
+				case_objectif = target.case + (0,350) if self.pos[1] < target.pos.y else target.case + (0,-350)
+				if case_objectif in game_rectangle:
+					# position devant le pion
+					pos_pousse = self._position_pousse(target,case_objectif)
+					# vérification qu'il n'y a pas un pion à nous sur la case devant ou derrière
+					case_p_pousse = target.case + (0,-350) if self.pos[1] < target.pos.y else target.case + (0,350)
+					if  case_p_pousse not in cases_with_pion and case_objectif not in cases_with_pion:
+						# appelle de la fonction
+						path = find_path(Vec2(self.pos[0],self.pos[1]), pos_pousse, circles)
+						if self._pathValid(path):
+							break
 		else: # aucune cible ne convient
 			return None, None, []
 
 
-		case_stop = Line(case_direction_pousse, target.pos).pointFrom(case_direction_pousse,160)
-		path += [target.pos.x,target.pos.y, case_stop.x, case_stop.y, target.pos.x,target.pos.y]
+		case_stop = Line(case_objectif, target.pos).pointFrom(160)
+		path += [tuple(target.pos), tuple(case_stop), (target.pos.x,target.pos.y)]
 
 		
 		"""# décalage du point d'arrivée (à 120mm du pion)
@@ -726,7 +725,7 @@ class Robot:
 		
 		self.debug.log(D_SHOW_PATH,path)
 		
-		return target, case_direction_pousse, path
+		return target, case_objectif, path
 
 	def _findObstacles(self, pions):
 		"""
@@ -756,20 +755,18 @@ class Robot:
 		return True
 
 		
-	def _position_pousse(self, target, case):
+	def _position_pousse(self, target, objectif):
 		"""
 		(calcul)
 		Renvoie la position qui permettra de pousser la target sur la case en avançant droit
 
-		@param target (Pion)
-		@param case (Vec2)
+		@param target (Pion) le pion à pousser
+		@param objectif (Vec2) case où l'on veut pousser le pion
 
 		@return (Vec2) la position de pousse
 		"""
-		l = Line(case, target.pos)
-		return l.pointFrom(target.pos,300)
-	
-		
+		l = Line(target.pos, objectif)
+		return l.pointFrom(-300)
 		
 	def dumpObj(self, id_pince):
 		"""
@@ -777,8 +774,6 @@ class Robot:
 		ouvrir la pince
 		"""
 		r = self.addBlockingCmd(1, 1, ID_OTHERS, Q_PINCE, id_pince, PINCE_OUVERT)
-		if not r: # timeout
-			self.write("Robot->dumpObj : timeout ouvrir les pinces")
 
 	
 	def takeObj(self, target):
@@ -788,87 +783,7 @@ class Robot:
 		ramasser un objet
 		@return True si l'objet a été pris, False sinon
 		"""
-		# récupération de la position
-		self.update_pos()
-
-		# détection du sens des pinces par rapport à l'objet (on calcul l'angle dans le repère objet)
-		if (target.pos.x-self.pos[0]) == 0:
-			teta = math.pi
-		else:
-			teta = math.atan(float(target.pos.y-self.pos[1]) / float(target.pos.x-self.pos[0]))
-
-		if target.pos.x-self.pos[0] < 0: teta += math.pi
-
-		teta = math.degrees(teta)
-		if abs(self.pos[2] - teta) < 90:
-			id_pince_av, id_pince_ar = PINCE_AV, PINCE_AR
-			self.write("l'objet est devant")
-		else:
-			id_pince_av, id_pince_ar = PINCE_AR,PINCE_AV
-			self.write("l'objet est derrière")
-			
-		# demander une identification de l'objet
-		#id_objet = self.addBlockingCmd(1, 1, ID_OTHERS, Q_PION, id_pince_av)
-		id_objet = PION_1
-		if not id_objet: # timeout
-			self.write("Robot->takeObj : timeout identification de l'objet")
-			return False
-		
-		# checker si on peut le prendre avec la pince avant ou pince arrière
-		if self.pinces[id_pince_av].canAccept(id_objet):
-			id_pince = id_pince_av
-		elif self.pinces[id_pince_ar].canAccept(id_objet):
-			id_pince = id_pince_ar
-		else:
-			# si aucune pince : abandon
-			self.write("Robot->takeObj : aucune pince libre")
-			self.id_pince = None
-			return False
-		self.id_pince = id_pince
-		
-		# si pince arrière demi tour
-		if id_pince == id_pince_ar:
-			self.write("demi tour")
-			r = self.addBlockingCmd(2, (0.5,3), ID_ASSERV, Q_ANGLE_REL, 90, VITESSE-50)
-		
-		# avance vers l'objet
-		self.write("go to %s"%target)
-		r = self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_GOAL_ABS, target.pos.x, target.pos.y, VITESSE)
-		if not r[1]: # timeout
-			self.write("Robot->takeObj : timeout de l'asserv")
-			return False
-			
-		# ouvre la pince
-		self.write("ouvre les pinces")
-		r = self.addBlockingCmd(1, 0.5, ID_OTHERS, Q_PINCE, id_pince, PINCE_OUVERT)
-		if not r: # timeout
-			self.write("Robot->takeObj : timeout ouvrir les pinces")
-			return False
-		
-		# baisse les pinces
-		self.write("baisse les pinces")
-		r = self.addBlockingCmd(2, (0.5,10), ID_OTHERS, Q_PRECAL, id_pince)
-		if not r[1]: # timeout
-			self.write("Robot->takeObj : timeout baisser les pinces")
-			return False
-
-		# fermer la pince
-		self.write("ouvre les pinces")
-		r = self.addBlockingCmd(1, 0.5, ID_OTHERS, Q_PINCE, id_pince, PINCE_FERME)
-		if not r: # timeout
-			self.write("Robot->takeObj : timeout fermer pinces")
-			return False
-		
-		# lève les pinces
-		self.write("lève les pinces")
-		r = self.addBlockingCmd(2, (0.5,10), ID_OTHERS, Q_SETPOSITION, id_pince, 9999)
-		if not r[1]: # timeout
-			self.write("Robot->takeObj : timeout lever les pinces")
-			return False
-
-		self.pinces[id_pince].objet = PION_2_T
-		
-		return True
+		pass
 
 
 	def belge(self):

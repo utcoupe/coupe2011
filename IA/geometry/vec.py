@@ -69,6 +69,18 @@ class Vec2(Vec):
 	
 	def tangente(self, other, type):
 		return other.tangente(self, -type)
+
+	def __lt__(self, other):
+		return self.x < other[0] and self.y < other[1]
+
+	def __le__(self, other):
+		return self.x <= other[0] and self.y <= other[1]
+
+	def __gt__(self, other):
+		return self.x > other[0] and self.y > other[1]
+
+	def __ge__(self, other):
+		return self.x >= other[0] and self.y >= other[1]
 			
 	def __repr__(self):
 		return "Vec2"+str((int(self.x),int(self.y)))
