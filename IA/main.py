@@ -1,11 +1,24 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 """
-@todo interupts danger, 90s pour la majorité des fonctions
+CheckList
+- Vérifier timer
+- Vérifier la vitesse
+- Enlever tous les raw_input()
+
 
 
 """
+##############################
+##		DEBUG/RELEASE		##
+##############################
+RELEASE		= 0
+DEBUG		= 1
+MOD			= DEBUG
 
+##############################
+##			IMPORTS			##
+##############################
 from pince import *
 from robotClient import *
 from msgFifo import *
@@ -20,11 +33,15 @@ from geometry.vec import *
 from geometry.circle import *
 
 
-
 MAX_MSG		= 10000
-VITESSE 	= 130
-DEFAULT_MOD = MOD_TCP
-DEFAULT_DEBUG	= 1
+if MOD == RELEASE:
+	VITESSE		= 200
+	CONN_MOD	= MOD-TCP
+	DEBUG_LVL	= 0
+else:
+	VITESSE 	= 130
+	CONN_MOD	= MOD_TCP
+	DEBUG_LVL	= 1
 
 
 # constantes de recalage
@@ -32,9 +49,6 @@ RECAL_X		= 3
 RECAL_Y		= 4
 RECAL_A		= 5
 
-M_NORMAL	= 0
-M_WARNING	= 1
-M_ERREUR	= 2
 
 class Robot:
 	def __init__(self):
@@ -46,31 +60,39 @@ class Robot:
 		self.msg_events[id_msg]
 		"""
 		self._lock_write = threading.Lock()
-
-		mod = DEFAULT_MOD
-		debug_lvl = DEFAULT_DEBUG
+		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
+		self._e_stop = threading.Event() # pour arreter le robot
+		self.debug = Debug(DEBUG_LVL) # pour debugger
+		threading.Thread(None, self._loopReset, "Robot._loopReset()").start()
 		
-		if len(sys.argv) > 1:
-			mod = int(sys.argv[1])
-		if len(sys.argv) > 2:
-			debug_lvl = int(sys.argv[2])
-
+		if MOD == DEBUG:
+			self.write("##############################", colorConsol.FAIL)
+			self.write("##        MODE DEBUG        ##", colorConsol.FAIL)
+			self.write("##############################", colorConsol.FAIL)
+		elif MOD == RELEASE:
+			self.write("##############################", colorConsol.FAIL)
+			self.write("##       MODE RELEASE       ##", colorConsol.FAIL)
+			self.write("##############################", colorConsol.FAIL)
+		else:
+			self.write("##############################", colorConsol.FAIL)
+			self.write("##       UNKNOWN MODE       ##", colorConsol.FAIL)
+			self.write("##############################", colorConsol.FAIL)
 		
 		self.pinces = (Pince(), Pince())
-		self.client = RobotClient(self,mod)
-		
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
 		self.pos = (0,0,0)
-		self.target_pos = (-1,-1) # la position du pion visé
-		
-		self._e_stop = threading.Event()
+		self.color = RED
 		
 		self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
 		self.id_msg = 0
-		
-		self.debug = Debug(debug_lvl)
 
-		self.color = RED
+		self.client.start() # demarrage du client
+		
+	def _loopReset(self):
+		fifo = self.client.addFifo( MsgFifo( Q_SWITCH_COLOR ) )
+		while True:
+			fifo.getMsg()
+			self.reset()
 	
 	def addCmd(self, id_device, id_cmd, *args):
 		"""
@@ -137,105 +159,138 @@ class Robot:
 			self._lock_write.release()
 	
 	def start(self):
-		""" démarage du robot """
-		self.client.start()
-		
-		
 		"""
-		self.color = BLUE
-		pions = [Pion(2300,600),Pion(2300,200)]
-		for p in pions:
-			p.calculCase()
-			p.calculColor(self.color)
-		self.pos = (1500,1000,90)
-		self.debug.log(D_UPDATE_POS, self.pos)
-		self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
-		target, objectif, path = self.findTarget(pions)
-		raw_input()
-		return
-		#"""
+		Démarage du robot
+
 		"""
-		self.write("* CALIBRATION MANUELLE *")
-		self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
-		self.write("")
-		#self.calibCam()
-		#self.testCam()
-		#"""
+		while True:
+			while MOD == DEBUG:
+				self.do_path(((1000,0),(0,0)))
 
-		#"""
-		self.write("* RÉCUPÉRATION COULEUR *")
-		self.color = int(self.addBlockingCmd(1, 1, ID_OTHERS, Q_COLOR).content)
-		if self.color == RED:
-			self.write("COULEUR ROUGE !")
-		else:
-			self.write("COULEUR BLEU !")
-		self.addCmd(ID_OTHERS, Q_LED, self.color)
-		self.write("")
-
-		
-		self.write("* JACK POUR RECALAGE *")
-		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
-		self.write("* RECALAGE *")
-		r = self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
-		self.write("")
-		
-		self.update_pos()
-		
-		self.write("* ATTENTE DU JACK *")
-		self.addCmd(ID_OTHERS, Q_LED, -1)
-		r = self.addBlockingCmd(2, (0.5,None), ID_OTHERS, Q_JACK)
-		self.addCmd(ID_OTHERS, Q_LED, self.color)
-		self.write("ON Y VAS !")
-		self.write("")
-		threading.Timer(88, self.stop, ("90s !",)).start()
-		if self.color == BLUE:
-			self.do_path(((1000,300),))
-		else:
-			self.do_path(((2000,300),))
-		self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
-		#"""
-
-		# strategie anti belge
-		self.belge()
-		return
-		
-		while not self._e_stop.isSet():
-			self.update_pos()
-			self.debug.log(D_UPDATE_POS,self.pos)
-			self.write("* SCAN *")
-			l = self.scan()
+			"""
+			self.color = BLUE
+			pions = [Pion(2300,600),Pion(2300,200)]
+			for p in pions:
+				p.calculCase()
+				p.calculColor(self.color)
+			self.pos = (1500,1000,90)
+			self.debug.log(D_UPDATE_POS, self.pos)
+			self.debug.log(D_PIONS, map(lambda p: tuple(p), pions))
+			target, objectif, path = self.findTarget(pions)
+			raw_input()
+			return
+			#"""
+			"""
+			self.write("* CALIBRATION MANUELLE *")
+			self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
 			self.write("")
+			#self.calibCam()
+			#self.testCam()
+			#"""
 
-			self.updatePions(l)
+			if self.preparation() != Q_KILL:
 			
-			self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+				if MOD == RELEASE: threading.Timer(88, self.stop, ("90s !",)).start()
+				if self.color == BLUE:
+					self.do_path(((1000,300),))
+				else:
+					self.do_path(((2000,300),))
+				self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
+				#"""
 
-			if self.pions:
-				target, objectif, path = self.findTarget(self.pions)
 				
-				self.write("cible : %s"%target)
-				self.write("objectif : %s"%objectif)
-				self.write("path : %s"%path)
-
-				if target:
-					self.write("* MOVE *")
-					if self.do_path(zip(path[2::2],path[3::2])):
-						# on update la pos actuelle de la target
-						target.pos = objectif
-						self.write("objectif : %s"%objectif)
-						self.write("target.pos : %s"%target.pos)
-						target.calculCase()
-						target.calculColor(self.color)
-						self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+				while not self._e_stop.isSet():
+					self.update_pos()
+					self.debug.log(D_UPDATE_POS,self.pos)
+					self.write("* SCAN *")
+					l = self.scan()
 					self.write("")
-					#raw_input("press")
-					continue
+
+					self.updatePions(l)
 					
-				
-			self.write("* TOURNE *")
-			self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
+					self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+
+					if self.pions:
+						target, objectif, path = self.findTarget(self.pions)
+						
+						self.write("cible : %s"%target)
+						self.write("objectif : %s"%objectif)
+						self.write("path : %s"%path)
+
+						if target:
+							self.write("* MOVE *")
+							if self.do_path(zip(path[2::2],path[3::2])):
+								# on update la pos actuelle de la target
+								target.pos = objectif
+								self.write("objectif : %s"%objectif)
+								self.write("target.pos : %s"%target.pos)
+								target.calculCase()
+								target.calculColor(self.color)
+								self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+							self.write("")
+							#raw_input("press")
+							continue
+							
+						
+					self.write("* TOURNE *")
+					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
+					self.write("")
+
+	def preparation(self):
+		"""
+		Ce qui doit etre fait pendant les 3 minutes
+		Choix de la couleur
+		Recalage
+
+		@return 0 si ok, <0 sinon
+		"""
+		retour = 0
+		fifo = self.client.addFifo( MsgFifo(W_JACK, Q_KILL, Q_COLOR, Q_AUTO_CALIB) )
+		try:
+			self.addCmd(ID_OTHERS, Q_COLOR)
+			self.write("* RÉCUPÉRATION COULEUR *")
+			m = fifo.getMsg(1)
+			if m.id_cmd == Q_COLOR:
+				self.color = int(m.content)
+			elif m.id_cmd == Q_KILL:
+				raise KillException("Q_KILL")
+			
+			if self.color == RED:
+				self.write("COULEUR ROUGE !")
+			else:
+				self.write("COULEUR BLEU !")
+			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			self.write("")
 
+			self.write("* JACK POUR RECALAGE *")
+			m = fifo.getMsg()
+			if m.id_cmd == Q_KILL:
+				raise KillException("Q_KILL")
+			elif m.id_cmd == W_JACK:
+				self.write("* RECALAGE *")
+				self.addCmd(ID_ASSERV, Q_AUTO_CALIB, self.color)
+				fifo.getMsg(0.5)
+				fifo.getMsg()
+				self.write("")
+			
+				self.update_pos()
+			
+				self.write("* ATTENTE DU JACK *")
+				self.addCmd(ID_OTHERS, Q_LED, -1)
+				m = fifo.getMsg()
+				if m.id_cmd == Q_KILL:
+					raise KillException("Q_KILL")
+				elif m.id_cmd == W_JACK:
+					self.addCmd(ID_OTHERS, Q_LED, self.color)
+					self.write("ON Y VAS !")
+					self.write("")
+		except KillException as ex:
+			self.write(ex, colorConsol.FAIL)
+			retour = Q_KILL
+		finally:
+			self.client.removeFifo()
+		return retour
+		
 	def updatePions(self, l):
 		# update des pions
 		pions_to_add = []
@@ -261,22 +316,28 @@ class Robot:
 		self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
 		self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
 		self._e_stop.set()
-		self.client._treat("%s.%s.%s"%(ID_IA,W_STOP,Q_KILL))
+		self.client.stop()
 	
 	def reset(self):
-		""" reset du robot
-		self.client, self.pos, self.pinces ne sont pas remis à zéro
 		"""
+		reset du robot
+		"""
+		self.write("* * * * * * *", colorConsol.FAIL)
+		self.write("*   RESET   *", colorConsol.FAIL)
+		self.write("* * * * * * *", colorConsol.FAIL)
 		self.stop()
-		self.target_pos = (-1,-1) # la position du pion visé
-		# clear des events
-		for events in self.events:
-			for e in events:
-				e.clear()
-		self.id_msg = 0
-		# clear des pions
+		self.client.reset()
+		time.sleep(0.5)
+		
+		self.pinces = (Pince(), Pince())
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
+		self.pos = (0,0,0)
+		self.color = RED
+		self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
+		self.id_msg = 0
+		
 		self._e_stop.clear()
+		self.write("* ROBOT IS READY *", colorConsol.OKGREEN)
 		
 	def isEmpty(self):
 		return (self.pinces[0].isEmpty() and self.pinces[1].isEmpty())
@@ -338,7 +399,7 @@ class Robot:
 					p.calculCase()
 				self.debug.log(D_PIONS, tuple(map(lambda p: tuple(p), l)))
 
-			if '1' == raw_input():
+			if 'q' == raw_input():
 				break
 		
 	def update_pos(self):
@@ -359,15 +420,18 @@ class Robot:
 	def do_path(self, path):
 		"""
 		(blockant)
-		@todo interuption danger, interuption 90s, interuption si erreur parceque la position n'est pas la bonne
-		suit un chemin
+		@todo interuption si erreur parceque la position n'est pas la bonne
+		Suit un chemin
 		La fonction peut tout couper si elle reçoit un message de danger de la tourelle
 		ou si après avoir comparé la position actuelle du robot avec celle éstimée 
 		il y a une anomalie
 		
 		@param path<(x,y)> la liste des points
 		"""
-		if not self._e_stop.isSet():
+		retour = 0
+		if self._e_stop.isSet():
+			retour = -42
+		else:
 			self.update_pos()
 			
 			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_KILL, W_PING_AV, W_PING_AR) )
@@ -380,60 +444,74 @@ class Robot:
 			nb_accuse_recep = 0
 			timeLastPing = 0
 			inPause = False
-			while nb_accuse_recep<len(path):
-				if inPause and time.time() - timeLastPing > 0.5:
-					self.addCmd(ID_ASSERV, Q_RESUME)
-					inPause = False
-				m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
-				if not m:
-					self.write("ERROR : Robot.do_path : accusé de reception non reçu", colorConsol.FAIL)
-					return
-				if m.id_cmd == Q_GOAL_ABS:
-					nb_accuse_recep += 1
-				elif m.id_cmd == Q_KILL: # arret
-					self.write("WARNING : Robot.do_path : arret du robot", colorConsol.WARNING)
-					return
-				elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-					if not inPause :
-						self.addCmd(ID_ASSERV, Q_PAUSE)
-						self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
-						inPause = True
-					timeLastPing = time.time()
-				
-			self.write("Tous les accusés de receptions reçus")
-
-			self.addCmd(ID_ASSERV, Q_GETSENS)
-			
-			nb_point_reach = 0
-			while nb_point_reach<len(path):
-				m = fifo.getMsg(0.5)
-				if inPause and time.time() - timeLastPing > 0.5:
-					self.addCmd(ID_ASSERV, Q_RESUME)
-					inPause = False
-				if m:
+			try:
+				while not self._e_stop.isSet() and nb_accuse_recep<len(path):
+					if inPause and time.time() - timeLastPing > 0.5:
+						self.addCmd(ID_ASSERV, Q_RESUME)
+						inPause = False
+					m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
+					if not m:
+						raise TimeoutException("Robot.do_path : accusé de reception trop long à recevoir")
 					if m.id_cmd == Q_GOAL_ABS:
-						self.addCmd(ID_ASSERV, Q_GETSENS)
-						nb_point_reach += 1
-					elif m.id_cmd == Q_GETSENS:
-						self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
-						self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
-						self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
+						nb_accuse_recep += 1
 					elif m.id_cmd == Q_KILL: # arret
-						self.write("WARINING : Robot.do_path : arret du robot")
-						return
+						raise KillException("Q_KILL")
 					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-						if not inPause:
+						if not inPause :
 							self.addCmd(ID_ASSERV, Q_PAUSE)
-							self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+							self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
 							inPause = True
 						timeLastPing = time.time()
 				
-			self.client.removeFifo(fifo)
-			# arret de l'écoute des pings
-			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
-			self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
+				self.write("Tous les accusés de receptions reçus")
 
-			return True
+				self.addCmd(ID_ASSERV, Q_GETSENS)
+				loopPosition = LoopCmd(self, 0.5, ID_ASSERV, Q_POSITION)
+				loopPosition.start()
+				
+				nb_point_reach = 0
+				while not self._e_stop.isSet() and nb_point_reach<len(path):
+					m = fifo.getMsg(0.5)
+					if inPause and time.time() - timeLastPing > 0.5:
+						self.addCmd(ID_ASSERV, Q_RESUME)
+						inPause = False
+					if m:
+						if m.id_cmd == Q_GOAL_ABS:
+							self.addCmd(ID_ASSERV, Q_GETSENS)
+							nb_point_reach += 1
+						elif m.id_cmd == Q_GETSENS:
+							self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+							self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
+							self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
+						elif m.id_cmd == Q_KILL: # arret
+							raise KillException("Q_KILL")
+						elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+							if not inPause:
+								self.addCmd(ID_ASSERV, Q_PAUSE)
+								self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+								inPause = True
+							timeLastPing = time.time()
+						elif m.id_cmd == Q_POSITION:
+							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+							if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) or (abs(new_pos[2] - self.pos[2]) < 5):
+								self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+								break
+			except KillException as ex:
+				self.write(ex, colorConsol.FAIL)
+				retour = Q_KILL
+			except TimeoutException as ex:
+				self.write(ex, colorConsol.FAIL)
+				retour = Q_KILL
+			finally:
+				# arret de la récupération en boucle de la position
+				loopPosition.stop()
+				# destruction de la fifo
+				self.client.removeFifo(fifo)
+				# arret de l'écoute des pings
+				self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
+				self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
+
+		return retour
 
 			
 	
@@ -760,6 +838,6 @@ class Robot:
 
 		
 if __name__ == '__main__':
-	robot = Robot()	
+	robot = Robot()
 	robot.start()
 	

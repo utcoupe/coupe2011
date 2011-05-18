@@ -3,10 +3,15 @@
 
 C_SEP_SEND = '.'	# séparation entre les données de la commande à envoyer aux cartes
 
+class KillException(Exception):
+	pass
+
+class TimeoutException(Exception):
+	pass
+
 
 Q_IDENT			=	0
 PING			=	1
-Q_KILL			=	-1
 
 # asserv
 Q_GOAL_ABS			=	2
@@ -56,10 +61,10 @@ GREEN	= 2
 AVANT	= 0
 ARRIERE	= 1
 
+Q_KILL								= -42
 E_INVALID_CMD						= -1
 E_INVALID_PARAMETERS_NUMBERS		= -2
 W_PING_AV							= -30
 W_PING_AR							= -31
-W_STOP								= -42
 W_SWITCH_COLOR						= -21
 W_JACK								= -22

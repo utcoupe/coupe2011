@@ -13,10 +13,10 @@ from geometry.vec import *
 ###################
 VIDE			= 0
 PION_1			= 1 # pion simple
-PION_2			= 2 # double pion
-PION_1_T		= 3 # pion simple + tour
-PION_2_T		= 4 # pion double + tour
-TOUR			= 5 # tour simple
+TOUR			= 2 # tour simple
+PION_2			= 3 # double pion
+PION_1_T		= 4 # pion simple + tour
+PION_2_T		= 5 # pion double + tour
 
 class Pion:
 	def __init__(self, x ,y, t=PION_1):

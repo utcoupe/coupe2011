@@ -84,29 +84,48 @@ class RobotClient(threading.Thread):
 				
 	def _treat(self, msg):
 		""" fonction appellée quand un message est reçu """
-		# formatage de la réponse et appelle d'un robot.on<Event>()
 		self.write("Received : '%s'"%msg)
 		msg = str(msg).strip()
 		msg_split = msg.split(C_SEP_SEND,2)
-		id_from = int(msg_split[0]) # l'id du client qui a envoyé le message
-		if id_from != ID_SERVER: # si ce n'est pas le serveur
-			id_msg = int(msg_split[1])
-			if id_msg >= 0: # les erreurs sont en negatif
-				id_cmd = self.robot.cmd[id_msg]
-			else:
-				id_cmd = id_msg
-			msg = msg_split[2].strip() if len(msg_split) > 2 else None
+		try:
+			id_from = int(msg_split[0]) # l'id du client qui a envoyé le message
+			if id_from != ID_SERVER: # si ce n'est pas le serveur
+				id_msg = int(msg_split[1])
+				if id_msg >= 0: # les erreurs sont en negatif
+					id_cmd = self.robot.cmd[id_msg]
+				else:
+					id_cmd = id_msg
+				msg = msg_split[2].strip() if len(msg_split) > 2 else None
 
-			# remplissage des fifo qui attendent
-			for fifo in self._listFifo:
-				fifo.addMsg(id_from, id_msg, id_cmd, msg)
-				
-		else: # si c'est le serveur qui a envoyé la commande
-			id_cmd = msg_split[1]
-			if id_cmd == "scan":
-				self.robot.scan()
+				# remplissage des fifo qui attendent
+				for fifo in self._listFifo:
+					fifo.addMsg(id_from, id_msg, id_cmd, msg)
+					
+			else: # si c'est le serveur qui a envoyé la commande
+				id_cmd = msg_split[1]
+				if id_cmd == "scan":
+					self.robot.scan()
+		except ValueError as ex:
+			self.write(ex, colorConsol.FAIL)
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
 
+	def stop(self):
+		"""
+		Envoi la commande Q_KILL à toutes les fifo,
+		de cette manière toutes les actions en cours du robot devraient s'arreter
+		"""
+		for fifo in self._listFifo:
+			fifo.addMsg(ID_IA, -1, Q_KILL, "kill")
 			
+	def reset(self):
+		"""
+		Appellée lors du reset du robot, cette fonction n'a pas pour
+		effet de reset la connection avec le serveur, elle va juste reset
+		ce qui est utilisé par le robot (le partialMsg et les fifo)
+		"""
+		self._partialMsg = ""
+		self._listFifo = []
 
 	def write(self, msg):
 		""" pour écrire sans se marcher sur les doigts """
