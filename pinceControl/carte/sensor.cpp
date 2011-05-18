@@ -43,10 +43,11 @@ void initSensor(){
 
 void valueChangeOnSwitchColor()
 {
-	static long long int lastTime = 0;
+	static long long lastTime = 0;
 
-	if (millis() - lastTime > 500)
+	if (millis() - lastTime > 100)
 	{
+		delayMicroseconds(100);
 		int c = digitalRead(PIN_COLOR);
 		sendMessage(W_SWITCH_COLOR, c);
 		lastTime = millis();
@@ -57,8 +58,9 @@ void valueChangeOnJack()
 {
 	static long long int lastTime = 0;
 	
-	if (millis() - lastTime > 500)
+	if (millis() - lastTime > 100)
 	{
+		delayMicroseconds(100);
 		int v = digitalRead(PIN_JACK);
 		sendMessage(W_JACK, v);
 		lastTime = millis();
@@ -231,7 +233,7 @@ void removeTriggerMS(unsigned int index){
 }
 
 void sensorTrigger(){
-	static long long temps = 0;
+	static long long timePing = 0;
 	//sharp
 	/*for(int i=0;i<NB_SHARP;i++){
 		if(trigerSharp[i].pin==-1)break;//fin des trigger
@@ -249,9 +251,9 @@ void sensorTrigger(){
 		}
 	}
 	
-	if (millis() - temps > 200)
+	if (millis() - timePing > 200)
 	{
-		temps = millis();
+		timePing = millis();
 		int d = 0;
 		
 		if(pingAvMessageID>=0){
