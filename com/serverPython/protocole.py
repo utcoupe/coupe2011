@@ -62,6 +62,7 @@ AVANT	= 0
 ARRIERE	= 1
 
 Q_KILL								= -42
+E_TIMEOUT							= -43
 E_INVALID_CMD						= -1
 E_INVALID_PARAMETERS_NUMBERS		= -2
 W_PING_AV							= -30

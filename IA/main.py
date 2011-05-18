@@ -36,7 +36,7 @@ from geometry.circle import *
 MAX_MSG		= 10000
 if MOD == RELEASE:
 	VITESSE		= 200
-	CONN_MOD	= MOD-TCP
+	CONN_MOD	= MOD_CIN
 	DEBUG_LVL	= 0
 else:
 	VITESSE 	= 130
@@ -77,6 +77,9 @@ class Robot:
 			self.write("##############################", colorConsol.FAIL)
 			self.write("##       UNKNOWN MODE       ##", colorConsol.FAIL)
 			self.write("##############################", colorConsol.FAIL)
+		self.write("VITESSE : %s"%VITESSE, colorConsol.OKBLUE)
+		self.write("CONN_MOD : %s"%CONN_MOD, colorConsol.OKBLUE)
+		self.write("DEBUG_LVL : %s"%DEBUG_LVL, colorConsol.OKBLUE)
 		
 		self.pinces = (Pince(), Pince())
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
@@ -89,7 +92,7 @@ class Robot:
 		self.client.start() # demarrage du client
 		
 	def _loopReset(self):
-		fifo = self.client.addFifo( MsgFifo( Q_SWITCH_COLOR ) )
+		fifo = self.client.addFifo( MsgFifo( W_SWITCH_COLOR ) )
 		while True:
 			fifo.getMsg()
 			self.reset()
@@ -128,6 +131,8 @@ class Robot:
 		(blockant)
 		Envoyer une commande et attendre la réponse
 		
+		@raise TimeoutException
+		
 		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
 		@param nb_msg le nombre de messages attendus
 		@param id_device id du device (asserv, cam,...)
@@ -161,10 +166,10 @@ class Robot:
 	def start(self):
 		"""
 		Démarage du robot
-
 		"""
 		while True:
 			while MOD == DEBUG:
+				continue
 				self.do_path(((1000,0),(0,0)))
 
 			"""
@@ -287,6 +292,9 @@ class Robot:
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
+		except TimeoutException as ex:
+			self.write(ex, colorConsol.FAIL)
+			retour = E_TIMEOUT
 		finally:
 			self.client.removeFifo()
 		return retour
@@ -450,8 +458,6 @@ class Robot:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
 					m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
-					if not m:
-						raise TimeoutException("Robot.do_path : accusé de reception trop long à recevoir")
 					if m.id_cmd == Q_GOAL_ABS:
 						nb_accuse_recep += 1
 					elif m.id_cmd == Q_KILL: # arret
@@ -475,33 +481,32 @@ class Robot:
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
-					if m:
-						if m.id_cmd == Q_GOAL_ABS:
-							self.addCmd(ID_ASSERV, Q_GETSENS)
-							nb_point_reach += 1
-						elif m.id_cmd == Q_GETSENS:
-							self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
-							self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
-							self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
-						elif m.id_cmd == Q_KILL: # arret
-							raise KillException("Q_KILL")
-						elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-							if not inPause:
-								self.addCmd(ID_ASSERV, Q_PAUSE)
-								self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
-								inPause = True
-							timeLastPing = time.time()
-						elif m.id_cmd == Q_POSITION:
-							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
-							if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) or (abs(new_pos[2] - self.pos[2]) < 5):
-								self.write("WARINING : Robot.do_path : detection adversaire", colorConsol.WARNING)
-								break
+					if m.id_cmd == Q_GOAL_ABS:
+						self.addCmd(ID_ASSERV, Q_GETSENS)
+						nb_point_reach += 1
+					elif m.id_cmd == Q_GETSENS:
+						self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+						self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
+						self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
+					elif m.id_cmd == Q_KILL: # arret
+						raise KillException("Q_KILL")
+					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+						if not inPause:
+							self.addCmd(ID_ASSERV, Q_PAUSE)
+							self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+							inPause = True
+						timeLastPing = time.time()
+					elif m.id_cmd == Q_POSITION:
+						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+						if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) or (abs(new_pos[2] - self.pos[2]) < 5):
+							self.write("WARNING : Robot.do_path : detection anomalie deplacement", colorConsol.WARNING)
+							break
 			except KillException as ex:
 				self.write(ex, colorConsol.FAIL)
 				retour = Q_KILL
 			except TimeoutException as ex:
 				self.write(ex, colorConsol.FAIL)
-				retour = Q_KILL
+				retour = E_TIMEOUT
 			finally:
 				# arret de la récupération en boucle de la position
 				loopPosition.stop()

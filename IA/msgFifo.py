@@ -31,17 +31,23 @@ class MsgFifo:
 	
 	def getMsg(self, time=None):
 		"""
+		@raise TimeoutException
+		
+		@param time (float) timeout en s
+		
 		@return (Message)
 		"""
 		try:
 			r = self._queue.get(True, time)
 		except Empty:
-			return None
+			raise TimeoutException("%s"%self)
 		else:
 			self._queue.task_done()
 			return r
 	
-	
+	def __repr__(self):
+		return "MsgFifo(%s)"%self._filter
+
 	
 	
 	
