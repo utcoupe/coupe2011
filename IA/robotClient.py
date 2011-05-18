@@ -139,6 +139,8 @@ class RobotClient(threading.Thread):
 		self._lock_fifo.acquire()
 		try:
 			self._listFifo.remove(msgFifo)
+		except ValueError:
+			pass
 		finally:
 			self._lock_fifo.release()
 	

@@ -175,13 +175,15 @@ class Robot:
 		"""
 		while True:
 			if MOD == DEBUG:
+				self.preparation()
+				continue
+				"""
 				if 1 or self.preparation() >= 0:
 					while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
 							raw_input("bouh tu t'es coincé")
 				else:
 					continue
-				#"""
 				self.color = BLUE
 				self.pos = (1500,1000,90)
 				self.debug.log(D_UPDATE_POS, self.pos)
@@ -196,16 +198,18 @@ class Robot:
 				return
 				#"""
 				"""
+				self.color = RED
 				self.write("* CALIBRATION MANUELLE *")
-				self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850,700,180)
+				self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850, 700, 180)
 				self.write("")
+				r  = 0
 				#self.calibCam()
 				#self.testCam()
 				#"""
-
-
-			if self.preparation() >= 0:
-			
+			else:
+				r = self.preparation()
+			self.write("preparation %s"%r)
+			if r >= 0:
 				if MOD == RELEASE: threading.Timer(88, self.stop, ("90s !",)).start()
 				if self.color == BLUE:
 					self.do_path(((1000,300),))
@@ -218,7 +222,8 @@ class Robot:
 					self.update_pos()
 					self.debug.log(D_UPDATE_POS,self.pos)
 					self.write("* SCAN *")
-					l = self.scan()
+					time.sleep(0.2)
+					l = self.scan(True)
 					self.write("")
 
 					self.updatePions(l)
@@ -226,7 +231,7 @@ class Robot:
 					self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 
 					if self.pions:
-						target, objectif, path = self.findTarget(self.pions)
+						target, objectif, path = self.findPoussTarget(self.pions)
 						
 						self.write("cible : %s"%target)
 						self.write("objectif : %s"%objectif)
@@ -234,7 +239,7 @@ class Robot:
 
 						if target:
 							self.write("* MOVE *")
-							if self.do_path(zip(path[2::2],path[3::2])):
+							if self.do_path(path):
 								# on update la pos actuelle de la target
 								target.pos = objectif
 								self.write("objectif : %s"%objectif)
@@ -279,30 +284,33 @@ class Robot:
 			self.write("")
 
 			self.write("* JACK POUR RECALAGE *")
-			m = fifo.getMsg()
-			if m.id_cmd == Q_KILL:
-				raise KillException("Q_KILL")
-			elif m.id_cmd == W_JACK:
-				self.write("* RECALAGE *")
-				self.addCmd(ID_ASSERV, Q_AUTO_CALIB, self.color)
-				fifo.getMsg(0.5)
-				fifo.getMsg()
-				self.write("")
+			while True:
+				m = fifo.getMsg()
+				if m.id_cmd == Q_KILL:
+					raise KillException("Q_KILL")
+				elif m.id_cmd == W_JACK and int(m.content) == 0:
+					self.write("* RECALAGE *")
+					self.addCmd(ID_ASSERV, Q_AUTO_CALIB, self.color)
+					fifo.getMsg(0.5)
+					fifo.getMsg()
+					self.write("")
+					break
 
-				# on allume les deux led pour prevenir que c'est pret
-				self.addCmd(ID_OTHERS, Q_LED, -1)
-			
-				self.update_pos()
-			
-				self.write("* ATTENTE DU JACK *")
-				while True:
-					m = fifo.getMsg()
-					if m.id_cmd == Q_KILL:
-						raise KillException("Q_KILL")
-					elif m.id_cmd == W_JACK and int(m.content) == 0:
-						self.addCmd(ID_OTHERS, Q_LED, self.color)
-						self.write("ON Y VAS !")
-						self.write("")
+			# on allume les deux led pour prevenir que c'est pret
+			self.addCmd(ID_OTHERS, Q_LED, -1)
+		
+			self.update_pos()
+		
+			self.write("* ATTENTE DU JACK *")
+			while True:
+				m = fifo.getMsg()
+				if m.id_cmd == Q_KILL:
+					raise KillException("Q_KILL")
+				elif m.id_cmd == W_JACK and int(m.content) == 0:
+					self.addCmd(ID_OTHERS, Q_LED, self.color)
+					self.write("ON Y VAS !")
+					self.write("")
+					break
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
@@ -310,7 +318,7 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		finally:
-			self.client.removeFifo()
+			self.client.removeFifo(fifo)
 		return retour
 		
 	def updatePions(self, l):
@@ -330,7 +338,7 @@ class Robot:
 		@return None (le résultat est mis dans self.pions
 		"""
 		# update des pions
-		pions_to_add = []
+		"""pions_to_add = []
 		for new_p in l:
 			for p in self.pions:
 				if new_p == p:
@@ -344,6 +352,8 @@ class Robot:
 		
 		self.debug.log(D_DELETE_PATH)
 		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+		"""
+		self.pions = l
 		
 	def stop(self, msg=None):
 		""" arret du robot """
@@ -394,7 +404,7 @@ class Robot:
 			self.updatePions(l)
 			
 			if self.pions:
-				target, objectif, path = self.findTarget(self.pions)
+				target, objectif, path = self.findPoussTarget(self.pions)
 				
 				self.write("cible : %s"%target)
 				self.write("objectif : %s"%objectif)
@@ -528,6 +538,7 @@ class Robot:
 						timeLastPing = time.time()
 					elif m.id_cmd == Q_POSITION:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+						self.debug.log(D_UPDATE_POS, new_pos)
 						if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) < 30 and abs(new_pos[2] - self.pos[2]) < 5:
 							self.write("WARNING : Robot.do_path : detection anomalie deplacement", colorConsol.WARNING)
 							self.addCmd(ID_ASSERV, Q_STOP)
