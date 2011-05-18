@@ -641,11 +641,21 @@ class Robot:
 		for p in pions:
 			if p.isOtherColor(self.color):
 				path = find_path(Vec2(self.pos[0],self.pos[1]), p.pos, circles)
-				if self._pathValid(path):
-					self.debug.log(D_SHOW_PATH,path)
-					return p, path
-		return None,[]
+				if path and self._pathValid(path):
+					target = p
+					break
+		else:
+			return None,[]
+
+		# on va maintenant faire en sorte de s'arreter avant
+		pos_devant = Line(Vec2(path[-1][0],path[-1][1]), Vec2(path[-2][0],path[-2][1])).pointFrom(250)
+		path = path[:-1] + [tuple(pos_devant)]
+
+		self.debug.log(D_SHOW_PATH,path)
 		
+		return target, path
+		
+
 	def findPoussTarget(self,pions):
 		"""
 		(calcul)

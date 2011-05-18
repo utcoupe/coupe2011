@@ -108,18 +108,14 @@ class Line:
 	def __repr__(self):
 		return "Line"+str((self.A,self.B,self.teta,self.lenght()))
 
-	def pointFrom(self, M, d):
+	def pointFrom(self, d):
 		"""
-		Calcul la position du point de la droite situé à une distance d de M
-		@param M (Vec) point de depart sur la droite
+		Calcul la position du point de la droite situé à une distance d de A
 		@param d (int) distance
 
-		@return (Vec) le point
+		@return (Vec2) le point
 		"""
-		dAB = self.lenght()
-		x = self.invers * int(d * (self.B.x-self.A.x) / dAB)
-		y = self.invers * int(d * (self.B.y-self.A.y) / dAB)
-		return M + (x,y)
+		return self.A + Vec2(d * self.cosT(), d * self.sinT())
 		
 
 '''$
