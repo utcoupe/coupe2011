@@ -13,7 +13,7 @@
 #define NB_MS 		2
 
 //define jack et couleur
-#define PIN_JACK 		3
+#define PIN_JACK 		35
 #define INTERRUPT_JACK	1
 #define LED_BLEU 		29
 #define LED_ROUGE 		33
@@ -22,7 +22,7 @@
 
 
 // pin couleur
-#define PIN_COLOR		2
+#define PIN_COLOR		31
 #define INTERRUPT_COLOR	0
 
 //define sharp
