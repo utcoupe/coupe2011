@@ -105,8 +105,8 @@ class Robot:
 	
 	def addCmd(self, id_device, id_cmd, *args):
 		"""
-		Envoyer une commande
 		(non blockant)
+		Envoyer une commande
 		
 		@param id_device id du device (asserv, cam,...)
 		@param id_cmd id de la commande
@@ -175,6 +175,12 @@ class Robot:
 		"""
 		while True:
 			if MOD == DEBUG:
+				if 1 or self.preparation() >= 0:
+					while 1:
+						if self.do_path(((400,0),(0,0))) < 0:
+							raw_input("bouh tu t'es coincé")
+				else:
+					continue
 				#"""
 				self.color = BLUE
 				self.pos = (1500,1000,90)
@@ -247,6 +253,7 @@ class Robot:
 
 	def preparation(self):
 		"""
+		(blockant)
 		Ce qui doit etre fait pendant les 3 minutes
 		Choix de la couleur
 		Recalage
@@ -281,18 +288,21 @@ class Robot:
 				fifo.getMsg(0.5)
 				fifo.getMsg()
 				self.write("")
+
+				# on allume les deux led pour prevenir que c'est pret
+				self.addCmd(ID_OTHERS, Q_LED, -1)
 			
 				self.update_pos()
 			
 				self.write("* ATTENTE DU JACK *")
-				self.addCmd(ID_OTHERS, Q_LED, -1)
-				m = fifo.getMsg()
-				if m.id_cmd == Q_KILL:
-					raise KillException("Q_KILL")
-				elif m.id_cmd == W_JACK:
-					self.addCmd(ID_OTHERS, Q_LED, self.color)
-					self.write("ON Y VAS !")
-					self.write("")
+				while True:
+					m = fifo.getMsg()
+					if m.id_cmd == Q_KILL:
+						raise KillException("Q_KILL")
+					elif m.id_cmd == W_JACK and int(m.content) == 0:
+						self.addCmd(ID_OTHERS, Q_LED, self.color)
+						self.write("ON Y VAS !")
+						self.write("")
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
@@ -461,7 +471,7 @@ class Robot:
 		else:
 			self.update_pos()
 			
-			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_KILL, W_PING_AV, W_PING_AR) )
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_POSITION, Q_KILL, W_PING_AV, W_PING_AR) )
 			
 			goals = []
 			for p in path:
@@ -471,12 +481,13 @@ class Robot:
 			nb_accuse_recep = 0
 			timeLastPing = 0
 			inPause = False
+			loopPosition = None
 			try:
 				while not self._e_stop.isSet() and nb_accuse_recep<len(path):
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
-					m = fifo.getMsg(0.5) # timeout de 0.5 seconde pour les accusés de receptions
+					m = fifo.getMsg(0.5,"accusé de reception") # timeout de 0.5 seconde pour les accusés de receptions
 					if m.id_cmd == Q_GOAL_ABS:
 						nb_accuse_recep += 1
 					elif m.id_cmd == Q_KILL: # arret
@@ -491,12 +502,12 @@ class Robot:
 				self.write("Tous les accusés de receptions reçus")
 
 				self.addCmd(ID_ASSERV, Q_GETSENS)
-				loopPosition = LoopCmd(self, 0.5, ID_ASSERV, Q_POSITION)
+				loopPosition = LoopCmd(self, 1, 1, ID_ASSERV, Q_POSITION)
 				loopPosition.start()
 				
 				nb_point_reach = 0
 				while not self._e_stop.isSet() and nb_point_reach<len(path):
-					m = fifo.getMsg(0.5)
+					m = fifo.getMsg(2,"do_path 2ème partie")
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
@@ -517,9 +528,12 @@ class Robot:
 						timeLastPing = time.time()
 					elif m.id_cmd == Q_POSITION:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
-						if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) or (abs(new_pos[2] - self.pos[2]) < 5):
+						if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) < 30 and abs(new_pos[2] - self.pos[2]) < 5:
 							self.write("WARNING : Robot.do_path : detection anomalie deplacement", colorConsol.WARNING)
+							self.addCmd(ID_ASSERV, Q_STOP)
+							retour = E_BLOCK
 							break
+						self.pos = new_pos
 			except KillException as ex:
 				self.write(ex, colorConsol.FAIL)
 				retour = Q_KILL
@@ -528,7 +542,7 @@ class Robot:
 				retour = E_TIMEOUT
 			finally:
 				# arret de la récupération en boucle de la position
-				loopPosition.stop()
+				if loopPosition: loopPosition.stop()
 				# destruction de la fifo
 				self.client.removeFifo(fifo)
 				# arret de l'écoute des pings

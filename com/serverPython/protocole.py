@@ -4,10 +4,12 @@
 C_SEP_SEND = '.'	# séparation entre les données de la commande à envoyer aux cartes
 
 class KillException(Exception):
-	pass
+	def __init__(self, msg = ""):
+		Exception.__init__(self, "KillException : %s"%msg)
 
 class TimeoutException(Exception):
-	pass
+	def __init__(self, msg = ""):
+		Exception.__init__(self, "Timeout : %s"%msg)
 
 
 Q_IDENT			=	0
@@ -63,6 +65,7 @@ ARRIERE	= 1
 
 Q_KILL								= -42
 E_TIMEOUT							= -43
+E_BLOCK								= -44
 E_INVALID_CMD						= -1
 E_INVALID_PARAMETERS_NUMBERS		= -2
 W_PING_AV							= -30
