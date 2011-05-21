@@ -845,18 +845,23 @@ class Robot:
 		ouvrir la pince
 		@param id_pince (int) AVANT ou ARRIERE
 		"""
-		return self.addBlockingCmd(1, 1, ID_AX12, Q_PINCE, id_pince, PINCE_OUVERT)
+		if id_pince == AVANT:
+			return self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MIN_AV)
+		else:
+			return self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MIN_AR)
 
 	
 	def takeObj(self, id_pince):
 		"""
 		(blockant)
-		@todo remplir bien les pinces
-		ramasser un objet
+		ramasser un objet (serre et remonte)
 		@param target (Pion)
 		@return True si l'objet a été pris, False sinon
 		"""
-		return self.addBlockingCmd(
+		if id_pince == AVANT:
+			self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE_AV)
+		else:
+			self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE_AR)
 
 	def construireTourVerte(self):
 		"""
