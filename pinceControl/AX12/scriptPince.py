@@ -37,8 +37,8 @@ ser.close()
 
 # Fonction de demande d'ouverture
 def action_pince(face, action):
-    ser.write(face)
-    ser.write(action)
+    ser.write(str(face))
+    ser.write(str(action))
 
 # Fonction de lecture des informations veant du CM-5
 def read_CM5():
@@ -80,22 +80,22 @@ while (keyB != 13):
     
     if (keyB==Q_OPEN_MAX_AV):
         action_pince(Face_front, Pinces_ouvertureMax)
-    elif (keyB==Demande_ouverture_max_arrie):
+    elif (keyB==Q_OPEN_MAX_AR):
         action_pince(Face_back, Pinces_ouvertureMax)  
 
     elif (keyB==Q_OPEN_MIN_AV):
         action_pince(Face_front, Pinces_ouvertureMin)
-    elif (keyB==Demande_ouverture_min_arrie):
+    elif (keyB==Q_OPEN_MIN_AR):
         action_pince(Face_back, Pinces_ouvertureMin)
 
     elif (keyB==Q_SERRE_AV):
         action_pince(Face_front, Pinces_fermetureMin)
-    elif (keyB==Demande_serrage_arrie):
+    elif (keyB==Q_SERRE_AR):
         action_pince(Face_back, Pinces_fermetureMin)
 
     elif (keyB==Q_CLOSE_AV):
         action_pince(Face_front, Pinces_fermetureMax)
-    elif (keyB==Demande_fermeture_max_arrie):
+    elif (keyB==Q_CLOSE_AR):
         action_pince(Face_back, Pinces_fermetureMax)
 
     valRetour=read_CM5()
@@ -108,7 +108,7 @@ while (keyB != 13):
         if(valRetour==2):
             send(idArenvoyer, E_SURCHAUFFE)
     except TypeError:
-        send(idArenvoyer, -42)
+        send(idArenvoyer, E_MERDE_AX12)
     except ValueError:
         send(idArenvoyer, E_MERDE_AX12)
 
