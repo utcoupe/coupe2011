@@ -79,9 +79,24 @@ while (keyB != 13):
     valRetour = 0
 
     commandThomas = raw_input()
-    trucQuiSertPas, idArenvoyer, keyB = commandThomas.split('.',3) 
+    input_split = commandThomas.split('.')
+    trucQuiSertPas, idArenvoyer, keyB = 0,0,0
+    if len(input_split) == 0:
+        continue
+    if len(input_split) >= 1:
+        trucQuiSertPas = input_split[0]
+    else:
+        continue
+    if len(input_split) >= 2:
+        idArenvoyer = input_split[1]
+    else:
+        continue
+    if len(input_split) >= 3:
+        keyB = int(input_split[2])
+    else:
+        send(idArenvoyer, E_INVALID_PARAMETERS_NUMBERS)
+        continue
 
-    keyB = int(keyB)
     
     if (keyB==Demande_ouverture_max_avant):
         action_pince(Face_front, Pinces_ouvertureMax)
