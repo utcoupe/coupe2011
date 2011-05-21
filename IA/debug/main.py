@@ -3,7 +3,7 @@
 """
 DEBUG de l'IA
 """
-
+from math import *
 import sys
 sys.path.append('./')
 sys.path.append('../')
@@ -35,6 +35,7 @@ if __name__ == "__main__":
 			self.parent = parent
 			self.initialize(w,h)
 			self.pos = None
+			self.direction = None
 			self.pions = []
 			self.path = []
 			self.pince = []
@@ -55,8 +56,8 @@ if __name__ == "__main__":
 				   
 			self.canevas.create_rectangle(0,0,80,80,fill="red")
 			self.canevas.create_rectangle(520,0,600,80,fill="blue")
-			self.canevas.create_rectangle(0,80,80,420,fill="green")
-			self.canevas.create_rectangle(520,80,600,420,fill="green")
+			self.canevas.create_rectangle(0,80,80,420,fill="#229300")
+			self.canevas.create_rectangle(520,80,600,420,fill="#229300")
 			for i in xrange(90,500,70):
 				for j in xrange(0,421,70):
 					if (i-90)%140:
@@ -73,10 +74,12 @@ if __name__ == "__main__":
 
 		def update_pos(self, pos):
 			if self.pos: self.canevas.delete(self.pos)
+			if self.direction: self.canevas.delete(self.direction)
 			x,y,a = pos
 			x = self.X(x)
 			y = self.Y(y)
-			self.pos = self.canevas.create_oval(x-5,y-5,x+5,y+5,outline='black',fill='black')
+			self.pos = self.canevas.create_oval(x-5,y-5,x+5,y+5,outline='#93FF00',fill='#93FF00')
+			self.direction = self.canevas.create_line(x,y,x+40*cos(pi - radians(a)),y+40*sin(pi - radians(a)), fill='#93FF00', arrow=Tk.LAST)
 
 		def status_pince(self, etat):
 			self.canevas2.create_rectangle(20,0,250,170,fill="black")
@@ -156,7 +159,12 @@ if __name__ == "__main__":
 		def show_path(self, path):
 			self.delete_path()
 			if path:
-				self.path = self.canevas.create_line(map(lambda p: (self.X(p[0]),self.Y(p[1])),path),fill="pink", width=2, arrow=Tk.LAST)
+				if len(path) > 1:
+					self.path = self.canevas.create_line(map(lambda p: (self.X(p[0]),self.Y(p[1])),path),fill="pink", width=2, arrow=Tk.LAST)
+				elif len(path) == 1:
+					x = self.X(path[0][0])
+					y = self.Y(path[0][1])
+					self.path = self.canevas.create_oval(x-5,y-5,x+5,y+5,outline='pink',fill='pink')
 		
 		def delete_path(self, params=None):
 			if self.path:

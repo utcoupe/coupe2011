@@ -7,7 +7,7 @@ class LoopCmd(threading.Thread):
     def __init__(self, robot, timeBeforeStart, interval, id_device, id_cmd, *args):
 	"""
 	@param robot (Robot)
-	@param interval (float) temps avant le premier lancement de la cmd en s
+	@param timeBeforeStart (float) temps avant le premier lancement de la cmd en s
 	@param interval (float) interval entre chaque appelle en s
 	@param id_device (int)
 	@param id_cmd (int)
@@ -22,6 +22,7 @@ class LoopCmd(threading.Thread):
 	self._args = args
 	
 	self._e_stop = threading.Event()
+	self._e_end = threading.Event()
     
     def stop(self):
 	self._e_stop.set()
@@ -30,6 +31,10 @@ class LoopCmd(threading.Thread):
 	self._e_stop.wait(self.timeBeforeStart)
 	while not self._e_stop.is_set():
 	    start = time.time()
-	    self.robot.addCmd(self._device, self._cmd, self._args)
+	    self.robot.addCmd(self._device, self._cmd, *self._args)
 	    self._e_stop.wait(self.interval)
 			
+    def join(self, timeout=None):
+	if self.isAlive():
+	    self.robot.write('join')
+	    threading.Thread.join(self, timeout)

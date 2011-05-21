@@ -101,7 +101,9 @@ class Robot:
 		fifo = self.client.addFifo( MsgFifo( W_SWITCH_COLOR ) )
 		while True:
 			fifo.getMsg()
+			self.addCmd(ID_OTHERS, Q_LED, -1)
 			self.reset()
+			self.client.addFifo(fifo)
 	
 	def addCmd(self, id_device, id_cmd, *args):
 		"""
@@ -174,14 +176,25 @@ class Robot:
 		Démarage du robot
 		"""
 		while True:
+			while self._e_stop.isSet():
+				time.sleep(0.5)
 			if MOD == DEBUG:
-				self.preparation()
+				"""self.color = BLUE
+				self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
+				self.do_path(((self.symX(1850),300),))
+				while True:
+					self.do_path(((self.symX(1850),700),(self.symX(800),700),(self.symX(800),1400),(self.symX(1850),1400)))
 				continue
-				"""
-				if 1 or self.preparation() >= 0:
-					while 1:
+				self.preparation()"""
+				if self.preparation() >= 0:
+					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
+					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 0)
+					self.write("")
+					self.construireTourVerte()
+					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
-							raw_input("bouh tu t'es coincé")
+							raw_input("bouh tu t'es coincé")"""
+					continue
 				else:
 					continue
 				self.color = BLUE
@@ -206,7 +219,7 @@ class Robot:
 				#self.calibCam()
 				#self.testCam()
 				#"""
-			else:
+			"""else:
 				r = self.preparation()
 			self.write("preparation %s"%r)
 			if r >= 0:
@@ -254,7 +267,7 @@ class Robot:
 						
 					self.write("* TOURNE *")
 					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
-					self.write("")
+					self.write("")"""
 
 	def preparation(self):
 		"""
@@ -265,8 +278,13 @@ class Robot:
 
 		@return 0 si ok, <0 sinon
 		"""
+		self.write('preparation')
 		retour = 0
+		# pour recevoir les messages
 		fifo = self.client.addFifo( MsgFifo(W_JACK, Q_KILL, Q_COLOR, Q_AUTO_CALIB) )
+		# pour faire clignoter les leds
+		loop1 = LoopCmd(self, 0, 1, ID_OTHERS, Q_LED, RED)
+		loop2 = LoopCmd(self, 0.5, 1, ID_OTHERS, Q_LED, BLUE)
 		try:
 			self.addCmd(ID_OTHERS, Q_COLOR)
 			self.write("* RÉCUPÉRATION COULEUR *")
@@ -283,22 +301,25 @@ class Robot:
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			self.write("")
 
-			self.write("* JACK POUR RECALAGE *")
+			"""self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
 					raise KillException("Q_KILL")
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
+					# on fait clignoter les leds
+					loop1.start()
+					loop2.start()
 					self.write("* RECALAGE *")
-					self.addCmd(ID_ASSERV, Q_AUTO_CALIB, self.color)
-					fifo.getMsg(0.5)
-					fifo.getMsg()
+					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
-					break
-
-			# on allume les deux led pour prevenir que c'est pret
-			self.addCmd(ID_OTHERS, Q_LED, -1)
-		
+					break"""
+			
+			loop1.stop()
+			loop2.stop()
+			loop1.join()
+			loop2.join()
+			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			self.update_pos()
 		
 			self.write("* ATTENTE DU JACK *")
@@ -307,7 +328,6 @@ class Robot:
 				if m.id_cmd == Q_KILL:
 					raise KillException("Q_KILL")
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
-					self.addCmd(ID_OTHERS, Q_LED, self.color)
 					self.write("ON Y VAS !")
 					self.write("")
 					break
@@ -317,9 +337,16 @@ class Robot:
 		except TimeoutException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
+			retour = -101
 		finally:
 			self.client.removeFifo(fifo)
-		return retour
+			loop1.stop()
+			loop2.stop()
+			loop1.join()
+			loop2.join()
+			return retour
 		
 	def updatePions(self, l):
 		"""
@@ -360,8 +387,8 @@ class Robot:
 		if msg: self.write(msg, colorConsol.FAIL)
 		self.addCmd(-1, Q_KILL)
 		self.addCmd(ID_ASSERV,Q_STOP)
-		self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
-		self.addBlockingCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
+		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
+		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
 		self._e_stop.set()
 		self.client.stop()
 	
@@ -383,8 +410,8 @@ class Robot:
 		self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
 		self.id_msg = 0
 		
-		self._e_stop.clear()
 		self.write("* ROBOT IS READY *", colorConsol.OKGREEN)
+		self._e_stop.clear()
 		
 	def isEmpty(self):
 		return (self.pinces[0].isEmpty() and self.pinces[1].isEmpty())
@@ -481,8 +508,11 @@ class Robot:
 		else:
 			self.update_pos()
 			
-			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_POSITION, Q_KILL, W_PING_AV, W_PING_AR) )
+			self.debug.log(D_DELETE_PATH)
+			self.debug.log(D_SHOW_PATH,path)
 			
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_POSITION, Q_KILL, W_PING_AV, W_PING_AR) )
+
 			goals = []
 			for p in path:
 				self.addCmd(ID_ASSERV, Q_GOAL_ABS, p[0],p[1],VITESSE)
@@ -539,11 +569,15 @@ class Robot:
 					elif m.id_cmd == Q_POSITION:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 						self.debug.log(D_UPDATE_POS, new_pos)
-						if abs(new_pos[0] - self.pos[0]) < 30 and abs(new_pos[1] - self.pos[1]) < 30 and abs(new_pos[2] - self.pos[2]) < 5:
+						if 	abs(new_pos[0] - path[nb_point_reach][0]) > 50 \
+							and abs(new_pos[1] - path[nb_point_reach][1]) > 50 \
+							and abs(new_pos[0] - self.pos[0]) < 30 \
+							and abs(new_pos[1] - self.pos[1]) < 30 \
+							and abs(new_pos[2] - self.pos[2]) < 5:
 							self.write("WARNING : Robot.do_path : detection anomalie deplacement", colorConsol.WARNING)
-							self.addCmd(ID_ASSERV, Q_STOP)
-							retour = E_BLOCK
-							break
+							#self.addCmd(ID_ASSERV, Q_STOP)
+							#retour = E_BLOCK
+							#break
 						self.pos = new_pos
 			except KillException as ex:
 				self.write(ex, colorConsol.FAIL)
@@ -562,6 +596,8 @@ class Robot:
 
 		return retour
 
+	def go_point(self, x,y):
+		return self.do_path(((x,y),))
 			
 	
 	def scan(self, fast=False):
@@ -807,7 +843,9 @@ class Robot:
 		"""
 		(blockant)
 		ouvrir la pince
+		@param id_pince (int) AVANT ou ARRIERE
 		"""
+		return
 		r = self.addBlockingCmd(1, 1, ID_OTHERS, Q_PINCE, id_pince, PINCE_OUVERT)
 
 	
@@ -816,37 +854,82 @@ class Robot:
 		(blockant)
 		@todo remplir bien les pinces
 		ramasser un objet
+		@param target (Pion)
 		@return True si l'objet a été pris, False sinon
 		"""
-		pass
+		return
 
+	def construireTourVerte(self):
+		"""
+		Script pour construire une tour à partir de ce qu'il y a dans la zone verte
+		"""
+		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
+		listeVerte = (PION_1,PION_1,TOUR,PION_1,TOUR)
+		listeYVerte = (690,970,1250,1530,1810)
 
-	def belge(self):
-		if self.color == RED:
-			self.do_path(((2375,175), (2300,250)))
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, 45, VITESSE - 30)
-			time.sleep(40)
-			start = time.time()
-			while time.time() - start < 20:
-				r = self.addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
-				if r and r.content < 100:
-					time.sleep(15)
-
-			self.do_path(((2375,175), (2375,525), (1825,525), (2375,525), (2375, 1225), (1825, 1225)))
-			
-					
+		nbTours = 0
+		for p in listeVerte[:3]:
+			if p == TOUR: nbTours += 1
+		if nbTours < 2:
+			debut = 0
 		else:
-			self.do_path(((self.sym(2375),175), (self.sym(2300),250)))
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.syma(45), VITESSE - 30)
-			time.sleep(40)
-			start = time.time()
-			while time.time() - start < 20:
-				r = self.addBlockingCmd(1, 1, ID_ASSERV, Q_SHARP, 0)
-				if r and r.content < 100:
-					time.sleep(15)
+			deut = 1
+		
+		# prise du premier pion avec pince AVANT
+		self.go_point(self.symX(600),listeYVerte[debut]) 	# devant le premier pion
+		self._takePionVert(debut, AVANT)
+		self.write("1 ére tour prise", colorConsol.OKGREEN)
 
-			self.do_path(((self.sym(2375),175), (self.sym(2375),525), (self.sym(1825),525), (self.sym(2375),525), (self.sym(2375), 1225), (self.sym(1825), 1225)))
+		# prise du deuxième pion avec pince ARRIERE
+		self.go_point(self.symX(600),listeYVerte[debut+1]) 	# devant le deuxième
+		self._takePionVert(debut+1, ARRIERE)
+		self.write("2 ème tour prise", colorConsol.OKGREEN)
+
+		# prise du troisième
+		if listeVerte[debut] == PION_1 and listeVerte[debut+1] == PION_1:
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(90), VITESSE-30)
+			self.go_point(self.symX(600),listeYVerte[debut+2]) # devant le troisième
+			self.dumpObj(ARRIERE)
+			self._takePionVert(debut+2, ARRIERE) # prise troisième pion
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(90), VITESSE-30)
+			self.dumpObj(ARRIERE)
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(180), VITESSE-30)
+			self.dumpObj(AVANT)
+			self.takeObj(AVANT) # 2 pions + 1 tour AVANT
+		else:
+			if listeVerte[debut] == TOUR:
+				self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(180), VITESSE-30)
+				self.dumpObj(AVANT)
+				self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30)
+				self.dumpObj(ARRIERE)
+				self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30)
+			else:
+				self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(90), VITESSE-30)
+				self.dumpObj(ARRIERE)
+				self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30)
+				self.dumpObj(AVANT)
+			self.takeObj(AVANT) # un pion + une tour dans la pince avant
+			self.go_point(self.symX(600),listeYVerte[debut+2]) # devant le troisième
+			self._takePionVert(debut+2, ARRIERE) # prise troisième pion
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30)
+			self.dumpObj(ARRIERE)
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30)
+			self.dumpObj(AVANT)
+			self.takeObj(AVANT) # 2 pions + 1 tour AVANT
+		self.write("3 ème tour prise", colorConsol.OKGREEN)
 			
+				
+	def _takePionVert(self, index, id_pince):
+		listeYVerte = (690,970,1250,1530,1810)
+		if id_pince == ARRIERE:
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(0), VITESSE-30)
+		else:
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(180), VITESSE-30)
+		
+		self.go_point(self.symX(300),listeYVerte[index]) # avance
+		self.takeObj(id_pince)
+		self.go_point(self.symX(600),listeYVerte[index]) # recul
+		
 
 	def symX(self,x):
 		"""
@@ -875,6 +958,18 @@ class Robot:
 			return 180 - a
 		else:
 			return a
+
+	def otherColor(self, c):
+		"""
+		Renvoie l'autre couleur, si BLUE, renvoie RED
+
+		@param c (int) la couleur
+		@return (int) la color opposée
+		"""
+		if c == BLUE:
+			return RED
+		else:
+			return BLUE
 
 
 		

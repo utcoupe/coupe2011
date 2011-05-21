@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import serial, time
-#from protocole import *
+from protocole import *
 
 '''
     --- PROTOCOLE ---
@@ -51,7 +51,7 @@ CM5_actionOK = 50       # valeur de retour quand l'action est fini
 # Initialisation de la liaison serie
 ser = serial.Serial()
 ser.baudrate = 57600
-ser.port = 3                  # A modifier suivant l'OS
+ser.port = '/dev/ttyUSB0' #3                  # A modifier suivant l'OS
 ser.timeout = 0.5
 ser.close()
 

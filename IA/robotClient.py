@@ -8,7 +8,9 @@ import colorConsol
 
 MOD_TCP = 0
 MOD_CIN = 1
-		
+
+
+
 class RobotClient(threading.Thread):
 	def __init__(self, robot, mod):
 		threading.Thread.__init__(self,None,None,"RobotClient")
@@ -58,7 +60,7 @@ class RobotClient(threading.Thread):
 				self._socket.send(msg+"\n")
 			else:
 				print msg
-			self.write("Send : %s"%msg)
+			#self.write("Send : %s"%msg)
 	
 	def run(self):
 		""" 
@@ -84,7 +86,7 @@ class RobotClient(threading.Thread):
 				
 	def _treat(self, msg):
 		""" fonction appellée quand un message est reçu """
-		self.write("Received : '%s'"%msg)
+		#self.write("Received : '%s'"%msg)
 		msg = str(msg).strip()
 		msg_split = msg.split(C_SEP_SEND,2)
 		try:
