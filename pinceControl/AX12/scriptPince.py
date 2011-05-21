@@ -2,26 +2,6 @@
 import serial, time
 from protocole import *
 
-'''
-    --- PROTOCOLE ---
-'''
-
-MERDE = 0
-Retour_OK = 1
-Surchauffe = 2
-LowVoltage = 3
-
-Demande_ouverture_max_avant = 0
-Demande_ouverture_max_arrie = 1
-
-Demande_ouverture_min_avant = 6
-Demande_ouverture_min_arrie = 7
-
-Demande_fermeture_max_avant = 2
-Demande_fermeture_max_arrie = 3
-
-Demande_serrage_avant = 4
-Demande_serrage_arrie = 5
 
 def send(idMess, retourMess):
     print '%s.%s'%(idMess,retourMess)
@@ -40,10 +20,10 @@ Positions des AX12 sur le robot
 Face_front = 0
 Face_back = 1
  
-Pinces_ouvertureMax = 0 # pour rechercher un piont
-Pinces_ouvertureMin = 1 # pour lancher un piont
+Pinces_ouvertureMax = 0 # pour rechercher un pion
+Pinces_ouvertureMin = 1 # pour lancher un pion
 Pinces_fermetureMax = 2 # au debut du match
-Pinces_fermetureMin = 3 # saisir un piont
+Pinces_fermetureMin = 3 # saisir un pion
 
 CM5_actionOK = 50       # valeur de retour quand l'action est fini
 ''' --------------------- '''
@@ -98,22 +78,22 @@ while (keyB != 13):
         continue
 
     
-    if (keyB==Demande_ouverture_max_avant):
+    if (keyB==Q_OPEN_MAX_AV):
         action_pince(Face_front, Pinces_ouvertureMax)
     elif (keyB==Demande_ouverture_max_arrie):
         action_pince(Face_back, Pinces_ouvertureMax)  
 
-    elif (keyB==Demande_ouverture_min_avant):
+    elif (keyB==Q_OPEN_MIN_AV):
         action_pince(Face_front, Pinces_ouvertureMin)
     elif (keyB==Demande_ouverture_min_arrie):
         action_pince(Face_back, Pinces_ouvertureMin)
 
-    elif (keyB==Demande_serrage_avant):
+    elif (keyB==Q_SERRE_AV):
         action_pince(Face_front, Pinces_fermetureMin)
     elif (keyB==Demande_serrage_arrie):
         action_pince(Face_back, Pinces_fermetureMin)
 
-    elif (keyB==Demande_fermeture_max_avant):
+    elif (keyB==Q_CLOSE_AV):
         action_pince(Face_front, Pinces_fermetureMax)
     elif (keyB==Demande_fermeture_max_arrie):
         action_pince(Face_back, Pinces_fermetureMax)
@@ -122,15 +102,15 @@ while (keyB != 13):
     try:
         valRetour = int(valRetour)
         if(valRetour==0):
-            send(idArenvoyer, Retour_OK)
+            send(idArenvoyer, 1)
         if(valRetour==1):
-            send(idArenvoyer, Retour_OK)
+            send(idArenvoyer, 1)
         if(valRetour==2):
-            send(idArenvoyer, Surchauffe)
+            send(idArenvoyer, E_SURCHAUFFE)
     except TypeError:
-        send(idArenvoyer, MERDE)
+        send(idArenvoyer, -42)
     except ValueError:
-        send(idArenvoyer, MERDE)
+        send(idArenvoyer, E_MERDE_AX12)
 
 ser.close()
 print 'Fin du programme : com CM-5'

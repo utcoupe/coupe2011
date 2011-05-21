@@ -39,9 +39,27 @@ Q_PRECAL			= 46
 Q_COLOR				= 50
 Q_ULTRAPING			= 51
 
+
+
 # cam
 Q_SCAN_AV		= 62
 Q_SCAN_AR		= 63
+
+
+# ax12
+Q_OPEN_MAX_AV		= 72
+Q_OPEN_MAX_AR		= 82
+
+Q_OPEN_MIN_AV		= 73
+Q_OPEN_MAX_AR		= 83
+
+Q_CLOSE_AV			= 74
+Q_CLOSE_AR			= 84
+
+Q_SERRE_AV			= 75
+Q_SERRE_AR			= 85
+
+
 
 
 # server python
@@ -63,7 +81,7 @@ GREEN	= 2
 AVANT	= 0
 ARRIERE	= 1
 
-Q_KILL								= -42
+Q_KILL								= -69
 E_TIMEOUT							= -43
 E_BLOCK								= -44
 E_INVALID_CMD						= -1
@@ -72,3 +90,6 @@ W_PING_AV							= -30
 W_PING_AR							= -31
 W_SWITCH_COLOR						= -21
 W_JACK								= -22
+E_SURCHAUFFE						= -55
+E_LOW_VOLTAGE						= -56
+E_MERDE_AX12						= -57
