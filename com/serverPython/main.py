@@ -12,7 +12,8 @@ from server import *
 server = Server()
 
 #server.addSubprocessClient("clients/python/UDPClient/main.py")
-server.addSubprocessClient("./UTCamera");
+server.addSubprocessClient("./UTCamera")
+server.addSubprocessClient("../../../pinceControl/AX12/scriptPince.py")
 #server.addSubprocessClient(["../../../IA/main.py","1","0"])
 
 import glob
