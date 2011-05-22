@@ -314,9 +314,9 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	*/
 
 	/* on limite la vitesse lineaire quand on s'approche du but */
-	if(abs(currentDelta)<2000){
-		pid4DeltaControl.SetOutputLimits(-min(80,current_goal.speed),min(80,current_goal.speed)); /*composante liee a la vitesse lineaire*/
-		pid4AlphaControl.SetOutputLimits(-150,150); /*composante liee a la vitesse de rotation*/
+	if(abs(currentDelta)<1000){
+		pid4DeltaControl.SetOutputLimits(-min(90,current_goal.speed),min(90,current_goal.speed)); // composante liee a la vitesse lineaire
+		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
 	}
 
 	if(abs(currentDelta) < 5*ENC_MM_TO_TICKS) /*si l'ecart n'est plus que de 6 mm, on considere la consigne comme atteinte*/
@@ -339,15 +339,28 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		//alpha 200 delta -255 / delta+alpha = -55 / delta-alpha = -455 / => alpha 200 delta -55
 		//alpha -200 delta 255 / delta+alpha = 55 / delta-alpha = 455 / => alpha -200 delta 55
 		//alpha -200 delta -255 / delta+alpha = -455 / delta-alpha = -55 / => alpha -200 delta -55
-		if(output4Delta+output4Alpha>255 || output4Delta-output4Alpha>255)
+		/*
+		 Correction by thomas
+		 if(output4Delta+output4Alpha>255 || output4Delta-output4Alpha>255)
 			pwm4Delta = 255-output4Alpha;
 		else if(output4Delta+output4Alpha<-255 || output4Delta-output4Alpha<-255)
 			pwm4Delta = -255+output4Alpha;
 		else
-			pwm4Delta = output4Delta;
+			pwm4Delta = output4Delta;*/
 
 		(*value_pwm_right) = output4Delta+output4Alpha;
 		(*value_pwm_left) = output4Delta-output4Alpha;
+		
+		// Correction by thomas
+		if ((*value_pwm_right) > 255)
+			(*value_pwm_right) = 255;
+		else if ((*value_pwm_right) < -255)
+			(*value_pwm_right) = -255;
+		
+		if ((*value_pwm_left) > 255)
+			(*value_pwm_left) = 255;
+		else if ((*value_pwm_left) < -255)
+			(*value_pwm_left) = -255;
 	}
 
 	if(current_goal.phase == PHASE_2){
