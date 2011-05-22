@@ -47,19 +47,23 @@ else:
 
 # Fonction de demande d'ouverture
 def action_pince(face, action):
-	ser.write(str(face))
-	ser.write(str(action))
+	if cm5_connected:
+		ser.write(str(face))
+		ser.write(str(action))
 
 # Fonction de lecture des informations veant du CM-5
 def read_CM5():
-	timeMax = 5
-	timeOutPerso = timeMax
-	while timeOutPerso > 0:
-		text = ser.readline()
-		if text:
-			return text
-			timeOutPerso=timeMax
-		timeOutPerso-=1
+	if cm5_connected:
+		timeMax = 5
+		timeOutPerso = timeMax
+		while timeOutPerso > 0:
+			text = ser.readline()
+			if text:
+				return text
+				timeOutPerso=timeMax
+			timeOutPerso-=1
+	else:
+		return E_CM5_NOT_CONN
 	
 print 'Debut programme : com CM-5'
 sys.stdout.flush()
@@ -86,10 +90,7 @@ while (keyB != 13):
 		send(idArenvoyer, E_INVALID_PARAMETERS_NUMBERS)
 		continue
 	
-	if not cm5_connected:
-		send(E_CM5_NOT_CONN,E_CM5_NOT_CONN)
-		continue
-	elif keyB == Q_IDENT:
+	if keyB == Q_IDENT:
 		send(idArenvoyer, "ax12")
 		continue
 	elif keyB == PING:
@@ -121,10 +122,12 @@ while (keyB != 13):
 		valRetour = int(valRetour)
 		if(valRetour==0):
 			send(idArenvoyer, 1)
-		if(valRetour==1):
+		elif(valRetour==1):
 			send(idArenvoyer, 1)
-		if(valRetour==2):
+		elif(valRetour==2):
 			send(idArenvoyer, E_SURCHAUFFE)
+		else:
+			send(idArenvoyer, valRetour)
 	except TypeError:
 		send(idArenvoyer, E_MERDE_AX12)
 	except ValueError:

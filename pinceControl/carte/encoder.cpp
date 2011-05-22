@@ -15,9 +15,44 @@ long value_left_enc;//AR
 long value_right_enc;//AV
 long goal_position_AV,goal_position_AR;
 
-void testAV(){
+void testAV()
+{
+	if (goal_position_AV < 0)
+		return;
+	if (value_right_enc < goal_position_AV) // vers le haut
+	{
+		if (value_right_enc < goal_position_AV-MARGE)
+			setAVPWM(PWM_VALUE);
+		else if (value_right_enc < goal_position_AV-MARGE_END)
+			setAVPWM(PWM_END);
+		else //arret
+		{
+			setAVPWM(0x00);
+			if(msg_position_AV!=-1){
+				sendMessage(msg_position_AV,2);
+				msg_position_AV=-1;
+			}
+		}
+	}
+	else
+	{
+		if (value_right_enc > goal_position_AV+MARGE)
+			setAVPWM(PWM_VALUE);
+		else if (value_right_enc > goal_position_AV-MARGE_END)
+			setAVPWM(PWM_END);
+		else //arret
+		{
+			setAVPWM(0x00);
+			if(msg_position_AV!=-1){
+				sendMessage(msg_position_AV,2);
+				msg_position_AV=-1;
+			}
+		}
+	}
+	/*
 	if(goal_position_AV>=0){
 		if(value_right_enc<(goal_position_AV-MARGE)){
+			if (value_right_enc<(goal_position_AV-MARGE_END))
 			setAVPWM(PWM_VALUE);//VERS LE HAUT
 		}
 		else if(value_right_enc>(goal_position_AV+MARGE)){
@@ -30,9 +65,43 @@ void testAV(){
 				msg_position_AV=-1;
 			}
 		}
-	}
+	}*/
 }
-void testAR(){
+void testAR()
+{
+	if (goal_position_AV < 0)
+		return;
+	if (value_left_enc < goal_position_AR) // vers le haut
+	{
+		if (value_left_enc < goal_position_AR-MARGE)
+			setAVPWM(PWM_VALUE);
+		else if (value_left_enc < goal_position_AR-MARGE_END)
+			setAVPWM(PWM_END);
+		else //arret
+		{
+			setAVPWM(0x00);
+			if(msg_position_AV!=-1){
+				sendMessage(msg_position_AV,2);
+				msg_position_AV=-1;
+			}
+		}
+	}
+	else
+	{
+		if (value_left_enc > goal_position_AR+MARGE)
+			setAVPWM(PWM_VALUE);
+		else if (value_left_enc > goal_position_AR-MARGE_END)
+			setAVPWM(PWM_END);
+		else //arret
+		{
+			setAVPWM(0x00);
+			if(msg_position_AR!=-1){
+				sendMessage(msg_position_AR,2);
+				msg_position_AR=-1;
+			}
+		}
+	}
+	/*
 	if(goal_position_AR>=0){
 		if(value_left_enc<(goal_position_AR-MARGE)){
 			setARPWM(PWM_VALUE);//VERS LE HAUT
@@ -47,7 +116,7 @@ void testAR(){
 				msg_position_AR=-1;
 			}
 		}
-	}
+	}*/
 }
 
 void initEncoders(){

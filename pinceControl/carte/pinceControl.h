@@ -31,8 +31,10 @@
 
 //deplacement verticale
 #define POSITION_MAX 10000
-#define PWM_VALUE 	90 //90
-#define MARGE 		50 //Tolerance de maintient en position pour la pince
+#define PWM_VALUE 	250 //90
+#define PWM_END		100
+#define MARGE 		100 // Tolérance avant de ralentir
+#define MARGE_END	50 //Tolerance de maintient en position pour la pince
 #define SEUIL_LOAD	0x50
 #define PIN_MS_RECAL_AV		30 //microswitch pour recalage
 #define PIN_MS_RECAL_AR		37

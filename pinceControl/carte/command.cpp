@@ -94,9 +94,9 @@ void cmd(int id, int header, int *args, int size){
 	case Q_MOTOR:
 	{
 	    if(size<1)
-		sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+			sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 	    else
-		sendMessage(id, setPincePWM(1,args[0],1000));
+			sendMessage(id, setPincePWM(1,args[0],1000));
 
 	    break;
 	}
