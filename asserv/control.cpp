@@ -181,7 +181,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	Serial.println(currentEcart);
 	*/
 
-	if(abs(currentEcart) < M_PI/360) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
+	if(abs(currentEcart) < M_PI/360) /*si l'erreur est inferieur a 1deg, on considère la consigne atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
@@ -319,7 +319,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
 	}
 
-	if(abs(currentDelta) < 5*ENC_MM_TO_TICKS) /*si l'ecart n'est plus que de 6 mm, on considere la consigne comme atteinte*/
+	if(abs(currentDelta) < 5*ENC_MM_TO_TICKS) /*si l'ecart n'est plus que de 5 mm, on considere la consigne comme atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
