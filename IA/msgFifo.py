@@ -2,6 +2,7 @@
 
 import threading
 from Queue import Queue, Empty
+from protocole import *
 
 class Message:
 	def __init__(self, id_from, id_msg, id_cmd, content):
@@ -29,19 +30,25 @@ class MsgFifo:
 			m = (Message(id_from, id_msg, id_cmd, msg))
 			self._queue.put(m)
 	
-	def getMsg(self, time=None):
+	def getMsg(self, time=None, msg=""):
 		"""
+		@raise TimeoutException
+		
+		@param time (float) timeout en s
+		
 		@return (Message)
 		"""
 		try:
 			r = self._queue.get(True, time)
 		except Empty:
-			return None
+			raise TimeoutException("%s.getMsg(timeout=%s,msg=%s)"%(self,time,msg))
 		else:
 			self._queue.task_done()
 			return r
 	
-	
+	def __repr__(self):
+		return "MsgFifo(%s)"%(self._filter,)
+
 	
 	
 	

@@ -1,76 +1,134 @@
 #include "sensor.h"
 
-int getPion(unsigned char face){
-	int value,value2;
-	//test des sharp du bas vers le haut
-	if(face == FACEAV){
-		//test 1
-		value = getSharp(SHARP_AV1);
-		if(value>DIST_MAX1 && value<DIST_MIN1){
-			//au moin 1 pion
-			//test 2 sharp type 2 (value ou value 2)
-			value = getSharp(SHARP_AV2G);
-			value2 = getSharp(SHARP_AV2D);
-			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
-				//test 3 sharp type 1
-				value = getSharp(SHARP_AV3);
-				if(value>DIST_MAX1 && value<DIST_MIN1){
-					//test 4
-					value = getSharp(SHARP_AV4);
-					if(value>DIST_MAX1 && value<DIST_MIN1){
-						//test 5
-						value = getSharp(SHARP_AV5);
-						if(value>DIST_MAX1 && value<DIST_MIN1){
-									return 5; // tete sur 2 pion
-						} else return 4; // tete sur pion
-					} else return 3; // tete
-				}else return 2; // 2 pion
-			}else return 1; // 1 pion seul
-		}else return 0; //pas de pion
-	}
-	
-	if(face == FACEAR){
-		//test 1
-		value = getSharp(SHARP_AR1);
-		if(value>DIST_MAX1 && value<DIST_MIN1){
-			//au moin 1 pion
-			//test 2 sharp type 2 (value ou value 2)
-			value = getSharp(SHARP_AR2G);
-			value2 = getSharp(SHARP_AR2D);
-			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
-				//test 3 sharp type 1
-				value = getSharp(SHARP_AR3);
-				if(value>DIST_MAX1 && value<DIST_MIN1){
-					//test 4
-					value = getSharp(SHARP_AR4);
-					if(value>DIST_MAX1 && value<DIST_MIN1){
-						//test 5
-						value = getSharp(SHARP_AR5);
-						if(value>DIST_MAX1 && value<DIST_MIN1){
-									return 5; // tete sur 2 pion
-						} else return 4; // tete sur pion
-					} else return 3; // tete
-				}else return 2; // 2 pion
-			}else return 1; // 1 pion seul
-		}else return 0; //pas de pion
-	}
-	
-	return 6; //erreur
+
+TriggerSharp trigerSharp[NB_SHARP];
+TriggerMS trigerMS[NB_MS];
+int JackMessageID;
+int pingAvMessageID;
+int pingArMessageID;
+
+typedef struct
+{
+	int lastValue;
+	long long lastOscillation;
+	long long lastSwitch;
+	bool oscillation;
+}Switch;
+
+Switch switchColor, switchJack;
+void SwitchInit(Switch & s, const int pin)
+{
+	s.lastValue = digitalRead(pin);
+	s.lastOscillation = 0;
+	s.lastSwitch = 0;
+	s.oscillation = false;
 }
+void checkSwitch(const int pin, const int warning, Switch & s);
+
+
 
 void initSensor(){
+	// micro switch
 	pinMode(PIN_MS_AV, INPUT);  
 	pinMode(PIN_MS_AR, INPUT);
+	// jack et couleur
 	pinMode(PIN_COLOR, INPUT);
 	pinMode(PIN_JACK, INPUT);
+	// let bleu et rouge
 	pinMode(LED_BLEU, OUTPUT);
 	pinMode(LED_ROUGE, OUTPUT);
 	digitalWrite(LED_BLEU,LOW);
 	digitalWrite(LED_ROUGE,LOW);
+	
 	for(int i=0;i<NB_SHARP;i++)
 		trigerSharp[i].pin=-1;
 	for(int i=0;i<NB_MS;i++)
 		trigerMS[i].pin=-1;
+		
+	JackMessageID=-42;
+	pingAvMessageID=-42;
+	pingArMessageID=-42;
+	
+	SwitchInit(switchColor, PIN_COLOR);
+	SwitchInit(switchJack, PIN_JACK);
+}
+
+void sensorTrigger(){
+	static long long timePing = 0;
+
+	checkSwitch(PIN_COLOR, W_SWITCH_COLOR, switchColor);
+	checkSwitch(PIN_JACK, W_JACK, switchJack);
+	//microswitch
+	for(int i=0;i<NB_MS;i++){
+		if(trigerSharp[i].pin==-1)break;
+		if(getMicroSwitch(trigerMS[i].pin)==trigerMS[i].value){
+			sendMessage(trigerMS[i].messageId,2);
+			removeTriggerMS(i);
+		}
+	}
+	
+	if (millis() - timePing > 200)
+	{
+		timePing = millis();
+		int d = 0;
+		
+		if(pingAvMessageID>=0){
+			d = microsecondsToCentimeters(getDistance(PIN_PING_AV));
+			if(d != 0 and d <= DISTANCE_DETECT){
+					sendMessage(-30,d);
+			}
+		}
+			
+		if(pingArMessageID>=0){
+			d = microsecondsToCentimeters(getDistance(PIN_PING_AR));
+			if(d != 0 and d <= DISTANCE_DETECT){
+					sendMessage(-31,d);
+			}
+		}
+	}
+}
+
+
+void checkSwitch(const int pin, const int warning, Switch & s)
+{
+	// Si on a pas detecter une oscillation précédement
+	// et que la dernière fois qu'on a switch remonte à "longtemps"
+	if (!s.oscillation and millis() - s.lastSwitch > 100)
+	{
+		int v = digitalRead(pin);
+		if (v != s.lastValue)
+		{
+			s.lastOscillation = millis();
+			s.oscillation = true;
+		}
+	}
+	// Si on a detecté une oscillation précédement
+	// et qu'on a attendu "longtemps" entre temps (pour éliminer les oscillations de merde)
+	else if (s.oscillation and millis() - s.lastOscillation > 100)
+	{
+		int v = digitalRead(pin);
+		if (v != s.lastValue)
+		{
+			sendMessage(warning, v);
+			s.lastSwitch = millis();
+			s.lastValue = v;
+		}
+		s.oscillation = false;
+	}
+}
+
+
+void valueChangeOnJack()
+{
+	static long long int lastTime = 0;
+	
+	if (millis() - lastTime > 100)
+	{
+		delayMicroseconds(100);
+		int v = digitalRead(PIN_JACK);
+		sendMessage(W_JACK, v);
+		lastTime = millis();
+	}
 }
 
 int setLED(unsigned char color){
@@ -91,14 +149,13 @@ int setLED(unsigned char color){
 	return -42;
 }
 
-int waitJack(){
-	//attend le branchement d'un jack (il peut etre deja branché)
-	while(digitalRead(PIN_JACK)!=HIGH)
-		delay(40);
-	//attend le debranchement du jack
-	while(digitalRead(PIN_JACK)!=LOW)
-		delay(40);
-	return 2;
+int getColor()
+{
+	int c = digitalRead(PIN_COLOR);
+	if (c == LOW)
+		return BLEU;
+	else
+		return ROUGE;
 }
 
 int getSharp(unsigned char pin)
@@ -214,48 +271,59 @@ int setTriggerMS(unsigned int id, unsigned char pin,bool ref){
 }
 
 void removeTriggerMS(unsigned int index){
-		// aucun trigger
-		if(trigerMS[0].pin==-1) return;
-		//1 trigger
-		if(trigerMS[1].pin==-1){
-			trigerMS[1].pin=-1;//index == 1 ici j'espere
+	// aucun trigger
+	if(trigerMS[0].pin==-1) return;
+	//1 trigger
+	if(trigerMS[1].pin==-1){
+		trigerMS[1].pin=-1;//index == 1 ici j'espere
+		return;
+	}
+	//au moin 2 trigger
+	for(int j=2;j<NB_MS;j++){
+		if(trigerMS[j].pin==-1){
+			//remplace le trigger index par le dernier trigger
+			trigerMS[index].pin=trigerMS[j-1].pin;
+			trigerMS[index].value=trigerMS[j-1].value;
+			trigerMS[index].messageId=trigerMS[j-1].messageId;
+			trigerMS[j-1].pin=-1;
 			return;
 		}
-		//au moin 2 trigger
-		for(int j=2;j<NB_MS;j++){
-			if(trigerMS[j].pin==-1){
-				//remplace le trigger index par le dernier trigger
-				trigerMS[index].pin=trigerMS[j-1].pin;
-				trigerMS[index].value=trigerMS[j-1].value;
-				trigerMS[index].messageId=trigerMS[j-1].messageId;
-				trigerMS[j-1].pin=-1;
-				return;
-			}
-		}
-		//tableau de trigger remplis remplace index par le dernier delete le dernier
-		trigerMS[index].pin=trigerMS[NB_SHARP-1].pin;
-		trigerMS[index].value=trigerMS[NB_SHARP-1].value;
-		trigerMS[index].messageId=trigerMS[NB_SHARP-1].messageId;
-		trigerMS[NB_SHARP-1].pin=-1;
+	}
+	//tableau de trigger remplis remplace index par le dernier delete le dernier
+	trigerMS[index].pin=trigerMS[NB_SHARP-1].pin;
+	trigerMS[index].value=trigerMS[NB_SHARP-1].value;
+	trigerMS[index].messageId=trigerMS[NB_SHARP-1].messageId;
+	trigerMS[NB_SHARP-1].pin=-1;
 }
 
-void sensorTrigger(){
-	static int temps = 0;
-	//sharp
-	/*for(int i=0;i<NB_SHARP;i++){
-		if(trigerSharp[i].pin==-1)break;//fin des trigger
-		if(getSharp(trigerSharp[i].pin)<=trigerSharp[i].value){
-			sendMessage(trigerSharp[i].messageId,2);
-			removeTriggerSharp(i);
-		}
-	}*/
-	//microswitch
-	for(int i=0;i<NB_MS;i++){
-		if(trigerSharp[i].pin==-1)break;
-		if(getMicroSwitch(trigerMS[i].pin)==trigerMS[i].value){
-			sendMessage(trigerMS[i].messageId,2);
-			removeTriggerMS(i);
-		}
+
+int getPion(unsigned char face){
+	int value,value2;
+	//test des sharp du bas vers le haut
+	if(face == FACEAV){
+		//test 1
+		value = getSharp(SHARP_AV1);
+		if(value>DIST_MAX1 && value<DIST_MIN1){
+			//au moin 1 pion
+			//test 2 sharp type 2 (value ou value 2)
+			value = getSharp(SHARP_AV2G);
+			value2 = getSharp(SHARP_AV2D);
+			if((value>DIST_MAX2 && value<DIST_MIN2) || (value>DIST_MAX2 && value<DIST_MIN2)){
+				//test 3 sharp type 1
+				value = getSharp(SHARP_AV3);
+				if(value>DIST_MAX1 && value<DIST_MIN1){
+					//test 4
+					value = getSharp(SHARP_AV4);
+					if(value>DIST_MAX1 && value<DIST_MIN1){
+						//test 5
+						value = getSharp(SHARP_AV5);
+						if(value>DIST_MAX1 && value<DIST_MIN1){
+									return 5; // tete sur 2 pion
+						} else return 4; // tete sur pion
+					} else return 3; // tete
+				}else return 2; // 2 pion
+			}else return 1; // 1 pion seul
+		}else return 0; //pas de pion
 	}
 	
 	/*if (millis() - temps > 200)
@@ -278,17 +346,4 @@ void sensorTrigger(){
 		}
 	}*/
 }
-
-
-int getColor()
-{
-	int c = digitalRead(PIN_COLOR);
-	if (c == LOW)
-		return BLEU;
-	else
-		return ROUGE;
-}
-
-
-
 

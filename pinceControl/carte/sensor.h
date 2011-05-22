@@ -5,6 +5,7 @@
 #include "message.h"
 #include "ping.h"
 
+// interrupts : 2 (interrupt 0), 3 (interrupt 1), 18 (interrupt 5), 19 (interrupt 4), 20 (interrupt 3), and 21 (interrupt 2)
 
 //define microswitch
 #define PIN_MS_AV 	48
@@ -12,17 +13,17 @@
 #define NB_MS 		2
 
 //define jack et couleur
-#define PIN_JACK 	35
-#define LED_BLEU 	29
-#define LED_ROUGE 	33
-#define BLEU 		0
-#define ROUGE 		1
+#define PIN_JACK 		35
+#define INTERRUPT_JACK	1
+#define LED_BLEU 		29
+#define LED_ROUGE 		33
+#define BLEU 			0
+#define ROUGE 			1
 
-//interupteur bleu 33
-//interupteur rouge 41
 
 // pin couleur
-#define PIN_COLOR	31
+#define PIN_COLOR		31
+#define INTERRUPT_COLOR	0
 
 //define sharp
 #define FACEAV 		0
@@ -70,15 +71,13 @@ struct TriggerMS{
 };
 
 
-static TriggerSharp trigerSharp[NB_SHARP];
-static TriggerMS trigerMS[NB_MS];
-static int JackMessageID=-42;
-static int pingAvMessageID=-42;
-static int pingArMessageID=-42;
+extern TriggerSharp trigerSharp[NB_SHARP];
+extern TriggerMS trigerMS[NB_MS];
+extern int JackMessageID;
+extern int pingAvMessageID;
+extern int pingArMessageID;
 
 void initSensor();
-int jack(int id);
-int waitJack();
 int setLED(unsigned char color);
 int getPion(unsigned char face);
 int getSharp(unsigned char pin);
@@ -89,5 +88,7 @@ int setTriggerMS(unsigned int id, unsigned char pin,bool ref);
 void removeTriggerMS(unsigned int index);
 void sensorTrigger();
 int getColor();
+void valueChangeOnJack();
+void valueChangeOnSwitchColor();
 
 #endif

@@ -56,6 +56,9 @@ class Vec:
 
 	def __str__(self):
 		return self.__repr__()
+	
+	def tracer(self, canevas, **options):
+		return canevas.create_oval(self.x-3,self.y-3,self.x+3,self.y+3, options)
 
 
 	
@@ -64,11 +67,20 @@ class Vec2(Vec):
 	def __init__(self,x,y):
 		Vec.__init__(self, x,y)
 	
-	def tracer(self, canevas, color="black"):
-		return canevas.create_oval(self.x-3,self.y-3,self.x+3,self.y+3, fill=color, width=3)
-	
 	def tangente(self, other, type):
 		return other.tangente(self, -type)
+
+	def __lt__(self, other):
+		return self.x < other[0] and self.y < other[1]
+
+	def __le__(self, other):
+		return self.x <= other[0] and self.y <= other[1]
+
+	def __gt__(self, other):
+		return self.x > other[0] and self.y > other[1]
+
+	def __ge__(self, other):
+		return self.x >= other[0] and self.y >= other[1]
 			
 	def __repr__(self):
 		return "Vec2"+str((int(self.x),int(self.y)))

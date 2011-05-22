@@ -3,18 +3,21 @@
 import threading
 import socket
 import sys
-sys.path.append('../com/serverPython/')
 from protocole import *
 import colorConsol
 
+MOD_TCP = 0
+MOD_CIN = 1
 
-		
+
+
 class RobotClient(threading.Thread):
-	def __init__(self, robot):
+	def __init__(self, robot, mod):
 		threading.Thread.__init__(self,None,None,"RobotClient")
-		
-		self._listFifo = list()
+
 		self.robot = robot
+		self.mod = mod
+		self._listFifo = list()
 		self._lock_fifo = threading.Lock()
 		
 		self._partialMsg = ""
@@ -22,11 +25,13 @@ class RobotClient(threading.Thread):
 		self._e_close = threading.Event()
 		
 		# connection
-		host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
-		port = int(sys.argv[2]) if len(sys.argv) > 2 else 50000			# The same port as used by the server
-		self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-		self._socket.settimeout(1.0)
-		self._socket.connect((host, port))
+		if self.mod == MOD_TCP:
+			host = sys.argv[1] if len(sys.argv) > 1 else 'localhost'
+			port = int(sys.argv[2]) if len(sys.argv) > 2 else 50000			# The same port as used by the server
+			self._socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+			self._socket.settimeout(1.0)
+			self._socket.connect((host, port))
+		
 
 	def combineWithPartial(self, msg):
 		"""
@@ -50,11 +55,12 @@ class RobotClient(threading.Thread):
 		Envoie le message au serveur
 		"""
 		if not self._e_close.isSet():
-			self._socket.send(str(msg).strip()+"\n")
-			self.write("Send : %s"%msg)
-			if msg == 'close':
-				self._e_close.set()
-				self.write("break send")
+			msg = str(msg).strip()
+			if self.mod == MOD_TCP:
+				self._socket.send(msg+"\n")
+			else:
+				print msg
+			#self.write("Send : %s"%msg)
 	
 	def run(self):
 		""" 
@@ -62,13 +68,17 @@ class RobotClient(threading.Thread):
 		"""
 		while not self._e_close.isSet():
 			try:
-				data = self._socket.recv(1024) # en octets/chars
+				if self.mod == MOD_TCP:
+					data = self._socket.recv(1024) # en octets/chars
+				else:
+					data = raw_input()+"\n"
 			except socket.timeout:
 				pass
 			else:
 				if not data or str(data) == 'close':
-					self._socket.close()
-					self._e_close.set()
+					if self.mod == MOD_TCP:
+						self._socket.close()
+						self._e_close.set()
 					self.write("break recv")
 				else:
 					for msg in self.combineWithPartial(data):
@@ -76,29 +86,48 @@ class RobotClient(threading.Thread):
 				
 	def _treat(self, msg):
 		""" fonction appellée quand un message est reçu """
-		# formatage de la réponse et appelle d'un robot.on<Event>()
-		self.write("Received : '%s'"%msg)
+		#self.write("Received : '%s'"%msg)
 		msg = str(msg).strip()
 		msg_split = msg.split(C_SEP_SEND,2)
-		id_from = int(msg_split[0]) # l'id du client qui a envoyé le message
-		if id_from != ID_SERVER: # si ce n'est pas le serveur
-			id_msg = int(msg_split[1])
-			if id_msg >= 0: # les erreurs sont en negatif
-				id_cmd = self.robot.cmd[id_msg]
-			else:
-				id_cmd = id_msg
-			msg = msg_split[2].strip() if len(msg_split) > 2 else None
+		try:
+			id_from = int(msg_split[0]) # l'id du client qui a envoyé le message
+			if id_from != ID_SERVER: # si ce n'est pas le serveur
+				id_msg = int(msg_split[1])
+				if id_msg >= 0: # les erreurs sont en negatif
+					id_cmd = self.robot.cmd[id_msg]
+				else:
+					id_cmd = id_msg
+				msg = msg_split[2].strip() if len(msg_split) > 2 else None
 
-			# remplissage des fifo qui attendent
-			for fifo in self._listFifo:
-				fifo.addMsg(id_from, id_msg, id_cmd, msg)
-				
-		else: # si c'est le serveur qui a envoyé la commande
-			id_cmd = msg_split[1]
-			if id_cmd == "scan":
-				self.robot.scan()
+				# remplissage des fifo qui attendent
+				for fifo in self._listFifo:
+					fifo.addMsg(id_from, id_msg, id_cmd, msg)
+					
+			else: # si c'est le serveur qui a envoyé la commande
+				id_cmd = msg_split[1]
+				if id_cmd == "scan":
+					self.robot.scan()
+		except ValueError as ex:
+			self.write(ex, colorConsol.FAIL)
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
 
+	def stop(self):
+		"""
+		Envoi la commande Q_KILL à toutes les fifo,
+		de cette manière toutes les actions en cours du robot devraient s'arreter
+		"""
+		for fifo in self._listFifo:
+			fifo.addMsg(ID_IA, -1, Q_KILL, "kill")
 			
+	def reset(self):
+		"""
+		Appellée lors du reset du robot, cette fonction n'a pas pour
+		effet de reset la connection avec le serveur, elle va juste reset
+		ce qui est utilisé par le robot (le partialMsg et les fifo)
+		"""
+		self._partialMsg = ""
+		self._listFifo = []
 
 	def write(self, msg):
 		""" pour écrire sans se marcher sur les doigts """
@@ -112,6 +141,8 @@ class RobotClient(threading.Thread):
 		self._lock_fifo.acquire()
 		try:
 			self._listFifo.remove(msgFifo)
+		except ValueError:
+			pass
 		finally:
 			self._lock_fifo.release()
 	
