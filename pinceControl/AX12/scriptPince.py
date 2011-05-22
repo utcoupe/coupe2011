@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import serial, time
+import serial, time, sys
 from protocole import *
 
 
 def send(idMess, retourMess):
-	print '%s.%s'%(idMess,retourMess)
+	print '-1.%s.%s'%(idMess,retourMess)
+	sys.stdout.flush()
 
 '''
 	--- PARAMETRES internes ---
@@ -53,12 +54,12 @@ def read_CM5():
 		timeOutPerso-=1
 	
 print 'Debut programme : com CM-5'
+sys.stdout.flush()
 keyB = 0
 ser.open()
 
 while (keyB != 13):
 	valRetour = 0
-
 	commandThomas = raw_input()
 	input_split = commandThomas.split('.')
 	trucQuiSertPas, idArenvoyer, keyB = 0,0,0
@@ -80,8 +81,10 @@ while (keyB != 13):
 
 	if keyB == Q_IDENT:
 		send(idArenvoyer, "ax12")
+		continue
 	elif keyB == PING:
 		send(idArenvoyer, "Pong")
+		continue
 		
 	elif (keyB==Q_OPEN_MAX_AV):
 		action_pince(Face_front, Pinces_ouvertureMax)
