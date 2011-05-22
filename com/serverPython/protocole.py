@@ -66,8 +66,8 @@ Q_SERRE_AR			= 85
 ID_SERVER		= 0
 ID_CAM			= 1
 ID_AX12			= 2
-ID_ASSERV		= 3 # carte asserv
-ID_OTHERS		= 4 # carte avec les pinces et sharps
+ID_ASSERV		= 4 # carte asserv
+ID_OTHERS		= 3 # carte avec les pinces et sharps
 ID_IA			= 5 # l'IA
 
 
