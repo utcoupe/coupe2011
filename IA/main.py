@@ -860,8 +860,10 @@ class Robot:
 		"""
 		if id_pince == AVANT:
 			self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE_AV)
+			self.addCmd(ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
 		else:
 			self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE_AR)
+			self.addCmd(ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
 
 	def construireTourVerte(self):
 		"""
@@ -965,7 +967,7 @@ class Robot:
 
 	def otherColor(self, c):
 		"""
-		Renvoie l'autre couleur, si BLUE, renvoie RED
+		Renvoie la couleur adverse de (c)
 
 		@param c (int) la couleur
 		@return (int) la color opposée
