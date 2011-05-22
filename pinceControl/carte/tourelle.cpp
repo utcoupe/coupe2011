@@ -171,7 +171,7 @@ void loopTourelle() {
 					}
 					else// si la tourelle a détecté un élement exterieur à la table
 					{
-						motor1.step+=150;
+						motor1.step+=500;
 						if(motor1.dir==TURNLEFT)
 							motor1.dir=TURNRIGHT;
 						else
