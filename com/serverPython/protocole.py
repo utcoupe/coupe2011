@@ -93,3 +93,4 @@ W_JACK								= -22
 E_SURCHAUFFE						= -55
 E_LOW_VOLTAGE						= -56
 E_MERDE_AX12						= -57
+E_CM5_NOT_CONN						= -58

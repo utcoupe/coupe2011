@@ -35,7 +35,15 @@ ser = serial.Serial()
 ser.baudrate = 57600
 ser.port = '/dev/ttyUSB0' #3				  # A modifier suivant l'OS
 ser.timeout = 0.5
-ser.close()
+try:
+	ser.close()
+	ser.open()
+except Exception as ex:
+	sys.stderr.write(str(ex)+"\n")
+	send(E_CM5_NOT_CONN,E_CM5_NOT_CONN)
+	cm5_connected = False
+else:
+	cm5_connected = True
 
 # Fonction de demande d'ouverture
 def action_pince(face, action):
@@ -56,7 +64,6 @@ def read_CM5():
 print 'Debut programme : com CM-5'
 sys.stdout.flush()
 keyB = 0
-ser.open()
 
 while (keyB != 13):
 	valRetour = 0
@@ -78,8 +85,11 @@ while (keyB != 13):
 	else:
 		send(idArenvoyer, E_INVALID_PARAMETERS_NUMBERS)
 		continue
-
-	if keyB == Q_IDENT:
+	
+	if not cm5_connected:
+		send(E_CM5_NOT_CONN,E_CM5_NOT_CONN)
+		continue
+	elif keyB == Q_IDENT:
 		send(idArenvoyer, "ax12")
 		continue
 	elif keyB == PING:
