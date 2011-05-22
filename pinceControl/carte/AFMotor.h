@@ -31,6 +31,12 @@
 #define BRAKE 3
 #define RELEASE 4
 
+// Arduino pin names
+#define MOTORLATCH 12
+#define MOTORCLK 4
+#define MOTORENABLE 7
+#define MOTORDATA 8
+
 
 class AF_DCMotor
 {
@@ -41,6 +47,38 @@ class AF_DCMotor
 
  private:
   uint8_t motornum, pwmfreq;
+};
+
+
+#define SINGLE 1
+#define DOUBLE 2
+#define INTERLEAVE 3
+#define MICROSTEP 4
+#define MICROSTEPS 16         // 8 or 16
+
+class AF_Stepper {
+ public:
+  AF_Stepper(uint16_t, uint8_t);
+  void step(uint16_t steps, uint8_t dir,  uint8_t style = SINGLE);
+  void setSpeed(uint16_t);
+  uint8_t onestep(uint8_t dir, uint8_t style);
+  void release(void);
+  uint16_t revsteps; // # steps per revolution
+  uint8_t steppernum;
+  uint32_t usperstep, steppingcounter;
+ private:
+  uint8_t currentstep;
+
+};
+
+
+class AFMotorController
+{
+  public:
+    AFMotorController(void);
+    void enable(void);
+    friend class AF_DCMotor;
+    void latch_tx(void);
 };
 
 #endif

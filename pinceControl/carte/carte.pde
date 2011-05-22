@@ -5,12 +5,14 @@ void setup(){
 	initPinceControl();
 	//initTourelle();
 	initSensor();
+	setupTourelle();
 }
 
 void loop(){
 	readIncomingData();
 	sensorTrigger();
 	//tourelleRun();
+	loopTourelle();
 	
 }
 

@@ -258,7 +258,7 @@ void sensorTrigger(){
 		}
 	}
 	
-	if (millis() - temps > 200)
+	/*if (millis() - temps > 200)
 	{
 		temps = millis();
 		int d = 0;
@@ -276,7 +276,7 @@ void sensorTrigger(){
 					sendMessage(-31,d);
 			}
 		}
-	}
+	}*/
 }
 
 
