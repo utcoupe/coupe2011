@@ -65,10 +65,10 @@ Q_SERRE_AR			= 85
 # server python
 ID_SERVER		= 0
 ID_CAM			= 1
-ID_AX12			= 2
-ID_ASSERV		= 4 # carte asserv
+ID_AX12			= 5
+ID_ASSERV		= 2 # carte asserv
 ID_OTHERS		= 3 # carte avec les pinces et sharps
-ID_IA			= 5 # l'IA
+ID_IA			= 4 # l'IA
 
 
 

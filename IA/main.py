@@ -191,7 +191,7 @@ class Robot:
 				self.preparation()"""
 				if self.preparation() >= 0:
 					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
-					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 0)
+					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")
 					self.construireTourVerte()
 					"""while 1:
