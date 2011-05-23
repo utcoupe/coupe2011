@@ -13,7 +13,7 @@ int gauche = 0,droite = 0;
 
 void setupTourelle() {
   Serial.begin(9600);           // set up Serial library at 9600 bps
-  Serial.println("Stepper");
+  //Serial.println("Stepper");
 	resolution=10;
 	right=motor1.position+resolution;
 	left=motor1.position-resolution;
@@ -36,59 +36,60 @@ void update_pos(int xUpdate, int yUpdate, int angleRUpdate)
 
 bool cibleValide(int angleTTest, int distance)
 {
-	bool valide=true;
-	int angle=angleR+((18*angleTTest/50)%1000); //modulo 1000 pour le cas où la tourelle fait un tour, 18 et 50 le rapport de réduction des angre
-	int A=distance*cos(angle)+x, B=distance*sin(angle)+y;
+	bool valide = true;
+  // Modulo 1000 pour le cas où la tourelle fait un tour, 18 et 50 le rapport de réduction des angre
+	int angle = angleR + ((18*angleTTest/50) % 1000); 
+	int A = distance * cos(angle) + x, B = distance * sin(angle) + y;
 
-	if(A>(3000-MARGE_BORD) || A<MARGE_BORD)
-		valide=false;
+	if(A > (3000 - MARGE_BORD) || A < MARGE_BORD)
+		valide = false;
 
-	if(B>(2100-MARGE_BORD) || B<MARGE_BORD)
-		valide=false;
+	if(B > (2100 - MARGE_BORD) || B < MARGE_BORD)
+		valide = false;
 	
 	return valide;
 }
 
 	
-
-void recherche(){
-	if (motor1.dir == TURNRIGHT) {
-		if (motor1.position >= right){
-			motor1.step = INCREMENT;  	      
-			motor1.dir = TURNLEFT;
-			resolution+=10;
-			right=motor1.position+resolution;
-			left=motor1.position-resolution;
-		}else {
-			motor1.step = INCREMENT;  
-		}
-	}else {
-		if (motor1.position <= left){
-			motor1.step = INCREMENT;  	      
-			motor1.dir = TURNRIGHT;
-			resolution+=10;
-			right=motor1.position+resolution;
-			left=motor1.position-resolution;
-		}else {
-			motor1.step = INCREMENT;  
-		}
-	}
+void recherche() {
+	//if (motor1.dir == TURNRIGHT) {
+		//if (motor1.position >= right){
+			//motor1.step = INCREMENT;  	      
+			//motor1.dir = TURNLEFT;
+			//resolution+=10;
+			//right=motor1.position+resolution;
+			//left=motor1.position-resolution;
+		//}else {
+			//motor1.step = INCREMENT;  
+		//}
+	//}else {
+		//if (motor1.position <= left){
+			//motor1.step = INCREMENT;  	      
+			//motor1.dir = TURNRIGHT;
+			//resolution+=10;
+			//right=motor1.position+resolution;
+			//left=motor1.position-resolution;
+		//}else {
+			//motor1.step = INCREMENT;  
+		//}
+	//}
+	motor1.step = 150;
 }
 
 void run(int mode){
 	motor1.run();
-	if(mode == RIGHT){
+	if (mode == RIGHT) {
 		motor1.dir = TURNRIGHT;
-		motor1.step=10;
-	}else if (mode == LEFT){
+		motor1.step = 10;
+	} else if (mode == LEFT) {
 		motor1.dir = TURNLEFT;
-		motor1.step=10;
-	}else if (mode == RECHERCHE){
+		motor1.step = 10;
+	} else if (mode == RECHERCHE) {
 		recherche();
-	}else if(mode ==NONE){
-		motor1.step=0;
-	}else{
-		motor1.step=10;
+	} else if (mode == NONE) {
+		motor1.step = 0;
+	} else {
+		motor1.step =10;
 	}
 	motor1.run();
 }
@@ -101,7 +102,6 @@ int testPing(int pin){
 }
 
 void loopTourelle() {
-  motor1.run();
   //Serial.println("ici");
   
   /*
@@ -125,73 +125,103 @@ void loopTourelle() {
 	}else if(val=='a'){
 		Serial.println(microsecondsToCentimeters(getDistance(PIN_PING_GAUCHE)),DEC);
 	}else if(val=='z'){
-		*/
+	*/
 		
 		
-		int turn = NONE;
-		int distance = 0;
-		static long long oldMillis=0;
-		static int pingTurn = RIGHT;
-			//boucle principale
-			//run(turn);
-			if((millis()-oldMillis)>TEMPO){
-				oldMillis=millis();
-				if(pingTurn == RIGHT){
-					motor1.step=0;delay(40);
-					gauche = testPing(PIN_PING_GAUCHE);
-					pingTurn = LEFT;
-				}else{
-					motor1.step=0;delay(40);
-					droite = testPing(PIN_PING_DROITE);
-					pingTurn = RIGHT;
-				}
-				
-				
+	int turn = NONE;
+	int distance = 0;
+	static long long oldMillis = 0;
+	static int pingTurn = RIGHT;
+	//boucle principale
+	//run(turn);
+	
+	if ((millis() - oldMillis) > TEMPO)
+	{
+		oldMillis = millis();
+		if (pingTurn == RIGHT) {
+			motor1.step = 0;
+			delay(40);
+			gauche = testPing(PIN_PING_GAUCHE);
+			pingTurn = LEFT;
+		} else {
+			motor1.step = 0;
+			delay(40);
+			droite = testPing(PIN_PING_DROITE);
+			pingTurn = RIGHT;
+		}
+		
+		bool objGauche = (gauche > 0);
+		bool objDroite = (droite > 0);
 
-				if (droite>0 && gauche>0 &&((droite-gauche)>DIFFMAX || (droite-gauche)<-DIFFMAX))
-				{
-					/*Serial.print("deux objets différents repérés\n");
-					Serial.println(droite,DEC);
-					Serial.println(gauche,DEC);*/
-					
-					if(droite<gauche)
-						turn=RIGHT;
-						
-					else
-						turn=LEFT;
-					
-				}
-				else if(droite > 0 && gauche > 0){
-					distance=(gauche+droite)/2;
-					if(cibleValide(motor1.position, distance))
-					{
-						/*Serial.print("deux : ");
-						Serial.println(distance,DEC);*/
-						turn=NONE;
-					}
-					else// si la tourelle a détecté un élement exterieur à la table
-					{
-						motor1.step+=500;
-						if(motor1.dir==TURNLEFT)
-							motor1.dir=TURNRIGHT;
-						else
-							motor1.dir=TURNLEFT;
-					}
-				}else if(gauche > 0){
-					//Serial.print("left : ");
-					turn=LEFT;
-					distance=gauche;
-					//Serial.println(distance,DEC);
-				}else if(droite > 0){
-					//Serial.print("right : ");
-					turn=RIGHT;
-					distance=droite;
-					//Serial.println(distance,DEC);
-				}else{
-					turn=RECHERCHE;
-				}
+		/*
+		 * Un objet est détecté de chaque côté mais à des distances 
+		 * différentes.
+		 */
+		if (objDroite && objGauche 
+		    && ((droite - gauche) > DIFFMAX 
+		        || (droite - gauche) < -DIFFMAX))
+		{
+			/*Serial.print("deux objets différents repérés\n");
+			Serial.println(droite,DEC);
+			Serial.println(gauche,DEC);*/
+			
+			if (droite < gauche)
+				turn = RIGHT;
+			else
+				turn = LEFT;
+		}
+		
+		/*
+		 * Un objet est détecté de chaque côté à des distances
+		 * équivalentes.
+		 */
+		else if (objDroite && objGauche)
+		{
+			distance = (gauche + droite) / 2;
+			if (cibleValide(motor1.position, distance))
+			{
+				/*Serial.print("deux : ");
+				Serial.println(distance,DEC);*/
+				turn = NONE;
 			}
-			run(turn);
+			// Si la tourelle a détecté un élement exterieur à la table
+			else
+			{
+				motor1.step += 500;
+				if(motor1.dir == TURNLEFT)
+					motor1.dir = TURNRIGHT;
+				else
+					motor1.dir = TURNLEFT;
+			}
+		}
+		
+		/*
+		 *  Un objet est détecté à gauche.
+		 */
+		else if (objGauche) 
+		{
+			//Serial.print("left : ");
+			turn = LEFT;
+			//Serial.println(distance,DEC);
+		}
+		
+		/*
+		 * Un objet est détecté à droite
+		 */
+		else if (objDroite)
+		{
+			//Serial.print("right : ");
+			turn = RIGHT;
+			//Serial.println(distance,DEC);
+		}
+		
+		/*
+		 * Aucun objet détecté
+		 */
+		else
+			turn = RECHERCHE;
+	}
+	run(turn);
 	//}
  }
 
