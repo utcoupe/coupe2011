@@ -47,19 +47,9 @@ Q_SCAN_AR		= 63
 
 
 # ax12
-Q_OPEN_MAX_AV		= 72
-Q_OPEN_MAX_AR		= 82
-
-Q_OPEN_MIN_AV		= 73
-Q_OPEN_MIN_AR		= 83
-
-Q_CLOSE_AV			= 74
-Q_CLOSE_AR			= 84
-
-Q_SERRE_AV			= 75
-Q_SERRE_AR			= 85
-
-
+Q_OPEN_MAX		= 72
+Q_CLOSE			= 73
+Q_SERRE			= 74
 
 
 # server python
