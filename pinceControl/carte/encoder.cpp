@@ -23,10 +23,10 @@ void testAV()
 		setAVPWM(PWM_MOVE);
 	else if (value_right_enc < goal_position_AV-MARGE_MAINTIENT)
 		setAVPWM(PWM_MAINTIENT);
-	else if (value_right_enc > goal_position_AV+MARGE_MAINTIENT)
-		setAVPWM(-PWM_MAINTIENT);
 	else if (value_right_enc > goal_position_AV+MARGE_MARCHE)
 		setAVPWM(-PWM_MOVE);
+	else if (value_right_enc > goal_position_AV+MARGE_MAINTIENT)
+		setAVPWM(-PWM_MAINTIENT);
 	else //arret
 	{
 		setAVPWM(0x00);
@@ -55,7 +55,6 @@ void testAV()
 	}*/
 }
 
-
 void testAR()
 {
 	if (goal_position_AR < 0)
@@ -64,10 +63,10 @@ void testAR()
 		setARPWM(PWM_MOVE);
 	else if (value_left_enc < goal_position_AR-MARGE_MAINTIENT)
 		setARPWM(PWM_MAINTIENT);
-	else if (value_left_enc > goal_position_AR+MARGE_MAINTIENT)
-		setARPWM(-PWM_MAINTIENT);
 	else if (value_left_enc > goal_position_AR+MARGE_MARCHE)
 		setARPWM(-PWM_MOVE);
+	else if (value_left_enc > goal_position_AR+MARGE_MAINTIENT)
+		setARPWM(-PWM_MAINTIENT);
 	else //arret
 	{
 		setARPWM(0x00);
