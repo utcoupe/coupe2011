@@ -68,8 +68,9 @@ void encoderSafe()
 	static int last_left_enc_value = 0;
 	static int last_right_enc_value = 0;
 	
-	if ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
-		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT))
+	if (goal_position_AV >= 0
+		and ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
+		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT)))
 	{
 		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
@@ -78,8 +79,9 @@ void encoderSafe()
 		}
 	}
 	
-	if ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
-		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT))
+	if (goal_position_AR >= 0
+		and ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
+		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT)))
 	{
 		if (abs(last_right_enc_value - value_right_enc) < 10)
 		{
