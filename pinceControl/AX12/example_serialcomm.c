@@ -141,14 +141,14 @@ int main(void)
 					
 					// SERRAGE
 					case ACTION_FER_MIN:{
-						WriteWord( ax_gauche, P_CW_COMPLIANCE_SLOPE, 16);
-						WriteWord( ax_droit , P_CW_COMPLIANCE_SLOPE, 16);
+						WriteWord( ax_gauche, P_CW_COMPLIANCE_SLOPE, 2);
+						WriteWord( ax_droit , P_CW_COMPLIANCE_SLOPE, 2);
 						MiliSec(WAIT_AFTER_ORDER);
-						WriteWord( ax_gauche, P_CCW_COMPLIANCE_SLOPE, 16);
-						WriteWord( ax_droit , P_CCW_COMPLIANCE_SLOPE, 16);
+						WriteWord( ax_gauche, P_CCW_COMPLIANCE_SLOPE, 2);
+						WriteWord( ax_droit , P_CCW_COMPLIANCE_SLOPE, 2);
 						MiliSec(WAIT_AFTER_ORDER+200);
-						WriteWord( ax_gauche, P_GOAL_POSITION_L, 504);
-						WriteWord( ax_droit , P_GOAL_POSITION_L, 520);
+						WriteWord( ax_gauche, P_GOAL_POSITION_L, 482); //486
+						WriteWord( ax_droit , P_GOAL_POSITION_L, 542); //538
 						MiliSec(200);
 						TxDWord10(TACHE_OK);
 					break;}
