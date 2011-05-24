@@ -32,7 +32,7 @@
 #define POSITION_MAX 10000
 #define PWM_MOVE 		250 // PWM pour se déplacer rapidement
 #define PWM_MAINTIENT	100 // PWM pour le maintient en position
-#define MARGE_MARCHE	100 // Tolérance avant de ralentir
+#define MARGE_MARCHE	200 // Tolérance avant de ralentir
 #define MARGE_MAINTIENT	50 // Tolerance de maintient en position pour la pince
 #define SEUIL_LOAD	0x50
 #define PIN_MS_RECAL_AV		30 //microswitch pour recalage

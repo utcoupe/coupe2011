@@ -125,9 +125,11 @@ class Robot:
 
 	def test(self):
 		self.write("* TEST LEDS *", colorConsol.HEADER)
-		self.addCmd(ID_OTHERS, Q_LED, RED) time.sleep(0.5)
-		self.addCmd(ID_OTHERS, Q_LED, BLUE) time.sleep(0.5)
-		self.addCmd(ID_OTHERS, Q_LED, -1) time.sleep(0.5)
+		self.addCmd(ID_OTHERS, Q_LED, RED)
+		time.sleep(0.5)
+		self.addCmd(ID_OTHERS, Q_LED, BLUE)
+		time.sleep(0.5)
+		self.addCmd(ID_OTHERS, Q_LED, -1)
 		
 		self.write("* TEST ASCENSEURS *", colorConsol.HEADER)
 		self.write("test ms recalage avant")
@@ -135,7 +137,7 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
 		raw_input("appuyez sur une touche pour continuer les tests")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
-		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
+		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 2000)
 		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 0)
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
@@ -184,6 +186,8 @@ class Robot:
 			while self._e_stop.isSet():
 				time.sleep(0.5)
 			if MOD == DEBUG:
+				self.test()
+				continue
 				"""self.color = BLUE
 				self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 				self.do_path(((self.symX(1850),300),))
