@@ -122,6 +122,59 @@ class Robot:
 			delay = 500 - (time.time() - start)
 			if delay > 0: time.sleep(delay)
 		self.client.removeFifo(fifo)
+
+	def test(self):
+		self.write("* TEST LEDS *", colorConsol.HEADER)
+		self.addCmd(ID_OTHERS, Q_LED, RED) time.sleep(0.5)
+		self.addCmd(ID_OTHERS, Q_LED, BLUE) time.sleep(0.5)
+		self.addCmd(ID_OTHERS, Q_LED, -1) time.sleep(0.5)
+		
+		self.write("* TEST ASCENSEURS *", colorConsol.HEADER)
+		self.write("test ms recalage avant")
+		raw_input("appuyez sur une touche pour lancer le test")
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
+		raw_input("appuyez sur une touche pour continuer les tests")
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
+		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
+		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 0)
+		raw_input("appuyez sur une touche pour lancer le test")
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
+		raw_input("appuyez sur une touche pour continuer les tests")
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
+		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
+		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, ARRIERE, 0)
+		
+		self.write("* TEST AX12 *", colorConsol.HEADER)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, AVANT)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, AVANT)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, ARRIERE)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, ARRIERE)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, ARRIERE)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, ARRIERE)
+		
+		self.write("* TEST JACK *", colorConsol.HEADER)
+		self.write("attente d'activation du jack...", colorConsol.HEADER)
+		self.waitJackSignal()
+		
+		self.write("* TEST SWITCH COLOR *", colorConsol.HEADER)
+		for i in xrange(2):
+			self.write("attente switch color %s/2..."%(i+1))
+			fifo = self.client.addFifo( MsgFifo(W_SWITCH_COLOR, Q_COLOR) )
+			m = fifo.getMsg()
+			self.addCmd(ID_OTHER, Q_COLOR)
+			m = fifo.getMsg()
+			color = int(m.content)
+			self.addCmd(ID_OTHERS, Q_LED, color)
+			
+		self.write("* TEST MS *", colorConsol.HEADER)
+		self.write("face avant...")
+		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT)
+		self.write("face arriere...")
+		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE)
+		
+		
 			
 	def start(self):
 		"""
@@ -381,6 +434,17 @@ class Robot:
 			loop1.join()
 			loop2.join()
 			return retour
+
+	def waitJackSignal(self):
+		"""
+		Attend qu'on enlève le jack
+		"""
+		fifo = self.client.addFifo( MsgFifo(W_JACK) )
+		while True:
+			m = fifo.getMsg()
+			if m.id_cmd == W_JACK and int(m.content) == 0:
+				break
+		self.client.removeFifo(fifo)
 		
 	def updatePions(self, l):
 		"""
