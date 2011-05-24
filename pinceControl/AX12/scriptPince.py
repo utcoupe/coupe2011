@@ -23,7 +23,6 @@ Face_front = 0
 Face_back = 1
  
 Pinces_ouvertureMax = 0 # pour rechercher un pion
-Pinces_ouvertureMin = 1 # pour lancher un pion
 Pinces_fermetureMax = 2 # au debut du match
 Pinces_fermetureMin = 3 # saisir un pion
 
@@ -68,12 +67,13 @@ def read_CM5():
 print 'Debut programme : com CM-5'
 sys.stdout.flush()
 keyB = 0
+actionActuelle = 0
 
 while (keyB != 13):
 	valRetour = 0
 	commandThomas = raw_input()
 	input_split = commandThomas.split('.')
-	trucQuiSertPas, idArenvoyer, keyB = 0,0,0
+	trucQuiSertPas, idArenvoyer, keyB, face = 0,0,0,0
 	if len(input_split) == 0:
 		continue
 	if len(input_split) >= 1:
@@ -96,26 +96,20 @@ while (keyB != 13):
 	elif keyB == PING:
 		send(idArenvoyer, "Pong")
 		continue
-		
-	elif (keyB==Q_OPEN_MAX_AV):
-		action_pince(Face_front, Pinces_ouvertureMax)
-	elif (keyB==Q_OPEN_MAX_AR):
-		action_pince(Face_back, Pinces_ouvertureMax)  
-
-	elif (keyB==Q_OPEN_MIN_AV):
-		action_pince(Face_front, Pinces_ouvertureMin)
-	elif (keyB==Q_OPEN_MIN_AR):
-		action_pince(Face_back, Pinces_ouvertureMin)
-
-	elif (keyB==Q_SERRE_AV):
-		action_pince(Face_front, Pinces_fermetureMin)
-	elif (keyB==Q_SERRE_AR):
-		action_pince(Face_back, Pinces_fermetureMin)
-
-	elif (keyB==Q_CLOSE_AV):
-		action_pince(Face_front, Pinces_fermetureMax)
-	elif (keyB==Q_CLOSE_AR):
-		action_pince(Face_back, Pinces_fermetureMax)
+	else:
+		if len(input_split) >= 4:
+			face = int(input_split[3])
+		else:
+			send(idArenvoyer, E_INVALID_PARAMETERS_NUMBERS)
+			continue
+		if(keyB==Q_OPEN_MAX):
+			actionActuelle = Pinces_ouvertureMax
+		elif (keyB==Q_SERRE):
+			actionActuelle = Pinces_fermetureMin
+		elif (keyB==Q_CLOSE):
+			actionActuelle = Pinces_fermetureMax
+		# Enfin on lance la commande
+		action_pince(face, actionActuelle)
 
 	valRetour=read_CM5()
 	try:
