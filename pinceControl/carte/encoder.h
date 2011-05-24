@@ -24,6 +24,7 @@
 void initEncoders();
 void testAR();
 void testAV();
+void encoderSafe();
 
 /*The most common type of incremental encoder uses two output channels (A and B) to sense position.
  *  the two output channels of the quadrature encoder indicate both position and direction of rotation.

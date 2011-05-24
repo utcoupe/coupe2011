@@ -19,104 +19,76 @@ void testAV()
 {
 	if (goal_position_AV < 0)
 		return;
-	if (value_right_enc < goal_position_AV) // vers le haut
+	if (value_right_enc < goal_position_AV-MARGE_MARCHE)
+		setAVPWM(PWM_MOVE);
+	else if (value_right_enc < goal_position_AV-MARGE_MAINTIENT)
+		setAVPWM(PWM_MAINTIENT);
+	else if (value_right_enc > goal_position_AV+MARGE_MARCHE)
+		setAVPWM(-PWM_MOVE);
+	else if (value_right_enc > goal_position_AV+MARGE_MAINTIENT)
+		setAVPWM(-PWM_MAINTIENT);
+	else //arret
 	{
-		if (value_right_enc < goal_position_AV-MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_right_enc < goal_position_AV-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
+		setAVPWM(0x00);
+		if(msg_position_AV!=-1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
 		}
 	}
-	else
-	{
-		if (value_right_enc > goal_position_AV+MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_right_enc > goal_position_AV-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
-		}
-	}
-	/*
-	if(goal_position_AV>=0){
-		if(value_right_enc<(goal_position_AV-MARGE)){
-			if (value_right_enc<(goal_position_AV-MARGE_END))
-			setAVPWM(PWM_VALUE);//VERS LE HAUT
-		}
-		else if(value_right_enc>(goal_position_AV+MARGE)){
-			setAVPWM(-PWM_VALUE);//VERS LE BAS
-		}
-		else{//arret
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
-		}
-	}*/
 }
+
 void testAR()
 {
-	if (goal_position_AV < 0)
+	if (goal_position_AR < 0)
 		return;
-	if (value_left_enc < goal_position_AR) // vers le haut
+	if (value_left_enc < goal_position_AR-MARGE_MARCHE)
+		setARPWM(PWM_MOVE);
+	else if (value_left_enc < goal_position_AR-MARGE_MAINTIENT)
+		setARPWM(PWM_MAINTIENT);
+	else if (value_left_enc > goal_position_AR+MARGE_MARCHE)
+		setARPWM(-PWM_MOVE);
+	else if (value_left_enc > goal_position_AR+MARGE_MAINTIENT)
+		setARPWM(-PWM_MAINTIENT);
+	else //arret
 	{
-		if (value_left_enc < goal_position_AR-MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_left_enc < goal_position_AR-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
+		setARPWM(0x00);
+		if(msg_position_AR!=-1){
+			sendMessage(msg_position_AR,2);
+			msg_position_AR=-1;
 		}
 	}
-	else
+}
+
+/**
+ * Test si les ascenseurs bloquent
+ * Envoie le message E_BLOCK si un ascneseur bloque
+ */
+void encoderSafe()
+{
+	static int last_left_enc_value = 0;
+	static int last_right_enc_value = 0;
+	
+	if (goal_position_AV >= 0
+		and ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
+		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT)))
 	{
-		if (value_left_enc > goal_position_AR+MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_left_enc > goal_position_AR-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
+		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
-			setAVPWM(0x00);
-			if(msg_position_AR!=-1){
-				sendMessage(msg_position_AR,2);
-				msg_position_AR=-1;
-			}
-		}
-	}
-	/*
-	if(goal_position_AR>=0){
-		if(value_left_enc<(goal_position_AR-MARGE)){
-			setARPWM(PWM_VALUE);//VERS LE HAUT
-		}
-		else if(value_left_enc>(goal_position_AR+MARGE)){
-			setARPWM(-PWM_VALUE);//VERS LE BAS
-		}
-		else{//arret
 			setARPWM(0x00);
-			if(msg_position_AR!=-1){
-				sendMessage(msg_position_AR,2);
-				msg_position_AR=-1;
-			}
+			sendMessage(E_BLOCK,E_BLOCK);
 		}
-	}*/
+	}
+	
+	if (goal_position_AR >= 0
+		and ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
+		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT)))
+	{
+		if (abs(last_right_enc_value - value_right_enc) < 10)
+		{
+			setAVPWM(0x00);
+			sendMessage(E_BLOCK,E_BLOCK);
+		}
+	}
 }
 
 void initEncoders(){

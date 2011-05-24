@@ -13,8 +13,8 @@ void cmd(int id, int header, int *args, int size){
     {
 	case Q_IDENT:
 	{
-		sendMessage(id, (char*)"pince");
-		break;
+	    sendMessage(id, (char*)"pince");
+	    break;
 	}
 	case Q_PING:
 	{
@@ -52,7 +52,7 @@ void cmd(int id, int header, int *args, int size){
 
 	    break;
 	}
-	case Q_PINCE:
+	/*case Q_PINCE:
 	{
 	    if(size<2)
 		sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
@@ -63,7 +63,7 @@ void cmd(int id, int header, int *args, int size){
 	    }
 
 	    break;
-	}
+	}*/
 	case Q_SETPOSITION:
 	{
 	    if(size<2)
@@ -91,15 +91,6 @@ void cmd(int id, int header, int *args, int size){
 
 	    break;
 	}
-	case Q_MOTOR:
-	{
-	    if(size<1)
-			sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
-	    else
-			sendMessage(id, setPincePWM(1,args[0],1000));
-
-	    break;
-	}
 	case Q_CODEUR:
 	{
 	    //face
@@ -119,11 +110,11 @@ void cmd(int id, int header, int *args, int size){
 	}
 	case Q_RESET:
 	{
-		initPinceControl();
-		//initTourelle();
-		initSensor();//en dernier a cause du jack
-		sendMessage(id, 1);
-		break;
+	    initPinceControl();
+	    //initTourelle();
+	    initSensor();//en dernier a cause du jack
+	    sendMessage(id, 1);
+	    break;
 	}
 	case Q_RECALAGE:
 	{
@@ -145,35 +136,50 @@ void cmd(int id, int header, int *args, int size){
 	}
 	case Q_ULTRAPING:
 	{
-	    if(args[0]==FACEAV){
+	    if(args[0]==FACEAV)
+	    {
 		pingAvMessageID=id;
 		sendMessage(id, 1);
-	    }else if(args[0]==FACEAR){
+	    }
+	    else if(args[0]==FACEAR)
+	    {
 		pingArMessageID=id;
 		sendMessage(id, 1);
-	    }else if(args[0]==-1){
+	    }
+	    else if(args[0]==-1)
+	    {
 		pingAvMessageID=-42;
 		sendMessage(id, 1);
-	    }else if(args[0]==-2){
+	    }
+	    else if(args[0]==-2)
+	    {
 		pingArMessageID=-42;
 		sendMessage(id, 1);
-	    }else{
+	    }
+	    else
+	    {
 		sendMessage(id, E_INVALID_TYPE_PARAMETERS);
 	    }
 	    break;
 	}
 	case Q_GETULTRAPING:
 	{
-	    if(args[0]==FACEAV){
-		    sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AV)));
-	    }else if(args[0]==FACEAR){
+	    if(args[0]==FACEAV)
+	    {
+		sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AV)));
+	    }
+	    else if(args[0]==FACEAR)
+	    {
 		    sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
-	    }else{
+	    }
+	    else
+	    {
 		    sendMessage(id, E_INVALID_TYPE_PARAMETERS);
 	    }
 	    break;
 	}
-	default:{
+	default:
+	{
 	    sendMessage(id,-1);
 	    break;
 	}

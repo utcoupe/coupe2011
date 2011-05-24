@@ -1,6 +1,6 @@
 #include "command.h"
 
-void setup(){	
+void setup(){
 	initSerialLink();
 	initPinceControl();
 	//initTourelle();
@@ -10,10 +10,10 @@ void setup(){
 
 void loop(){
 	readIncomingData();
+	encoderSafe();
 	sensorTrigger();
 	//tourelleRun();
 	//loopTourelle();
-	
 }
 
 
