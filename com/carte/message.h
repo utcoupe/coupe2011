@@ -71,6 +71,13 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define W_SWITCH_COLOR						-21
 #define W_JACK								-22
 #define W_STOP								-42
+#define Q_KILL								-69
+#define E_TIMEOUT							-43
+#define E_BLOCK								-44
+#define E_SURCHAUFFE						-55
+#define E_LOW_VOLTAGE						-56
+#define E_MERDE_AX12						-57
+#define E_CM5_NOT_CONN						-58
 
 
 #define AVANT		0

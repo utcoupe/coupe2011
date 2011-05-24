@@ -35,24 +35,6 @@ void testAV()
 			msg_position_AV=-1;
 		}
 	}
-	
-	/*
-	if(goal_position_AV>=0){
-		if(value_right_enc<(goal_position_AV-MARGE)){
-			if (value_right_enc<(goal_position_AV-MARGE_END))
-			setAVPWM(PWM_VALUE);//VERS LE HAUT
-		}
-		else if(value_right_enc>(goal_position_AV+MARGE)){
-			setAVPWM(-PWM_VALUE);//VERS LE BAS
-		}
-		else{//arret
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
-		}
-	}*/
 }
 
 void testAR()
@@ -75,22 +57,36 @@ void testAR()
 			msg_position_AR=-1;
 		}
 	}
-	/*
-	if(goal_position_AR>=0){
-		if(value_left_enc<(goal_position_AR-MARGE)){
-			setARPWM(PWM_VALUE);//VERS LE HAUT
-		}
-		else if(value_left_enc>(goal_position_AR+MARGE)){
-			setARPWM(-PWM_VALUE);//VERS LE BAS
-		}
-		else{//arret
+}
+
+/**
+ * Test si les ascenseurs bloquent
+ * Envoie le message E_BLOCK si un ascneseur bloque
+ */
+void encoderSafe()
+{
+	static last_left_enc_value = 0;
+	static last_right_enc_value = 0;
+	
+	if ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
+		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT))
+	{
+		if ((last_left_enc_value - value_left_enc) < 10)
+		{
 			setARPWM(0x00);
-			if(msg_position_AR!=-1){
-				sendMessage(msg_position_AR,2);
-				msg_position_AR=-1;
-			}
+			sendMessage(E_BLOCK,E_BLOCK);
 		}
-	}*/
+	}
+	
+	if ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
+		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT))
+	{
+		if ((last_right_enc_value - value_right_enc) < 10)
+		{
+			setAVPWM(0x00);
+			sendMessage(E_BLOCK,E_BLOCK);
+		}
+	}
 }
 
 void initEncoders(){

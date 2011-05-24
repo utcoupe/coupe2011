@@ -10,10 +10,10 @@ void setup(){
 
 void loop(){
 	readIncomingData();
+	encoderSafe();
 	sensorTrigger();
 	//tourelleRun();
 	//loopTourelle();
-	
 }
 
 
