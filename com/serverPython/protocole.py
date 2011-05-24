@@ -30,7 +30,6 @@ Q_GETSENS			=	16
 
 # others
 Q_SHARP				= 31
-Q_PINCE				= 35
 Q_SETPOSITION		= 36
 Q_JACK				= 38
 Q_LED				= 39

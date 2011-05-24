@@ -1,6 +1,6 @@
 #include "command.h"
 
-void setup(){	
+void setup(){
 	initSerialLink();
 	initPinceControl();
 	//initTourelle();

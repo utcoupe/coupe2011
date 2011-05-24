@@ -880,10 +880,7 @@ class Robot:
 		@return True si l'objet a été pris, False sinon
 		"""
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, id_pince)
-		if id_pince == AVANT:
-			self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE_AV)
-		else:
-			self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE_AR)
+		self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE, id_pince)
 
 	def construireTourVerte(self):
 		"""

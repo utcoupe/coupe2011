@@ -1,7 +1,6 @@
 #ifndef PINCECONTROL_H_
 #define PINCECONTROL_H_
 
-#include "Ax12.h"
 #include "AFMotor.h"
 #include "message.h"
 #include "pwm.h"
@@ -31,24 +30,21 @@
 
 //deplacement verticale
 #define POSITION_MAX 10000
-#define PWM_VALUE 	250 //90
-#define PWM_END		100
-#define MARGE 		100 // Tolérance avant de ralentir
-#define MARGE_END	50 //Tolerance de maintient en position pour la pince
+#define PWM_MOVE 		250 // PWM pour se déplacer rapidement
+#define PWM_MAINTIENT	100 // PWM pour le maintient en position
+#define MARGE_MARCHE	100 // Tolérance avant de ralentir
+#define MARGE_MAINTIENT	50 // Tolerance de maintient en position pour la pince
 #define SEUIL_LOAD	0x50
 #define PIN_MS_RECAL_AV		30 //microswitch pour recalage
 #define PIN_MS_RECAL_AR		37
 
-extern Ax12Class Ax12;
 extern int msg_position_AV,msg_position_AR;
 
 #include "encoder.h"
 
 void initPinceControl();
-int setPinceState(unsigned char index,unsigned char etat);
+//int setPinceState(unsigned char index,unsigned char etat);
 int setPincePosition(unsigned int id,unsigned char,unsigned int pos);
-int presentLoad(unsigned char idPince);
-int setPincePWM(unsigned char face,int pwm,int tempo = 1);
 int pinceRecal(unsigned char face);
 
 #endif

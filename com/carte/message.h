@@ -29,7 +29,7 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 //#define Q_TSHARP 			32 //TRIGGERSHARP //obselete
 #define Q_MS	 			33
 #define Q_TMS	 			34 //TRIGGERMS
-#define Q_PINCE 			35
+//#define Q_PINCE 			35
 #define Q_SETPOSITION 		36 //PINCE POSITION
 #define Q_LOAD 				37 //PRESENT_LOAD
 #define Q_JACK		 		38

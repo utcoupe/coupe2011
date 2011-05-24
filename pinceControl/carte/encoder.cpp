@@ -19,36 +19,23 @@ void testAV()
 {
 	if (goal_position_AV < 0)
 		return;
-	if (value_right_enc < goal_position_AV) // vers le haut
+	if (value_right_enc < goal_position_AV-MARGE_MARCHE)
+		setAVPWM(PWM_MOVE);
+	else if (value_right_enc < goal_position_AV-MARGE_MAINTIENT)
+		setAVPWM(PWM_MAINTIENT);
+	else if (value_right_enc > goal_position_AV+MARGE_MAINTIENT)
+		setAVPWM(-PWM_MAINTIENT);
+	else if (value_right_enc > goal_position_AV+MARGE_MARCHE)
+		setAVPWM(-PWM_MOVE);
+	else //arret
 	{
-		if (value_right_enc < goal_position_AV-MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_right_enc < goal_position_AV-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
+		setAVPWM(0x00);
+		if(msg_position_AV!=-1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
 		}
 	}
-	else
-	{
-		if (value_right_enc > goal_position_AV+MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_right_enc > goal_position_AV-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
-		}
-	}
+	
 	/*
 	if(goal_position_AV>=0){
 		if(value_right_enc<(goal_position_AV-MARGE)){
@@ -67,38 +54,26 @@ void testAV()
 		}
 	}*/
 }
+
+
 void testAR()
 {
-	if (goal_position_AV < 0)
+	if (goal_position_AR < 0)
 		return;
-	if (value_left_enc < goal_position_AR) // vers le haut
+	if (value_left_enc < goal_position_AR-MARGE_MARCHE)
+		setARPWM(PWM_MOVE);
+	else if (value_left_enc < goal_position_AR-MARGE_MAINTIENT)
+		setARPWM(PWM_MAINTIENT);
+	else if (value_left_enc > goal_position_AR+MARGE_MAINTIENT)
+		setARPWM(-PWM_MAINTIENT);
+	else if (value_left_enc > goal_position_AR+MARGE_MARCHE)
+		setARPWM(-PWM_MOVE);
+	else //arret
 	{
-		if (value_left_enc < goal_position_AR-MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_left_enc < goal_position_AR-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AV!=-1){
-				sendMessage(msg_position_AV,2);
-				msg_position_AV=-1;
-			}
-		}
-	}
-	else
-	{
-		if (value_left_enc > goal_position_AR+MARGE)
-			setAVPWM(PWM_VALUE);
-		else if (value_left_enc > goal_position_AR-MARGE_END)
-			setAVPWM(PWM_END);
-		else //arret
-		{
-			setAVPWM(0x00);
-			if(msg_position_AR!=-1){
-				sendMessage(msg_position_AR,2);
-				msg_position_AR=-1;
-			}
+		setARPWM(0x00);
+		if(msg_position_AR!=-1){
+			sendMessage(msg_position_AR,2);
+			msg_position_AR=-1;
 		}
 	}
 	/*
