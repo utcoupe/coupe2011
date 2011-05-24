@@ -108,72 +108,21 @@ class Robot:
 			self.reset()
 			self.client.addFifo(fifo)
 	
-	def addCmd(self, id_device, id_cmd, *args):
-		"""
-		(non blockant)
-		Envoyer une commande
-		
-		@param id_device id du device (asserv, cam,...)
-		@param id_cmd id de la commande
-		@param args les éventuels arguments
-		
-		@return id_msg
-		"""
-		# création du message
-		msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
-		for a in args: msg += C_SEP_SEND+str(a)
-		
-		# sauvegarde de la commande
-		self.cmd[self.id_msg] = id_cmd
-		
-		# envoie
-		self.client.send(msg)
-		
-		# increment de id_msg
-		self.id_msg += 1
-		if self.id_msg >= MAX_MSG:
-			self.id_msg = 0
-		
-		# return de id_msg
-		return 0 if self.id_msg==0 else (self.id_msg-1)
-
-	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
-		"""
-		(blockant)
-		Envoyer une commande et attendre la réponse
-		
-		@raise TimeoutException
-		
-		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
-		@param nb_msg le nombre de messages attendus
-		@param id_device id du device (asserv, cam,...)
-		@param id_cmd id de la commande
-		@param args les éventuels arguments
-
-		@return la réponse ou None si timeout
-		"""
-		fifo = self.client.addFifo( MsgFifo(id_cmd) )
-		self.addCmd(id_device, id_cmd, *args)
-		if nb_msg > 1:
-			reponse = []
-			for i in xrange(nb_msg):
-				reponse.append(fifo.getMsg(timeout[i]))
-		elif nb_msg == 1:
-			reponse = fifo.getMsg(timeout)
-		else: reponse = None
+	def _loopUpdatePos(self):
+		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
+		while True:
+			start = time.time()
+			self.addCmd(ID_ASSERV, Q_POSITION)
+			m = fifo.getMsg()
+			self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+			if len(self.pos) != 3:
+				self.wirte("ERROR : reception pos : %s"%self.pos, colorConsol.FAIL)
+				self.pos = (0,0,0)
+			self.debug.log(D_UPDATE_POS, self.pos)
+			delay = 500 - (time.time() - start)
+			if delay > 0: time.sleep(delay)
 		self.client.removeFifo(fifo)
-		return reponse
-		
-	
-	def write(self, msg, color=None):
-		""" pour écrire sans se marcher sur les doigts """
-		self._lock_write.acquire()
-		try:
-			if color: print color+str(msg).strip()+colorConsol.ENDC
-			else: sys.stderr.write(str(msg).strip()+"\n")
-		finally:
-			self._lock_write.release()
-	
+			
 	def start(self):
 		"""
 		Démarage du robot
@@ -271,6 +220,72 @@ class Robot:
 					self.write("* TOURNE *")
 					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
 					self.write("")"""
+					
+	def addCmd(self, id_device, id_cmd, *args):
+		"""
+		(non blockant)
+		Envoyer une commande
+		
+		@param id_device id du device (asserv, cam,...)
+		@param id_cmd id de la commande
+		@param args les éventuels arguments
+		
+		@return id_msg
+		"""
+		# création du message
+		msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
+		for a in args: msg += C_SEP_SEND+str(a)
+		
+		# sauvegarde de la commande
+		self.cmd[self.id_msg] = id_cmd
+		
+		# envoie
+		self.client.send(msg)
+		
+		# increment de id_msg
+		self.id_msg += 1
+		if self.id_msg >= MAX_MSG:
+			self.id_msg = 0
+		
+		# return de id_msg
+		return 0 if self.id_msg==0 else (self.id_msg-1)
+
+	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
+		"""
+		(blockant)
+		Envoyer une commande et attendre la réponse
+		
+		@raise TimeoutException
+		
+		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
+		@param nb_msg le nombre de messages attendus
+		@param id_device id du device (asserv, cam,...)
+		@param id_cmd id de la commande
+		@param args les éventuels arguments
+
+		@return la réponse ou None si timeout
+		"""
+		fifo = self.client.addFifo( MsgFifo(id_cmd) )
+		self.addCmd(id_device, id_cmd, *args)
+		if nb_msg > 1:
+			reponse = []
+			for i in xrange(nb_msg):
+				reponse.append(fifo.getMsg(timeout[i]))
+		elif nb_msg == 1:
+			reponse = fifo.getMsg(timeout)
+		else: reponse = None
+		self.client.removeFifo(fifo)
+		return reponse
+		
+	
+	def write(self, msg, color=None):
+		""" pour écrire sans se marcher sur les doigts """
+		self._lock_write.acquire()
+		try:
+			if color: print color+str(msg).strip()+colorConsol.ENDC
+			else: sys.stderr.write(str(msg).strip()+"\n")
+		finally:
+			self._lock_write.release()
 
 	def preparation(self):
 		"""
@@ -339,7 +354,7 @@ class Robot:
 			loop1.join()
 			loop2.join()
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
-			self.update_pos()
+			#self.update_pos()
 		
 			self.write("* ATTENTE DU JACK *")
 			while True:
@@ -525,7 +540,7 @@ class Robot:
 		if self._e_stop.isSet():
 			retour = -42
 		else:
-			self.update_pos()
+			#self.update_pos()
 			
 			self.debug.log(D_DELETE_PATH)
 			self.debug.log(D_SHOW_PATH,path)
@@ -540,7 +555,7 @@ class Robot:
 			nb_accuse_recep = 0
 			timeLastPing = 0
 			inPause = False
-			loopPosition = None
+			#loopPosition = None
 			try:
 				while not self._e_stop.isSet() and nb_accuse_recep<len(path):
 					if inPause and time.time() - timeLastPing > 0.5:
@@ -561,8 +576,8 @@ class Robot:
 				self.write("Tous les accusés de receptions reçus")
 
 				self.addCmd(ID_ASSERV, Q_GETSENS)
-				loopPosition = LoopCmd(self, 1, 1, ID_ASSERV, Q_POSITION)
-				loopPosition.start()
+				#loopPosition = LoopCmd(self, 1, 1, ID_ASSERV, Q_POSITION)
+				#loopPosition.start()
 				
 				nb_point_reach = 0
 				while not self._e_stop.isSet() and nb_point_reach<len(path):
@@ -608,7 +623,7 @@ class Robot:
 				self.write(ex, colorConsol.FAIL)
 			finally:
 				# arret de la récupération en boucle de la position
-				if loopPosition: loopPosition.stop()
+				#if loopPosition: loopPosition.stop()
 				# destruction de la fifo
 				self.client.removeFifo(fifo)
 				# arret de l'écoute des pings
@@ -866,10 +881,7 @@ class Robot:
 		ouvrir la pince
 		@param id_pince (int) AVANT ou ARRIERE
 		"""
-		if id_pince == AVANT:
-			return self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX_AV)
-		else:
-			return self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX_AR)
+		return self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX, id_pince)
 
 	
 	def takeObj(self, id_pince):
@@ -879,7 +891,7 @@ class Robot:
 		@param target (Pion)
 		@return True si l'objet a été pris, False sinon
 		"""
-		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, id_pince)
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
 		self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE, id_pince)
 
 	def construireTourVerte(self):
@@ -952,13 +964,9 @@ class Robot:
 	def _takePionVert(self, index, id_pince):
 		listeYVerte = (690,970,1250,1530,1810)
 		retour = 0
-		if id_pince == ARRIERE:
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(0), VITESSE-30)
-			self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX_AR)
-		else:
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(180), VITESSE-30)
-			self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX_AV)
-		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_PRECAL, id_pince)
+		self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(0), VITESSE-30)
+		self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX, id_pince)
+		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
 		
 		self.go_point(self.symX(X_PRISE),listeYVerte[index]) # avance
 		self.takeObj(id_pince)
