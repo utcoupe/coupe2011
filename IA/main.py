@@ -32,6 +32,7 @@ import time
 import math
 import threading
 import sys
+import copy
 from debugClient import *
 from pathfinding import *
 from geometry.vec import *
@@ -126,6 +127,9 @@ class Robot:
 		self.client.removeFifo(fifo)
 
 	def test(self):
+		"""
+		Check list
+		"""
 		self.activeReset = False
 		self.write("* TEST LEDS *", colorConsol.HEADER)
 		self.addCmd(ID_OTHERS, Q_LED, RED)
@@ -281,72 +285,6 @@ class Robot:
 					self.write("* TOURNE *")
 					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
 					self.write("")"""
-					
-	def addCmd(self, id_device, id_cmd, *args):
-		"""
-		(non blockant)
-		Envoyer une commande
-		
-		@param id_device id du device (asserv, cam,...)
-		@param id_cmd id de la commande
-		@param args les éventuels arguments
-		
-		@return id_msg
-		"""
-		# création du message
-		msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
-		for a in args: msg += C_SEP_SEND+str(a)
-		
-		# sauvegarde de la commande
-		self.cmd[self.id_msg] = id_cmd
-		
-		# envoie
-		self.client.send(msg)
-		
-		# increment de id_msg
-		self.id_msg += 1
-		if self.id_msg >= MAX_MSG:
-			self.id_msg = 0
-		
-		# return de id_msg
-		return 0 if self.id_msg==0 else (self.id_msg-1)
-
-	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
-		"""
-		(blockant)
-		Envoyer une commande et attendre la réponse
-		
-		@raise TimeoutException
-		
-		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
-		@param nb_msg le nombre de messages attendus
-		@param id_device id du device (asserv, cam,...)
-		@param id_cmd id de la commande
-		@param args les éventuels arguments
-
-		@return la réponse ou None si timeout
-		"""
-		fifo = self.client.addFifo( MsgFifo(id_cmd) )
-		self.addCmd(id_device, id_cmd, *args)
-		if nb_msg > 1:
-			reponse = []
-			for i in xrange(nb_msg):
-				reponse.append(fifo.getMsg(timeout[i]))
-		elif nb_msg == 1:
-			reponse = fifo.getMsg(timeout)
-		else: reponse = None
-		self.client.removeFifo(fifo)
-		return reponse
-		
-	
-	def write(self, msg, color=None):
-		""" pour écrire sans se marcher sur les doigts """
-		self._lock_write.acquire()
-		try:
-			if color: print color+str(msg).strip()+colorConsol.ENDC
-			else: sys.stderr.write(str(msg).strip()+"\n")
-		finally:
-			self._lock_write.release()
 
 	def preparation(self):
 		"""
@@ -360,7 +298,7 @@ class Robot:
 		self.write('preparation')
 		retour = 0
 		# pour recevoir les messages
-		fifo = self.client.addFifo( MsgFifo(W_JACK, Q_KILL, Q_COLOR, Q_AUTO_CALIB, Q_PRECAL) )
+		fifo = self.client.addFifo( MsgFifo(W_JACK, Q_COLOR, Q_AUTO_CALIB, Q_PRECAL) )
 		# pour faire clignoter les leds
 		loop1 = LoopCmd(self, 0, 1, ID_OTHERS, Q_LED, RED)
 		loop2 = LoopCmd(self, 0.5, 1, ID_OTHERS, Q_LED, BLUE)
@@ -443,6 +381,7 @@ class Robot:
 			loop2.join()
 			return retour
 
+
 	def waitJackSignal(self):
 		"""
 		Attend qu'on enlève le jack
@@ -454,39 +393,26 @@ class Robot:
 				break
 		self.client.removeFifo(fifo)
 		
-	def updatePions(self, l):
+		
+	def dumpObj(self, id_pince):
 		"""
-		(calcul)
-		@todo cette focntion est à chier pour l'instant (surtout le filtre avec l'age),
-		il faudrait savoir quels pions ont bougés, par exemple à partir de
-		quel angle du robot a été fait le scan on peut savoir quels pions de
-		l'ancien scan sont affectés, on peut donc savoir que si un pion n'est
-		pas retrouvé dans ce champs c'est qu'il a été déplacé.
-		
-		A partir du résultat du nouveau scan et de l'ancien, l'IA doit
-		faire un "merge", le résultat est stocké dans self.pions
-		
-		@param l (list<Pion>) le résultat du scan
+		(blockant)
+		ouvrir la pince
+		@param id_pince (int) AVANT ou ARRIERE
+		"""
+		return self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 
-		@return None (le résultat est mis dans self.pions
+	
+	def takeObj(self, id_pince):
 		"""
-		# update des pions
-		"""pions_to_add = []
-		for new_p in l:
-			for p in self.pions:
-				if new_p == p:
-					new_p.update(p,self.color)
-					break
-			else:
-				pions_to_add.append(new_p)
-		self.pions += pions_to_add
+		(blockant)
+		ramasser un objet (serre et remonte)
+		@param target (Pion)
+		@return True si l'objet a été pris, False sinon
+		"""
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, id_pince)
 
-		self.pions = filter(lambda p: p.age() < AGE_MAX, self.pions)
-		
-		self.debug.log(D_DELETE_PATH)
-		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
-		"""
-		self.pions = l
 		
 	def stop(self, msg=None):
 		""" arret du robot """
@@ -612,12 +538,13 @@ class Robot:
 		if self._e_stop.isSet():
 			retour = -42
 		else:
+			self.write("* DO_PATH *", colorConsol.HEADER)
 			#self.update_pos()
 			
 			self.debug.log(D_DELETE_PATH)
 			self.debug.log(D_SHOW_PATH,path)
 			
-			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_POSITION, Q_KILL, W_PING_AV, W_PING_AR) )
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_POSITION, W_PING_AV, W_PING_AR) )
 
 			goals = []
 			for p in path:
@@ -652,6 +579,7 @@ class Robot:
 				#loopPosition.start()
 				
 				nb_point_reach = 0
+				last_pos = copy.copy(self.pos)
 				while not self._e_stop.isSet() and nb_point_reach<len(path):
 					m = fifo.getMsg(2,"do_path 2ème partie")
 					if inPause and time.time() - timeLastPing > 0.5:
@@ -675,16 +603,11 @@ class Robot:
 					elif m.id_cmd == Q_POSITION:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 						self.debug.log(D_UPDATE_POS, new_pos)
-						if 	abs(new_pos[0] - path[nb_point_reach][0]) > 50 \
-							and abs(new_pos[1] - path[nb_point_reach][1]) > 50 \
-							and abs(new_pos[0] - self.pos[0]) < 30 \
-							and abs(new_pos[1] - self.pos[1]) < 30 \
-							and abs(new_pos[2] - self.pos[2]) < 5:
+						if self._anomalie_deplacement(last_pos, new_pos):
 							self.write("WARNING : Robot.do_path : detection anomalie deplacement", colorConsol.WARNING)
 							#self.addCmd(ID_ASSERV, Q_STOP)
 							#retour = E_BLOCK
 							#break
-						self.pos = new_pos
 			except KillException as ex:
 				self.write(ex, colorConsol.FAIL)
 				retour = Q_KILL
@@ -704,10 +627,140 @@ class Robot:
 
 		return retour
 
-	def go_point(self, x,y):
-		return self.do_path(((x,y),))
-			
-	
+	def go_point(self, x,y, **options):
+		"""
+		(bloquant|nbloquant)
+		Va a un point unique
+		
+		@param x,y coords du point en mm
+		@param **options les options [block(True/False),cmd(Q_GOAL_ABS/Q_GOAL_REL)
+
+		@return (int)
+		"""
+		retour = 0
+		block = True
+		cmd = Q_GOAL_ABS
+		if "block" in options and not options["block"]:
+			block = False
+		if "cmd" in options and options["cmd"] == Q_GOAL_REL:
+			cmd = Q_GOAL_REL
+
+		if block:
+			if cmd == Q_GOAL_ABS:
+				return self.do_path(((x,y),))
+			else:
+				fifo = self.client.addFifo( MsgFifo(Q_GOAL_REL, Q_POSITION) )
+				self.addCmd(ID_ASSERV, Q_GOAL_REL, x, y, VITESSE)
+				nb_recv = 0
+				last_pos = copy.copy(self.pos)
+				try:
+					while True:
+						m = fifo.getMsg(2)
+						if m.id_cmd == Q_GOAL_REL:
+							nb_recv += 1
+							if nb_recv >= 2: break
+						elif m.id_cmd == Q_POSITION:
+							if self._anomalie_deplacement(last_pos, new_pos):
+								self.write("WARNING : Robot.go_point : detection anomalie deplacement", colorConsol.WARNING)
+								#self.addCmd(ID_ASSERV, Q_STOP)
+								#retour = E_BLOCK
+								#break
+						elif m.id_cmd == Q_KILL:
+							raise KillException("Q_KILL")
+				except KillException as ex:
+					self.write(ex, colorConsol.FAIL)
+					retour = Q_KILL
+				except TimeoutException as ex:
+					self.write(ex, colorConsol.FAIL)
+					retour = E_TIMEOUT
+				except Exception as ex:
+					self.write(ex, colorConsol.FAIL)
+				finally:
+					self.client.removeFifo(fifo)
+		else:
+			if cmd == Q_GOAL_ABS:
+				self.addCmd(ID_ASSERV, Q_GOAL_ABS, x, y, VITESSE)
+			else:
+				self.addCmd(ID_ASSERV, Q_GOAL_REL, x, y, VITESSE)
+				
+		return retour
+
+
+	def tourne(self, a, **options):
+		"""
+		(bloquant|nbloquant)
+		Fait tourner le robot
+		
+		@param a angle en degrès
+		@param **options les options [block(True/False),cmd(Q_ANGLE_ABS/Q_ANGLE_REL)
+
+		@return (int)
+		"""
+		retour = 0
+		cmd = Q_ANGLE_ABS
+		if "cmd" in options and options["cmd"] == Q_ANGLE_REL:
+			cmd = Q_ANGLE_REL
+		block = True
+		if "block" in options and not options["block"]:
+			block = False
+
+		if block:
+			fifo = self.client.addFifo( MsgFifo(Q_POSITION, Q_ANGLE_REL, Q_ANGLE_ABS) )
+		
+		self.addCmd(ID_ASSERV, cmd, a, VITESSE-30)
+
+		if block:
+			last_pos = copy.copy(self.pos)
+			nb_recv = 0
+			try:
+				while True:
+					m = fifo.getMsg(5)
+					if m.id_cmd == cmd:
+						nb_recv += 1
+						if nb_recv >= 2: break
+					elif m.id_cmd == Q_POSITION:
+						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+						self.debug.log(D_UPDATE_POS, new_pos)
+						if self._anomalie_deplacement(last_pos, new_pos):
+							self.write("WARNING : Robot.tourne : detection anomalie rotation", colorConsol.WARNING)
+							#self.addCmd(ID_ASSERV, Q_STOP)
+							#retour = E_BLOCK
+							#break
+					elif m.id_cmd == Q_KILL:
+						raise KillException("Q_KILL")
+			except KillException as ex:
+				self.write(ex, colorConsol.FAIL)
+				retour = Q_KILL
+			except TimeoutException as ex:
+				self.write(ex, colorConsol.FAIL)
+				retour = E_TIMEOUT
+			except Exception as ex:
+				self.write(ex, colorConsol.FAIL)
+			finally:
+				# destruction de la fifo
+				self.client.removeFifo(fifo)
+				
+		return retour
+
+	def _anomalie_deplacement(self, last_pos, new_pos):
+		"""
+		(calcul)
+		Detecte si il y a une anomalie de déplacement, puis remplace last_pos par new_pos
+
+		@return (True/False)
+		"""
+		retour = (	abs(new_pos[0] - path[nb_point_reach][0]) > 50 \
+					and abs(new_pos[1] - path[nb_point_reach][1]) > 50 \
+					and abs(new_pos[0] - self.pos[0]) < 30 \
+					and abs(new_pos[1] - self.pos[1]) < 30 \
+					and abs(new_pos[2] - self.pos[2]) < 5 \
+				 )
+		last_pos = new_pos
+		return retour
+		
+	####################################################################
+	#					UTILISATION DE LA CAM						   #
+	####################################################################
 	def scan(self, fast=False):
 		"""
 		(blockant)
@@ -716,6 +769,7 @@ class Robot:
 		Met à jourla liste des pions actuelle
 
 		"""
+		self.write("* SCAN *", colorConsol.HEADER)
 		l = []
 
 		# pour écouter la réponse de la cam
@@ -779,6 +833,46 @@ class Robot:
 		"""
 		return filter(lambda p: (0 < p.pos.x < 3000) and (0 < p.pos.y < 2100), l)
 
+
+
+	####################################################################
+	#						IA DYNAMIQUE							   #
+	####################################################################
+	
+	def updatePions(self, l):
+		"""
+		(calcul)
+		@todo cette focntion est à chier pour l'instant (surtout le filtre avec l'age),
+		il faudrait savoir quels pions ont bougés, par exemple à partir de
+		quel angle du robot a été fait le scan on peut savoir quels pions de
+		l'ancien scan sont affectés, on peut donc savoir que si un pion n'est
+		pas retrouvé dans ce champs c'est qu'il a été déplacé.
+		
+		A partir du résultat du nouveau scan et de l'ancien, l'IA doit
+		faire un "merge", le résultat est stocké dans self.pions
+		
+		@param l (list<Pion>) le résultat du scan
+
+		@return None (le résultat est mis dans self.pions
+		"""
+		# update des pions
+		"""pions_to_add = []
+		for new_p in l:
+			for p in self.pions:
+				if new_p == p:
+					new_p.update(p,self.color)
+					break
+			else:
+				pions_to_add.append(new_p)
+		self.pions += pions_to_add
+
+		self.pions = filter(lambda p: p.age() < AGE_MAX, self.pions)
+		
+		self.debug.log(D_DELETE_PATH)
+		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
+		"""
+		self.pions = l
+		
 	def sortPionsByImportance(self, pions):
 		"""
 		(calcul)
@@ -946,95 +1040,77 @@ class Robot:
 		"""
 		l = Line(target.pos, objectif)
 		return l.pointFrom(-300)
-		
-	def dumpObj(self, id_pince):
-		"""
-		(blockant)
-		ouvrir la pince
-		@param id_pince (int) AVANT ou ARRIERE
-		"""
-		return self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 
-	
-	def takeObj(self, id_pince):
-		"""
-		(blockant)
-		ramasser un objet (serre et remonte)
-		@param target (Pion)
-		@return True si l'objet a été pris, False sinon
-		"""
-		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
-		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, id_pince)
 
+	####################################################################
+	#							IA SCRIPT							   #
+	####################################################################
 	def construireTourVerte(self):
 		"""
-		@todo reculer en même temps qu'on lève les pinces à certains moment
 		Script pour construire une tour à partir de ce qu'il y a dans la zone verte
+
+		@return (int) id_pince avec la tour
 		"""
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
 		listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
 		listeYVerte = (690,970,1250,1530,1810)
 
-		nbTours = 0
-		for p in listeVerte[:3]:
-			if p == TOUR: nbTours += 1
-		if nbTours < 2:
-			debut = 0
-		else:
-			debut = 1
+		p1 = 0
+		p2 = 1
+		p3 = 2
+		if (listeVerte[p1] == PION_1 and listeVerte[p2] == PION_2 and listeVerte[p3] == PION_1) \
+			or (listeVerte[p1] == TOUR and listeVerte[p3] == TOUR) \
+			or (listeVerte[p2] == TOUR and listeVerte[p3] == TOUR):
+			p3 += 1
+			
 		
 		# prise du premier pion avec pince AVANT
-		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[debut]) 	# devant le premier pion
-		self._takePionVert(debut, AVANT)
+		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
+		self._takePionVert(p1, AVANT)
 		self.write("1 ére tour prise", colorConsol.OKGREEN)
 
 		# prise du deuxième pion avec pince ARRIERE
-		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[debut+1]) 	# devant le deuxième
-		self._takePionVert(debut+1, ARRIERE)
+		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p2]) 	# devant le deuxième
+		self._takePionVert(p2, ARRIERE)
 		self.write("2 ème tour prise", colorConsol.OKGREEN)
 
 		# prise du troisième
-		if listeVerte[debut] == PION_1 and listeVerte[debut+1] == PION_1:
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(90), VITESSE-30)
-			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[debut+2]) # devant le troisième
+		if listeVerte[p1] == PION_1 and listeVerte[p2] == PION_1:
+			self.tourne(self.symA(90)) # tourne
+			self.dumpObj(ARRIERE) # lache pion à l'arriere
+			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]) # devant le troisième
+			self._takePionVert(ARRIERE) # prend le pion dans la pince arrière
+			self._combinerFaces(ARRIERE) # construit dans la pince arrière
+			self.tourne(self.symA(90)) # tourne
+			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p2]) # devant le deuxième
 			self.dumpObj(ARRIERE)
-			self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
-			self._takePionVert(debut+2, ARRIERE) # prise troisième pion
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(90), VITESSE-30)
-			self.dumpObj(ARRIERE) # lache le pion à l'arrière (tour) sur le pion
-			self.takeObj(ARRIERE) # reprend (pion + tour)
-			self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
-			self.dumpObj(AVANT) # lache le pion à l'avant
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30) # demi tour
-			self.dumpObj(ARRIERE) # lache la tour et le pion
-			self.takeObj(ARRIERE) # 2 pions + 1 tour AVANT
+			self.takeObj(ARRIERE)
+			self.write("3 ème tour prise", colorConsol.OKGREEN)
+			return ARRIERE
 		else:
-			if listeVerte[debut] == TOUR:
+			if listeVerte[p1] == TOUR:
 				angle = 90
-				id1 = ARRIERE
-				id2 = AVANT
+				p_with_pion = ARRIERE
+				p_with_tour = AVANT
 			else:
 				angle = -90
-				id1 = AVANT
-				id2 = ARRIERE
-			self.combinerFaces(id2)
-			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[debut+2]) # devant le troisième
-			self._takePionVert(debut+2, id1) # prise troisième pion pince id1
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(angle), VITESSE-30)
-			self.dumpObj(id1)
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30) # demi tour
-			self.dumpObj(id2)
-			self.takeObj(id2) # 2 pions + 1 tour AVANT
-		self.write("3 ème tour prise", colorConsol.OKGREEN)
-			
+				p_with_pion = AVANT
+				p_with_tour = ARRIERE
+			self._combinerFaces(p_with_tour)
+			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]) # devant le troisième
+			self._takePionVert(p3, p_with_pion) # prise troisième pion pince maintenant vide
+			self.tourne(180, cmd=Q_ANGLE_REL) # tourne
+			self._combinerFaces(p_with_tour)
+			self.write("3 ème tour prise", colorConsol.OKGREEN)
+			return p_with_tour
 				
 	def _takePionVert(self, index, id_pince):
 		listeYVerte = (690,970,1250,1530,1810)
 		retour = 0
 		if id_pince == AVANT:
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(180), VITESSE-30)
+			self.tourne(self.symA(180))
 		else:
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(0), VITESSE-30)
+			self.tourne(self.symA(0))
 		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
 		
@@ -1061,7 +1137,7 @@ class Robot:
 			
 		return retour
 		
-	def combinerFaces(self, id_face):
+	def _combinerFaces(self, id_face):
 		"""
 		@param id_pince la pince qui contient le pion à mettre sur
 		l'autre, au final cette pince contiendra les deux pions
@@ -1077,13 +1153,86 @@ class Robot:
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
 		self.dumpObj(id1) # lache
-		self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_GOAL_REL, d, 0, VITESSE) #recul
-		self.addBlockingCmd(2, (1,10), ID_ASSERV, Q_ANGLE_REL, 180, 0, VITESSE-30) # tourne
-		self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_GOAL_REL, d, 0, VITESSE) #avance
+		self.go_point(d, 0, cmd=Q_GOAL_REL)
+		self.tourne(self.symA(180), cmd=Q_ANGLE_REL)
+		self.go_point(d, 0, cmd=Q_GOAL_REL)
 		self.dumpObj(id2) # lache
 		self.takeObj(id2) # reprend
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, 9500)
+
 		
+	####################################################################
+	#							TOOLS								   #
+	####################################################################
+					
+	def addCmd(self, id_device, id_cmd, *args):
+		"""
+		(non blockant)
+		Envoyer une commande
+		
+		@param id_device id du device (asserv, cam,...)
+		@param id_cmd id de la commande
+		@param args les éventuels arguments
+		
+		@return id_msg
+		"""
+		# création du message
+		msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
+		for a in args: msg += C_SEP_SEND+str(a)
+		
+		# sauvegarde de la commande
+		self.cmd[self.id_msg] = id_cmd
+		
+		# envoie
+		self.client.send(msg)
+		
+		# increment de id_msg
+		self.id_msg += 1
+		if self.id_msg >= MAX_MSG:
+			self.id_msg = 0
+		
+		# return de id_msg
+		return 0 if self.id_msg==0 else (self.id_msg-1)
+
+
+	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
+		"""
+		(blockant)
+		Envoyer une commande et attendre la réponse
+		
+		@raise TimeoutException
+		
+		@param timeout le timeout, None si complétement bloquant, une liste si plusieurs messages attendus
+		@param nb_msg le nombre de messages attendus
+		@param id_device id du device (asserv, cam,...)
+		@param id_cmd id de la commande
+		@param args les éventuels arguments
+
+		@return la réponse ou None si timeout
+		"""
+		fifo = self.client.addFifo( MsgFifo(id_cmd) )
+		self.addCmd(id_device, id_cmd, *args)
+		if nb_msg > 1:
+			reponse = []
+			for i in xrange(nb_msg):
+				reponse.append(fifo.getMsg(timeout[i]))
+		elif nb_msg == 1:
+			reponse = fifo.getMsg(timeout)
+		else: reponse = None
+		self.client.removeFifo(fifo)
+		return reponse
+		
+	
+	def write(self, msg, color=None):
+		""" pour écrire sans se marcher sur les doigts """
+		self._lock_write.acquire()
+		try:
+			if color: print color+str(msg).strip()+colorConsol.ENDC
+			else: sys.stderr.write(str(msg).strip()+"\n")
+		finally:
+			self._lock_write.release()
+
+			
 	def symX(self,x):
 		"""
 		(calcul)

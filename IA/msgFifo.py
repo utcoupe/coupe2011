@@ -20,7 +20,8 @@ class MsgFifo:
 		@param msg2wait (list<id_cmd>)
 		"""
 		self._queue = Queue()
-		self._filter = msg2wait
+		self._filter = [Q_KILL]
+		self._filter += msg2wait
 	
 	def addMsg(self, id_from, id_msg, id_cmd, msg):
 		"""
