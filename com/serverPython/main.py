@@ -27,7 +27,7 @@ def scanSerials():
 for serial in scanSerials():
 	server.addSerialClient(serial,115200)
 
-		
+server.parseMsg(ID_SERVER, "ls")
 
 
 print 'fin thread principal'

@@ -44,7 +44,7 @@ class Server():
 	def _identClient(self, client):
 		self.parseMsg(ID_SERVER, str(client.id)+C_SEP_SEND+'-999'+C_SEP_SEND+str(Q_IDENT)) # une identification
 		client.e_validate.wait(2)
-		self.write(client, colorConsol.OKGREEN)
+		self.write("After ident :%s"%client, colorConsol.OKGREEN)
 		
 	def addTCPClient(self, conn, addr):
 		self._lock_addClient.acquire()
@@ -68,6 +68,7 @@ class Server():
 			self.id_non_validate+=1
 			client.start()
 			self.clients.append(client)
+			time.sleep(1) # avant de pouvoir envoyer de recevoir des infos il faut attendre
 			self._identClient(client)
 		except Exception as ex:
 			self.write(ex, colorConsol.FAIL)

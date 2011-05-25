@@ -37,6 +37,7 @@ class Client(threading.Thread):
 		@param msg message à envoyer
 		"""
 		if self.mask_recv_from & mask_from:
+			#self._server.write("send to %s, %s"%(self.id,msg))
 			self._fn_send(msg)
 		else:
 			#self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id), colorConsol.WARNING)
@@ -160,7 +161,12 @@ class LocalClient(Client):
 									client.e_validate.set()
 			except Exception as ex:
 				self._server.write("ERROR : LocalClient, identification début '%s'"%ex, colorConsol.FAIL)
-				
+			
+			# lister les clients
+			if "ls" == msg:
+				for client in self._server.clients:
+					self._server.write(client, colorConsol.OKBLUE)
+			
 			# loop
 			t = re.match('loop\(([^\),]+),([^\),]+),([^\),]+)\).*',msg)
 			if t:

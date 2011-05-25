@@ -65,8 +65,8 @@ void testAR()
  */
 void encoderSafe()
 {
-	static int last_left_enc_value = 0;
-	static int last_right_enc_value = 0;
+	static long last_left_enc_value = 0;
+	static long last_right_enc_value = 0;
 	
 	if (goal_position_AV >= 0
 		and ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
@@ -74,7 +74,7 @@ void encoderSafe()
 	{
 		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
-			value_left_enc = -1;
+			goal_position_AV = -1;
 			setARPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
@@ -86,7 +86,7 @@ void encoderSafe()
 	{
 		if (abs(last_right_enc_value - value_right_enc) < 10)
 		{
-			value_right_enc = -1;
+			goal_position_AR = -1;
 			setAVPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}

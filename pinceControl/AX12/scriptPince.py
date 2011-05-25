@@ -64,8 +64,6 @@ def read_CM5():
 	else:
 		return E_CM5_NOT_CONN
 	
-print 'Debut programme : com CM-5'
-sys.stdout.flush()
 keyB = 0
 actionActuelle = 0
 
@@ -128,4 +126,3 @@ while (keyB != Q_KILL):
 		send(idArenvoyer, E_MERDE_AX12)
 
 ser.close()
-print 'Fin du programme : com CM-5'
