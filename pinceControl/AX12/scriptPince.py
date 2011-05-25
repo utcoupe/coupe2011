@@ -14,7 +14,7 @@ def send(idMess, retourMess):
 Positions des AX12 sur le robot
 	Face_front 
 	1 -- 2
-	|	|
+	|	 |
 	3 -- 4
 	Face_back 
 '''
@@ -91,7 +91,7 @@ while (keyB != 13):
 		continue
 	
 	if keyB == Q_IDENT:
-		send(idArenvoyer, "ax12")
+		send(idArenvoyer, str(ID_AX12)+C_SEP_SEND+"ax12")
 		continue
 	elif keyB == PING:
 		send(idArenvoyer, "Pong")

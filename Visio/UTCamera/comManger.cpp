@@ -102,12 +102,12 @@ void modeStationnaire()
 
             // --- Identification ---
             case 0:{
-                    printf("cam");
+                cout << 1 << '.' << "cam";
             break;}
 
             // --- Ping ---
             case 1:{
-                    printf("%s","Pong");
+                cout << "Pong";
             break;}
 
             // --- ScanAvant ---

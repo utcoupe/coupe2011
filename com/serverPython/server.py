@@ -42,6 +42,14 @@ class Server():
 		client = TCPClient(self,len(self.clients), conn, addr)
 		client.start()
 		self.clients.append(client)
+		
+		# rien trouvé de plus propre pour récup les ids des clients
+		self.parseMsg(0, '-1'+C_SEP_SEND+'-999'+C_SEP_SEND+str(Q_IDENT)) # demande à tout le monde une identification
+		time.sleep(2)
+
+		for client in self.clients:
+			client.id = client.new_id # changement des ids
+			self.write(client, colorConsol.OKGREEN)
 	
 	def addSerialClient(self, port, baudrate):
 		s = serial.Serial(port, baudrate, timeout=1, writeTimeout=1)
