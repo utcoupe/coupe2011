@@ -48,7 +48,7 @@ class MsgFifo:
 			return r
 	
 	def __repr__(self):
-		return "MsgFifo(%s)"%(( get_cname(_) for _ in self._filter))
+		return "MsgFifo(%s)"%(tuple(get_cname(_) for _ in self._filter),)
 
 	
 	
