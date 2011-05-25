@@ -74,6 +74,7 @@ void encoderSafe()
 	{
 		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
+			value_left_enc = -1;
 			setARPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
@@ -85,6 +86,7 @@ void encoderSafe()
 	{
 		if (abs(last_right_enc_value - value_right_enc) < 10)
 		{
+			value_right_enc = -1;
 			setAVPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}

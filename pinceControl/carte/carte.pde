@@ -3,6 +3,7 @@
 void setup(){
 	initSerialLink();
 	initPinceControl();
+	initEncoders();
 	//initTourelle();
 	initSensor();
 	//setupTourelle();
