@@ -3,25 +3,32 @@
 
 #include "AFMotor.h"
 #include "ping.h"
+#include "message.h"
 #include <Servo.h>
 #include <WProgram.h>
-#include "ping.h"
 
 
 #define NB_PAS 200
 #define STYLE SINGLE
 #define SPEED 300000
 #define MAXDIST 300 // cm
-#define TEMPO 100 // ms
+#define TEMPO 500 // ms
 #define INCREMENT 10
 #define DIFFMAX 10
 #define MARGE_BORD 10
+#define SETUP_TIMEOUT 1000
+
+#define DISTANCE_OUTOFRANGE -1
+#define DISTANCE_UNDEFINED -2
 
 #define TURNRIGHT BACKWARD
 #define TURNLEFT FORWARD
 
 #define PIN_PING_GAUCHE 26
 #define PIN_PING_DROITE 22
+
+#define RIGHT_PING 30
+#define LEFT_PING 31
 
 enum ModeTourr 
 {
@@ -56,11 +63,11 @@ public:
 		if(steps > 0)
 		{
 			step(steps, dir, style);
-			steps = 0;
-			if(dir == TURNLEFT)
+			if (dir == TURNLEFT)
 				position += steps;
 			else
 				position -= steps;
+			steps = 0;
 		}
 	}
 };
@@ -74,7 +81,7 @@ void loopTourelle();
 int testPing();
 void run();
 void recherche();
-void setupTourelle();
+int setupTourelle();
 bool cibleValide();
 void update_pos();
 

@@ -64,10 +64,14 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_GETSENS			16
 #define Q_GETENC			17
 
+// tourelle
+#define Q_OBJECT_DETECTED   60
+
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
 #define	E_INVALID_TYPE_PARAMETERS			-3
+#define E_TOURELLE_SETUP_FAIL               -4
 #define W_SWITCH_COLOR						-21
 #define W_JACK								-22
 #define W_STOP								-42
