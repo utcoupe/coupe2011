@@ -69,7 +69,7 @@ sys.stdout.flush()
 keyB = 0
 actionActuelle = 0
 
-while (keyB != 13):
+while (keyB != Q_KILL):
 	valRetour = 0
 	commandThomas = raw_input()
 	input_split = commandThomas.split('.')

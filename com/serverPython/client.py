@@ -14,10 +14,15 @@ class Client(threading.Thread):
 		threading.Thread.__init__(self, None, None, name)
 		self._server = server # la socket pour envoyer recevoir
 		self.id = id # id du client sur le serveur
-		self.new_id = id # nouvel id à appliquer ultérieurement (sert lors de l'identification du début)
 		self._running = False # le client tourne
 		self.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme 
 		self._partialMsg = ""
+		self.e_validate = threading.Event()
+
+		if self.id != ID_SERVER:
+			self.blockRecv() # empecher toute reception
+			self.setMaskRecvFrom(ID_SERVER,1) # les cartes ne peuvent recevoir des messages que du serveur
+			self.setMaskRecvFrom(ID_IA,1) # et de l'IA
 	
 	def __del__(self):
 		self.s.close()
@@ -149,7 +154,10 @@ class LocalClient(Client):
 				else:
 					if id_cmd == -999: # la demande d'identification du début
 						if id_from != int(msg_split[1]):
-							self._server.clients[id_from].new_id = int(msg_split[1])
+							for client in self._server.clients:
+								if client.id == id_from:
+									client.id = int(msg_split[1])
+									client.e_validate.set()
 			except Exception as ex:
 				self._server.write("ERROR : LocalClient, identification début '%s'"%ex, colorConsol.FAIL)
 				

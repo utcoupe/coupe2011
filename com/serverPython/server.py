@@ -25,10 +25,13 @@ class Server():
 		self.tcpLoop = TCPLoop(self,'', 50000)
 		self.e_shutdown = threading.Event()
 		self._lock_write = threading.Lock()
+		self._lock_addClient = threading.Lock()
 		
 		locClient = LocalClient(self, 0)
 		locClient.start()
 		self.clients.append(locClient)
+
+		self.id_non_validate = 13
 		
 		
 	def start(self):
@@ -37,36 +40,58 @@ class Server():
 	
 	def shutdown(self):
 		self.e_shutdown.set()
-	
-	def addTCPClient(self, conn, addr):
-		client = TCPClient(self,len(self.clients), conn, addr)
-		client.start()
-		self.clients.append(client)
-		
-		# rien trouvé de plus propre pour récup les ids des clients
-		self.parseMsg(0, '-1'+C_SEP_SEND+'-999'+C_SEP_SEND+str(Q_IDENT)) # demande à tout le monde une identification
-		time.sleep(2)
 
-		for client in self.clients:
-			client.id = client.new_id # changement des ids
-			self.write(client, colorConsol.OKGREEN)
-	
-	def addSerialClient(self, port, baudrate):
-		s = serial.Serial(port, baudrate, timeout=1, writeTimeout=1)
-		client = SerialClient(self, len(self.clients), s, port, baudrate)
-		client.start()
-		self.clients.append(client)
-	
-	def addSubprocessClient(self, exec_name):
+	def _identClient(self, client):
+		self.parseMsg(ID_SERVER, str(client.id)+C_SEP_SEND+'-999'+C_SEP_SEND+str(Q_IDENT)) # une identification
+		client.e_validate.wait(2)
+		self.write(client, colorConsol.OKGREEN)
+		
+	def addTCPClient(self, conn, addr):
+		self._lock_addClient.acquire()
 		try:
-			process = subprocess.Popen(exec_name, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
-		except OSError as e:
-			self.write("Server->addSubprocessClient(%s) failed"%exec_name, colorConsol.FAIL)
-			self.write(e, colorConsol.FAIL)
-		else:
-			client = SubprocessClient(self, len(self.clients), process, exec_name)
+			client = TCPClient(self,self.id_non_validate, conn, addr)
+			self.id_non_validate+=1
 			client.start()
 			self.clients.append(client)
+			self._identClient(client)
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
+		finally:
+			self._lock_addClient.release()
+			
+	
+	def addSerialClient(self, port, baudrate):
+		self._lock_addClient.acquire()
+		try:
+			s = serial.Serial(port, baudrate, timeout=1, writeTimeout=1)
+			client = SerialClient(self, self.id_non_validate, s, port, baudrate)
+			self.id_non_validate+=1
+			client.start()
+			self.clients.append(client)
+			self._identClient(client)
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
+		finally:
+			self._lock_addClient.release()
+	
+	def addSubprocessClient(self, exec_name):
+		self._lock_addClient.acquire()
+		try:
+			try:
+				process = subprocess.Popen(exec_name, stdin=subprocess.PIPE, stdout=subprocess.PIPE)
+			except OSError as e:
+				self.write("Server->addSubprocessClient(%s) failed"%exec_name, colorConsol.FAIL)
+				self.write(e, colorConsol.FAIL)
+			except Exception as ex:
+				self.write(ex, colorConsol.FAIL)
+			else:
+				client = SubprocessClient(self, self.id_non_validate, process, exec_name)
+				self.id_non_validate+=1
+				client.start()
+				self.clients.append(client)
+				self._identClient(client)
+		finally:
+			self._lock_addClient.release()
 		
 	def parseMsg(self, id_client, msg):
 		"""
