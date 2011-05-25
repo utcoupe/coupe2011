@@ -58,7 +58,7 @@ RECAL_A		= 5
 
 # constantes pour prendre les pions dans le vert
 X_PRISE = 300
-X_DEPLACEMENT = 500
+X_DEPLACEMENT = 550
 
 class Robot:
 	def __init__(self):
@@ -99,14 +99,16 @@ class Robot:
 		self.id_msg = 0
 
 		self.client.start() # demarrage du client
+		self.activeReset = True
 		
 	def _loopReset(self):
 		fifo = self.client.addFifo( MsgFifo( W_SWITCH_COLOR ) )
 		while True:
 			fifo.getMsg()
 			self.addCmd(ID_OTHERS, Q_LED, -1)
-			self.reset()
-			self.client.addFifo(fifo)
+			if self.activeReset:
+				self.reset()
+				self.client.addFifo(fifo)
 	
 	def _loopUpdatePos(self):
 		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
@@ -124,6 +126,7 @@ class Robot:
 		self.client.removeFifo(fifo)
 
 	def test(self):
+		self.activeReset = False
 		self.write("* TEST LEDS *", colorConsol.HEADER)
 		self.addCmd(ID_OTHERS, Q_LED, RED)
 		time.sleep(0.5)
@@ -137,14 +140,14 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
 		raw_input("appuyez sur une touche pour continuer les tests")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
-		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 2000)
-		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, AVANT, 0)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 0)
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
 		raw_input("appuyez sur une touche pour continuer les tests")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
-		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
-		self.addBlockingCmd(2, (1,5,), ID_OTHERS, Q_SETPOSITION, ARRIERE, 0)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 0)
 		
 		self.write("* TEST AX12 *", colorConsol.HEADER)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
@@ -157,7 +160,7 @@ class Robot:
 		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, ARRIERE)
 		
 		self.write("* TEST JACK *", colorConsol.HEADER)
-		self.write("attente d'activation du jack...", colorConsol.HEADER)
+		self.write("attente d'activation du jack...")
 		self.waitJackSignal()
 		
 		self.write("* TEST SWITCH COLOR *", colorConsol.HEADER)
@@ -165,7 +168,7 @@ class Robot:
 			self.write("attente switch color %s/2..."%(i+1))
 			fifo = self.client.addFifo( MsgFifo(W_SWITCH_COLOR, Q_COLOR) )
 			m = fifo.getMsg()
-			self.addCmd(ID_OTHER, Q_COLOR)
+			self.addCmd(ID_OTHERS, Q_COLOR)
 			m = fifo.getMsg()
 			color = int(m.content)
 			self.addCmd(ID_OTHERS, Q_LED, color)
@@ -173,9 +176,10 @@ class Robot:
 		self.write("* TEST MS *", colorConsol.HEADER)
 		self.write("face avant...")
 		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT)
-		self.write("face arriere...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE)
+		#self.write("face arriere...")
+		#self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE)
 		
+		self.activeReset = True
 		
 			
 	def start(self):
@@ -186,8 +190,8 @@ class Robot:
 			while self._e_stop.isSet():
 				time.sleep(0.5)
 			if MOD == DEBUG:
-				self.test()
-				continue
+				#self.test()
+				#continue
 				"""self.color = BLUE
 				self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 				self.do_path(((self.symX(1850),300),))
@@ -949,7 +953,7 @@ class Robot:
 		ouvrir la pince
 		@param id_pince (int) AVANT ou ARRIERE
 		"""
-		return self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX, id_pince)
+		return self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 
 	
 	def takeObj(self, id_pince):
@@ -960,7 +964,7 @@ class Robot:
 		@return True si l'objet a été pris, False sinon
 		"""
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
-		self.addBlockingCmd(1, 2, ID_AX12, Q_SERRE, id_pince)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, id_pince)
 
 	def construireTourVerte(self):
 		"""
@@ -968,7 +972,7 @@ class Robot:
 		Script pour construire une tour à partir de ce qu'il y a dans la zone verte
 		"""
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
-		listeVerte = (TOUR,PION_1,TOUR,PION_1,TOUR)
+		listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
 		listeYVerte = (690,970,1250,1530,1810)
 
 		nbTours = 0
@@ -1013,12 +1017,7 @@ class Robot:
 				angle = -90
 				id1 = AVANT
 				id2 = ARRIERE
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(angle), VITESSE-30)
-			self.dumpObj(id1) # pose le pion
-			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_REL, 180, VITESSE-30) # tourne
-			self.dumpObj(id2) # pose la tour sur le pion
-			self.takeObj(id2) # un pion + une tour dans la pince id2
-			self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id2, 9500)
+			self.combinerFaces(id2)
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[debut+2]) # devant le troisième
 			self._takePionVert(debut+2, id1) # prise troisième pion pince id1
 			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(angle), VITESSE-30)
@@ -1032,8 +1031,11 @@ class Robot:
 	def _takePionVert(self, index, id_pince):
 		listeYVerte = (690,970,1250,1530,1810)
 		retour = 0
-		self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(0), VITESSE-30)
-		self.addBlockingCmd(1, 2, ID_AX12, Q_OPEN_MAX, id_pince)
+		if id_pince == AVANT:
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(180), VITESSE-30)
+		else:
+			self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_ANGLE_ABS, self.symA(0), VITESSE-30)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
 		
 		self.go_point(self.symX(X_PRISE),listeYVerte[index]) # avance
@@ -1059,7 +1061,29 @@ class Robot:
 			
 		return retour
 		
-
+	def combinerFaces(self, id_face):
+		"""
+		@param id_pince la pince qui contient le pion à mettre sur
+		l'autre, au final cette pince contiendra les deux pions
+		"""
+		if id_face == AVANT:
+			id1 = ARRIERE
+			id2 = AVANT
+			d = 100
+		else:
+			id1 = AVANT
+			id2 = ARRIERE
+			d = -100
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
+		self.dumpObj(id1) # lache
+		self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_GOAL_REL, d, 0, VITESSE) #recul
+		self.addBlockingCmd(2, (1,10), ID_ASSERV, Q_ANGLE_REL, 180, 0, VITESSE-30) # tourne
+		self.addBlockingCmd(2, (1,5), ID_ASSERV, Q_GOAL_REL, d, 0, VITESSE) #avance
+		self.dumpObj(id2) # lache
+		self.takeObj(id2) # reprend
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, 9500)
+		
 	def symX(self,x):
 		"""
 		(calcul)
