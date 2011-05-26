@@ -73,7 +73,6 @@ class Robot:
 		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
 		self._e_stop = threading.Event() # pour arreter le robot
 		self.debug = Debug(DEBUG_LVL) # pour debugger
-		threading.Thread(None, self._loopReset, "Robot._loopReset()").start()
 		
 		if MOD == DEBUG:
 			self.write("##############################", colorConsol.FAIL)
@@ -103,7 +102,15 @@ class Robot:
 		self.client.start() # demarrage du client
 		self.activeReset = True
 		
+		self.e_validate_ident = threading.Event()
+		
+		threading.Thread(None, self._loopReset, "Robot._loopReset()").start()
+		threading.Thread(None, self._loopUpdatePos, "Robot._loopUpdatePos").start()
+
+		
+		
 	def _loopReset(self):
+		self.e_validate_ident.wait()
 		fifo = self.client.addFifo( MsgFifo( W_SWITCH_COLOR ) )
 		while True:
 			fifo.getMsg()
@@ -113,17 +120,22 @@ class Robot:
 				self.client.addFifo(fifo)
 	
 	def _loopUpdatePos(self):
+		self.e_validate_ident.wait()
 		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
 		while True:
 			start = time.time()
 			self.addCmd(ID_ASSERV, Q_POSITION)
-			m = fifo.getMsg()
-			self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
-			if len(self.pos) != 3:
-				self.wirte("ERROR : reception pos : %s"%self.pos, colorConsol.FAIL)
-				self.pos = (0,0,0)
-			self.debug.log(D_UPDATE_POS, self.pos)
-			delay = 500 - (time.time() - start)
+			try:
+				m = fifo.getMsg(1)
+			except TimeoutException:
+				pass
+			else:
+				self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+				if len(self.pos) != 3:
+					self.write("ERROR : reception pos : %s"%self.pos, colorConsol.FAIL)
+					self.pos = (0,0,0)
+				self.debug.log(D_UPDATE_POS, self.pos)
+			delay = 0.5 - (time.time() - start)
 			if delay > 0: time.sleep(delay)
 		self.client.removeFifo(fifo)
 
@@ -139,7 +151,7 @@ class Robot:
 		time.sleep(0.5)
 		self.addCmd(ID_OTHERS, Q_LED, -1)
 		
-		self.write("* TEST ASCENSEURS *", colorConsol.HEADER)
+		"""self.write("* TEST ASCENSEURS *", colorConsol.HEADER)
 		self.write("test ms recalage avant")
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
@@ -152,7 +164,7 @@ class Robot:
 		raw_input("appuyez sur une touche pour continuer les tests")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 0)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 0)"""
 		
 		self.write("* TEST AX12 *", colorConsol.HEADER)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
@@ -191,11 +203,13 @@ class Robot:
 		"""
 		Démarage du robot
 		"""
-		return
+		self.e_validate_ident.wait()
 		while True:
 			while self._e_stop.isSet():
 				time.sleep(0.5)
 			if MOD == DEBUG:
+				#time.sleep(2)
+				#self._combinerFaces(AVANT)
 				#self.test()
 				#continue
 				"""self.color = BLUE
@@ -412,7 +426,7 @@ class Robot:
 		@param target (Pion)
 		@return True si l'objet a été pris, False sinon
 		"""
-		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
+		#self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, id_pince)
 
 		
@@ -605,7 +619,7 @@ class Robot:
 					elif m.id_cmd == Q_POSITION:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 						self.debug.log(D_UPDATE_POS, new_pos)
-						if self._anomalie_deplacement(last_pos, new_pos):
+						if self._anomalie_deplacement(path[nb_point_reach], last_pos, new_pos):
 							self.write("WARNING : Robot.do_path : detection anomalie deplacement", colorConsol.WARNING)
 							#self.addCmd(ID_ASSERV, Q_STOP)
 							#retour = E_BLOCK
@@ -641,6 +655,7 @@ class Robot:
 
 		@return (int)
 		"""
+		self.write("* GO_POINT *", colorConsol.HEADER)
 		if self._e_stop.isSet():
 			retour = -42
 		else:
@@ -667,7 +682,8 @@ class Robot:
 								nb_recv += 1
 								if nb_recv >= 2: break
 							elif m.id_cmd == Q_POSITION:
-								if self._anomalie_deplacement(last_pos, new_pos):
+								new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+								if self._anomalie_deplacement((x,y), last_pos, new_pos):
 									self.write("WARNING : Robot.go_point : detection anomalie deplacement", colorConsol.WARNING)
 									#self.addCmd(ID_ASSERV, Q_STOP)
 									#retour = E_BLOCK
@@ -689,7 +705,7 @@ class Robot:
 					self.addCmd(ID_ASSERV, Q_GOAL_ABS, x, y, VITESSE)
 				else:
 					self.addCmd(ID_ASSERV, Q_GOAL_REL, x, y, VITESSE)
-				
+		
 		return retour
 
 
@@ -703,6 +719,7 @@ class Robot:
 
 		@return (int)
 		"""
+		self.write("* TOURNE *", colorConsol.HEADER)
 		if self._e_stop.isSet():
 			retour = -42
 		else:
@@ -731,7 +748,7 @@ class Robot:
 						elif m.id_cmd == Q_POSITION:
 							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 							self.debug.log(D_UPDATE_POS, new_pos)
-							if self._anomalie_deplacement(last_pos, new_pos):
+							if self._anomalie_deplacement((self.pos[0],self.pos[1]), last_pos, new_pos):
 								self.write("WARNING : Robot.tourne : detection anomalie rotation", colorConsol.WARNING)
 								#self.addCmd(ID_ASSERV, Q_STOP)
 								#retour = E_BLOCK
@@ -752,15 +769,15 @@ class Robot:
 				
 		return retour
 
-	def _anomalie_deplacement(self, last_pos, new_pos):
+	def _anomalie_deplacement(self, next_objectif, last_pos, new_pos):
 		"""
 		(calcul)
 		Detecte si il y a une anomalie de déplacement, puis remplace last_pos par new_pos
 
 		@return (True/False)
 		"""
-		retour = (	abs(new_pos[0] - path[nb_point_reach][0]) > 50 \
-					and abs(new_pos[1] - path[nb_point_reach][1]) > 50 \
+		retour = (	abs(new_pos[0] - next_objectif[0]) > 50 \
+					and abs(new_pos[1] - next_objectif[1]) > 50 \
 					and abs(new_pos[0] - self.pos[0]) < 30 \
 					and abs(new_pos[1] - self.pos[1]) < 30 \
 					and abs(new_pos[2] - self.pos[2]) < 5 \
@@ -1191,15 +1208,15 @@ class Robot:
 		else:
 			self.tourne(self.symA(0))
 		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
-		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
+		#self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
 		
 		self.go_point(self.symX(X_PRISE),listeYVerte[index]) # avance
 		self.takeObj(id_pince)
 		fifo = self.client.addFifo( MsgFifo(Q_SETPOSITION) )
-		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, 9500) # lève la pince
+		#self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, 9500) # lève la pince
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[index]) # recul en même temps
 		nb_reception = 0
-		try:
+		"""try:
 			while True:
 				m = fifo.getMsg(10)
 				if m.id_cmd == Q_KILL:
@@ -1212,7 +1229,7 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		finally:
-			self.client.removeFifo(fifo)
+			self.client.removeFifo(fifo)"""
 			
 		return retour
 		
@@ -1229,15 +1246,15 @@ class Robot:
 			id1 = AVANT
 			id2 = ARRIERE
 			d = -100
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
+		#self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
+		#self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
 		self.dumpObj(id1) # lache
 		self.go_point(d, 0, cmd=Q_GOAL_REL)
-		self.tourne(self.symA(180), cmd=Q_ANGLE_REL)
+		self.tourne(180, cmd=Q_ANGLE_REL)
 		self.go_point(d, 0, cmd=Q_GOAL_REL)
 		self.dumpObj(id2) # lache
 		self.takeObj(id2) # reprend
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, 9500)
+		#self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, 9500)
 
 		
 	####################################################################

@@ -60,7 +60,7 @@ class RobotClient(threading.Thread):
 				self._socket.send(msg+"\n")
 			else:
 				print msg
-			self.write("Send : %s"%msg)
+			#self.write("Send : %s"%msg)
 	
 	def run(self):
 		""" 
@@ -86,7 +86,7 @@ class RobotClient(threading.Thread):
 				
 	def _treat(self, msg):
 		""" fonction appellée quand un message est reçu """
-		self.write("Received : '%s'"%msg)
+		#self.write("Received : '%s'"%msg)
 		msg = str(msg).strip()
 		msg_split = msg.split(C_SEP_SEND,2)
 		try:
@@ -109,6 +109,7 @@ class RobotClient(threading.Thread):
 					self.robot.scan()
 				elif id_cmd == Q_IDENT:
 					self.send("{id_server}{sep}{id_msg}{sep}{id_ia}{sep}ia".format(id_server=ID_SERVER,id_msg=msg_split[1], sep=C_SEP_SEND, id_ia=ID_IA))
+					self.robot.e_validate_ident.set()
 		except ValueError as ex:
 			self.write(ex, colorConsol.FAIL)
 		except Exception as ex:
