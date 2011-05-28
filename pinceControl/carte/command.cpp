@@ -123,8 +123,7 @@ void cmd(int id, int header, int *args, int size){
 
 	    else
 	    {
-		sendMessage(id, 1);
-		sendMessage(id, pinceRecal(args[0]));
+		sendMessage(id, pinceRecal(id, args[0]));
 	    }
 
 	    break;
@@ -158,7 +157,7 @@ void cmd(int id, int header, int *args, int size){
 	    }
 	    else
 	    {
-		sendMessage(id, E_INVALID_TYPE_PARAMETERS);
+		sendMessage(id, E_INVALID_PARAMETERS_TYPE);
 	    }
 	    break;
 	}
@@ -170,11 +169,11 @@ void cmd(int id, int header, int *args, int size){
 	    }
 	    else if(args[0]==FACEAR)
 	    {
-		    sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
+		sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
 	    }
 	    else
 	    {
-		    sendMessage(id, E_INVALID_TYPE_PARAMETERS);
+		sendMessage(id, E_INVALID_PARAMETERS_TYPE);
 	    }
 	    break;
 	}

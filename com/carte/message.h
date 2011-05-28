@@ -66,8 +66,9 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
-#define	E_INVALID_TYPE_PARAMETERS			-3
-#define E_TOURELLE_SETUP_FAIL               -4
+#define	E_INVALID_PARAMETERS_TYPE			-3
+#define E_INVALID_PARAMETERS_VALUE			-4
+#define E_TOURELLE_SETUP_FAIL				-5
 #define W_SWITCH_COLOR						-21
 #define W_JACK								-22
 #define W_STOP								-42
@@ -78,6 +79,7 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define E_LOW_VOLTAGE						-56
 #define E_MERDE_AX12						-57
 #define E_CM5_NOT_CONN						-58
+
 
 // les ids
 #define ID_SERVER		0
