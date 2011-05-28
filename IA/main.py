@@ -151,20 +151,20 @@ class Robot:
 		time.sleep(0.5)
 		self.addCmd(ID_OTHERS, Q_LED, -1)
 		
-		"""self.write("* TEST ASCENSEURS *", colorConsol.HEADER)
+		self.write("* TEST ASCENSEURS *", colorConsol.HEADER)
 		self.write("test ms recalage avant")
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
 		raw_input("appuyez sur une touche pour continuer les tests")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 0)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, BAS)
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
 		raw_input("appuyez sur une touche pour continuer les tests")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 0)"""
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, BAS)
 		
 		self.write("* TEST AX12 *", colorConsol.HEADER)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
@@ -426,7 +426,7 @@ class Robot:
 		@param target (Pion)
 		@return True si l'objet a été pris, False sinon
 		"""
-		#self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
+		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, BAS)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, id_pince)
 
 		
@@ -1134,7 +1134,7 @@ class Robot:
 		self.go_point(self.symX(1300),1700) # avancer sur la case
 		self.dumpObj(id_pince) # lacher l'objet
 		"""fifo = self.client.addFifo( MsgFifo(Q_SETPOSITION) )
-		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, 9500)
+		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT)
 		m = fifo.getMsg(1)"""
 		self.go_point(-200, 0, cmd=Q_GOAL_REL)
 		"""m = fifo.getMsg(10)
@@ -1208,12 +1208,12 @@ class Robot:
 		else:
 			self.tourne(self.symA(0))
 		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
-		#self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, 0)
+		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, BAS)
 		
 		self.go_point(self.symX(X_PRISE),listeYVerte[index]) # avance
 		self.takeObj(id_pince)
 		fifo = self.client.addFifo( MsgFifo(Q_SETPOSITION) )
-		#self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, 9500) # lève la pince
+		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT) # lève la pince
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[index]) # recul en même temps
 		nb_reception = 0
 		"""try:
@@ -1246,15 +1246,15 @@ class Robot:
 			id1 = AVANT
 			id2 = ARRIERE
 			d = -100
-		#self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, 9500)
-		#self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, 9500)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		self.dumpObj(id1) # lache
 		self.go_point(d, 0, cmd=Q_GOAL_REL)
 		self.tourne(180, cmd=Q_ANGLE_REL)
 		self.go_point(d, 0, cmd=Q_GOAL_REL)
 		self.dumpObj(id2) # lache
 		self.takeObj(id2) # reprend
-		#self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, 9500)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, HAUT)
 
 		
 	####################################################################

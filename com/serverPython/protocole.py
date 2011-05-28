@@ -52,6 +52,8 @@ Q_OPEN_MAX		= 72
 Q_CLOSE			= 73
 Q_SERRE			= 74
 
+# phone
+Q_SCAN_DEPART	= 80
 
 # server python
 ID_SERVER		= 0
@@ -59,7 +61,8 @@ ID_CAM			= 1
 ID_AX12			= 2
 ID_ASSERV		= 3 # carte asserv
 ID_OTHERS		= 4 # carte avec les pinces et sharps
-ID_IA			= 5 # l'IA
+ID_PHONE		= 5 # la visio du smartphone
+ID_IA			= 6 # l'IA
 
 
 
@@ -71,6 +74,10 @@ GREEN	= 2
 
 AVANT	= 0
 ARRIERE	= 1
+
+HAUT	= 1
+BAS		= 2
+MIDLE	= 3
 
 Q_KILL								= -69
 E_TIMEOUT							= -43
