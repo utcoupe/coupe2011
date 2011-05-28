@@ -83,6 +83,6 @@ void run();
 void recherche();
 int setupTourelle();
 bool cibleValide();
-void update_pos();
+void updatePos();
 
 #endif
