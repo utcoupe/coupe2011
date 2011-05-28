@@ -80,7 +80,7 @@ void encoderSafe()
 		}
 	}
 	
-	if (goal_position_AV >= 0
+	/*if (goal_position_AV >= 0
 		and ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
 		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT)))
 	{
@@ -90,7 +90,7 @@ void encoderSafe()
 			setAVPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
-	}
+	}*/
 }
 
 void initEncoders(){

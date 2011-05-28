@@ -19,7 +19,7 @@ int pinceRecal(unsigned char face){
 	pinMode(PIN_MS_RECAL_AR,INPUT);
 	goal_position_AV=-1;
 	goal_position_AR=-1;
-	if(face==PINCEAV){
+	if(face==AVANT){
 		setAVPWM(-PWM_MAINTIENT);
 		while(digitalRead(PIN_MS_RECAL_AV)!=HIGH){
 			delay(40);
@@ -28,7 +28,7 @@ int pinceRecal(unsigned char face){
 		initEncoders();
 		return 2;
 	}
-	if(face==PINCEAR){
+	if(face==ARRIERE){
 		setARPWM(-PWM_MAINTIENT);
 		while(digitalRead(PIN_MS_RECAL_AR)!=HIGH){
 			delay(40);

@@ -193,8 +193,8 @@ class Robot:
 		self.write("* TEST MS *", colorConsol.HEADER)
 		self.write("face avant...")
 		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT)
-		#self.write("face arriere...")
-		#self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE)
+		self.write("face arriere...")
+		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE)
 		
 		self.activeReset = True
 		
@@ -210,8 +210,8 @@ class Robot:
 			if MOD == DEBUG:
 				#time.sleep(2)
 				#self._combinerFaces(AVANT)
-				#self.test()
-				#continue
+				self.test()
+				continue
 				"""self.color = BLUE
 				self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 				self.do_path(((self.symX(1850),300),))

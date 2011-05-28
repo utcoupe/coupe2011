@@ -18,12 +18,12 @@ void initServo()
 int setServoState(unsigned char index,unsigned char etat)
 {
 	char droite,gauche;
-	if(PINCEAV==index)
+	if(AVANT==index)
 	{
 		droite=IDAVD;
 		gauche=IDAVG;
 	}
-	else if(PINCEAR==index)
+	else if(ARRIERE==index)
 	{
 		droite=IDARD;
 		gauche=IDARG;

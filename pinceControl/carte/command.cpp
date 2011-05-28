@@ -99,9 +99,9 @@ void cmd(int id, int header, int *args, int size){
 
 	    else
 	    {
-		if(args[0]==PINCEAV)
+		if(args[0]==AVANT)
 		    sendMessage(id, value_right_enc);
-		else if(args[0]==PINCEAR)
+		else if(args[0]==ARRIERE)
 		    sendMessage(id, value_left_enc);
 		else
 		    sendMessage(id, -1);

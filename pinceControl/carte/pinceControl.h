@@ -5,28 +5,12 @@
 #include "message.h"
 #include "pwm.h"
 
+#define BAUDRATE 	115200
 
 //Pinces
-#define HAUT FORWARD
-#define BAS BACKWARD
-#define IDAVG		2	//avant gauche
-#define IDAVD		3	//avant droit
-#define IDARG		7	//arriere gauche
-#define IDARD		1	//arriere droit
-#define POSITIONFG	1024-700	//fermé Gauche
-#define POSITIONSG	1024-600	//serré
-#define POSITIONOG	1024-400	//ouvert
-#define POSITIONFD	1024-300	//fermé Droit
-#define POSITIONSD	1024-400	//serré
-#define POSITIONOD	1024-600	//ouvert
-#define CONTROLPIN 	40
-#define BAUDRATE 	115200
-/*cf protocole*/
-#define PINCEAV 	0
-#define PINCEAR 	1
-#define PINCE_F	 	0
-#define PINCE_S	 	1
-#define PINCE_O	 	2
+//#define HAUT FORWARD
+//#define BAS BACKWARD
+
 
 //deplacement verticale
 #define POSITION_MAX 10000

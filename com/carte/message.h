@@ -41,11 +41,6 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_COLOR				50
 #define Q_ULTRAPING			51
 #define Q_GETULTRAPING		52
-
-/*debug*/
-#define Q_MOTOR		 		41
-#define Q_TXAX12	 		42 //write
-#define Q_RXAX12	 		43 //read
 #define Q_CODEUR	 		44 
 
 // asserv
