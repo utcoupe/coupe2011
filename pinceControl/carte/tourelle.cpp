@@ -29,12 +29,12 @@ int setupTourelle() {
     }
     
     getDistance(PIN_PING_GAUCHE);
-    delay(1000);
+    delay(500);
     getDistance(PIN_PING_GAUCHE);
     return 0;
 }
 
-void update_pos(int xUpdate, int yUpdate, int angleRUpdate)
+void updatePos(int xUpdate, int yUpdate, int angleRUpdate)
 {
 	x = xUpdate;
 	y = yUpdate;
