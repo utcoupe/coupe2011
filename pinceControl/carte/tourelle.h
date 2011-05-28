@@ -10,7 +10,7 @@
 
 #define NB_PAS 200
 #define STYLE SINGLE
-#define SPEED 300000
+#define SPEED 30000
 #define MAXDIST 300 // cm
 #define TEMPO 500 // ms
 #define INCREMENT 10

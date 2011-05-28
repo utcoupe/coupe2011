@@ -62,21 +62,21 @@ int traiterCible (int angleT, int distance)
 		if(obj_x > (300 - MARGE_BORD) || obj_x < MARGE_BORD)
 		{
 			result = DISTANCE_OUTOFRANGE;
-			Serial.println("*****************************************");
+			/*Serial.println("*****************************************");
 			Serial.print("En dehors limites (largeur, ");
 			Serial.print(distance, DEC);
 			Serial.println(").");
-			Serial.println("*****************************************");
+			Serial.println("*****************************************");*/
 		}
 
 		else if (obj_y > (210 - MARGE_BORD) || obj_y < MARGE_BORD)
 		{
 			result = DISTANCE_OUTOFRANGE;
-			Serial.println("*****************************************");
+			/*Serial.println("*****************************************");
 			Serial.print("En dehors limites (hauteur, ");
 			Serial.print(distance, DEC);
 			Serial.println(").");
-			Serial.println("*****************************************");
+			Serial.println("*****************************************");*/
 		}
 		
 		else
@@ -109,22 +109,22 @@ void loopTourelle()
 		if (pingTurn == RIGHT_PING) {
 			gauche = traiterCible(motor1.position, testPing(PIN_PING_GAUCHE));
 			pingTurn = LEFT_PING;
-			Serial.println("RIGHT_PING");
+			//Serial.println("RIGHT_PING");
 		} else {
 			droite = traiterCible(motor1.position, testPing(PIN_PING_DROITE));
 			pingTurn = RIGHT_PING;
-			Serial.println("LEFT_PING");
+			//Serial.println("LEFT_PING");
 		}
 		
 		if (gauche != DISTANCE_UNDEFINED && droite != DISTANCE_UNDEFINED)
 		{
-			Serial.print("gauche = ");
+			/*Serial.print("gauche = ");
 			Serial.println(gauche, DEC);
 			Serial.print("droite = ");
 			Serial.println(droite, DEC);
 			Serial.print("position = ");
 			Serial.println(motor1.position, DEC);
-			Serial.print("\n");
+			Serial.print("\n");*/
 			
 			bool objGauche = (gauche > 0);
 			bool objDroite = (droite > 0);
