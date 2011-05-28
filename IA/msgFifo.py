@@ -20,7 +20,8 @@ class MsgFifo:
 		@param msg2wait (list<id_cmd>)
 		"""
 		self._queue = Queue()
-		self._filter = msg2wait
+		self._filter = [Q_KILL]
+		self._filter += msg2wait
 	
 	def addMsg(self, id_from, id_msg, id_cmd, msg):
 		"""
@@ -47,7 +48,7 @@ class MsgFifo:
 			return r
 	
 	def __repr__(self):
-		return "MsgFifo(%s)"%(self._filter,)
+		return "MsgFifo(%s)"%(tuple(get_cname(_) for _ in self._filter),)
 
 	
 	

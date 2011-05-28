@@ -104,9 +104,12 @@ class RobotClient(threading.Thread):
 					fifo.addMsg(id_from, id_msg, id_cmd, msg)
 					
 			else: # si c'est le serveur qui a envoyé la commande
-				id_cmd = msg_split[1]
-				if id_cmd == "scan":
+				id_cmd = int(msg_split[2])
+				if msg_split[1] == "scan":
 					self.robot.scan()
+				elif id_cmd == Q_IDENT:
+					self.send("{id_server}{sep}{id_msg}{sep}{id_ia}{sep}ia".format(id_server=ID_SERVER,id_msg=msg_split[1], sep=C_SEP_SEND, id_ia=ID_IA))
+					self.robot.e_validate_ident.set()
 		except ValueError as ex:
 			self.write(ex, colorConsol.FAIL)
 		except Exception as ex:

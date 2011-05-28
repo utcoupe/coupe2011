@@ -13,7 +13,7 @@ void cmd(int id, int header, int *args, int size){
     {
 	case Q_IDENT:
 	{
-	    sendMessage(id, (char*)"pince");
+	    sendMessage(id, ID_OTHERS, (char*)"others");
 	    break;
 	}
 	case Q_PING:

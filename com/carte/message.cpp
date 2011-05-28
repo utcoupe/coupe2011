@@ -22,6 +22,33 @@ void sendMessage(int id, int i)
 }
 
 ///
+/// Envoie un string
+///
+void sendMessage(int id, char* str)
+{
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
+	Serial.println(str);
+}
+
+///
+/// Envoie un int et un string
+///
+void sendMessage(int id, int i, char* str)
+{
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
+	Serial.print(i);
+	Serial.print(C_SEP_SEND);
+	Serial.println(str);
+}
+
+
+///
 /// Envoie un tableau d'int
 ///
 void sendMessage(int id, int *tabi, int size)
@@ -36,18 +63,6 @@ void sendMessage(int id, int *tabi, int size)
 		Serial.print(C_SEP_SEND);
 	}
 	Serial.println(tabi[size-1]);
-}
-
-///
-/// Envoie un string
-///
-void sendMessage(int id, char* str)
-{
-	Serial.print(-1);
-	Serial.print(C_SEP_SEND);
-	Serial.print(id);
-	Serial.print(C_SEP_SEND);
-	Serial.println(str);
 }
 
 ///

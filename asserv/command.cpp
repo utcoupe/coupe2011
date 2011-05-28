@@ -19,7 +19,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 
 		case Q_IDENT: /* Identification */
 		{
-			sendMessage(id, (char*)"asserv");
+			sendMessage(id, ID_ASSERV, (char*)"asserv");
 			break;
 		}
 

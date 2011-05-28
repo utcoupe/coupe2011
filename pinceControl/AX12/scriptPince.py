@@ -14,7 +14,7 @@ def send(idMess, retourMess):
 Positions des AX12 sur le robot
 	Face_front 
 	1 -- 2
-	|	|
+	|	 |
 	3 -- 4
 	Face_back 
 '''
@@ -64,12 +64,10 @@ def read_CM5():
 	else:
 		return E_CM5_NOT_CONN
 	
-print 'Debut programme : com CM-5'
-sys.stdout.flush()
 keyB = 0
 actionActuelle = 0
 
-while (keyB != 13):
+while (keyB != Q_KILL):
 	valRetour = 0
 	commandThomas = raw_input()
 	input_split = commandThomas.split('.')
@@ -91,7 +89,7 @@ while (keyB != 13):
 		continue
 	
 	if keyB == Q_IDENT:
-		send(idArenvoyer, "ax12")
+		send(idArenvoyer, str(ID_AX12)+C_SEP_SEND+"ax12")
 		continue
 	elif keyB == PING:
 		send(idArenvoyer, "Pong")
@@ -128,4 +126,3 @@ while (keyB != 13):
 		send(idArenvoyer, E_MERDE_AX12)
 
 ser.close()
-print 'Fin du programme : com CM-5'

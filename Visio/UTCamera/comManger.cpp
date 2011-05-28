@@ -18,11 +18,11 @@ int s2i(const string & s)
 
 void parse(const string & s, int *id_from, int *id_msg, int *id_cmd)
 {
-	size_t index1 = s.find_first_not_of("0123456789",0);
+	size_t index1 = s.find_first_not_of("-0123456789",0);
 
 	*id_from = s2i(s.substr(0,index1));
 
-	size_t index2 = s.find_first_not_of("0123456789",index1+1);
+	size_t index2 = s.find_first_not_of("-0123456789",index1+1);
 
 	*id_msg = s2i(s.substr(index1+1,index2));
 
@@ -102,12 +102,12 @@ void modeStationnaire()
 
             // --- Identification ---
             case 0:{
-                    printf("cam");
+                cout << 1 << '.' << "cam";
             break;}
 
             // --- Ping ---
             case 1:{
-                    printf("%s","Pong");
+                cout << "Pong";
             break;}
 
             // --- ScanAvant ---

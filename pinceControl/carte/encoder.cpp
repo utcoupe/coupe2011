@@ -66,25 +66,27 @@ void testAR()
 void encoderSafe()
 {
 	static int last_left_enc_value = 0;
-	static int last_right_enc_value = 0;
+	//static int last_right_enc_value = 0;
 	
-	if (goal_position_AV >= 0
+	if (goal_position_AR >= 0
 		and ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
 		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT)))
 	{
 		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
+			goal_position_AV = -1;
 			setARPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
 	}
 	
-	if (goal_position_AR >= 0
+	if (goal_position_AV >= 0
 		and ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
 		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT)))
 	{
 		if (abs(last_right_enc_value - value_right_enc) < 10)
 		{
+			goal_position_AR = -1;
 			setAVPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
@@ -92,8 +94,8 @@ void encoderSafe()
 }
 
 void initEncoders(){
-	value_left_enc = 0;
-	value_right_enc = 0;
+	value_left_enc = -200;
+	value_right_enc = -200;
 
 	pinMode(PIN_LEFT_A,INPUT);
 	pinMode(PIN_LEFT_B,INPUT);
