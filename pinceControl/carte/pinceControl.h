@@ -21,8 +21,8 @@
 #define SEUIL_LOAD	0x50
 #define PIN_MS_RECAL_AV			30 //microswitch pour recalage
 #define PIN_MS_RECAL_AR			37
-#define PIN_MS_RECAL_AV_HAUT	18
-#define PIN_MS_RECAL_AV_BAS		19
+#define PIN_MS_RECAL_AV_HAUT	21
+#define PIN_MS_RECAL_AV_BAS		20
 
 extern int msg_position_AV,msg_position_AR;
 

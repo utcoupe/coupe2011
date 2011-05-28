@@ -158,6 +158,8 @@ class LocalClient(Client):
 							for client in self._server.clients:
 								if client.id == id_from:
 									client.id = int(msg_split[1])
+									if client.id == ID_IA:
+										client.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme	
 									client.e_validate.set()
 			except Exception as ex:
 				self._server.write("ERROR : LocalClient, identification début '%s'"%ex, colorConsol.FAIL)

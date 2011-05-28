@@ -22,14 +22,15 @@ int pinceRecal(int id, char face)
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	if(face==AVANT){
-		return setPincePosition(id, AVANT, BAS);
-		/*setAVPWM(-PWM_MAINTIENT);
-		while(digitalRead(PIN_MS_RECAL_AV)!=HIGH){
+		setAVPWM(-PWM_MAINTIENT);
+		//while(digitalRead(PIN_MS_RECAL_AV)!=HIGH)
+		while(digitalRead(PIN_MS_RECAL_AV_BAS)!=HIGH)
+		{
 			delay(40);
 		}
 		setAVPWM(0x00);
 		initEncoders();
-		return 2;*/
+		return 2;
 	}
 	if(face==ARRIERE){
 		setARPWM(-PWM_MAINTIENT);
@@ -50,8 +51,8 @@ int setPinceState( char index, char etat){
 	return setServoState(index, etat);
 }*/
 
-int setPincePosition(int id, char index, int pos){
-	if(pos > POSITION_MAX) return 0; //erreur
+int setPincePosition(int id, char index, int pos)
+{
 	int pwm=PWM_MOVE;
 	int pos_in_ticks=0;
 	switch (pos)
@@ -76,16 +77,24 @@ int setPincePosition(int id, char index, int pos){
 	switch(index)
 	{
 		case AVANT:
-			goal_position_AV=pos;
-			msg_position_AV=id;
-			return 1;
+			if (goal_position_AV != pos_in_ticks)
+			{
+				goal_position_AV=pos_in_ticks;
+				msg_position_AV=id;
+				return 1;
+			}
+			else
+			{
+				sendMessage(id, 1);
+				return 2;
+			}
 		case ARRIERE:
-			goal_position_AR=pos;
+			goal_position_AR=pos_in_ticks;
 			msg_position_AR=id;
 			testAR();
 			return 1;
 		default : 
-			return 0;//erreur
+			return E_INVALID_PARAMETERS_VALUE;
 	}
 }
 
