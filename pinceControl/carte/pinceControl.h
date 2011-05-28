@@ -27,8 +27,8 @@ extern int msg_position_AV,msg_position_AR;
 #include "encoder.h"
 
 void initPinceControl();
-//int setPinceState(unsigned char index,unsigned char etat);
-int setPincePosition(unsigned int id,unsigned char,unsigned int pos);
-int pinceRecal(unsigned char face);
+//int setPinceState( char index, char etat);
+int setPincePosition(int id, char, int pos);
+int pinceRecal(char face);
 
 #endif

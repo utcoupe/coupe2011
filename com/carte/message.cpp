@@ -94,7 +94,7 @@ void sendMessage(int id, char** tabs, int nbStr, int *tabi, int nbInt)
 /// Envoie des int et des strings
 /// aucune protection, il faut au moins envoyer une chaine et un int
 ///
-void sendMessage(int id, unsigned char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
+void sendMessage(int id,  char cmd, int* tabi, int nbInt, char** tabs, int nbStr)
 {
 	Serial.print(-1);
 	Serial.print(C_SEP_SEND);

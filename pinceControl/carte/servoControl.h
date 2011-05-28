@@ -17,7 +17,7 @@
 #define PINCE_S	 	1
 #define PINCE_O	 	2
 
-int setServoState(unsigned char index,unsigned char etat);
+int setServoState( char index, char etat);
 void initServo();
 
 #endif

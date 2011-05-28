@@ -15,7 +15,7 @@ void initServo()
 }
 
 
-int setServoState(unsigned char index,unsigned char etat)
+int setServoState( char index, char etat)
 {
 	char droite,gauche;
 	if(AVANT==index)

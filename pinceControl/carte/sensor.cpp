@@ -131,7 +131,7 @@ void valueChangeOnJack()
 	}
 }
 
-int setLED(unsigned char color){
+int setLED( char color){
 	if(color == BLEU){
 		digitalWrite(LED_BLEU,HIGH);
 		digitalWrite(LED_ROUGE,LOW);
@@ -158,7 +158,7 @@ int getColor()
 		return ROUGE;
 }
 
-int getSharp(unsigned char pin)
+int getSharp( char pin)
 {
   	switch (pin)
   	{
@@ -192,7 +192,7 @@ int getSharp(unsigned char pin)
 }
 
 //déclanché si la valeur es inferieur à ref
-int setTriggerSharp(unsigned int id, unsigned char pin,unsigned int ref){
+int setTriggerSharp( int id,  char pin, int ref){
 	if(pin > NB_SHARP) return 0; //erreur
 	for(int i=0;i<NB_SHARP;i++){
 		//remplacement de trigger
@@ -213,7 +213,7 @@ int setTriggerSharp(unsigned int id, unsigned char pin,unsigned int ref){
 	return 0;//erreur
 }
 
-void removeTriggerSharp(unsigned char index){
+void removeTriggerSharp( char index){
 		// aucun trigger
 		if(trigerSharp[0].pin==-1) return;
 		//1 trigger
@@ -239,7 +239,7 @@ void removeTriggerSharp(unsigned char index){
 		trigerSharp[NB_SHARP-1].pin=-1;
 }
 
-int getMicroSwitch(unsigned char pin){
+int getMicroSwitch( char pin){
 	switch (pin)
   	{
 		case 0:
@@ -251,7 +251,7 @@ int getMicroSwitch(unsigned char pin){
 	}
 }
 
-int setTriggerMS(unsigned int id, unsigned char pin,bool ref){
+int setTriggerMS( int id,  char pin,bool ref){
 	if(pin > NB_MS)
 		for(int i=0;i<NB_MS;i++){
 		if(trigerMS[i].pin==pin){
@@ -270,7 +270,7 @@ int setTriggerMS(unsigned int id, unsigned char pin,bool ref){
 	return 0;
 }
 
-void removeTriggerMS(unsigned int index){
+void removeTriggerMS( int index){
 	// aucun trigger
 	if(trigerMS[0].pin==-1) return;
 	//1 trigger
@@ -297,7 +297,7 @@ void removeTriggerMS(unsigned int index){
 }
 
 
-int getPion(unsigned char face){
+int getPion( char face){
 	int value,value2;
 	//test des sharp du bas vers le haut
 	if(face == FACEAV){

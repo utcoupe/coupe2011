@@ -59,13 +59,13 @@
 
 
 struct TriggerSharp{
-	unsigned int messageId;
+	int messageId;
 	int pin;
-	unsigned int value;
+	int value;
 };
 
 struct TriggerMS{
-	unsigned int messageId;
+	int messageId;
 	int pin;
 	bool value;
 };
@@ -78,14 +78,14 @@ extern int pingAvMessageID;
 extern int pingArMessageID;
 
 void initSensor();
-int setLED(unsigned char color);
-int getPion(unsigned char face);
-int getSharp(unsigned char pin);
-int setTriggerSharp(unsigned int id, unsigned char pin,unsigned int ref);
-void removeTriggerSharp(unsigned char index);
-int getMicroSwitch(unsigned char pin);
-int setTriggerMS(unsigned int id, unsigned char pin,bool ref);
-void removeTriggerMS(unsigned int index);
+int setLED( char color);
+int getPion( char face);
+int getSharp( char pin);
+int setTriggerSharp( int id,  char pin, int ref);
+void removeTriggerSharp( char index);
+int getMicroSwitch( char pin);
+int setTriggerMS( int id,  char pin,bool ref);
+void removeTriggerMS( int index);
 void sensorTrigger();
 int getColor();
 void valueChangeOnJack();

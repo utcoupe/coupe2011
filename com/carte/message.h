@@ -87,9 +87,13 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define ID_OTHERS		4 // carte avec les pinces et sharps
 #define ID_IA			5 // l'IA
 
-
+// paramètres
 #define AVANT		0
 #define ARRIERE		1
 #define ARRET		2
+// pour les ascenseurs
+#define HAUT		1
+#define BAS			2
+#define MIDLE		3
 
 #endif /* MESSAGE_H_ */

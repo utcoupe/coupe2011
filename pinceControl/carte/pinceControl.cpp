@@ -10,7 +10,7 @@ void initPinceControl(){
 	//initServo();
 }
 
-int pinceRecal(unsigned char face){
+int pinceRecal(char face){
 	pinMode(PIN_MS_RECAL_AV, OUTPUT);
 	digitalWrite(PIN_MS_RECAL_AV, LOW);
 	pinMode(PIN_MS_RECAL_AR, OUTPUT);
@@ -43,11 +43,11 @@ int pinceRecal(unsigned char face){
 /** Utilisation des servos
  */
 /*
-int setPinceState(unsigned char index,unsigned char etat){
+int setPinceState( char index, char etat){
 	return setServoState(index, etat);
 }*/
 
-int setPincePosition(unsigned int id, unsigned char index,unsigned int pos){
+int setPincePosition(int id, char index, int pos){
 	if(pos >= POSITION_MAX) return 0; //erreur
 	switch(index){
 		case 0 :
