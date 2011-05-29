@@ -47,9 +47,28 @@ public class Main {
 	static Configuration configuration = new Configuration();
 	static PictureSupplier pictureSupplier;
 
+	static String projectPath = "";
+	static String classPath = "";
+	static String configPath = "main_config.data";
+	static boolean enableView = true;
+
 	static public void main(String[] args) {
 		System.out.println(TAG + "starting...");
 		
+		// path
+		URL str = Main.class.getProtectionDomain().getCodeSource().getLocation();
+		classPath = str.getPath();
+		projectPath = classPath + "..";
+		System.setProperty("user.dir", projectPath);
+		
+		// set config
+		if (args.length == 1) {
+			if (args[0].equals("noview")) {
+				enableView = false;
+			}
+		}
+		
+
 		load();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			public void run() {
@@ -62,21 +81,11 @@ public class Main {
 
 		// connect clients
 		NetworkClient.connectNetwork(pictureSupplier);
-		if (!(args.length > 0 && args[0].equals("noview")))
-		{
+		if (enableView) {
 			new ViewClientFrame(pictureSupplier);
 		}
 
 		System.out.println(TAG + "started");
-	}
-	
-	static private String getConfigPath()
-	{
-		File classPath = new File(System.getProperty("java.class.path"));
-		File projectPath = classPath.getParentFile();
-		String path = projectPath + File.separator + "main_config.data";
-		
-		return path;
 	}
 
 	static private void save() {
@@ -85,7 +94,7 @@ public class Main {
 
 		FileOutputStream f_out;
 		try {
-			f_out = new FileOutputStream(getConfigPath());
+			f_out = new FileOutputStream(projectPath + File.separator + configPath);
 			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 			obj_out.writeObject(configuration);
 		} catch (FileNotFoundException e) {
@@ -99,7 +108,7 @@ public class Main {
 	static private void load() {
 		FileInputStream f_in;
 		try {
-			f_in = new FileInputStream(getConfigPath());
+			f_in = new FileInputStream(projectPath + File.separator + configPath);
 			ObjectInputStream obj_in = new ObjectInputStream(f_in);
 			Main.configuration = (Configuration) obj_in.readObject();
 		} catch (FileNotFoundException e) {
@@ -263,7 +272,7 @@ class PictureSupplier extends Observable implements Observer {
 		System.out.println(TAG + "take cache...");
 		BufferedImage image = null;
 		try {
-			File file = new File("img/shot-utc-polytech.jpg");
+			File file = new File(Main.projectPath + File.separator + "img/shot-utc-polytech.jpg");
 			image = ImageIO.read(file);
 			image = ImageUtils.rotate(image, 90);
 			this.image = image;
@@ -508,7 +517,7 @@ class FigureFinder extends Observable implements java.io.Serializable, Observer 
 	public void save() {
 		FileOutputStream f_out;
 		try {
-			f_out = new FileOutputStream("PictureModel.data");
+			f_out = new FileOutputStream(Main.projectPath + File.separator + "PictureModel.data");
 			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 
 			obj_out.writeInt(figureValueS);
@@ -525,7 +534,7 @@ class FigureFinder extends Observable implements java.io.Serializable, Observer 
 	public void load() {
 		FileInputStream f_in;
 		try {
-			f_in = new FileInputStream("PictureModel.data");
+			f_in = new FileInputStream(Main.projectPath + File.separator + "PictureModel.data");
 			ObjectInputStream obj_in = new ObjectInputStream(f_in);
 
 			figureValueS = (int) obj_in.readInt();
@@ -846,8 +855,8 @@ class Manager extends JPanel implements MouseListener, Observer {
 			BufferedImage imagePion = null;
 			BufferedImage imageFigure = null;
 			try {
-				imagePion = ImageIO.read(new File("img/pion.png"));
-				imageFigure = ImageIO.read(new File("img/figure.png"));
+				imagePion = ImageIO.read(new File(Main.projectPath + File.separator + "img/pion.png"));
+				imageFigure = ImageIO.read(new File(Main.projectPath + File.separator + "img/figure.png"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -877,7 +886,7 @@ class Manager extends JPanel implements MouseListener, Observer {
 
 		BufferedImage imageArrow = null;
 		try {
-			imageArrow = ImageIO.read(new File("img/arrow.png"));
+			imageArrow = ImageIO.read(new File(Main.projectPath + File.separator + "img/arrow.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
