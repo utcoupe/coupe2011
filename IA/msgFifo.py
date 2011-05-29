@@ -6,10 +6,13 @@ from protocole import *
 
 class Message:
 	def __init__(self, id_from, id_msg, id_cmd, content):
-		self.id_from = id_from
-		self.id_msg = id_msg
-		self.id_cmd = id_cmd
+		self.id_from = int(id_from)
+		self.id_msg = int(id_msg)
+		self.id_cmd = int(id_cmd)
 		self.content = content
+
+	def __repr__(self):
+		return "(id_from=%s, id_msg=%s, id_cmd=%s, content=%s)"%(self.id_from, self.id_msg, self.id_cmd, self.content)
 
 class MsgFifo:
 	"""

@@ -43,11 +43,13 @@ from geometry.circle import *
 MAX_MSG		= 10000
 if MOD == RELEASE:
 	VITESSE		= 200
+	VITESSE_ROT	= 170
 	CONN_MOD	= MOD_CIN
 	DEBUG_LVL	= 0
-	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX, c'est qu'il ne doit plus être sur la carte
+	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX(s), c'est qu'il ne doit plus être sur la carte
 else:
-	VITESSE 	= 130
+	VITESSE 	= 200
+	VITESSE_ROT	= 170
 	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 1
 	AGE_MAX		= 10
@@ -87,6 +89,7 @@ class Robot:
 			self.write("##       UNKNOWN MODE       ##", colorConsol.FAIL)
 			self.write("##############################", colorConsol.FAIL)
 		self.write("VITESSE : %s"%VITESSE, colorConsol.OKBLUE)
+		self.write("VITESSE ROT : %s"%VITESSE_ROT, colorConsol.OKBLUE)
 		self.write("CONN_MOD : %s"%CONN_MOD, colorConsol.OKBLUE)
 		self.write("DEBUG_LVL : %s"%DEBUG_LVL, colorConsol.OKBLUE)
 		self.write("AGE_MAX : %s"%AGE_MAX, colorConsol.OKBLUE)
@@ -98,6 +101,7 @@ class Robot:
 		
 		self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
 		self.id_msg = 0
+		self._lock_id_msg = threading.Lock()
 
 		self.client.start() # demarrage du client
 		self.activeReset = True
@@ -159,6 +163,7 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, BAS)
+		self.write("test ms recalage arrière")
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
 		raw_input("appuyez sur une touche pour continuer les tests")
@@ -190,11 +195,11 @@ class Robot:
 			color = int(m.content)
 			self.addCmd(ID_OTHERS, Q_LED, color)
 			
-		self.write("* TEST MS *", colorConsol.HEADER)
+		"""self.write("* TEST MS *", colorConsol.HEADER)
 		self.write("face avant...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT)
+		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT, 1)
 		self.write("face arriere...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE)
+		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE, 1)"""
 		
 		self.activeReset = True
 		
@@ -208,10 +213,10 @@ class Robot:
 			while self._e_stop.isSet():
 				time.sleep(0.5)
 			if MOD == DEBUG:
-				#time.sleep(2)
-				#self._combinerFaces(AVANT)
-				self.test()
-				continue
+				time.sleep(2)
+				self.construireTourVerte()
+				#self.test()
+				#continue
 				"""self.color = BLUE
 				self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 				self.do_path(((self.symX(1850),300),))
@@ -223,7 +228,11 @@ class Robot:
 					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")
+					#self._combinerFaces(AVANT)
+					#continue
+					#self.go_point(self.symX(800), 300)
 					self.construireTourVerte()
+					self.allerPoserTourVerte(ARRIERE)
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
 							raw_input("bouh tu t'es coincé")"""
@@ -261,7 +270,7 @@ class Robot:
 					self.do_path(((1000,300),))
 				else:
 					self.do_path(((2000,300),))
-				self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE-30)
+				self.addBlockingCmd(1, 10, ID_ASSERV, Q_ANGLE_ABS, 90, VITESSE_ROT)
 
 				
 				while not self._e_stop.isSet():
@@ -299,7 +308,7 @@ class Robot:
 							
 						
 					self.write("* TOURNE *")
-					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE - 30)
+					self.addBlockingCmd(2, (0.5,5), ID_ASSERV, Q_ANGLE_REL, 30, VITESSE_ROT)
 					self.write("")"""
 
 	def preparation(self):
@@ -336,6 +345,8 @@ class Robot:
 
 			
 			self.write("* RECALAGE PINCES *", colorConsol.HEADER)
+			self.addCmd(ID_AX12, Q_CLOSE, AVANT)
+			self.addCmd(ID_AX12, Q_CLOSE, ARRIERE)
 			self.addCmd(ID_OTHERS, Q_PRECAL, AVANT)
 			self.addCmd(ID_OTHERS, Q_PRECAL, ARRIERE)
 			nb_rep = 0
@@ -362,8 +373,8 @@ class Robot:
 					self.write("* RECALAGE *")
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
-					break"""
-			
+					break
+			"""
 			loop1.stop()
 			loop2.stop()
 			loop1.join()
@@ -554,7 +565,7 @@ class Robot:
 		if self._e_stop.isSet():
 			retour = -42
 		else:
-			self.write("* DO_PATH *", colorConsol.HEADER)
+			self.write("* DO_PATH %s *"%(path,), colorConsol.HEADER)
 			#self.update_pos()
 			
 			self.debug.log(D_DELETE_PATH)
@@ -568,6 +579,7 @@ class Robot:
 				goals.append(p)
 
 			nb_accuse_recep = 0
+			nb_point_reach = 0
 			timeLastPing = 0
 			inPause = False
 			#loopPosition = None
@@ -578,7 +590,10 @@ class Robot:
 						inPause = False
 					m = fifo.getMsg(0.5,"accusé de reception") # timeout de 0.5 seconde pour les accusés de receptions
 					if m.id_cmd == Q_GOAL_ABS:
-						nb_accuse_recep += 1
+						if int(m.content) == 1:
+							nb_accuse_recep += 1
+						elif int(m.content) == 2:
+							nb_point_reach += 1
 					elif m.id_cmd == Q_KILL: # arret
 						raise KillException("Q_KILL")
 					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
@@ -594,10 +609,10 @@ class Robot:
 				#loopPosition = LoopCmd(self, 1, 1, ID_ASSERV, Q_POSITION)
 				#loopPosition.start()
 				
-				nb_point_reach = 0
 				last_pos = copy.copy(self.pos)
 				while not self._e_stop.isSet() and nb_point_reach<len(path):
 					m = fifo.getMsg(2,"do_path 2ème partie")
+					self.write("do_path : %s"%m)
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
@@ -638,8 +653,8 @@ class Robot:
 				# destruction de la fifo
 				self.client.removeFifo(fifo)
 				# arret de l'écoute des pings
-				self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
-				self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
+				self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+				self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
 
 		return retour
 
@@ -655,7 +670,7 @@ class Robot:
 
 		@return (int)
 		"""
-		self.write("* GO_POINT *", colorConsol.HEADER)
+		self.write("* GO_POINT %s %s %s*"%(x,y,options), colorConsol.HEADER)
 		if self._e_stop.isSet():
 			retour = -42
 		else:
@@ -678,6 +693,7 @@ class Robot:
 					try:
 						while True:
 							m = fifo.getMsg(2)
+							self.write("go_path : %s"%m)
 							if m.id_cmd == Q_GOAL_REL:
 								nb_recv += 1
 								if nb_recv >= 2: break
@@ -719,7 +735,7 @@ class Robot:
 
 		@return (int)
 		"""
-		self.write("* TOURNE *", colorConsol.HEADER)
+		self.write("* TOURNE %s %s *"%(a,options), colorConsol.HEADER)
 		if self._e_stop.isSet():
 			retour = -42
 		else:
@@ -734,7 +750,7 @@ class Robot:
 			if block:
 				fifo = self.client.addFifo( MsgFifo(Q_POSITION, Q_ANGLE_REL, Q_ANGLE_ABS) )
 			
-			self.addCmd(ID_ASSERV, cmd, a, VITESSE-30)
+			self.addCmd(ID_ASSERV, cmd, a, VITESSE_ROT)
 
 			if block:
 				last_pos = copy.copy(self.pos)
@@ -742,6 +758,7 @@ class Robot:
 				try:
 					while True:
 						m = fifo.getMsg(5)
+						self.write(m)
 						if m.id_cmd == cmd:
 							nb_recv += 1
 							if nb_recv >= 2: break
@@ -1126,19 +1143,13 @@ class Robot:
 
 		@param id_pince la pince dans laquelle se trouve la tour
 		"""
-		self.go_point(self.symX(1400),1500) # aller devant la case bonus
+		self.go_point(self.symX(1350),1500) # aller devant la case bonus
 		if id_pince == AVANT:
 			self.tourne(self.symA(90))
 		else:
 			self.tourne(self.symA(-90))
-		self.go_point(self.symX(1300),1700) # avancer sur la case
+		self.go_point(self.symX(1350),1700) # avancer sur la case
 		self.dumpObj(id_pince) # lacher l'objet
-		"""fifo = self.client.addFifo( MsgFifo(Q_SETPOSITION) )
-		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT)
-		m = fifo.getMsg(1)"""
-		self.go_point(-200, 0, cmd=Q_GOAL_REL)
-		"""m = fifo.getMsg(10)
-		self.addCmd(ID_OTHERS, Q_CLOSE, id_pince) # ferme les pinces"""
 		
 	
 	def construireTourVerte(self):
@@ -1153,12 +1164,16 @@ class Robot:
 
 		p1 = 0
 		p2 = 1
-		p3 = 2
-		if (listeVerte[p1] == PION_1 and listeVerte[p2] == PION_2 and listeVerte[p3] == PION_1) \
+		if (listeVerte[p1] == TOUR and listeVerte[p2] == TOUR):
+			p2 += 1
+		p3 = p2 + 1
+		if (listeVerte[p1] == PION_1 and listeVerte[p2] == PION_1 and listeVerte[p3] == PION_1) \
 			or (listeVerte[p1] == TOUR and listeVerte[p3] == TOUR) \
 			or (listeVerte[p2] == TOUR and listeVerte[p3] == TOUR):
 			p3 += 1
-			
+
+		self.write((p1,p2,p3),None)
+		raw_input("tttt")
 		
 		# prise du premier pion avec pince AVANT
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
@@ -1192,10 +1207,11 @@ class Robot:
 				angle = -90
 				p_with_pion = AVANT
 				p_with_tour = ARRIERE
+			self.tourne(angle)
 			self._combinerFaces(p_with_tour)
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]) # devant le troisième
 			self._takePionVert(p3, p_with_pion) # prise troisième pion pince maintenant vide
-			self.tourne(180, cmd=Q_ANGLE_REL) # tourne
+			self.tourne(angle) # tourne
 			self._combinerFaces(p_with_tour)
 			self.write("3 ème tour prise", colorConsol.OKGREEN)
 			return p_with_tour
@@ -1207,16 +1223,19 @@ class Robot:
 			self.tourne(self.symA(180))
 		else:
 			self.tourne(self.symA(0))
+		#raw_input("ouvrir...")
 		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
+		#raw_input("descendre...")
 		self.addBlockingCmd(2, (1, 10), ID_OTHERS, Q_SETPOSITION, id_pince, BAS)
 		
+		#raw_input("avancer...")
 		self.go_point(self.symX(X_PRISE),listeYVerte[index]) # avance
 		self.takeObj(id_pince)
 		fifo = self.client.addFifo( MsgFifo(Q_SETPOSITION) )
 		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT) # lève la pince
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[index]) # recul en même temps
 		nb_reception = 0
-		"""try:
+		try:
 			while True:
 				m = fifo.getMsg(10)
 				if m.id_cmd == Q_KILL:
@@ -1229,7 +1248,7 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		finally:
-			self.client.removeFifo(fifo)"""
+			self.client.removeFifo(fifo)
 			
 		return retour
 		
@@ -1238,20 +1257,27 @@ class Robot:
 		@param id_pince la pince qui contient le pion à mettre sur
 		l'autre, au final cette pince contiendra les deux pions
 		"""
+		self.update_pos()
 		if id_face == AVANT:
 			id1 = ARRIERE
 			id2 = AVANT
-			d = 100
+			d_avance = 100
+			d_recul = -105
+			a = self.pos[2] + 180
 		else:
 			id1 = AVANT
 			id2 = ARRIERE
-			d = -100
+			d_avance = -100
+			d_recul = 105
+			a = self.pos[2] + 180
+		pos_recul = self.pos_rel(self.pos, radians(self.pos[2]), d_avance)
+		pos_avance = self.pos_rel(self.pos, radians(self.pos[2]), d_recul)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		self.dumpObj(id1) # lache
-		self.go_point(d, 0, cmd=Q_GOAL_REL)
-		self.tourne(180, cmd=Q_ANGLE_REL)
-		self.go_point(d, 0, cmd=Q_GOAL_REL)
+		self.go_point(*pos_recul)
+		self.tourne(a)
+		self.go_point(*pos_avance)
 		self.dumpObj(id2) # lache
 		self.takeObj(id2) # reprend
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, HAUT)
@@ -1272,6 +1298,7 @@ class Robot:
 		
 		@return id_msg
 		"""
+		self._lock_id_msg.acquire()
 		# création du message
 		msg = str(id_device)+C_SEP_SEND+str(self.id_msg)+C_SEP_SEND+str(id_cmd)
 		for a in args: msg += C_SEP_SEND+str(a)
@@ -1288,7 +1315,12 @@ class Robot:
 			self.id_msg = 0
 		
 		# return de id_msg
-		return 0 if self.id_msg==0 else (self.id_msg-1)
+		if self.id_msg==0:
+			self._lock_id_msg.release()
+			return 0
+		else:
+			self._lock_id_msg.release()
+			return (self.id_msg-1)
 
 
 	def addBlockingCmd(self, nb_msg, timeout, id_device, id_cmd, *args):
@@ -1369,7 +1401,8 @@ class Robot:
 		else:
 			return BLUE
 
-
+	def pos_rel(self, pos, t, d):
+		return (pos[0] + int(cos(t) * d), int(pos[1] + sin(t) * d))
 		
 if __name__ == '__main__':
 	robot = Robot()

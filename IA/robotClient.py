@@ -60,7 +60,7 @@ class RobotClient(threading.Thread):
 				self._socket.send(msg+"\n")
 			else:
 				print msg
-			#self.write("Send : %s"%msg)
+			self.write("Send : %s"%msg)
 	
 	def run(self):
 		""" 
@@ -132,9 +132,9 @@ class RobotClient(threading.Thread):
 		self._partialMsg = ""
 		self._listFifo = []
 
-	def write(self, msg):
+	def write(self, msg, color=None):
 		""" pour écrire sans se marcher sur les doigts """
-		self.robot.write(msg)
+		self.robot.write(msg, color)
 	
 	def addFifo(self, msgFifo):
 		self._listFifo.append(msgFifo)
