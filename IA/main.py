@@ -214,7 +214,7 @@ class Robot:
 				time.sleep(0.5)
 			if MOD == DEBUG:
 				time.sleep(2)
-				self.construireTourVerte()
+				#self.construireTourVerte()
 				#self.test()
 				#continue
 				"""self.color = BLUE
@@ -225,14 +225,14 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
-					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
+					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
-					self.write("")
+					self.write("")"""
 					#self._combinerFaces(AVANT)
 					#continue
-					#self.go_point(self.symX(800), 300)
-					self.construireTourVerte()
-					self.allerPoserTourVerte(ARRIERE)
+					self.go_point(self.symX(800), 300)
+					id_pince = self.construireTourVerte()
+					self.allerPoserTourVerte(id_pince)
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
 							raw_input("bouh tu t'es coincé")"""
@@ -361,7 +361,7 @@ class Robot:
 			self.write("")
 					
 
-			"""self.write("* JACK POUR RECALAGE *")
+			self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -374,7 +374,7 @@ class Robot:
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
 					break
-			"""
+			
 			loop1.stop()
 			loop2.stop()
 			loop1.join()
@@ -1159,7 +1159,7 @@ class Robot:
 		@return (int) id_pince avec la tour
 		"""
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
-		listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
+		listeVerte = (PION_1,PION_1,PION_1,TOUR,TOUR)
 		listeYVerte = (690,970,1250,1530,1810)
 
 		p1 = 0
@@ -1171,9 +1171,10 @@ class Robot:
 			or (listeVerte[p1] == TOUR and listeVerte[p3] == TOUR) \
 			or (listeVerte[p2] == TOUR and listeVerte[p3] == TOUR):
 			p3 += 1
+			
+		#print p1,p2,p3
+		#raw_input()
 
-		self.write((p1,p2,p3),None)
-		raw_input("tttt")
 		
 		# prise du premier pion avec pince AVANT
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
@@ -1190,12 +1191,13 @@ class Robot:
 			self.tourne(self.symA(90)) # tourne
 			self.dumpObj(ARRIERE) # lache pion à l'arriere
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]) # devant le troisième
-			self._takePionVert(ARRIERE) # prend le pion dans la pince arrière
+			self._takePionVert(p3,ARRIERE) # prend le pion dans la pince arrière
+			self.tourne(-90)
 			self._combinerFaces(ARRIERE) # construit dans la pince arrière
-			self.tourne(self.symA(90)) # tourne
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p2]) # devant le deuxième
 			self.dumpObj(ARRIERE)
 			self.takeObj(ARRIERE)
+			self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, HAUT)
 			self.write("3 ème tour prise", colorConsol.OKGREEN)
 			return ARRIERE
 		else:
