@@ -5,7 +5,7 @@ void setup(){
 	initPinceControl();
 	//initTourelle();
 	initSensor();
-	//setupTourelle();
+	setupTourelle();
 }
 
 void loop(){
@@ -13,7 +13,7 @@ void loop(){
 	encoderSafe();
 	sensorTrigger();
 	//tourelleRun();
-	//loopTourelle();
+	loopTourelle();
 }
 
 
