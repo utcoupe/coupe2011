@@ -250,7 +250,7 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 		pid4AlphaControl.Reset();
 		pid4AlphaControl.SetSampleTime(DUREE_CYCLE);
 		pid4AlphaControl.SetInputLimits(-M_PI,M_PI);
-		pid4AlphaControl.SetOutputLimits(-200,200); /*composante lie a la vitesse de rotation*/
+		pid4AlphaControl.SetOutputLimits(-255,255); /*composante lie a la vitesse de rotation*/
 		pid4AlphaControl.SetMode(AUTO);
 		initDone = true;
 	}
@@ -287,7 +287,6 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	int sens = 1;
 	if(abs(currentAlpha) > M_PI/2){/* c'est a dire qu'on a meilleur temps de partir en marche arriere */
 		sens = -1;
-		//currentAlpha = moduloPI(M_PI - abs(angularCoeff) - robot_state.angle);
 		currentAlpha = moduloPI(M_PI + angularCoeff - robot_state.angle);
 	}
 	
