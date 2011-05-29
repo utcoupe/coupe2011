@@ -95,7 +95,7 @@ void encoderSafe()
 
 void initEncoders(){
 	value_left_enc = -200;
-	value_right_enc = -200;
+	value_right_enc = 0;
 
 	pinMode(PIN_LEFT_A,INPUT);
 	pinMode(PIN_LEFT_B,INPUT);
