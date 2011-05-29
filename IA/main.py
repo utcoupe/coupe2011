@@ -230,7 +230,8 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
-					listeVerte = self.scanSmartPhone()
+					#listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
+					listeVerte = self.scanListeVerte()
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")"""
@@ -843,14 +844,14 @@ class Robot:
 	####################################################################
 	#					UTILISATION DE LA VISIO						   #
 	####################################################################
-	def scanListeVerte():
+	def scanListeVerte(self):
 		"""
 		(bloquant)
 		"""
 		self.write("* SCAN LISTE VERTE *", colorConsol.HEADER)
 		r = self.addBlockingCmd(1, 2, ID_PHONE, Q_SCAN_DEPART)
 		self.write(" result : %s"%r)
-		listeVerte = eval(r)
+		listeVerte = eval(r.content)
 		return listeVerte
 	
 	def scan(self, fast=False):
@@ -1153,14 +1154,13 @@ class Robot:
 		self.dumpObj(id_pince) # lacher l'objet
 		
 	
-	def construireTourVerte(self):
+	def construireTourVerte(self, listeVerte):
 		"""
 		Script pour construire une tour à partir de ce qu'il y a dans la zone verte
 
 		@return (int) id_pince avec la tour
 		"""
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
-		listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
 		listeYVerte = (690,970,1250,1530,1810)
 
 		p1 = 0
