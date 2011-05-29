@@ -235,10 +235,16 @@ class NetworkClient extends Thread implements Observer {
 				}
 			}
 
-			// in.close();
-			// out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			System.out.println("déconnexion client");
+			try {
+				in.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			out.close();
 		} finally {
 			pictureSupplier.deleteObserver(this);
 		}
