@@ -300,7 +300,8 @@ class PictureSupplier extends Observable implements Observer {
 		System.out.println(TAG + "take photo...");
 		BufferedImage image = null;
 		try {
-			URL url = new URL("http://192.168.43.1:8080/shot.jpg");
+			//URL url = new URL("http://192.168.43.1:8080/shot.jpg");
+			URL url = new URL("http://192.168.1.1:8080/shot.jpg");
 			image = ImageIO.read(url);
 			image = ImageUtils.rotate(image, 90);
 			this.image = image;
