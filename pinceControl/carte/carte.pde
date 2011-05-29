@@ -1,19 +1,24 @@
 #include "command.h"
 
-void setup(){
+void setup()
+{
 	initSerialLink();
 	initPinceControl();
+	//initTourelle(); //pas utilisé
+	initEncoders();
 	//initTourelle();
 	initSensor();
 	setupTourelle();
 }
 
-void loop(){
+void loop()
+{
 	readIncomingData();
 	encoderSafe();
 	sensorTrigger();
-	//tourelleRun();
-	loopTourelle();
+	//tourelleRun(); //pas utilisé
+  loopTourelle();
+	testAV();
 }
 
 

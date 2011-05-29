@@ -12,6 +12,7 @@ void initSerialLink();
 void readIncomingData();
 void sendMessage(int id, char* str);
 void sendMessage(int id, int i);
+void sendMessage(int id, int i, char* s);
 void sendMessage(int id, int *tabi, int size);
 void sendMessage(int id, char** tabs, int nbStr, int *tabi, int nbInt);
 void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
@@ -40,11 +41,6 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_COLOR				50
 #define Q_ULTRAPING			51
 #define Q_GETULTRAPING		52
-
-/*debug*/
-#define Q_MOTOR		 		41
-#define Q_TXAX12	 		42 //write
-#define Q_RXAX12	 		43 //read
 #define Q_CODEUR	 		44 
 
 // asserv
@@ -70,8 +66,9 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
-#define	E_INVALID_TYPE_PARAMETERS			-3
-#define E_TOURELLE_SETUP_FAIL               -4
+#define	E_INVALID_PARAMETERS_TYPE			-3
+#define E_INVALID_PARAMETERS_VALUE			-4
+#define E_TOURELLE_SETUP_FAIL				-5
 #define W_SWITCH_COLOR						-21
 #define W_JACK								-22
 #define W_STOP								-42
@@ -84,8 +81,21 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define E_CM5_NOT_CONN						-58
 
 
+// les ids
+#define ID_SERVER		0
+#define ID_CAM			1
+#define ID_AX12			2
+#define ID_ASSERV		3 // carte asserv
+#define ID_OTHERS		4 // carte avec les pinces et sharps
+#define ID_IA			5 // l'IA
+
+// paramètres
 #define AVANT		0
 #define ARRIERE		1
 #define ARRET		2
+// pour les ascenseurs
+#define HAUT		1
+#define BAS			2
+#define MIDLE		3
 
 #endif /* MESSAGE_H_ */

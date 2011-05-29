@@ -10,7 +10,7 @@
 
 #define NB_PAS 200
 #define STYLE SINGLE
-#define SPEED 300000
+#define SPEED 30000
 #define MAXDIST 300 // cm
 #define TEMPO 50 // ms
 #define INCREMENT 10
@@ -26,16 +26,16 @@
 #define TURNRIGHT BACKWARD
 #define TURNLEFT FORWARD
 
-#define PIN_PING_GAUCHE 26
+#define PIN_PING_GAUCHE 24
 #define PIN_PING_DROITE 22
 
 class Stepper : public AF_Stepper
 {
 public:
-	int _steps;
-	int _dir;
-	int _style;
-	int _position;
+	int steps;
+	int dir;
+	int style;
+	int position;
 	
 	Stepper(int ID);
 	void run();
@@ -50,29 +50,17 @@ private:
 public:
 	Ping (int pin, int maxDist);
 	int sendPing();
-}
+};
 
 class Tourelle
 {
-private:
-	Stepper _motor;
-	Ping _leftPing;
-	Ping _rightPing;
-	TourelleMode _mode;
-	int _robot_pos_x;
-	int _robot_pos_y;
-	int _robot_angle;
-	int _distanceGauche;
-	int _distanceDroite;
-	long long _millitime;
-	PingTurn _pingTurn;
-	
+private:	
 	enum TourelleMode 
 	{
 		TurnRight = 1,
 		TurnLeft,
+    Fixe,
 		Recherche,
-		Echappement,
 		None
 	};
 	
@@ -86,7 +74,22 @@ private:
 	{
 		int x;
 		int y;
+    int distance;
 	};
+
+	Stepper _motor;
+	Ping _leftPing;
+	Ping _rightPing;
+	TourelleMode _mode;
+	int _robot_pos_x;
+	int _robot_pos_y;
+	int _robot_angle;
+  int _obj_x;
+  int _obj_y;
+	int _distanceGauche;
+	int _distanceDroite;
+	long long _millitime;
+	PingTurn _pingTurn;
 	
 	TargetCoord findTargetCoord(int angleTourelle, int distance);
 	bool targetInRange(TargetCoord targetCoord);
@@ -98,11 +101,11 @@ public:
 	Tourelle(int robot_pos_x, int robot_pos_y, int robot_angle);
 	int setup();
 	void loop();
-	void update_pos();
-}
+	void update_pos(int xUpdate, int yUpdate, int angleRUpdate);
+};
 
 int setupTourelle();
 void loopTourelle();
-void update_pos();
+void update_pos(int xUpdate, int yUpdate, int angleRUpdate);
 
 #endif

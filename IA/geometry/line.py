@@ -9,7 +9,7 @@ import copy
 
 
 class Line:
-	def __init__(self,A, B):
+	def __init__(self, A, B):
 		self.A = copy.deepcopy(A)
 		self.B = copy.deepcopy(B)
 		self.AB = Vec2(B.x - A.x, B.y - A.y)

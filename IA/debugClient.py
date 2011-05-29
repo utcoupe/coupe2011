@@ -15,7 +15,7 @@ class Debug:
 	def log(self, id_cmd, args=None):
 		if self.lvl != 0:
 			msg = str(id_cmd)+C_SEP_SEND+str(args)
-			print "debug log : '%s'"%msg
+			#print "debug log : '%s'"%msg
 			self.p.stdin.write(msg+"\n")
 	
 	def __del__(self):

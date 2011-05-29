@@ -36,6 +36,8 @@ void valueChangeOnEncoderLeftPinA();
 void valueChangeOnEncoderLeftPinB();
 void valueChangeOnEncoderRightPinA();
 void valueChangeOnEncoderRightPinB();
+void valueChangeOnMSRecalAVBas();
+void valueChangeOnMSRecalAVHaut();
 
 extern long value_left_enc;//AR
 extern long value_right_enc;//AV

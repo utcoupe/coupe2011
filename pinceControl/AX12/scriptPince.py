@@ -14,7 +14,7 @@ def send(idMess, retourMess):
 Positions des AX12 sur le robot
 	Face_front 
 	1 -- 2
-	|	|
+	|	 |
 	3 -- 4
 	Face_back 
 '''
@@ -29,12 +29,21 @@ Pinces_fermetureMin = 3 # saisir un pion
 CM5_actionOK = 50	   # valeur de retour quand l'action est fini
 ''' --------------------- '''
 
+# recherche du CM5
+import glob
+def scanSerials():
+	pathname = '/dev/ttyUSB*'
+	return glob.iglob(pathname)
+USBports = tuple(scanSerials())
+
 # Initialisation de la liaison serie
 ser = serial.Serial()
 ser.baudrate = 57600
-ser.port = '/dev/ttyUSB0' #3				  # A modifier suivant l'OS
+
+
 ser.timeout = 0.5
 try:
+	ser.port = USBports[0]
 	ser.close()
 	ser.open()
 except Exception as ex:
@@ -64,12 +73,10 @@ def read_CM5():
 	else:
 		return E_CM5_NOT_CONN
 	
-print 'Debut programme : com CM-5'
-sys.stdout.flush()
 keyB = 0
 actionActuelle = 0
 
-while (keyB != 13):
+while (keyB != Q_KILL):
 	valRetour = 0
 	commandThomas = raw_input()
 	input_split = commandThomas.split('.')
@@ -91,7 +98,7 @@ while (keyB != 13):
 		continue
 	
 	if keyB == Q_IDENT:
-		send(idArenvoyer, "ax12")
+		send(idArenvoyer, str(ID_AX12)+C_SEP_SEND+"ax12")
 		continue
 	elif keyB == PING:
 		send(idArenvoyer, "Pong")
@@ -128,4 +135,3 @@ while (keyB != 13):
 		send(idArenvoyer, E_MERDE_AX12)
 
 ser.close()
-print 'Fin du programme : com CM-5'

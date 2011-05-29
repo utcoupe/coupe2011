@@ -8,8 +8,16 @@
 #define SERVO_OUVERT_A	130
 #define SERVO_OUVERT_B	70
 
+#define IDAVG		2	//avant gauche
+#define IDAVD		3	//avant droit
+#define IDARG		7	//arriere gauche
+#define IDARD		1	//arriere droit
 
-int setServoState(unsigned char index,unsigned char etat);
+#define PINCE_F	 	0
+#define PINCE_S	 	1
+#define PINCE_O	 	2
+
+int setServoState( char index, char etat);
 void initServo();
 
 #endif

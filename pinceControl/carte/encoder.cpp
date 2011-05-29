@@ -66,34 +66,36 @@ void testAR()
 void encoderSafe()
 {
 	static int last_left_enc_value = 0;
-	static int last_right_enc_value = 0;
+	//static int last_right_enc_value = 0;
 	
-	if (goal_position_AV >= 0
+	if (goal_position_AR >= 0
 		and ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
 		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT)))
 	{
 		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
+			goal_position_AV = -1;
 			setARPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
 	}
 	
-	if (goal_position_AR >= 0
+	/*if (goal_position_AV >= 0
 		and ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
 		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT)))
 	{
 		if (abs(last_right_enc_value - value_right_enc) < 10)
 		{
+			goal_position_AR = -1;
 			setAVPWM(0x00);
 			sendMessage(E_BLOCK,E_BLOCK);
 		}
-	}
+	}*/
 }
 
 void initEncoders(){
-	value_left_enc = 0;
-	value_right_enc = 0;
+	value_left_enc = -200;
+	value_right_enc = -200;
 
 	pinMode(PIN_LEFT_A,INPUT);
 	pinMode(PIN_LEFT_B,INPUT);
@@ -112,8 +114,10 @@ void initEncoders(){
 
 	attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnEncoderLeftPinA,CHANGE);
 	attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnEncoderLeftPinB,CHANGE);
-	attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnEncoderRightPinA,CHANGE);
-	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnEncoderRightPinB,CHANGE);
+	//attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnEncoderRightPinA,CHANGE);
+	//attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnEncoderRightPinB,CHANGE);
+	attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnMSRecalAVHaut,CHANGE);
+	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnMSRecalAVBas,CHANGE);
 }
 
 
@@ -189,5 +193,39 @@ void valueChangeOnEncoderRightPinB(){
 			value_right_enc++;
 
 	state_right_pinB = new_state;
+}
+
+
+void valueChangeOnMSRecalAVBas()
+{
+	delay(500);
+	
+	if (digitalRead(PIN_MS_RECAL_AV_BAS) == HIGH)
+	{
+		value_right_enc = 0;
+		sendMessage(-101, "av bas");
+		setAVPWM(0x00);
+		if(msg_position_AV != -1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
+		}
+	}
+}
+
+
+void valueChangeOnMSRecalAVHaut()
+{
+	delay(500);
+	
+	if (digitalRead(PIN_MS_RECAL_AV_HAUT) == HIGH)
+	{
+		value_right_enc = POSITION_MAX;
+		sendMessage(-101, "av haut");
+		setAVPWM(0x00);
+		if(msg_position_AV != -1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
+		}
+	}
 }
 

@@ -3,14 +3,17 @@
 
 int msg_position_AV,msg_position_AR;
 
-void initPinceControl(){
+void initPinceControl()
+{
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	initPWM();
 	//initServo();
 }
 
-int pinceRecal(unsigned char face){
+int pinceRecal(int id, char face)
+{
+	sendMessage(id, 1);
 	pinMode(PIN_MS_RECAL_AV, OUTPUT);
 	digitalWrite(PIN_MS_RECAL_AV, LOW);
 	pinMode(PIN_MS_RECAL_AR, OUTPUT);
@@ -19,16 +22,18 @@ int pinceRecal(unsigned char face){
 	pinMode(PIN_MS_RECAL_AR,INPUT);
 	goal_position_AV=-1;
 	goal_position_AR=-1;
-	if(face==PINCEAV){
-		setAVPWM(-PWM_MAINTIENT);
-		while(digitalRead(PIN_MS_RECAL_AV)!=HIGH){
+	if(face==AVANT){
+		//while(digitalRead(PIN_MS_RECAL_AV)!=HIGH)
+		while(digitalRead(PIN_MS_RECAL_AV_BAS)!=HIGH)
+		{
+			setAVPWM(-PWM_MAINTIENT);
 			delay(40);
 		}
 		setAVPWM(0x00);
 		initEncoders();
 		return 2;
 	}
-	if(face==PINCEAR){
+	if(face==ARRIERE){
 		setARPWM(-PWM_MAINTIENT);
 		while(digitalRead(PIN_MS_RECAL_AR)!=HIGH){
 			delay(40);
@@ -43,25 +48,59 @@ int pinceRecal(unsigned char face){
 /** Utilisation des servos
  */
 /*
-int setPinceState(unsigned char index,unsigned char etat){
+int setPinceState( char index, char etat){
 	return setServoState(index, etat);
 }*/
 
-int setPincePosition(unsigned int id, unsigned char index,unsigned int pos){
-	if(pos >= POSITION_MAX) return 0; //erreur
-	switch(index){
-		case 0 :
-			setAVPWM(PWM_MOVE);
-			goal_position_AV=pos;
-			msg_position_AV=id;
-			return 1;
-		case 1 : 
-			setARPWM(PWM_MOVE);
-			goal_position_AR=pos;
+int setPincePosition(int id, char index, int pos)
+{
+	int pwm=PWM_MOVE;
+	int pos_in_ticks=0;
+	switch (pos)
+	{
+		case HAUT:
+			pos_in_ticks = POSITION_MAX;
+		break;
+
+		case MIDLE:
+			pos_in_ticks = 4000;
+		break;
+
+		case BAS:
+			pos_in_ticks = 0;
+		break;
+
+		default:
+			return E_INVALID_PARAMETERS_VALUE;
+		break;
+	}
+	
+	switch(index)
+	{
+		case AVANT:
+			if (goal_position_AV != pos_in_ticks)
+			{
+				goal_position_AV=pos_in_ticks;
+				msg_position_AV=id;
+				return 1;
+			}
+			else
+			{
+				sendMessage(id, 1);
+				return 2;
+			}
+		break;
+		
+		case ARRIERE:
+			goal_position_AR=pos_in_ticks;
 			msg_position_AR=id;
+			testAR();
 			return 1;
+		break;
+		
 		default : 
-			return 0;//erreur
+			return E_INVALID_PARAMETERS_VALUE;
+		break;
 	}
 }
 

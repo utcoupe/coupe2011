@@ -12,16 +12,21 @@ from protocole import *
 class Client(threading.Thread):
 	def __init__(self, server, id, name):
 		threading.Thread.__init__(self, None, None, name)
-		self.name = name
 		self._server = server # la socket pour envoyer recevoir
 		self.id = id # id du client sur le serveur
 		self._running = False # le client tourne
 		self.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme 
 		self._partialMsg = ""
+		self.e_validate = threading.Event()
+
+		if self.id != ID_SERVER:
+			self.blockRecv() # empecher toute reception
+			self.setMaskRecvFrom(ID_SERVER,1) # les cartes ne peuvent recevoir des messages que du serveur
+			self.setMaskRecvFrom(ID_IA,1) # et de l'IA
 	
 	def __del__(self):
 		self.s.close()
-		print "%s destroy"%self.name
+		print "%s destroy"%self.name()
 		
 	def stop(self):
 		self._running = False
@@ -32,6 +37,7 @@ class Client(threading.Thread):
 		@param msg message à envoyer
 		"""
 		if self.mask_recv_from & mask_from:
+			#self._server.write("send to %s, %s"%(self.id,msg))
 			self._fn_send(msg)
 		else:
 			#self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id), colorConsol.WARNING)
@@ -41,12 +47,12 @@ class Client(threading.Thread):
 		"""
 		Point d'entrée, envoie au client son id puis lance self._loop() en boucle
 		"""
-		self._server.write("%s start"%self.name, colorConsol.OKGREEN)
+		self._server.write("%s start"%self.name(), colorConsol.OKGREEN)
 		self._running = True
 		self.send(1,str(ID_SERVER)+C_SEP_SEND+str(Q_IDENT)+C_SEP_SEND+str(self.id)+"\n")
 		while self._running and not self._server.e_shutdown.isSet():
 			self._loopRecv()
-		self._server.write("%s arreté"%self.name, colorConsol.WARNING)
+		self._server.write("%s arreté"%self.name(), colorConsol.WARNING)
 
 	def combineWithPartial(self, msg):
 		"""
@@ -81,6 +87,9 @@ class Client(threading.Thread):
 		Le client ne reçoit plus de messages
 		"""
 		self.mask_recv_from = 0
+
+	def __repr__(self):
+		return self.name()
 	
 	
 class TCPClient(Client):
@@ -93,10 +102,14 @@ class TCPClient(Client):
 		@param id id du client
 		@param s socket pour écouter envoyer
 		"""
-		Client.__init__(self, server, id, "TCPClient(%s,addr=%s)"%(id,addr))
+		Client.__init__(self, server, id, "TCPClient(addr=%s)"%(addr,))
+		self.addr = addr
 		self.s = s
 		self.s.settimeout(1.0) # timeout
-	
+
+	def name(self):
+		return "TCPClient(%s,addr=%s)"%(self.id,self.addr)
+		
 	def _fn_send(self, msg):
 		self.s.send(str(msg).strip()+"\n")
 		
@@ -107,29 +120,55 @@ class TCPClient(Client):
 		except socket.timeout:
 			pass
 		except socket.error as er:
-			self._server.write(self.name+" "+str(er), colorConsol.FAIL)
+			self._server.write(self.name()+" "+str(er), colorConsol.FAIL)
 		else:
 			for msg in self.combineWithPartial(msg):
-				self._server.write("Received from %s : '%s'"%(self.name,msg))
+				self._server.write("Received from %s : '%s'"%(self.name(),msg))
 				if msg:
-					self._server.parseMsg(self.id, msg)
-					
+					self._server.parseMsg(self.id, msg)	
 
 class LocalClient(Client):
 	"""
 	Le client qui est dans le terminal lancé par main.py
 	"""
 	def __init__(self, server, id):
-		Client.__init__(self, server, id, "LocalClient(%s)"%id)
+		Client.__init__(self, server, id, "LocalClient()")
 		self.mask_recv_from = -1
 		self.macros = {}
+
+	def name(self):
+		return "LocalClient(%s)"%(self.id)
 	
 	def _fn_send(self, msg):
 		self._server.write("Received on server : '%s'"%msg)
 		id_from, msg = msg.strip().split(C_SEP_SEND,1)
+		id_from = int(id_from)
 		if "sd" == msg:
 			self._server.shutdown()
 		else:
+			try:
+				msg_split = msg.split('.')
+				try:
+					id_cmd = int(msg_split[0])
+				except ValueError as ex:
+					pass
+				else:
+					if id_cmd == -999: # la demande d'identification du début
+						if id_from != int(msg_split[1]):
+							for client in self._server.clients:
+								if client.id == id_from:
+									client.id = int(msg_split[1])
+									if client.id == ID_IA:
+										client.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme	
+									client.e_validate.set()
+			except Exception as ex:
+				self._server.write("ERROR : LocalClient, identification début '%s'"%ex, colorConsol.FAIL)
+			
+			# lister les clients
+			if "ls" == msg:
+				for client in self._server.clients:
+					self._server.write(client, colorConsol.OKBLUE)
+			
 			# loop
 			t = re.match('loop\(([^\),]+),([^\),]+),([^\),]+)\).*',msg)
 			if t:
@@ -175,10 +214,13 @@ class SerialClient(Client):
 	connection aux cartes arduinos
 	"""
 	def __init__(self, server, id, serial, port, baudrate):
-		Client.__init__(self, server, id, "SerialClient(%s,port=%s,baudrate=%s)"%(id,port,baudrate))
+		Client.__init__(self, server, id, "SerialClient(port=%s,baudrate=%s)"%(port,baudrate))
 		self.serial = serial
 		self.port = port
 		self.baudrate = baudrate
+
+	def name(self):
+		return "SerialClient(%s,port=%s,baudrate=%s)"%(self.id,self.port,self.baudrate)
 	
 	def _fn_send(self, msg):
 		self.serial.write(str(msg).strip()+"\n")
@@ -187,7 +229,7 @@ class SerialClient(Client):
 		msg = self.serial.readline()
 		if msg:
 			for msg in self.combineWithPartial(msg):
-				self._server.write("Received from %s : '%s'"%(self.name,msg))
+				self._server.write("Received from %s : '%s'"%(self.name(),msg))
 				self._server.parseMsg(self.id, msg)
 
 	def stop(self):
@@ -196,12 +238,15 @@ class SerialClient(Client):
 
 class SubprocessClient(Client):
 	def __init__(self, server, id, process, exec_name):
-		Client.__init__(self, server, id, "SubprocessClient(%s,exc_name=%s)"%(id,exec_name))
+		Client.__init__(self, server, id, "SubprocessClient(exc_name=%s)"%(exec_name))
 		self.process = process
 		self.exec_name = exec_name
+
+	def name(self):
+		return "SubprocessClient(%s,exc_name=%s)"%(self.id,self.exec_name)
 		
 	def _fn_send(self, msg):
-		self._server.write("send to subprocess(%s) '%s'"%(self.name,str(msg).strip()+"\n"))
+		self._server.write("send to subprocess(%s) '%s'"%(self.name(),str(msg).strip()+"\n"))
 		self.process.stdin.write(str(msg).strip()+"\n") # envoie au child
 		self.process.stdin.flush()
 	
@@ -209,7 +254,7 @@ class SubprocessClient(Client):
 		msg = self.process.stdout.readline()
 		if msg:
 			for msg in self.combineWithPartial(msg):
-				self._server.write("Received from %s : '%s'"%(self.name,msg))
+				self._server.write("Received from %s : '%s'"%(self.name(),msg))
 				self._server.parseMsg(self.id, msg)
 	
 	def stop(self):
