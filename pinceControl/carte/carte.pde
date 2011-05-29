@@ -8,7 +8,7 @@ void setup()
 	initEncoders();
 	//initTourelle();
 	initSensor();
-	//setupTourelle();
+	setupTourelle();
 }
 
 void loop()
@@ -17,7 +17,7 @@ void loop()
 	encoderSafe();
 	sensorTrigger();
 	//tourelleRun(); //pas utilisé
-	//loopTourelle();
+  loopTourelle();
 	testAV();
 }
 
