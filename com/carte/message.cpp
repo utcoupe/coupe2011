@@ -47,6 +47,20 @@ void sendMessage(int id, int i, char* str)
 	Serial.println(str);
 }
 
+///
+/// Envoie un string et un int
+///
+void sendMessage(int id, char* str, int i)
+{
+	Serial.print(-1);
+	Serial.print(C_SEP_SEND);
+	Serial.print(id);
+	Serial.print(C_SEP_SEND);
+	Serial.print(str);
+	Serial.print(C_SEP_SEND);
+	Serial.println(i);
+}
+
 
 ///
 /// Envoie un tableau d'int

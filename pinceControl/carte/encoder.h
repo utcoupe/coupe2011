@@ -32,12 +32,14 @@ void encoderSafe();
  *  If B leads A, then the disk is rotating in a counter-clockwise direction.
  *  */
 
-void valueChangeOnEncoderLeftPinA();
+/*void valueChangeOnEncoderLeftPinA();
 void valueChangeOnEncoderLeftPinB();
 void valueChangeOnEncoderRightPinA();
-void valueChangeOnEncoderRightPinB();
+void valueChangeOnEncoderRightPinB();*/
 void valueChangeOnMSRecalAVBas();
 void valueChangeOnMSRecalAVHaut();
+void valueChangeOnMSRecalARBas();
+void valueChangeOnMSRecalARHaut();
 
 extern long value_left_enc;//AR
 extern long value_right_enc;//AV
