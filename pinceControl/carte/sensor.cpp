@@ -2,8 +2,6 @@
 
 
 TriggerSharp trigerSharp[NB_SHARP];
-TriggerMS trigerMS[NB_MS];
-int JackMessageID;
 int pingAvMessageID;
 int pingArMessageID;
 
@@ -15,7 +13,7 @@ typedef struct
 	bool oscillation;
 }Switch;
 
-Switch switchColor, switchJack;
+Switch switchColor, switchJack, switchMSAV, switchMSAR;
 void SwitchInit(Switch & s, const int pin)
 {
 	s.lastValue = digitalRead(pin);
@@ -23,7 +21,7 @@ void SwitchInit(Switch & s, const int pin)
 	s.lastSwitch = 0;
 	s.oscillation = false;
 }
-void checkSwitch(const int pin, const int warning, Switch & s);
+void checkSwitch(const int pin, const int warning, Switch & s, char* param = (char*)"");
 
 
 
@@ -40,32 +38,28 @@ void initSensor(){
 	digitalWrite(LED_BLEU,LOW);
 	digitalWrite(LED_ROUGE,LOW);
 	
-	for(int i=0;i<NB_SHARP;i++)
-		trigerSharp[i].pin=-1;
-	for(int i=0;i<NB_MS;i++)
-		trigerMS[i].pin=-1;
 		
-	JackMessageID=-42;
 	pingAvMessageID=-42;
 	pingArMessageID=-42;
 	
 	SwitchInit(switchColor, PIN_COLOR);
 	SwitchInit(switchJack, PIN_JACK);
+	SwitchInit(switchMSAV, PIN_MS_AV);
+	SwitchInit(switchMSAR, PIN_MS_AR);
 }
 
-void sensorTrigger(){
+void sensorTrigger()
+{
 	static long long timePing = 0;
 
 	checkSwitch(PIN_COLOR, W_SWITCH_COLOR, switchColor);
 	checkSwitch(PIN_JACK, W_JACK, switchJack);
-	//microswitch
-	for(int i=0;i<NB_MS;i++){
-		if(trigerSharp[i].pin==-1)break;
-		if(getMicroSwitch(trigerMS[i].pin)==trigerMS[i].value){
-			sendMessage(trigerMS[i].messageId,2);
-			removeTriggerMS(i);
-		}
-	}
+	
+	char buffer[10];
+	sprintf(buffer, "%d", AVANT);
+	checkSwitch(PIN_MS_AV, W_MS, switchMSAV, buffer);
+	sprintf(buffer, "%d", ARRIERE);
+	checkSwitch(PIN_MS_AR, W_MS, switchMSAR, buffer);
 	
 	if (millis() - timePing > 200)
 	{
@@ -89,7 +83,8 @@ void sensorTrigger(){
 }
 
 
-void checkSwitch(const int pin, const int warning, Switch & s)
+
+void checkSwitch(const int pin, const int warning, Switch & s, char* param)
 {
 	// Si on a pas detecter une oscillation précédement
 	// et que la dernière fois qu'on a switch remonte à "longtemps"
@@ -109,7 +104,10 @@ void checkSwitch(const int pin, const int warning, Switch & s)
 		int v = digitalRead(pin);
 		if (v != s.lastValue)
 		{
-			sendMessage(warning, v);
+			if (param != "")
+				sendMessage(warning, param, v);
+			else
+				sendMessage(warning, v);
 			s.lastSwitch = millis();
 			s.lastValue = v;
 		}
@@ -117,19 +115,6 @@ void checkSwitch(const int pin, const int warning, Switch & s)
 	}
 }
 
-
-void valueChangeOnJack()
-{
-	static long long int lastTime = 0;
-	
-	if (millis() - lastTime > 100)
-	{
-		delayMicroseconds(100);
-		int v = digitalRead(PIN_JACK);
-		sendMessage(W_JACK, v);
-		lastTime = millis();
-	}
-}
 
 int setLED( char color){
 	if(color == BLEU){
@@ -213,7 +198,7 @@ int setTriggerSharp( int id,  char pin, int ref){
 	return 0;//erreur
 }
 
-void removeTriggerSharp( char index){
+void removeTriggerSharp(char index){
 		// aucun trigger
 		if(trigerSharp[0].pin==-1) return;
 		//1 trigger
@@ -250,52 +235,6 @@ int getMicroSwitch( char pin){
 			return 2;
 	}
 }
-
-int setTriggerMS( int id,  char pin,bool ref){
-	if(pin > NB_MS)
-		for(int i=0;i<NB_MS;i++){
-		if(trigerMS[i].pin==pin){
-			sendMessage(trigerMS[i].messageId,0);
-			trigerMS[i].value=ref;
-			trigerMS[i].messageId=id;
-			return 1;
-		}
-		if(trigerMS[i].pin==-1){
-			trigerMS[i].pin=pin;
-			trigerMS[i].value=ref;
-			trigerMS[i].messageId=id;
-			return 1;
-		}
-	}
-	return 0;
-}
-
-void removeTriggerMS( int index){
-	// aucun trigger
-	if(trigerMS[0].pin==-1) return;
-	//1 trigger
-	if(trigerMS[1].pin==-1){
-		trigerMS[1].pin=-1;//index == 1 ici j'espere
-		return;
-	}
-	//au moin 2 trigger
-	for(int j=2;j<NB_MS;j++){
-		if(trigerMS[j].pin==-1){
-			//remplace le trigger index par le dernier trigger
-			trigerMS[index].pin=trigerMS[j-1].pin;
-			trigerMS[index].value=trigerMS[j-1].value;
-			trigerMS[index].messageId=trigerMS[j-1].messageId;
-			trigerMS[j-1].pin=-1;
-			return;
-		}
-	}
-	//tableau de trigger remplis remplace index par le dernier delete le dernier
-	trigerMS[index].pin=trigerMS[NB_SHARP-1].pin;
-	trigerMS[index].value=trigerMS[NB_SHARP-1].value;
-	trigerMS[index].messageId=trigerMS[NB_SHARP-1].messageId;
-	trigerMS[NB_SHARP-1].pin=-1;
-}
-
 
 int getPion( char face){
 	int value,value2;

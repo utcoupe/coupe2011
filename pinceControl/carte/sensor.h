@@ -64,16 +64,8 @@ struct TriggerSharp{
 	int value;
 };
 
-struct TriggerMS{
-	int messageId;
-	int pin;
-	bool value;
-};
 
 
-extern TriggerSharp trigerSharp[NB_SHARP];
-extern TriggerMS trigerMS[NB_MS];
-extern int JackMessageID;
 extern int pingAvMessageID;
 extern int pingArMessageID;
 

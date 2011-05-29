@@ -94,7 +94,7 @@ void encoderSafe()
 }
 
 void initEncoders(){
-	value_left_enc = -200;
+	value_left_enc = 0;
 	value_right_enc = 0;
 
 	pinMode(PIN_LEFT_A,INPUT);
@@ -112,10 +112,12 @@ void initEncoders(){
 	state_right_pinA = digitalRead(PIN_RIGHT_A);
 	state_right_pinB = digitalRead(PIN_RIGHT_B);
 
-	attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnEncoderLeftPinA,CHANGE);
-	attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnEncoderLeftPinB,CHANGE);
+	//attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnEncoderLeftPinA,CHANGE);
+	//attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnEncoderLeftPinB,CHANGE);
 	//attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnEncoderRightPinA,CHANGE);
 	//attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnEncoderRightPinB,CHANGE);
+	attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnMSRecalARHaut,CHANGE);
+	attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnMSRecalARBas,CHANGE);
 	attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnMSRecalAVHaut,CHANGE);
 	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnMSRecalAVBas,CHANGE);
 }
@@ -203,7 +205,7 @@ void valueChangeOnMSRecalAVBas()
 	if (digitalRead(PIN_MS_RECAL_AV_BAS) == HIGH)
 	{
 		value_right_enc = 0;
-		sendMessage(-101, "av bas");
+		sendMessage(-101, (char*)"av bas");
 		setAVPWM(0x00);
 		if(msg_position_AV != -1){
 			sendMessage(msg_position_AV,2);
@@ -220,7 +222,7 @@ void valueChangeOnMSRecalAVHaut()
 	if (digitalRead(PIN_MS_RECAL_AV_HAUT) == HIGH)
 	{
 		value_right_enc = POSITION_MAX;
-		sendMessage(-101, "av haut");
+		sendMessage(-101, (char*)"av haut");
 		setAVPWM(0x00);
 		if(msg_position_AV != -1){
 			sendMessage(msg_position_AV,2);
@@ -229,3 +231,36 @@ void valueChangeOnMSRecalAVHaut()
 	}
 }
 
+
+void valueChangeOnMSRecalARBas()
+{
+	delay(500);
+	
+	if (digitalRead(PIN_MS_RECAL_AR_BAS) == HIGH)
+	{
+		value_left_enc = 0;
+		sendMessage(-101, (char*)"ar bas");
+		setARPWM(0x00);
+		if(msg_position_AR != -1){
+			sendMessage(msg_position_AR,2);
+			msg_position_AR=-1;
+		}
+	}
+}
+
+
+void valueChangeOnMSRecalARHaut()
+{
+	delay(500);
+	
+	if (digitalRead(PIN_MS_RECAL_AR_HAUT) == HIGH)
+	{
+		value_left_enc = POSITION_MAX;
+		sendMessage(-101, (char*)"ar haut");
+		setARPWM(0x00);
+		if(msg_position_AR != -1){
+			sendMessage(msg_position_AR,2);
+			msg_position_AR=-1;
+		}
+	}
+}

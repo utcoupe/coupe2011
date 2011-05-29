@@ -43,15 +43,6 @@ void cmd(int id, int header, int *args, int size){
 
 	    break;
 	}
-	case Q_TMS:
-	{
-	    if(size<2)
-		sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
-	    else
-		sendMessage(id, setTriggerMS(id, args[0],args[1]));
-
-	    break;
-	}
 	/*case Q_PINCE:
 	{
 	    if(size<2)
