@@ -7,10 +7,11 @@ from protocole import *
 
 
 class Debug:
-	def __init__(self, lvl):
+	def __init__(self, path_exec, lvl):
 		self.lvl = lvl
+		print path_exec
 		if lvl != 0:
-			self.p = subprocess.Popen("debug/main.py", stdout=subprocess.PIPE, stdin=subprocess.PIPE)
+			self.p = subprocess.Popen(path_exec, stdout=subprocess.PIPE, stdin=subprocess.PIPE)
 	
 	def log(self, id_cmd, args=None):
 		if self.lvl != 0:

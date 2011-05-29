@@ -15,6 +15,11 @@ CheckList
 
 
 """
+import os
+import sys
+ROOT_DIR  = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
+print ROOT_DIR
+
 ##############################
 ##		DEBUG/RELEASE		##
 ##############################
@@ -32,8 +37,8 @@ from loopCmd import *
 import time
 import math
 import threading
-import sys
 import copy
+sys.path.append(os.path.join(ROOT_DIR, "IA"))
 from debugClient import *
 from pathfinding import *
 from geometry.vec import *
@@ -74,7 +79,7 @@ class Robot:
 		self._lock_write = threading.Lock()
 		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
 		self._e_stop = threading.Event() # pour arreter le robot
-		self.debug = Debug(DEBUG_LVL) # pour debugger
+		self.debug = Debug(os.path.join(ROOT_DIR,"IA","debug","main.py"),DEBUG_LVL) # pour debugger
 		
 		if MOD == DEBUG:
 			self.write("##############################", colorConsol.FAIL)
