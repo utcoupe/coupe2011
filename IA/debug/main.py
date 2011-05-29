@@ -3,10 +3,13 @@
 """
 DEBUG de l'IA
 """
+
+import os
+ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])[0]
+
 from math import *
 import sys
-sys.path.append('./')
-sys.path.append('../')
+sys.path.append(os.path.join(ROOT_DIR,"IA"))
 from protocole import *
 import colorConsol
 

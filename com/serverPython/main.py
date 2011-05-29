@@ -7,14 +7,18 @@ mise sur écoute de seulement eux même
 identification et réarrangement
 """
 
+import os
+ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])[0]
+print ROOT_DIR
+
 from server import *
 
 server = Server()
 server.start()
 
 #server.addSubprocessClient("clients/python/UDPClient/main.py")
-server.addSubprocessClient("./UTCamera")
-server.addSubprocessClient("../../../pinceControl/AX12/scriptPince.py")
+server.addSubprocessClient(os.path.join(ROOT_DIR,"Visio","UTCamera","bin","UTCamera"))
+server.addSubprocessClient(os.path.join(ROOT_DIR,"pinceControl","AX12","scriptPince.py"))
 #server.addSubprocessClient(["../../../IA/main.py","1","0"])
 
 import glob
