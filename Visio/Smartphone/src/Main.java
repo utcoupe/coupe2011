@@ -69,6 +69,15 @@ public class Main {
 
 		System.out.println(TAG + "started");
 	}
+	
+	static private String getConfigPath()
+	{
+		File classPath = new File(System.getProperty("java.class.path"));
+		File projectPath = classPath.getParentFile();
+		String path = projectPath + File.separator + "main_config.data";
+		
+		return path;
+	}
 
 	static private void save() {
 		if (configuration == null)
@@ -76,7 +85,7 @@ public class Main {
 
 		FileOutputStream f_out;
 		try {
-			f_out = new FileOutputStream("main_config.data");
+			f_out = new FileOutputStream(getConfigPath());
 			ObjectOutputStream obj_out = new ObjectOutputStream(f_out);
 			obj_out.writeObject(configuration);
 		} catch (FileNotFoundException e) {
@@ -90,7 +99,7 @@ public class Main {
 	static private void load() {
 		FileInputStream f_in;
 		try {
-			f_in = new FileInputStream("main_config.data");
+			f_in = new FileInputStream(getConfigPath());
 			ObjectInputStream obj_in = new ObjectInputStream(f_in);
 			Main.configuration = (Configuration) obj_in.readObject();
 		} catch (FileNotFoundException e) {
@@ -340,7 +349,7 @@ class PawnFinder extends Observable {
 		int pixelReference = Main.configuration.pawnPixelReference;
 		int magic = Main.configuration.pawnMagic;
 
-		// détection des points jaunes
+		// dï¿½tection des points jaunes
 		width = image.getWidth();
 		height = image.getHeight();
 		boolean[][] yellowPixelMatrix = new boolean[width][height];
@@ -824,7 +833,7 @@ class Manager extends JPanel implements MouseListener, Observer {
 		g.setColor(new Color(0, 0, 0, 150));
 		g.fillRect(0, 0, mPictureSupplier.getImage().getWidth(), Main.configuration.topIgnore);
 
-		// ligne verticale centrée
+		// ligne verticale centrï¿½e
 		if (viewClientFrame.mJCheckBoxVerticalLine.isSelected()) {
 			g.drawLine(mPictureSupplier.width / 2, 0, mPictureSupplier.width / 2, getHeight());
 		}
@@ -860,7 +869,7 @@ class Manager extends JPanel implements MouseListener, Observer {
 			}
 		}
 
-		// détection des points jaunes
+		// dï¿½tection des points jaunes
 		ArrayList<Cluster> clusters = mPictureSupplier.mPawnFinder.getClustersByMinSize(200);
 
 		// affiche les clusters
