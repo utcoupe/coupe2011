@@ -1,4 +1,4 @@
-Compiler : javac *.java
+Le code est dans /bin
 Lancer avec UI : java Main
 Lancer sans UI : java Main noview
 
