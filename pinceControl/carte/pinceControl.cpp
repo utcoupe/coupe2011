@@ -3,7 +3,8 @@
 
 int msg_position_AV,msg_position_AR;
 
-void initPinceControl(){
+void initPinceControl()
+{
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	initPWM();
@@ -22,10 +23,10 @@ int pinceRecal(int id, char face)
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	if(face==AVANT){
-		setAVPWM(-PWM_MAINTIENT);
 		//while(digitalRead(PIN_MS_RECAL_AV)!=HIGH)
 		while(digitalRead(PIN_MS_RECAL_AV_BAS)!=HIGH)
 		{
+			setAVPWM(-PWM_MAINTIENT);
 			delay(40);
 		}
 		setAVPWM(0x00);
@@ -88,13 +89,18 @@ int setPincePosition(int id, char index, int pos)
 				sendMessage(id, 1);
 				return 2;
 			}
+		break;
+		
 		case ARRIERE:
 			goal_position_AR=pos_in_ticks;
 			msg_position_AR=id;
 			testAR();
 			return 1;
+		break;
+		
 		default : 
 			return E_INVALID_PARAMETERS_VALUE;
+		break;
 	}
 }
 

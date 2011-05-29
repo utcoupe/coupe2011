@@ -29,12 +29,21 @@ Pinces_fermetureMin = 3 # saisir un pion
 CM5_actionOK = 50	   # valeur de retour quand l'action est fini
 ''' --------------------- '''
 
+# recherche du CM5
+import glob
+def scanSerials():
+	pathname = '/dev/ttyUSB*'
+	return glob.iglob(pathname)
+USBports = tuple(scanSerials())
+
 # Initialisation de la liaison serie
 ser = serial.Serial()
 ser.baudrate = 57600
-ser.port = '/dev/ttyUSB0' #3				  # A modifier suivant l'OS
+
+
 ser.timeout = 0.5
 try:
+	ser.port = USBports[0]
 	ser.close()
 	ser.open()
 except Exception as ex:

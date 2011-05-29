@@ -32,10 +32,10 @@
  * pin 12 -> direction moteur 1
  * pin 11 -> enable moteur 2 (pwm)
  * pin 13 -> direction moteur 2
- * pin 18 -> A encodeur 1
- * pin 19 -> B encodeur 1
- * pin 21 -> A encodeur 2
- * pin 20 -> B encodeur 2
+ * pin 18 -> A encodeur 1 (gauche)
+ * pin 19 -> B encodeur 1 (gauche)
+ * pin 21 -> A encodeur 2 (droite)
+ * pin 20 -> B encodeur 2 (droite)
  * */
 #define PIN_EN_LEFT 3
 #define PIN_DIR_LEFT 12

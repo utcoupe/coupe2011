@@ -116,8 +116,8 @@ void initEncoders(){
 	attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnEncoderLeftPinB,CHANGE);
 	//attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnEncoderRightPinA,CHANGE);
 	//attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnEncoderRightPinB,CHANGE);
-	attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnMSRecalAVHaut,RISING);
-	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnMSRecalAVBas,RISING);
+	attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnMSRecalAVHaut,CHANGE);
+	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnMSRecalAVBas,CHANGE);
 }
 
 
@@ -198,22 +198,34 @@ void valueChangeOnEncoderRightPinB(){
 
 void valueChangeOnMSRecalAVBas()
 {
-	value_right_enc = 0;
-	setAVPWM(0x00);
-	if(msg_position_AV != -1){
-		sendMessage(msg_position_AV,2);
-		msg_position_AV=-1;
+	delay(500);
+	
+	if (digitalRead(PIN_MS_RECAL_AV_BAS) == HIGH)
+	{
+		value_right_enc = 0;
+		sendMessage(-101, "av bas");
+		setAVPWM(0x00);
+		if(msg_position_AV != -1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
+		}
 	}
 }
 
 
 void valueChangeOnMSRecalAVHaut()
 {
-	value_right_enc = POSITION_MAX;
-	setAVPWM(0x00);
-	if(msg_position_AV != -1){
-		sendMessage(msg_position_AV,2);
-		msg_position_AV=-1;
+	delay(500);
+	
+	if (digitalRead(PIN_MS_RECAL_AV_HAUT) == HIGH)
+	{
+		value_right_enc = POSITION_MAX;
+		sendMessage(-101, "av haut");
+		setAVPWM(0x00);
+		if(msg_position_AV != -1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
+		}
 	}
 }
 
