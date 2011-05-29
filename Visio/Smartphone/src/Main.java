@@ -236,9 +236,10 @@ class NetworkClient extends Thread implements Observer {
 			}
 
 		} catch (IOException e) {
+			System.out.println("erreur IO avec le socket port " + socket.getPort());
 			e.printStackTrace();
 		} catch (Exception e) {
-			System.out.println("déconnexion client");
+			System.out.println("déconnexion client port " + socket.getPort());
 			try {
 				in.close();
 			} catch (IOException e1) {
@@ -248,8 +249,11 @@ class NetworkClient extends Thread implements Observer {
 		} finally {
 			pictureSupplier.deleteObserver(this);
 			try {
+				System.out.println("fermeture socket... port " + socket.getPort());
 				socket.close();
+				System.out.println("socket fermé port " + socket.getPort());
 			} catch (IOException e) {
+				System.out.println("erreur de fermeture du socket port " + socket.getPort());
 			}
 		}
 	}
