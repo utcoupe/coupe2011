@@ -42,14 +42,14 @@ from geometry.circle import *
 
 MAX_MSG		= 10000
 if MOD == RELEASE:
-	VITESSE		= 200
-	VITESSE_ROT	= 170
+	VITESSE		= 250
+	VITESSE_ROT	= 200
 	CONN_MOD	= MOD_CIN
 	DEBUG_LVL	= 0
 	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX(s), c'est qu'il ne doit plus être sur la carte
 else:
-	VITESSE 	= 200
-	VITESSE_ROT	= 170
+	VITESSE 	= 250
+	VITESSE_ROT	= 200
 	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 1
 	AGE_MAX		= 10
@@ -225,6 +225,7 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
+					listeVerte = self.scanSmartPhone()
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")"""
@@ -261,6 +262,12 @@ class Robot:
 				#self.calibCam()
 				#self.testCam()
 				#"""
+			else:
+				if self.preparation() >= 0:
+					listeVerte = self.scanListeVerte()
+					self.go_point(self.symX(800), 300)
+					id_pince = self.construireTourVerte()
+					self.allerPoserTourVerte(id_pince)
 			"""else:
 				r = self.preparation()
 			self.write("preparation %s"%r)
@@ -829,8 +836,18 @@ class Robot:
 		return retour
 		
 	####################################################################
-	#					UTILISATION DE LA CAM						   #
+	#					UTILISATION DE LA VISIO						   #
 	####################################################################
+	def scanListeVerte():
+		"""
+		(bloquant)
+		"""
+		self.write("* SCAN LISTE VERTE *", colorConsol.HEADER)
+		r = self.addBlockingCmd(1, 2, ID_PHONE, Q_SCAN_DEPART)
+		self.write(" result : %s"%r)
+		listeVerte = eval(r)
+		return listeVerte
+	
 	def scan(self, fast=False):
 		"""
 		(blockant)
@@ -942,27 +959,6 @@ class Robot:
 		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 		"""
 		self.pions = l
-
-	def takePion(self, target):
-		"""
-		@todo pour l'instant la fonction se contente
-		@param target (Pion)
-		"""
-		id_pince = -1
-		
-		update_pos()
-
-		l = Line(Vec2(self.pos[0],self.pos[1]), target.pos)
-		if abs(l - radians(self.pos[2])) > pi:
-			id_pince = ARRIERE
-		else:
-			id_pince = AVANT
-
-		self.go_point(target.pos.x, target.pos.y)
-
-		self.takeObj(id_pince)
-
-		
 		
 		
 	def sortPionsByImportance(self, pions):
@@ -1159,7 +1155,7 @@ class Robot:
 		@return (int) id_pince avec la tour
 		"""
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
-		listeVerte = (PION_1,PION_1,PION_1,TOUR,TOUR)
+		listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
 		listeYVerte = (690,970,1250,1530,1810)
 
 		p1 = 0
