@@ -13,6 +13,9 @@ print ROOT_DIR
 
 import subprocess
 
+
+subprocess.Popen(os.path.join(ROOT_DIR,"com","serverPython","kill_socket.sh")).wait()
+
 from server import *
 
 server = Server()

@@ -168,6 +168,7 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, BAS)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.write("test ms recalage arrière")
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
@@ -175,6 +176,7 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, BAS)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		
 		self.write("* TEST AX12 *", colorConsol.HEADER)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
@@ -200,11 +202,17 @@ class Robot:
 			color = int(m.content)
 			self.addCmd(ID_OTHERS, Q_LED, color)
 			
-		"""self.write("* TEST MS *", colorConsol.HEADER)
+		self.write("* TEST MS *", colorConsol.HEADER)
 		self.write("face avant...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT, 1)
+		self.write("appui...")
+		self.waitMSSignal(AVANT, 1)
+		self.write("relachement...")
+		self.waitMSSignal(AVANT, 0)
 		self.write("face arriere...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE, 1)"""
+		self.write("appui...")
+		self.waitMSSignal(ARRIERE, 1)
+		self.write("relachement...")
+		self.waitMSSignal(ARRIERE, 0)
 		
 		self.activeReset = True
 		
@@ -230,15 +238,15 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
-					#listeVerte = (PION_1,TOUR,PION_1,PION_1,TOUR)
-					listeVerte = self.scanListeVerte()
+					listeVerte = (PION_1,PION_1,TOUR,TOUR,PION_1)
+					#listeVerte = self.scanListeVerte()
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")"""
 					#self._combinerFaces(AVANT)
 					#continue
 					self.go_point(self.symX(800), 300)
-					id_pince = self.construireTourVerte()
+					id_pince = self.construireTourVerte(listeVerte)
 					self.allerPoserTourVerte(id_pince)
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
@@ -432,7 +440,18 @@ class Robot:
 			if m.id_cmd == W_JACK and int(m.content) == 0:
 				break
 		self.client.removeFifo(fifo)
-		
+
+	def waitMSSignal(self, id_face, state):
+		fifo = self.client.addFifo( MsgFifo(W_MS) )
+		try:
+			while True:
+				m = fifo.getMsg()
+				if m.id_cmd == W_MS and int(m.content.split(C_SEP_SEND)[1]) == state:
+					break
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
+		finally:
+			self.client.removeFifo(fifo)
 		
 	def dumpObj(self, id_pince):
 		"""
@@ -1346,7 +1365,9 @@ class Robot:
 		if nb_msg > 1:
 			reponse = []
 			for i in xrange(nb_msg):
-				reponse.append(fifo.getMsg(timeout[i]))
+				r = fifo.getMsg(timeout[i])
+				print nb_msg,r
+				reponse.append(r)
 		elif nb_msg == 1:
 			reponse = fifo.getMsg(timeout)
 		else: reponse = None
