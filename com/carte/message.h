@@ -61,9 +61,6 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_GETSENS			16
 #define Q_GETENC			17
 
-// tourelle
-#define Q_OBJECT_DETECTED   60
-
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
