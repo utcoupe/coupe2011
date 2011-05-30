@@ -227,6 +227,9 @@ class Robot:
 				time.sleep(0.5)
 			if MOD == DEBUG:
 				time.sleep(2)
+				#self.ratisserMap()
+				#listeVerte = self.scanListeVerte()
+				#print listeVerte
 				#self.construireTourVerte()
 				#self.test()
 				#continue
@@ -238,11 +241,12 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
-					listeVerte = (PION_1,PION_1,TOUR,TOUR,PION_1)
+					listeVerte = (PION_1,TOUR,PION_1,TOUR,PION_1)
 					#listeVerte = self.scanListeVerte()
-					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
-					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
-					self.write("")"""
+					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
+					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1500, 1750, 90)
+					self.write("")
+					self.ratisserMap()
 					#self._combinerFaces(AVANT)
 					#continue
 					self.go_point(self.symX(800), 300)
@@ -382,7 +386,7 @@ class Robot:
 			self.write("")
 					
 
-			self.write("* JACK POUR RECALAGE *")
+			"""self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -394,7 +398,7 @@ class Robot:
 					self.write("* RECALAGE *")
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
-					break
+					break"""
 			
 			loop1.stop()
 			loop2.stop()
@@ -403,7 +407,7 @@ class Robot:
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			#self.update_pos()
 		
-			self.write("* ATTENTE DU JACK *")
+			"""self.write("* ATTENTE DU JACK *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -411,7 +415,7 @@ class Robot:
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
 					self.write("ON Y VAS !")
 					self.write("")
-					break
+					break"""
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
@@ -472,14 +476,13 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, id_pince, BAS)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_SERRE, id_pince)
 
-		
+	
 	def stop(self, msg=None):
 		""" arret du robot """
 		if msg: self.write(msg, colorConsol.FAIL)
 		#self.addCmd(-1, Q_KILL)
 		self.addCmd(ID_ASSERV,Q_STOP)
 		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
-		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -2)
 		self._e_stop.set()
 		self.client.stop()
 	
@@ -652,8 +655,6 @@ class Robot:
 						self.addCmd(ID_ASSERV, Q_GETSENS)
 						nb_point_reach += 1
 					elif m.id_cmd == Q_GETSENS:
-						self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
-						self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
 						self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
 					elif m.id_cmd == Q_KILL: # arret
 						raise KillException("Q_KILL")
@@ -686,7 +687,6 @@ class Robot:
 				self.client.removeFifo(fifo)
 				# arret de l'écoute des pings
 				self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
-				self.addCmd(ID_OTHERS, Q_ULTRAPING, -2)
 
 		return retour
 
@@ -868,9 +868,10 @@ class Robot:
 		(bloquant)
 		"""
 		self.write("* SCAN LISTE VERTE *", colorConsol.HEADER)
-		r = self.addBlockingCmd(1, 2, ID_PHONE, Q_SCAN_DEPART)
+		r = self.addBlockingCmd(1, 4, ID_PHONE, Q_SCAN_DEPART)
 		self.write(" result : %s"%r)
 		listeVerte = eval(r.content)
+		listeVerte = map(lambda x: TOUR if x else PION_1, listeVerte)
 		return listeVerte
 	
 	def scan(self, fast=False):
@@ -1164,13 +1165,18 @@ class Robot:
 
 		@param id_pince la pince dans laquelle se trouve la tour
 		"""
-		self.go_point(self.symX(1350),1500) # aller devant la case bonus
+		self.do_path(((self.symX(1000),1200),(self.symX(1500),1750))) # aller devant la case bonus
 		if id_pince == AVANT:
-			self.tourne(self.symA(90))
+			angle = 135
+			pwm = 70
 		else:
-			self.tourne(self.symA(-90))
-		self.go_point(self.symX(1350),1700) # avancer sur la case
+			angle = -45
+			pwm = -70
+		self.tourne(self.symA(angle))
 		self.dumpObj(id_pince) # lacher l'objet
+		
+		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT)
+		self.addCmd(ID_ASSERV, Q_PWM, pwm, 2000)
 		
 	
 	def construireTourVerte(self, listeVerte):
@@ -1232,7 +1238,7 @@ class Robot:
 			self.tourne(angle)
 			self._combinerFaces(p_with_tour)
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]) # devant le troisième
-			self._takePionVert(p3, p_with_pion) # prise troisième pion pince maintenant vide
+			self._takePionVert(p3, p_with_pion) # prise troisième pion avec la pince maintenant vide
 			self.tourne(angle) # tourne
 			self._combinerFaces(p_with_tour)
 			self.write("3 ème tour prise", colorConsol.OKGREEN)
@@ -1273,6 +1279,71 @@ class Robot:
 			self.client.removeFifo(fifo)
 			
 		return retour
+
+	def ratisserMap(self):
+		cases = []
+		for x in xrange(625,2500,350):
+			cases.append([(self.symX(x),250)])
+			for y in xrange(525, 1600,350):
+				cases[len(cases)-1].append((self.symX(x),y))
+		checksPoints = (cases[2][4], cases[0][2], cases[2][0], cases[4][2])
+
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
+		
+		fifo = None
+		loop = None
+		
+		while True:
+			for c in checksPoints:
+				fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_POSITION, Q_GETSENS, W_MS, W_PING_AV, W_PING_AR) )
+				self.addCmd(ID_ASSERV, Q_GOAL_ABS, c[0], c[1], VITESSE)
+				nb_recep = 0
+				last_pos = copy.copy(self.pos)
+				loop = LoopCmd(self, 0.2, 0.5, ID_ASSERV, Q_GETSENS)
+				loop.start()
+				try:
+					while True:
+						m = fifo.getMsg(2)
+						if m.id_cmd == Q_GOAL_ABS:
+							nb_recep+=1
+							if nb_recep > 1: break
+						elif m.id_cmd == W_MS:
+							self.write(m.content, colorConsol.WARNING)
+							self.write("WARNING : Robot.go_point : detection objet", colorConsol.WARNING)
+						elif m.id_cmd == Q_POSITION:
+							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+							print new_pos, last_pos
+							if self._anomalie_deplacement((x,y), last_pos, new_pos):
+								self.write("WARNING : Robot.go_point : detection anomalie deplacement", colorConsol.WARNING)
+								#self.addCmd(ID_ASSERV, Q_STOP)
+								#retour = E_BLOCK
+								#break
+						elif m.id_cmd == Q_GETSENS:
+							self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
+						elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+							self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
+							self.addBlockingCmd(1, 5, ID_ASSERV, Q_STOP)
+							self.tourne(self.pos[2] + 90)
+							break
+						elif m.id_cmd == Q_KILL:
+							raise KillException("Q_KILL")
+				except KillException as ex:
+					self.write(ex, colorConsol.FAIL)
+					retour = Q_KILL
+				except TimeoutException as ex:
+					self.write(ex, colorConsol.FAIL)
+					retour = E_TIMEOUT
+				except Exception as ex:
+					self.write(ex, colorConsol.FAIL)
+				finally:
+					self.client.removeFifo(fifo)
+
+		self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+		if loop: loop.stop()
+		if fifo: self.client.removeFifo(fifo)
+
+		
 		
 	def _combinerFaces(self, id_face):
 		"""
