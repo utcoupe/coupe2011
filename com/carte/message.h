@@ -72,6 +72,8 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define E_TOURELLE_SETUP_FAIL				-5
 #define W_SWITCH_COLOR						-21
 #define W_JACK								-22
+#define W_PING_AV							-30
+#define W_PING_AR							-31
 #define W_STOP								-42
 #define E_TIMEOUT							-43
 #define E_BLOCK								-44

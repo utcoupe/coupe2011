@@ -69,14 +69,14 @@ void sensorTrigger()
 		if(pingAvMessageID>=0){
 			d = microsecondsToCentimeters(getDistance(PIN_PING_AV));
 			if(d != 0 and d <= DISTANCE_DETECT){
-					sendMessage(-30,d);
+				sendMessage(W_PING_AV,d);
 			}
 		}
 			
 		if(pingArMessageID>=0){
 			d = microsecondsToCentimeters(getDistance(PIN_PING_AR));
 			if(d != 0 and d <= DISTANCE_DETECT){
-					sendMessage(-31,d);
+				sendMessage(W_PING_AR,d);
 			}
 		}
 	}

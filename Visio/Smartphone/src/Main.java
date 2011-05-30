@@ -149,7 +149,7 @@ class NetworkClient extends Thread implements Observer {
 
 	final static int PORT_REMOTE = 50000;
 	final static int PORT_LOCAL = 1234;
-	final static String IP_REMOTE = "10.42.43.1";
+	final static String IP_REMOTE = "192.168.1.136";
 	final static String TAG = "[NetworkClient] ";
 
 	static public void connectNetwork(final PictureSupplier pictureSupplier) {
@@ -219,7 +219,7 @@ class NetworkClient extends Thread implements Observer {
 				} else if (idcmd.equals("1")) {
 					// ping
 					out.println("-1.Pong");
-				} else if (idcmd.equals("13")) {
+				} else if (idcmd.equals("69")) {
 					// exit
 					// out.println("Pong");
 				} else if (idcmd.equals("80")) { // figures

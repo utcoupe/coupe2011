@@ -12,9 +12,10 @@ ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__
 print ROOT_DIR
 
 import subprocess
+import time
 
-
-subprocess.Popen(os.path.join(ROOT_DIR,"com","serverPython","kill_socket.sh")).wait()
+subprocess.Popen([os.path.join(ROOT_DIR,"com","serverPython","kill_socket.sh"),"50000"]).wait()
+time.sleep(2)
 
 from server import *
 
@@ -25,7 +26,7 @@ server.start()
 server.addSubprocessClient(os.path.join(ROOT_DIR,"Visio","UTCamera","bin","UTCamera"))
 server.addSubprocessClient(os.path.join(ROOT_DIR,"pinceControl","AX12","scriptPince.py"))
 #server.addSubprocessClient(["../../../IA/main.py","1","0"])
-p = subprocess.Popen(os.path.join(ROOT_DIR,"smartphone.py")) #, stdout=subprocess.PIPE)
+p = subprocess.Popen(os.path.join(ROOT_DIR,"smartphone.py"), stdout=subprocess.PIPE)
 
 
 import glob
@@ -40,7 +41,7 @@ for serial in scanSerials():
 
 server.parseMsg(ID_SERVER, "ls")
 
-p.join()
+p.wait()
 
 print 'fin thread principal'
 
