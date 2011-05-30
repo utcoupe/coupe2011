@@ -12,6 +12,10 @@ ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__
 print ROOT_DIR
 
 import subprocess
+import time
+
+subprocess.Popen([os.path.join(ROOT_DIR,"com","serverPython","kill_socket.sh"),"50000"]).wait()
+time.sleep(2)
 
 from server import *
 
@@ -37,7 +41,7 @@ for serial in scanSerials():
 
 server.parseMsg(ID_SERVER, "ls")
 
-p.join()
+p.wait()
 
 print 'fin thread principal'
 

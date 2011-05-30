@@ -30,7 +30,6 @@ class LoopCmd(threading.Thread):
     def run(self):
 	self._e_stop.wait(self.timeBeforeStart)
 	while not self._e_stop.is_set():
-	    start = time.time()
 	    self.robot.addCmd(self._device, self._cmd, *self._args)
 	    self._e_stop.wait(self.interval)
 			

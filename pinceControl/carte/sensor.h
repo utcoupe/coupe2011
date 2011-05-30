@@ -53,9 +53,9 @@
 #define SHARP_AR4	10
 #define SHARP_AR5	11
 //PING
-#define PIN_PING_AV 22
-#define PIN_PING_AR 24
-#define DISTANCE_DETECT 30//cm
+#define PIN_PING_AV 51
+#define PIN_PING_AR 53
+#define DISTANCE_DETECT 40//cm
 
 
 struct TriggerSharp{

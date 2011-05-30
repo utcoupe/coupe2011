@@ -15,5 +15,4 @@ else:
 
 p.wait()
 
-p.terminate()
-p.kill()
+

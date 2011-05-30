@@ -24,6 +24,7 @@ Q_ANGLE_REL			=   5
 Q_POSITION			= 	6
 Q_AUTO_CALIB		=	7
 Q_MANUAL_CALIB		=	8
+Q_PWM 				=	10
 Q_STOP				=	13
 Q_PAUSE				=	14
 Q_RESUME			=	15

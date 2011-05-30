@@ -6,7 +6,6 @@ void setup()
 	initPinceControl();
 	//initTourelle(); //pas utilisé
 	initEncoders();
-	//initTourelle();
 	initSensor();
 	//setupTourelle();
 }

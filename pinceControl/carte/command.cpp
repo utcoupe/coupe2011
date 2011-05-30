@@ -128,27 +128,25 @@ void cmd(int id, int header, int *args, int size){
 	{
 	    if(args[0]==FACEAV)
 	    {
-		pingAvMessageID=id;
-		sendMessage(id, 1);
+			pingArMessageID=-42;
+			pingAvMessageID=id;
+			sendMessage(id, 1);
 	    }
 	    else if(args[0]==FACEAR)
 	    {
-		pingArMessageID=id;
-		sendMessage(id, 1);
+			pingAvMessageID=-42;
+			pingArMessageID=id;
+			sendMessage(id, 1);
 	    }
 	    else if(args[0]==-1)
 	    {
-		pingAvMessageID=-42;
-		sendMessage(id, 1);
-	    }
-	    else if(args[0]==-2)
-	    {
-		pingArMessageID=-42;
-		sendMessage(id, 1);
+			pingAvMessageID=-42;
+			pingArMessageID=-42;
+			sendMessage(id, 1);
 	    }
 	    else
 	    {
-		sendMessage(id, E_INVALID_PARAMETERS_TYPE);
+			sendMessage(id, E_INVALID_PARAMETERS_TYPE);
 	    }
 	    break;
 	}
@@ -156,11 +154,11 @@ void cmd(int id, int header, int *args, int size){
 	{
 	    if(args[0]==FACEAV)
 	    {
-		sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AV)));
+			sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AV)));
 	    }
 	    else if(args[0]==FACEAR)
 	    {
-		sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
+			sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
 	    }
 	    else
 	    {

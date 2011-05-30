@@ -61,9 +61,6 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define Q_GETSENS			16
 #define Q_GETENC			17
 
-// tourelle
-#define Q_OBJECT_DETECTED   60
-
 // erreurs
 #define	E_INVALID_CMD						-1
 #define	E_INVALID_PARAMETERS_NUMBERS		-2
@@ -72,6 +69,8 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define E_TOURELLE_SETUP_FAIL				-5
 #define W_SWITCH_COLOR						-21
 #define W_JACK								-22
+#define W_PING_AV							-30
+#define W_PING_AR							-31
 #define W_STOP								-42
 #define E_TIMEOUT							-43
 #define E_BLOCK								-44
