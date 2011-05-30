@@ -49,6 +49,7 @@ class RobotClient(threading.Thread):
 			self._partialMsg = msg[index+1:]
 			#print self._partialMsg,[ m for m in msg[:index].split('\n') ]
 			return [ m for m in msg[:index].split('\n') ]
+
 		
 	def send(self, msg):
 		""" 
@@ -60,7 +61,8 @@ class RobotClient(threading.Thread):
 				self._socket.send(msg+"\n")
 			else:
 				print msg
-			self.write("Send : %s"%msg)
+			#self.write("Send : %s"%msg)
+
 	
 	def run(self):
 		""" 
@@ -83,7 +85,8 @@ class RobotClient(threading.Thread):
 				else:
 					for msg in self.combineWithPartial(data):
 						self._treat(msg)
-				
+
+	
 	def _treat(self, msg):
 		""" fonction appellée quand un message est reçu """
 		#self.write("Received : '%s'"%msg)

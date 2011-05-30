@@ -13,7 +13,7 @@
 
 
 //deplacement verticale
-#define POSITION_MAX 12000
+#define POSITION_MAX 11000
 #define PWM_MOVE 		250 // PWM pour se déplacer rapidement
 #define PWM_MAINTIENT	100 // PWM pour le maintient en position
 #define MARGE_MARCHE	500 // Tolérance avant de ralentir
@@ -23,6 +23,8 @@
 #define PIN_MS_RECAL_AR			37
 #define PIN_MS_RECAL_AV_HAUT	21
 #define PIN_MS_RECAL_AV_BAS		20
+#define PIN_MS_RECAL_AR_HAUT	18
+#define PIN_MS_RECAL_AR_BAS		19
 
 extern int msg_position_AV,msg_position_AR;
 

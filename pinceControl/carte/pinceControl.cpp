@@ -34,8 +34,10 @@ int pinceRecal(int id, char face)
 		return 2;
 	}
 	if(face==ARRIERE){
-		setARPWM(-PWM_MAINTIENT);
-		while(digitalRead(PIN_MS_RECAL_AR)!=HIGH){
+		//while(digitalRead(PIN_MS_RECAL_AR)!=HIGH){
+		while(digitalRead(PIN_MS_RECAL_AR_BAS)!=HIGH)
+		{
+			setARPWM(-PWM_MAINTIENT);
 			delay(40);
 		}
 		setARPWM(0x00);
@@ -92,10 +94,21 @@ int setPincePosition(int id, char index, int pos)
 		break;
 		
 		case ARRIERE:
-			goal_position_AR=pos_in_ticks;
+			/*goal_position_AR=pos_in_ticks;
 			msg_position_AR=id;
 			testAR();
-			return 1;
+			return 1;*/
+			if (goal_position_AR != pos_in_ticks)
+			{
+				goal_position_AR=pos_in_ticks;
+				msg_position_AR=id;
+				return 1;
+			}
+			else
+			{
+				sendMessage(id, 1);
+				return 2;
+			}
 		break;
 		
 		default : 

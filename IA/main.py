@@ -15,6 +15,11 @@ CheckList
 
 
 """
+import os
+import sys
+ROOT_DIR  = os.path.split(os.path.split(os.path.abspath(__file__))[0])[0]
+print ROOT_DIR
+
 ##############################
 ##		DEBUG/RELEASE		##
 ##############################
@@ -32,8 +37,8 @@ from loopCmd import *
 import time
 import math
 import threading
-import sys
 import copy
+sys.path.append(os.path.join(ROOT_DIR, "IA"))
 from debugClient import *
 from pathfinding import *
 from geometry.vec import *
@@ -42,14 +47,14 @@ from geometry.circle import *
 
 MAX_MSG		= 10000
 if MOD == RELEASE:
-	VITESSE		= 200
-	VITESSE_ROT	= 170
+	VITESSE		= 250
+	VITESSE_ROT	= 200
 	CONN_MOD	= MOD_CIN
 	DEBUG_LVL	= 0
 	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX(s), c'est qu'il ne doit plus être sur la carte
 else:
-	VITESSE 	= 200
-	VITESSE_ROT	= 170
+	VITESSE 	= 250
+	VITESSE_ROT	= 200
 	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 1
 	AGE_MAX		= 10
@@ -74,7 +79,7 @@ class Robot:
 		self._lock_write = threading.Lock()
 		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
 		self._e_stop = threading.Event() # pour arreter le robot
-		self.debug = Debug(DEBUG_LVL) # pour debugger
+		self.debug = Debug(os.path.join(ROOT_DIR,"IA","debug","main.py"),DEBUG_LVL) # pour debugger
 		
 		if MOD == DEBUG:
 			self.write("##############################", colorConsol.FAIL)
@@ -163,6 +168,7 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, AVANT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, BAS)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.write("test ms recalage arrière")
 		raw_input("appuyez sur une touche pour lancer le test")
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
@@ -170,6 +176,7 @@ class Robot:
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_PRECAL, ARRIERE)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, BAS)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		
 		self.write("* TEST AX12 *", colorConsol.HEADER)
 		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
@@ -195,11 +202,17 @@ class Robot:
 			color = int(m.content)
 			self.addCmd(ID_OTHERS, Q_LED, color)
 			
-		"""self.write("* TEST MS *", colorConsol.HEADER)
+		self.write("* TEST MS *", colorConsol.HEADER)
 		self.write("face avant...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, AVANT, 1)
+		self.write("appui...")
+		self.waitMSSignal(AVANT, 1)
+		self.write("relachement...")
+		self.waitMSSignal(AVANT, 0)
 		self.write("face arriere...")
-		self.addBlockingCmd(2, (1,None), ID_OTHERS, Q_TMS, ARRIERE, 1)"""
+		self.write("appui...")
+		self.waitMSSignal(ARRIERE, 1)
+		self.write("relachement...")
+		self.waitMSSignal(ARRIERE, 0)
 		
 		self.activeReset = True
 		
@@ -225,13 +238,15 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
+					listeVerte = (PION_1,PION_1,TOUR,TOUR,PION_1)
+					#listeVerte = self.scanListeVerte()
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")"""
 					#self._combinerFaces(AVANT)
 					#continue
 					self.go_point(self.symX(800), 300)
-					id_pince = self.construireTourVerte()
+					id_pince = self.construireTourVerte(listeVerte)
 					self.allerPoserTourVerte(id_pince)
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
@@ -261,6 +276,12 @@ class Robot:
 				#self.calibCam()
 				#self.testCam()
 				#"""
+			else:
+				if self.preparation() >= 0:
+					listeVerte = self.scanListeVerte()
+					self.go_point(self.symX(800), 300)
+					id_pince = self.construireTourVerte()
+					self.allerPoserTourVerte(id_pince)
 			"""else:
 				r = self.preparation()
 			self.write("preparation %s"%r)
@@ -419,7 +440,18 @@ class Robot:
 			if m.id_cmd == W_JACK and int(m.content) == 0:
 				break
 		self.client.removeFifo(fifo)
-		
+
+	def waitMSSignal(self, id_face, state):
+		fifo = self.client.addFifo( MsgFifo(W_MS) )
+		try:
+			while True:
+				m = fifo.getMsg()
+				if m.id_cmd == W_MS and int(m.content.split(C_SEP_SEND)[1]) == state:
+					break
+		except Exception as ex:
+			self.write(ex, colorConsol.FAIL)
+		finally:
+			self.client.removeFifo(fifo)
 		
 	def dumpObj(self, id_pince):
 		"""
@@ -829,8 +861,18 @@ class Robot:
 		return retour
 		
 	####################################################################
-	#					UTILISATION DE LA CAM						   #
+	#					UTILISATION DE LA VISIO						   #
 	####################################################################
+	def scanListeVerte(self):
+		"""
+		(bloquant)
+		"""
+		self.write("* SCAN LISTE VERTE *", colorConsol.HEADER)
+		r = self.addBlockingCmd(1, 2, ID_PHONE, Q_SCAN_DEPART)
+		self.write(" result : %s"%r)
+		listeVerte = eval(r.content)
+		return listeVerte
+	
 	def scan(self, fast=False):
 		"""
 		(blockant)
@@ -942,27 +984,6 @@ class Robot:
 		self.debug.log(D_PIONS, map(lambda p: tuple(p), self.pions))
 		"""
 		self.pions = l
-
-	def takePion(self, target):
-		"""
-		@todo pour l'instant la fonction se contente
-		@param target (Pion)
-		"""
-		id_pince = -1
-		
-		update_pos()
-
-		l = Line(Vec2(self.pos[0],self.pos[1]), target.pos)
-		if abs(l - radians(self.pos[2])) > pi:
-			id_pince = ARRIERE
-		else:
-			id_pince = AVANT
-
-		self.go_point(target.pos.x, target.pos.y)
-
-		self.takeObj(id_pince)
-
-		
 		
 		
 	def sortPionsByImportance(self, pions):
@@ -1152,14 +1173,13 @@ class Robot:
 		self.dumpObj(id_pince) # lacher l'objet
 		
 	
-	def construireTourVerte(self):
+	def construireTourVerte(self, listeVerte):
 		"""
 		Script pour construire une tour à partir de ce qu'il y a dans la zone verte
 
 		@return (int) id_pince avec la tour
 		"""
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
-		listeVerte = (PION_1,PION_1,PION_1,TOUR,TOUR)
 		listeYVerte = (690,970,1250,1530,1810)
 
 		p1 = 0
@@ -1345,7 +1365,9 @@ class Robot:
 		if nb_msg > 1:
 			reponse = []
 			for i in xrange(nb_msg):
-				reponse.append(fifo.getMsg(timeout[i]))
+				r = fifo.getMsg(timeout[i])
+				print nb_msg,r
+				reponse.append(r)
 		elif nb_msg == 1:
 			reponse = fifo.getMsg(timeout)
 		else: reponse = None
