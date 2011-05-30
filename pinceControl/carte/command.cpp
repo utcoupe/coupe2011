@@ -138,11 +138,13 @@ void cmd(int id, int header, int *args, int size){
 	    if(args[0]==FACEAV)
 	    {
 		pingAvMessageID=id;
+		changerSensTourelle(FACEAV);
 		sendMessage(id, 1);
 	    }
 	    else if(args[0]==FACEAR)
 	    {
 		pingArMessageID=id;
+		changerSensTourelle(FACEAR);
 		sendMessage(id, 1);
 	    }
 	    else if(args[0]==-1)

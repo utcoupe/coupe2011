@@ -1,6 +1,6 @@
 #include "tourelle.h"
 
-static Tourelle tourelle(225, 17, 0);
+static Tourelle tourelle(205, 90, 90);
 
 /*
  * Global
@@ -20,6 +20,11 @@ void update_pos(int xUpdate, int yUpdate, int angleRUpdate)
 	tourelle.update_pos(xUpdate, yUpdate, angleRUpdate);
 }
 
+void changerSensTourelle(int sens)
+{
+	tourelle.setSens(sens);	
+}
+
 /*
  * Stepper
  */
@@ -36,12 +41,12 @@ Stepper::Stepper(int ID) :
 
 void Stepper::run()
 {
-	onestep(dir, style);
+	step(steps, dir, style);
 	if (dir == TURNLEFT)
-		++position;
+		position += steps;
 	else
-		--position;
-	--steps;
+		position -= steps;
+	steps = 0;
 }
 
 /*
@@ -65,13 +70,6 @@ int Ping::sendPing()
 /*
  * Tourelle
  */
- 
-/*
-obj_coord[0] = obj_x;
-obj_coord[1] = obj_y;
-sendMessage(Q_OBJECT_DETECTED, obj_coord, 2);
-*/
-
 Tourelle::Tourelle(int robot_pos_x, int robot_pos_y, int robot_angle) :
 	_robot_pos_x(robot_pos_x),
 	_robot_pos_y(robot_pos_y),
@@ -85,7 +83,8 @@ Tourelle::Tourelle(int robot_pos_x, int robot_pos_y, int robot_angle) :
 	_leftPing(PIN_PING_GAUCHE, MAXDIST),
 	_rightPing(PIN_PING_DROITE, MAXDIST),
 	_millitime(0),
-	_pingTurn(RightPing)
+	_pingTurn(RightPing),
+	_sens(FACEAV)
 {
 }
 
@@ -116,10 +115,8 @@ void Tourelle::update_pos(int xUpdate, int yUpdate, int angleRUpdate)
 	_robot_angle = angleRUpdate;
 }
 
-Tourelle::TargetCoord Tourelle::findTargetCoord(int angleT, int distance)
+void Tourelle::findTargetCoord(int angleT, int distance, int* target_x, int* target_y)
 {
-	TargetCoord targetCoord;
-	
 	// Modulo 360 pour le cas où la tourelle fait un tour
 	int angleTDeg = floor(0.36 * angleT);
 	int angleTDegMod;
@@ -129,33 +126,20 @@ Tourelle::TargetCoord Tourelle::findTargetCoord(int angleT, int distance)
 		angleTDegMod = angleTDeg % 360;
 	int angleDeg = _robot_angle + angleTDegMod;
 	float angleRad = angleDeg * 0.0175; 
-	targetCoord.x = floor(distance * cos(angleRad)) + _robot_pos_x;
-	targetCoord.y = floor(distance * sin(angleRad)) + _robot_pos_y;
-  targetCoord.distance = distance;
-	
-	return targetCoord;
+	*target_x = floor(distance * cos(angleRad)) + _robot_pos_x;
+	*target_y = floor(distance * sin(angleRad)) + _robot_pos_y;
 }
 
-bool Tourelle::targetInRange(TargetCoord targetCoord)
+bool Tourelle::targetInRange(int target_x, int target_y)
 {
-	if(targetCoord.x > (300 - MARGE_BORD) || targetCoord.x < MARGE_BORD)
+	if(target_x > (300 - MARGE_BORD) || target_x < MARGE_BORD)
 	{
-		Serial.println("*****************************************");
-		Serial.print("En dehors limites (largeur, ");
-		Serial.print(targetCoord.distance, DEC);
-		Serial.println(").");
-		Serial.println("*****************************************");
 		return false;
 	}
 
-	else if (targetCoord.y > (210 - MARGE_BORD) || targetCoord.y < MARGE_BORD)
+	else if (target_y > (210 - MARGE_BORD) || target_y < MARGE_BORD)
 	{
-		Serial.println("*****************************************");
-		Serial.print("En dehors limites (hauteur, ");
-		Serial.print(targetCoord.distance, DEC);
-		Serial.println(").");
-		Serial.println("*****************************************");
-		return true;
+		return false;
 	}
 	
 	return true;
@@ -167,13 +151,18 @@ void Tourelle::loop()
 	
 	if (_distanceGauche != DISTANCE_UNDEFINED && _distanceDroite != DISTANCE_UNDEFINED)
 	{
-		chooseMode();
-		setMotorParameters();
+		if (_distanceGauche <= DISTANCE_DETECT)
+			sendMessage(W_ROBOT_DETECTED, _distanceGauche);
+		else if (_distanceDroite <= DISTANCE_DETECT)
+			sendMessage(W_ROBOT_DETECTED, _distanceDroite);
+		
+		//chooseMode();
+		//setMotorParameters();
 		_distanceGauche = DISTANCE_UNDEFINED;
 		_distanceDroite = DISTANCE_UNDEFINED;
+		//_motor.run();
 	}
-	_motor.run();
- }
+}
 
 void Tourelle::measureDistances()
 {
@@ -184,88 +173,166 @@ void Tourelle::measureDistances()
 		{
 			_distanceGauche = _leftPing.sendPing();
 			_pingTurn = LeftPing;
-			Serial.println("RIGHT_PING");
+			Serial.print("gauche = ");
+			Serial.println(_distanceGauche, DEC);
 		} 
 		else 
 		{
 			_distanceDroite = _rightPing.sendPing();
 			_pingTurn = RightPing;
-			Serial.println("LEFT_PING");
+			Serial.print("droite = ");
+			Serial.println(_distanceDroite, DEC);
 		}
 	}
 }
 
 void Tourelle::chooseMode()
 {
-	TargetCoord leftTargetCoord;
-	TargetCoord rightTargetCoord;
+	int leftTarget_x;
+	int leftTarget_y;
+	int rightTarget_x;
+	int rightTarget_y;
 	
-	Serial.print("gauche = ");
-	Serial.println(_distanceGauche, DEC);
-	Serial.print("droite = ");
-	Serial.println(_distanceDroite, DEC);
+	// Vérification des distances
+	findTargetCoord(_motor.position, _distanceGauche, &leftTarget_x, &leftTarget_y);
+	findTargetCoord(_motor.position, _distanceDroite, &rightTarget_x, &rightTarget_y);
+	bool objGaucheValide = _distanceGauche!=0 && targetInRange(leftTarget_x, leftTarget_y);
+	bool objDroiteValide = _distanceDroite!=0 && targetInRange(rightTarget_x, rightTarget_y);
+	
 	Serial.print("position = ");
 	Serial.println(_motor.position, DEC);
-	Serial.print("\n");
-	
-	// Objet détecté à gauche
-	bool objGaucheValide = _distanceGauche > 0 && targetInRange(findTargetCoord(_motor.position, _distanceGauche));
-	bool objDroiteValide = _distanceDroite > 0 && targetInRange(findTargetCoord(_motor.position, _distanceGauche));
 
-	/*
-   * Si un objet valide à droite et que l'objet à gauche est valide mais celui de droite est plus près, ou bien l'objet gauche invalide.
-   */
-	if (objDroiteValide && 
-        ((objGaucheValide && 
-          (_distanceDroite < _distanceGauche) && (_distanceGauche - _distanceDroite > DIFFMAX) || !objGaucheValide)))
-		_mode = TurnRight;
+	// Si les deux objets perçus sont valides.
+	if (objGaucheValide && objDroiteValide)
+	{
+		// La différence entre les deux distances est trop grande.
+		if (abs(_distanceGauche - _distanceDroite) > DIFFMAX)
+		{
+			if (_distanceGauche < _distanceDroite)
+				_mode = TurnLeft;
+			else
+				_mode = TurnRight;
+		}
+		
+		// Sinon la différence est inférieure à DIFFMAX, on fixe l'objet.
+		else
+			_mode = Fixe;
+	}
 	
-	/*
-	 *  Sinon si un objet à gauche est valide et qu'il est plus près de celui de droite.
-	 */
-	else if (objGaucheValide && (_distanceGauche < _distanceDroite) && (_distanceDroite - _distanceGauche > DIFFMAX))
+	// Si seulement l'objet gauche est valide.
+	else if (objGaucheValide)
 		_mode = TurnLeft;
 	
-	/*
-   * Sinon si l'objet gauche est valide et que l'objet droite est valide aussi.
-   */
-	else if (objGaucheValide && objDroiteValide)
-		_mode = Fixe;
-	
-	/*
-	 * Sinon on recherche.
-	 */
+	// Si seulement l'objet droite est valide.
+	else if (objDroiteValide)
+		_mode = TurnRight;
+
+	// Si aucun n'est valide.
+	else if (!objDroiteValide && !objGaucheValide)
+		_mode = Recherche;
+		
+	// Cas d'erreur.
 	else
-	  _mode = Recherche;
+		_mode = None;
+		
+	// Debug
+	switch (_mode)
+	{
+		case TurnLeft:
+			Serial.print("x = ");
+			Serial.println(leftTarget_x, DEC);
+			Serial.print("y = ");
+			Serial.println(leftTarget_y, DEC);
+			Serial.print("distance = ");
+			Serial.println(_distanceGauche, DEC);
+			break;
+		case TurnRight:
+			Serial.print("x = ");
+			Serial.println(rightTarget_x, DEC);
+			Serial.print("y = ");
+			Serial.println(rightTarget_y, DEC);
+			Serial.print("distance = ");
+			Serial.println(_distanceDroite, DEC);
+			break;
+		case Fixe:	
+			Serial.print("x = ");
+			Serial.println(rightTarget_x, DEC);
+			Serial.print("y = ");
+			Serial.println(rightTarget_y, DEC);
+			Serial.print("distance = ");
+			Serial.println(_distanceDroite, DEC);				
+			break;
+	}
 }
 
 void Tourelle::setMotorParameters()
 {
+  Serial.print("Mode : ");
   switch (_mode)
-  {
+  {	  
     case TurnLeft:
-      _motor.steps = 50;
-      _motor.dir = TURNLEFT;
+	  if(_motor.position>1200)
+	  {
+		  _motor.steps = 1000;
+		  _motor.dir = TURNRIGHT;
+	  }
+	  else
+	  {
+		  _motor.steps = 25;
+		  _motor.dir = TURNLEFT;
+	  }
+	  Serial.println("LEFT\n");
       break;
 
     case TurnRight:
-      _motor.steps = 50;
-      _motor.dir = TURNRIGHT;
+	  if(_motor.position<-1200)
+	  {
+		  _motor.steps = 1000;
+		  _motor.dir = TURNLEFT;
+	  }
+	  else
+	  {
+		  _motor.steps = 25;
+		  _motor.dir = TURNRIGHT;
+	  }
+      Serial.println("RIGHT\n");
       break;
 
     case Fixe:
+      _motor.steps = 0;
+      Serial.println("FIXE\n");
       break;
 
     case Recherche:
-      _motor.steps = 50;
-      if (_motor.position > 0)
-        _motor.dir = TURNLEFT;
-      else
+	  Serial.println("RECHERCHE\n");
+      _motor.steps = 75;
+      if (_motor.position > 800)
         _motor.dir = TURNRIGHT;
+      else if (_motor.position < -800)
+        _motor.dir = TURNLEFT;
       break;
+   
+	case None:
+	  Serial.println("NONE\n");
+	  _motor.steps = 0;
+	  break;
 
     default:
+	  Serial.println("ERROR\n");
       _motor.steps = 0;
       break;
-  }
+	}
+}
+
+void Tourelle::setSens(int sens)
+{
+	if (sens != _sens)
+	{
+		_motor.steps = 500;
+		_sens = sens;
+		if (sens = FACEAV)
+			_motor.dir = TURNRIGHT;
+		else
+			_motor.dir = TURNLEFT;
+	}
 }

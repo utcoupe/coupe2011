@@ -4,6 +4,7 @@
 #include "AFMotor.h"
 #include "ping.h"
 #include "message.h"
+#include "sensor.h"
 #include <Servo.h>
 #include <WProgram.h>
 
@@ -12,9 +13,9 @@
 #define STYLE SINGLE
 #define SPEED 30000
 #define MAXDIST 300 // cm
-#define TEMPO 50 // ms
+#define TEMPO 20 // ms
 #define INCREMENT 10
-#define DIFFMAX 10 
+#define DIFFMAX  10
 #define MARGE_BORD 10
 #define SETUP_TIMEOUT 1000
 
@@ -26,8 +27,8 @@
 #define TURNRIGHT BACKWARD
 #define TURNLEFT FORWARD
 
-#define PIN_PING_GAUCHE 24
-#define PIN_PING_DROITE 22
+#define PIN_PING_GAUCHE 24 //noir
+#define PIN_PING_DROITE 22 //marron
 
 class Stepper : public AF_Stepper
 {
@@ -59,7 +60,7 @@ private:
 	{
 		TurnRight = 1,
 		TurnLeft,
-    Fixe,
+		Fixe,
 		Recherche,
 		None
 	};
@@ -69,13 +70,6 @@ private:
 		RightPing,
 		LeftPing
 	};
-	
-	struct TargetCoord
-	{
-		int x;
-		int y;
-    int distance;
-	};
 
 	Stepper _motor;
 	Ping _leftPing;
@@ -84,15 +78,16 @@ private:
 	int _robot_pos_x;
 	int _robot_pos_y;
 	int _robot_angle;
-  int _obj_x;
-  int _obj_y;
+    int _obj_x;
+    int _obj_y;
 	int _distanceGauche;
 	int _distanceDroite;
 	long long _millitime;
 	PingTurn _pingTurn;
+	int _sens;
 	
-	TargetCoord findTargetCoord(int angleTourelle, int distance);
-	bool targetInRange(TargetCoord targetCoord);
+	void findTargetCoord(int angleTourelle, int distance, int* target_x, int* target_y);
+	bool targetInRange(int target_x, int target_y);
 	void measureDistances();
 	void chooseMode();
 	void setMotorParameters();
@@ -102,10 +97,12 @@ public:
 	int setup();
 	void loop();
 	void update_pos(int xUpdate, int yUpdate, int angleRUpdate);
+	void setSens(int sens);
 };
 
 int setupTourelle();
 void loopTourelle();
 void update_pos(int xUpdate, int yUpdate, int angleRUpdate);
+void changerSensTourelle(int sens);
 
 #endif
