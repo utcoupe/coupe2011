@@ -231,7 +231,6 @@ class Robot:
 		self.write("relachement...")
 		self.waitMSSignal(ARRIERE, 0)
 		
-		self.write("* TEST MS *", colorConsol.HEADER)
 		
 		self.activeReset = True
 		
@@ -246,6 +245,8 @@ class Robot:
 				time.sleep(0.5)
 			if MOD == DEBUG:
 				time.sleep(2)
+				self.test()
+				exit()
 				self.color = RED
 				self.pos = (1500,1050,0)
 				print self._volerPion(AVANT)
@@ -1435,6 +1436,8 @@ class Robot:
 		if loop: loop.stop()
 		if fifo: self.client.removeFifo(fifo)
 
+
+
 	def _volerPion(self, id_pince):
 		"""
 		@todo décommenter
@@ -1443,12 +1446,23 @@ class Robot:
 		"""
 		#self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 		#self.takeObj(id_pince)
+		last_pos = self.pos
 		case = self._findNearCaseToDump()
-		print case
 		l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
-		pos = l.pointFrom(170)
-		print pos
-		
+		pos_to_dump = l.pointFrom(170)
+		self.log(D_DELETE_PATH)
+		self.log(D_SHOW_PATH,((self.pos[0],self.pos[1]),(pos_to_dump[0],pos_to_dump[1])))
+		self.go_point(pos)
+		l = Line(Vec2(self.pos[0],self.pos[1]), Vec2(pos_to_dump[0],pos_to_dump[1]))
+		if id_pince == ARRIERE and abs(degrees(l.teta) - self.pos[2]) < 90:
+			self.tourne(degrees(l.teta) + 180)
+		elif id_pince == AVANT and abs(degrees(l.teta) - self.pos[2]) > 90:
+			self.tourne(degrees(l.teta))
+		self.dumpObj(id_pince)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, HAUT)
+		self.addBlockingCmd(1, 3, ID_AX12, Q_CLOSE, AVANT)
+		self.go_point(last_pos)
+
 		
 	def _findNearCaseToDump(self):
 		"""
@@ -1485,8 +1499,14 @@ class Robot:
 					d_near = len(l)
 					
 		return nearCase
-		
-		
+
+
+	def script_i_scan(self):
+		"""
+		(script IA)
+		Script utilisant les caméras smartphone
+		"""
+		pass
 		
 	####################################################################
 	#							TOOLS								   #
