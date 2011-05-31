@@ -231,6 +231,8 @@ class Robot:
 		self.write("relachement...")
 		self.waitMSSignal(ARRIERE, 0)
 		
+		self.write("* TEST MS *", colorConsol.HEADER)
+		
 		self.activeReset = True
 		
 			
@@ -642,7 +644,7 @@ class Robot:
 			nb_point_reach = 0
 			timeLastPing = 0
 			inPause = False
-			if 
+			
 			try:
 				while not self._e_stop.isSet() and nb_accuse_recep<len(path):
 					if inPause and time.time() - timeLastPing > 0.5:
@@ -1197,7 +1199,7 @@ class Robot:
 		self._takePionVert(0,AVANT)
 		time.sleep(1)
 		l = Line(Vec2(CASES[0][1].x,CASES[0][1].y),Vec2(self.pos[0],self.pos[1]))
-		self.go_point(l.pointFrom(-(R_PION + D_CENTER_2_PINCE))
+		self.go_point(l.pointFrom(-(R_PION + D_CENTER_2_PINCE)))
 		self.dumpObj(AVANT)
 		while True:
 			r = self.do_path(((800,700),(2200,700)))
@@ -1624,9 +1626,9 @@ class Robot:
 		Le sens dans lequel va avancer le robot pour la prochaine cible
 		"""
 		self.update_pos()
-		l = Line(Vec2(self.pos[
+		#l = Line(Vec2(self.pos[
 
-	def self.print_ex(ex)(self, ex):
+	def print_ex(self, ex):
 		self.write(traceback.print_tb(sys.exc_info()[2]) + "\n" + str(ex), colorConsol.FAIL)
 			
 	
