@@ -70,7 +70,11 @@ RECAL_A		= 5
 X_PRISE = 300
 X_DEPLACEMENT = 550
 
+# distance entre le centre du robot et le fond des pinces (mm)
+D_CENTER_2_PINCE = 60
 
+# rayon d'un pion (mm)
+R_PION = 100
 
 CASES = []
 # initialisation des cases
@@ -440,7 +444,7 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		except Exception as ex:
-			self.write(ex, colorConsol.FAIL)
+			self.print_ex(ex)
 			retour = -101
 		finally:
 			self.client.removeFifo(fifo)
@@ -470,7 +474,7 @@ class Robot:
 				if m.id_cmd == W_MS and int(m.content.split(C_SEP_SEND)[1]) == state:
 					break
 		except Exception as ex:
-			self.write(ex, colorConsol.FAIL)
+			self.print_ex(ex)
 		finally:
 			self.client.removeFifo(fifo)
 		
@@ -597,7 +601,10 @@ class Robot:
 		fifo = self.client.addFifo( MsgFifo(Q_POSITION) )
 		self.addCmd(ID_ASSERV, Q_POSITION)
 		m = fifo.getMsg()
-		self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+		try:
+			self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+		except Exception as ex:
+			self.print_ex(ex)
 		self.write("NEW POS : "+str(self.pos))
 		self.client.removeFifo(fifo)
 		self.debug.log(D_UPDATE_POS, self.pos)
@@ -635,7 +642,7 @@ class Robot:
 			nb_point_reach = 0
 			timeLastPing = 0
 			inPause = False
-			#loopPosition = None
+			if 
 			try:
 				while not self._e_stop.isSet() and nb_accuse_recep<len(path):
 					if inPause and time.time() - timeLastPing > 0.5:
@@ -658,9 +665,6 @@ class Robot:
 				
 				self.write("Tous les accusés de receptions reçus")
 
-				self.addCmd(ID_ASSERV, Q_GETSENS)
-				#loopPosition = LoopCmd(self, 1, 1, ID_ASSERV, Q_POSITION)
-				#loopPosition.start()
 				
 				last_pos = copy.copy(self.pos)
 				while not self._e_stop.isSet() and nb_point_reach<len(path):
@@ -672,8 +676,6 @@ class Robot:
 					if m.id_cmd == Q_GOAL_ABS:
 						self.addCmd(ID_ASSERV, Q_GETSENS)
 						nb_point_reach += 1
-					elif m.id_cmd == Q_GETSENS:
-						self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
 					elif m.id_cmd == Q_KILL: # arret
 						raise KillException("Q_KILL")
 					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
@@ -697,10 +699,9 @@ class Robot:
 				self.write(ex, colorConsol.FAIL)
 				retour = E_TIMEOUT
 			except Exception as ex:
-				self.write(ex, colorConsol.FAIL)
+				self.print_ex(ex)
+				retour = -101
 			finally:
-				# arret de la récupération en boucle de la position
-				#if loopPosition: loopPosition.stop()
 				# destruction de la fifo
 				self.client.removeFifo(fifo)
 				# arret de l'écoute des pings
@@ -763,7 +764,8 @@ class Robot:
 						self.write(ex, colorConsol.FAIL)
 						retour = E_TIMEOUT
 					except Exception as ex:
-						self.write(ex, colorConsol.FAIL)
+						self.print_ex(ex)
+						retour = -101
 					finally:
 						self.client.removeFifo(fifo)
 			else:
@@ -829,7 +831,8 @@ class Robot:
 					self.write(ex, colorConsol.FAIL)
 					retour = E_TIMEOUT
 				except Exception as ex:
-					self.write(ex, colorConsol.FAIL)
+					self.print_ex(ex)
+					retour = -101
 				finally:
 					# destruction de la fifo
 					self.client.removeFifo(fifo)
@@ -874,8 +877,8 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		except Exception as ex:
-			self.write(ex, colorConsol.FAIL)
-			retour = -42
+			self.print_ex(ex)
+			retour = -101
 		return retour
 		
 	####################################################################
@@ -1183,7 +1186,25 @@ class Robot:
 		Rusher pour aller chercher un pion vert adverse et le faire chier
 		"""
 		pass
-	
+
+
+	def script_homologation(self):
+		"""
+		(script IA)
+		Homologation : prend un pion et le pose
+		"""
+		self.do_path(((self.symX(800), 300), (self.symX(X_DEPLACEMENT),690)))
+		self._takePionVert(0,AVANT)
+		time.sleep(1)
+		l = Line(Vec2(CASES[0][1].x,CASES[0][1].y),Vec2(self.pos[0],self.pos[1]))
+		self.go_point(l.pointFrom(-(R_PION + D_CENTER_2_PINCE))
+		self.dumpObj(AVANT)
+		while True:
+			r = self.do_path(((800,700),(2200,700)))
+			if r == Q_KILL:
+				break
+		
+		
 	
 	def script_allerPoserTourVerte(self, id_pince):
 		"""
@@ -1404,7 +1425,7 @@ class Robot:
 					self.write(ex, colorConsol.FAIL)
 					retour = E_TIMEOUT
 				except Exception as ex:
-					self.write(ex, colorConsol.FAIL)
+					self.print_ex(ex)
 				finally:
 					self.client.removeFifo(fifo)
 
@@ -1414,6 +1435,7 @@ class Robot:
 
 	def _volerPion(self, id_pince):
 		"""
+		@todo décommenter
 		(script IA)
 		Un pion est tombé par hasard dans nos pinces ? on le prend !
 		"""
@@ -1596,7 +1618,18 @@ class Robot:
 
 	def pos_rel(self, pos, t, d):
 		return (pos[0] + int(cos(t) * d), int(pos[1] + sin(t) * d))
-		
+
+	def sens_next_cible(self, cible):
+		"""
+		Le sens dans lequel va avancer le robot pour la prochaine cible
+		"""
+		self.update_pos()
+		l = Line(Vec2(self.pos[
+
+	def self.print_ex(ex)(self, ex):
+		self.write(traceback.print_tb(sys.exc_info()[2]) + "\n" + str(ex), colorConsol.FAIL)
+			
+	
 if __name__ == '__main__':
 	robot = Robot()
 	robot.start()

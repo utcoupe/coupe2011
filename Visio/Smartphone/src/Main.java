@@ -50,7 +50,10 @@ public class Main {
 	static String projectPath = "";
 	static String classPath = "";
 	static String configPath = "main_config.data";
+	
 	static boolean enableView = true;
+	static String IP_REMOTE = "10.42.43.1";
+	static String IP_SMARTPHONE = "192.168.43.1";
 
 	static public void main(String[] args) {
 		System.out.println(TAG + "starting...");
@@ -60,14 +63,17 @@ public class Main {
 		classPath = str.getPath();
 		projectPath = classPath + "..";
 		System.setProperty("user.dir", projectPath);
-		
+
 		// set config
-		if (args.length == 1) {
-			if (args[0].equals("noview")) {
-				enableView = false;
-			}
+		if (args.length != 3) {
+			System.out.println("usage: java -cp <classpath> Main view/noview ip_ ip_smartphone");
+			return;
 		}
-		
+
+		String view = args[0];
+		enableView = args[0].equals("view");
+		IP_REMOTE = args[1];
+		IP_SMARTPHONE = args[2];
 
 		load();
 		Runtime.getRuntime().addShutdownHook(new Thread() {
@@ -149,16 +155,14 @@ class NetworkClient extends Thread implements Observer {
 
 	final static int PORT_REMOTE = 50000;
 	final static int PORT_LOCAL = 1234;
-	final static String IP_REMOTE = "192.168.1.136";
 	final static String TAG = "[NetworkClient] ";
 
 	static public void connectNetwork(final PictureSupplier pictureSupplier) {
-
 		new Thread(new Runnable() {
 			public void run() {
 				try {
 					System.out.println(TAG + "serveur remote port : " + PORT_REMOTE);
-					Socket socketServeurPython = new Socket(IP_REMOTE, PORT_REMOTE);
+					Socket socketServeurPython = new Socket(Main.IP_REMOTE, PORT_REMOTE);
 					NetworkClient client = new NetworkClient(socketServeurPython, pictureSupplier);
 					client.run();
 					System.out.println(TAG + "serveur remote connected");
@@ -219,7 +223,7 @@ class NetworkClient extends Thread implements Observer {
 				} else if (idcmd.equals("1")) {
 					// ping
 					out.println("-1.Pong");
-				} else if (idcmd.equals("69")) {
+				} else if (idcmd.equals("13")) {
 					// exit
 					// out.println("Pong");
 				} else if (idcmd.equals("80")) { // figures
@@ -300,8 +304,7 @@ class PictureSupplier extends Observable implements Observer {
 		System.out.println(TAG + "take photo...");
 		BufferedImage image = null;
 		try {
-			//URL url = new URL("http://192.168.43.1:8080/shot.jpg");
-			URL url = new URL("http://192.168.1.1:8080/shot.jpg");
+			URL url = new URL("http://"+Main.IP_SMARTPHONE+":8080/shot.jpg");
 			image = ImageIO.read(url);
 			image = ImageUtils.rotate(image, 90);
 			this.image = image;
