@@ -1,19 +1,21 @@
+/*
+ * encoder.h
+ *
+ *  Created on: 13 janv. 2011
+ *      Author: HoHen
+ */
+
 #ifndef ENCODER_H_
 #define ENCODER_H_
 
-#define PIN_AR_A 18 //bleu //arriere
-#define PIN_AR_B 19 //blanc //arriere
-#define PIN_AV_A 20 //bleu //avant
-#define PIN_AV_B 21 //blanc //avant
-#define INTERRUPT_AR_A 5
-#define INTERRUPT_AR_B 4
-#define INTERRUPT_AV_A 2
-#define INTERRUPT_AV_B 3
-#define PIN_MS_RECAL_AV_HAUT	41 //21
-#define PIN_MS_RECAL_AV_BAS		43 //20
-#define PIN_MS_RECAL_AR_HAUT	47 //18
-#define PIN_MS_RECAL_AR_BAS		45 //19
-#define SEUIL_VITESSE 0.7f
+#define PIN_LEFT_A 18 //bleu //arriere
+#define PIN_LEFT_B 19 //blanc //arriere
+#define PIN_RIGHT_A 20 //bleu //avant
+#define PIN_RIGHT_B 21 //blanc //avant
+#define INTERRUPT_LEFT_A 5
+#define INTERRUPT_LEFT_B 4
+#define INTERRUPT_RIGHT_A 2
+#define INTERRUPT_RIGHT_B 3
 
 #include "pinceControl.h"
 #include "wiring.h"
@@ -30,17 +32,17 @@ void encoderSafe();
  *  If B leads A, then the disk is rotating in a counter-clockwise direction.
  *  */
 
-void valueChangeOnEncoderARPinA();
-void valueChangeOnEncoderARPinB();
-void valueChangeOnEncoderAVPinA();
-void valueChangeOnEncoderAVPinB();
-/*void valueChangeOnMSRecalAVBas();
+/*void valueChangeOnEncoderLeftPinA();
+void valueChangeOnEncoderLeftPinB();
+void valueChangeOnEncoderRightPinA();
+void valueChangeOnEncoderRightPinB();*/
+void valueChangeOnMSRecalAVBas();
 void valueChangeOnMSRecalAVHaut();
 void valueChangeOnMSRecalARBas();
-void valueChangeOnMSRecalARHaut();*/
+void valueChangeOnMSRecalARHaut();
 
-extern long value_AR_enc;//AR
-extern long value_AV_enc;//AV
+extern long value_left_enc;//AR
+extern long value_right_enc;//AV
 extern long goal_position_AV;
 extern long goal_position_AR;
 

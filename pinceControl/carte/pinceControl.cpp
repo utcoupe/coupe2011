@@ -14,12 +14,12 @@ void initPinceControl()
 int pinceRecal(int id, char face)
 {
 	sendMessage(id, 1);
-	//pinMode(PIN_MS_RECAL_AV, OUTPUT);
-	//digitalWrite(PIN_MS_RECAL_AV, LOW);
-	//pinMode(PIN_MS_RECAL_AR, OUTPUT);
-	//digitalWrite(PIN_MS_RECAL_AR, LOW);
-	//pinMode(PIN_MS_RECAL_AV,INPUT);
-	//pinMode(PIN_MS_RECAL_AR,INPUT);
+	pinMode(PIN_MS_RECAL_AV, OUTPUT);
+	digitalWrite(PIN_MS_RECAL_AV, LOW);
+	pinMode(PIN_MS_RECAL_AR, OUTPUT);
+	digitalWrite(PIN_MS_RECAL_AR, LOW);
+	pinMode(PIN_MS_RECAL_AV,INPUT);
+	pinMode(PIN_MS_RECAL_AR,INPUT);
 	goal_position_AV=-1;
 	goal_position_AR=-1;
 	if(face==AVANT){

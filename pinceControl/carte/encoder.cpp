@@ -1,87 +1,61 @@
+/*
+ * encoder.cpp
+ *
+ *  Created on: 13 janv. 2011
+ *      Author: HoHen
+ */
 #include "encoder.h"
 
-int state_AR_pinA;
-int state_AR_pinB;
-int state_AV_pinA;
-int state_AV_pinB;
+int state_left_pinA;
+int state_left_pinB;
+int state_right_pinA;
+int state_right_pinB;
 
-long value_AR_enc;//AR left
-long value_AV_enc;//AV right
+long value_left_enc;//AR
+long value_right_enc;//AV
 long goal_position_AV,goal_position_AR;
-
-void arretMsgAV(){
-	setAVPWM(0x00);
-	if(msg_position_AV!=-1){
-		sendMessage(msg_position_AV,2);
-		msg_position_AV=-1;
-	}
-}
-
-void arretMsgAR(){
-	setARPWM(0x00);
-	if(msg_position_AR!=-1){
-		sendMessage(msg_position_AR,2);
-		msg_position_AR=-1;
-	}
-}
-
 
 void testAV()
 {
 	if (goal_position_AV < 0)
 		return;
-	if (value_AV_enc < goal_position_AV-MARGE_MARCHE)
+	if (value_right_enc < goal_position_AV-MARGE_MARCHE)
 		setAVPWM(PWM_MOVE);
-	else if (value_AV_enc < goal_position_AV-MARGE_MAINTIENT)
+	else if (value_right_enc < goal_position_AV-MARGE_MAINTIENT)
 		setAVPWM(PWM_MAINTIENT);
-	else if (value_AV_enc > goal_position_AV+MARGE_MARCHE)
+	else if (value_right_enc > goal_position_AV+MARGE_MARCHE)
 		setAVPWM(-PWM_MOVE);
-	else if (value_AV_enc > goal_position_AV+MARGE_MAINTIENT)
+	else if (value_right_enc > goal_position_AV+MARGE_MAINTIENT)
 		setAVPWM(-PWM_MAINTIENT);
 	else //arret
-		arretMsgAV();
-		
-	if (digitalRead(PIN_MS_RECAL_AV_HAUT) == HIGH)
 	{
-		value_AV_enc = POSITION_MAX;
-		//sendMessage(-101, (char*)"ar haut");
-		//arretMsgAV();
-
-	}else if (digitalRead(PIN_MS_RECAL_AV_BAS) == HIGH)
-	{
-		value_AV_enc = 0;
-		//sendMessage(-101, (char*)"ar haut");
-		//arretMsgAV();
+		setAVPWM(0x00);
+		if(msg_position_AV!=-1){
+			sendMessage(msg_position_AV,2);
+			msg_position_AV=-1;
+		}
 	}
-		
 }
 
 void testAR()
 {
 	if (goal_position_AR < 0)
 		return;
-	if (value_AR_enc < goal_position_AR-MARGE_MARCHE)
+	if (value_left_enc < goal_position_AR-MARGE_MARCHE)
 		setARPWM(PWM_MOVE);
-	else if (value_AR_enc < goal_position_AR-MARGE_MAINTIENT)
+	else if (value_left_enc < goal_position_AR-MARGE_MAINTIENT)
 		setARPWM(PWM_MAINTIENT);
-	else if (value_AR_enc > goal_position_AR+MARGE_MARCHE)
+	else if (value_left_enc > goal_position_AR+MARGE_MARCHE)
 		setARPWM(-PWM_MOVE);
-	else if (value_AR_enc > goal_position_AR+MARGE_MAINTIENT)
+	else if (value_left_enc > goal_position_AR+MARGE_MAINTIENT)
 		setARPWM(-PWM_MAINTIENT);
 	else //arret
-		arretMsgAR();
-		
-	if (digitalRead(PIN_MS_RECAL_AR_HAUT) == HIGH)
 	{
-		value_AR_enc = POSITION_MAX;
-		//sendMessage(-101, (char*)"ar haut");
-		//arretMsgAR();
-
-	}else if (digitalRead(PIN_MS_RECAL_AR_BAS) == HIGH)
-	{
-		value_AR_enc = 0;
-		//sendMessage(-101, (char*)"ar haut");
-		//arretMsgAR();
+		setARPWM(0x00);
+		if(msg_position_AR!=-1){
+			sendMessage(msg_position_AR,2);
+			msg_position_AR=-1;
+		}
 	}
 }
 
@@ -91,33 +65,14 @@ void testAR()
  */
 void encoderSafe()
 {
-	static long long millis_old=0;
-	millis_old=millis();
-	
-	static int encoder_AR_old=0;
-	encoder_AR_old=value_AR_enc;
-	static int encoder_AV_old=0;
-	encoder_AR_old=value_AV_enc;
-	
-	float vitesseAR = ((float)abs(encoder_AR_old-value_AR_enc))/(float)(millis()-millis_old);
-	float vitesseAV = ((float)abs(encoder_AV_old-value_AV_enc))/(float)(millis()-millis_old);
-	
-	//sendMessage(-500,vitesseAV);
-	
-	if(vitesseAR<=SEUIL_VITESSE){
-		setARPWM(0x00);
-	}
-	if(vitesseAV<=SEUIL_VITESSE){
-		setAVPWM(0x00);
-	}
 	/*static int last_left_enc_value = 0;
 	//static int last_right_enc_value = 0;
 	
 	if (goal_position_AR >= 0
-		and ((value_AR_enc < goal_position_AR-MARGE_MAINTIENT)
-		or (value_AR_enc > goal_position_AR+MARGE_MAINTIENT)))
+		and ((value_left_enc < goal_position_AR-MARGE_MAINTIENT)
+		or (value_left_enc > goal_position_AR+MARGE_MAINTIENT)))
 	{
-		if (abs(last_left_enc_value - value_AR_enc) < 10)
+		if (abs(last_left_enc_value - value_left_enc) < 10)
 		{
 			goal_position_AV = -1;
 			setARPWM(0x00);
@@ -126,10 +81,10 @@ void encoderSafe()
 	}*/
 	
 	/*if (goal_position_AV >= 0
-		and ((value_AV_enc < goal_position_AV-MARGE_MAINTIENT)
-		or (value_AV_enc > goal_position_AV+MARGE_MAINTIENT)))
+		and ((value_right_enc < goal_position_AV-MARGE_MAINTIENT)
+		or (value_right_enc > goal_position_AV+MARGE_MAINTIENT)))
 	{
-		if (abs(last_right_enc_value - value_AV_enc) < 10)
+		if (abs(last_right_enc_value - value_right_enc) < 10)
 		{
 			goal_position_AR = -1;
 			setAVPWM(0x00);
@@ -139,122 +94,117 @@ void encoderSafe()
 }
 
 void initEncoders(){
-	value_AR_enc = 0;
-	value_AV_enc = 0;
+	value_left_enc = 0;
+	value_right_enc = 0;
 
-	pinMode(PIN_AR_A,INPUT);
-	pinMode(PIN_AR_B,INPUT);
-	pinMode(PIN_AV_A,INPUT);
-	pinMode(PIN_AV_B,INPUT);
-	
-	pinMode(PIN_MS_RECAL_AV_HAUT,INPUT);
-	pinMode(PIN_MS_RECAL_AV_BAS,INPUT);
-	pinMode(PIN_MS_RECAL_AR_HAUT,INPUT);
-	pinMode(PIN_MS_RECAL_AR_BAS,INPUT);
+	pinMode(PIN_LEFT_A,INPUT);
+	pinMode(PIN_LEFT_B,INPUT);
+	pinMode(PIN_RIGHT_A,INPUT);
+	pinMode(PIN_RIGHT_B,INPUT);
 
-	digitalWrite(PIN_AR_A, HIGH);
-	digitalWrite(PIN_AR_B, HIGH);
-	digitalWrite(PIN_AV_A, HIGH);
-	digitalWrite(PIN_AV_B, HIGH);
+	digitalWrite(PIN_LEFT_A, HIGH);
+	digitalWrite(PIN_LEFT_B, HIGH);
+	digitalWrite(PIN_RIGHT_A, HIGH);
+	digitalWrite(PIN_RIGHT_B, HIGH);
 
-	state_AR_pinA = digitalRead(PIN_AR_A);
-	state_AR_pinB = digitalRead(PIN_AR_B);
-	state_AV_pinA = digitalRead(PIN_AV_A);
-	state_AV_pinB = digitalRead(PIN_AV_B);
+	state_left_pinA = digitalRead(PIN_LEFT_A);
+	state_left_pinB = digitalRead(PIN_LEFT_B);
+	state_right_pinA = digitalRead(PIN_RIGHT_A);
+	state_right_pinB = digitalRead(PIN_RIGHT_B);
 
-	attachInterrupt(INTERRUPT_AR_A,valueChangeOnEncoderARPinA,CHANGE);
-	attachInterrupt(INTERRUPT_AV_B,valueChangeOnEncoderARPinB,CHANGE);
-	attachInterrupt(INTERRUPT_AV_A,valueChangeOnEncoderAVPinA,CHANGE);
-	attachInterrupt(INTERRUPT_AV_B,valueChangeOnEncoderAVPinB,CHANGE);
-	/*attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnMSRecalARHaut,CHANGE);
-	attachInterrupt(INTERRUPT_AV_B,valueChangeOnMSRecalARBas,CHANGE);
+	//attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnEncoderLeftPinA,CHANGE);
+	//attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnEncoderLeftPinB,CHANGE);
+	//attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnEncoderRightPinA,CHANGE);
+	//attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnEncoderRightPinB,CHANGE);
+	attachInterrupt(INTERRUPT_LEFT_A,valueChangeOnMSRecalARHaut,CHANGE);
+	attachInterrupt(INTERRUPT_LEFT_B,valueChangeOnMSRecalARBas,CHANGE);
 	attachInterrupt(INTERRUPT_RIGHT_A,valueChangeOnMSRecalAVHaut,CHANGE);
-	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnMSRecalAVBas,CHANGE);*/
+	attachInterrupt(INTERRUPT_RIGHT_B,valueChangeOnMSRecalAVBas,CHANGE);
 }
 
 
-void valueChangeOnEncoderARPinA(){
-	int new_state = digitalRead(PIN_AR_A);
+void valueChangeOnEncoderLeftPinA(){
+	int new_state = digitalRead(PIN_LEFT_A);
 
 	if(new_state == HIGH)
-		if(state_AR_pinB == HIGH)
-			value_AR_enc--;
+		if(state_left_pinB == HIGH)
+			value_left_enc--;
 		else
-			value_AR_enc++;
+			value_left_enc++;
 
 	else
-		if(state_AR_pinB == HIGH)
-			value_AR_enc++;
+		if(state_left_pinB == HIGH)
+			value_left_enc++;
 		else
-			value_AR_enc--;
+			value_left_enc--;
 
-	state_AR_pinA = new_state;
+	state_left_pinA = new_state;
 	testAR();
 }
 
-void valueChangeOnEncoderARPinB(){
-	int new_state = digitalRead(PIN_AR_B);
+void valueChangeOnEncoderLeftPinB(){
+	int new_state = digitalRead(PIN_LEFT_B);
 
 	if(new_state == HIGH)
-		if(state_AR_pinA == HIGH)
-			value_AR_enc++;
+		if(state_left_pinA == HIGH)
+			value_left_enc++;
 		else
-			value_AR_enc--;
+			value_left_enc--;
 
 	else
-		if(state_AR_pinA == HIGH)
-			value_AR_enc--;
+		if(state_left_pinA == HIGH)
+			value_left_enc--;
 		else
-			value_AR_enc++;
+			value_left_enc++;
 
-	state_AR_pinB = new_state;
+	state_left_pinB = new_state;
 }
 
-void valueChangeOnEncoderAVPinA(){
-	int new_state = digitalRead(PIN_AV_A);
+void valueChangeOnEncoderRightPinA(){
+	int new_state = digitalRead(PIN_RIGHT_A);
 
 	if(new_state == HIGH)
-		if(state_AV_pinB == HIGH)
-			value_AV_enc--;
+		if(state_right_pinB == HIGH)
+			value_right_enc--;
 		else
-			value_AV_enc++;
+			value_right_enc++;
 
 	else
-		if(state_AV_pinB == HIGH)
-			value_AV_enc++;
+		if(state_right_pinB == HIGH)
+			value_right_enc++;
 		else
-			value_AV_enc--;
+			value_right_enc--;
 
-	state_AV_pinA = new_state;
+	state_right_pinA = new_state;
 	testAV();
 }
 
-void valueChangeOnEncoderAVPinB(){
-	int new_state = digitalRead(PIN_AV_B);
+void valueChangeOnEncoderRightPinB(){
+	int new_state = digitalRead(PIN_RIGHT_B);
 
 	if(new_state == HIGH)
-		if(state_AV_pinA == HIGH)
-			value_AV_enc++;
+		if(state_right_pinA == HIGH)
+			value_right_enc++;
 		else
-			value_AV_enc--;
+			value_right_enc--;
 
 	else
-		if(state_AV_pinA == HIGH)
-			value_AV_enc--;
+		if(state_right_pinA == HIGH)
+			value_right_enc--;
 		else
-			value_AV_enc++;
+			value_right_enc++;
 
-	state_AV_pinB = new_state;
+	state_right_pinB = new_state;
 }
 
 
-/*void valueChangeOnMSRecalAVBas()
+void valueChangeOnMSRecalAVBas()
 {
 	delay(500);
 	
 	if (digitalRead(PIN_MS_RECAL_AV_BAS) == HIGH)
 	{
-		value_AV_enc = 0;
+		value_right_enc = 0;
 		sendMessage(-101, (char*)"av bas");
 		setAVPWM(0x00);
 		if(msg_position_AV != -1){
@@ -271,7 +221,7 @@ void valueChangeOnMSRecalAVHaut()
 	
 	if (digitalRead(PIN_MS_RECAL_AV_HAUT) == HIGH)
 	{
-		value_AV_enc = POSITION_MAX;
+		value_right_enc = POSITION_MAX;
 		sendMessage(-101, (char*)"av haut");
 		setAVPWM(0x00);
 		if(msg_position_AV != -1){
@@ -288,7 +238,7 @@ void valueChangeOnMSRecalARBas()
 	
 	if (digitalRead(PIN_MS_RECAL_AR_BAS) == HIGH)
 	{
-		value_AR_enc = 0;
+		value_left_enc = 0;
 		sendMessage(-101, (char*)"ar bas");
 		setARPWM(0x00);
 		if(msg_position_AR != -1){
@@ -305,7 +255,7 @@ void valueChangeOnMSRecalARHaut()
 	
 	if (digitalRead(PIN_MS_RECAL_AR_HAUT) == HIGH)
 	{
-		value_AR_enc = POSITION_MAX;
+		value_left_enc = POSITION_MAX;
 		sendMessage(-101, (char*)"ar haut");
 		setARPWM(0x00);
 		if(msg_position_AR != -1){
@@ -313,4 +263,4 @@ void valueChangeOnMSRecalARHaut()
 			msg_position_AR=-1;
 		}
 	}
-}*/
+}

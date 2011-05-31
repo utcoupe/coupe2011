@@ -91,9 +91,9 @@ void cmd(int id, int header, int *args, int size){
 	    else
 	    {
 		if(args[0]==AVANT)
-		    sendMessage(id, value_AV_enc);
+		    sendMessage(id, value_right_enc);
 		else if(args[0]==ARRIERE)
-		    sendMessage(id, value_AR_enc);
+		    sendMessage(id, value_left_enc);
 		else
 		    sendMessage(id, -1);
 	    }
@@ -128,17 +128,20 @@ void cmd(int id, int header, int *args, int size){
 	{
 	    if(args[0]==FACEAV)
 	    {
-			updatePosition(FACEAV);
+			pingArMessageID=-42;
+			pingAvMessageID=id;
 			sendMessage(id, 1);
 	    }
 	    else if(args[0]==FACEAR)
 	    {
-			updatePosition(FACEAR);
+			pingAvMessageID=-42;
+			pingArMessageID=id;
 			sendMessage(id, 1);
 	    }
 	    else if(args[0]==-1)
 	    {
-			updatePosition(-1);
+			pingAvMessageID=-42;
+			pingArMessageID=-42;
 			sendMessage(id, 1);
 	    }
 	    else
