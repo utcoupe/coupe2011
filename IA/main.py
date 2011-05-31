@@ -30,10 +30,6 @@ MOD			= DEBUG
 ##############################
 ##			IMPORTS			##
 ##############################
-from pince import *
-from robotClient import *
-from msgFifo import *
-from loopCmd import *
 import time
 import math
 import threading
@@ -43,6 +39,11 @@ from debugClient import *
 from pathfinding import *
 from geometry.vec import *
 from geometry.circle import *
+from pince import *
+from robotClient import *
+from msgFifo import *
+from loopCmd import *
+from case import *
 
 
 MAX_MSG		= 10000
@@ -69,6 +70,16 @@ RECAL_A		= 5
 X_PRISE = 300
 X_DEPLACEMENT = 550
 
+
+
+CASES = []
+# initialisation des cases
+for x in xrange(625,2500,350):
+	CASES.append([Case(x,250)])
+	for y in xrange(525, 1600,350):
+		CASES[len(CASES)-1].append(Case(x,y))
+
+				
 class Robot:
 	def __init__(self):
 		"""
@@ -76,6 +87,8 @@ class Robot:
 		Lorsqu'il reçoit un message, il sait de qui il provient grâce au server,
 		il retrouve ensuite à quelle commande il correspond grâce à l'id_msg. (opération effectuée dans RobotClient)
 		"""
+
+		
 		self._lock_write = threading.Lock()
 		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
 		self._e_stop = threading.Event() # pour arreter le robot
@@ -115,8 +128,8 @@ class Robot:
 		
 		threading.Thread(None, self._loopReset, "Robot._loopReset()").start()
 		threading.Thread(None, self._loopUpdatePos, "Robot._loopUpdatePos").start()
-
 		
+
 		
 	def _loopReset(self):
 		self.e_validate_ident.wait()
@@ -227,10 +240,14 @@ class Robot:
 				time.sleep(0.5)
 			if MOD == DEBUG:
 				time.sleep(2)
-				#self.ratisserMap()
+				self.color = RED
+				self.pos = (1500,1050,0)
+				print self._volerPion(AVANT)
+				exit()
+				#self.script_ratisserMap()
 				#listeVerte = self.scanListeVerte()
 				#print listeVerte
-				#self.construireTourVerte()
+				#self.script_construireTourVerte()
 				#self.test()
 				#continue
 				"""self.color = BLUE
@@ -246,12 +263,12 @@ class Robot:
 					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1500, 1750, 90)
 					self.write("")
-					self.ratisserMap()
+					self.script_ratisserMap()
 					#self._combinerFaces(AVANT)
 					#continue
 					self.go_point(self.symX(800), 300)
-					id_pince = self.construireTourVerte(listeVerte)
-					self.allerPoserTourVerte(id_pince)
+					id_pince = self.script_construireTourVerte(listeVerte)
+					self.script_allerPoserTourVerte(id_pince)
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
 							raw_input("bouh tu t'es coincé")"""
@@ -284,8 +301,8 @@ class Robot:
 				if self.preparation() >= 0:
 					listeVerte = self.scanListeVerte()
 					self.go_point(self.symX(800), 300)
-					id_pince = self.construireTourVerte()
-					self.allerPoserTourVerte(id_pince)
+					id_pince = self.script_construireTourVerte()
+					self.script_allerPoserTourVerte(id_pince)
 			"""else:
 				r = self.preparation()
 			self.write("preparation %s"%r)
@@ -485,6 +502,7 @@ class Robot:
 		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
 		self._e_stop.set()
 		self.client.stop()
+
 	
 	def reset(self):
 		"""
@@ -1159,7 +1177,15 @@ class Robot:
 	####################################################################
 	#							IA SCRIPT							   #
 	####################################################################
-	def allerPoserTourVerte(self, id_pince):
+	def script_rush(self):
+		"""
+		(script IA)
+		Rusher pour aller chercher un pion vert adverse et le faire chier
+		"""
+		pass
+	
+	
+	def script_allerPoserTourVerte(self, id_pince):
 		"""
 		Script pour aller poser la tour verte
 
@@ -1179,8 +1205,9 @@ class Robot:
 		self.addCmd(ID_ASSERV, Q_PWM, pwm, 2000)
 		
 	
-	def construireTourVerte(self, listeVerte):
+	def script_construireTourVerte(self, listeVerte):
 		"""
+		(script IA)
 		Script pour construire une tour à partir de ce qu'il y a dans la zone verte
 
 		@return (int) id_pince avec la tour
@@ -1220,7 +1247,7 @@ class Robot:
 			self._takePionVert(p3,ARRIERE) # prend le pion dans la pince arrière
 			self.tourne(-90)
 			self._combinerFaces(ARRIERE) # construit dans la pince arrière
-			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p2]) # devant le deuxième
+			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p2]-100) # devant le deuxième
 			self.dumpObj(ARRIERE)
 			self.takeObj(ARRIERE)
 			self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, HAUT)
@@ -1240,7 +1267,9 @@ class Robot:
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]) # devant le troisième
 			self._takePionVert(p3, p_with_pion) # prise troisième pion avec la pince maintenant vide
 			self.tourne(angle) # tourne
-			self._combinerFaces(p_with_tour)
+			if p3 > 2:
+				sefl.go_point(self.symX(X_DEPLACEMENT),listeVerte[p3]-200) # on recul un peu pour etre sur de ne pas se taper la bordure
+				self._combinerFaces(p_with_tour)
 			self.write("3 ème tour prise", colorConsol.OKGREEN)
 			return p_with_tour
 				
@@ -1280,70 +1309,7 @@ class Robot:
 			
 		return retour
 
-	def ratisserMap(self):
-		cases = []
-		for x in xrange(625,2500,350):
-			cases.append([(self.symX(x),250)])
-			for y in xrange(525, 1600,350):
-				cases[len(cases)-1].append((self.symX(x),y))
-		checksPoints = (cases[2][4], cases[0][2], cases[2][0], cases[4][2])
 
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
-		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
-		
-		fifo = None
-		loop = None
-		
-		while True:
-			for c in checksPoints:
-				fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_POSITION, Q_GETSENS, W_MS, W_PING_AV, W_PING_AR) )
-				self.addCmd(ID_ASSERV, Q_GOAL_ABS, c[0], c[1], VITESSE)
-				nb_recep = 0
-				last_pos = copy.copy(self.pos)
-				loop = LoopCmd(self, 0.2, 0.5, ID_ASSERV, Q_GETSENS)
-				loop.start()
-				try:
-					while True:
-						m = fifo.getMsg(2)
-						if m.id_cmd == Q_GOAL_ABS:
-							nb_recep+=1
-							if nb_recep > 1: break
-						elif m.id_cmd == W_MS:
-							self.write(m.content, colorConsol.WARNING)
-							self.write("WARNING : Robot.go_point : detection objet", colorConsol.WARNING)
-						elif m.id_cmd == Q_POSITION:
-							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
-							print new_pos, last_pos
-							if self._anomalie_deplacement((x,y), last_pos, new_pos):
-								self.write("WARNING : Robot.go_point : detection anomalie deplacement", colorConsol.WARNING)
-								#self.addCmd(ID_ASSERV, Q_STOP)
-								#retour = E_BLOCK
-								#break
-						elif m.id_cmd == Q_GETSENS:
-							self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
-						elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-							self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
-							self.addBlockingCmd(1, 5, ID_ASSERV, Q_STOP)
-							self.tourne(self.pos[2] + 90)
-							break
-						elif m.id_cmd == Q_KILL:
-							raise KillException("Q_KILL")
-				except KillException as ex:
-					self.write(ex, colorConsol.FAIL)
-					retour = Q_KILL
-				except TimeoutException as ex:
-					self.write(ex, colorConsol.FAIL)
-					retour = E_TIMEOUT
-				except Exception as ex:
-					self.write(ex, colorConsol.FAIL)
-				finally:
-					self.client.removeFifo(fifo)
-
-		self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
-		if loop: loop.stop()
-		if fifo: self.client.removeFifo(fifo)
-
-		
 		
 	def _combinerFaces(self, id_face):
 		"""
@@ -1375,6 +1341,128 @@ class Robot:
 		self.takeObj(id2) # reprend
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, id2, HAUT)
 
+
+
+	def script_ratisserMap(self):
+		"""
+		(script IA)
+		Tourner sur la carte pour tout shooter et prendre les pions si ils tombent dans nos pinces
+		"""
+		checksPoints = (CASES[self.symC(2)][4], CASES[self.symC(0)][2], CASES[self.symC(2)][0], CASES[self.symC(4)][2])
+			
+
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
+		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
+		
+		fifo = None
+		loop = None
+		
+		while True:
+			for c in checksPoints:
+				if fifo: self.client.removeFifo(fifo)
+				fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_POSITION, Q_GETSENS, W_MS, W_PING_AV, W_PING_AR) )
+				self.addCmd(ID_ASSERV, Q_GOAL_ABS, c.x, c.y, VITESSE)
+				nb_recep = 0
+				last_pos = copy.copy(self.pos)
+				loop = LoopCmd(self, 0.2, 0.5, ID_ASSERV, Q_GETSENS)
+				loop.start()
+				try:
+					while True:
+						m = fifo.getMsg(2)
+						if m.id_cmd == Q_GOAL_ABS:
+							nb_recep+=1
+							if nb_recep > 1: break
+						elif m.id_cmd == W_MS:
+							id_pince, id_state = [ int(_) for _ in m.content.split(C_SEP_SEND) ]
+							self.write(m.content, colorConsol.WARNING)
+							if id_state == 1:
+								self.write("WARNING : Robot.go_point : detection objet", colorConsol.WARNING)
+								self._volerPion(id_pince, fifo)
+								fifo.clear()
+						elif m.id_cmd == Q_POSITION:
+							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
+							print new_pos, last_pos
+							if self._anomalie_deplacement((x,y), last_pos, new_pos):
+								self.write("WARNING : Robot.go_point : detection anomalie deplacement", colorConsol.WARNING)
+								#self.addCmd(ID_ASSERV, Q_STOP)
+								#retour = E_BLOCK
+								#break
+						elif m.id_cmd == Q_GETSENS:
+							self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
+						elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+							self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
+							self.addBlockingCmd(1, 5, ID_ASSERV, Q_STOP)
+							self.tourne(self.pos[2] + 90)
+							self.client.removeFifo(fifo)
+							break
+						elif m.id_cmd == Q_KILL:
+							raise KillException("Q_KILL")
+				except KillException as ex:
+					self.write(ex, colorConsol.FAIL)
+					retour = Q_KILL
+				except TimeoutException as ex:
+					self.write(ex, colorConsol.FAIL)
+					retour = E_TIMEOUT
+				except Exception as ex:
+					self.write(ex, colorConsol.FAIL)
+				finally:
+					self.client.removeFifo(fifo)
+
+		self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+		if loop: loop.stop()
+		if fifo: self.client.removeFifo(fifo)
+
+	def _volerPion(self, id_pince):
+		"""
+		(script IA)
+		Un pion est tombé par hasard dans nos pinces ? on le prend !
+		"""
+		#self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
+		#self.takeObj(id_pince)
+		case = self._findNearCaseToDump()
+		print case
+		l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
+		pos = l.pointFrom(170)
+		print pos
+		
+		
+	def _findNearCaseToDump(self):
+		"""
+		@todo décommenter le update_pos
+		Trouver une case proche de nous où l'on peut poser un pion
+		"""
+		#self.update_pos()
+		limite = 350
+		nearCases = []
+		nearCase = None
+		d_near = 1E10
+		
+		for x,column in enumerate(CASES):
+			if abs(column[0].x-self.pos[0]) < limite:
+				for y,case in enumerate(column):
+					if abs(case.y-self.pos[1]) < limite:
+						if case.color == self.otherColor(self.color):
+							nearCases.append(case)
+
+		# recherche d'une case vide
+		for case in nearCases:
+			if case.empty():
+				l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
+				if len(l) < d_near:
+					nearCase = case
+					d_near = len(l)
+
+		# si aucune n'est vide tant pis on bourine
+		if not nearCase:
+			for case in nearCases:
+				l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
+				if len(l) < d_near:
+					nearCase = case
+					d_near = len(l)
+					
+		return nearCase
+		
+		
 		
 	####################################################################
 	#							TOOLS								   #
@@ -1484,6 +1572,16 @@ class Robot:
 		else:
 			return a
 
+	def symC(self,Cx):
+		"""
+		(calcul)
+		retourne l'abscisse de la CASES opposée
+		"""
+		if self.color == RED:
+			return len(CASES) - Cx
+		else:
+			return Cx
+	
 	def otherColor(self, c):
 		"""
 		Renvoie la couleur adverse de (c)
