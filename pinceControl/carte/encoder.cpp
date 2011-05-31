@@ -91,6 +91,25 @@ void testAR()
  */
 void encoderSafe()
 {
+	static long long millis_old=0;
+	millis_old=millis();
+	
+	static int encoder_AR_old=0;
+	encoder_AR_old=value_AR_enc;
+	static int encoder_AV_old=0;
+	encoder_AR_old=value_AV_enc;
+	
+	float vitesseAR = ((float)abs(encoder_AR_old-value_AR_enc))/(float)(millis()-millis_old);
+	float vitesseAV = ((float)abs(encoder_AV_old-value_AV_enc))/(float)(millis()-millis_old);
+	
+	//sendMessage(-500,vitesseAV);
+	
+	if(vitesseAR<=SEUIL_VITESSE){
+		setARPWM(0x00);
+	}
+	if(vitesseAV<=SEUIL_VITESSE){
+		setAVPWM(0x00);
+	}
 	/*static int last_left_enc_value = 0;
 	//static int last_right_enc_value = 0;
 	
