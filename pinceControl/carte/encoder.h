@@ -13,6 +13,7 @@
 #define PIN_MS_RECAL_AV_BAS		43 //20
 #define PIN_MS_RECAL_AR_HAUT	47 //18
 #define PIN_MS_RECAL_AR_BAS		45 //19
+#define SEUIL_VITESSE 0.7f
 
 #include "pinceControl.h"
 #include "wiring.h"
