@@ -12,7 +12,7 @@
 #define RAD_TO_DEG 180.0/M_PI
 
 /* Parametres mecanique du robot */
-#define DIST_MOTOR_AXIS_TO_BACK_MM 120.0 // Distance entre le l'axe des moteurs et l'arriere du robot
+#define DIST_MOTOR_AXIS_TO_BACK_MM 122.0 // Distance entre le l'axe des moteurs et l'arriere du robot
 
 #define ENC_CENTER_DIST_MM (305.0) // Distance entre chaque roue codeuse
 #define ENC_CENTER_DIST_TICKS (ENC_CENTER_DIST_MM*ENC_MM_TO_TICKS) // Distance entre chaque roue codeuse du robot en ticks
