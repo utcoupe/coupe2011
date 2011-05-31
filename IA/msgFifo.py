@@ -49,6 +49,13 @@ class MsgFifo:
 		else:
 			self._queue.task_done()
 			return r
+
+	def clear(self):
+		"""
+		Efface tous les messages reçus
+		"""
+		self._queue = Queue()
+		
 	
 	def __repr__(self):
 		return "MsgFifo(%s)"%(tuple(get_cname(_) for _ in self._filter),)

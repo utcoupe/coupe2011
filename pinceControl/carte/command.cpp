@@ -128,20 +128,17 @@ void cmd(int id, int header, int *args, int size){
 	{
 	    if(args[0]==FACEAV)
 	    {
-			pingArMessageID=-42;
-			pingAvMessageID=id;
+			updatePosition(FACEAV);
 			sendMessage(id, 1);
 	    }
 	    else if(args[0]==FACEAR)
 	    {
-			pingAvMessageID=-42;
-			pingArMessageID=id;
+			updatePosition(FACEAR);
 			sendMessage(id, 1);
 	    }
 	    else if(args[0]==-1)
 	    {
-			pingAvMessageID=-42;
-			pingArMessageID=-42;
+			updatePosition(-1);
 			sendMessage(id, 1);
 	    }
 	    else
