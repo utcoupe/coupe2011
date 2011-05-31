@@ -91,9 +91,9 @@ void cmd(int id, int header, int *args, int size){
 	    else
 	    {
 		if(args[0]==AVANT)
-		    sendMessage(id, value_right_enc);
+		    sendMessage(id, value_AV_enc);
 		else if(args[0]==ARRIERE)
-		    sendMessage(id, value_left_enc);
+		    sendMessage(id, value_AR_enc);
 		else
 		    sendMessage(id, -1);
 	    }
