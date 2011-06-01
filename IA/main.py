@@ -25,7 +25,7 @@ print ROOT_DIR
 ##############################
 RELEASE		= 0
 DEBUG		= 1
-MOD			= DEBUG
+MOD			= RELEASE
 
 ##############################
 ##			IMPORTS			##
@@ -34,6 +34,7 @@ import time
 import math
 import threading
 import copy
+import traceback
 sys.path.append(os.path.join(ROOT_DIR, "IA"))
 from debugClient import *
 from pathfinding import *
@@ -50,7 +51,7 @@ MAX_MSG		= 10000
 if MOD == RELEASE:
 	VITESSE		= 250
 	VITESSE_ROT	= 200
-	CONN_MOD	= MOD_CIN
+	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 0
 	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX(s), c'est qu'il ne doit plus être sur la carte
 else:
@@ -139,11 +140,12 @@ class Robot:
 		self.e_validate_ident.wait()
 		fifo = self.client.addFifo( MsgFifo( W_SWITCH_COLOR ) )
 		while True:
-			fifo.getMsg()
-			self.addCmd(ID_OTHERS, Q_LED, -1)
-			if self.activeReset:
-				self.reset()
-				self.client.addFifo(fifo)
+			m = fifo.getMsg()
+			if m.id_cmd == W_SWITCH_COLOR:
+				self.addCmd(ID_OTHERS, Q_LED, -1)
+				if self.activeReset:
+					self.reset()
+					self.client.addFifo(fifo)
 	
 	def _loopUpdatePos(self):
 		self.e_validate_ident.wait()
@@ -231,7 +233,22 @@ class Robot:
 		self.write("relachement...")
 		self.waitMSSignal(ARRIERE, 0)
 		
-		
+		self.write("* TEST TOURELLE *", colorConsol.HEADER)
+		fifo = self.client.addFifo( MsgFifo(W_PING_AV, W_PING_AR) )
+		self.addCmd(ID_OTHER, Q_ULTRAPING, AVANT)
+		raw_input("appuyez sur une touche et passer la main devant...")
+		while True:
+			m = fifo.getMsg(2)
+			if m.id_cmd == W_PING_AV:
+				break
+		self.addCmd(ID_OTHER, Q_ULTRAPING, AVANT)
+		raw_input("appuyez sur une touche et passer la main derriere...")
+		while True:
+			m = fifo.getMsg(2)
+			if m.id_cmd == W_PING_AR:
+				break
+		self.addCmd(ID_OTHER, Q_ULTRAPING, -1)
+		raw_input("fini...")
 		self.activeReset = True
 		
 			
@@ -245,12 +262,12 @@ class Robot:
 				time.sleep(0.5)
 			if MOD == DEBUG:
 				time.sleep(2)
-				self.test()
-				exit()
-				self.color = RED
-				self.pos = (1500,1050,0)
-				print self._volerPion(AVANT)
-				exit()
+				#self.test()
+				#exit()
+				#self.color = RED
+				#self.pos = (1500,1050,0)
+				#print self._volerPion(AVANT)
+				#exit()
 				#self.script_ratisserMap()
 				#listeVerte = self.scanListeVerte()
 				#print listeVerte
@@ -265,17 +282,19 @@ class Robot:
 				continue
 				self.preparation()"""
 				if self.preparation() >= 0:
+					threading.Timer(88, self.stop, ("90s !",)).start()
+					self.write(" * START * ", colorConsol.HEADER)
 					listeVerte = (PION_1,TOUR,PION_1,TOUR,PION_1)
 					#listeVerte = self.scanListeVerte()
 					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
-					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1500, 1750, 90)
+					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1150, 700, 180)
 					self.write("")
+					self.script_homologation()
+					return
+					#self.go_point(self.symX(800), 300)
+					#id_pince = self.script_construireTourVerte(listeVerte)
+					#self.script_allerPoserTourVerte(id_pince)
 					self.script_ratisserMap()
-					#self._combinerFaces(AVANT)
-					#continue
-					self.go_point(self.symX(800), 300)
-					id_pince = self.script_construireTourVerte(listeVerte)
-					self.script_allerPoserTourVerte(id_pince)
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
 							raw_input("bouh tu t'es coincé")"""
@@ -306,6 +325,9 @@ class Robot:
 				#"""
 			else:
 				if self.preparation() >= 0:
+					threading.Timer(88, self.stop, ("90s !",)).start()
+					self.script_homologation()
+					continue
 					listeVerte = self.scanListeVerte()
 					self.go_point(self.symX(800), 300)
 					id_pince = self.script_construireTourVerte()
@@ -410,7 +432,7 @@ class Robot:
 			self.write("")
 					
 
-			"""self.write("* JACK POUR RECALAGE *")
+			self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -422,7 +444,7 @@ class Robot:
 					self.write("* RECALAGE *")
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
-					break"""
+					break
 			
 			loop1.stop()
 			loop2.stop()
@@ -431,7 +453,7 @@ class Robot:
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			#self.update_pos()
 		
-			"""self.write("* ATTENTE DU JACK *")
+			self.write("* ATTENTE DU JACK *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -439,7 +461,7 @@ class Robot:
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
 					self.write("ON Y VAS !")
 					self.write("")
-					break"""
+					break
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
@@ -447,7 +469,7 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		except Exception as ex:
-			self.print_ex(ex)
+			self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 			retour = -101
 		finally:
 			self.client.removeFifo(fifo)
@@ -477,7 +499,7 @@ class Robot:
 				if m.id_cmd == W_MS and int(m.content.split(C_SEP_SEND)[1]) == state:
 					break
 		except Exception as ex:
-			self.print_ex(ex)
+			self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 		finally:
 			self.client.removeFifo(fifo)
 		
@@ -607,7 +629,7 @@ class Robot:
 		try:
 			self.pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 		except Exception as ex:
-			self.print_ex(ex)
+			self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 		self.write("NEW POS : "+str(self.pos))
 		self.client.removeFifo(fifo)
 		self.debug.log(D_UPDATE_POS, self.pos)
@@ -628,13 +650,13 @@ class Robot:
 		if self._e_stop.isSet():
 			retour = -42
 		else:
-			self.write("* DO_PATH %s *"%(path,), colorConsol.HEADER)
+			self.write("* DO_PATH %s BEGIN *"%(path,), colorConsol.HEADER)
 			#self.update_pos()
 			
 			self.debug.log(D_DELETE_PATH)
 			self.debug.log(D_SHOW_PATH,path)
 			
-			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_GETSENS, Q_POSITION, W_PING_AV, W_PING_AR) )
+			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_ANGLE_ABS, Q_POSITION, W_PING_AV, W_PING_AR) )
 
 			goals = []
 			for p in path:
@@ -652,6 +674,7 @@ class Robot:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
 					m = fifo.getMsg(0.5,"accusé de reception") # timeout de 0.5 seconde pour les accusés de receptions
+					if m.id_cmd!=Q_POSITION: self.write("do_path : %s"%m)
 					if m.id_cmd == Q_GOAL_ABS:
 						if int(m.content) == 1:
 							nb_accuse_recep += 1
@@ -659,34 +682,35 @@ class Robot:
 							nb_point_reach += 1
 					elif m.id_cmd == Q_KILL: # arret
 						raise KillException("Q_KILL")
-					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-						if not inPause :
-							self.addCmd(ID_ASSERV, Q_PAUSE)
-							self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
-							inPause = True
-						timeLastPing = time.time()
 				
 				self.write("Tous les accusés de receptions reçus")
 
 				
 				last_pos = copy.copy(self.pos)
+				sens_ping = self.sens_next_cible(path[nb_point_reach])
+				self.addCmd(ID_OTHERS, Q_ULTRAPING, sens_ping)
 				while not self._e_stop.isSet() and nb_point_reach<len(path):
 					m = fifo.getMsg(2,"do_path 2ème partie")
-					self.write("do_path : %s"%m)
+					if m.id_cmd!=Q_POSITION: self.write("do_path : %s"%m)
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
 					if m.id_cmd == Q_GOAL_ABS:
-						self.addCmd(ID_ASSERV, Q_GETSENS)
 						nb_point_reach += 1
+						if nb_point_reach < len(path):
+							sens_ping = self.sens_next_cible(path[nb_point_reach])
+							self.addCmd(ID_OTHERS, Q_ULTRAPING, sens_ping)
 					elif m.id_cmd == Q_KILL: # arret
 						raise KillException("Q_KILL")
 					elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-						if not inPause:
-							self.addCmd(ID_ASSERV, Q_PAUSE)
-							self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
-							inPause = True
-						timeLastPing = time.time()
+						pos_adv = self.pos_rel(self.pos, radians(self.pos[2]), (int(m.content)+30) * 10 * (1 if m.id_cmd == W_PING_AV else -1))
+						self.write("%s %s"%(self.pos,pos_adv), colorConsol.WARNING)
+						if (0 < pos_adv[0] < 3000) and (0 < pos_adv[1] < 2100):
+							if not inPause:
+								self.addCmd(ID_ASSERV, Q_PAUSE)
+								self.write("WARNING : Robot.do_path : detection adversaire", colorConsol.WARNING)
+								inPause = True
+							timeLastPing = time.time()
 					elif m.id_cmd == Q_POSITION:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 						self.debug.log(D_UPDATE_POS, new_pos)
@@ -702,7 +726,7 @@ class Robot:
 				self.write(ex, colorConsol.FAIL)
 				retour = E_TIMEOUT
 			except Exception as ex:
-				self.print_ex(ex)
+				self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 				retour = -101
 			finally:
 				# destruction de la fifo
@@ -710,6 +734,8 @@ class Robot:
 				# arret de l'écoute des pings
 				self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
 
+		self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
+		self.write("* DO_PATH END *", colorConsol.HEADER)
 		return retour
 
 	def go_point(self, x,y, **options):
@@ -724,7 +750,7 @@ class Robot:
 
 		@return (int)
 		"""
-		self.write("* GO_POINT %s %s %s*"%(x,y,options), colorConsol.HEADER)
+		self.write("* GO_POINT %s %s %s BEGIN *"%(x,y,options), colorConsol.HEADER)
 		if self._e_stop.isSet():
 			retour = -42
 		else:
@@ -740,17 +766,32 @@ class Robot:
 				if cmd == Q_GOAL_ABS:
 					return self.do_path(((x,y),))
 				else:
-					fifo = self.client.addFifo( MsgFifo(Q_GOAL_REL, Q_POSITION) )
+					fifo = self.client.addFifo( MsgFifo(Q_GOAL_REL, Q_POSITION, W_PING_AR, W_PING_AV) )
+					sens_ping = self.sens_next_cible(path[nb_point_reach])
+					timeLastPing = 0
+					inPause = False
 					self.addCmd(ID_ASSERV, Q_GOAL_REL, x, y, VITESSE)
+					self.addCmd(ID_OTHERS, Q_ULTRAPING, sens_ping)
 					nb_recv = 0
 					last_pos = copy.copy(self.pos)
 					try:
 						while True:
+							if inPause and time.time() - timeLastPing > 0.5:
+								self.addCmd(ID_ASSERV, Q_RESUME)
+								inPause = False
 							m = fifo.getMsg(2)
-							self.write("go_path : %s"%m)
+							if m.id_cmd!=Q_POSITION: self.write("go_point : %s"%m)
 							if m.id_cmd == Q_GOAL_REL:
 								nb_recv += 1
 								if nb_recv >= 2: break
+							elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+								pos_adv = self.pos_rel(self.pos, radians(self.pos[2]), (int(m.content)+30) * 10 * (1 if m.id_cmd == W_PING_AV else -1))
+								if (0 < pos_adv[0] < 3000) and (0 < pos_adv[1] < 2100):
+									if not inPause:
+										self.addCmd(ID_ASSERV, Q_PAUSE)
+										self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
+										inPause = True
+									timeLastPing = time.time()
 							elif m.id_cmd == Q_POSITION:
 								new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 								if self._anomalie_deplacement((x,y), last_pos, new_pos):
@@ -767,7 +808,7 @@ class Robot:
 						self.write(ex, colorConsol.FAIL)
 						retour = E_TIMEOUT
 					except Exception as ex:
-						self.print_ex(ex)
+						self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 						retour = -101
 					finally:
 						self.client.removeFifo(fifo)
@@ -777,6 +818,7 @@ class Robot:
 				else:
 					self.addCmd(ID_ASSERV, Q_GOAL_REL, x, y, VITESSE)
 		
+		self.write("* GO_POINT END *", colorConsol.HEADER)
 		return retour
 
 
@@ -813,7 +855,7 @@ class Robot:
 				try:
 					while True:
 						m = fifo.getMsg(5)
-						self.write(m)
+						if m.id_cmd!=Q_POSITION: self.write("tourne : %s"%m)
 						if m.id_cmd == cmd:
 							nb_recv += 1
 							if nb_recv >= 2: break
@@ -834,7 +876,7 @@ class Robot:
 					self.write(ex, colorConsol.FAIL)
 					retour = E_TIMEOUT
 				except Exception as ex:
-					self.print_ex(ex)
+					self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 					retour = -101
 				finally:
 					# destruction de la fifo
@@ -880,7 +922,7 @@ class Robot:
 			self.write(ex, colorConsol.FAIL)
 			retour = E_TIMEOUT
 		except Exception as ex:
-			self.print_ex(ex)
+			self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 			retour = -101
 		return retour
 		
@@ -1199,10 +1241,15 @@ class Robot:
 		self.do_path(((self.symX(800), 300), (self.symX(X_DEPLACEMENT),690)))
 		self._takePionVert(0,AVANT)
 		time.sleep(1)
-		l = Line(Vec2(CASES[0][1].x,CASES[0][1].y),Vec2(self.pos[0],self.pos[1]))
-		self.go_point(l.pointFrom(-(R_PION + D_CENTER_2_PINCE)))
-		self.dumpObj(AVANT)
-		while True:
+		# avec pinces
+		self.tourne(90)
+		case = CASES[self.symC(0)][3]
+		l = Line(Vec2(case.x,case.y),Vec2(self.pos[0],self.pos[1]))
+		pos_2_dump = l.pointFrom(R_PION + D_CENTER_2_PINCE)
+		self.go_point(pos_2_dump.x, pos_2_dump.y)
+		self.dumpObj(AVANT)#"""
+		self.addCmd(ID_AX12, Q_CLOSE, AVANT)
+		while not self._e_stop.isSet():
 			r = self.do_path(((800,700),(2200,700)))
 			if r == Q_KILL:
 				break
@@ -1298,6 +1345,7 @@ class Robot:
 			return p_with_tour
 				
 	def _takePionVert(self, index, id_pince):
+		self.write("* _takePionVert begin *", colorConsol.HEADER)
 		listeYVerte = (690,970,1250,1530,1810)
 		retour = 0
 		if id_pince == AVANT:
@@ -1331,6 +1379,7 @@ class Robot:
 		finally:
 			self.client.removeFifo(fifo)
 			
+		self.write("* _takePionVert end *", colorConsol.HEADER)
 		return retour
 
 
@@ -1379,19 +1428,20 @@ class Robot:
 		self.addBlockingCmd(2, (1,5), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 		
 		fifo = None
-		loop = None
 		
-		while True:
+		while not self._e_stop.isSet():
 			for c in checksPoints:
 				if fifo: self.client.removeFifo(fifo)
-				fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_POSITION, Q_GETSENS, W_MS, W_PING_AV, W_PING_AR) )
+				if self._e_stop.isSet():
+					break
+				fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_POSITION, W_MS, W_PING_AV, W_PING_AR) )
+				sens_ping = self.sens_next_cible((c.x,c.y))
 				self.addCmd(ID_ASSERV, Q_GOAL_ABS, c.x, c.y, VITESSE)
+				self.addCmd(ID_OTHERS, Q_ULTRAPING, sens_ping)
 				nb_recep = 0
 				last_pos = copy.copy(self.pos)
-				loop = LoopCmd(self, 0.2, 0.5, ID_ASSERV, Q_GETSENS)
-				loop.start()
 				try:
-					while True:
+					while not self._e_stop.isSet():
 						m = fifo.getMsg(2)
 						if m.id_cmd == Q_GOAL_ABS:
 							nb_recep+=1
@@ -1401,7 +1451,7 @@ class Robot:
 							self.write(m.content, colorConsol.WARNING)
 							if id_state == 1:
 								self.write("WARNING : Robot.go_point : detection objet", colorConsol.WARNING)
-								self._volerPion(id_pince, fifo)
+								self._volerPion(id_pince)
 								fifo.clear()
 						elif m.id_cmd == Q_POSITION:
 							new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
@@ -1411,29 +1461,30 @@ class Robot:
 								#self.addCmd(ID_ASSERV, Q_STOP)
 								#retour = E_BLOCK
 								#break
-						elif m.id_cmd == Q_GETSENS:
-							self.addCmd(ID_OTHERS, Q_ULTRAPING, m.content)
 						elif m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
-							self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
-							self.addBlockingCmd(1, 5, ID_ASSERV, Q_STOP)
-							self.tourne(self.pos[2] + 90)
-							self.client.removeFifo(fifo)
-							break
+							pos_adv = self.pos_rel(self.pos, radians(self.pos[2]), (int(m.content)+30) * 10 * (1 if m.id_cmd == W_PING_AV else -1))
+							if (0 < pos_adv[0] < 3000) and (0 < pos_adv[1] < 2100):
+								self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
+								self.addBlockingCmd(1, 5, ID_ASSERV, Q_STOP)
+								self.tourne(self.pos[2] + 90)
+								self.client.removeFifo(fifo)
+								break
 						elif m.id_cmd == Q_KILL:
 							raise KillException("Q_KILL")
 				except KillException as ex:
 					self.write(ex, colorConsol.FAIL)
 					retour = Q_KILL
+					break
 				except TimeoutException as ex:
 					self.write(ex, colorConsol.FAIL)
 					retour = E_TIMEOUT
 				except Exception as ex:
-					self.print_ex(ex)
+					print traceback.print_tb(sys.exc_info()[2])
+					self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 				finally:
 					self.client.removeFifo(fifo)
 
 		self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
-		if loop: loop.stop()
 		if fifo: self.client.removeFifo(fifo)
 
 
@@ -1450,8 +1501,8 @@ class Robot:
 		case = self._findNearCaseToDump()
 		l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
 		pos_to_dump = l.pointFrom(170)
-		self.log(D_DELETE_PATH)
-		self.log(D_SHOW_PATH,((self.pos[0],self.pos[1]),(pos_to_dump[0],pos_to_dump[1])))
+		self.debug.log(D_DELETE_PATH)
+		self.debug.log(D_SHOW_PATH,((self.pos[0],self.pos[1]),(pos_to_dump[0],pos_to_dump[1])))
 		self.go_point(pos)
 		l = Line(Vec2(self.pos[0],self.pos[1]), Vec2(pos_to_dump[0],pos_to_dump[1]))
 		if id_pince == ARRIERE and abs(degrees(l.teta) - self.pos[2]) < 90:
@@ -1622,7 +1673,7 @@ class Robot:
 		retourne l'abscisse de la CASES opposée
 		"""
 		if self.color == RED:
-			return len(CASES) - Cx
+			return len(CASES) - 1 - Cx
 		else:
 			return Cx
 	
@@ -1641,16 +1692,23 @@ class Robot:
 	def pos_rel(self, pos, t, d):
 		return (pos[0] + int(cos(t) * d), int(pos[1] + sin(t) * d))
 
+	def angle_diff(self, a,b):
+		return atan2(sin(a-b), cos(a-b))
+	
 	def sens_next_cible(self, cible):
 		"""
 		Le sens dans lequel va avancer le robot pour la prochaine cible
 		"""
+		self.write("* sens_next_cible begin *", colorConsol.HEADER)
 		self.update_pos()
-		#l = Line(Vec2(self.pos[
+		l = Line(Vec2(self.pos[0],self.pos[1]), Vec2(cible[0],cible[1]))
+		if abs(self.angle_diff(l.teta, radians(self.pos[2]))) > pi/2:
+			retour = ARRIERE
+		else:
+			retour =  AVANT
+		self.write("* sens_next_cible end *", colorConsol.HEADER)
+		return retour
 
-	def print_ex(self, ex):
-		self.write(traceback.print_tb(sys.exc_info()[2]) + "\n" + str(ex), colorConsol.FAIL)
-			
 	
 if __name__ == '__main__':
 	robot = Robot()
