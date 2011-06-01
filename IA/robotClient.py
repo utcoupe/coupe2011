@@ -23,6 +23,7 @@ class RobotClient(threading.Thread):
 		self._partialMsg = ""
 		
 		self._e_close = threading.Event()
+		self._lock_send = threading.Lock()
 		
 		# connection
 		if self.mod == MOD_TCP:
@@ -56,12 +57,16 @@ class RobotClient(threading.Thread):
 		Envoie le message au serveur
 		"""
 		if not self._e_close.isSet():
-			msg = str(msg).strip()
-			if self.mod == MOD_TCP:
-				self._socket.send(msg+"\n")
-			else:
-				print msg
-			#self.write("Send : %s"%msg)
+			self._lock_send.acquire()
+			try:
+				msg = str(msg).strip()
+				if self.mod == MOD_TCP:
+					self._socket.send(msg+"\n")
+				else:
+					print msg
+				#self.write("Send : %s"%msg)
+			finally:
+				self._lock_send.release()
 
 	
 	def run(self):
