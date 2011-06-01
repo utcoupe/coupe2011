@@ -110,7 +110,7 @@ void cmd(int id, int header, int *args, int size){
 	case Q_RECALAGE:
 	{
 	    if(size<1)
-		sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+			sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 
 	    else
 	    {
@@ -126,16 +126,22 @@ void cmd(int id, int header, int *args, int size){
 	}
 	case Q_ULTRAPING:
 	{
+	    if(size<1)
+			sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
+		sendMessage(id, 1);
+			
+		updatePosition(args[0]);
+		/*
 	    if(args[0]==FACEAV)
 	    {
 			pingArMessageID=-42;
-			pingAvMessageID=id;
+			//pingAvMessageID=id;
 			sendMessage(id, 1);
 	    }
 	    else if(args[0]==FACEAR)
 	    {
 			pingAvMessageID=-42;
-			pingArMessageID=id;
+			//pingArMessageID=id;
 			sendMessage(id, 1);
 	    }
 	    else if(args[0]==-1)
@@ -147,7 +153,7 @@ void cmd(int id, int header, int *args, int size){
 	    else
 	    {
 			sendMessage(id, E_INVALID_PARAMETERS_TYPE);
-	    }
+	    }*/
 	    break;
 	}
 	case Q_GETULTRAPING:

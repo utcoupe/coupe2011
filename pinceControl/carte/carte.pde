@@ -4,10 +4,9 @@ void setup()
 {
 	initSerialLink();
 	initPinceControl();
-	//initTourelle(); //pas utilisé
 	initEncoders();
 	initSensor();
-	//setupTourelle();
+	setupTourelle();
 }
 
 void loop()
@@ -15,8 +14,7 @@ void loop()
 	readIncomingData();
 	encoderSafe();
 	sensorTrigger();
-	//tourelleRun(); //pas utilisé
-	//loopTourelle();
+	loopTourelle();
 	testAV();
 	testAR();
 }
