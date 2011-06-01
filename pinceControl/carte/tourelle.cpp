@@ -96,7 +96,10 @@ void loopTourelle()
 		else if(millis() - timeLastSend > 200 and (d_gauche < 40 || d_droite < 40))
 		{
 			timeLastSend = millis();
-			sendMessage(W_PING_AV, min(d_gauche, d_droite) );
+			if (faceTourelleActuel==FACEAV)
+				sendMessage(W_PING_AV, min(d_gauche, d_droite));
+			else
+				sendMessage(W_PING_AR, min(d_gauche, d_droite));
 		}
 	}
  }

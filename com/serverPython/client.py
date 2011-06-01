@@ -30,7 +30,7 @@ class Client(threading.Thread):
 		
 	def stop(self):
 		self._running = False
-	
+		
 	def send(self, mask_from, msg):
 		"""
 		@param mask_from id du client qui a envoyé le message
@@ -38,7 +38,11 @@ class Client(threading.Thread):
 		"""
 		if self.mask_recv_from & mask_from:
 			#self._server.write("send to %s, %s"%(self.id,msg))
-			self._fn_send(msg)
+			try:
+				self._fn_send(msg)
+			except Exception as ex:
+				self._server.write(ex, colorConsol.FAIL)
+				if self.id != ID_SERVER: self.stop()
 		else:
 			#self._server.write("client with mask '%s' is not authorized to send to client #%s"%(mask_from,self.id), colorConsol.WARNING)
 			pass
@@ -149,11 +153,12 @@ class LocalClient(Client):
 			try:
 				msg_split = msg.split('.')
 				try:
-					id_cmd = int(msg_split[0])
+					id_msg = int(msg_split[0])
+					id_cmd = int(msg_split[1])
 				except ValueError as ex:
 					pass
 				else:
-					if id_cmd == -999: # la demande d'identification du début
+					if id_msg == -999: # la demande d'identification du début
 						if id_from != int(msg_split[1]):
 							for client in self._server.clients:
 								if client.id == id_from:
@@ -161,8 +166,14 @@ class LocalClient(Client):
 									if client.id == ID_IA:
 										client.mask_recv_from = (-1 ^ (1 << self.id)) # tout le monde sauf soit meme	
 									client.e_validate.set()
+					elif id_cmd == Q_KILL: # arret du robot
+						for client in self._server.clients:
+							if client.id != ID_SERVER and client.id != ID_IA:
+								print client
+								client.stop()
+							
 			except Exception as ex:
-				self._server.write("ERROR : LocalClient, identification début '%s'"%ex, colorConsol.FAIL)
+				self._server.write("ERROR : LocalClient, execute commande '%s'"%ex, colorConsol.FAIL)
 			
 			# lister les clients
 			if "ls" == msg:
@@ -218,7 +229,7 @@ class SerialClient(Client):
 		self.serial = serial
 		self.port = port
 		self.baudrate = baudrate
-
+	
 	def name(self):
 		return "SerialClient(%s,port=%s,baudrate=%s)"%(self.id,self.port,self.baudrate)
 	
@@ -234,7 +245,7 @@ class SerialClient(Client):
 
 	def stop(self):
 		self.serial.close()
-		Client.stop()
+		Client.stop(self)
 
 class SubprocessClient(Client):
 	def __init__(self, server, id, process, exec_name):
@@ -259,6 +270,6 @@ class SubprocessClient(Client):
 	
 	def stop(self):
 		self.process.kill()
-		Client.stop()
+		Client.stop(self)
 
 

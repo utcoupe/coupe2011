@@ -4,6 +4,7 @@
 #include "fifo.h"
 #include "message.h"
 #include "encoder.h"
+#include "pwm.h"
 
 /**
  * Analyse le message et effectue les actions associees
@@ -239,6 +240,7 @@ void cmd(int id, int id_cmd, int* args, int size){
 			Serial.print("§encR: ");Serial.println(value_right_enc);*/
 			break;
 		}
+		
 
 		default:
 		{
