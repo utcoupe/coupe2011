@@ -1,7 +1,5 @@
 Le code est dans /bin
-Lancer avec UI : java Main
-Lancer sans UI : java Main noview
+Lancer : java Main noview/view ip_serveur_python ip_smartphone
 
 S'y connecter en TCP : port 1234
 Lui se connecte au démarrage au port 50000
-

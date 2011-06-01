@@ -54,7 +54,10 @@ Q_CLOSE			= 73
 Q_SERRE			= 74
 
 # phone
-Q_SCAN_DEPART	= 80
+Q_SCAN_DEPART	= 80 # smartphone
+Q_SCAN_DEPART_S	= 81 # simulation
+Q_SCAN_PIONS	= 82 # smartphone
+Q_SCAN_PIONS_S	= 83 # simulation
 
 # server python
 ID_SERVER		= 0

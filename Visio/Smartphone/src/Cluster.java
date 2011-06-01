@@ -131,7 +131,7 @@ public class Cluster {
 					cluster.computeCenter();
 
 					// reel location
-					cluster.computeReelLocation();
+					cluster.computePixLocationFromBottom();
 
 				} // end cluster
 			} // end for
@@ -202,7 +202,7 @@ public class Cluster {
 		}
 	}
 
-	private void computeReelLocation() {
+	private void computePixLocationFromBottom() {
 		this.reelLocation = new Point(this.center.x - width / 2, height - this.center.y);
 	}
 }

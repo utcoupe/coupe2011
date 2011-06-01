@@ -50,14 +50,14 @@ public class Main {
 	static String projectPath = "";
 	static String classPath = "";
 	static String configPath = "main_config.data";
-	
+
 	static boolean enableView = true;
 	static String IP_REMOTE = "10.42.43.1";
 	static String IP_SMARTPHONE = "192.168.43.1";
 
 	static public void main(String[] args) {
 		System.out.println(TAG + "starting...");
-		
+
 		// path
 		URL str = Main.class.getProtectionDomain().getCodeSource().getLocation();
 		classPath = str.getPath();
@@ -142,6 +142,8 @@ class Configuration implements Serializable {
 	boolean showPawnsPixels = false;
 	boolean showFigures = false;
 	boolean showPawnsArrows = true;
+
+	public int rotateImage;
 }
 
 class NetworkClient extends Thread implements Observer {
@@ -223,19 +225,29 @@ class NetworkClient extends Thread implements Observer {
 				} else if (idcmd.equals("1")) {
 					// ping
 					out.println("-1.Pong");
-				} else if (idcmd.equals("13")) {
+				} else if (idcmd.equals("13") || idcmd.equals("-69")) {
 					// exit
-					// out.println("Pong");
-				} else if (idcmd.equals("80")) { // figures
-					// take photo
+					System.exit(0);
+				} else if (idcmd.equals("80")) { // photo + figures
+					currentRequest = TYPE_R.FIGURES;
 					pictureSupplier.addObserver(this);
 					pictureSupplier.takePhoto();
-				} else if (idcmd.equals("81")) {
-					// take cache
+				} else if (idcmd.equals("81")) { // cache + figure
+					currentRequest = TYPE_R.FIGURES;
+					pictureSupplier.addObserver(this);
+					pictureSupplier.takeCache();
+				} else if (idcmd.equals("82")) { // photo + pions
+					// take cache + send pawns
+					currentRequest = TYPE_R.PIONS;
+					pictureSupplier.addObserver(this);
+					pictureSupplier.takePhoto();
+				} else if (idcmd.equals("83")) { // cache + pions
+					// take cache + send pawns
+					currentRequest = TYPE_R.PIONS;
 					pictureSupplier.addObserver(this);
 					pictureSupplier.takeCache();
 				} else {
-					out.println("bad input, usage: cmd = 71 || 72");
+					out.println("bad input, usage: cmd = 80..83");
 				}
 			}
 
@@ -243,6 +255,7 @@ class NetworkClient extends Thread implements Observer {
 			System.out.println("erreur IO avec le socket port " + socket.getPort());
 			e.printStackTrace();
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("déconnexion client port " + socket.getPort());
 			try {
 				in.close();
@@ -261,13 +274,35 @@ class NetworkClient extends Thread implements Observer {
 			}
 		}
 	}
+	
+	private enum TYPE_R {FIGURES, PIONS};
+	private TYPE_R currentRequest;
 
 	public void update(Observable arg0, Object arg1) {
 		System.out.println("sending to tcp client...");
 		pictureSupplier.deleteObserver(this);
 
-		boolean[] figures = pictureSupplier.mFigureFinder.getFigures();
-		out.println("-1." + idmsg + "." + "[" + (figures[0] ? "1" : "0") + "," + (figures[1] ? "1" : "0") + "," + (figures[2] ? "1" : "0") + "," + (figures[3] ? "1" : "0") + "," + (figures[4] ? "1" : "0") + "]");
+		switch (currentRequest) {
+		case PIONS:
+			ArrayList<Cluster> clusters = pictureSupplier.mPawnFinder.getClustersFiltered();
+			String s = "-1." + idmsg + ".";
+			s += "[";
+			for (Cluster cluster : clusters) {
+				Point locationPix = cluster.reelLocation;
+				Point locationMm = Virtuel2Reel.ptpix2ptmm(locationPix);
+				s += "["+locationMm.x+","+locationMm.y+"],";
+			}
+			System.out.println(s);
+			s = s.substring(0,s.length()-1);
+			s+= "]";
+			out.println(s);
+			break;
+		case FIGURES:
+		default:
+			boolean[] figures = pictureSupplier.mFigureFinder.getFigures();
+			out.println("-1." + idmsg + "." + "[" + (figures[0] ? "1" : "0") + "," + (figures[1] ? "1" : "0") + "," + (figures[2] ? "1" : "0") + "," + (figures[3] ? "1" : "0") + "," + (figures[4] ? "1" : "0") + "]");			
+			break;
+		}
 		System.out.println("sending to tcp client...done");
 	}
 }
@@ -304,7 +339,7 @@ class PictureSupplier extends Observable implements Observer {
 		System.out.println(TAG + "take photo...");
 		BufferedImage image = null;
 		try {
-			URL url = new URL("http://"+Main.IP_SMARTPHONE+":8080/shot.jpg");
+			URL url = new URL("http://" + Main.IP_SMARTPHONE + ":8080/shot.jpg");
 			image = ImageIO.read(url);
 			image = ImageUtils.rotate(image, 90);
 			this.image = image;
@@ -448,6 +483,10 @@ class PawnFinder extends Observable {
 	}
 
 	int magic;
+
+	public ArrayList<Cluster> getClustersFiltered() {
+		return getClustersByMinSize(200);
+	}
 }
 
 @SuppressWarnings("serial")
@@ -661,6 +700,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 	JSlider mJSliderL = new JSlider(0, 100);
 	JSlider mJSliderMagic = new JSlider(0, 255);
 	JSlider mJSliderTop = new JSlider(0, 400);
+	JSlider mJSliderRotate = new JSlider(-45, 45);
 
 	JCheckBox mJCheckBoxVerticalLine = new JCheckBox();
 	JCheckBox mJCheckBoxShowPixels = new JCheckBox();
@@ -696,6 +736,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		mJSliderL.setValue(figureFinder.getFigureValueL());
 		mJSliderMagic.setValue(Main.configuration.pawnMagic);
 		mJSliderTop.setValue(Main.configuration.topIgnore);
+		mJSliderRotate.setValue(Main.configuration.rotateImage);
 		mJCheckBoxVerticalLine.setSelected(Main.configuration.showVerticalLine);
 		mJCheckBoxShowPixels.setSelected(Main.configuration.showPawnsPixels);
 		mJCheckBoxPawnsArrows.setSelected(Main.configuration.showPawnsArrows);
@@ -710,6 +751,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		mJSliderL.addChangeListener(this);
 		mJSliderMagic.addChangeListener(this);
 		mJSliderTop.addChangeListener(this);
+		mJSliderRotate.addChangeListener(this);
 		mJCheckBoxVerticalLine.addChangeListener(this);
 		mJCheckBoxShowPixels.addChangeListener(this);
 		mJCheckBoxPawnsArrows.addChangeListener(this);
@@ -897,7 +939,7 @@ class Manager extends JPanel implements MouseListener, Observer {
 		}
 
 		// d�tection des points jaunes
-		ArrayList<Cluster> clusters = mPictureSupplier.mPawnFinder.getClustersByMinSize(200);
+		ArrayList<Cluster> clusters = mPictureSupplier.mPawnFinder.getClustersFiltered();
 
 		// affiche les clusters
 		boolean alt = true;
@@ -927,8 +969,8 @@ class Manager extends JPanel implements MouseListener, Observer {
 					g.drawImage(imageArrow, cluster.center.x - imageArrow.getWidth() / 2, cluster.center.y - imageArrow.getHeight(), new Color(0, 0, 0, 1), null);
 					g.setColor(Color.YELLOW);
 
-					textbn(g, cluster.reelLocation.x + "," + cluster.reelLocation.y, cluster.center.x + 15, cluster.center.y - 15);
-					textbn(g, pixel2mm(cluster.reelLocation.y) + "mm", cluster.center.x + 15, cluster.center.y);
+					textbn(g, cluster.reelLocation.x + "," + cluster.reelLocation.y + " pix", cluster.center.x + 15, cluster.center.y - 15);
+					textbn(g, (int)Virtuel2Reel.xy2xmm(cluster.reelLocation.x, cluster.reelLocation.y) + "," + (int)Virtuel2Reel.ypix2ymm(cluster.reelLocation.y) + " mm", cluster.center.x + 15, cluster.center.y);
 				}
 			}
 			alt = !alt;
@@ -1006,5 +1048,83 @@ class Manager extends JPanel implements MouseListener, Observer {
 	public void update(Observable arg0, Object arg1) {
 		System.out.println(TAG + "view got an update");
 		repaint();
+	}
+}
+
+class Virtuel2Reel {
+	static double ypix2ymm(double y) {
+		double[] tab = {
+			181,	450,
+			308,	625,
+			392,	800,
+			455,	975,
+			500,	1150,
+			536,	1325,
+			564,	1500,
+			588,	1675,
+			608,	1850,
+			625,	2025,
+			639,	2200,
+			651,	2375,
+			661,	2550
+		};
+		return laMethodMagique(tab, y);
+		//return 22.981705972f * Math.pow(1.0068177218f, y);
+		//return 0.0000001f * (y * y * y * y) - .000149f * (y * y * y) + 0.080f * (y * y) - 17.21f * (y) + 1710f;
+	}
+
+	public static Point ptpix2ptmm(Point locationPix) {
+		Point p = new Point();
+		p.x = (int) xy2xmm(locationPix.x, locationPix.y);
+		p.y = (int) ypix2ymm(locationPix.y);
+		return p;
+	}
+
+	static double ypix2xlargmmDemieCase(double y) {
+		double[] tab = {
+			196,		220,
+			315,		197,
+			400,		139,
+			460,		125,
+			505,		112,
+			542,		102,
+			569,		90,
+			593,		82,
+			612,		70,
+			628,		69,
+			642,		68,
+			654,		59,
+			664,		57
+		};
+		return laMethodMagique(tab, y);
+		//return -0.359f * y + 294.1f;
+	}
+	
+	static double laMethodMagique(double[] tab, double val)
+	{
+			double diff = 99999;
+			double proche = 0;
+			double procheValeur = 0;
+			for (int i=0; i<tab.length;i+=2) {
+				if (Math.abs(tab[i] - val) < diff) {
+					proche = tab[i];
+					procheValeur = tab[i+1];
+					diff = Math.abs(tab[i] - val);
+				}
+			}
+			double magicNumber = (val * procheValeur) / proche;
+			return magicNumber;
+	}
+
+	static double xy2xmm(double x, double y) {
+		return (175f/ypix2xlargmmDemieCase(y))*x; // mm/px*px
+	}
+	
+	static double[] xypix2xymm(double x, double y)
+	{
+		double[] xymm = new double[2];
+		xymm[0] = xy2xmm(x, y);
+		xymm[1] = ypix2ymm(y);
+		return xymm;
 	}
 }

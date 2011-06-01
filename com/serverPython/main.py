@@ -23,10 +23,10 @@ server = Server()
 server.start()
 
 #server.addSubprocessClient("clients/python/UDPClient/main.py")
-#server.addSubprocessClient(os.path.join(ROOT_DIR,"Visio","UTCamera","bin","UTCamera"))
+server.addSubprocessClient(os.path.join(ROOT_DIR,"Visio","UTCamera","bin","UTCamera"))
 server.addSubprocessClient(os.path.join(ROOT_DIR,"pinceControl","AX12","scriptPince.py"))
 #server.addSubprocessClient(["../../../IA/main.py","1","0"])
-#p = subprocess.Popen(os.path.join(ROOT_DIR,"smartphone.py"), stdout=subprocess.PIPE)
+p = subprocess.Popen(os.path.join(ROOT_DIR,"smartphone.py"))
 
 
 import glob
@@ -41,6 +41,7 @@ for serial in scanSerials():
 
 server.parseMsg(ID_SERVER, "ls")
 
+p.wait()
 
 print 'fin thread principal'
 
