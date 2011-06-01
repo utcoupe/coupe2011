@@ -60,7 +60,12 @@ public:
 	{
 		if(steps > 0)
 		{
-			step(steps, dir, style);
+			for (int i=0; i<steps; ++i)
+			{
+				onestep(dir, SINGLE);
+				delayMicroseconds(1500);
+			}
+			//step(steps, dir, style);
 			if (dir == TURNLEFT)
 				position += steps;
 			else
