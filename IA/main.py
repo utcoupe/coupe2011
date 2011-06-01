@@ -528,9 +528,11 @@ class Robot:
 	def stop(self, msg=None):
 		""" arret du robot """
 		if msg: self.write("stop : %s"%msg, colorConsol.FAIL)
-		self.addCmd(-1, Q_KILL)
 		self.addCmd(ID_ASSERV,Q_STOP)
+		self.addCmd(ID_AX12, Q_KILL)
 		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
+		time.sleep(0.5)
+		self.addCmd(-1, Q_KILL)
 		self._e_stop.set()
 		self.client.stop()
 
