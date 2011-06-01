@@ -25,7 +25,7 @@ print ROOT_DIR
 ##############################
 RELEASE		= 0
 DEBUG		= 1
-MOD			= DEBUG
+MOD			= RELEASE
 
 ##############################
 ##			IMPORTS			##
@@ -432,7 +432,7 @@ class Robot:
 						break
 			self.write("")
 					
-			"""
+			
 			self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
@@ -446,7 +446,7 @@ class Robot:
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
 					break
-			"""
+			
 			loop1.stop()
 			loop2.stop()
 			loop1.join()
@@ -454,7 +454,7 @@ class Robot:
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			#self.update_pos()
 		
-			"""self.write("* ATTENTE DU JACK *")
+			self.write("* ATTENTE DU JACK *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -462,7 +462,7 @@ class Robot:
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
 					self.write("ON Y VAS !")
 					self.write("")
-					break"""
+					break
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
