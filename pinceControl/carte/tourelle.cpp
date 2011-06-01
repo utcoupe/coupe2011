@@ -1,7 +1,7 @@
 #include "tourelle.h"
 #include "sensor.h"
 
-Stepper motor1(2);
+Stepper motor1(1);
 int faceTourelleActuel;
 int faceTourelleDemande;
 bool tourelleActive;
@@ -59,12 +59,13 @@ void updatePosition(int faceUpdate)
 
 void loopTourelle() 
 {	
-	static long long startTime = 0;
+	static long long startTime=0;
 	static bool pingTurnGauche=true;
 	if(tourelleActive)
 	{
 		if ((millis() - startTime) > TEMPO)
 		{
+			startTime=millis();
 			if(pingTurnGauche)
 			{
 				gauche = testPing(PIN_PING_GAUCHE);	
@@ -93,7 +94,7 @@ void loopTourelle()
 		}
 		else if(gauche < 40 || droite < 40)
 		{
-			sendMessage(W_PING_AV, min(gauche, droite));
+			sendMessage(W_PING_AV, min(gauche, droite) );
 		}
 	}
  }
