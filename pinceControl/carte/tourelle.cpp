@@ -59,8 +59,8 @@ void loopTourelle()
 	static long long timeLastPing=0;
 	static bool pingTurnGauche=true;
 	static long long timeLastSend=0;
-	int d_gauche = 1337;
-	int d_droite = 1337;
+	static int d_gauche = 1337;
+	static int d_droite = 1337;
 	
 	if(tourelleActive)
 	{
@@ -96,7 +96,7 @@ void loopTourelle()
 		else if(millis() - timeLastSend > 200 and (d_gauche < 40 || d_droite < 40))
 		{
 			timeLastSend = millis();
-			int tab[1];
+			int tab[2];
 			
 			if(d_gauche < 40 && d_droite < 40)
 				tab[0]=MIDLE;
