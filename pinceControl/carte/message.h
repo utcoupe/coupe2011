@@ -100,7 +100,7 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define MIDLE		3
 
 //ping 
-#define GAUCHE 1
-#define DROITE 2
+#define GAUCHE 0
+#define DROITE 1
 
 #endif /* MESSAGE_H_ */
