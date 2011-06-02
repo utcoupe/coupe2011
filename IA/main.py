@@ -49,13 +49,13 @@ from case import *
 
 MAX_MSG		= 10000
 if MOD == RELEASE:
-	VITESSE		= 250
+	VITESSE		= 200
 	VITESSE_ROT	= 200
 	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 0
 	AGE_MAX		= 10 # si un pion n'a pas été vu par un scan au bout de AGE_MAX(s), c'est qu'il ne doit plus être sur la carte
 else:
-	VITESSE 	= 250
+	VITESSE 	= 200
 	VITESSE_ROT	= 200
 	CONN_MOD	= MOD_TCP
 	DEBUG_LVL	= 1
@@ -121,6 +121,7 @@ class Robot:
 		self.pions = [] # la liste des pions que l'on a déjà vu pour pouvoir faire des estimations par la suite
 		self.pos = (0,0,0)
 		self.color = RED
+		self.time_begin = -1
 		
 		self.cmd = [0] * MAX_MSG # self.cmd[id_msg] = id_cmd
 		self.id_msg = 0
@@ -314,9 +315,10 @@ class Robot:
 				self.preparation()"""
 				if self.preparation() >= 0:
 					threading.Timer(88, self.stop, ("90s !",)).start()
+					self.time_start = time.time()
 					self.write(" * START * ", colorConsol.HEADER)
 					listeVerte = (PION_1,PION_1,TOUR,PION_1,PION_1)
-					#listeVerte = self.scanListeVerte()
+					#continue
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1850, 700, 0)
 					self.write("")"""
@@ -357,12 +359,14 @@ class Robot:
 			else:
 				if self.preparation() >= 0:
 					threading.Timer(88, self.stop, ("90s !",)).start()
-					self.script_homologation()
-					continue
-					listeVerte = self.scanListeVerte()
+					self.time_start = time.time()
+					#self.script_homologation()
+					#continue
+					#listeVerte = self.scanListeVerte()
 					self.go_point(self.symX(800), 300)
 					id_pince = self.script_construireTourVerte()
 					self.script_allerPoserTourVerte(id_pince)
+					self.script_ratisserMap()
 			"""else:
 				r = self.preparation()
 			self.write("preparation %s"%r)
@@ -462,7 +466,7 @@ class Robot:
 						break
 			self.write("")
 					
-			"""
+			
 			self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
@@ -475,7 +479,7 @@ class Robot:
 					self.write("* RECALAGE *")
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
-					break"""
+					break
 			
 			loop1.stop()
 			loop2.stop()
@@ -483,7 +487,7 @@ class Robot:
 			loop2.join()
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			#self.update_pos()
-			"""
+			
 			self.write("* ATTENTE DU JACK *")
 			while True:
 				m = fifo.getMsg()
@@ -492,7 +496,7 @@ class Robot:
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
 					self.write("ON Y VAS !")
 					self.write("")
-					break"""
+					break
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
@@ -671,7 +675,7 @@ class Robot:
 		self.debug.log(D_UPDATE_POS, self.pos)
 		#self.write("time update pos %s"%(time.time() - start))
 		
-	def do_path(self, path):
+	def do_path(self, path, timeout=None):
 		"""
 		(blockant)
 		@todo interuption si erreur parceque la position n'est pas la bonne
@@ -682,19 +686,29 @@ class Robot:
 		
 		@param path<(x,y)> la liste des points
 		"""
+		if timeout:
+			time_stop = time.time() + timeout
+		else:
+			time_stop = time.time() + 3600
 		retour = 0
 		if self._e_stop.isSet():
 			retour = -42
 		else:
 			self.write("* DO_PATH %s BEGIN *"%(path,), colorConsol.HEADER)
 
-			for p in path:
-				self.go_point(*p)
+			for x,y in path:
+				if time.time() < time_stop:
+					if self.go_point(x,y, timeout) == E_TIMEOUT:
+						retour = E_TIMEOUT
+						break
+				else:
+					retour = E_TIMEOUT
+					break
 				
 			self.write("* DO_PATH END *", colorConsol.HEADER)
 		return retour
 
-	def go_point(self, x,y):
+	def go_point(self, x,y, timeout=None):
 		"""
 		(bloquant|nbloquant)
 		Va a un point unique
@@ -703,6 +717,10 @@ class Robot:
 
 		@return (int)
 		"""
+		if timeout:
+			timeout = time.time() + timeout
+		else:
+			timeout = time.time() + 3600
 		x,y = int(round(x)),int(round(y))
 		self.write("* GO_POINT %s %s BEGIN *"%(x,y), colorConsol.HEADER)
 		if self._e_stop.isSet():
@@ -737,6 +755,8 @@ class Robot:
 			time_to_check_anomalie = time.time() + 1.0
 			try:
 				while True:
+					if time.time() > timeout:
+						raise TimeoutException("robot.go_point : temps pour aller au point trop long")
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
@@ -749,7 +769,11 @@ class Robot:
 						pos_adv = self.pos_rel(self.pos, radians(self.pos[2]), (int(m.content)+30) * 10 * (1 if m.id_cmd == W_PING_AV else -1))
 						if (0 < pos_adv[0] < 3000) and (0 < pos_adv[1] < 2100):
 							if not inPause:
-								self.addCmd(ID_ASSERV, Q_PAUSE)
+								self.addCmd(ID_ASSERV, Q_STOP)
+								if m.id_cmd == W_PING_AV:
+									self.addCmd(ID_ASSERV, Q_PWM, -100, 500)
+								if m.id_cmd == W_PING_AR:
+									self.addCmd(ID_ASSERV, Q_PWM, 100, 500)
 								self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
 								inPause = True
 							timeLastPing = time.time()
@@ -1241,7 +1265,7 @@ class Robot:
 
 		@param id_pince la pince dans laquelle se trouve la tour
 		"""
-		self.do_path(((self.symX(1000),1200),(self.symX(1500),1750))) # aller devant la case bonus
+		self.do_path(((self.symX(1000),1200),(self.symX(1500),1750)), 20) # aller devant la case bonus
 		if id_pince == AVANT:
 			angle = 135
 			pwm = 70
@@ -1253,6 +1277,7 @@ class Robot:
 		
 		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT)
 		self.addCmd(ID_ASSERV, Q_PWM, pwm, 2000)
+		self.addCmd(ID_AX12, Q_CLOSE, id_pince)
 		
 	def script_construireOtherTourVerte(self, listeVerte):
 		self.color = self.otherColor(self.color)
@@ -1292,6 +1317,7 @@ class Robot:
 		# prise du premier pion avec pince AVANT
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
 		self._takePionVert(p1, AVANT)
+		return AVANT
 		self.write("1 ére tour prise", colorConsol.OKGREEN)
 
 		# prise du deuxième pion avec pince ARRIERE
@@ -1307,6 +1333,7 @@ class Robot:
 			self._takePionVert(p3,ARRIERE) # prend le pion dans la pince arrière
 			self.tourne(-90)
 			self._combinerFaces(ARRIERE) # construit dans la pince arrière
+			self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
 			self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p2]-100) # devant le deuxième
 			self.dumpObj(ARRIERE)
 			self.takeObj(ARRIERE)
@@ -1419,6 +1446,8 @@ class Robot:
 
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
 		self.addBlockingCmd(2, (1,10), ID_OTHERS, Q_SETPOSITION, ARRIERE, HAUT)
+		self.addCmd(ID_AX12, Q_CLOSE, AVANT)
+		self.addCmd(ID_AX12, Q_CLOSE, ARRIERE)
 		
 		fifo = None
 		
@@ -1499,9 +1528,16 @@ class Robot:
 		self.takeObj(id_pince)
 		self.update_pos()
 		last_pos = self.pos
-		case = self._findNearCaseToDump()
+		for i in xrange(0,361,90):
+			case = self._findNearCaseToDump()
+			if not case:
+				self.tourne(i)
+				self.addCmd(ID_ASSERV, Q_PWM, 100, 700)
+				time.time.sleep(700)
+			else:
+				break
 		l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
-		pos_to_dump = l.pointFrom(170)
+		pos_to_dump = l.pointFrom(130)
 		self.debug.log(D_DELETE_PATH)
 		self.debug.log(D_SHOW_PATH,((self.pos[0],self.pos[1]),(pos_to_dump[0],pos_to_dump[1])))
 		#raw_input("go pos to dump")
@@ -1509,9 +1545,9 @@ class Robot:
 		#raw_input("tourne ?")
 		l = Line(Vec2(self.pos[0],self.pos[1]), Vec2(pos_to_dump[0],pos_to_dump[1]))
 		if id_pince == ARRIERE and self.angle_diff(l.teta, radians(self.pos[2])) < pi/2.0:
-			self.tourne(degrees(l.teta))
-		elif id_pince == AVANT and self.angle_diff(l.teta, radians(self.pos[2])) > pi/2.0:
 			self.tourne(degrees(l.teta) + 180)
+		elif id_pince == AVANT and self.angle_diff(l.teta, radians(self.pos[2])) > pi/2.0:
+			self.tourne(degrees(l.teta))
 		#raw_input("dump")
 		self.dumpObj(id_pince)
 		#raw_input("remonter")
