@@ -181,7 +181,7 @@ void angleControl(int* value_pwm_left, int* value_pwm_right){
 	Serial.println(currentEcart);
 	*/
 
-	if(abs(currentEcart) < M_PI/360) /*si l'erreur est inferieur a 1deg, on concidere la consigne atteinte*/
+	if(abs(currentEcart) < 3.0f*M_PI/360.0f) /*si l'erreur est inferieur a 3deg, on concidere la consigne atteinte*/
 		current_goal.phase = PHASE_2;
 	else
 		current_goal.phase = PHASE_1;
@@ -311,10 +311,32 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	Serial.print("  y:");
 	Serial.println(current_goal.y);
 	*/
-
+	
+	
+	
 	/* on limite la vitesse lineaire quand on s'approche du but */
-	if(abs(currentDelta)<1750){
+	if (abs(currentDelta)<250){
+		pid4DeltaControl.SetOutputLimits(-min(50,current_goal.speed),min(50,current_goal.speed)); // composante liee a la vitesse lineaire
+		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
+	}
+	else if (abs(currentDelta)<500){
+		pid4DeltaControl.SetOutputLimits(-min(60,current_goal.speed),min(60,current_goal.speed)); // composante liee a la vitesse lineaire
+		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
+	}
+	else if (abs(currentDelta)<750){
 		pid4DeltaControl.SetOutputLimits(-min(80,current_goal.speed),min(80,current_goal.speed)); // composante liee a la vitesse lineaire
+		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
+	}
+	else if (abs(currentDelta)<1000){
+		pid4DeltaControl.SetOutputLimits(-min(100,current_goal.speed),min(100,current_goal.speed)); // composante liee a la vitesse lineaire
+		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
+	}
+	else if (abs(currentDelta)<1250){
+		pid4DeltaControl.SetOutputLimits(-min(150,current_goal.speed),min(150,current_goal.speed)); // composante liee a la vitesse lineaire
+		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
+	}
+	else if (abs(currentDelta)<1500){
+		pid4DeltaControl.SetOutputLimits(-min(200,current_goal.speed),min(200,current_goal.speed)); // composante liee a la vitesse lineaire
 		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
 	}
 
