@@ -316,6 +316,17 @@ class Robot:
 					self.do_path(((self.symX(1850),700),(self.symX(800),700),(self.symX(800),1400),(self.symX(1850),1400)))
 				continue
 				self.preparation()"""
+				"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
+				self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 200, 200, 0)
+				self.write("")
+				self.addCmd(ID_OTHERS, Q_ULTRAPING, AVANT)
+				fifo = self.client.addFifo( MsgFifo(W_PING_AV, W_PING_AR) )
+				while True:
+					m = fifo.getMsg()
+					if m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR:
+						pos_adv = self.get_pos_adv(m)
+						self.write(m.content)
+						self.write(pos_adv)"""
 				if self.preparation() >= 0:
 					threading.Timer(88, self.stop, ("90s !",)).start()
 					self.time_start = time.time()
@@ -472,7 +483,7 @@ class Robot:
 			self.write("")
 					
 			
-			"""self.write("* JACK POUR RECALAGE *")
+			self.write("* JACK POUR RECALAGE *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -485,14 +496,14 @@ class Robot:
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
 					break
-			"""
+			
 			loop1.stop()
 			loop2.stop()
 			loop1.join()
 			loop2.join()
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			#self.update_pos()
-			"""
+			
 			self.write("* ATTENTE DU JACK *")
 			while True:
 				m = fifo.getMsg()
@@ -501,7 +512,7 @@ class Robot:
 				elif m.id_cmd == W_JACK and int(m.content) == 0:
 					self.write("ON Y VAS !")
 					self.write("")
-					break"""
+					break
 		except KillException as ex:
 			self.write(ex, colorConsol.FAIL)
 			retour = Q_KILL
@@ -779,7 +790,7 @@ class Robot:
 					elif time.time() > self.time_begin + DELAY_PINGS and (m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR):
 						pos_adv = self.get_pos_adv(m)
 						
-						if (0 < pos_adv[0] < 3000) and (0 < pos_adv[1] < 2100):
+						if (300 < pos_adv[0] < 2700) and (300 < pos_adv[1] < 1800):
 							if not inPause:
 								self.addCmd(ID_ASSERV, Q_STOP)
 								if m.id_cmd == W_PING_AV:
@@ -1280,7 +1291,7 @@ class Robot:
 
 		@param id_pince la pince dans laquelle se trouve la tour
 		"""
-		self.do_path(((self.symX(1000),1200),(self.symX(1500),1750)), 20) # aller devant la case bonus
+		self.do_path(((self.symX(625),1550),(self.symX(1500),1550),(self.symX(1500),1750)), 20) # aller devant la case bonus
 		if id_pince == AVANT:
 			angle = 135
 			pwm = 70
@@ -1467,10 +1478,11 @@ class Robot:
 		"""
 		checksPoints = (CASES[self.symC(2)][4], CASES[self.symC(0)][2], CASES[self.symC(2)][0], CASES[self.symC(4)][2])
 			
-		self.ascenseurPinces(AVANT, HAUT)
-		self.ascenseurPinces(ARRIERE, HAUT)
 		self.addCmd(ID_AX12, Q_OPEN_MAX, AVANT)
 		self.addCmd(ID_AX12, Q_OPEN_MAX, ARRIERE)
+		self.ascenseurPinces(AVANT, BAS)
+		self.ascenseurPinces(ARRIERE, BAS)
+		time.sleep(2)
 		
 		fifo = None
 		
@@ -1516,7 +1528,7 @@ class Robot:
 							nb_anomalies = 0
 						elif time.time() > self.time_begin + DELAY_PINGS and (m.id_cmd == W_PING_AV or m.id_cmd == W_PING_AR):
 							pos_adv = self.get_pos_adv(m)
-							if (0 < pos_adv[0] < 3000) and (0 < pos_adv[1] < 2100):
+							if (300 < pos_adv[0] < 2700) and (300 < pos_adv[1] < 1800):
 								self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
 								self.addBlockingCmd(1, 5, ID_ASSERV, Q_STOP)
 								self.tourne(self.pos[2] + 90)
@@ -1569,9 +1581,6 @@ class Robot:
 		self.go_point(*pos_to_dump)
 		#raw_input("dump")
 		self.dumpObj(id_pince)
-		#raw_input("remonter")
-		self.ascenseurPinces(id_pince, HAUT)
-		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 		#raw_input("reculer")
 		self.go_point(pos_recul[0],pos_recul[1])
 
@@ -1751,7 +1760,7 @@ class Robot:
 			return BLUE
 
 	def pos_rel(self, pos, t, d):
-		return (pos[0] + int(cos(t) * d), int(pos[1] + sin(t) * d))
+		return (int(pos[0] + (cos(t) * float(d))), int(pos[1] + (sin(t) * float(d))))
 
 	def angle_diff(self, a,b):
 		return abs(atan2(sin(a-b), cos(a-b)))
@@ -1773,16 +1782,15 @@ class Robot:
 	def get_pos_adv(self, message):
 		content_split = [ int(_) for _ in message.content.split(C_SEP_SEND) ]
 		if GAUCHE == content_split[0]:
-			teta = -35
+			teta = 40
 		elif DROITE == content_split[0]:
-			teta = 35
+			teta = -40
 		else:
 			teta = 0
-		teta = 0
 		if message.id_cmd == W_PING_AR:
 			teta += 180
 		self.update_pos()
-		pos_adv = self.pos_rel(self.pos, radians(teta), (content_split[0]+30)*10)
+		pos_adv = self.pos_rel(self.pos, radians(teta), (content_split[0]+10)*10)
 		return pos_adv
 	
 if __name__ == '__main__':
