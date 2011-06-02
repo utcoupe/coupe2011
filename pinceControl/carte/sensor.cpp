@@ -239,7 +239,7 @@ int getMicroSwitch( char pin){
 int getPion( char face){
 	int value,value2;
 	//test des sharp du bas vers le haut
-	if(face == FACEAV){
+	if(face == AVANT){
 		//test 1
 		value = getSharp(SHARP_AV1);
 		if(value>DIST_MAX1 && value<DIST_MIN1){

@@ -20,8 +20,8 @@ int setupTourelle() {
     getDistance(PIN_PING_GAUCHE);
     delay(50);
     getDistance(PIN_PING_GAUCHE);
-    faceTourelleActuel=FACEAV;
-    faceTourelleDemande=FACEAV;
+    faceTourelleActuel=AVANT;
+    faceTourelleDemande=AVANT;
     tourelleActive=false;
     return 0;
 }
@@ -44,12 +44,12 @@ void updatePosition(int faceUpdate)
 	else 
 	{
 		tourelleActive=false;
-		if(faceTourelleActuel==FACEAR)
+		if(faceTourelleActuel==ARRIERE)
 		{
 			motor.dir = TURNRIGHT;
 			motor.steps = 500;
 			motor.run();
-			faceTourelleActuel=FACEAV;
+			faceTourelleActuel=AVANT;
 		}
 	}
 }
@@ -79,33 +79,38 @@ void loopTourelle()
 			}
 		}
 	
-		if(faceTourelleActuel==FACEAV && faceTourelleDemande==FACEAR)
+		if(faceTourelleActuel==AVANT && faceTourelleDemande==ARRIERE)
 		{
 			motor.dir = TURNLEFT;
 			motor.steps = 500;
 			motor.run();
-			faceTourelleActuel=FACEAR;
+			faceTourelleActuel=ARRIERE;
 		}
-		else if(faceTourelleActuel==FACEAR && faceTourelleDemande==FACEAV)
+		else if(faceTourelleActuel==ARRIERE && faceTourelleDemande==AVANT)
 		{
 			motor.dir = TURNRIGHT;
 			motor.steps = 500;
 			motor.run();
-			faceTourelleActuel=FACEAV;
+			faceTourelleActuel=AVANT;
 		}
 		else if(millis() - timeLastSend > 200 and (d_gauche < 40 || d_droite < 40))
 		{
 			timeLastSend = millis();
-			int pos=0;
+			int tab[1];
 			
 			if(d_gauche < 40 && d_droite < 40)
-				pos=MIDLE;
+				tab[0]=MIDLE;
 			else if(d_gauche<40)
-				pos=GAUCHE;
+				tab[0]=GAUCHE;
 			else
-				pos=DROITE;
-				
-			sendMessage(faceTourelleActuel, pos, min(d_gauche, d_droite));
+				tab[0]=DROITE;
+			
+			tab[1]=min(d_gauche, d_droite);
+			
+			if(faceTourelleActuel==AVANT)
+				sendMessage(W_PING_AV, tab, 2);
+			else
+				sendMessage(W_PING_AR, tab, 2);
 				
 		}
 	}

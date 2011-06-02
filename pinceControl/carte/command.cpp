@@ -158,11 +158,11 @@ void cmd(int id, int header, int *args, int size){
 	}
 	case Q_GETULTRAPING:
 	{
-	    if(args[0]==FACEAV)
+	    if(args[0]==AVANT)
 	    {
 			sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AV)));
 	    }
-	    else if(args[0]==FACEAR)
+	    else if(args[0]==ARRIERE)
 	    {
 			sendMessage(id,microsecondsToCentimeters(getDistance(PIN_PING_AR)));
 	    }
