@@ -328,6 +328,7 @@ class Robot:
 					id_pince = self.script_construireTourVerte(listeVerte)
 					self.script_allerPoserTourVerte(id_pince)
 					self.script_ratisserMap()
+					exit()
 					"""while 1:
 						if self.do_path(((400,0),(0,0))) < 0:
 							raw_input("bouh tu t'es coincé")"""
