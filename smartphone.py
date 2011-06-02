@@ -12,10 +12,13 @@ import subprocess
 #else:
 #	p = subprocess.Popen(["java","-cp",os.path.join(ROOT_DIR,"Visio","Smartphone","bin"),"Main","noview"])
 
-
+view = "noview"
+if len(sys.argv) > 1:
+	view = "view"
+print view
 print os.path.join(ROOT_DIR,"Visio","Smartphone","bin")
 # ===> usage: noview/view ip_serveur_python ip_smartphone
-p = subprocess.Popen(["java","-cp",os.path.join(ROOT_DIR,"Visio","Smartphone","bin"),"Main","noview", "localhost", "192.168.43.1"]);
+p = subprocess.Popen(["java","-cp",os.path.join(ROOT_DIR,"Visio","Smartphone","bin"),"Main",view, "localhost", "192.168.43.1"]);
 	
 
 p.wait()

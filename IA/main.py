@@ -321,15 +321,16 @@ class Robot:
 					self.time_start = time.time()
 					self.write(" * START * ", colorConsol.HEADER)
 					listeVerte = (PION_1,TOUR,PION_1,PION_1,PION_1)
+					#listeVerte = self.scanListeVerte()
 					#continue
-					self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
-					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 1500, 1750, -90)
-					self.write("")
+					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
+					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 975, 1225, 0)
+					self.write("")"""
 					#self.script_homologation()
 					#return
-					#self.go_point(self.symX(800), 300)
-					#id_pince = self.script_construireTourVerte(listeVerte)
-					#self.script_allerPoserTourVerte(id_pince)
+					self.go_point(self.symX(800), 300)
+					id_pince = self.script_construireTourVerte(listeVerte)
+					self.script_allerPoserTourVerte(id_pince)
 					self.script_ratisserMap()
 					exit()
 					"""while 1:
@@ -483,16 +484,16 @@ class Robot:
 					self.write("* RECALAGE *")
 					self.addBlockingCmd(2, (0.5,None), ID_ASSERV, Q_AUTO_CALIB, self.color)
 					self.write("")
-					break"""
-			
+					break
+			"""
 			loop1.stop()
 			loop2.stop()
 			loop1.join()
 			loop2.join()
 			self.addCmd(ID_OTHERS, Q_LED, self.color)
 			#self.update_pos()
-			
-			"""self.write("* ATTENTE DU JACK *")
+			"""
+			self.write("* ATTENTE DU JACK *")
 			while True:
 				m = fifo.getMsg()
 				if m.id_cmd == Q_KILL:
@@ -762,7 +763,7 @@ class Robot:
 			self.addCmd(ID_OTHERS, Q_ULTRAPING, sens_ping)
 			nb_recv = 0
 			nb_anomalies = 0
-			time_to_check_anomalie = time.time() + 1.0
+			time_to_check_anomalie = time.time() + 1.5
 			try:
 				while True:
 					if time.time() > timeout:
@@ -951,7 +952,10 @@ class Robot:
 		r = self.addBlockingCmd(1, 4, ID_PHONE, Q_SCAN_DEPART)
 		self.write(" result : %s"%r)
 		listeVerte = eval(r.content)
+		listeVerte.reverse()
 		listeVerte = map(lambda x: TOUR if x else PION_1, listeVerte)
+		self.write(listeVerte)
+		self.write("* SCAN LISTE VERTE END *", colorConsol.HEADER)
 		return listeVerte
 	
 	def scan(self, fast=False):
@@ -1331,6 +1335,7 @@ class Robot:
 		# prise du premier pion avec pince AVANT
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
 		self._takePionVert(p1, AVANT)
+		return AVANT
 		self.write("1 ére tour prise", colorConsol.OKGREEN)
 
 		# prise du deuxième pion avec pince ARRIERE
@@ -1544,36 +1549,31 @@ class Robot:
 		"""
 		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
 		self.takeObj(id_pince) # prend le pion
-		for i in xrange(0,361,90):
-			self.update_pos()
-			last_pos = self.pos
-			case = self._findNearCaseToDump()
-			if not case:
-				self.write("no case", colorConsol.WARNING)
-				self.tourne(i)
-				self.addCmd(ID_ASSERV, Q_PWM, 100, 700)
-				time.time.sleep(700)
-			else:
-				break
+		case = self._findNearCaseToDump()
+		if not case:
+			self.write("no case", colorConsol.WARNING)
+			return
+		self.update_pos()
 		l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
 		pos_to_dump = l.pointFrom(130) # position pour poser le pion
-		teta = l.teta + pi # angle de nous vers la case
+		pos_recul = l.pointFrom(400)
 		self.debug.log(D_DELETE_PATH)
 		self.debug.log(D_SHOW_PATH,((self.pos[0],self.pos[1]),(pos_to_dump[0],pos_to_dump[1])))
-		raw_input("tourne")
-		if id_pince == ARRIERE and angle_diff < 90:
+		teta = l.teta + pi # angle de nous vers la case
+		#raw_input("tourne")
+		if id_pince == ARRIERE:
 			self.tourne(degrees(teta) + 180)
 		else:
-			self.tourne(degrees(l.teta))
-		raw_input("go pos to dump")
+			self.tourne(degrees(teta))
+		#raw_input("go pos to dump")
 		self.go_point(*pos_to_dump)
-		raw_input("dump")
+		#raw_input("dump")
 		self.dumpObj(id_pince)
-		raw_input("remonter")
+		#raw_input("remonter")
 		self.ascenseurPinces(id_pince, HAUT)
-		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, AVANT)
-		raw_input("reculer")
-		self.go_point(last_pos[0],last_pos[1])
+		self.addBlockingCmd(1, 3, ID_AX12, Q_OPEN_MAX, id_pince)
+		#raw_input("reculer")
+		self.go_point(pos_recul[0],pos_recul[1])
 
 		
 	def _findNearCaseToDump(self):
@@ -1581,8 +1581,8 @@ class Robot:
 		@todo décommenter le update_pos
 		Trouver une case proche de nous où l'on peut poser un pion
 		"""
-		#self.update_pos()
-		limite = 350
+		self.update_pos()
+		limite = 351
 		nearCases = []
 		nearCase = None
 		d_near = 1E10
