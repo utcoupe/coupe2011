@@ -313,8 +313,8 @@ void positionControl(int* value_pwm_left, int* value_pwm_right){
 	*/
 
 	/* on limite la vitesse lineaire quand on s'approche du but */
-	if(abs(currentDelta)<1000){
-		pid4DeltaControl.SetOutputLimits(-min(90,current_goal.speed),min(90,current_goal.speed)); // composante liee a la vitesse lineaire
+	if(abs(currentDelta)<1750){
+		pid4DeltaControl.SetOutputLimits(-min(80,current_goal.speed),min(80,current_goal.speed)); // composante liee a la vitesse lineaire
 		pid4AlphaControl.SetOutputLimits(-150,150); // composante liee a la vitesse de rotation
 	}
 
