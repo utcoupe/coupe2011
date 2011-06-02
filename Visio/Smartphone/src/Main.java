@@ -130,8 +130,9 @@ public class Main {
 class Configuration implements Serializable {
 	private static final long serialVersionUID = 1L;
 
-	// hm
+	// optimize
 	int topIgnore = 0;
+	boolean pawnEnabled = false;
 
 	// pawn
 	int pawnPixelReference = 16570675;
@@ -418,7 +419,8 @@ class PawnFinder extends Observable {
 		int[] hsbvals = new int[3];
 		int pixel, red, green, blue;
 		nbPixelsFound = 0;
-		for (int y = Main.configuration.topIgnore; y < height; y++) {
+		int y = Main.configuration.pawnEnabled ? Main.configuration.topIgnore : height;
+		for (; y < height; y++) {
 			for (int x = 0; x < width; x++) {
 				pixel = image.getRGB(x, y);
 
@@ -706,6 +708,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 	JCheckBox mJCheckBoxShowPixels = new JCheckBox();
 	JCheckBox mJCheckBoxPawnsArrows = new JCheckBox();
 	JCheckBox mJCheckBoxFigures = new JCheckBox();
+	JCheckBox mJCheckBoxPawnsEnabled = new JCheckBox();
 
 	JPanel mPanelTop = new JPanel();
 	JPanel mPanelRight = new JPanel();
@@ -741,6 +744,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		mJCheckBoxShowPixels.setSelected(Main.configuration.showPawnsPixels);
 		mJCheckBoxPawnsArrows.setSelected(Main.configuration.showPawnsArrows);
 		mJCheckBoxFigures.setSelected(Main.configuration.showFigures);
+		mJCheckBoxPawnsEnabled.setSelected(Main.configuration.pawnEnabled);
 
 		// listeners
 		mJButtonPhoto.addActionListener(this);
@@ -756,6 +760,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		mJCheckBoxShowPixels.addChangeListener(this);
 		mJCheckBoxPawnsArrows.addChangeListener(this);
 		mJCheckBoxFigures.addChangeListener(this);
+		mJCheckBoxPawnsEnabled.addChangeListener(this);
 
 		mPanelRight.setPreferredSize(new Dimension(200, 800));
 		mPanelRight.setLayout(new FlowLayout());
@@ -778,6 +783,8 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		mPanelRight.add(mJCheckBoxPawnsArrows);
 		mPanelRight.add(new JLabel("Figures:"));
 		mPanelRight.add(mJCheckBoxFigures);
+		mPanelRight.add(new JLabel("Calculer pions:"));
+		mPanelRight.add(mJCheckBoxPawnsEnabled);
 		mPanelRight.add(mPanelTop);
 		mPanelRight.add(mJTextAreaTime);
 		mPanelRight.add(mHistogramme);
@@ -808,6 +815,7 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		setVisible(true);
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setLocation(100, 20);
 		pack();
 	}
 
@@ -843,6 +851,9 @@ class ViewClientFrame extends JFrame implements ActionListener, ChangeListener, 
 		} else if (e.getSource() == mJCheckBoxFigures) {
 			Main.configuration.showFigures = mJCheckBoxFigures.isSelected();
 			mManager.repaint();
+		} else if (e.getSource() == mJCheckBoxPawnsEnabled) {
+			Main.configuration.pawnEnabled = mJCheckBoxPawnsEnabled.isSelected();
+			Main.pictureSupplier.calculateAll();
 		} else if (e.getSource() == mJSliderMagic) {
 			mPictureSupplier.mPawnFinder.setMagic(mJSliderMagic.getValue());
 			Main.configuration.pawnMagic = mJSliderMagic.getValue();
@@ -908,7 +919,11 @@ class Manager extends JPanel implements MouseListener, Observer {
 		}
 
 		// draw figure
-		if (Main.configuration.showFigures) {
+		if (traceRectangleBegin) {
+			g.drawLine(x1, 0, x1, getHeight());
+			g.drawLine(0, y1, getWidth(), y1);
+		}
+		else if (Main.configuration.showFigures) {
 			boolean[] figures = mFigureFinder.getFigures();
 			Rectangle[] zones = mFigureFinder.getFigureZones();
 
@@ -1019,6 +1034,7 @@ class Manager extends JPanel implements MouseListener, Observer {
 	public void mouseExited(MouseEvent e) {
 	}
 
+	boolean traceRectangleBegin = false;
 	public void mousePressed(MouseEvent e) {
 		System.out.println(TAG + "mousePressed");
 		if (takingMagicPixel) {
@@ -1028,6 +1044,8 @@ class Manager extends JPanel implements MouseListener, Observer {
 		} else {
 			x1 = e.getX();
 			y1 = e.getY();
+			traceRectangleBegin = true;
+			repaint();
 		}
 	}
 
@@ -1038,8 +1056,13 @@ class Manager extends JPanel implements MouseListener, Observer {
 		} else {
 			x2 = e.getX();
 			y2 = e.getY();
+			traceRectangleBegin = false;
 
-			mFigureFinder.setZoneFigures(new Rectangle(x1, y1, x2 - x1, y2 - y1));
+			// rectangle manuel
+			//mFigureFinder.setZoneFigures(new Rectangle(x1, y1, x2 - x1, y2 - y1));
+			
+			// rectangle semi-automatique
+			mFigureFinder.setZoneFigures(new Rectangle(x1, y1, x2 - x1, 3));
 
 			repaint();
 		}
