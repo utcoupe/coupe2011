@@ -99,4 +99,8 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define BAS			2
 #define MIDLE		3
 
+//ping 
+#define GAUCHE 1
+#define DROITE 2
+
 #endif /* MESSAGE_H_ */

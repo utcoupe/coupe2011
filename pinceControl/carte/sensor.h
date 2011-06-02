@@ -26,8 +26,6 @@
 #define INTERRUPT_COLOR	0
 
 //define sharp
-#define FACEAV 		0
-#define FACEAR 		1
 #define MAX_SEUIL 	450 //valeur maximum pour un seuil de sharp ==> distance minimum de detection
 #define NB_SHARP 	12
 //sharp type 1
