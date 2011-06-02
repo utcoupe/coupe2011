@@ -59,8 +59,8 @@
 #define KP_SPEED 2.0
 #define KI_SPEED 5.0
 #define KD_SPEED 1.0
-#define KP_ANGLE 15.0
-#define KI_ANGLE 1.0
+#define KP_ANGLE 14.0
+#define KI_ANGLE 1.5
 #define KD_ANGLE 20000.0
 #define KP_DELTA .65
 #define KI_DELTA 0.0
