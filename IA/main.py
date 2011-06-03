@@ -269,10 +269,10 @@ class Robot:
 				time.sleep(2)
 				#self.test()
 				#exit()
-				self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 400, 400, 0)
+				"""self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 400, 400, 0)
 				while True:
 					self.do_path(((1400,400),(400,400)))
-				exit()
+				exit()"""
 				"""while True:
 					for i in xrange(0,361, 45):
 						self.tourne(i)"""
