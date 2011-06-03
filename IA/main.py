@@ -266,10 +266,9 @@ class Robot:
 			while self._e_stop.isSet():
 				time.sleep(0.5)
 			if MOD == DEBUG:
-				#time.sleep(2)
-				self.test()
-				exit()
-				#self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 400, 400, 0)
+				time.sleep(2)
+				#self.test()
+				#exit()
 				"""while True:
 					self.do_path(((800,400),(400,400)))
 				exit()"""
@@ -595,7 +594,15 @@ class Robot:
 		self.addCmd(1, 1, ID_OTHERS, Q_ULTRAPING, -1)
 		self.update_pos()
 		pos_pince_av = self.pos_rel(self.pos, radians(self.pos[2]), D_CENTER_2_PINCE + R_PION)
-		self.addCmd(ID_AX12, Q_KILL)
+		pos_pince_ar = self.pos_rel(self.pos, radians(self.pos[2]), - (D_CENTER_2_PINCE + R_PION))
+		case_pince_av = Case(*pos_pince_av)
+		case_pince_ar = Case(*pos_pince_ar)
+		if case_pince_av.color == self.color:
+			self.addCmd(ID_AX12, Q_OPEN_MAX, AVANT)
+			self.debug.log(D_PIONS, ((pos_pince_av[0],pos_pince_av[1],3,case_pince_av.color),))
+		if case_pince_ar.color == self.color:
+			self.addCmd(ID_AX12, Q_OPEN_MAX, ARRIERE)
+			self.debug.log(D_PIONS, ((pos_pince_ar[0],pos_pince_ar[1],3,case_pince_ar.color),))
 		time.sleep(0.5)
 		self.addCmd(-1, Q_KILL)
 		self._e_stop.set()
