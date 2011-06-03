@@ -25,7 +25,7 @@ print ROOT_DIR
 ##############################
 RELEASE		= 0
 DEBUG		= 1
-MOD			= DEBUG
+MOD			= RELEASE
 
 ##############################
 ##			IMPORTS			##
@@ -381,13 +381,15 @@ class Robot:
 					threading.Timer(88, self.stop, ("90s !",)).start()
 					self.time_start = time.time()
 					self.write(" * START * ", colorConsol.HEADER)
-					#self.script_homologation()
-					#continue
+					listeVerte = (PION_1,TOUR,PION_1,PION_1,PION_1)
 					listeVerte = self.scanListeVerte()
+					#self.script_homologation()
+					#return
 					self.go_point(self.symX(800), 300)
-					id_pince = self.script_construireTourVerte()
+					id_pince = self.script_construireTourVerte(listeVerte)
 					self.script_allerPoserTourVerte(id_pince)
 					self.script_ratisserMap()
+					return
 			"""else:
 				r = self.preparation()
 			self.write("preparation %s"%r)
