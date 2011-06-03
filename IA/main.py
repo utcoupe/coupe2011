@@ -98,8 +98,9 @@ class Robot:
 
 		
 		self._lock_write = threading.Lock()
-		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
+		self.e_validate_ident = threading.Event()
 		self._e_stop = threading.Event() # pour arreter le robot
+		self.client = RobotClient(self,CONN_MOD) # client pour communiquer avec le serveur
 		self.debug = Debug(os.path.join(ROOT_DIR,"IA","debug","main.py"),DEBUG_LVL) # pour debugger
 		
 		if MOD == DEBUG:
@@ -133,7 +134,6 @@ class Robot:
 		self.client.start() # demarrage du client
 		self.activeReset = True
 		
-		self.e_validate_ident = threading.Event()
 		
 		threading.Thread(None, self._loopReset, "Robot._loopReset()").start()
 		threading.Thread(None, self._loopUpdatePos, "Robot._loopUpdatePos").start()
@@ -269,9 +269,9 @@ class Robot:
 				time.sleep(2)
 				#self.test()
 				#exit()
-				"""self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 400, 400, 0)
-				while True:
-					self.do_path(((1400,400),(400,400)))
+				#self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 400, 400, 0)
+				"""while True:
+					self.do_path(((800,400),(400,400)))
 				exit()"""
 				"""while True:
 					for i in xrange(0,361, 45):
@@ -336,7 +336,7 @@ class Robot:
 					self.time_start = time.time()
 					self.write(" * START * ", colorConsol.HEADER)
 					listeVerte = (PION_1,TOUR,PION_1,PION_1,PION_1)
-					listeVerte = self.scanListeVerte()
+					#listeVerte = self.scanListeVerte()
 					#continue
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 975, 1225, 0)
@@ -772,7 +772,9 @@ class Robot:
 				self.write("déplacement trop petit %s %s %s"%(self.pos, abs(self.pos[0] - x), abs(self.pos[1] - y)))
 				self.write("* GO_POINT END *", colorConsol.HEADER)
 				return retour
-
+			
+			self.addCmd(ID_ASSERV, Q_STOP)
+			self.addCmd(ID_ASSERV, Q_RESUME)
 			fifo = self.client.addFifo( MsgFifo(Q_GOAL_ABS, Q_POSITION, W_PING_AR, W_PING_AV) )
 			sens_ping = self.sens_next_cible((x,y))
 			timeLastPing = 0
@@ -867,6 +869,8 @@ class Robot:
 				self.write("angle trop petit")
 				self.write("* TOURNE END *", colorConsol.HEADER)
 				return retour
+			self.addCmd(ID_ASSERV, Q_STOP)
+			self.addCmd(ID_ASSERV, Q_RESUME)
 			fifo = self.client.addFifo( MsgFifo(Q_POSITION, Q_ANGLE_ABS) )
 
 			nb_anomalies = 0
@@ -1306,20 +1310,42 @@ class Robot:
 
 		@param id_pince la pince dans laquelle se trouve la tour
 		"""
-		self.do_path(((self.symX(625),1550),(self.symX(1500),1550),(self.symX(1500),1750)), 20) # aller devant la case bonus
-		if id_pince == AVANT:
-			angle = 135
-			pwm = 70
+		r = self.do_path(((self.symX(625),1550),(self.symX(1500),1550),(self.symX(1500),1750)), 20) # aller devant la case bonus
+		if r == E_TIMEOUT:
+			r = self.go_point(self.symX(975),1400, 8)
+			if r!=E_TIMEOUT:
+				if id_pince == AVANT:
+					self.tourne(90)
+				else:
+					self.tourne(-90)
+			else:
+				self.go_point(self.symX(975),700)
+				if id_pince == AVANT:
+					self.tourne(90)
+				else:
+					self.tourne(-90)
+			self.dumpObj(id_pince)
+			while True:
+				time.sleep(1)
 		else:
-			angle = -45
-			pwm = -70
-		self.tourne(self.symA(angle))
-		self.dumpObj(id_pince) # lacher l'objet
+			if id_pince == AVANT:
+				angle = 135
+				pwm = 80
+			else:
+				angle = -45
+				pwm = -80
+			self.tourne(self.symA(angle))
+			self.dumpObj(id_pince) # lacher l'objet
 
-		self.ascenseurPinces(id_pince, HAUT)
-		self.addBlockingCmd(2, (1,3), ID_ASSERV, Q_PWM, pwm, 2000)
-		self.addBlockingCmd(2, (1,2), ID_ASSERV, Q_PWM, -pwm, 1500)
-		self.addCmd(ID_AX12, Q_CLOSE, id_pince)
+			self.ascenseurPinces(id_pince, HAUT)
+			self.addBlockingCmd(2, (1,3), ID_ASSERV, Q_PWM, pwm, 2000)
+			if id_pince == AVANT:
+				self.ascenseurPinces(ARRIERE, BAS)
+				self.addBlockingCmd(1, 4, ID_AX12, Q_OPEN_MAX, ARRIERE)
+			else:
+				self.ascenseurPinces(AVANT, BAS)
+				self.addBlockingCmd(1, 4, ID_AX12, Q_OPEN_MAX, AVANT)
+			self.addBlockingCmd(2, (1,2), ID_ASSERV, Q_PWM, -pwm, 1500)
 		
 	def script_construireOtherTourVerte(self, listeVerte):
 		self.color = self.otherColor(self.color)
