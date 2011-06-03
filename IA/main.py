@@ -380,9 +380,10 @@ class Robot:
 				if self.preparation() >= 0:
 					threading.Timer(88, self.stop, ("90s !",)).start()
 					self.time_start = time.time()
+					self.write(" * START * ", colorConsol.HEADER)
 					#self.script_homologation()
 					#continue
-					#listeVerte = self.scanListeVerte()
+					listeVerte = self.scanListeVerte()
 					self.go_point(self.symX(800), 300)
 					id_pince = self.script_construireTourVerte()
 					self.script_allerPoserTourVerte(id_pince)
@@ -974,7 +975,7 @@ class Robot:
 		r = self.addBlockingCmd(1, 4, ID_PHONE, Q_SCAN_DEPART)
 		self.write(" result : %s"%r)
 		listeVerte = eval(r.content)
-		if self.color == ROUGE:
+		if self.color == RED:
 			listeVerte.reverse()
 		listeVerte = map(lambda x: TOUR if x else PION_1, listeVerte)
 		self.write(listeVerte)
