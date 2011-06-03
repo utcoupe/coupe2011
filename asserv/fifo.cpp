@@ -68,11 +68,11 @@ void pushGoalSpeed(int id, double speed, double period){
 	}
 }
 
-void pushGoalPwm(double speed, double period){
+void pushGoalPwm(int id, double speed, double period){
 	if((goals.in+1)%SIZE != goals.out){
 		Goal* incGoal = goals.goal+goals.in;
 		incGoal->type = TYPE_PWM;
-		incGoal->id = NO_ID;
+		incGoal->id = id;
 		incGoal->data_1 = speed;
 		incGoal->data_2 = period;
 		goals.in = (goals.in+1)%SIZE;
@@ -109,7 +109,7 @@ void pushGoalAutoCalibration(int id, bool color){ /* false -> blue / true -> red
 		/* phase 1 : tourner en PI/2 */
 		pushGoalOrientation(NO_ID,M_PI/2,SPEED_ANGL);
 		/* phase 2 : reculer pendant 2s */
-		pushGoalPwm(PWM,2000);
+		pushGoalPwm(NO_ID,PWM,2000);
 		/* phase 3 : fixer X et angle */
 		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
@@ -118,7 +118,7 @@ void pushGoalAutoCalibration(int id, bool color){ /* false -> blue / true -> red
 		/* phase 5 : tourner en 0 */
 		pushGoalOrientation(NO_ID,0,SPEED_ANGL);
 		/* phase 6 : reculer pendant 2s */
-		pushGoalPwm(PWM,2000);
+		pushGoalPwm(NO_ID,PWM,2000);
 		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 		pushGoalManualCalibration(TYPE_CALIB_X,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS); //c'est 120 mm (distance entre l'axe des moteurs et le derriere du robot)
 		/* phase 8 : avancer de quelques cm */
@@ -134,7 +134,7 @@ void pushGoalAutoCalibration(int id, bool color){ /* false -> blue / true -> red
 		/* phase 1 : tourner d'un angle PI/2 */
 		pushGoalOrientation(NO_ID,M_PI/2,SPEED_ANGL);
 		/* phase 2 : reculer pendant 2s */
-		pushGoalPwm(PWM,2000);
+		pushGoalPwm(NO_ID,PWM,2000);
 		/* phase 3 : fixer X et angle */
 		pushGoalManualCalibration(TYPE_CALIB_Y,DIST_MOTOR_AXIS_TO_BACK_MM*ENC_MM_TO_TICKS);
 		pushGoalManualCalibration(TYPE_CALIB_ANGLE,M_PI/2);
@@ -143,7 +143,7 @@ void pushGoalAutoCalibration(int id, bool color){ /* false -> blue / true -> red
 		/* phase 5 : tourner en PI */
 		pushGoalOrientation(NO_ID,M_PI,SPEED_ANGL);
 		/* phase 6 : reculer pendant 2s */
-		pushGoalPwm(PWM,2000);
+		pushGoalPwm(NO_ID,PWM,2000);
 		/* phase 7 : fixer Y (et peut-etre speed, a voir si c'est utile) */
 		pushGoalManualCalibration(TYPE_CALIB_X,(TABLE_HEIGHT_MM-DIST_MOTOR_AXIS_TO_BACK_MM)*ENC_MM_TO_TICKS);
 		/* phase 8 : avancer de quelques cm */

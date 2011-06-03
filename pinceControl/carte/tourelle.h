@@ -14,7 +14,7 @@
 #define MAXDIST 100 // cm
 #define INCREMENT 10
 #define DIFFMAX 30
-#define TEMPO 100
+#define TEMPO 200
 #define MARGE_BORD 35
 #define SETUP_TIMEOUT 1000
 #define DISTANCE_OUTOFRANGE 1337

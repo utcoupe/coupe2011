@@ -15,10 +15,11 @@ import subprocess
 view = "noview"
 if len(sys.argv) > 1:
 	view = "view"
+
 print view
 print os.path.join(ROOT_DIR,"Visio","Smartphone","bin")
 # ===> usage: noview/view ip_serveur_python ip_smartphone
-p = subprocess.Popen(["java","-cp",os.path.join(ROOT_DIR,"Visio","Smartphone","bin"),"Main",view, "localhost", "192.168.43.1"]);
+p = subprocess.Popen(["java","-cp",os.path.join(ROOT_DIR,"Visio","Smartphone","bin"),"Main",view, "utcoupe-AOD255.local", "192.168.43.1"]);
 
 	
 

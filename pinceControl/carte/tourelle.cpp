@@ -59,8 +59,8 @@ void loopTourelle()
 	static long long timeLastPing=0;
 	static bool pingTurnGauche=true;
 	static long long timeLastSend=0;
-	static int d_gauche = 1337;
-	static int d_droite = 1337;
+	static int d_gauche = DISTANCE_OUTOFRANGE;
+	static int d_droite = DISTANCE_OUTOFRANGE;
 	
 	if(tourelleActive)
 	{
@@ -96,7 +96,7 @@ void loopTourelle()
 		else if(millis() - timeLastSend > 200 and (d_gauche < 40 || d_droite < 40))
 		{
 			timeLastSend = millis();
-			int tab[2];
+			int tab[4];
 			
 			if(d_gauche < 40 && d_droite < 40)
 				tab[0]=MIDLE;
@@ -106,11 +106,13 @@ void loopTourelle()
 				tab[0]=DROITE;
 			
 			tab[1]=min(d_gauche, d_droite);
+			tab[2]=d_gauche;
+			tab[3]=d_droite;
 			
 			if(faceTourelleActuel==AVANT)
-				sendMessage(W_PING_AV, tab, 2);
+				sendMessage(W_PING_AV, tab, 4);
 			else
-				sendMessage(W_PING_AR, tab, 2);
+				sendMessage(W_PING_AR, tab, 4);
 				
 		}
 	}

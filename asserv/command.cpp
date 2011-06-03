@@ -144,8 +144,8 @@ void cmd(int id, int id_cmd, int* args, int size){
 				sendMessage(id, E_INVALID_PARAMETERS_NUMBERS);
 			else
 			{
-				pushGoalPwm(args[0],args[1]);
 				sendMessage(id, 1);
+				pushGoalPwm(id,args[0],args[1]);
 			}
 			break;
 		}

@@ -475,6 +475,7 @@ void pwmControl(int* value_pwm_left, int* value_pwm_right){
 	if(millis()-start > current_goal.period){
 		current_goal.isReached = true;
 		initDone = false;
+		sendMessage(current_goal.id, 2);
 		(*value_pwm_right) = 0;
 		(*value_pwm_left) = 0;
 	}
