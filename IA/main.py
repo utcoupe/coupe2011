@@ -269,6 +269,10 @@ class Robot:
 				time.sleep(2)
 				#self.test()
 				#exit()
+				self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 400, 400, 0)
+				while True:
+					self.do_path(((1400,400),(400,400)))
+				exit()
 				"""while True:
 					for i in xrange(0,361, 45):
 						self.tourne(i)"""
@@ -332,7 +336,7 @@ class Robot:
 					self.time_start = time.time()
 					self.write(" * START * ", colorConsol.HEADER)
 					listeVerte = (PION_1,TOUR,PION_1,PION_1,PION_1)
-					#listeVerte = self.scanListeVerte()
+					listeVerte = self.scanListeVerte()
 					#continue
 					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
 					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 975, 1225, 0)
@@ -778,12 +782,12 @@ class Robot:
 			try:
 				while True:
 					if time.time() > timeout:
-						raise TimeoutException("robot.go_point : temps pour aller au point trop long")
+						raise TimeoutException("Robot.go_point : temps pour aller au point trop long")
 					if inPause and time.time() - timeLastPing > 0.5:
 						self.addCmd(ID_ASSERV, Q_RESUME)
 						inPause = False
 					m = fifo.getMsg(2)
-					if m.id_cmd!=Q_POSITION: self.write("go_point : %s"%m)
+					if m.id_cmd!=Q_POSITION: self.write("Robot.go_point : %s"%m)
 					if m.id_cmd == Q_GOAL_ABS:
 						nb_recv += 1
 						if nb_recv >= 2: break
@@ -792,22 +796,22 @@ class Robot:
 						
 						if (300 < pos_adv[0] < 2700) and (300 < pos_adv[1] < 1800):
 							if not inPause:
-								self.addCmd(ID_ASSERV, Q_STOP)
-								if m.id_cmd == W_PING_AV:
-									self.addCmd(ID_ASSERV, Q_PWM, -100, 500)
-								if m.id_cmd == W_PING_AR:
-									self.addCmd(ID_ASSERV, Q_PWM, 100, 500)
+								self.addCmd(ID_ASSERV, Q_PAUSE)
 								self.write("WARNING : Robot.go_point : detection adversaire", colorConsol.WARNING)
 								inPause = True
 							timeLastPing = time.time()
-					elif m.id_cmd == Q_POSITION and time.time() > time_to_check_anomalie:
+					elif not inPause and m.id_cmd == Q_POSITION and time.time() > time_to_check_anomalie:
 						new_pos = tuple(int(_) for _ in m.content.split(C_SEP_SEND))
 						if self._anomalie_deplacement_delta((x,y), self.pos, new_pos):
 							self.write("WARNING : Robot.go_point : detection anomalie deplacement", colorConsol.WARNING)
 							nb_anomalies += 1
 							if nb_anomalies > 2:
-								self.write("WARNING : Robot.do_path : detection anomalie deplacement critique", colorConsol.FAIL)
+								self.write("ERROR : Robot.do_path : detection anomalie deplacement critique", colorConsol.FAIL)
 								self.addCmd(ID_ASSERV, Q_STOP)
+								if sens_ping == AVANT:
+									self.addBlockingCmd(2, (1,2), ID_ASSERV, Q_PWM, -70, 1000)
+								else:
+									self.addBlockingCmd(2, (1,2), ID_ASSERV, Q_PWM, 70, 1000)
 								retour = E_BLOCK
 								break
 						else:
@@ -826,6 +830,7 @@ class Robot:
 				self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 				retour = -101
 			finally:
+				self.addCmd(ID_ASSERV, Q_STOP)
 				self.client.removeFifo(fifo)
 				self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
 
@@ -835,7 +840,7 @@ class Robot:
 		return retour
 
 
-	def tourne(self, a):
+	def tourne(self, a, timeout=None):
 		"""
 		(bloquant|nbloquant)
 		Fait tourner le robot
@@ -844,6 +849,10 @@ class Robot:
 
 		@return (int)
 		"""
+		if timeout:
+			timeout = time.time() + timeout
+		else:
+			timeout = time.time() + 3600
 		a = int(round(a))
 		self.write("* TOURNE %s *"%(a), colorConsol.HEADER)
 		if self._e_stop.isSet():
@@ -864,6 +873,8 @@ class Robot:
 			nb_recv = 0
 			try:
 				while True:
+					if time.time() > timeout:
+						raise TimeoutException("Robot.go_point : temps pour aller au point trop long")
 					m = fifo.getMsg(2)
 					#if m.id_cmd!=Q_POSITION: self.write("tourne : %s"%m)
 					self.write("tourne : %s"%m)
@@ -878,7 +889,6 @@ class Robot:
 							nb_anomalies += 1
 							if nb_anomalies > 2:
 								self.write("WARNING : Robot.tourne : detection anomalie deplacement critique", colorConsol.FAIL)
-								self.addCmd(ID_ASSERV, Q_STOP)
 								retour = E_BLOCK
 								break
 						else:
@@ -897,6 +907,7 @@ class Robot:
 				self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
 				retour = -101
 			finally:
+				self.addCmd(ID_ASSERV, Q_STOP)
 				# destruction de la fifo
 				self.client.removeFifo(fifo)
 			
@@ -963,7 +974,8 @@ class Robot:
 		r = self.addBlockingCmd(1, 4, ID_PHONE, Q_SCAN_DEPART)
 		self.write(" result : %s"%r)
 		listeVerte = eval(r.content)
-		listeVerte.reverse()
+		if self.color == ROUGE:
+			listeVerte.reverse()
 		listeVerte = map(lambda x: TOUR if x else PION_1, listeVerte)
 		self.write(listeVerte)
 		self.write("* SCAN LISTE VERTE END *", colorConsol.HEADER)
@@ -1302,10 +1314,8 @@ class Robot:
 		self.dumpObj(id_pince) # lacher l'objet
 
 		self.ascenseurPinces(id_pince, HAUT)
-		self.addCmd(ID_ASSERV, Q_PWM, pwm, 2000)
-		time.sleep(2)
-		self.addCmd(ID_ASSERV, Q_PWM, -pwm, 1000)
-		time.sleep(1)
+		self.addBlockingCmd(2, (1,3), ID_ASSERV, Q_PWM, pwm, 2000)
+		self.addBlockingCmd(2, (1,2), ID_ASSERV, Q_PWM, -pwm, 1500)
 		self.addCmd(ID_AX12, Q_CLOSE, id_pince)
 		
 	def script_construireOtherTourVerte(self, listeVerte):
@@ -1346,7 +1356,7 @@ class Robot:
 		# prise du premier pion avec pince AVANT
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
 		self._takePionVert(p1, AVANT)
-		return AVANT
+		#return AVANT
 		self.write("1 ére tour prise", colorConsol.OKGREEN)
 
 		# prise du deuxième pion avec pince ARRIERE
@@ -1406,11 +1416,9 @@ class Robot:
 		if id_pince == ARRIERE:
 			pwm = -pwm
 		self.write("pwm : %s"%pwm)
-		self.addCmd(ID_ASSERV, Q_PWM, pwm, 2000)
-		time.sleep(2)
+		self.addBlockingCmd(2, (1,3), ID_ASSERV, Q_PWM, pwm, 2000)
 		self.takeObj(id_pince)
-		self.addCmd(ID_ASSERV, Q_PWM, -pwm, 500)
-		time.sleep(0.5)
+		self.addBlockingCmd(2, (1,1), ID_ASSERV, Q_PWM, -pwm, 500)
 		fifo = self.client.addFifo( MsgFifo(Q_SETPOSITION) )
 		self.addCmd(ID_OTHERS, Q_SETPOSITION, id_pince, HAUT) # lève la pince
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[index]) # recul en même temps
@@ -1578,11 +1586,11 @@ class Robot:
 		else:
 			self.tourne(degrees(teta))
 		#raw_input("go pos to dump")
-		self.go_point(*pos_to_dump)
+		self.go_point(pos_to_dump[0],pos_to_dump[1], 2)
 		#raw_input("dump")
 		self.dumpObj(id_pince)
 		#raw_input("reculer")
-		self.go_point(pos_recul[0],pos_recul[1])
+		self.go_point(pos_recul[0],pos_recul[1], 2)
 
 		
 	def _findNearCaseToDump(self):
