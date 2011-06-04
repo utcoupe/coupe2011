@@ -25,7 +25,7 @@ print ROOT_DIR
 ##############################
 RELEASE		= 0
 DEBUG		= 1
-MOD			= DEBUG
+MOD			= RELEASE
 
 ##############################
 ##			IMPORTS			##
@@ -69,7 +69,7 @@ RECAL_A		= 5
 
 # constantes pour prendre les pions dans le vert
 X_PRISE = 300
-X_DEPLACEMENT = 700
+X_DEPLACEMENT = 650
 
 # distance entre le centre du robot et le fond des pinces (mm)
 D_CENTER_2_PINCE = 60
@@ -240,18 +240,17 @@ class Robot:
 		self.write("* TEST TOURELLE *", colorConsol.HEADER)
 		fifo = self.client.addFifo( MsgFifo(W_PING_AV, W_PING_AR) )
 		self.addCmd(ID_OTHERS, Q_ULTRAPING, AVANT)
-		raw_input("appuyez sur une touche et passer la main devant...")
-		while True:
-			m = fifo.getMsg()
-			if m.id_cmd == W_PING_AV:
-				break
-		self.addCmd(ID_OTHERS, Q_ULTRAPING, ARRIERE)
-		raw_input("appuyez sur une touche et passer la main derriere...")
-		while True:
+		raw_input("appuez et passer la main devant...")
+		end = time.time() + 2
+		while time.time() < end:
 			m = fifo.getMsg()
 			self.write(m)
-			if m.id_cmd == W_PING_AR:
-				break
+		self.addCmd(ID_OTHERS, Q_ULTRAPING, ARRIERE)
+		raw_input("appuez et passer la main derriere...")
+		end = time.time() + 2
+		while time.time() < end:
+			m = fifo.getMsg()
+			self.write(m)
 		self.addCmd(ID_OTHERS, Q_ULTRAPING, -1)
 		raw_input("fini...")
 		self.activeReset = True
@@ -269,6 +268,11 @@ class Robot:
 				time.sleep(2)
 				#self.test()
 				#exit()
+				"""while True:
+					self.do_path(((0,400),))
+					raw_input("press")
+					self.go_point(0,0)
+					raw_input("press")"""
 				"""while True:
 					self.do_path(((800,400),(400,400)))
 				exit()"""
@@ -333,13 +337,13 @@ class Robot:
 				if self.preparation() >= 0:
 					threading.Timer(88, self.stop, ("90s !",)).start()
 					self.time_start = time.time()
+					#self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
+					#self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, self.symX(800), 350, 0)
+					#self.write("")
 					self.write(" * START * ", colorConsol.HEADER)
-					listeVerte = (PION_1,TOUR,PION_1,PION_1,PION_1)
-					#listeVerte = self.scanListeVerte()
+					listeVerte = (TOUR,PION_1,PION_1,PION_1,PION_1)
+					listeVerte = self.scanListeVerte()
 					#continue
-					"""self.write("* CALIBRATION MANUELLE *", colorConsol.HEADER)
-					self.addBlockingCmd(1, 1, ID_ASSERV, Q_MANUAL_CALIB, 975, 1225, 0)
-					self.write("")"""
 					#self.script_homologation()
 					#return
 					self.go_point(self.symX(800), 300)
@@ -987,13 +991,17 @@ class Robot:
 		(bloquant)
 		"""
 		self.write("* SCAN LISTE VERTE *", colorConsol.HEADER)
-		r = self.addBlockingCmd(1, 4, ID_PHONE, Q_SCAN_DEPART)
-		self.write(" result : %s"%r)
-		listeVerte = eval(r.content)
-		if self.color == RED:
-			listeVerte.reverse()
-		listeVerte = map(lambda x: TOUR if x else PION_1, listeVerte)
-		self.write(listeVerte)
+		try:
+			r = self.addBlockingCmd(1, 4, ID_PHONE, Q_SCAN_DEPART)
+			self.write(" result : %s"%r)
+			listeVerte = eval(r.content)
+			if self.color == RED:
+				listeVerte.reverse()
+			listeVerte = map(lambda x: TOUR if x else PION_1, listeVerte)
+			self.write(listeVerte)
+		except Exception as ex:
+			self.write(str(traceback.print_tb(sys.exc_info()[2])) + "\n" + str(ex), colorConsol.FAIL)
+			listeVerte = (PION_1, TOUR, TOUR, TOUR, TOUR)
 		self.write("* SCAN LISTE VERTE END *", colorConsol.HEADER)
 		return listeVerte
 	
@@ -1319,29 +1327,31 @@ class Robot:
 
 		@param id_pince la pince dans laquelle se trouve la tour
 		"""
-		r = self.do_path(((self.symX(625),1550),(self.symX(1500),1550),(self.symX(1500),1750)), 20) # aller devant la case bonus
-		if r == E_TIMEOUT:
-			r = self.go_point(self.symX(975),1400, 8)
-			if r!=E_TIMEOUT:
-				if id_pince == AVANT:
-					self.tourne(90)
-				else:
-					self.tourne(-90)
-			else:
-				self.go_point(self.symX(975),700)
-				if id_pince == AVANT:
-					self.tourne(90)
-				else:
-					self.tourne(-90)
-			self.dumpObj(id_pince)
-			while True:
-				time.sleep(1)
+		self.go_point(self.symX(625),1500, 20)
+		if id_pince == AVANT:
+			first_angle = 0
+			second_angle = 90
+		else:
+			first_angle = 180
+			second_angle = -90
+		
+		self.tourne(self.symA(first_angle))
+		r = self.go_point(self.symX(1500),1500, 20)
+		if r < 0: self._poserTourVerteSafe(id_pince)
+		#tourner
+		r = self.tourne(second_angle,5)
+		if r < 0: self._poserTourVerteSafe(id_pince)
+
+		# avancer
+		r = self.go_point(self.symX(1500),1650, 5)
+		if r < 0:
+			self._poserTourVerteSafe(id_pince)
 		else:
 			if id_pince == AVANT:
-				angle = 135
+				angle = 125
 				pwm = 80
 			else:
-				angle = -45
+				angle = -55
 				pwm = -80
 			self.tourne(self.symA(angle))
 			self.dumpObj(id_pince) # lacher l'objet
@@ -1355,7 +1365,27 @@ class Robot:
 				self.ascenseurPinces(AVANT, BAS)
 				self.addBlockingCmd(1, 4, ID_AX12, Q_OPEN_MAX, AVANT)
 			self.addBlockingCmd(2, (1,2), ID_ASSERV, Q_PWM, -pwm, 1500)
+
+	def _poserTourVerteSafe(self, id_pince):
+		self.do_path(((self.symX(1325), 1550), (self.symX(1150), 1550)))
 		
+		if id_pince == AVANT:
+			angle = 180
+			angle2 = -90
+		else:
+			angle = 0
+			angle2 = 90
+			
+		self.update_pos()
+		if self.angle_diff(radians(self.pos[2]), radians(self.symA(angle))) > pi/2:
+			self.tourne(angle2)
+			self.tourne(self.symA(angle))
+
+		self.tourne(self.symA(angle-30))
+		self.dumpObj(id_pince)
+		while True:
+			time.sleep(1)
+	
 	def script_construireOtherTourVerte(self, listeVerte):
 		self.color = self.otherColor(self.color)
 		try:
@@ -1377,6 +1407,11 @@ class Robot:
 		self.write("* CONSTRUCTION TOUR VERTE *", colorConsol.HEADER)
 		listeYVerte = (690,970,1250,1530,1810)
 
+		nb_tours = 0
+		for p in listeVerte:
+			if p == TOUR:
+				nb_tours += 1
+		
 		p1 = 0
 		p2 = 1
 		if (listeVerte[p1] == TOUR and listeVerte[p2] == TOUR):
@@ -1394,7 +1429,9 @@ class Robot:
 		# prise du premier pion avec pince AVANT
 		self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p1]) 	# devant le premier pion
 		self._takePionVert(p1, AVANT)
-		#return AVANT
+		if nb_tours > 2:
+			self.ascenseurPinces(AVANT, BAS)
+			return AVANT
 		self.write("1 ére tour prise", colorConsol.OKGREEN)
 
 		# prise du deuxième pion avec pince ARRIERE
@@ -1415,6 +1452,8 @@ class Robot:
 			self.dumpObj(ARRIERE)
 			self.takeObj(ARRIERE)
 			self.write("3 ème tour prise", colorConsol.OKGREEN)
+			self.addCmd(ID_OTHERS, Q_SETPOSITION, AVANT, HAUT)
+			self.addCmd(ID_AX12, Q_CLOSE, AVANT)
 			return ARRIERE
 		else:
 			if listeVerte[p1] == TOUR:
@@ -1434,6 +1473,8 @@ class Robot:
 				self.go_point(self.symX(X_DEPLACEMENT),listeYVerte[p3]-200) # on recul un peu pour etre sur de ne pas se taper la bordure
 			self._combinerFaces(p_with_tour)
 			self.write("3 ème tour prise", colorConsol.OKGREEN)
+			self.addCmd(ID_OTHERS, Q_SETPOSITION, p_with_pion, HAUT)
+			self.addCmd(ID_AX12, Q_CLOSE, p_with_pion)
 			return p_with_tour
 				
 	def _takePionVert(self, index, id_pince):
@@ -1522,7 +1563,7 @@ class Robot:
 		(script IA)
 		Tourner sur la carte pour tout shooter et prendre les pions si ils tombent dans nos pinces
 		"""
-		checksPoints = (CASES[self.symC(2)][4], CASES[self.symC(0)][2], CASES[self.symC(2)][0], CASES[self.symC(4)][2])
+		checksPoints = (CASES[self.symC(2)][4], CASES[self.symC(0)][2], CASES[self.symC(1)][1], CASES[self.symC(3)][1], CASES[self.symC(4)][2])
 			
 		self.addCmd(ID_AX12, Q_OPEN_MAX, AVANT)
 		self.addCmd(ID_AX12, Q_OPEN_MAX, ARRIERE)
@@ -1613,7 +1654,7 @@ class Robot:
 			return
 		self.update_pos()
 		l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
-		pos_to_dump = l.pointFrom(130) # position pour poser le pion
+		pos_to_dump = l.pointFrom(R_PION+D_CENTER_2_PINCE) # position pour poser le pion
 		pos_recul = l.pointFrom(400)
 		self.debug.log(D_DELETE_PATH)
 		self.debug.log(D_SHOW_PATH,((self.pos[0],self.pos[1]),(pos_to_dump[0],pos_to_dump[1])))
@@ -1641,6 +1682,14 @@ class Robot:
 		nearCases = []
 		nearCase = None
 		d_near = 1E10
+
+		# bonus
+		case_b1 = CASES[self.symC(4)][1]
+		case_b2 = CASES[self.symC(4)][3]
+		if case_b1.empty() and abs(case_b1.x-self.pos[0]) < 400 and abs(case_b1.y-self.pos[1]) < 400:
+			nearCase = case_b1
+		if not nearCase and case_b2.empty() and abs(case_b2.x-self.pos[0]) < 400 and abs(case_b2.y-self.pos[1]) < 400:
+			nearCase = case_b2
 		
 		for x,column in enumerate(CASES):
 			if abs(column[0].x-self.pos[0]) < limite:
@@ -1650,12 +1699,13 @@ class Robot:
 							nearCases.append(case)
 
 		# recherche d'une case vide
-		for case in nearCases:
-			if case.empty():
-				l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
-				if len(l) < d_near:
-					nearCase = case
-					d_near = len(l)
+		if not nearCase:
+			for case in nearCases:
+				if case.empty():
+					l = Line(Vec2(case.x,case.y), Vec2(self.pos[0],self.pos[1]))
+					if len(l) < d_near:
+						nearCase = case
+						d_near = len(l)
 
 		# si aucune n'est vide tant pis on bourine
 		if not nearCase:
