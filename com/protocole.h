@@ -1,22 +1,11 @@
-#ifndef MESSAGE_H_
-#define MESSAGE_H_
+#ifndef PROTOCOLE_H
+#define PROTOCOLE_H
 
-#define SERIAL_BAUD 115200
 
 // cf. protocole
-#define C_SEP_SEND	'.' // tout est séparé par ça. Ex : 5:0:300:45
+#define C_SEP_SEND	'.' // tout est séparé par ça.
 
 
-
-void initSerialLink();
-void readIncomingData();
-void sendMessage(int id, int i);
-void sendMessage(int id, char* str);
-void sendMessage(int id, int i, char* s);
-void sendMessage(int id, char* str, int i);
-void sendMessage(int id, int *tabi, int size);
-void sendMessage(int id, char** tabs, int nbStr, int *tabi, int nbInt);
-void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 
 // all
 #define Q_IDENT 			0
@@ -99,4 +88,8 @@ void sendMessage(int id, int* tabi, int nbInt, char** tabs, int nbStr);
 #define BAS			2
 #define MIDLE		3
 
-#endif /* MESSAGE_H_ */
+#define GAUCHE		0
+#define DROITE		1
+
+#endif
+

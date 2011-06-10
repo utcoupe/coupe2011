@@ -8,10 +8,8 @@
 
 int main()
 {
-	vector<Pion> v;
 	vector<int> msg;
-	
-	read(msg);
+	readIncomingData(msg);
 	cout << "id : " << msg[0] << endl;
 	if (msg.size() > 1)
 		cout << "cmd : " << msg[1] << endl;
@@ -27,10 +25,13 @@ int main()
 	else
 		cout << "params : None" << endl;
 
-	v.push_back(createPion(0,300,500));
-	v.push_back(createPion(1,500,800));
+	vector<int> v;
+	v.push_back(300);
+	v.push_back(400);
 	
 	send(msg[0],v);
+	send(msg[0], "coucou");
+	send(msg[0], 42);
 	
 	return 0;
 }
