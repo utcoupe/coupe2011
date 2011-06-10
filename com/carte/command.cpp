@@ -22,13 +22,4 @@ void cmd(int id, int id_cmd, int *args, int sizeArgs)
 	}
 }
 
-void ledOn()
-{
-	digitalWrite(12, HIGH);
-}
-
-void ledOff()
-{
-	digitalWrite(12, LOW);
-}
 
