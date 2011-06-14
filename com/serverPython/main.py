@@ -25,6 +25,7 @@ server.start()
 #server.addSubprocessClient("clients/python/UDPClient/main.py")
 #server.addSubprocessClient(os.path.join(ROOT_DIR,"Visio","UTCamera","bin","UTCamera"))
 server.addSubprocessClient(os.path.join(ROOT_DIR,"pinceControl","AX12","scriptPince.py"))
+server.addSubprocessClient(os.path.join(ROOT_DIR,"clients","soutenance_quentin","main.py"))
 #server.addSubprocessClient(["../../../IA/main.py","1","0"])
 #p = subprocess.Popen(os.path.join(ROOT_DIR,"smartphone.py"))
 
