@@ -19,6 +19,8 @@ import threading
 class Screen(Tk.Tk):
 	def __init__(self,parent=None):
 		Tk.Tk.__init__(self,parent)
+		self.current_face = Tk.IntVar()
+		self.current_face.set(AVANT)
 		rb_pince_av = Tk.Radiobutton(self, text="Face avant", variable=self.current_face, value=AVANT, indicatoron=0)
 		rb_pince_av.pack()
 		rb_pince_ar = Tk.Radiobutton(self, text="Face arriere", variable=self.current_face, value=ARRIERE, indicatoron=0)
@@ -27,8 +29,6 @@ class Screen(Tk.Tk):
 		b_ascenseur_up.pack()
 		b_ascenseur_up = Tk.Button(self, text="Descendre ascenseur", command=self.b_ascenseur_down)
 		b_ascenseur_up.pack()
-		self.current_face = Tk.IntVar()
-		self.current_face.set(AVANT)
 		b_close = Tk.Button(self, text="Fermer les pinces", command=self.b_pinces_close)
 		b_close.pack()
 		b_serre = Tk.Button(self, text="Serrer les pinces", command=self.b_pinces_serre)
