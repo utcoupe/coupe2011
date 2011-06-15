@@ -1,6 +1,15 @@
 # -*- coding: utf-8 -*-
+"""
+@author Thomas
+
+Les classes représentant les différnets clients acceptés par le serveur
+"""
 
 import sys
+import os
+ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])[0]
+sys.path.append(os.path.join(ROOT_DIR,"com"))
+
 import threading
 import socket
 import time

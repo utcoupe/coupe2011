@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+@author Thomas
 
+Des couleurs pour le terminal !
+"""
 
 HEADER = '\033[95m'
 OKBLUE = '\033[94m'

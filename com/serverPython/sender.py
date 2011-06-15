@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+@author Thomas
 
+Thread servant à envoyer les messages daux clients
+"""
 import threading
 from Queue import Queue, Empty
 import colorConsol
@@ -8,6 +12,7 @@ import colorConsol
 class Sender(threading.Thread):
 	def __init__(self, server):
 		threading.Thread.__init__(self,None, None, "Sender")
+		self.daemon = True # ce thread est un daemon, il s'arretera quand tous les threads non daemon s'arreteront
 		self._server = server
 		self._queue = Queue()
 	

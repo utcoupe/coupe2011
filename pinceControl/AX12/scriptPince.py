@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-import serial, time, sys
+import serial, time, sys, os
+ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])[0]
+sys.path.append(os.path.join(ROOT_DIR,"com"))
 from protocole import *
 
 
@@ -100,7 +102,7 @@ while (keyB != Q_KILL):
 	if keyB == Q_IDENT:
 		send(idArenvoyer, str(ID_AX12)+C_SEP_SEND+"ax12")
 		continue
-	elif keyB == PING:
+	elif keyB == Q_PING:
 		send(idArenvoyer, "Pong")
 		continue
 	else:

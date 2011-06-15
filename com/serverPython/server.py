@@ -1,4 +1,14 @@
 # -*- coding: utf-8 -*-
+"""
+@author Thomas
+
+Le Serveur python, centre du réseau, des clients Subprocess (stdin/stdout),
+TCP, et Serial peuvent se connecter et échanger des informations
+"""
+import sys
+import os
+ROOT_DIR  = os.path.split(os.path.split(os.path.dirname(os.path.abspath(__file__)))[0])[0]
+sys.path.append(os.path.join(ROOT_DIR,"com"))
 
 import random
 import threading
@@ -6,10 +16,10 @@ import serial
 import subprocess
 
 from sender import *
-from protocole import *
 from client import *
 from tcpLoop import *
 import colorConsol
+from protocole import *
 
 
 class Server():

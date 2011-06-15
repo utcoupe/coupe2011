@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
+"""
+@author Thomas
 
+Le thread écoutant les connection TCP entrantes pour ensuite les transformer en clients
+"""
 import client
 import threading
 import socket
@@ -14,6 +18,7 @@ class TCPLoop(threading.Thread):
 		@param server le serveur
 		"""
 		threading.Thread.__init__(self, None, None, "TCPLoop(%s,%s)"%(host,port))
+		self.daemon = True
 		self._server = server
 		self._host = host
 		self._port = port
