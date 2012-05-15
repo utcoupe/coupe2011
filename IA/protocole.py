@@ -1,1 +1,1 @@
-../com/serverPython/protocole.py
+../com/protocole.py
