@@ -10,3 +10,4 @@ bin/
 apk/
 doc/
 Debug/
+obj/
